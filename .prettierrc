@@ -3,16 +3,16 @@
   "printWidth": 80,
   "tabWidth": 2,
   "singleQuote": true,
-  "endOfLine": "lf",
   "semi": true,
-  "arrowParens": "always",
   "bracketSpacing": true,
   "htmlWhitespaceSensitivity": "css",
   "insertPragma": false,
   "jsxBracketSameLine": false,
   "jsxSingleQuote": false,
-  "proseWrap": "preserve",
   "quoteProps": "as-needed",
   "requirePragma": false,
-  "trailingComma": "none"
+  "trailingComma": "none",
+  "arrowParens": "always",
+  "proseWrap": "never",
+  "endOfLine": "auto"
 }
