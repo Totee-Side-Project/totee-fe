@@ -25,6 +25,13 @@
   },
 
   "rules": {
+    "sort-imports": ["error", {
+      "ignoreCase": false,
+      "ignoreDeclarationSort": true,
+      "ignoreMemberSort": false,
+      "memberSyntaxSortOrder": ["all", "single", "multiple", "none"],
+      "allowSeparatedGroups": false
+    }],
     "react/react-in-jsx-scope": 0,
     "react/prefer-stateless-function": 0,
     "react/jsx-filename-extension": 0,
