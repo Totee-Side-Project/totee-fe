@@ -15,6 +15,7 @@ export function Counter() {
      return (
         <div>
             <div>{counter}</div>
+            <div>{counterLabel}</div>
             <button onClick={onClickButtons} id="plus">+</button>
             <button onClick={onClickButtons} id="minus">-</button>
         </div>

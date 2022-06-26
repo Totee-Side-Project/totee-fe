@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import logo from './logo.svg';
+
 import './App.css';
-import MainPage from '@components/pages/MainPage';
+import {MainPage, PostsPage} from '@components/pages';
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
     <Router>
       <Routes>
         <Route path="/" element={<MainPage/>}/>
+        <Route path="/posts" element={<PostsPage/>}/>
       </Routes>
     </Router>
   );
