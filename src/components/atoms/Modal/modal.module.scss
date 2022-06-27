@@ -1,4 +1,4 @@
-.background{
+.modal{
   position: fixed;
   top: 0;
   left: 0;
@@ -8,11 +8,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 90;
-}
+  z-index:-1000;
+  opacity: 0;
+  .content{
+    width: fit-content;
+    height: fit-content;
+    padding: 60px;
+    background-color: #fff;
+    transform: translateY(20%);
+    opacity: 0;
+  }
+  
+  &.open{
+    display: flex;
+    z-index: 1000;
+    opacity: 1;
 
-.container{
-  width: 100px;
-  height: 100px;
-  background-color: #fff;
+    .content{
+      transform: translateY(0);
+      opacity: 1;
+      transition: all 0.3s;
+    }
+  }
 }

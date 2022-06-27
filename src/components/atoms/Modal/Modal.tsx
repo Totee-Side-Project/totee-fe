@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classes from './modal.module.scss';
-
+import classNames from 'classnames';
 interface IModalPropsType {
+  isOpen: boolean;
   children: React.ReactNode;
 }
 
-export function Modal({ children }: IModalPropsType) {
+export function Modal({ isOpen, children }: IModalPropsType) {
   return (
-    <div className={classes.background}>
-      <div className={classes.container}>{children}</div>
-    </div>
+    <>
+      <section
+        className={classNames(classes.modal, isOpen ? classes.open : '')}
+      >
+        <div className={classes.content}>{children}</div>
+      </section>
+    </>
   );
 }
