@@ -1,0 +1,22 @@
+.button{
+    width: fit-content;
+    height: fit-content;
+    padding:13px 20px;   
+    border: none;
+    outline:0;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-weight: 700;
+    color: rgba(31, 31, 31, 1);
+    border-radius: 10px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover{
+        cursor: pointer;
+    }
+}
+.icon{
+    margin-right: 5px;
+}

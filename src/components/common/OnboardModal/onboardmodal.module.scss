@@ -1,0 +1,41 @@
+.onboardModal{
+    text-align: center;
+    h1{
+        font-size: 35px;
+        font-weight: 500;
+        margin-bottom: 15px;
+        color: rgba(52, 52, 52, 1);
+        span{
+            font-size: 38px;
+            font-weight: 900px;
+            color: rgba(86, 138, 53, 1);
+        }
+    }
+    h2{
+        font-weight: 400;
+        font-size: 18px;
+        color: #4C4C4C;
+    }
+    .flex{
+        display: flex;
+        align-items:flex-end;
+        column-gap: 16px;
+    }
+    .body{
+        margin: 40px 0px 120px 0px;
+        .imagePlaceholder{
+            width: 135px;
+            height: 135px;
+            background: #EBEBEB;
+            border-radius: 100%;
+            margin: 0 auto;
+        }
+    }
+    .footer{
+        width:400px;
+        justify-content: center;
+        margin-top: 45px;
+        display: flex;
+        column-gap: 25px;
+    }
+}
