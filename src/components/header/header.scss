@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
+
+.header{
+  //display: flex;
+  position: fixed;
+  height: 90px;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.content{
+  display: flex;
+  width: 88%;
+  height: 100%;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.buttonWrapper{
+  margin-left: auto;
+  margin-right: 4%;
+  ul{
+    display: flex;
+    list-style: none;
+
+    li + li {
+      margin-left: 25px;
+    }
+  }
+}
+
+.line{
+  border-left: 3px solid #B6B6B6;
+  height: 24px;
+  margin-top: 6px;
+}
+
+.createButton{
+  width: 145px;
+  height: 37px;
+  border: 1.5px solid #568A35;
+  border-radius: 10px;
+  background-color: #fff;
+  font-size: 17px;
+  color: #568A35;
+  font-family: 'Noto Sans KR', sans-serif;
+  cursor: pointer;
+}
+
+.loginButton{
+  cursor: pointer;
+  border: none;
+  background-color: #fff;
+  font-size: 21px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
