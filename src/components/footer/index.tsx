@@ -1,0 +1,63 @@
+import React from 'react';
+import './footer.scss';
+import logo from '../../assets/ToteeLogo.png';
+import facebook from '../../assets/Facebook.svg';
+import twitter from '../../assets/Twitter.svg';
+import LinkedIn from '../../assets/LinkedIn.svg';
+import instagram from '../../assets/Instagram.svg';
+import youtube from '../../assets/YouTube.svg';
+
+const Footer = () => {
+  return (
+    <>
+      <div className="footer">
+        <div className="footerWrap">
+          <div className="footerAbout">
+            <div>
+              <img src={logo} alt="토티 로고" />
+            </div>
+            <p>스터디와 멘토&멘티를 찾는 가장 쉬운 방법</p>
+            <p>토티에서 함께 할 멘토&멘티를 찾아보세요!</p>
+            <div className="footerIconWrap">
+              <img src={facebook} />
+              <img src={twitter} />
+              <img src={LinkedIn} />
+              <img src={instagram} />
+              <img src={youtube} />
+            </div>
+          </div>
+          <div className="footerName">
+            <h2>FRONTEND</h2>
+            <p>Rulu</p>
+            <p>aeong98</p>
+            <p>ctaaag</p>
+          </div>
+          <div className="footerName">
+            <h2>BACKEND</h2>
+            <p>Marine</p>
+          </div>
+          <div className="footerName">
+            <h2>DESIGNER</h2>
+            <p>Hazel</p>
+          </div>
+          <div className="footerName">
+            <h2>Contacts us</h2>
+            <p>rnjstmdals6@gmail.com</p>
+          </div>
+        </div>
+        <div className="footerLine" />
+        <div className="lineWrap">
+          <div className="lineDownL">
+            <p>Copyright © 2022 Totee</p>
+            <p>Templates</p>
+          </div>
+          <div className="lineDownR">
+            <p>All Rights Reserved | Terms and Conditions</p>
+            <p>| Privacy Policy</p>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+export default Footer;
