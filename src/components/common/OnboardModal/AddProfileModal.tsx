@@ -1,14 +1,33 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Button, Input } from '@components/atoms';
 import classes from './onboardmodal.module.scss';
-import { IModalPropsType } from 'types/modal.types';
 
 export default function AddProfileModal({ step, setStep }: IModalPropsType) {
   const [value, setValue] = useState('');
-  const [photos, setPhotos] = useState<string[]>([]);
-  const [attachment, setAttachment] = useState();
-  const [fileName, setFileNames] = useState<string>();
+  const [files, setFiles] = useState<any>();
   const ImgInput = useRef<HTMLInputElement>(null);
+  const ImgPlaceholder = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    preview();
+
+    return () => preview();
+  });
+
+  const preview = () => {
+    if (!files) return false;
+
+    const imgEl = ImgPlaceholder.current as HTMLDivElement;
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      imgEl.style.backgroundRepeat = 'no-repeat';
+      imgEl.style.backgroundSize = 'cover';
+      imgEl.style.backgroundImage = `url(${reader.result})`;
+    };
+
+    reader.readAsDataURL(files[0]);
+  };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -16,42 +35,15 @@ export default function AddProfileModal({ step, setStep }: IModalPropsType) {
   };
 
   const onPhotoBtnClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.preventDefault();
-
     if (ImgInput) {
       ImgInput.current!.click();
     }
   };
 
-  const onImgChange = useCallback(
-    async (e: React.ChangeEvent<HTMLInputElement>) => {
-      const imageLists = e.target.files;
-      let attach: any = attachment;
-      let imageUrlLists: any = [...photos];
-      let names = [];
-
-      // if (imageLists) {
-      //   for (let i = 0; i < imageLists.length; i++) {
-      //     // 파일이름 저장
-      //     names.push(imageLists[i].name);
-      //     // 서버에 저장할 인코딩 파일 저장
-      //     const reader = new FileReader();
-      //     reader.readAsDataURL(imageLists[i]);
-      //     reader.onloadend = () => {
-      //       let base64data = reader.result;
-      //       attach.push(base64data);
-      //     };
-      //     // 현재 이미지 URL 저장 (프리뷰용)
-      //     const currentImageUrl = URL.createObjectURL(imageLists[i]);
-      //     imageUrlLists.push(currentImageUrl);
-      //   }
-      // }
-      // setFileNames(names);
-      // setAttachment(attach);
-      // setPhotos(imageUrlLists);
-    },
-    [photos],
-  );
+  const onImgChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files;
+    setFiles(file);
+  };
 
   return (
     <>
@@ -60,7 +52,11 @@ export default function AddProfileModal({ step, setStep }: IModalPropsType) {
       </h1>
       <h2>사용하실 프로필 사진과 닉네임을 입력해주세요</h2>
       <div className={classes.body}>
-        <div className={classes.imagePlaceholder} onClick={onPhotoBtnClick}>
+        <div
+          className={classes.imagePlaceholder}
+          onClick={onPhotoBtnClick}
+          ref={ImgPlaceholder}
+        >
           <div className={classes.imageButton}></div>
           <input
             ref={ImgInput}
