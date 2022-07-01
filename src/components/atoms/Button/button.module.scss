@@ -20,3 +20,9 @@
 .icon{
     margin-right: 5px;
 }
+.hover{
+    &:hover{
+        cursor: pointer;
+        box-shadow: inset 0 1000px rgba(0, 0, 0, 0.03) !important;
+    }
+}

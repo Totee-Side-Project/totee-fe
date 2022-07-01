@@ -15,12 +15,6 @@ function App() {
   };
   const {data, isFetching, isError} = useGetUserAPI();
   
-  useEffect(()=>{
-    if(isError){
-      document.location.href = '/'
-    }
-  },[isError])
-
   return (
     <>
       <Header />

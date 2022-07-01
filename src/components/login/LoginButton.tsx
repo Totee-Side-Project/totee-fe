@@ -10,11 +10,11 @@ function LoginButton() {
 
   // 로그인 state 확인
   const loginLabel = useRecoilValue(loginLabelSelector);
-  // 현재 로그인한 사용자 정보
-  const userInfo = useRecoilValue(UserState);
 
   //로그인 state 관리
   const [login,setLogin] = useRecoilState(loginState)
+  const [user,setUser] = useRecoilState(UserState)
+
   let loginLocalStorage:any = localStorage.getItem("loginData")
   loginLocalStorage = JSON.parse(loginLocalStorage);
 
@@ -35,13 +35,20 @@ function LoginButton() {
       state:false,
       token:""
     })
+    setUser({
+      email: "",
+      nickname: null,
+      position: null,
+      profileImgaeUrl: "",
+      roleType:""
+    })
   }
   return (
     <div>
       {login.state === true ? <div onClick={handleLogout}>로그아웃</div> : <div className="login_button" onClick={()=>setIsModalOpen(!isModalOpen)}>로그인</div>}
         <SignInModal isOpen={isModalOpen} setIsOpen={setIsModalOpen}/>
       <h2>{loginLabel}</h2>
-      <h2>현재 로그인한 사용자 정보 : {userInfo.email}</h2>
+      <h2>현재 로그인한 사용자 정보 : {user.email}</h2>
     </div>
     
   )

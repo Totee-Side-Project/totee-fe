@@ -73,5 +73,22 @@
         margin-top:15px;
 
     }
-    
+    .helperText{
+        width: 100%;
+        text-align: left;
+        margin-top:10px;
+        font-size:13px;
+        span{
+            color: transparent;
+        }
+        &.show{
+            .pass{
+                color: #2F855A;
+            }
+            .fail{
+                color: #C53030;
+            }
+        }
+       
+    }    
 }

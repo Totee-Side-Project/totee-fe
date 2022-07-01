@@ -26,7 +26,11 @@ export function Modal({ isOpen, setIsOpen, children }: IModalPropsType) {
           >
             <XIcon></XIcon>
           </div>
-        {children}
+          {isOpen&&
+            <>
+            {children}
+            </>
+          }
         </div>
       </section>
     </>
