@@ -3,15 +3,24 @@ import Header from '@components/header';
 
 import './App.css';
 import { MainPage, PostsPage } from '@components/pages';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 import LoginOauth from '@components/login/LoginOauth';
+import {useGetUserAPI} from "@hooks/useGetQuery";
 
 function App() {
   const padding = {
     paddingTop: '100px',
   };
+  const {data, isFetching, isError} = useGetUserAPI();
+  
+  useEffect(()=>{
+    if(isError){
+      document.location.href = '/'
+    }
+  },[isError])
+
   return (
     <>
       <Header />

@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Button, Input } from '@components/atoms';
 import classes from './onboardmodal.module.scss';
+import { IModalPropsType } from 'types/modal.types';
 
 export default function AddProfileModal({ step, setStep }: IModalPropsType) {
   const [value, setValue] = useState('');

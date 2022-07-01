@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Modal } from '@components/atoms';
 import classes from './onboardmodal.module.scss';
-import SignInModal from './SignInModal';
 import AddProfileModal from './AddProfileModal';
 import CheckPositionModal from './CheckPositionModal';
 
@@ -16,10 +15,8 @@ export function OnboardModal() {
   const handleStep = (step: number) => {
     switch (step) {
       case 0:
-        return <SignInModal step={step} setStep={setStep} />;
-      case 1:
         return <AddProfileModal step={step} setStep={setStep} />;
-      case 2:
+      case 1:
         return (
           <CheckPositionModal
             step={step}
