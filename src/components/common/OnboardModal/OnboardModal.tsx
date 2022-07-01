@@ -5,6 +5,12 @@ import AddProfileModal from './AddProfileModal';
 import CheckPositionModal from './CheckPositionModal';
 
 export function OnboardModal() {
+  const [values, setValues]=useState({
+    "grade":"",
+    "nickname":"",
+    "position":"",
+    "profileImage":"",
+  })
   const [step, setStep] = useState(0);
   const [isOpenModal, setIsOpenModal] = useState(false);
 
@@ -15,12 +21,14 @@ export function OnboardModal() {
   const handleStep = (step: number) => {
     switch (step) {
       case 0:
-        return <AddProfileModal step={step} setStep={setStep} />;
+        return <AddProfileModal step={step} setStep={setStep} values={values} setValues={setValues}/>;
       case 1:
         return (
           <CheckPositionModal
             step={step}
             setStep={setStep}
+            values={values} 
+            setValues={setValues}
           ></CheckPositionModal>
         );
       default:

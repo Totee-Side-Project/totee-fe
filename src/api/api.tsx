@@ -27,6 +27,11 @@ export const PostAPI = {
 
 export const UserAPI = {
   getUserInfo: ()=> api.get('/api/v1/info'),
+  updateUserInfo : (form:any)=>api.post('/api/v1/info',form,{
+    headers:{
+      'Content-Type': 'multipart/form-data'
+    }
+  }),
   validateNickname : (nickname:string) => api.post('/api/v1/validation/nickname',{nickname:nickname})
 }
 

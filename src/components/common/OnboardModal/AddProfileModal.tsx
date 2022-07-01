@@ -5,7 +5,7 @@ import { IModalPropsType } from 'types/modal.types';
 import { UserAPI } from '@api/api';
 import classNames from 'classnames';
 
-export default function AddProfileModal({ step, setStep }: IModalPropsType) {
+export default function AddProfileModal({ step, setStep, values, setValues}: IModalPropsType) {
   const [nickname, setNickname] = useState('');
   const [files, setFiles] = useState<any>();
   const [isValidate, setIsValidate]=useState(false);
@@ -19,11 +19,20 @@ export default function AddProfileModal({ step, setStep }: IModalPropsType) {
     return () => preview();
   });
 
+  useEffect(()=>{
+    setValues({
+      ...values,
+      ["nickname"]:nickname
+    })
+  },[nickname])
+
   const preview = (): any => {
     if (!files) return;
 
     const imgEl = ImgPlaceholder.current as HTMLDivElement;
     const reader = new FileReader();
+
+    if(!imgEl) return;
 
     reader.onload = () => {
       imgEl.style.backgroundRepeat = 'no-repeat';
@@ -31,8 +40,10 @@ export default function AddProfileModal({ step, setStep }: IModalPropsType) {
       imgEl.style.backgroundImage = `url(${reader.result})`;
     };
 
-    reader.readAsDataURL(files[0]);
+    reader.readAsDataURL(files);
   };
+
+
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -46,8 +57,12 @@ export default function AddProfileModal({ step, setStep }: IModalPropsType) {
   };
 
   const onImgChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files;
+    const file = e.target.files![0];
     setFiles(file);
+    setValues({
+      ...values,
+      ["profileImage"]:file,
+    })
   };
 
   const onClickValidate=async()=>{
@@ -137,7 +152,7 @@ export default function AddProfileModal({ step, setStep }: IModalPropsType) {
             color: '#fff',
           }}
           onClick={() => setStep(step + 1)}
-          disable={files && nickname && isValidate ? true: true}
+          disable={files && nickname && isValidate ? false: true}
         />
       </div>
       <div className={classes.page}>1/2</div>

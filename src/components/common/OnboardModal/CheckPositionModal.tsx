@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
-import { Button, Input } from '@components/atoms';
-import classes from './onboardmodal.module.scss';
-import { IModalPropsType } from 'types/modal.types';
+import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 
-export default function CheckPositionModal({ step, setStep }: IModalPropsType) {
+import { Button, Input } from '@components/atoms';
+import { useAddUserInfo } from '@hooks/useMutateQuery';
+
+
+import classes from './onboardmodal.module.scss';
+import { IModalPropsType } from 'types/modal.types';
+
+export default function CheckPositionModal({ step, setStep,values, setValues }: IModalPropsType) {
   const [selectedPosition, setSelectedPosition] = useState('');
+  const addUserMutation = useAddUserInfo();
 
   const positionList = [
     '프론트엔드',
@@ -17,6 +22,22 @@ export default function CheckPositionModal({ step, setStep }: IModalPropsType) {
     '디자인',
     '기타',
   ];
+
+  useEffect(()=>{
+    setValues({
+      ...values,
+      ["position"]:selectedPosition
+    })
+  },[selectedPosition])
+
+  const onClickConfimButton=async()=>{
+    let formData = new FormData();
+    for (const [key, value] of Object.entries(values)){
+      formData.append(key, value);
+    }
+    const result = await addUserMutation.mutateAsync(formData);
+    console.log(result);
+  }
 
   return (
     <>
@@ -58,7 +79,8 @@ export default function CheckPositionModal({ step, setStep }: IModalPropsType) {
             backgroundColor: 'rgba(86, 138, 53, 1)',
             color: '#fff',
           }}
-          onClick={() => {}}
+          onClick={onClickConfimButton}
+          disable={selectedPosition? false: true}
         />
       </div>
       <div className={classes.page}>2/2</div>
