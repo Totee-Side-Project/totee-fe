@@ -6,7 +6,6 @@ import CheckPositionModal from './CheckPositionModal';
 
 export function OnboardModal() {
   const [values, setValues]=useState({
-    "grade":"",
     "nickname":"",
     "position":"",
     "profileImage":"",

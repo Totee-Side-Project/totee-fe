@@ -12,16 +12,16 @@ export default function CheckPositionModal({ step, setStep,values, setValues }: 
   const [selectedPosition, setSelectedPosition] = useState('');
   const addUserMutation = useAddUserInfo();
 
-  const positionList = [
-    '프론트엔드',
-    '백엔드',
-    'ML',
-    '게임',
-    '안드로이드',
-    'IOS',
-    '디자인',
-    '기타',
-  ];
+  const positionList:any = {
+    '프론트엔드': "FRONTEND",
+    '백엔드' : "BACKEND",
+    'ML': "ML",
+    '게임': "GAME",
+    '안드로이드': "ANDROID",
+    'IOS':" IOS",
+    '디자인' :"DESIGN",
+    '기타':"OTHERS",
+  };
 
   useEffect(()=>{
     setValues({
@@ -47,14 +47,14 @@ export default function CheckPositionModal({ step, setStep,values, setValues }: 
       <h2>희망하시거나 현재 속해있는 포지션을 선택해주세요.</h2>
       <div className={classes.body2}>
         <div className={classes.grid}>
-          {positionList.map((position: string, _) => (
+          {Object.keys(positionList).map((position: string, _) => (
             <div
               className={classNames(
                 classes.tag,
                 position === selectedPosition ? classes.selected : '',
               )}
               key={`position-${position}`}
-              onClick={() => setSelectedPosition(position)}
+              onClick={() => setSelectedPosition(positionList[position])}
             >
               {position}
             </div>
