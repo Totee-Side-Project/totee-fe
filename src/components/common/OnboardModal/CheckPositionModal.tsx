@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 
-import { Button, Input } from '@components/atoms';
-import { useAddUserInfo } from '@hooks/useMutateQuery';
-
+import { Button } from '@components/atoms';
 
 import classes from './onboardmodal.module.scss';
 import { IModalPropsType } from 'types/modal.types';
 
-export default function CheckPositionModal({ step, setStep,values, setValues }: IModalPropsType) {
+export default function CheckPositionModal({ step, setStep,values, setValues, setIsOpenModal, onClickConfimButton }: IModalPropsType) {
   const [selectedPosition, setSelectedPosition] = useState('');
-  const addUserMutation = useAddUserInfo();
+
 
   const positionList:any = {
-    '프론트엔드': "FRONTEND",
-    '백엔드' : "BACKEND",
+    '프론트엔드': "FRONT_END",
+    '백엔드' : "BACK_END",
     'ML': "ML",
     '게임': "GAME",
     '안드로이드': "ANDROID",
@@ -30,14 +28,6 @@ export default function CheckPositionModal({ step, setStep,values, setValues }: 
     })
   },[selectedPosition])
 
-  const onClickConfimButton=async()=>{
-    let formData = new FormData();
-    for (const [key, value] of Object.entries(values)){
-      formData.append(key, value);
-    }
-    const result = await addUserMutation.mutateAsync(formData);
-    console.log(result);
-  }
 
   return (
     <>

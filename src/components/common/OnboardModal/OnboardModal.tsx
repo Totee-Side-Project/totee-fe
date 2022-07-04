@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Modal } from '@components/atoms';
+import { Button, Modal, Alert } from '@components/atoms';
 import classes from './onboardmodal.module.scss';
 import AddProfileModal from './AddProfileModal';
 import CheckPositionModal from './CheckPositionModal';
+import { useAddUserInfo } from '@hooks/useMutateQuery';
 
 export function OnboardModal() {
+  const [isShowAlert, setIsShowAlert]=useState(false);
   const [values, setValues]=useState({
     "nickname":"",
     "position":"",
@@ -12,6 +14,26 @@ export function OnboardModal() {
   })
   const [step, setStep] = useState(0);
   const [isOpenModal, setIsOpenModal] = useState(false);
+
+  const addUserMutation = useAddUserInfo();
+
+  const onClickConfimButton=async()=>{
+    let formData = new FormData();
+    for (const [key, value] of Object.entries(values)){
+      formData.append(key, value);
+    }
+    const result = await addUserMutation.mutateAsync(formData);
+    if(result.status ===200){
+      setTimeout(()=>{
+        setIsShowAlert(false);
+      },3000);
+
+      if(setIsOpenModal){
+        setIsOpenModal(false);
+        setIsShowAlert(true);
+      }
+    }
+  }
 
   useEffect(() => {
     if (!isOpenModal) setStep(0);
@@ -28,6 +50,8 @@ export function OnboardModal() {
             setStep={setStep}
             values={values} 
             setValues={setValues}
+            setIsOpenModal={setIsOpenModal}
+            onClickConfimButton={onClickConfimButton}
           ></CheckPositionModal>
         );
       default:
@@ -41,6 +65,7 @@ export function OnboardModal() {
       <Modal isOpen={isOpenModal} setIsOpen={setIsOpenModal}>
         <section className={classes.onboardModal}>{handleStep(step)}</section>
       </Modal>
+      {isShowAlert && <Alert text="토티에 오신것을 환영합니다"/>}
     </>
   );
 }

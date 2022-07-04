@@ -9,5 +9,7 @@ export interface IModalPropsType{
         profileImage : any;
     }
     setValues:(e:any)=>void;
+    setIsOpenModal?:(e:boolean)=>void;
+    onClickConfimButton?:()=>void;
 }
 

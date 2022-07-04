@@ -71,7 +71,7 @@ export default function AddProfileModal({ step, setStep, values, setValues}: IMo
       if(result.data.header.code !== 200){
         setIsValidate(false);
         return;
-      }
+    }
 
       setIsValidate(true);
       result.data.body.data
