@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 import LoginOauth from '@components/login/LoginOauth';
+import SetUpStudyPage from "@components/pages/setupstudypage/SetUpStudyPage";
 
 function App() {
   const padding = {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="/posts" element={<PostsPage />} />
         <Route path="/oauth/redirect" element={<LoginOauth />} />
+        <Route path="/setupstudy" element={<SetUpStudyPage />} />
       </Routes>
       <Footer />
     </>

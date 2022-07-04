@@ -5,6 +5,10 @@ import logo from '../../assets/toteelogo-kr.png';
 import './header.scss';
 
 const Header = () => {
+  let navigate = useNavigate();
+  function handleStudyClick() {
+    navigate("/setupstudy");
+  }
   return (
     <>
       <header className="header">
@@ -15,7 +19,7 @@ const Header = () => {
           <div className="buttonWrapper">
             <ul>
               <li>
-                <button className="createButton">스터디 개설</button>
+                <button className="createButton" onClick={handleStudyClick}>스터디 개설</button>
               </li>
               <li className="line" />
               <li>
