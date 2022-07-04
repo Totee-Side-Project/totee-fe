@@ -10,7 +10,7 @@ import LoginOauth from '@components/login/LoginOauth';
 import {useGetUserAPI} from "@hooks/useGetQuery";
 
 function App() {
-  const padding = {
+  const padding:any = {
     paddingTop: '100px',
   };
   const {data, isFetching, isError} = useGetUserAPI();
