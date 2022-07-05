@@ -1,35 +1,66 @@
 .input_group{
-    .label{
-        font-weight: 500;
-        margin-bottom: 5px;
-        display: block;
-        width: 100%;
-        text-align: left;
-        font-size: 16px;
-        color: rgba(131, 131, 131, 1)
+    &.default{
+        .label{
+            font-weight: 500;
+            margin-bottom: 5px;
+            display: block;
+            width: 100%;
+            text-align: left;
+            font-size: 16px;
+            color: rgba(131, 131, 131, 1)
+        }
+        input{
+            width:100%;
+            font-size: 16px;
+            height: 45px;
+            padding: 10px;
+            background: #FFFFFF;
+            border-radius: 10px;
+            outline:none !important;
+            transition: transform 1000ms;
+    
+            &.default{
+                color: #C8C5CB;
+                border: 1.5px solid #C9C9C9;
+            }
+            &.active{
+                color: rgba(24, 14, 37, 1);
+                border: 1px solid #C8C5CB;
+            }
+    
+            &.focused{
+                color: rgba(24, 14, 37, 1);
+                // outline: 1.5px solid rgba(52, 52, 52, 1) !important;
+            }
+        }
     }
-    input{
-        width:100%;
-        font-size: 16px;
-        height: 45px;
-        padding: 10px;
-        background: #FFFFFF;
-        border-radius: 10px;
-        outline:none !important;
-        transition: transform 1000ms;
-
-        &.default{
-            color: #C8C5CB;
-            border: 1.5px solid #C9C9C9;
-        }
-        &.active{
-            color: rgba(24, 14, 37, 1);
-            border: 1px solid #C8C5CB;
-        }
-
-        &.focused{
-            color: rgba(24, 14, 37, 1);
-            // outline: 1.5px solid rgba(52, 52, 52, 1) !important;
+    &.search{
+        input{
+            width:100%;
+            font-size: 20px;
+            height: 65px;
+            padding: 17px 134px;
+            outline:none !important;
+            transition: transform 1000ms;
+            background: #FFFFFF;
+            border: 3px solid #568A35;
+            box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
+            border-radius: 20px;
+    
+            &.default{
+                color: #C8C5CB;
+                border: 3px solid #568A35;
+            }
+            &.active{
+                color: rgba(24, 14, 37, 1);
+                border: 2px solid #C8C5CB;
+            }
+    
+            &.focused{
+                color: rgba(24, 14, 37, 1);
+                // outline: 1.5px solid rgba(52, 52, 52, 1) !important;
+            }
         }
     }
+    
 }

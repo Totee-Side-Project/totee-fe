@@ -3,7 +3,6 @@ import { loginState } from "@store/login";
 import {Link, useNavigate} from "react-router-dom"
 import { useEffect } from "react";
 
-
 function LoginOauth() {
   const [login,setLogin] = useRecoilState(loginState)
   const navigate = useNavigate();
@@ -14,14 +13,16 @@ function LoginOauth() {
   // token localstorage 저장
   let obj:any = {state:true,token:token}
   obj = JSON.stringify(obj)
+
   localStorage.setItem('loginData',obj)
-  
+
   //login token 담길시 새로고침
   useEffect(()=>{
     document.location.href = '/'
   },[login])
 
   return (
+    // <div></div>
     <Link to='/'>메인으로 이동</Link>
   )
 }
