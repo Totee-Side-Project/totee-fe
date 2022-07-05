@@ -3,18 +3,18 @@ import Header from '@components/header';
 
 import './App.css';
 import { MainPage, PostsPage } from '@components/pages';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 import LoginOauth from '@components/login/LoginOauth';
-import {useGetUserAPI} from "@hooks/useGetQuery";
+import { useGetUserAPI } from '@hooks/useGetQuery';
 
 function App() {
-  const padding:any = {
+  const padding: any = {
     paddingTop: '100px',
   };
-  const {data, isFetching, isError} = useGetUserAPI();
-  
+  const { data, isFetching, isError } = useGetUserAPI();
+
   return (
     <>
       <Header />
