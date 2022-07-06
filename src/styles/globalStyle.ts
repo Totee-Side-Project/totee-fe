@@ -137,6 +137,9 @@ const globalStyle = css`
     text-decoration: none;
     color: inherit;
   }
+  #root{
+    position:relative;
+  }
 `;
 
 export default globalStyle;

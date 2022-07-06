@@ -1,7 +1,8 @@
 import React, {useState, useCallback, useEffect} from 'react';
 import classes from './input.module.scss';
-
+import className from 'classnames';
 interface InputProps{
+    style?:string;
     value:string;
     label?:string;
     type:string;
@@ -22,7 +23,7 @@ interface InputProps{
  * @param onChange : onChange 콜백 함수
  * @returns 
  */
-export function Input({value, label, type, name, id, placeholder, onChange}:InputProps) {
+export function Input({style="default", value, label, type, name, id, placeholder, onChange}:InputProps) {
     const [inputType, setInputType]=useState("default");
 
     const handleFocus=useCallback(()=>{
@@ -46,7 +47,7 @@ export function Input({value, label, type, name, id, placeholder, onChange}:Inpu
 
 
   return (
-    <div className={classes.input_group}>
+    <div className={className(classes.input_group, classes[style])}>
         <label 
             className={classes.label} 
             htmlFor={name}

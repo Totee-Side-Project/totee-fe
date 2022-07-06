@@ -1,22 +1,33 @@
-import React, { useState } from 'react';
-import { Button, Input } from '@components/atoms';
-import classes from './onboardmodal.module.scss';
-import { IModalPropsType } from 'types/modal.types';
+import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 
-export default function CheckPositionModal({ step, setStep }: IModalPropsType) {
+import { Button } from '@components/atoms';
+
+import classes from './onboardmodal.module.scss';
+import { IModalPropsType } from 'types/modal.types';
+
+export default function CheckPositionModal({ step, setStep,values, setValues, setIsOpenModal, onClickConfimButton }: IModalPropsType) {
   const [selectedPosition, setSelectedPosition] = useState('');
 
-  const positionList = [
-    '프론트엔드',
-    '백엔드',
-    'ML',
-    '게임',
-    '안드로이드',
-    'IOS',
-    '디자인',
-    '기타',
-  ];
+
+  const positionList:any = {
+    '프론트엔드': "FRONT_END",
+    '백엔드' : "BACK_END",
+    'ML': "ML",
+    '게임': "GAME",
+    '안드로이드': "ANDROID",
+    'IOS':" IOS",
+    '디자인' :"DESIGN",
+    '기타':"OTHERS",
+  };
+
+  useEffect(()=>{
+    setValues({
+      ...values,
+      ["position"]:selectedPosition
+    })
+  },[selectedPosition])
+
 
   return (
     <>
@@ -26,14 +37,14 @@ export default function CheckPositionModal({ step, setStep }: IModalPropsType) {
       <h2>희망하시거나 현재 속해있는 포지션을 선택해주세요.</h2>
       <div className={classes.body2}>
         <div className={classes.grid}>
-          {positionList.map((position: string, _) => (
+          {Object.keys(positionList).map((position: string, _) => (
             <div
               className={classNames(
                 classes.tag,
                 position === selectedPosition ? classes.selected : '',
               )}
               key={`position-${position}`}
-              onClick={() => setSelectedPosition(position)}
+              onClick={() => setSelectedPosition(positionList[position])}
             >
               {position}
             </div>
@@ -58,7 +69,8 @@ export default function CheckPositionModal({ step, setStep }: IModalPropsType) {
             backgroundColor: 'rgba(86, 138, 53, 1)',
             color: '#fff',
           }}
-          onClick={() => {}}
+          onClick={onClickConfimButton}
+          disable={selectedPosition? false: true}
         />
       </div>
       <div className={classes.page}>2/2</div>
