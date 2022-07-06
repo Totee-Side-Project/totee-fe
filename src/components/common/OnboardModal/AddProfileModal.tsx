@@ -1,10 +1,15 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Button, Input } from '@components/atoms';
 import classes from './onboardmodal.module.scss';
+import { IModalPropsType } from 'types/modal.types';
+import { UserAPI } from '@api/api';
+import classNames from 'classnames';
 
-export default function AddProfileModal({ step, setStep }: IModalPropsType) {
-  const [value, setValue] = useState('');
+export default function AddProfileModal({ step, setStep, values, setValues}: IModalPropsType) {
+  const [nickname, setNickname] = useState('');
   const [files, setFiles] = useState<any>();
+  const [isValidate, setIsValidate]=useState(false);
+  const [isShowErrorMsg, setIsShowErrorMsg]=useState(false);
   const ImgInput = useRef<HTMLInputElement>(null);
   const ImgPlaceholder = useRef<HTMLDivElement>(null);
 
@@ -14,11 +19,20 @@ export default function AddProfileModal({ step, setStep }: IModalPropsType) {
     return () => preview();
   });
 
-  const preview = () => {
-    if (!files) return false;
+  useEffect(()=>{
+    setValues({
+      ...values,
+      ["nickname"]:nickname
+    })
+  },[nickname])
+
+  const preview = (): any => {
+    if (!files) return;
 
     const imgEl = ImgPlaceholder.current as HTMLDivElement;
     const reader = new FileReader();
+
+    if(!imgEl) return;
 
     reader.onload = () => {
       imgEl.style.backgroundRepeat = 'no-repeat';
@@ -26,12 +40,14 @@ export default function AddProfileModal({ step, setStep }: IModalPropsType) {
       imgEl.style.backgroundImage = `url(${reader.result})`;
     };
 
-    reader.readAsDataURL(files[0]);
+    reader.readAsDataURL(files);
   };
+
+
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setValue(value);
+    setNickname(value);
   };
 
   const onPhotoBtnClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -41,9 +57,27 @@ export default function AddProfileModal({ step, setStep }: IModalPropsType) {
   };
 
   const onImgChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files;
+    const file = e.target.files![0];
     setFiles(file);
+    setValues({
+      ...values,
+      ["profileImage"]:file,
+    })
   };
+
+  const onClickValidate=async()=>{
+      const result = await UserAPI.validateNickname(nickname);
+
+      if(result.data.header.code !== 200){
+        setIsValidate(false);
+        return;
+    }
+
+      setIsValidate(true);
+      result.data.body.data
+      ? setIsShowErrorMsg(false) 
+      : setIsShowErrorMsg(true);
+  }
 
   return (
     <>
@@ -71,7 +105,7 @@ export default function AddProfileModal({ step, setStep }: IModalPropsType) {
         <div className={classes.flex}>
           <div style={{ width: '100%' }}>
             <Input
-              value={value}
+              value={nickname}
               label="닉네임"
               type="text"
               name="nickname"
@@ -87,8 +121,17 @@ export default function AddProfileModal({ step, setStep }: IModalPropsType) {
               color: 'rgba(137, 137, 137, 1)',
               border: '2px solid #C9C9C9',
             }}
+            onClick={onClickValidate}
           />
         </div>
+          <div className={classNames(classes.helperText, isValidate?classes.show: "")}>
+            {
+                !isShowErrorMsg
+                ? <span className={classes.pass}>사용할 수 있는 닉네임입니다.</span>
+                : <span className={classes.fail}>다른 사용자와 중복된 닉네임입니다.</span>
+            }
+          </div>
+          
       </div>
       <div className={classes.footer}>
         <Button
@@ -109,6 +152,7 @@ export default function AddProfileModal({ step, setStep }: IModalPropsType) {
             color: '#fff',
           }}
           onClick={() => setStep(step + 1)}
+          disable={files && nickname && isValidate ? false: true}
         />
       </div>
       <div className={classes.page}>1/2</div>
