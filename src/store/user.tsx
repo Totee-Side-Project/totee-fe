@@ -5,8 +5,8 @@ export const UserState=atom({
     key:"userState",
     default:{
         email: "",
-        nickname: null,
-        position: null,
+        nickname: "",
+        position: "",
         profileImgaeUrl: "",
         roleType:""
     }

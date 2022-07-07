@@ -9,7 +9,6 @@ import { IModalPropsType } from 'types/modal.types';
 export default function CheckPositionModal({ step, setStep,values, setValues, setIsOpenModal, onClickConfimButton }: IModalPropsType) {
   const [selectedPosition, setSelectedPosition] = useState('');
 
-
   const positionList:any = {
     '프론트엔드': "FRONT_END",
     '백엔드' : "BACK_END",
@@ -44,7 +43,7 @@ export default function CheckPositionModal({ step, setStep,values, setValues, se
                 position === selectedPosition ? classes.selected : '',
               )}
               key={`position-${position}`}
-              onClick={() => setSelectedPosition(positionList[position])}
+              onClick={() => setSelectedPosition(position)}
             >
               {position}
             </div>

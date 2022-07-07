@@ -34,7 +34,7 @@ export const UserAPI = {
       },
     }),
   validateNickname: (nickname: string) =>
-    api.post('/api/v1/validation/nickname', { nickname: nickname }),
+    api.post(`/api/v1/validate/nickname?nicknameRequestDto=${nickname}`, { nickname: nickname }),
 };
 
 // 로그인 리다이렉트 uri - 우선 local에서 테스트할 수 있게 작업함

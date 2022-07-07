@@ -27,6 +27,11 @@
   ul{
     display: flex;
     list-style: none;
+    align-items: center;
+    li{
+      display: flex;
+      align-items: center;
+    }
 
     li + li {
       margin-left: 25px;
@@ -58,4 +63,17 @@
   background-color: #fff;
   font-size: 21px;
   font-family: 'Noto Sans KR', sans-serif;
+}
+
+.DownIcon{
+  width:35px;
+  height:35px;
+  background-color: #EFEFEF;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 20px;
+  margin-left:15px;
+  &:hover{
+    cursor: pointer;
+  }
 }

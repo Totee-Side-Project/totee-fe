@@ -17,7 +17,7 @@ export const modalState:any = atom({
 });
 
 
-export const loginLabelSelector = selector({
+export const LoginLabelSelector = selector({
   key: 'loginLabelSelector',
   get: ({ get }) => {
       const login = get(loginState);

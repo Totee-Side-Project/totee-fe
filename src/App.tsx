@@ -5,15 +5,32 @@ import './App.css';
 import { MainPage, PostsPage } from '@components/pages';
 import { useEffect, useState } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 import './App.css';
 import LoginOauth from '@components/login/LoginOauth';
 import { useGetUserAPI } from '@hooks/useGetQuery';
+import {loginState} from '@store/index';
 
 function App() {
   const padding: any = {
     paddingTop: '100px',
   };
+  const [login, setLogin] = useRecoilState(loginState);
+
   const { data, isFetching, isError } = useGetUserAPI();
+
+  let loginLocalStorage:any = localStorage.getItem("loginData")
+  loginLocalStorage = JSON.parse(loginLocalStorage);
+
+  // 로그인 상태 유지
+  useEffect(()=>{
+    if(loginLocalStorage === null) {
+      return;
+    } else {
+      setLogin(loginLocalStorage);
+    }
+  },[])
+
 
   return (
     <>
