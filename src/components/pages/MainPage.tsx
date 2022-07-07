@@ -1,4 +1,5 @@
 import PostCard from '@components/post/postCard';
+import PostList from '@components/post/postList';
 import React from 'react';
 import { Counter, Modal } from '@components/atoms';
 import { OnboardModal, Banner, Search } from '@components/common';
@@ -10,6 +11,7 @@ export function MainPage() {
     <div>
       <Banner />
       <Search />
+      <PostList />
       {/* <div style={{height:"1000px"}}>
       <h1>리코일 테스트 페이지 입니다.</h1>
       <OnboardModal />

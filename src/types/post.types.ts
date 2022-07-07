@@ -3,7 +3,12 @@ export interface Post {
   title: string;
   content: string;
   nickname: string;
-  likeCount: number;
-  commentCount: number;
+  likeNum: number;
+  commentNum: number;
   view: number;
+  createdAt: string;
+  position: string;
+  postId: number;
+  imageUrl: any;
+  author: string;
 }
