@@ -3,9 +3,15 @@ import classes from './categories.module.scss';
 import { CategoryButton } from '@components/atoms';
 import classNames from 'classnames';
 import { useSearchParams } from 'react-router-dom';
+import { useGetCategoryList} from 'hooks/useGetQuery';
 
 interface IImgButtonProps {
   isSelected: boolean;
+}
+
+interface ICategory{
+  categoryName : string;
+  imageUrl: string;
 }
 
 interface ITextButtonProps extends IImgButtonProps {
@@ -14,15 +20,22 @@ interface ITextButtonProps extends IImgButtonProps {
 export function Categories() {
   const [isShowTotal, setIsShowTotal] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('전체');
-  let [searchParams, setSearchParams] = useSearchParams();
+  const [categoryList, setCategoryList]=useState<ICategory[]>([]);
 
-  const categories = {
-    전체: 'total',
-    스터디: 'study',
-    멘토멘티: 'mentoMentee',
-    프로젝트: 'project',
-    동아리: 'team',
-  };
+  let [searchParams, setSearchParams] = useSearchParams();
+  
+  const {data , isFetching} = useGetCategoryList();
+
+  useEffect(()=>{
+    if(data && data.data.header.code === 200){
+      const total={
+        categoryName :"전체",
+        imageUrl : null,
+      }
+      setCategoryList([total, ...data.data.body.data]);
+    }
+  },[data])
+ 
 
   useEffect(() => {
     searchParams.get('cateogory') !== null
@@ -52,26 +65,26 @@ export function Categories() {
 
   return (
     <section className={classes.categories_wrapper}>
-      {Object.keys(categories).map((name: string) => (
+      {categoryList.map((category: ICategory) => (
         <CategoryButton
-          key={`categoryButton-${name}`}
+          key={`categoryButton-${category.categoryName}`}
           type={isShowTotal ? 'big' : 'small'}
           isSelected={false}
-          text={isShowTotal ? name : undefined}
+          text={isShowTotal ? category.categoryName : undefined}
           img={
             isShowTotal ? (
-              <ImgButton isSelected={selectedCategory === name}></ImgButton>
+              <ImgButton isSelected={selectedCategory === category.categoryName}></ImgButton>
             ) : (
               <TextButton
-                isSelected={selectedCategory === name}
-                text={name}
+                isSelected={selectedCategory === category.categoryName}
+                text={category.categoryName}
               ></TextButton>
             )
           }
           onClick={() =>
             setSearchParams({
               ...searchParams,
-              ['cateogory']: name,
+              ['cateogory']: category.categoryName,
             })
           }
         ></CategoryButton>

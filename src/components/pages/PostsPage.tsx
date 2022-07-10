@@ -1,6 +1,4 @@
 import React from 'react';
-import { useGetAllPosts } from '@hooks/useGetQuery';
-
 interface IPostType {
   categoryName: string;
   commentCount: number;
@@ -17,20 +15,11 @@ interface IPostType {
 }
 
 export function PostsPage() {
-  const { data, isFetching, isError } = useGetAllPosts();
-
-  if (isFetching) {
-    return <div>로딩중..</div>;
-  }
 
   return (
     <>
       <h1>포스트 리스트 테스트 페이지 입니다.</h1>
-      <div>
-        {data.data.body.data.content.map((dt: IPostType) => (
-          <div key={`post-${dt.postId}`}>{dt.title}</div>
-        ))}
-      </div>
+      
     </>
   );
 }

@@ -21,9 +21,13 @@ api.interceptors.request.use((config: any) => {
 // https://api.totee.link/swagger-ui.html#/
 
 export const PostAPI = {
-  getPostList: (page: number = 0, size: number = 8, sort?: string) =>
-    api.get(`/api/v1/post/list`),
+  getPostList: (categoryName? : string) =>
+    api.get(`/api/v1/post/list${categoryName?`/${categoryName}`:''}`),
 };
+
+export const CategoryAPI={
+  getCategoryList:()=> api.get(`/api/v1/category`)
+}
 
 export const UserAPI = {
   getUserInfo: () => api.get('/api/v1/info'),
