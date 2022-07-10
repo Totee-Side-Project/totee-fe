@@ -1,4 +1,5 @@
 .input_group{
+    position: relative;
     &.default{
         .label{
             font-weight: 500;
@@ -53,14 +54,28 @@
             }
             &.active{
                 color: rgba(24, 14, 37, 1);
-                border: 2px solid #C8C5CB;
+                border: 3px solid #C8C5CB;
             }
     
             &.focused{
                 color: rgba(24, 14, 37, 1);
+                border: 5px solid #568A35;
                 // outline: 1.5px solid rgba(52, 52, 52, 1) !important;
+            }
+            &:hover{
+                cursor: pointer;
             }
         }
     }
+    .img{
+        position: absolute;
+        top:13px;
+        left:20px;
+        &:hover{
+            cursor: pointer;
+        }
+    }
+
+
     
 }

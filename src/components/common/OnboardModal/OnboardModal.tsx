@@ -5,7 +5,11 @@ import AddProfileModal from './AddProfileModal';
 import CheckPositionModal from './CheckPositionModal';
 import { useAddUserInfo } from '@hooks/useMutateQuery';
 
-export function OnboardModal() {
+interface IOnboardModalProps {
+  isOpen: boolean;
+  setIsOpen: (e: boolean) => void;
+}
+export function OnboardModal({isOpen, setIsOpen}:IOnboardModalProps) {
   const [isShowAlert, setIsShowAlert]=useState(false);
   const [values, setValues]=useState({
     "nickname":"",
@@ -13,7 +17,6 @@ export function OnboardModal() {
     "profileImage":"",
   })
   const [step, setStep] = useState(0);
-  const [isOpenModal, setIsOpenModal] = useState(false);
 
   const addUserMutation = useAddUserInfo();
 
@@ -28,16 +31,16 @@ export function OnboardModal() {
         setIsShowAlert(false);
       },3000);
 
-      if(setIsOpenModal){
-        setIsOpenModal(false);
+      if(setIsOpen){
+        setIsOpen(false);
         setIsShowAlert(true);
       }
     }
   }
 
   useEffect(() => {
-    if (!isOpenModal) setStep(0);
-  }, [isOpenModal]);
+    if (!isOpen) setStep(0);
+  }, [isOpen]);
 
   const handleStep = (step: number) => {
     switch (step) {
@@ -50,7 +53,7 @@ export function OnboardModal() {
             setStep={setStep}
             values={values} 
             setValues={setValues}
-            setIsOpenModal={setIsOpenModal}
+            setIsOpenModal={setIsOpen}
             onClickConfimButton={onClickConfimButton}
           ></CheckPositionModal>
         );
@@ -61,8 +64,7 @@ export function OnboardModal() {
 
   return (
     <>
-      <button onClick={() => setIsOpenModal(!isOpenModal)}>모달버튼</button>
-      <Modal isOpen={isOpenModal} setIsOpen={setIsOpenModal}>
+      <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
         <section className={classes.onboardModal}>{handleStep(step)}</section>
       </Modal>
       {isShowAlert && <Alert text="토티에 오신것을 환영합니다"/>}

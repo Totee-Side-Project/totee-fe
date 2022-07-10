@@ -8,12 +8,13 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use((config: any) => {
-  const {token} = JSON.parse(localStorage.getItem("loginData") as string);
+  if(!localStorage.getItem('loginData')) return config;
+  const { token } = JSON.parse(localStorage.getItem('loginData') as string);
   if (!token) {
-    config.headers!.common["Authorization"] = null;
+    config.headers!.common['Authorization'] = null;
     return config;
   } else {
-    config.headers!.common["Authorization"] = `Bearer ${token}`;
+    config.headers!.common['Authorization'] = `Bearer ${token}`;
     return config;
   }
 });
@@ -21,19 +22,27 @@ api.interceptors.request.use((config: any) => {
 // https://api.totee.link/swagger-ui.html#/
 
 export const PostAPI = {
-  getPostList: (page: number = 0, size?: number, sort?: string) =>
-    api.get(`/api/v1/post/list`),
+  getPostList: (categoryName? : string) =>
+    api.get(`/api/v1/post/list${categoryName!=="전체"?`/${categoryName}`:''}`),
+  searchPostList:(title:string)=>
+    api.get(`/api/v1/post/search/${title}`)
 };
 
-export const UserAPI = {
-  getUserInfo: ()=> api.get('/api/v1/info'),
-  updateUserInfo : (form:any)=>api.post('/api/v1/info',form,{
-    headers:{
-      'Content-Type': 'multipart/form-data'
-    }
-  }),
-  validateNickname : (nickname:string) => api.post('/api/v1/validation/nickname',{nickname:nickname})
+export const CategoryAPI={
+  getCategoryList:()=> api.get(`/api/v1/category`)
 }
+
+export const UserAPI = {
+  getUserInfo: () => api.get('/api/v1/info'),
+  updateUserInfo: (form: any) =>
+    api.post('/api/v1/info', form, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }),
+  validateNickname: (nickname: string) =>
+    api.post('/api/v1/validation/nickname', { nickname: nickname }),
+};
 
 // 로그인 리다이렉트 uri - 우선 local에서 테스트할 수 있게 작업함
 export const OAUTH2_REDIRECT_URI = 'http://localhost:3000/oauth/redirect';
