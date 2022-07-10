@@ -83,7 +83,7 @@ export function Categories() {
           }
           onClick={() =>
             setSearchParams({
-              ...searchParams,
+              ...Object.fromEntries(searchParams),
               ['cateogory']: category.categoryName,
             })
           }

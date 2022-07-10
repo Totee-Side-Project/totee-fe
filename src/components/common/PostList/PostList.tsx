@@ -12,32 +12,48 @@ import { useSearchParams } from 'react-router-dom';
 
 export function PostList() {
   const [posts, setPosts] = useState<IPostType[]>([]);
-  const [selectedFilter, setSelectedFilter]=useState(0)
+  const [selectedFilter, setSelectedFilter]=useState('최신순');
   const [isShowTotal, setIsShowTotal]=useState(false);
   const [categoryName, setCategoryName]=useState('전체');
 
   let [searchParams, setSearchParams] = useSearchParams();
 
-  const {data, isFetching} = useGetPostListAPI(categoryName!=="전체"?categoryName: undefined);
+  const {data, isFetching} = useGetPostListAPI(categoryName);
   
-
   useEffect(()=>{
-    if(data && !isFetching){
-      console.log(data.data.body.data.content);
-      setPosts(data.data.body.data.content);
+    if(data && !isFetching && data.data.body.data.content){
+      setPosts(sortingData(data.data.body.data.content));
     }
   },[data]);
-
-  useEffect(()=>{
-    console.log(categoryName);
-  },[categoryName])
-
 
   useEffect(() => {
     searchParams.get('cateogory') !== null
       ? setCategoryName(searchParams.get('cateogory') as string)
       : setCategoryName('전체');
+
+    searchParams.get('filter') !== null && setSelectedFilter(searchParams.get('filter') as string);
   }, [searchParams]);
+
+  useEffect(()=>{
+    if(posts){
+      setPosts([...sortingData(posts)]);
+    }
+  },[selectedFilter])
+
+
+  const sortingData=(data:IPostType[]) : IPostType[]=>{
+    let newData=data;
+    console.log(selectedFilter);
+    switch(selectedFilter){
+      case "최신순":  newData.sort((a,b)=> + new Date(b.createdAt)- + new Date(a.createdAt)); break;
+      case "댓글많은순": newData.sort((a,b)=>  b.commentNum- a.commentNum); break;
+      case "좋아요순":  newData.sort((a,b)=>b.likeNum - a.likeNum); break;
+    } 
+
+    console.log(newData);
+  
+    return newData;
+  }
 
   return (
     <div className={classes.postListContainer}>
@@ -45,13 +61,16 @@ export function PostList() {
         {!isShowTotal
           ? <span onClick={()=>setIsShowTotal(true)}>전체보기 &gt;</span>
           : <ul className={classes.filterList}>
-            {["최신순", "댓글많은순", "좋아요 순"].map((item:string, idx:number)=>
+            {["최신순", "댓글많은순", "좋아요순"].map((item:string, idx:number)=>
               <li 
-                onClick={()=>setSelectedFilter(idx)}
+                onClick={()=> setSearchParams({
+                  ...Object.fromEntries(searchParams),
+                  ['filter']: item,
+                })}
                 key={`filter-${idx}`}
               >
-                  <EllipseIcon fill={selectedFilter===idx? "#568A35":"#A0AEC0"}/>
-                  <span className={selectedFilter===idx? classes.selected:''}>{item}</span>
+                  <EllipseIcon fill={selectedFilter===item? "#568A35":"#A0AEC0"}/>
+                  <span className={selectedFilter===item? classes.selected:''}>{item}</span>
               </li>
             )}
             </ul>

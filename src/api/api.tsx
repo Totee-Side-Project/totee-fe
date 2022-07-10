@@ -22,7 +22,7 @@ api.interceptors.request.use((config: any) => {
 
 export const PostAPI = {
   getPostList: (categoryName? : string) =>
-    api.get(`/api/v1/post/list${categoryName?`/${categoryName}`:''}`),
+    api.get(`/api/v1/post/list${categoryName!=="전체"?`/${categoryName}`:''}`),
 };
 
 export const CategoryAPI={
