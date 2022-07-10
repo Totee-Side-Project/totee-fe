@@ -41,6 +41,10 @@ export function Categories() {
     searchParams.get('cateogory') !== null
       ? setSelectedCategory(searchParams.get('cateogory') as string)
       : setSelectedCategory('전체');
+
+    searchParams.get('isShowTotal') === "전체보기"
+    ? setIsShowTotal(false)
+    : setIsShowTotal(true)
   }, [searchParams]);
 
   const ImgButton = ({ isSelected }: IImgButtonProps) => (

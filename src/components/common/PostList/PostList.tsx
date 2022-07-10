@@ -40,6 +40,13 @@ export function PostList() {
     }
   },[selectedFilter])
 
+  useEffect(()=>{
+    setSearchParams({
+      ...Object.fromEntries(searchParams),
+      ['isShowTotal']: isShowTotal? "전체보기":"일부보기"
+    })
+  },[isShowTotal])
+
 
   const sortingData=(data:IPostType[]) : IPostType[]=>{
     let newData=data;
@@ -49,8 +56,6 @@ export function PostList() {
       case "댓글많은순": newData.sort((a,b)=>  b.commentNum- a.commentNum); break;
       case "좋아요순":  newData.sort((a,b)=>b.likeNum - a.likeNum); break;
     } 
-
-    console.log(newData);
   
     return newData;
   }
