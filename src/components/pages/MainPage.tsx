@@ -1,6 +1,7 @@
+
 import React from 'react';
 import { Counter, Modal } from '@components/atoms';
-import { Banner, Categories, Search } from '@components/common';
+import { Banner, Categories, Search, PostList } from '@components/common';
 
 
 export function MainPage() {
@@ -9,6 +10,7 @@ export function MainPage() {
       <Banner />
       <Search />
       <Categories />
+      <PostList/>
     </div>
   );
 }

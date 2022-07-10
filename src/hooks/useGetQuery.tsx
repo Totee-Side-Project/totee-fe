@@ -34,3 +34,18 @@ export function useGetUserAPI() {
     },
   });
 }
+
+
+
+export function useGetPostListAPI() {
+  return useQuery(['posts'], () => PostAPI.getPostList(), {
+    // 브라우저 focus 됐을 때 재시작?
+    retry: false,
+    refetchOnWindowFocus: false,
+    // 자동으로 가져오는 옵션
+    enabled: true,
+    // 캐시 타임
+    staleTime: 10 * 600 * 1000,
+  });
+}
+ 

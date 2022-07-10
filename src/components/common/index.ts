@@ -4,3 +4,4 @@ export * from './Banner/Banner';
 export * from './Search/Search';
 export * from './Categories/Categories';
 export * from './ToggleIcon/ToggleIcon';
+export * from './PostList/PostList';
