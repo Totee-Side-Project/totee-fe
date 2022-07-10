@@ -21,7 +21,9 @@ export function PostList() {
   const {data, isFetching} = useGetPostListAPI(categoryName);
   
   useEffect(()=>{
-    if(data && !isFetching && data.data.body.data.content){
+    console.log(data);
+
+    if(data && !isFetching && data.data?.body.data.content){
       setPosts(sortingData(data.data.body.data.content));
     }
   },[data]);

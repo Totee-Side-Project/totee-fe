@@ -27,7 +27,7 @@ export function Categories() {
   const {data , isFetching} = useGetCategoryList();
 
   useEffect(()=>{
-    if(data && data.data.header.code === 200){
+    if(data && data.data?.header.code === 200){
       const total={
         categoryName :"전체",
         imageUrl : null,

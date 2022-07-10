@@ -8,6 +8,7 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use((config: any) => {
+  if(!localStorage.getItem('loginData')) return config;
   const { token } = JSON.parse(localStorage.getItem('loginData') as string);
   if (!token) {
     config.headers!.common['Authorization'] = null;
@@ -23,6 +24,8 @@ api.interceptors.request.use((config: any) => {
 export const PostAPI = {
   getPostList: (categoryName? : string) =>
     api.get(`/api/v1/post/list${categoryName!=="전체"?`/${categoryName}`:''}`),
+  searchPostList:(title:string)=>
+    api.get(`/api/v1/post/search/${title}`)
 };
 
 export const CategoryAPI={

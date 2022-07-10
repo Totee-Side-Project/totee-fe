@@ -7,7 +7,7 @@ export const UserState=atom({
         email: "",
         nickname: "",
         position: "",
-        profileImgaeUrl: "",
+        profileImageUrl: "",
         roleType:""
     }
 })

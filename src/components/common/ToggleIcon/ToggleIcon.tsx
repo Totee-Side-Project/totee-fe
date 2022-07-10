@@ -16,9 +16,9 @@ return (
     <div className={classes.toggleWrapper}>
         <div className={classes.toggleContainer}>
         <section className={classes.userInfo}>
-            <h1>MARINE</h1>
+            <h1>{userInfo.nickname}</h1>
             <div>
-                <p>rnjstmdals6@gmail.com</p>
+                <p>{userInfo.email}</p>
                 <p>rnjstmdals6@gmail.com</p>
             </div>
         </section>

@@ -33,7 +33,7 @@ const Header = () => {
       email: "",
       nickname: "",
       position: "",
-      profileImgaeUrl: "",
+      profileImageUrl: "",
       roleType:""
   })}
 
