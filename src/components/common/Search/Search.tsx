@@ -14,7 +14,12 @@ export function Search() {
 
   const onSubmit=(e:React.FormEvent)=>{
     e.preventDefault();
-    refetch();
+    if(inputValue.length>0){
+      refetch();
+    }
+    else{
+      setSearchResult(null);
+    }
   }
 
   useEffect(()=>{

@@ -22,7 +22,7 @@ export function PostList() {
   const [selectedFilter, setSelectedFilter]=useState('최신순');
   const [isShowTotal, setIsShowTotal]=useState(false);
   const [categoryName, setCategoryName]=useState('전체');
-  const [searchResult,setSearchResult] = useRecoilState(searchState);
+  const [searchResult, setSearchResult] = useRecoilState(searchState);
 
   let [searchParams, setSearchParams] = useSearchParams();
 
@@ -33,15 +33,14 @@ export function PostList() {
       setPosts([...searchResult]);
       handleCategory([...searchResult]);
     }
-  },[searchResult])
-  
-  useEffect(()=>{
-    if(data && !isFetching && data.data?.body.data.content){
-      setPosts(data.data.body.data.content);
-      handleCategory(data.data.body.data.content);      
+    else{
+      if(data?.data){
+        setPosts(data.data.body.data.content);
+        handleCategory(data.data.body.data.content);      
+      }
     }
-  },[data]);
-
+  },[searchResult, data])
+  
 
   useEffect(()=>{
     handleCategory(posts);
