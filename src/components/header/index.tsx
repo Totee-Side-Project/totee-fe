@@ -18,9 +18,11 @@ const Header = () => {
   //로그인 state 관리
   const [login,setLogin] = useRecoilState(loginState)
   const [user,setUser] = useRecoilState(UserState)
-  console.log(login);
-  console.log(user);
+  let navigate = useNavigate();
 
+  const handleStudyClick=()=> {
+    navigate("/setupstudy");
+  }
 
   //로그아웃 버튼
   const handleLogout = () => {
@@ -53,9 +55,9 @@ const Header = () => {
             <img src={logo} alt="토티 로고" />
           </Link>
           <div className="buttonWrapper">
-            <ul>
+            <ul className="profile_wrapper">
               <li>
-                <button className="createButton">스터디 개설</button>
+                <button className="createButton" onClick={handleStudyClick}>스터디 개설</button>
               </li>
               <li className="line" />
               <li>

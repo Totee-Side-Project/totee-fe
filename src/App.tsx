@@ -6,10 +6,12 @@ import { MainPage, PostsPage } from '@components/pages';
 import { useEffect, useState } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import './App.css';
 import LoginOauth from '@components/login/LoginOauth';
-import { useGetUserAPI } from '@hooks/useGetQuery';
-import {loginState} from '@store/index';
+
+import SetUpStudyPage from "@components/pages/setupstudypage/SetUpStudyPage";
+
+import {useGetUserAPI} from "@hooks/useGetQuery";
+import { loginState, UserState } from "@store/index";
 
 function App() {
   const padding: any = {
@@ -40,6 +42,7 @@ function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="/posts" element={<PostsPage />} />
         <Route path="/oauth/redirect" element={<LoginOauth />} />
+        <Route path="/setupstudy" element={<SetUpStudyPage />} />
       </Routes>
       <Footer />
     </>

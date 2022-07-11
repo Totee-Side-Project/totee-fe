@@ -1,0 +1,53 @@
+.box_container{
+  position: relative;
+  margin-top: 10px;
+}
+
+
+.recent_wrapper{
+  border: 1.5px solid #BFBFBF;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+}
+
+.recent_value {
+  width: 100%;
+  margin-left: 20px;
+}
+
+.value_placeholder {
+  color: #BFBFBF;
+}
+
+.recent_line{
+  font-size: 23px;
+  font-weight: 100;
+  height: 100%;
+  padding-left: 10px ;
+  color: #BFBFBF;
+}
+
+.recent_icon{
+  transform: rotate(90deg);
+  padding : 10px;
+  color: #BFBFBF;
+}
+
+.recent_list{
+  position: absolute;
+  width: inherit;
+  width: 100%;
+  background-color: white;
+  border: 1px solid #BFBFBF;
+  z-index: 10;
+  color: #BFBFBF;
+}
+.recent_list_item{
+  width: 100%;
+  list-style: none;
+  padding: 10px 20px 10px 20px;
+  border-bottom: 1px solid #BFBFBF;
+  background-color: white;
+  color: #BFBFBF;
+}

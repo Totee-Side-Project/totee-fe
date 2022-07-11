@@ -25,7 +25,12 @@ export const PostAPI = {
   getPostList: (categoryName? : string) =>
     api.get(`/api/v1/post/list${categoryName!=="전체"?`/${categoryName}`:''}`),
   searchPostList:(title:string)=>
-    api.get(`/api/v1/post/search/${title}`)
+    api.get(`/api/v1/post/search/${title}`),
+  createPost: (form:any)=>api.post('/api/v1/post',form,{
+    headers:{
+      'Content-Type': 'multipart/form-data'
+    }
+  })
 };
 
 export const CategoryAPI={
@@ -54,3 +59,9 @@ export const GOOGLE_AUTH_URL =
 // 카카오로그인
 export const KAKAO_AUTH_URL =
   BASE_URL + 'oauth2/authorization/kakao?redirect_uri=' + OAUTH2_REDIRECT_URI;
+
+
+export const SelectAPI = {
+  selectCategory: () => api.get('api/v1/category')
+}
+
