@@ -29,27 +29,26 @@ function ShowPostCard() {
         const response = await axios.get(
           'https://api.totee.link/api/v1/post/1',
         );
-        setPosts(response.data.body.data.content);
+        setPosts(response.data.body.data);
       } catch (e) {
         console.log('no');
       }
     };
     fetchPosts();
   }, []);
-
   return (
     <div className={classes.postCard}>
       <div className={classes.postWrapper}>
         <div className={classes.postImgWrapper}>
-          <div className={classes.postImgBox}>
-            <img className={classes.img} src={post.imageUrl} />
-          </div>
-          <div className={classes.postImgBox}>
-            <img className={classes.img} src={post.imageUrl} />
-          </div>
-          <div className={classes.postImgBox}>
-            <img className={classes.img} src={post.imageUrl} />
-          </div>
+          {/*<div className={classes.postImgBox}>*/}
+          {/*  <img className={classes.img} src={post.imageUrl} />*/}
+          {/*</div>*/}
+          {/*<div className={classes.postImgBox}>*/}
+          {/*  <img className={classes.img} src={post.imageUrl} />*/}
+          {/*</div>*/}
+          {/*<div className={classes.postImgBox}>*/}
+          {/*  <img className={classes.img} src={post.imageUrl} />*/}
+          {/*</div>*/}
         </div>
         <div className={classes.postContentBox}>
           <div>
@@ -66,9 +65,6 @@ function ShowPostCard() {
             )}
           </div>
           <div className={classes.postTag}># {post.period}개월</div>
-          <div className={classes.postTag}>
-            {post?.status === 'Y' ? <div># 모집중</div> : <div># 모집완료</div>}
-          </div>
         </div>
       </div>
     </div>

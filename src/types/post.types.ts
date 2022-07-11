@@ -12,5 +12,5 @@ export interface IPostType {
   imageUrl: any;
   author: string;
   onlineOrOffline: string;
-  period: number;
+  period: string;
 }
