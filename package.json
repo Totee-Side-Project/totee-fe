@@ -26,7 +26,7 @@
   "devDependencies": {
     "@honkhonk/vite-plugin-svgr": "^1.1.0",
     "@types/lodash": "^4.14.182",
-    "@types/node": "^16.11.26",
+    "@types/node": "^16.11.43",
     "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",
     "@typescript-eslint/eslint-plugin": "^5.3.1",

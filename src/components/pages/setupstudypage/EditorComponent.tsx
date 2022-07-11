@@ -1,4 +1,4 @@
-import React, { Component, useRef, useState } from 'react';
+import React, { Component, useEffect, useRef, useState } from 'react';
 import ReactQuill, {Quill} from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import './setupstudypage.scss';
@@ -7,6 +7,13 @@ const EditorComponent:any = (props:any) => {
   // const ReactQuill = require('react-quill');
   const QuillRef = useRef<ReactQuill>();
   const [contents, setContents] = useState("");
+
+  useEffect(()=>{
+    props.setValues({
+      ...props.values,
+      ["content"]:contents,
+    })
+  },[contents])
 
   const modules = {
     toolbar: [
@@ -44,7 +51,6 @@ const EditorComponent:any = (props:any) => {
   ];
 
 
-  // console.log(contents)
   return (
     <div className="editor_container">
       <ReactQuill
@@ -55,12 +61,10 @@ const EditorComponent:any = (props:any) => {
         }}
         value={contents}
         onChange={setContents}
-        className="editor_container"
-        style={{ borderRadius: '20px' }}
+        className="editor_wrapper"
         theme="snow"
         modules={modules}
         formats={formats}
-        // onChange={(content, delta, source, editor) => editor.getHTML()}
       />
     </div>
   );

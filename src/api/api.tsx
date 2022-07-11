@@ -23,6 +23,11 @@ api.interceptors.request.use((config: any) => {
 export const PostAPI = {
   getPostList: (page: number = 0, size?: number, sort?: string) =>
     api.get(`/api/v1/post/list`),
+  createPost: (form:any)=>api.post('/api/v1/post',form,{
+    headers:{
+      'Content-Type': 'multipart/form-data'
+    }
+  })
 };
 
 export const UserAPI = {
@@ -45,3 +50,9 @@ export const GOOGLE_AUTH_URL =
 // 카카오로그인
 export const KAKAO_AUTH_URL =
   BASE_URL + 'oauth2/authorization/kakao?redirect_uri=' + OAUTH2_REDIRECT_URI;
+
+
+export const SelectAPI = {
+  selectCategory: () => api.get('api/v1/category')
+}
+

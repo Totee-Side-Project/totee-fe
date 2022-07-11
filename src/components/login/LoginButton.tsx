@@ -39,7 +39,7 @@ function LoginButton() {
       email: "",
       nickname: null,
       position: null,
-      profileImgaeUrl: "",
+      profileImageUrl: "",
       roleType:""
     })
   }
