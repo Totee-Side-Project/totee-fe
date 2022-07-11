@@ -1,32 +1,60 @@
 
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { PostCard } from '../PostCard/PostCard';
-import {IPostType} from 'types/post.types';
+import { useRecoilState } from 'recoil';
+import { useSearchParams } from 'react-router-dom';
+
+
+import { searchState } from '@store/search';
 import {useGetPostListAPI} from '@hooks/useGetQuery';
-import classes from './postList.module.scss';
 import { ReactComponent as EllipseIcon } from '@assets/ellipse-icon.svg';
 import { ReactComponent as UpIcon } from '@assets/up-icon.svg';
-import { useSearchParams } from 'react-router-dom';
+
+import { PostCard } from '../PostCard/PostCard';
+import {IPostType} from 'types/post.types';
+import classes from './postList.module.scss';
+
 
 
 export function PostList() {
   const [posts, setPosts] = useState<IPostType[]>([]);
+  const [postsFiltered, setPostsFiltered]=useState<IPostType[]>([]);
   const [selectedFilter, setSelectedFilter]=useState('최신순');
   const [isShowTotal, setIsShowTotal]=useState(false);
   const [categoryName, setCategoryName]=useState('전체');
+  const [searchResult,setSearchResult] = useRecoilState(searchState);
 
   let [searchParams, setSearchParams] = useSearchParams();
 
-  const {data, isFetching} = useGetPostListAPI(categoryName);
+  const {data, isFetching} = useGetPostListAPI();
+
+  useEffect(()=>{
+    if(searchResult){
+      setPosts([...searchResult]);
+      handleCategory([...searchResult]);
+    }
+  },[searchResult])
   
   useEffect(()=>{
-    console.log(data);
-
     if(data && !isFetching && data.data?.body.data.content){
-      setPosts(sortingData(data.data.body.data.content));
+      setPosts(data.data.body.data.content);
+      handleCategory(data.data.body.data.content);      
     }
   },[data]);
+
+
+  useEffect(()=>{
+    handleCategory(posts);
+  },[categoryName]);
+
+  const handleCategory=(data:IPostType[])=>{
+    if(categoryName==="전체"){
+      setPostsFiltered(sortingData(data));
+    }
+    else{
+      setPostsFiltered(sortingData(data.filter((dt:IPostType)=>dt.categoryName === categoryName)))
+    }
+  }
 
   useEffect(() => {
     searchParams.get('cateogory') !== null
@@ -84,7 +112,7 @@ export function PostList() {
         }
       </div>
       <div className={classes.postWrapper}>
-        {posts.slice(0, isShowTotal? posts.length : 8).map((post:IPostType,idx:number)=>
+        {postsFiltered.slice(0, isShowTotal? postsFiltered.length : 8).map((post:IPostType,idx:number)=>
           <PostCard 
             key={`postCard-${idx}`}
             post={post}

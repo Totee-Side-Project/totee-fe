@@ -56,6 +56,13 @@
   color: #568A35;
   font-family: 'Noto Sans KR', sans-serif;
   cursor: pointer;
+
+  &:hover{
+    cursor: pointer;
+    background-color: #568A35;
+    color: #fff;
+    font-weight: 500;
+  }
 }
 
 .loginButton{

@@ -11,4 +11,5 @@ export interface IPostType {
   postId: number;
   imageUrl: any;
   author: string;
+  categoryName:string;
 }

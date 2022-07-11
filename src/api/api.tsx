@@ -22,8 +22,8 @@ api.interceptors.request.use((config: any) => {
 // https://api.totee.link/swagger-ui.html#/
 
 export const PostAPI = {
-  getPostList: (categoryName? : string) =>
-    api.get(`/api/v1/post/list${categoryName!=="전체"?`/${categoryName}`:''}`),
+  getPostList: () =>
+    api.get(`/api/v1/post/list`),
   searchPostList:(title:string)=>
     api.get(`/api/v1/post/search/${title}`),
   createPost: (form:any)=>api.post('/api/v1/post',form,{

@@ -3,13 +3,13 @@ import React, {useState, useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { loginState, UserState } from '@store/index';
-import { MainPage } from '@pages/MainPage';
-import { Icon } from '@components/atoms';
 import { SignInModal, OnboardModal, ToggleIcon } from '@components/common';
+import { Button } from '@components/atoms';
 import MeIcon from '@assets/me.jpeg';
 import logo from '../../assets/toteelogo-kr.png';
 import './header.scss';
 import DownIcon from '../../assets/toggle-icon.svg';
+
 const Header = () => {
   const [isOpenLoginModal, setIsOpenLoginModal]=useState(false);
   const [isOpenOnboardModal, setIsOpenOnboardModal]=useState(false);
@@ -57,7 +57,7 @@ const Header = () => {
           <div className="buttonWrapper">
             <ul className="profile_wrapper">
               <li>
-                <button className="createButton" onClick={handleStudyClick}>스터디 개설</button>
+                <button className="createButton" onClick={handleStudyClick}>스터디 개설</button>             
               </li>
               <li className="line" />
               <li>
@@ -66,7 +66,7 @@ const Header = () => {
                 :
                 <>
                 <ToggleIcon 
-                  imageUrl={MeIcon}
+                  imageUrl={user.profileImageUrl}
                   style={{width:"65px", height:"65px"}}
                   userInfo={{
                     nickname: user.nickname,

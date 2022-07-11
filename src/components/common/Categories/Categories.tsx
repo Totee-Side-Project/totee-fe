@@ -17,6 +17,7 @@ interface ICategory{
 interface ITextButtonProps extends IImgButtonProps {
   text: string;
 }
+
 export function Categories() {
   const [isShowTotal, setIsShowTotal] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('전체');
