@@ -17,8 +17,8 @@ function LoginAfter() {
     })
     setUser({
       email: "",
-      nickname: null,
-      position: null,
+      nickname: "",
+      position: "",
       profileImageUrl: "",
       roleType:""
     })

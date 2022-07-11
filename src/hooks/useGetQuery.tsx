@@ -28,7 +28,7 @@ export function useGetPostListAPI() {
   return useQuery(['posts'], () => PostAPI.getPostList().catch((err)=>err), {
     // 브라우저 focus 됐을 때 재시작?
     retry: false,
-    refetchOnWindowFocus: false,
+    refetchOnWindowFocus: true,
     // 자동으로 가져오는 옵션
     enabled: true,
     // 캐시 타임

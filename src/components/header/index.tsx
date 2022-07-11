@@ -21,7 +21,12 @@ const Header = () => {
   let navigate = useNavigate();
 
   const handleStudyClick=()=> {
-    navigate("/setupstudy");
+    if(login.state){
+      navigate("/setupstudy");
+    }
+    else{
+      setIsOpenLoginModal(true);
+    }
   }
 
   //로그아웃 버튼
