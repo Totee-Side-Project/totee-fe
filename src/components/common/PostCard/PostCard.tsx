@@ -9,6 +9,7 @@ interface Props {
   post: IPostType;
 }
 
+
 export function PostCard({ post }: Props) {
   return (
     <>
@@ -29,7 +30,7 @@ export function PostCard({ post }: Props) {
           <div className={classes.postContentBox}>
             <div>
               <div className={classes.postTitle}>{post?.title}</div>
-              <div className={classes.postContent}>{post?.content}</div>
+              <div className={classes.postContent} dangerouslySetInnerHTML={{__html:post?.content}}></div>
             </div>
             <div className={classes.postInfoBox}>
               <div className={classes.postInfoName}>
