@@ -3,15 +3,15 @@
     justify-content: center;
     align-items: center;
     margin: 60px auto;
-    column-gap: 80px;
+    column-gap: 60px;
 
 }
 .imgButton{
-    width: 105px;
-    height: 105px;
+    width: 85px;
+    height: 85px;
     background: #FFFFFF;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
+    border-radius: 15px;
 
     &:hover{
         cursor: pointer;
