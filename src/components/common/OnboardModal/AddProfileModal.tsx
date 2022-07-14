@@ -68,13 +68,14 @@ export default function AddProfileModal({ step, setStep, values, setValues}: IMo
   const onClickValidate=async()=>{
       const result = await UserAPI.validateNickname(nickname);
 
+      console.log(result.data.body.message);
       if(result.data.header.code !== 200){
         setIsValidate(false);
         return;
     }
 
       setIsValidate(true);
-      result.data.body.data
+      result.data.body.message ==="사용 가능한 닉네임입니다."
       ? setIsShowErrorMsg(false) 
       : setIsShowErrorMsg(true);
   }

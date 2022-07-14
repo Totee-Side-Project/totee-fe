@@ -20,6 +20,7 @@ export default function CheckPositionModal({ step, setStep,values, setValues, se
     '기타':"OTHERS",
   };
 
+
   useEffect(()=>{
     setValues({
       ...values,
@@ -40,10 +41,10 @@ export default function CheckPositionModal({ step, setStep,values, setValues, se
             <div
               className={classNames(
                 classes.tag,
-                position === selectedPosition ? classes.selected : '',
+                positionList[position] === selectedPosition ? classes.selected : '',
               )}
               key={`position-${position}`}
-              onClick={() => setSelectedPosition(position)}
+              onClick={() => setSelectedPosition(positionList[position])}
             >
               {position}
             </div>

@@ -38,9 +38,9 @@
     &.search{
         input{
             width:100%;
-            font-size: 20px;
+            font-size: 18px;
             height: 65px;
-            padding: 17px 134px;
+            padding: 17px 100px ;
             outline:none !important;
             transition: transform 1000ms;
             background: #FFFFFF;
@@ -50,16 +50,16 @@
     
             &.default{
                 color: #C8C5CB;
-                border: 3px solid #568A35;
+                border: 2px solid #568A35;
             }
             &.active{
                 color: rgba(24, 14, 37, 1);
-                border: 3px solid #C8C5CB;
+                border: 2px solid #C8C5CB;
             }
     
             &.focused{
                 color: rgba(24, 14, 37, 1);
-                border: 5px solid #568A35;
+                border: 2px solid #568A35;
                 // outline: 1.5px solid rgba(52, 52, 52, 1) !important;
             }
             &:hover{
@@ -69,7 +69,7 @@
     }
     .img{
         position: absolute;
-        top:13px;
+        top:20px;
         left:20px;
         &:hover{
             cursor: pointer;

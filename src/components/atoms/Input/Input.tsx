@@ -10,6 +10,7 @@ interface InputProps {
   id: string;
   placeholder: string;
   img?: any;
+  setStatus?:(e:any)=>void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -34,8 +35,15 @@ export function Input({
   placeholder,
   img,
   onChange,
+  setStatus,
 }: InputProps) {
   const [inputType, setInputType] = useState('default');
+
+  useEffect(()=>{
+    if(setStatus){
+      setStatus(inputType);
+    }
+  },[inputType])
 
   const handleFocus = useCallback(() => {
     setInputType('focused');
