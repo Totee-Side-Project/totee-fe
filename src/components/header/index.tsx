@@ -20,6 +20,7 @@ const Header = () => {
   const [user,setUser] = useRecoilState(UserState)
   let navigate = useNavigate();
 
+
   const handleStudyClick=()=> {
     if(login.state){
       navigate("/setupstudy");
@@ -74,11 +75,13 @@ const Header = () => {
                   imageUrl={user.profileImageUrl}
                   style={{width:"65px", height:"65px"}}
                   userInfo={{
+                    roleType: user.roleType,
                     nickname: user.nickname,
                     email:user.email
                   }}
                   handleLogout={handleLogout}
                   isShowToggle={isShowToggle}
+                  setIsShowToggle={setIsShowToggle}
                   onClick={()=>setIsShowToggle(!isShowToggle)}
                   ></ToggleIcon>
                   <img src={DownIcon} className="DownIcon" width={20} height={20} onClick={()=>setIsShowToggle(!isShowToggle)}></img>

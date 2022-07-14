@@ -29,9 +29,10 @@ export function PostList() {
   const {data, isFetching} = useGetPostListAPI();
 
   useEffect(()=>{
-    if(searchResult){
-      setPosts([...searchResult]);
-      handleCategory([...searchResult]);
+    if(searchResult && searchResult.data && searchResult.data.length>0){
+
+      setPosts([...searchResult.data]);
+      handleCategory([...searchResult.data]);
     }
     else{
       if(data?.data){
@@ -39,15 +40,13 @@ export function PostList() {
         handleCategory(data.data.body.data.content);      
       }
     }
-  },[searchResult, data])
+  },[searchResult, data, categoryName])
   
 
-  useEffect(()=>{
-    handleCategory(posts);
-  },[categoryName]);
 
   const handleCategory=(data:IPostType[])=>{
     if(categoryName==="전체"){
+      console.log(sortingData(data))
       setPostsFiltered(sortingData(data));
     }
     else{
@@ -79,7 +78,6 @@ export function PostList() {
 
   const sortingData=(data:IPostType[]) : IPostType[]=>{
     let newData=data;
-    console.log(selectedFilter);
     switch(selectedFilter){
       case "최신순":  newData.sort((a,b)=> + new Date(b.createdAt)- + new Date(a.createdAt)); break;
       case "댓글많은순": newData.sort((a,b)=>  b.commentNum- a.commentNum); break;
@@ -90,6 +88,12 @@ export function PostList() {
   }
 
   return (
+    <>
+    {searchResult && searchResult.data && searchResult.data.length>0 && 
+    <div className={classes.searchResult}>
+      " {searchResult.keyword}" 에 대한 검색 결과 <span>{searchResult.data.length}</span> 개
+    </div>
+    }
     <div className={classes.postListContainer}>
       <div className={classes.postListContainerHeader}>
         {!isShowTotal
@@ -124,6 +128,7 @@ export function PostList() {
           </div> */}
       </div>
     </div>
+    </>
   );
 }
 
