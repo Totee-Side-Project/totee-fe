@@ -15,11 +15,9 @@ interface IPostType {
 }
 
 export function PostsPage() {
-
   return (
     <>
       <h1>포스트 리스트 테스트 페이지 입니다.</h1>
-      
     </>
   );
 }

@@ -10,7 +10,7 @@ import { ThemeProvider } from '@emotion/react';
 import globalStyle from '@styles/globalStyle';
 import { theme } from '@styles/theme';
 import './index.css';
-
+import ScrollToTop from '@components/common/ScrollTop';
 
 const queryClient = new QueryClient();
 
@@ -21,6 +21,7 @@ ReactDOM.render(
         <RecoilRoot>
           <ThemeProvider theme={theme}>
             <Global styles={globalStyle} />
+            <ScrollToTop />
             <App />
           </ThemeProvider>
         </RecoilRoot>

@@ -1,19 +1,22 @@
-
 import com from '@assets/sms.svg';
 import view from '@assets/visibility.svg';
 import like from '@assets/favorite.svg';
 import { IPostType } from 'types/post.types';
 import classes from './postCard.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   post: IPostType;
 }
 
-
 export function PostCard({ post }: Props) {
+  let navigate = useNavigate();
+  const clickHandlerURLParameter = () => {
+    navigate(`/detail/${post.postId}`);
+  };
   return (
     <>
-      <div className={classes.postCard}>
+      <div className={classes.postCard} onClick={clickHandlerURLParameter}>
         <div className={classes.postWrapper}>
           <div className={classes.postImgWrapper}>
             <div className={classes.postImgBox}>
@@ -30,7 +33,10 @@ export function PostCard({ post }: Props) {
           <div className={classes.postContentBox}>
             <div>
               <div className={classes.postTitle}>{post?.title}</div>
-              <div className={classes.postContent} dangerouslySetInnerHTML={{__html:post?.content}}></div>
+              <div
+                className={classes.postContent}
+                dangerouslySetInnerHTML={{ __html: post?.content }}
+              ></div>
             </div>
             <div className={classes.postInfoBox}>
               <div className={classes.postInfoName}>
@@ -56,4 +62,3 @@ export function PostCard({ post }: Props) {
     </>
   );
 }
-
