@@ -50,7 +50,14 @@ export const UserAPI = {
 };
 
 // 로그인 리다이렉트 uri - 우선 local에서 테스트할 수 있게 작업함
-export const OAUTH2_REDIRECT_URI = process.env.NODE_ENV === "production"? "https://totee-fe-omega.vercel.app/oauth/redirect": 'http://localhost:3000/oauth/redirect';
+// export const OAUTH2_REDIRECT_URI 
+// = process.env.NODE_ENV === "production"
+// ? "https://totee-fe-omega.vercel.app/oauth/redirect"
+// : 'http://localhost:3000/oauth/redirect';
+
+export const OAUTH2_REDIRECT_URI 
+= 'https://totee-fe-omega.vercel.app/oauth/redirect';
+
 
 // 구글 로그인
 export const GOOGLE_AUTH_URL =
