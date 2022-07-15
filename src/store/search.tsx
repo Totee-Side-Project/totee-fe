@@ -1,7 +1,10 @@
 import {atom, selector} from "recoil";
-import {IPostType} from 'types/post.types';
+import {ISearchType} from 'types/post.types';
 
-export const searchState = atom<IPostType[] | null>({
+export const searchState = atom<ISearchType>({
     key: 'searchState',
-    default: null
+    default: {
+      data: null,
+      keyword: '',
+    }
   });

@@ -25,7 +25,7 @@ export function OnboardModal({isOpen, setIsOpen}:IOnboardModalProps) {
     for (const [key, value] of Object.entries(values)){
       formData.append(key, value);
     }
-    console.log(formData)
+
     const result = await addUserMutation.mutateAsync(formData);
     if(result.status ===200){
       setTimeout(()=>{

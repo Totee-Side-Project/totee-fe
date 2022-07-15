@@ -18,6 +18,7 @@ function App() {
     paddingTop: '100px',
   };
   const [login, setLogin] = useRecoilState(loginState);
+  const [user, setUser]=useRecoilState(UserState);
 
   const { data, isFetching, isError } = useGetUserAPI();
 
@@ -32,6 +33,7 @@ function App() {
       setLogin(loginLocalStorage);
     }
   },[])
+
 
 
   return (

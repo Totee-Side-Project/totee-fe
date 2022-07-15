@@ -1,10 +1,11 @@
 .categories_wrapper{
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     margin: 60px auto;
     column-gap: 60px;
-
+    row-gap:20px;
 }
 .imgButton{
     width: 85px;
