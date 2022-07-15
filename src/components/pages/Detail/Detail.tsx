@@ -81,7 +81,11 @@ function Detail() {
                   </div>
                 </div>
                 <div className="summary_category_right">
-                  {detailData.status}
+                  {detailData.status == 'Y' ? (
+                    <span>모집중</span>
+                  ) : (
+                    <span>모집완료</span>
+                  )}
                 </div>
               </div>
             </div>
