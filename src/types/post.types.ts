@@ -13,3 +13,9 @@ export interface IPostType {
   author: string;
   categoryName: string;
 }
+
+
+export interface ISearchType{
+  data : IPostType[] | null;
+  keyword: string;
+}

@@ -11,11 +11,11 @@ function Detail() {
   const navigate = useNavigate();
   let { id } = useParams();
   const { data } = useGetPostListAPI();
-  const [detailData, setDetailData] = useState([]);
+  const [detailData, setDetailData] = useState<any>([]);
 
   useEffect(() => {
     if (data && data.data?.header.code === 200) {
-      data.data.body.data.content.map((arr, i) => {
+      data.data.body.data.content.map((arr:any, i:number) => {
         if (arr.postId == id) {
           return setDetailData(arr);
         } else {
@@ -93,7 +93,7 @@ function Detail() {
 
           <div className="detail_sort_wrapper">
             {detailData.positionList
-              ? detailData.positionList.map((arr) => {
+              ? detailData.positionList.map((arr:any) => {
                   return (
                     <div className="detail_sort_content">모집분야 - {arr}</div>
                   );
