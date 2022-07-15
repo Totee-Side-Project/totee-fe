@@ -38,7 +38,6 @@ export function PostList() {
 
   const handleCategory = (data: IPostType[]) => {
     if (categoryName === '전체') {
-      console.log(sortingData(data));
       setPostsFiltered(sortingData(data));
     } else {
       setPostsFiltered(
