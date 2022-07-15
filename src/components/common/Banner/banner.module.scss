@@ -5,7 +5,7 @@
     background-color: #E3F1DA;
     width:100%;
     height:296px;
-    top:-10px;
+    top:-30px;
     text-align: center;
     @font-face {
       font-family: 'yg-jalnan';
@@ -26,7 +26,7 @@
     .title{
         width:100%;
         position: absolute;
-        top: 80px;
+        top: 60px;
         color: #454545;
         line-height: 2;
         font-size:40px;
@@ -37,8 +37,8 @@
         }
     }
     .img{
-      height: 400px;
-      margin: 110px auto 0px auto;
+      height: 450px;
+      margin: 65px auto 0px auto;
 
       
     }
@@ -46,5 +46,5 @@
 
 .banner_footer{
   width:100%;
-  height:296px;
+  height:260px;
 }

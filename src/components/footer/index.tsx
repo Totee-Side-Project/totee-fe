@@ -28,17 +28,45 @@ const Footer = () => {
           </div>
           <div className="footerName">
             <h2>FRONTEND</h2>
-            <p>Rulu</p>
-            <p>aeong98</p>
-            <p>ctaaag</p>
+            <p
+              onClick={() =>
+                window.open('https://github.com/LucaRune', '_blank')
+              }
+            >
+              Rulu
+            </p>
+            <p
+              onClick={() =>
+                window.open('https://github.com/aeong98', '_blank')
+              }
+            >
+              aeong98
+            </p>
+            <p
+              onClick={() => window.open('https://github.com/ctaaag', '_blank')}
+            >
+              ctaaag
+            </p>
           </div>
           <div className="footerName">
             <h2>BACKEND</h2>
-            <p>Marine</p>
+            <p
+              onClick={() =>
+                window.open('https://github.com/rnjstmdals6', '_blank')
+              }
+            >
+              Marine
+            </p>
           </div>
           <div className="footerName">
             <h2>DESIGNER</h2>
-            <p>Hazel</p>
+            <p
+              onClick={() =>
+                window.open('https://github.com/haezoo25', '_blank')
+              }
+            >
+              Hazel
+            </p>
           </div>
           <div className="footerName">
             <h2>Contacts us</h2>
