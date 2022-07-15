@@ -9,8 +9,8 @@ import { UserState } from '@store/index';
 export default function AddProfileModal({ step, setStep, values, setValues}: IModalPropsType) {
   const [nickname, setNickname] = useState('');
   const [files, setFiles] = useState<any>();
-  const [isValidate, setIsValidate]=useState(false);
-  const [isShowErrorMsg, setIsShowErrorMsg]=useState(false);
+  const [isValidate, setIsValidate]=useState<boolean>(false);
+  const [isShowErrorMsg, setIsShowErrorMsg]=useState<boolean>(false);
   const ImgInput = useRef<HTMLInputElement>(null);
   const ImgPlaceholder = useRef<HTMLDivElement>(null);
 
@@ -30,19 +30,13 @@ export default function AddProfileModal({ step, setStep, values, setValues}: IMo
   },[nickname])
 
   const preview = (): any => {
-    const imgEl = ImgPlaceholder.current as HTMLDivElement;
-
-    if(user.profileImageUrl){
-      imgEl.style.backgroundRepeat = 'no-repeat';
-      imgEl.style.backgroundSize = 'cover';
-      imgEl.style.backgroundImage = `url(${user.profileImageUrl})`;
-    }
     if (!files) return;
 
     const reader = new FileReader();
 
-    if(!imgEl) return;
+    const imgEl = ImgPlaceholder.current as HTMLDivElement;
 
+    if(!imgEl) return;
     reader.onload = () => {
       imgEl.style.backgroundRepeat = 'no-repeat';
       imgEl.style.backgroundSize = 'cover';
@@ -75,18 +69,20 @@ export default function AddProfileModal({ step, setStep, values, setValues}: IMo
   };
 
   const onClickValidate=async()=>{
-      const result = await UserAPI.validateNickname(nickname);
 
-      console.log(result.data.body.message);
-      if(result.data.header.code !== 200){
-        setIsValidate(false);
-        return;
-    }
-
-      setIsValidate(true);
-      result.data.body.message ==="사용 가능한 닉네임입니다."
-      ? setIsShowErrorMsg(false) 
-      : setIsShowErrorMsg(true);
+    await UserAPI
+    .validateNickname(nickname)
+    .then((res)=>{
+      if(res.status===200){
+        res.data.body.message ==="사용 가능한 닉네임입니다." && setIsShowErrorMsg(false);
+        setIsValidate(true);
+      }
+      else{
+        setIsShowErrorMsg(true);
+        setIsValidate(true);
+      }
+    })
+    .catch((err)=>err)
   }
 
   return (
@@ -134,14 +130,13 @@ export default function AddProfileModal({ step, setStep, values, setValues}: IMo
             onClick={onClickValidate}
           />
         </div>
-          <div className={classNames(classes.helperText, isValidate?classes.show: "")}>
+          <div className={classNames(classes.helperText, isValidate? classes.show: "")}>
             {
-                !isShowErrorMsg
+                !isShowErrorMsg 
                 ? <span className={classes.pass}>사용할 수 있는 닉네임입니다.</span>
                 : <span className={classes.fail}>다른 사용자와 중복된 닉네임입니다.</span>
             }
           </div>
-          
       </div>
       <div>
         {/* <Button
@@ -162,7 +157,7 @@ export default function AddProfileModal({ step, setStep, values, setValues}: IMo
             color: '#fff',
           }}
           onClick={() => setStep(step + 1)}
-          disable={nickname && isValidate ? false: true}
+          disable={files && nickname && !isShowErrorMsg && isValidate ? false: true}
         />
       </div>
       <div className={classes.page}>1/2</div>

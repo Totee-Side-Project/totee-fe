@@ -14,7 +14,7 @@ export function OnboardModal({ isOpen, setIsOpen }: IOnboardModalProps) {
   const [values, setValues] = useState({
     nickname: '',
     position: '',
-    profileImage: '',
+    profileImage: null as any,
   });
   const [step, setStep] = useState(0);
 
