@@ -8,7 +8,6 @@ import { Button } from '@components/atoms';
 import MeIcon from '@assets/me.jpeg';
 import logo from '../../assets/toteelogo-kr.png';
 import './header.scss';
-import DownIcon from '../../assets/toggle-icon.svg';
 
 const Header = () => {
   const [isOpenLoginModal, setIsOpenLoginModal]=useState(false);
@@ -84,7 +83,6 @@ const Header = () => {
                   setIsShowToggle={setIsShowToggle}
                   onClick={()=>setIsShowToggle(!isShowToggle)}
                   ></ToggleIcon>
-                  <img src={DownIcon} className="DownIcon" width={20} height={20} onClick={()=>setIsShowToggle(!isShowToggle)}></img>
                 </>
               }
               </li>        
