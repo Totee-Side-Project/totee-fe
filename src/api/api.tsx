@@ -5,6 +5,9 @@ const BASE_URL = 'https://api.totee.link/';
 export const api = axios.create({
   baseURL: BASE_URL,
   withCredentials: true,
+  validateStatus: (status) => {
+    return status < 500
+  }
 });
 
 api.interceptors.request.use((config: any) => {

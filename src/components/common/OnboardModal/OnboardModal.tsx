@@ -14,7 +14,7 @@ export function OnboardModal({ isOpen, setIsOpen }: IOnboardModalProps) {
   const [values, setValues] = useState({
     nickname: '',
     position: '',
-    profileImage: '',
+    profileImage: null as any,
   });
   const [step, setStep] = useState(0);
 
@@ -72,7 +72,7 @@ export function OnboardModal({ isOpen, setIsOpen }: IOnboardModalProps) {
 
   return (
     <>
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+      <Modal isOpen={isOpen} setIsOpen={setIsOpen} isCloseBtn={false}>
         <section className={classes.onboardModal}>{handleStep(step)}</section>
       </Modal>
       {isShowAlert && <Alert text="토티에 오신것을 환영합니다" />}

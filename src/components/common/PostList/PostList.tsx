@@ -38,7 +38,6 @@ export function PostList() {
 
   const handleCategory = (data: IPostType[]) => {
     if (categoryName === '전체') {
-      console.log(sortingData(data));
       setPostsFiltered(sortingData(data));
     } else {
       setPostsFiltered(
@@ -56,6 +55,11 @@ export function PostList() {
 
     searchParams.get('filter') !== null &&
       setSelectedFilter(searchParams.get('filter') as string);
+
+    searchParams.get('isShowTotal') !== null
+    ? setIsShowTotal(searchParams.get('isShowTotal') as string ==="전체보기" && true)
+    : setIsShowTotal(false);
+
   }, [searchParams]);
 
   useEffect(() => {
@@ -64,12 +68,6 @@ export function PostList() {
     }
   }, [selectedFilter]);
 
-  useEffect(() => {
-    setSearchParams({
-      ...Object.fromEntries(searchParams),
-      ['isShowTotal']: isShowTotal ? '전체보기' : '일부보기',
-    });
-  }, [isShowTotal]);
 
   const sortingData = (data: IPostType[]): IPostType[] => {
     let newData = data;
@@ -99,7 +97,12 @@ export function PostList() {
       <div className={classes.postListContainer}>
         <div className={classes.postListContainerHeader}>
           {!isShowTotal ? (
-            <span onClick={() => setIsShowTotal(true)}>전체보기 &gt;</span>
+            <span onClick={() => {
+              setSearchParams({
+                ...Object.fromEntries(searchParams),
+                ['isShowTotal']: "전체보기",
+              })
+            }}>전체보기 &gt;</span>
           ) : (
             <ul className={classes.filterList}>
               {['최신순', '댓글많은순', '좋아요순'].map(
