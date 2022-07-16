@@ -9,35 +9,35 @@ interface IOnboardModalProps {
   isOpen: boolean;
   setIsOpen: (e: boolean) => void;
 }
-export function OnboardModal({isOpen, setIsOpen}:IOnboardModalProps) {
-  const [isShowAlert, setIsShowAlert]=useState(false);
-  const [values, setValues]=useState({
-    "nickname":"",
-    "position":"",
-    "profileImage":"",
-  })
+export function OnboardModal({ isOpen, setIsOpen }: IOnboardModalProps) {
+  const [isShowAlert, setIsShowAlert] = useState(false);
+  const [values, setValues] = useState({
+    nickname: '',
+    position: '',
+    profileImage: null as any,
+  });
   const [step, setStep] = useState(0);
 
   const addUserMutation = useAddUserInfo();
 
-  const onClickConfimButton=async()=>{
+  const onClickConfimButton = async () => {
     let formData = new FormData();
-    for (const [key, value] of Object.entries(values)){
+    for (const [key, value] of Object.entries(values)) {
       formData.append(key, value);
     }
 
     const result = await addUserMutation.mutateAsync(formData);
-    if(result.status ===200){
-      setTimeout(()=>{
+    if (result.status === 200) {
+      setTimeout(() => {
         setIsShowAlert(false);
-      },3000);
+      }, 3000);
 
-      if(setIsOpen){
+      if (setIsOpen) {
         setIsOpen(false);
         setIsShowAlert(true);
       }
     }
-  }
+  };
 
   useEffect(() => {
     if (!isOpen) setStep(0);
@@ -46,13 +46,20 @@ export function OnboardModal({isOpen, setIsOpen}:IOnboardModalProps) {
   const handleStep = (step: number) => {
     switch (step) {
       case 0:
-        return <AddProfileModal step={step} setStep={setStep} values={values} setValues={setValues}/>;
+        return (
+          <AddProfileModal
+            step={step}
+            setStep={setStep}
+            values={values}
+            setValues={setValues}
+          />
+        );
       case 1:
         return (
           <CheckPositionModal
             step={step}
             setStep={setStep}
-            values={values} 
+            values={values}
             setValues={setValues}
             setIsOpenModal={setIsOpen}
             onClickConfimButton={onClickConfimButton}
@@ -65,10 +72,10 @@ export function OnboardModal({isOpen, setIsOpen}:IOnboardModalProps) {
 
   return (
     <>
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+      <Modal isOpen={isOpen} setIsOpen={setIsOpen} isCloseBtn={false}>
         <section className={classes.onboardModal}>{handleStep(step)}</section>
       </Modal>
-      {isShowAlert && <Alert text="토티에 오신것을 환영합니다"/>}
+      {isShowAlert && <Alert text="토티에 오신것을 환영합니다" />}
     </>
   );
 }

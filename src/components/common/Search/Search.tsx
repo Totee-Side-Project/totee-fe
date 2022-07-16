@@ -24,7 +24,7 @@ export function Search() {
       setSearchResult({
         data: data?.data?.body.data.content,
         keyword: inputValue,
-      });
+      });    
     }
     else{
       setSearchResult({
@@ -42,7 +42,7 @@ export function Search() {
   },[inputValue])
 
   useEffect(()=>{
-    if(data?.data?.body.data.content){
+    if(data && data.status ===200 && data?.data?.body.data.content){
       setPreviewResult(Array.from(new Set(data.data.body.data.content.map((ct:any)=>ct.title))));
       setIsOpenPreview(true);
     }

@@ -11,10 +11,11 @@ export interface IPostType {
   postId: number;
   imageUrl: any;
   author: string;
-  categoryName:string;
+  categoryName: string;
 }
 
+
 export interface ISearchType{
-  data: IPostType[] | null;
+  data : IPostType[] | null;
   keyword: string;
 }

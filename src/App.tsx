@@ -10,6 +10,7 @@ import { useRecoilState } from 'recoil';
 import LoginOauth from '@components/login/LoginOauth';
 
 import SetUpStudyPage from '@components/pages/setupstudypage/SetUpStudyPage';
+import Detail from '@components/pages/Detail/Detail';
 
 import { useGetUserAPI } from '@hooks/useGetQuery';
 import { loginState, UserState } from '@store/index';
@@ -44,6 +45,7 @@ function App() {
         <Route path="/posts" element={<PostsPage />} />
         <Route path="/oauth/redirect" element={<LoginOauth />} />
         <Route path="/setupstudy" element={<SetUpStudyPage />} />
+        <Route path="/detail/:id" element={<Detail />} />
       </Routes>
       <ScrollTopButton />
       <Footer />

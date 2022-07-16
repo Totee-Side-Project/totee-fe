@@ -37,7 +37,7 @@ export function useGetPostListAPI() {
 }
  
 export function useGetSearchPostList(title:string) {
-  return useQuery(['search', title], () => PostAPI.searchPostList(title).catch((err)=>err), {
+  return useQuery(['search', title], () => title.length > 0 && PostAPI.searchPostList(title).catch((err)=>err), {
     // 브라우저 focus 됐을 때 재시작?
     retry: false,
     refetchOnWindowFocus: false,

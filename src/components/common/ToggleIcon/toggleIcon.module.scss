@@ -2,8 +2,8 @@
     position: relative;
     .toggleContainer{
         position: absolute;
-        top: 40px;
-        right: -50px;
+        top: 0px;
+        right: 0px;
         width: fit-content;
         height: fit-content;
         background: #FFFFFF;
@@ -45,4 +45,8 @@
             }
         }
     }
+}
+.flex{
+    display: flex;
+    align-items: center;
 }
