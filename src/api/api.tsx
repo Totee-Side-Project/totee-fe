@@ -6,8 +6,8 @@ export const api = axios.create({
   baseURL: BASE_URL,
   withCredentials: true,
   validateStatus: (status) => {
-    return status < 500
-  }
+    return status < 500;
+  },
 });
 
 api.interceptors.request.use((config: any) => {
@@ -49,6 +49,11 @@ export const UserAPI = {
     }),
   validateNickname: (nickname: string) =>
     api.post('/api/v1/validate/nickname', { nickname: nickname }),
+};
+
+export const LikeAPI = {
+  getIsLikeInfo: (postId: any) => api.get(`/api/v1/post/isLike/${postId}`),
+  postLike: (postId: any) => api.post(`/api/v1/post/like/${postId}`),
 };
 
 // 로그인 리다이렉트 uri - 우선 local에서 테스트할 수 있게 작업함

@@ -6,16 +6,29 @@ import arrowIcon from '../../../assets/detail_icon.png';
 import IconEye from '../../../assets/detail_eye.png';
 import IconMessage from '../../../assets/detail_message.png';
 import IconLike from '../../../assets/detail_like.png';
+import likeButton from '../../../assets/detail_button.png';
+import { LikeAPI } from '@api/api';
 
 function Detail() {
   const navigate = useNavigate();
   let { id } = useParams();
   const { data } = useGetPostListAPI();
   const [detailData, setDetailData] = useState<any>([]);
+  const [Like, setLike] = useState<any>(false);
+
+  useEffect(() => {
+    const getLike = async () => {
+      let postId = id;
+      await LikeAPI.getIsLikeInfo(postId)
+        .then((res) => setLike(res.data.body.data))
+        .catch((err) => console.log('4', err));
+    };
+    getLike();
+  }, []);
 
   useEffect(() => {
     if (data && data.data?.header.code === 200) {
-      data.data.body.data.content.map((arr:any, i:number) => {
+      data.data.body.data.content.map((arr: any) => {
         if (arr.postId == id) {
           return setDetailData(arr);
         } else {
@@ -29,13 +42,24 @@ function Detail() {
     navigate('/');
   };
 
+  const clickLike = async () => {
+    let postId = id;
+    await LikeAPI.postLike(postId).then((res) => console.log(res));
+    await LikeAPI.getIsLikeInfo(postId)
+      .then((res) => setLike(res.data.body.data))
+      .catch((err) => console.log('4', err));
+  };
+
+  const handlerLikeButtonClick = () => {
+    clickLike();
+  };
+
   const checkingDetailPeriod = () => {
     if (detailData.period == 'VeryShortTerm') {
       return <span>1개월미만</span>;
     } else if (detailData.period == 'ShortTerm') {
       return <span>1~3개월</span>;
     } else if (detailData.period == 'MidTerm') {
-      console.log('하이');
       return <span>3~6개월</span>;
     } else if (detailData.period == 'LongTerm') {
       return <span>6개월이상</span>;
@@ -43,7 +67,7 @@ function Detail() {
       return null;
     }
   };
-
+  console.log('3', detailData);
   return (
     <div>
       {detailData && (
@@ -81,11 +105,28 @@ function Detail() {
                   </div>
                 </div>
                 <div className="summary_category_right">
-                  {detailData.status == 'Y' ? (
-                    <span>모집중</span>
-                  ) : (
-                    <span>모집완료</span>
-                  )}
+                  <div className="summary_like_button">
+                    {Like ? (
+                      <img
+                        src={likeButton}
+                        className="summary_like_true_button"
+                        onClick={handlerLikeButtonClick}
+                      />
+                    ) : (
+                      <img
+                        src={likeButton}
+                        className="summary_like_false_button"
+                        onClick={handlerLikeButtonClick}
+                      />
+                    )}
+                  </div>
+                  <div className="summary_category_status">
+                    {detailData.status == 'Y' ? (
+                      <span>모집중</span>
+                    ) : (
+                      <span>모집완료</span>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
@@ -93,9 +134,11 @@ function Detail() {
 
           <div className="detail_sort_wrapper">
             {detailData.positionList
-              ? detailData.positionList.map((arr:any) => {
+              ? detailData.positionList.map((arr: any, i: number) => {
                   return (
-                    <div className="detail_sort_content">모집분야 - {arr}</div>
+                    <div key={i} className="detail_sort_content">
+                      모집분야 - {arr}
+                    </div>
                   );
                 })
               : null}

@@ -54,6 +54,7 @@
 .summary_category_wrapper {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .summary_category_left {
   display: flex;
@@ -76,8 +77,26 @@
   @include category(white, #568a35, #568a35);
 }
 
-.summary_category_right {
+.summary_category_status {
   @include category(#f09933, #f09933, white);
+}
+
+.summary_category_right {
+  display: flex;
+  align-items: center;
+}
+
+.summary_like_true_button {
+  width: 30px;
+  height: 26px;
+  margin-top: 10px;
+}
+
+.summary_like_false_button {
+  width: 30px;
+  height: 26px;
+  margin-top: 10px;
+  filter: opacity(0.5) drop-shadow(0 0 0 gray) saturate(0%);
 }
 
 .detail_sort_wrapper {
