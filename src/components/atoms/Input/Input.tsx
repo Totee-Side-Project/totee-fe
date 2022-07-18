@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import classes from './input.module.scss';
 import className from 'classnames';
+
 interface InputProps {
   style?: string;
   value: string;
@@ -10,6 +11,7 @@ interface InputProps {
   id: string;
   placeholder: string;
   img?: any;
+  autoFocus?:boolean;
   setStatus?:(e:any)=>void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -34,6 +36,7 @@ export function Input({
   id,
   placeholder,
   img,
+  autoFocus=true,
   onChange,
   setStatus,
 }: InputProps) {
@@ -61,12 +64,14 @@ export function Input({
     value.length > 0 ? setInputType('focused') : setInputType('default');
   }, [value]);
 
+
   return (
     <div className={className(classes.input_group, classes[style])}>
       <label className={classes.label} htmlFor={name}>
         {label}
       </label>
       <input
+        autoFocus={autoFocus}
         className={classes[inputType]}
         type={type}
         name={name}
