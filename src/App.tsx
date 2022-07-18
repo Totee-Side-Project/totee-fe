@@ -1,3 +1,4 @@
+import { ScrollTopButton } from '@components/atoms/ScrollTopButton/ScrollTopButton';
 import Footer from '@components/footer';
 import Header from '@components/header';
 
@@ -9,10 +10,10 @@ import { useRecoilState } from 'recoil';
 import LoginOauth from '@components/login/LoginOauth';
 
 import SetUpStudyPage from '@components/pages/setupstudypage/SetUpStudyPage';
+import Detail from '@components/pages/Detail/Detail';
 
 import { useGetUserAPI } from '@hooks/useGetQuery';
 import { loginState, UserState } from '@store/index';
-import Detail from '@components/pages/Detail/Detail';
 
 function App() {
   const padding: any = {
@@ -46,6 +47,7 @@ function App() {
         <Route path="/setupstudy" element={<SetUpStudyPage />} />
         <Route path="/detail/:id" element={<Detail />} />
       </Routes>
+      <ScrollTopButton />
       <Footer />
     </>
   );
