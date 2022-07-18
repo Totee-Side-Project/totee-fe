@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import classes from './input.module.scss';
 import className from 'classnames';
+
 interface InputProps {
   style?: string;
   value: string;
@@ -60,6 +61,7 @@ export function Input({
   useEffect(() => {
     value.length > 0 ? setInputType('focused') : setInputType('default');
   }, [value]);
+
 
   return (
     <div className={className(classes.input_group, classes[style])}>

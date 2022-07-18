@@ -13,6 +13,7 @@ export function Search() {
   const [searchResult,setSearchResult] = useRecoilState(searchState);
   const [previewResult, setPreviewResult]=useState<any[]>();
   const inputRef= useRef(null as any);
+  
   const {data, refetch, isFetching} = useGetSearchPostList(inputValue);
   
   useOutsideAlerter(inputRef, ()=>{setIsOpenPreview(false)})

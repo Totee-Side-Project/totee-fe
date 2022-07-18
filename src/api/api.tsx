@@ -26,6 +26,7 @@ api.interceptors.request.use((config: any) => {
 
 export const PostAPI = {
   getPostList: () => api.get(`/api/v1/post/list`),
+  getPostByPostId : (postId:number)=> api.get(`/api/v1/post/${postId}`),
   searchPostList: (title: string) => api.get(`/api/v1/post/search/${title}`),
   createPost: (form: any) =>
     api.post('/api/v1/post', form, {

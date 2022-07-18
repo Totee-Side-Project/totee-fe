@@ -1,27 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { useGetPostListAPI } from '@hooks/useGetQuery';
+import { useGetPostByPostId } from '@hooks/useGetQuery';
 import { useNavigate, useParams } from 'react-router-dom';
 import './Detail.scss';
 import arrowIcon from '../../../assets/detail_icon.png';
 import IconEye from '../../../assets/detail_eye.png';
 import IconMessage from '../../../assets/detail_message.png';
 import IconLike from '../../../assets/detail_like.png';
-
+import {Comment} from '@components/common';
 function Detail() {
   const navigate = useNavigate();
   let { id } = useParams();
-  const { data } = useGetPostListAPI();
+  const { data } = useGetPostByPostId(parseInt(id as string));
   const [detailData, setDetailData] = useState<any>([]);
 
   useEffect(() => {
     if (data && data.data?.header.code === 200) {
-      data.data.body.data.content.map((arr:any, i:number) => {
-        if (arr.postId == id) {
-          return setDetailData(arr);
-        } else {
-          return null;
-        }
-      });
+      setDetailData(data.data.body.data);
     }
   }, [data]);
 
@@ -35,7 +29,6 @@ function Detail() {
     } else if (detailData.period == 'ShortTerm') {
       return <span>1~3개월</span>;
     } else if (detailData.period == 'MidTerm') {
-      console.log('하이');
       return <span>3~6개월</span>;
     } else if (detailData.period == 'LongTerm') {
       return <span>6개월이상</span>;
@@ -95,7 +88,7 @@ function Detail() {
             {detailData.positionList
               ? detailData.positionList.map((arr:any) => {
                   return (
-                    <div className="detail_sort_content">모집분야 - {arr}</div>
+                    <div className="detail_sort_content" key={`sort-content-${arr}`}>모집분야 - {arr}</div>
                   );
                 })
               : null}
@@ -127,6 +120,9 @@ function Detail() {
               <span>{detailData.view}</span>
             </div>
           </div>
+        {detailData.commentDTOList &&detailData.commentDTOList.map((comment:any)=>
+          <Comment comment={comment}></Comment>
+        )}
         </div>
       )}
     </div>
