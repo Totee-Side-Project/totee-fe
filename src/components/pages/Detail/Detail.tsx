@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useGetPostListAPI } from '@hooks/useGetQuery';
+import { useGetPostByPostId } from '@hooks/useGetQuery';
 import { useNavigate, useParams } from 'react-router-dom';
 import './Detail.scss';
 import arrowIcon from '../../../assets/detail_icon.png';
@@ -9,11 +9,13 @@ import IconLike from '../../../assets/detail_like.png';
 import likeButton from '../../../assets/detail_button.png';
 import Option from '../../../assets/detail_option.png';
 import { LikeAPI } from '@api/api';
+import {Comment, CommentInput} from '@components/common';
+import classNames from 'classnames';
 
 function Detail() {
   const navigate = useNavigate();
   let { id } = useParams();
-  const { data } = useGetPostListAPI();
+  const { data } = useGetPostByPostId(parseInt(id as string));
   const [detailData, setDetailData] = useState<any>([]);
   const [Like, setLike] = useState<any>(false);
 
@@ -29,13 +31,7 @@ function Detail() {
 
   useEffect(() => {
     if (data && data.data?.header.code === 200) {
-      data.data.body.data.content.map((arr: any) => {
-        if (arr.postId == id) {
-          return setDetailData(arr);
-        } else {
-          return null;
-        }
-      });
+      setDetailData(data.data.body.data);
     }
   }, [data]);
 
@@ -140,9 +136,7 @@ function Detail() {
             {detailData.positionList
               ? detailData.positionList.map((arr: any, i: number) => {
                   return (
-                    <div key={i} className="detail_sort_content">
-                      모집분야 - {arr}
-                    </div>
+                    <div className="detail_sort_content" key={`sort-content-${arr}`}>모집분야 - {arr}</div>
                   );
                 })
               : null}
@@ -174,7 +168,12 @@ function Detail() {
               <span>{detailData.view}</span>
             </div>
           </div>
-        </div>
+        <div className="comment_title">댓글</div>
+        {detailData.commentDTOList &&detailData.commentDTOList.map((comment:any)=>
+          <Comment postId={parseInt(id as string)} comment={comment} key={`comment-${comment.commentId}`}></Comment>
+        )}
+        <CommentInput postId={parseInt(id as string)}/>
+      </div>
       )}
     </div>
   );

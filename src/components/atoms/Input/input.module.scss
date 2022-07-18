@@ -22,15 +22,17 @@
     
             &.default{
                 color: #C8C5CB;
-                border: 1.5px solid #C9C9C9;
+                border: 2px solid #C8C5CB;
+
             }
             &.active{
                 color: rgba(24, 14, 37, 1);
-                border: 1px solid #C8C5CB;
+                border: 2px solid #C8C5CB;
             }
     
             &.focused{
                 color: rgba(24, 14, 37, 1);
+                border: 2px solid #568A35;
                 // outline: 1.5px solid rgba(52, 52, 52, 1) !important;
             }
         }

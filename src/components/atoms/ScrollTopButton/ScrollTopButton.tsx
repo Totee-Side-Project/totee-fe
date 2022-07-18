@@ -2,7 +2,7 @@ import ScrollTopBtn from '../../../assets/scrolltopBtn.svg';
 import classes from './scrolltopButton.module.scss';
 
 export function ScrollTopButton() {
-  const handleScroll = () => {
+  const handleScroll = (e: any) => {
     if (!window.scrollY) return;
 
     window.scroll({
