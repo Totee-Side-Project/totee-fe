@@ -90,8 +90,12 @@
   @include category(white, #568a35, #568a35);
 }
 
-.summary_category_status {
+.summary_category_status_true {
   @include category(#f09933, #f09933, white);
+}
+
+.summary_category_status_false {
+  @include category(gray, gray, white);
 }
 
 .summary_category_right {
@@ -172,13 +176,12 @@
   width: 20px;
   margin: 0px 10px;
 }
-.comment_title{
+.comment_title {
   font-weight: 500;
   font-size: 20px;
   line-height: 29px;
-  color: #6A6A6A;
-  width:100%;
+  color: #6a6a6a;
+  width: 100%;
   text-align: left;
   margin: 6px 0px 35px 0px;
-
 }
