@@ -26,6 +26,7 @@ api.interceptors.request.use((config: any) => {
 
 export const PostAPI = {
   getPostList: () => api.get(`/api/v1/post/list`),
+  getPostByPostId : (postId:number)=> api.get(`/api/v1/post/${postId}`),
   searchPostList: (title: string) => api.get(`/api/v1/post/search/${title}`),
   createPost: (form: any) =>
     api.post('/api/v1/post', form, {
@@ -33,7 +34,17 @@ export const PostAPI = {
         'Content-Type': 'multipart/form-data',
       },
     }),
+ 
 };
+
+export const CommentAPI={
+  createComment: (form:any)=>
+  api.post('/api/v1/comment', form),
+  updateComment: (commentId:number, form:any)=>
+  api.put(`/api/v1/comment/${commentId}`, form),
+  deleteComment: (commentId:number)=>
+  api.delete(`/api/v1/comment/${commentId}`),
+}
 
 export const CategoryAPI = {
   getCategoryList: () => api.get(`/api/v1/category`),

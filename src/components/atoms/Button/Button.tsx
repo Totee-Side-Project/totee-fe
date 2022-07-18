@@ -3,13 +3,8 @@ import classes from './button.module.scss';
 import classNames from 'classnames';
 interface ButtonProps {
   text: string;
-  style?: {
-    width?: string;
-    backgroundColor?: string;
-    border?: string;
-    borderRadius?: string;
-    color?: string;
-  };
+  type?:"button" | "submit" | "reset" | undefined;
+  style?:any;
   icon?: JSX.Element;
   onClick?: (e: any) => void;
   disable?:boolean;
@@ -17,21 +12,18 @@ interface ButtonProps {
 
 export function Button({
   text,
+  type="button",
   style = { backgroundColor: '#fff', border: 'none', borderRadius: '10px' },
   icon,
   onClick,
   disable=false
 }: ButtonProps) {
-  const { width, backgroundColor, border, borderRadius, color } = style;
   return (
     <button
       onClick={!disable && onClick ? onClick:()=>{}}
+      type={type}
       style={{
-        width: width,
-        backgroundColor: !disable? backgroundColor : "#EBEBEB",
-        border: border,
-        borderRadius: borderRadius,
-        color: color,
+       ...style
       }}
       className={classNames(classes.button,!disable?classes.hover:"")}
     >

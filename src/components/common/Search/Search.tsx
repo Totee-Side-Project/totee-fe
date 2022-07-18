@@ -13,6 +13,7 @@ export function Search() {
   const [searchResult,setSearchResult] = useRecoilState(searchState);
   const [previewResult, setPreviewResult]=useState<any[]>();
   const inputRef= useRef(null as any);
+  
   const {data, refetch, isFetching} = useGetSearchPostList(inputValue);
   
   useOutsideAlerter(inputRef, ()=>{setIsOpenPreview(false)})
@@ -56,7 +57,7 @@ export function Search() {
       <div className={classes.input_wrapper}>
         <form onSubmit={onSubmit}>
           <Input
-            style="search"
+          style="search"
             value={inputValue}
             type="text"
             name="search"
