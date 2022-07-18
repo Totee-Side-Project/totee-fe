@@ -7,6 +7,7 @@ import IconEye from '../../../assets/detail_eye.png';
 import IconMessage from '../../../assets/detail_message.png';
 import IconLike from '../../../assets/detail_like.png';
 import likeButton from '../../../assets/detail_button.png';
+import Option from '../../../assets/detail_option.png';
 import { LikeAPI } from '@api/api';
 
 function Detail() {
@@ -86,7 +87,10 @@ function Detail() {
             ></div>
             <div className="detail_summary_container">
               <div className="summary_title_wrapper">
-                <div className="summary_title_text"> {detailData.title}</div>
+                <div className="summary_title_addoption">
+                  <div className="summary_title_text"> {detailData.title}</div>
+                  <img className="summary_title_icon" src={Option} />
+                </div>
                 <div className="summary_title_line"></div>
               </div>
               <div className="summary_category_wrapper">

@@ -18,6 +18,7 @@
   height: 40px;
   text-align: center;
   // left: 80px;
+  cursor: pointer;
 }
 
 .detail_profile {
@@ -51,6 +52,18 @@
   margin: 10px 0px 10px 25px;
   padding-left: 15px;
 }
+
+.summary_title_addoption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.summary_title_icon {
+  width: 30px;
+  height: 30px;
+}
+
 .summary_category_wrapper {
   display: flex;
   justify-content: space-between;
@@ -90,6 +103,7 @@
   width: 30px;
   height: 26px;
   margin-top: 10px;
+  cursor: pointer;
 }
 
 .summary_like_false_button {
@@ -97,6 +111,7 @@
   height: 26px;
   margin-top: 10px;
   filter: opacity(0.5) drop-shadow(0 0 0 gray) saturate(0%);
+  cursor: pointer;
 }
 
 .detail_sort_wrapper {
