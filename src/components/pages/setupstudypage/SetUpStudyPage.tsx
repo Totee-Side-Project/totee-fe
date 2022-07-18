@@ -140,7 +140,7 @@ function SetUpStudyPage() {
           {i === 5 ? (
             <input
               className="contact_link"
-              placeholder="사용하실 연락 방식의 링크를 입력해주세요"
+              placeholder="사용하실 연락 방식의 링크를 입력해주세요."
               onChange={linkChange}
             />
           ) : null}
@@ -196,7 +196,7 @@ function SetUpStudyPage() {
         </div>
         <div className="category_title">
           <div className="category_title_text">
-            <span>개설하려는 스터디의 기본 정보를 입력해주세요</span>
+            <span>개설하려는 스터디의 기본 정보를 입력해주세요.</span>
           </div>
           <div className="category_title_line"></div>
         </div>
@@ -206,13 +206,14 @@ function SetUpStudyPage() {
         <div className="category_content_wrapper">{Categories()}</div>
       </div>
       <div className="category_title_text">
-        <span>개설하려는 스터디에 대해 소개해주세요</span>
+        <span>개설하려는 스터디에 대해 소개해주세요.</span>
       </div>
       <div className="category_title_line"></div>
+      <div className="title_title">제목</div>
       <input
         className="title_input"
         type="text"
-        placeholder="제목을 입력해주세요!"
+        placeholder="제목을 입력해주세요."
         onChange={handlerTitleChange}
       />
       <EditorComponent values={values} setValues={setValues} />
@@ -222,10 +223,10 @@ function SetUpStudyPage() {
           type="submit"
           onClick={onClickUploadButton}
         >
-          등록하기
+          글 올리기
         </button>
         <button className="cancel_button" onClick={handlerCancelClick}>
-          취소하기
+          취소
         </button>
       </div>
     </div>

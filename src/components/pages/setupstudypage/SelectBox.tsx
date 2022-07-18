@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import Checkbox from './CheckBox';
 import './selectbox.scss';
+import recentIcon from '../../../assets/recentIcon.svg';
+import recentLine from '../../../assets/recentLine.svg';
 
 function SelectBox(props: any) {
   const [showOptions, setShowOptions] = useState(false);
@@ -62,8 +64,8 @@ function SelectBox(props: any) {
             recentValue
           )}
         </div>
-        <div className="recent_line">|</div>
-        <div className="recent_icon">〉</div>
+        <img src={recentLine} className="recent_line" alt="|" />
+        <img src={recentIcon} className="recent_icon" alt=">" />
       </label>
       {showOptions ? (
         <ul className="recent_list">
