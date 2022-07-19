@@ -1,25 +1,39 @@
 import React, {useState} from 'react';
 import classes from './commentInput.module.scss';
 import { Input, Button } from '@components/atoms';
-import {useAddComment} from '@hooks/useMutateQuery';
-
+import {useAddComment, useAddReply} from '@hooks/useMutateQuery';
 interface ICommentInputPropsType{
-    postId: number;
+    postId?: number;
+    commentId?:number;
+    type:string;
+    onClickCancle?:()=>void;
 }
 
-export function CommentInput({postId}:ICommentInputPropsType) {
+export function CommentInput({postId, commentId, type="comment", onClickCancle}:ICommentInputPropsType) {
     const [inputValue, setInputValue]=useState('');
 
-    const AddPostCommentMutate =useAddComment(postId);
+    const AddPostCommentMutate =useAddComment(postId as number);
+    const AddPostReplyMutate =useAddReply(postId as number);
+
 
     const onSubmit=(e:React.FormEvent)=>{
         e.preventDefault();
-        AddPostCommentMutate.mutateAsync({
-            postId:postId,
-            content: inputValue
-        })
-        .then((res)=>res)
-        .catch((err)=>err)
+        if(type==="comment"){
+            AddPostCommentMutate.mutateAsync({
+                postId:postId,
+                content: inputValue
+            })
+            .then((res)=>res)
+            .catch((err)=>err)
+        }
+        else{
+            AddPostReplyMutate.mutateAsync({
+                commentId:commentId,
+                content: inputValue
+            })
+            .then((res)=>res)
+            .catch((err)=>err)
+        }
     }   
 
     return (
@@ -44,7 +58,10 @@ export function CommentInput({postId}:ICommentInputPropsType) {
                         borderRadius: "10px",
                         color:"#6A6A6A",
                     }}
-                    onClick={()=>setInputValue('')}
+                    onClick={()=>{
+                        setInputValue('');
+                        onClickCancle && onClickCancle();
+                    }}
                 ></Button>
                   <Button
                     text="댓글 등록"

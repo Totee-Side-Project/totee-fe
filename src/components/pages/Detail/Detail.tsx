@@ -9,7 +9,6 @@ import IconLike from '../../../assets/detail_like.png';
 import likeButton from '../../../assets/detail_button.png';
 import { LikeAPI } from '@api/api';
 import {Comment, CommentInput} from '@components/common';
-import classNames from 'classnames';
 
 function Detail() {
   const navigate = useNavigate();
@@ -29,6 +28,7 @@ function Detail() {
   }, []);
 
   useEffect(() => {
+    console.log("data", data);
     if (data && data.data?.header.code === 200) {
       setDetailData(data.data.body.data);
     }
@@ -165,10 +165,13 @@ function Detail() {
             </div>
           </div>
         <div className="comment_title">댓글</div>
+        <div className="comment_list">
         {detailData.commentDTOList &&detailData.commentDTOList.map((comment:any)=>
           <Comment postId={parseInt(id as string)} comment={comment} key={`comment-${comment.commentId}`}></Comment>
         )}
-        <CommentInput postId={parseInt(id as string)}/>
+        </div>
+        <CommentInput postId={parseInt(id as string)} type="comment"/>
+        
       </div>
       )}
     </div>

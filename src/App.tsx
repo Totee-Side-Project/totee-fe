@@ -13,7 +13,7 @@ import SetUpStudyPage from '@components/pages/setupstudypage/SetUpStudyPage';
 import Detail from '@components/pages/Detail/Detail';
 
 import { useGetUserAPI } from '@hooks/useGetQuery';
-import { loginState, UserState } from '@store/index';
+import { loginState, UserState, defaultLoginState, defaultUserState} from '@store/index';
 
 function App() {
   const padding: any = {
@@ -27,14 +27,18 @@ function App() {
   let loginLocalStorage: any = localStorage.getItem('loginData');
   loginLocalStorage = JSON.parse(loginLocalStorage);
 
-  // 로그인 상태 유지
-  useEffect(() => {
-    if (loginLocalStorage === null) {
-      return;
-    } else {
+  useEffect(()=>{
+    if(data && data.status===200){
       setLogin(loginLocalStorage);
+      return;
     }
-  }, []);
+    // 리프레시 토큰 발금
+    else{
+      setLogin(defaultLoginState);
+      setUser(defaultUserState);
+    }
+  },[data]);
+
 
   return (
     <>

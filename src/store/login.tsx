@@ -1,12 +1,14 @@
 import {atom, selector} from "recoil";
 
+export const defaultLoginState={
+  state:false,
+  token:""
+}
+
 
 export const loginState = atom({
   key: 'loginState',
-  default: {
-    state:false,
-    token:""
-  }
+  default: {...defaultLoginState}
 });
 
 export const modalState:any = atom({
