@@ -1,28 +1,27 @@
 import React, {useState} from 'react';
+import classNames from 'classnames';
 import classes from './comment.module.scss';
 import {handleTime} from '@utils/handleTime';
 import { useRecoilState } from 'recoil';
 import { UserState } from '@store/index';
-import { Input, Button } from '@components/atoms';
-import {useUpdateComment, useDeleteComment} from '@hooks/useMutateQuery';
-import { CommentInput } from '../CommentInput/CommentInput';
-import { ICommentPropsType} from 'types/comment.types';
-import { ReplyComment } from './ReplyComment';
+import { Input } from '@components/atoms';
 
-export function Comment({postId, comment}:ICommentPropsType) {
+import {useUpdateReply, useDeleteReply} from '@hooks/useMutateQuery';
+
+import { ICommentPropsType} from 'types/comment.types';
+
+
+export function ReplyComment({postId, comment, commentId}:ICommentPropsType) {
     const [user,setUser] = useRecoilState(UserState)
     const [isEdit, setIsEdit]=useState(false);
-    const [isReply, setIsReply]=useState(false);
     const [inputValue, setInputValue]=useState(comment.content);
-    const [replyInputValue, setReplyInputValue]=useState('');
 
-
-    const UpdateCommentMutate =useUpdateComment(postId, comment.commentId);
-    const DeleteCommentMutate =useDeleteComment(postId, comment.commentId);
+    const UpdateReplyMutate =useUpdateReply(postId, comment.replyId as number);
+    const DeleteReplyMutate =useDeleteReply(postId, comment.replyId as number);
 
     const onClickUpdateBtn=()=>[
-        UpdateCommentMutate.mutateAsync({
-            postId:postId,
+        UpdateReplyMutate.mutateAsync({
+            commentId:commentId,
             content: inputValue
         })
         .then((res)=>{
@@ -35,7 +34,7 @@ export function Comment({postId, comment}:ICommentPropsType) {
     ]
 
     const onClickDeleteBtn=()=>{
-        DeleteCommentMutate.mutateAsync()
+        DeleteReplyMutate.mutateAsync()
         .then((res)=>{
             if(res.status===200){
                 setIsEdit(false);
@@ -45,12 +44,11 @@ export function Comment({postId, comment}:ICommentPropsType) {
     }
 
     return (
-        <div className={classes.comment_container}>
+        <div className={classNames(classes.comment_container, classes.reply)}>
             <div className={classes.profile_wrapper}>
                 <div className={classes.profile_img}></div>
-                <div className={classes.vertical_line}></div>
             </div>
-            <div className={classes.content_wrapper}>
+            <div className={classNames(classes.content_wrapper,classes.reply_comment)}>
                 <div className={classes.title}>
                     <div className={classes.flex}>
                         <div className={classes.nickname}>{comment?.nickname}</div>
@@ -88,27 +86,6 @@ export function Comment({postId, comment}:ICommentPropsType) {
                         </>
                         }
                 </div>
-                <div 
-                    className={classes.reply_button}
-                    onClick={()=>setIsReply(!isReply)}>답글달기</div>
-
-                <div className={classes.reply_comment_wrapper}>
-                {comment.replyList && comment.replyList.map((reply)=>
-                    <ReplyComment
-                        postId={postId}
-                        comment={reply}
-                        commentId={comment.commentId}
-                    ></ReplyComment>
-                )}
-                </div>
-                {isReply&&
-                    <CommentInput 
-                    postId={postId} 
-                    commentId={comment.commentId} 
-                    type={"reply"}
-                    onClickCancle={()=>setIsReply(false)}
-                    ></CommentInput>
-                }
             </div>
         </div>
     )

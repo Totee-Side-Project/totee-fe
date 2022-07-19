@@ -1,5 +1,5 @@
 import { useMutation } from "react-query";
-import { UserAPI, CommentAPI } from "@api/api";
+import { UserAPI, CommentAPI, ReplyAPI } from "@api/api";
 import { useQueryClient } from "react-query";
 
 export const useAddUserInfo =()=>{
@@ -26,6 +26,31 @@ export const useUpdateComment =(postId:number, commentId:number)=>{
 export const useDeleteComment =(postId:number, commentId:number)=>{
     const queryClient = useQueryClient();
     return useMutation(()=>CommentAPI.deleteComment(commentId),{
+        onSuccess: ()=>queryClient.invalidateQueries(["post", postId])
+    })
+}
+
+
+export const useAddReply =(postId:number)=>{
+    const queryClient = useQueryClient();
+    return useMutation((form:any)=>ReplyAPI.createReply(form),{
+        onSuccess: ()=>{
+            console.log(postId);
+            queryClient.invalidateQueries(["post", postId])
+        }
+    })
+}
+
+export const useUpdateReply =(postId:number, replyId:number)=>{
+    const queryClient = useQueryClient();
+    return useMutation((form:any)=>ReplyAPI.updateReply(replyId, form),{
+        onSuccess: ()=>queryClient.invalidateQueries(["post", postId])
+    })
+}
+
+export const useDeleteReply =(postId:number, replyId:number)=>{
+    const queryClient = useQueryClient();
+    return useMutation(()=>ReplyAPI.deleteReply(replyId),{
         onSuccess: ()=>queryClient.invalidateQueries(["post", postId])
     })
 }

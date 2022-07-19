@@ -1,15 +1,17 @@
 import {atom, selector} from "recoil";
 
+export const defaultUserState={
+    email: "",
+    nickname: "",
+    position: "",
+    profileImageUrl: "",
+    roleType:""
+}
+
 
 export const UserState=atom({
     key:"userState",
-    default:{
-        email: "",
-        nickname: "",
-        position: "",
-        profileImageUrl: "",
-        roleType:""
-    }
+    default:{...defaultUserState}
 })
 
 export const UserSelector = selector({

@@ -51,6 +51,7 @@ const Header = () => {
     }
   },[login,user]);
 
+  console.log(login);
 
   return (
     <>
