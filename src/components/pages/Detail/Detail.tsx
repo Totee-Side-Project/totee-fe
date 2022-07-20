@@ -8,7 +8,7 @@ import IconMessage from '../../../assets/detail_message.png';
 import IconLike from '../../../assets/detail_like.png';
 import likeButton from '../../../assets/detail_button.png';
 import { LikeAPI } from '@api/api';
-import {Comment, CommentInput} from '@components/common';
+import { Comment, CommentInput } from '@components/common';
 
 function Detail() {
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ function Detail() {
   }, []);
 
   useEffect(() => {
-    console.log("data", data);
+    console.log('data', data);
     if (data && data.data?.header.code === 200) {
       setDetailData(data.data.body.data);
     }
@@ -132,7 +132,12 @@ function Detail() {
             {detailData.positionList
               ? detailData.positionList.map((arr: any, i: number) => {
                   return (
-                    <div className="detail_sort_content" key={`sort-content-${arr}`}>모집분야 - {arr}</div>
+                    <div
+                      className="detail_sort_content"
+                      key={`sort-content-${arr}`}
+                    >
+                      모집분야 - {arr}
+                    </div>
                   );
                 })
               : null}
@@ -143,7 +148,7 @@ function Detail() {
           </div>
           <div className="detail_line"></div>
           <div className="detail_content_wrapper">
-            <div className="detail_content_title">{detailData.title}</div>
+            {/*<div className="detail_content_title">{detailData.title}</div>*/}
             <div
               className="detail_content"
               dangerouslySetInnerHTML={{ __html: detailData.content }}
@@ -164,15 +169,19 @@ function Detail() {
               <span>{detailData.view}</span>
             </div>
           </div>
-        <div className="comment_title">댓글</div>
-        <div className="comment_list">
-        {detailData.commentDTOList &&detailData.commentDTOList.map((comment:any)=>
-          <Comment postId={parseInt(id as string)} comment={comment} key={`comment-${comment.commentId}`}></Comment>
-        )}
+          <div className="comment_title">댓글</div>
+          <div className="comment_list">
+            {detailData.commentDTOList &&
+              detailData.commentDTOList.map((comment: any) => (
+                <Comment
+                  postId={parseInt(id as string)}
+                  comment={comment}
+                  key={`comment-${comment.commentId}`}
+                ></Comment>
+              ))}
+          </div>
+          <CommentInput postId={parseInt(id as string)} type="comment" />
         </div>
-        <CommentInput postId={parseInt(id as string)} type="comment"/>
-        
-      </div>
       )}
     </div>
   );
