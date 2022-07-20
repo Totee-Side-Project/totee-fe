@@ -62,6 +62,7 @@
 .summary_title_icon {
   width: 30px;
   height: 30px;
+  margin-right: 20px;
 }
 
 .summary_category_wrapper {
@@ -92,10 +93,20 @@
 
 .summary_category_status_true {
   @include category(#f09933, #f09933, white);
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.2);
+    transition: transform 0.5s;
+  }
 }
 
 .summary_category_status_false {
   @include category(gray, gray, white);
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.2);
+    transition: transform 0.5s;
+  }
 }
 
 .summary_category_right {
@@ -108,13 +119,10 @@
   height: 26px;
   margin-top: 10px;
   cursor: pointer;
-<<<<<<< HEAD
-  &:hover{
+  &:hover {
     transform: scale(1.2);
-    transition: transform .5s;
+    transition: transform 0.5s;
   }
-=======
->>>>>>> feat/i21
 }
 
 .summary_like_false_button {
@@ -123,13 +131,10 @@
   margin-top: 10px;
   filter: opacity(0.5) drop-shadow(0 0 0 gray) saturate(0%);
   cursor: pointer;
-<<<<<<< HEAD
-  &:hover{
+  &:hover {
     transform: scale(1.2);
-    transition: transform .4s;
+    transition: transform 0.4s;
   }
-=======
->>>>>>> feat/i21
 }
 
 .detail_sort_wrapper {
@@ -199,13 +204,8 @@
   width: 100%;
   text-align: left;
   margin: 6px 0px 35px 0px;
-<<<<<<< HEAD
-
 }
-.comment_list{
+.comment_list {
   display: grid;
   row-gap: 28px;
 }
-=======
-}
->>>>>>> feat/i21

@@ -20,11 +20,10 @@ function Detail() {
   const { data, refetch } = useGetPostByPostId(parseInt(id as string));
   const [detailData, setDetailData] = useState<any>([]);
   const [Like, setLike] = useState<any>(false);
-  const [status, setStatus] = useState<any>(true);
+  const [status, setStatus] = useState<any>(detailData.status);
   const LoginLabel = useRecoilValue(UserSelector);
 
   useEffect(() => {
-    console.log('data', data);
     if (data && data.data?.header.code === 200) {
       setDetailData(data.data.body.data);
     }
@@ -70,24 +69,23 @@ function Detail() {
     }
   };
 
-  const statusClick = async () => {
-    let postId: any = id;
-    if (detailData.author == LoginLabel.nickname) {
-      await PostAPI.statusChange(postId)
-        .then((res) => console.log(res.data.body.data))
-        .catch((err) => console.log(err));
-    } else {
-      return null;
-    }
-  };
+  // const statusClick = async () => {
+  //   let postId: any = id;
+  //   if (detailData.author == LoginLabel.nickname) {
+  //     await PostAPI.statusChange(postId)
+  //       .then((res) => console.log(res.data.body.data))
+  //       .catch((err) => console.log(err));
+  //   } else {
+  //     return null;
+  //   }
+  // };
 
   const handlerStatusClick = async () => {
     let postId = id;
-    await statusClick();
     if (detailData.author == LoginLabel.nickname) {
-      setStatus((prev: any) => !prev);
-      navigate(`/detail/${postId}`);
-      console.log('navigate');
+      await PostAPI.statusChange(postId)
+        .then(async (res) => await refetch())
+        .catch((err) => console.log(err));
     } else {
       return null;
     }
@@ -149,7 +147,7 @@ function Detail() {
                     )}
                   </div>
 
-                  {detailData.status == 'Y' || status == true ? (
+                  {detailData.status == 'Y' ? (
                     <div
                       className="summary_category_status_true"
                       onClick={handlerStatusClick}
