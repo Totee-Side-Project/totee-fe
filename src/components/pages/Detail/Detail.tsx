@@ -17,7 +17,7 @@ import { UserSelector } from '@store/user';
 function Detail() {
   const navigate = useNavigate();
   let { id } = useParams();
-  const { data } = useGetPostByPostId(parseInt(id as string));
+  const { data, refetch } = useGetPostByPostId(parseInt(id as string));
   const [detailData, setDetailData] = useState<any>([]);
   const [Like, setLike] = useState<any>(false);
   const [status, setStatus] = useState<any>(true);
@@ -35,10 +35,12 @@ function Detail() {
 
   const clickLike = async () => {
     let postId = id;
-    await LikeAPI.postLike(postId).then((res) => console.log(res));
-    await LikeAPI.getIsLikeInfo(postId)
-      .then((res) => setLike(res.data.body.data))
-      .catch((err) => console.log('4', err));
+    await LikeAPI.postLike(postId).then(async (res) => {
+      refetch();
+      await LikeAPI.getIsLikeInfo(postId)
+        .then((res) => setLike(res.data.body.data))
+        .catch((err) => console.log('4', err));
+    });
   };
 
   const handlerLikeButtonClick = () => {
