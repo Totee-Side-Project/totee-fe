@@ -7,17 +7,12 @@ import IconEye from '../../../assets/detail_eye.png';
 import IconMessage from '../../../assets/detail_message.png';
 import IconLike from '../../../assets/detail_like.png';
 import likeButton from '../../../assets/detail_button.png';
-<<<<<<< HEAD
-import { LikeAPI } from '@api/api';
-import { Comment, CommentInput } from '@components/common';
-=======
 import Option from '../../../assets/detail_option.png';
 import { LikeAPI, PostAPI } from '@api/api';
 import { Comment, CommentInput } from '@components/common';
 import { useRecoilValue } from 'recoil';
 import classNames from 'classnames';
 import { UserSelector } from '@store/user';
->>>>>>> feat/i21
 
 function Detail() {
   const navigate = useNavigate();
@@ -216,7 +211,6 @@ function Detail() {
             </div>
           </div>
           <div className="comment_title">댓글</div>
-<<<<<<< HEAD
           <div className="comment_list">
             {detailData.commentDTOList &&
               detailData.commentDTOList.map((comment: any) => (
@@ -228,17 +222,6 @@ function Detail() {
               ))}
           </div>
           <CommentInput postId={parseInt(id as string)} type="comment" />
-=======
-          {detailData.commentDTOList &&
-            detailData.commentDTOList.map((comment: any) => (
-              <Comment
-                postId={parseInt(id as string)}
-                comment={comment}
-                key={`comment-${comment.commentId}`}
-              ></Comment>
-            ))}
-          <CommentInput postId={parseInt(id as string)} />
->>>>>>> feat/i21
         </div>
       )}
     </div>

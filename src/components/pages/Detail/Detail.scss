@@ -108,13 +108,10 @@
   height: 26px;
   margin-top: 10px;
   cursor: pointer;
-<<<<<<< HEAD
   &:hover{
     transform: scale(1.2);
     transition: transform .5s;
   }
-=======
->>>>>>> feat/i21
 }
 
 .summary_like_false_button {
@@ -123,13 +120,10 @@
   margin-top: 10px;
   filter: opacity(0.5) drop-shadow(0 0 0 gray) saturate(0%);
   cursor: pointer;
-<<<<<<< HEAD
   &:hover{
     transform: scale(1.2);
     transition: transform .4s;
   }
-=======
->>>>>>> feat/i21
 }
 
 .detail_sort_wrapper {
@@ -199,13 +193,9 @@
   width: 100%;
   text-align: left;
   margin: 6px 0px 35px 0px;
-<<<<<<< HEAD
-
 }
 .comment_list{
   display: grid;
   row-gap: 28px;
 }
-=======
-}
->>>>>>> feat/i21
+
