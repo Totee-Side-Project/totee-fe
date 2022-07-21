@@ -18,6 +18,7 @@ export function Button({
   onClick,
   disable=false
 }: ButtonProps) {
+  console.log(disable);
   return (
     <button
       onClick={!disable && onClick ? onClick:()=>{}}
@@ -25,7 +26,7 @@ export function Button({
       style={{
        ...style
       }}
-      className={classNames(classes.button,!disable?classes.hover:"")}
+      className={classNames(classes.button, disable?classes.disable: classes.hover)}
     >
       {icon && <span className={classes.icon}>{icon}</span>}
       <span>{text}</span>
