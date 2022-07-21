@@ -39,13 +39,23 @@ function Detail() {
       refetch();
       await LikeAPI.getIsLikeInfo(postId)
         .then((res) => setLike(res.data.body.data))
-        .catch((err) => console.log('4', err));
+        .catch((err) => console.log(err));
     });
   };
 
   const handlerLikeButtonClick = () => {
     clickLike();
   };
+
+  useEffect(() => {
+    const likeStatus = async () => {
+      let postId = id;
+      await LikeAPI.getIsLikeInfo(postId)
+        .then((res) => setLike(res.data.body.data))
+        .catch((err) => console.log(err));
+    };
+    likeStatus();
+  }, []);
 
   const checkingDetailPeriod = () => {
     if (detailData.period == 'VeryShortTerm') {
@@ -68,17 +78,6 @@ function Detail() {
       return null;
     }
   };
-
-  // const statusClick = async () => {
-  //   let postId: any = id;
-  //   if (detailData.author == LoginLabel.nickname) {
-  //     await PostAPI.statusChange(postId)
-  //       .then((res) => console.log(res.data.body.data))
-  //       .catch((err) => console.log(err));
-  //   } else {
-  //     return null;
-  //   }
-  // };
 
   const handlerStatusClick = async () => {
     let postId = id;

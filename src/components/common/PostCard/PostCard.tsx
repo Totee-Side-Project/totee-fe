@@ -4,6 +4,7 @@ import like from '@assets/favorite.svg';
 import { IPostType } from 'types/post.types';
 import classes from './postCard.module.scss';
 import { useNavigate } from 'react-router-dom';
+import { indexOf } from 'lodash';
 
 interface Props {
   post: IPostType;
@@ -14,13 +15,7 @@ export function PostCard({ post }: Props) {
   const clickHandlerURLParameter = () => {
     navigate(`/detail/${post.postId}`);
   };
-  const checking = () => {
-    if (post?.content.includes('img')) {
-      return console.log('컨텐츠에 이미지 포함되어있음');
-    }
-  };
 
-  checking();
   return (
     <>
       <div className={classes.postCard} onClick={clickHandlerURLParameter}>
