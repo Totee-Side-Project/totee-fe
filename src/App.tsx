@@ -9,7 +9,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import LoginOauth from '@components/login/LoginOauth';
 
-import SetUpStudyPage from '@components/pages/SetupStudyPage/SetUpStudyPage';
+import SetUpStudyPage from '@components/pages/SetUpStudyPage/SetUpStudyPage';
 import DetailPage from '@components/pages/DetailPage/DetailPage';
 import EditPage from '@components/pages/EditPage/EditPage'; 
 
