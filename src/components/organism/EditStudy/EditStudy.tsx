@@ -257,7 +257,7 @@ export function EditStudyPage({type, initialData}:IEditStudyPagePropsType) {
           type="submit"
           onClick={onClickUploadButton}
         >
-          글 올리기
+          {type==="create"? <span>글 올리기</span> : <span>글 수정하기</span>}
         </button>
         <button className="cancel_button" onClick={handlerCancelClick}>
           취소

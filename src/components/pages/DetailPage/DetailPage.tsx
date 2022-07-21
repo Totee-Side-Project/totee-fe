@@ -73,7 +73,7 @@ function DetailPage() {
 
   const OptionShow = () => {
     if (detailData.author == LoginLabel.nickname) {
-      return <img className="summary_title_icon" src={Option} />;
+      return <img className="summary_title_icon" src={Option} onClick={()=>navigate(`/edit/${id}`)}/>;
     } else {
       return null;
     }
