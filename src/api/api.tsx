@@ -35,6 +35,12 @@ export const PostAPI = {
         'Content-Type': 'multipart/form-data',
       },
     }),
+  upDatePost: (postId:number, form: any) =>
+  api.put(`/api/v1/post/${postId}`, form, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  }),
 };
 
 export const CommentAPI = {

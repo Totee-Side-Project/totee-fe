@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useGetPostByPostId } from '@hooks/useGetQuery';
 import { useNavigate, useParams } from 'react-router-dom';
-import './Detail.scss';
+import './DetailPage.scss';
 import arrowIcon from '../../../assets/detail_icon.png';
 import IconEye from '../../../assets/detail_eye.png';
 import IconMessage from '../../../assets/detail_message.png';
@@ -14,7 +14,7 @@ import { useRecoilValue } from 'recoil';
 import classNames from 'classnames';
 import { UserSelector } from '@store/user';
 
-function Detail() {
+function DetailPage() {
   const navigate = useNavigate();
   let { id } = useParams();
   const { data, refetch } = useGetPostByPostId(parseInt(id as string));
@@ -73,7 +73,7 @@ function Detail() {
 
   const OptionShow = () => {
     if (detailData.author == LoginLabel.nickname) {
-      return <img className="summary_title_icon" src={Option} />;
+      return <img className="summary_title_icon" src={Option} onClick={()=>navigate(`/edit/${id}`)}/>;
     } else {
       return null;
     }
@@ -225,4 +225,4 @@ function Detail() {
   );
 }
 
-export default Detail;
+export default DetailPage;

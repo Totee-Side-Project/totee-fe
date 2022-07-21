@@ -5,3 +5,4 @@ export * from './Input/Input';
 export * from './Alert/Alert';
 export * from './CategoryButton/CategoryButton';
 export * from './Icon/Icon';
+export * from './CheckBox/CheckBox';

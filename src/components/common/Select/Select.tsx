@@ -1,67 +1,51 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import Checkbox from './CheckBox';
-import './selectbox.scss';
+import { Checkbox } from '@components/atoms';
+import './select.scss';
 import recentIcon from '../../../assets/recentIcon.svg';
 import recentLine from '../../../assets/recentLine.svg';
+import {handleSelectValues} from '@utils/handleSelectValue';
 
-function SelectBox(props: any) {
+
+interface ISelectPropsType{
+    values:any;
+    setValues: (e:any)=>void;
+    optionData: any;
+    variable: any;
+    isChecked:any;
+    setIsChecked:(e:any)=>void;
+    initialData?:any;
+}
+
+export const Select=({values, setValues, optionData, variable, isChecked, setIsChecked, initialData}: ISelectPropsType) =>{
   const [showOptions, setShowOptions] = useState(false);
-  const [recentValue, setRecentValue] = useState('');
+  const keyOfValues = handleSelectValues(variable);
 
   const handleLabelClick = () => {
     setShowOptions((prev) => !prev);
   };
 
   const handleOnChangeSelectValue = (e: any) => {
-    setRecentValue(e.target.getAttribute('value'));
+    setValues({
+        ...values,
+        [keyOfValues]: e.target.getAttribute('value'),
+      });
   };
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const copy: any = [...props.isChecked, e.target.value];
+    const copy: any = [...isChecked, e.target.value];
     let result = [...new Set(copy)];
-    props.setIsChecked(result);
+    setIsChecked(result);
   };
-
-  useEffect(() => {
-    if (props.variable == '모집구분') {
-      props.setValues({
-        ...props.values,
-        ['categoryName']: recentValue,
-      });
-    } else if (props.variable == '모집인원') {
-      props.setValues({
-        ...props.values,
-        ['recruitNum']: recentValue,
-      });
-    } else if (props.variable == '진행방식') {
-      // let OnOrOff: any;
-      // recentValue == '온라인' ? (OnOrOff = 'ON') : (OnOrOff = 'OFF');
-      props.setValues({
-        ...props.values,
-        ['onlineOrOffline']: recentValue,
-      });
-    } else if (props.variable == '진행기간') {
-      props.setValues({
-        ...props.values,
-        ['period']: recentValue,
-      });
-    } else if (props.variable == '연락방식') {
-      props.setValues({
-        ...props.values,
-        ['contactMethod']: recentValue,
-      });
-    }
-  }, [recentValue]);
 
   return (
     <div className="box_container" onClick={handleLabelClick}>
       <label className="recent_wrapper">
         <div className="recent_value">
-          {recentValue == '' ? (
-            <span className="value_placeholder">{`${props.variable} 선택`}</span>
+          { (variable === '모집분야'|| values[keyOfValues] == '' )? (
+            <span className="value_placeholder">{`${variable} 선택`}</span>
           ) : (
-            recentValue
+            values[keyOfValues]
           )}
         </div>
         <img src={recentLine} className="recent_line" alt="|" />
@@ -69,8 +53,8 @@ function SelectBox(props: any) {
       </label>
       {showOptions ? (
         <ul className="recent_list">
-          {props.optionData.map((data: any, i: any) => {
-            if (props.variable == '모집분야') {
+          {optionData.map((data: any, i: any) => {
+            if (variable == '모집분야') {
               return (
                 <div className="recent_list_item">
                   <Checkbox
@@ -99,4 +83,3 @@ function SelectBox(props: any) {
   );
 }
 
-export default SelectBox;
