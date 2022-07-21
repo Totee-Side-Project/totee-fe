@@ -14,6 +14,13 @@ export function PostCard({ post }: Props) {
   const clickHandlerURLParameter = () => {
     navigate(`/detail/${post.postId}`);
   };
+  const checking = () => {
+    if (post?.content.includes('img')) {
+      return console.log('컨텐츠에 이미지 포함되어있음');
+    }
+  };
+
+  checking();
   return (
     <>
       <div className={classes.postCard} onClick={clickHandlerURLParameter}>

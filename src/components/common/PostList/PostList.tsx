@@ -26,12 +26,12 @@ export function PostList() {
 
   useEffect(() => {
     if (searchResult && searchResult.data && searchResult.data.length > 0) {
-      refetch();
+      // refetch();
       setPosts([...searchResult.data]);
       handleCategory([...searchResult.data]);
     } else {
       if (data?.data) {
-        refetch();
+        // refetch();
         setPosts(data.data.body.data.content);
         handleCategory(data.data.body.data.content);
       }
@@ -67,6 +67,7 @@ export function PostList() {
 
   useEffect(() => {
     if (posts) {
+      refetch();
       setPosts([...sortingData(posts)]);
     }
   }, [selectedFilter]);
