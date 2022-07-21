@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import Checkbox from './CheckBox';
-import './selectbox.scss';
+import { Checkbox } from '@components/atoms';
+import './select.scss';
 import recentIcon from '../../../assets/recentIcon.svg';
 import recentLine from '../../../assets/recentLine.svg';
 
-function SelectBox(props: any) {
+export const Select=(props: any) =>{
   const [showOptions, setShowOptions] = useState(false);
   const [recentValue, setRecentValue] = useState('');
 
@@ -99,4 +99,3 @@ function SelectBox(props: any) {
   );
 }
 
-export default SelectBox;

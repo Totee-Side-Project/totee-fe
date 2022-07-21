@@ -7,3 +7,5 @@ export * from './ToggleIcon/ToggleIcon';
 export * from './PostList/PostList';
 export * from './Comment/Comment';
 export * from './CommentInput/CommentInput';
+export * from './Editor/Editor';
+export * from './Select/Select';

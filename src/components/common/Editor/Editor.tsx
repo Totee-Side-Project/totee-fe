@@ -1,9 +1,9 @@
 import React, { Component, useEffect, useRef, useState } from 'react';
 import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import './setupstudypage.scss';
+import './editor.scss';
 
-const EditorComponent: any = (props: any) => {
+export const Editor: any = (props: any) => {
   // const ReactQuill = require('react-quill');
   const QuillRef = useRef<ReactQuill>();
   const [contents, setContents] = useState('');
@@ -68,5 +68,3 @@ const EditorComponent: any = (props: any) => {
     </div>
   );
 };
-
-export default EditorComponent;

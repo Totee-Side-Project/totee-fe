@@ -6,7 +6,7 @@ interface Props {
   data:any
 }
 
-const Checkbox = (props: Props) => {
+export const Checkbox = (props: Props) => {
   return (
     <div>
       <input
@@ -19,4 +19,3 @@ const Checkbox = (props: Props) => {
     </div>
   );
 };
-export default Checkbox;

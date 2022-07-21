@@ -5,8 +5,7 @@ import { createHashHistory } from 'history';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import EditorComponent from './EditorComponent';
-import SelectBox from './SelectBox';
+import { Editor, Select } from '@components/common';
 import studypageIcon from '../../../assets/studyPageIcon.png';
 import dashedLine from '../../../assets/dashedLine.png';
 import './setupstudypage.scss';
@@ -111,7 +110,7 @@ function SetUpStudyPage() {
           <div className="category_label">
             <span>{variable[i]}</span>
           </div>
-          <SelectBox
+          <Select
             values={values}
             setValues={setValues}
             optionData={arr}
@@ -216,7 +215,7 @@ function SetUpStudyPage() {
         placeholder="제목을 입력해주세요."
         onChange={handlerTitleChange}
       />
-      <EditorComponent values={values} setValues={setValues} />
+      <Editor values={values} setValues={setValues} />
       <div className="button_container">
         <button
           className="upload_button"
