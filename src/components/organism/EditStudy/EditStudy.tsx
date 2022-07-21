@@ -1,5 +1,5 @@
 import { SelectAPI } from '@api/api';
-import { useAddPost } from '@hooks/usePostQuery';
+import { useAddPost, useUpdatePost } from '@hooks/usePostQuery';
 import { UserState } from '@store/user';
 import { createHashHistory } from 'history';
 import React, { useEffect, useState } from 'react';
@@ -34,6 +34,7 @@ export function EditStudyPage({type, initialData}:IEditStudyPagePropsType) {
     title: '',
   });
   const [title, setTitle] = useState('');
+  const [isChecked, setIsChecked] = useState<string[]>([]);
 
   useEffect(()=>{
     if(type === "edit" && initialData){
@@ -49,9 +50,10 @@ export function EditStudyPage({type, initialData}:IEditStudyPagePropsType) {
             status: initialData?.status,
             title: initialData?.title,
         })
-        setTitle(initialData?.title,)
+        setTitle(initialData?.title);
+        setIsChecked(initialData?.positionList);
     }
-  },[type,initialData])
+  },[type,initialData]);
 
 
   //select
@@ -80,8 +82,7 @@ export function EditStudyPage({type, initialData}:IEditStudyPagePropsType) {
     '모집분야',
     '연락방식',
   ];
-  const [isChecked, setIsChecked] = useState([]);
-  const [link, setLink] = useState('');
+
   // }
 
   const cancelClick = (e: any) => {
@@ -93,10 +94,6 @@ export function EditStudyPage({type, initialData}:IEditStudyPagePropsType) {
     setIsChecked(checking);
   };
 
-  const linkChange = (e: any) => {
-    setLink(e.target.value);
-  };
-
   useEffect(() => {
     setValues({
       ...values,
@@ -104,12 +101,6 @@ export function EditStudyPage({type, initialData}:IEditStudyPagePropsType) {
     });
   }, [isChecked]);
 
-  useEffect(() => {
-    setValues({
-      ...values,
-      ['contactLink']: link,
-    });
-  }, [link]);
 
   useEffect(() => {
     setValues({
@@ -117,6 +108,7 @@ export function EditStudyPage({type, initialData}:IEditStudyPagePropsType) {
       ['title']: title,
     });
   }, [title]);
+
 
   const Categories = () => {
     const maping = select.map((arr: any, i: any) => {
@@ -155,7 +147,11 @@ export function EditStudyPage({type, initialData}:IEditStudyPagePropsType) {
             <input
               className="contact_link"
               placeholder="사용하실 연락 방식의 링크를 입력해주세요."
-              onChange={linkChange}
+              value={values.contactLink}
+              onChange={(e)=> setValues({
+                ...values,
+                ['contactLink']: e.target.value,
+              })}
             />
           ) : null}
         </div>
@@ -171,30 +167,53 @@ export function EditStudyPage({type, initialData}:IEditStudyPagePropsType) {
 
   //업로드 버튼
   const addPostMutation = useAddPost();
+  const updatePostMutation = useUpdatePost(initialData?.postId as number);
 
   const onClickUploadButton = async () => {
     let formData = new FormData();
     for (const [key, value] of Object.entries(values)) {
       formData.append(key, value);
     }
-    const result = await addPostMutation.mutateAsync(formData);
-    if (result.status == 200) {
-      console.log('성공');
-      setValues({
-        categoryName: '',
-        contactLink: '',
-        contactMethod: '',
-        content: '',
-        onlineOrOffline: '',
-        period: '',
-        positionList: '',
-        recruitNum: '',
-        status: 'Y',
-        title: '',
-      });
-      document.location.href = '/';
-    } else {
-      console.log('실패');
+
+    if(type==="create"){
+        const result = await addPostMutation.mutateAsync(formData);
+        if (result.status == 200) {
+          setValues({
+            categoryName: '',
+            contactLink: '',
+            contactMethod: '',
+            content: '',
+            onlineOrOffline: '',
+            period: '',
+            positionList: '',
+            recruitNum: '',
+            status: 'Y',
+            title: '',
+          });
+          document.location.href = '/';
+        } else {
+          console.log('실패');
+        }
+    }
+    else{
+        const result = await updatePostMutation.mutateAsync(formData);
+        if (result.status == 200) {
+          setValues({
+            categoryName: '',
+            contactLink: '',
+            contactMethod: '',
+            content: '',
+            onlineOrOffline: '',
+            period: '',
+            positionList: '',
+            recruitNum: '',
+            status: 'Y',
+            title: '',
+          });
+          navigate(`/detail/${initialData?.postId as number}`);
+        } else {
+          console.log('실패');
+        }
     }
   };
 
