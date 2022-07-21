@@ -1,11 +1,11 @@
 import { EditStudyPage } from '@components/organism';
 // 클릭한 값 보여주기
 
-function SetUpStudyPage() {
+function CreateStudyPage() {
 
   return (
    <EditStudyPage type="create"/>
   );
 }
 
-export default SetUpStudyPage;
+export default CreateStudyPage;

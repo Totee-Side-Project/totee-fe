@@ -9,7 +9,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import LoginOauth from '@components/login/LoginOauth';
 
-import SetUpStudyPage from '@components/pages/SetUpStudyPage/SetUpStudyPage';
+import CreateStudyPage from '@components/pages/CreateStudyPage/CreateStudyPage';
 import DetailPage from '@components/pages/DetailPage/DetailPage';
 import EditPage from '@components/pages/EditPage/EditPage'; 
 
@@ -49,7 +49,7 @@ function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="/posts" element={<PostsPage />} />
         <Route path="/oauth/redirect" element={<LoginOauth />} />
-        <Route path="/setupstudy" element={<SetUpStudyPage />} />
+        <Route path="/setupstudy" element={<CreateStudyPage />} />
         <Route path="/detail/:id" element={<DetailPage />} />
         <Route path="/edit/:id" element={<EditPage />} />
       </Routes>
