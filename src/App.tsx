@@ -11,6 +11,7 @@ import LoginOauth from '@components/login/LoginOauth';
 
 import SetUpStudyPage from '@components/pages/SetupStudyPage/SetUpStudyPage';
 import DetailPage from '@components/pages/DetailPage/DetailPage';
+import EditPage from '@components/pages/EditPage/EditPage'; 
 
 import { useGetUserAPI } from '@hooks/useGetQuery';
 import { loginState, UserState, defaultLoginState, defaultUserState} from '@store/index';
@@ -50,6 +51,7 @@ function App() {
         <Route path="/oauth/redirect" element={<LoginOauth />} />
         <Route path="/setupstudy" element={<SetUpStudyPage />} />
         <Route path="/detail/:id" element={<DetailPage />} />
+        <Route path="/edit/:id" element={<EditPage />} />
       </Routes>
       <ScrollTopButton />
       <Footer />

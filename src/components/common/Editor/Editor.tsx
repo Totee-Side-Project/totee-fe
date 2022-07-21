@@ -3,17 +3,9 @@ import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import './editor.scss';
 
-export const Editor: any = (props: any) => {
+export const Editor: any = ({values, setValues}:any) => {
   // const ReactQuill = require('react-quill');
   const QuillRef = useRef<ReactQuill>();
-  const [contents, setContents] = useState('');
-
-  useEffect(() => {
-    props.setValues({
-      ...props.values,
-      ['content']: contents,
-    });
-  }, [contents]);
 
   const modules = {
     toolbar: [
@@ -58,8 +50,13 @@ export const Editor: any = (props: any) => {
             QuillRef.current = element;
           }
         }}
-        value={contents}
-        onChange={setContents}
+        value={values.content}
+        onChange={(content:any)=>{
+            setValues({
+                ...values,
+                ['content']: content,
+              });
+        }}
         className="editor_wrapper"
         theme="snow"
         modules={modules}
