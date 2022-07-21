@@ -22,14 +22,16 @@ export function PostList() {
 
   let [searchParams, setSearchParams] = useSearchParams();
 
-  const { data, isFetching } = useGetPostListAPI();
+  const { data, isFetching, refetch } = useGetPostListAPI();
 
   useEffect(() => {
     if (searchResult && searchResult.data && searchResult.data.length > 0) {
+      refetch();
       setPosts([...searchResult.data]);
       handleCategory([...searchResult.data]);
     } else {
       if (data?.data) {
+        refetch();
         setPosts(data.data.body.data.content);
         handleCategory(data.data.body.data.content);
       }
@@ -57,9 +59,10 @@ export function PostList() {
       setSelectedFilter(searchParams.get('filter') as string);
 
     searchParams.get('isShowTotal') !== null
-    ? setIsShowTotal(searchParams.get('isShowTotal') as string ==="전체보기" && true)
-    : setIsShowTotal(false);
-
+      ? setIsShowTotal(
+          (searchParams.get('isShowTotal') as string) === '전체보기' && true,
+        )
+      : setIsShowTotal(false);
   }, [searchParams]);
 
   useEffect(() => {
@@ -67,7 +70,6 @@ export function PostList() {
       setPosts([...sortingData(posts)]);
     }
   }, [selectedFilter]);
-
 
   const sortingData = (data: IPostType[]): IPostType[] => {
     let newData = data;
@@ -97,12 +99,16 @@ export function PostList() {
       <div className={classes.postListContainer}>
         <div className={classes.postListContainerHeader}>
           {!isShowTotal ? (
-            <span onClick={() => {
-              setSearchParams({
-                ...Object.fromEntries(searchParams),
-                ['isShowTotal']: "전체보기",
-              })
-            }}>전체보기 &gt;</span>
+            <span
+              onClick={() => {
+                setSearchParams({
+                  ...Object.fromEntries(searchParams),
+                  ['isShowTotal']: '전체보기',
+                });
+              }}
+            >
+              전체보기 &gt;
+            </span>
           ) : (
             <ul className={classes.filterList}>
               {['최신순', '댓글많은순', '좋아요순'].map(
