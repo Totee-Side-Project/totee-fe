@@ -6,6 +6,7 @@ import { UserAPI } from '@api/api';
 import classNames from 'classnames';
 import { useRecoilState } from 'recoil';
 import { UserState } from '@store/index';
+
 export default function AddProfileModal({ step, setStep, values, setValues}: IModalPropsType) {
   const [nickname, setNickname] = useState('');
   const [files, setFiles] = useState<any>();
@@ -51,6 +52,7 @@ export default function AddProfileModal({ step, setStep, values, setValues}: IMo
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setNickname(value);
+    setIsValidate(false);
   };
 
   const onPhotoBtnClick = (e: React.MouseEvent<HTMLDivElement>) => {

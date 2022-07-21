@@ -13,6 +13,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    &.disable{
+        background-color: #EBEBEB !important;
+    }
     &:hover{
         cursor: pointer;
     }

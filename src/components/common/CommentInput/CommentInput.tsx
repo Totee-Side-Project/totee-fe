@@ -18,6 +18,8 @@ export function CommentInput({postId, commentId, type="comment", onClickCancle}:
 
     const onSubmit=(e:React.FormEvent)=>{
         e.preventDefault();
+        if(inputValue.length===0) return;
+
         if(type==="comment"){
             AddPostCommentMutate.mutateAsync({
                 postId:postId,
