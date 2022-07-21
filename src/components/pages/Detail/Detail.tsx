@@ -83,7 +83,7 @@ function Detail() {
   const handlerStatusClick = async () => {
     let postId = id;
     if (detailData.author == LoginLabel.nickname) {
-      await PostAPI.statusChange(postId)
+      await PostAPI.statusChange(postId as unknown as number)
         .then(async (res) => await refetch())
         .catch((err) => console.log(err));
     } else {
