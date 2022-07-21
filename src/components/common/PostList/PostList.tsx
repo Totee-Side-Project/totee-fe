@@ -26,12 +26,10 @@ export function PostList() {
 
   useEffect(() => {
     if (searchResult && searchResult.data && searchResult.data.length > 0) {
-      // refetch();
       setPosts([...searchResult.data]);
       handleCategory([...searchResult.data]);
     } else {
       if (data?.data) {
-        // refetch();
         setPosts(data.data.body.data.content);
         handleCategory(data.data.body.data.content);
       }
