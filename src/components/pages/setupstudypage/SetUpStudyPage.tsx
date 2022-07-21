@@ -159,28 +159,40 @@ function SetUpStudyPage() {
   const addPostMutation = useAddPost();
 
   const onClickUploadButton = async () => {
-    let formData = new FormData();
-    for (const [key, value] of Object.entries(values)) {
-      formData.append(key, value);
-    }
-    const result = await addPostMutation.mutateAsync(formData);
-    if (result.status == 200) {
-      console.log('성공');
-      setValues({
-        categoryName: '',
-        contactLink: '',
-        contactMethod: '',
-        content: '',
-        onlineOrOffline: '',
-        period: '',
-        positionList: '',
-        recruitNum: '',
-        status: 'Y',
-        title: '',
-      });
-      document.location.href = '/';
+    const checkValue = Object.values(values);
+    const checking = checkValue.map((arr) => {
+      if (arr == '') {
+        return false;
+      } else {
+        return true;
+      }
+    });
+    if (checking.toString().includes('false')) {
+      return alert('내용을 모두 입력해주세요');
     } else {
-      console.log('실패');
+      let formData = new FormData();
+      for (const [key, value] of Object.entries(values)) {
+        formData.append(key, value);
+      }
+      const result = await addPostMutation.mutateAsync(formData);
+      if (result.status == 200) {
+        console.log('성공');
+        setValues({
+          categoryName: '',
+          contactLink: '',
+          contactMethod: '',
+          content: '',
+          onlineOrOffline: '',
+          period: '',
+          positionList: '',
+          recruitNum: '',
+          status: 'Y',
+          title: '',
+        });
+        document.location.href = '/';
+      } else {
+        alert(result.data.msg);
+      }
     }
   };
 
