@@ -11,10 +11,16 @@ import LoginOauth from '@components/login/LoginOauth';
 
 import CreateStudyPage from '@components/pages/CreateStudyPage/CreateStudyPage';
 import DetailPage from '@components/pages/DetailPage/DetailPage';
-import EditPage from '@components/pages/EditPage/EditPage'; 
+import EditPage from '@components/pages/EditPage/EditPage';
+import MyPage from '@pages/MyPage/MyPage';
 
 import { useGetUserAPI } from '@hooks/useGetQuery';
-import { loginState, UserState, defaultLoginState, defaultUserState} from '@store/index';
+import {
+  loginState,
+  UserState,
+  defaultLoginState,
+  defaultUserState,
+} from '@store/index';
 
 function App() {
   const padding: any = {
@@ -28,18 +34,17 @@ function App() {
   let loginLocalStorage: any = localStorage.getItem('loginData');
   loginLocalStorage = JSON.parse(loginLocalStorage);
 
-  useEffect(()=>{
-    if(data && data.status===200){
+  useEffect(() => {
+    if (data && data.status === 200) {
       setLogin(loginLocalStorage);
       return;
     }
     // 리프레시 토큰 발금
-    else{
+    else {
       setLogin(defaultLoginState);
       setUser(defaultUserState);
     }
-  },[data]);
-
+  }, [data]);
 
   return (
     <>
@@ -52,6 +57,7 @@ function App() {
         <Route path="/setupstudy" element={<CreateStudyPage />} />
         <Route path="/detail/:id" element={<DetailPage />} />
         <Route path="/edit/:id" element={<EditPage />} />
+        <Route path="/mypage" element={<MyPage />} />
       </Routes>
       <ScrollTopButton />
       <Footer />
