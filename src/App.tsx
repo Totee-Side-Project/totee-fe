@@ -11,9 +11,15 @@ import LoginOauth from '@components/login/LoginOauth';
 
 import SetUpStudyPage from '@components/pages/setupstudypage/SetUpStudyPage';
 import Detail from '@components/pages/Detail/Detail';
+import MyPage from '@pages/MyPage/MyPage';
 
 import { useGetUserAPI } from '@hooks/useGetQuery';
-import { loginState, UserState, defaultLoginState, defaultUserState} from '@store/index';
+import {
+  loginState,
+  UserState,
+  defaultLoginState,
+  defaultUserState,
+} from '@store/index';
 
 function App() {
   const padding: any = {
@@ -27,18 +33,17 @@ function App() {
   let loginLocalStorage: any = localStorage.getItem('loginData');
   loginLocalStorage = JSON.parse(loginLocalStorage);
 
-  useEffect(()=>{
-    if(data && data.status===200){
+  useEffect(() => {
+    if (data && data.status === 200) {
       setLogin(loginLocalStorage);
       return;
     }
     // 리프레시 토큰 발금
-    else{
+    else {
       setLogin(defaultLoginState);
       setUser(defaultUserState);
     }
-  },[data]);
-
+  }, [data]);
 
   return (
     <>
@@ -50,6 +55,7 @@ function App() {
         <Route path="/oauth/redirect" element={<LoginOauth />} />
         <Route path="/setupstudy" element={<SetUpStudyPage />} />
         <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/mypage" element={<MyPage />} />
       </Routes>
       <ScrollTopButton />
       <Footer />
