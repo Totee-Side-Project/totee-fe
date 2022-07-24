@@ -7,7 +7,7 @@ import debounce from 'lodash';
 export function useGetUserAPI() {
   const [user, setUser] = useRecoilState(UserState);
 
-  return useQuery(['user'], () => UserAPI.getUserInfo().catch((err)=>err), {
+  return useQuery(['user'], () => UserAPI.getUserInfo().catch((err) => err), {
     // 브라우저 focus 됐을 때 재시작?
     retry: false,
     refetchOnWindowFocus: false,
@@ -16,17 +16,15 @@ export function useGetUserAPI() {
     // 캐시 타임
     staleTime: 10 * 600 * 1000,
     onSuccess: (res) => {
-      if(res?.data?.body.data){
+      if (res?.data?.body.data) {
         setUser(res.data.body.data);
       }
     },
   });
 }
 
-
-
 export function useGetPostListAPI() {
-  return useQuery(['posts'], () => PostAPI.getPostList().catch((err)=>err), {
+  return useQuery(['posts'], () => PostAPI.getPostList().catch((err) => err), {
     // 브라우저 focus 됐을 때 재시작?
     retry: false,
     refetchOnWindowFocus: true,
@@ -37,34 +35,56 @@ export function useGetPostListAPI() {
   });
 }
 
-export function useGetPostByPostId(postId:number) {
-  return useQuery(['post', postId], () => PostAPI.getPostByPostId(postId).catch((err)=>err), {
-    // 브라우저 focus 됐을 때 재시작?
-    retry: false,
-    refetchOnWindowFocus: true,
-    // 자동으로 가져오는 옵션
-    enabled: true,
-    // 캐시 타임
-    staleTime: 10 * 600 * 1000,
-  });
+export function useGetPostByPostId(postId: number) {
+  return useQuery(
+    ['post', postId],
+    () => PostAPI.getPostByPostId(postId).catch((err) => err),
+    {
+      // 브라우저 focus 됐을 때 재시작?
+      retry: false,
+      refetchOnWindowFocus: true,
+      // 자동으로 가져오는 옵션
+      enabled: true,
+      // 캐시 타임
+      staleTime: 10 * 600 * 1000,
+    },
+  );
 }
- 
- 
-export function useGetSearchPostList(title:string) {
-  return useQuery(['search', title], () => title.length > 0 && PostAPI.searchPostList(title).catch((err)=>err), {
-    // 브라우저 focus 됐을 때 재시작?
-    retry: false,
-    refetchOnWindowFocus: false,
-    // 자동으로 가져오는 옵션
-    enabled: true,
-    // 캐시 타임
-    staleTime: 10 * 600 * 1000,
-  });
+
+export function useGetSearchPostList(title: string) {
+  return useQuery(
+    ['search', title],
+    () => title.length > 0 && PostAPI.searchPostList(title).catch((err) => err),
+    {
+      // 브라우저 focus 됐을 때 재시작?
+      retry: false,
+      refetchOnWindowFocus: false,
+      // 자동으로 가져오는 옵션
+      enabled: true,
+      // 캐시 타임
+      staleTime: 10 * 600 * 1000,
+    },
+  );
 }
- 
 
 export function useGetCategoryList() {
-  return useQuery(['categories'], () => CategoryAPI.getCategoryList().catch((err)=>err), {
+  return useQuery(
+    ['categories'],
+    () => CategoryAPI.getCategoryList().catch((err) => err),
+    {
+      // 브라우저 focus 됐을 때 재시작?
+      retry: false,
+      refetchOnWindowFocus: false,
+      // 자동으로 가져오는 옵션
+      enabled: true,
+      // 캐시 타임
+      staleTime: 10 * 600 * 1000,
+    },
+  );
+}
+
+export function useGetRecommendList() {
+  return useQuery(['recommend'], () => PostAPI.recommendPostList(), {
     // 브라우저 focus 됐을 때 재시작?
     retry: false,
     refetchOnWindowFocus: false,
@@ -74,4 +94,3 @@ export function useGetCategoryList() {
     staleTime: 10 * 600 * 1000,
   });
 }
- 

@@ -35,6 +35,7 @@ export const PostAPI = {
         'Content-Type': 'multipart/form-data',
       },
     }),
+  recommendPostList: () => api.get(`/api/v1/post/recommend`),
 };
 
 export const CommentAPI = {
@@ -45,14 +46,12 @@ export const CommentAPI = {
     api.delete(`/api/v1/comment/${commentId}`),
 };
 
-export const ReplyAPI={
-  createReply: (form:any)=>
-  api.post('/api/v1/reply', form),
-  updateReply: (replyId:number, form:any)=>
-  api.put(`/api/v1/reply/${replyId}`, form),
-  deleteReply: (replyId:number)=>
-  api.delete(`/api/v1/reply/${replyId}`),
-}
+export const ReplyAPI = {
+  createReply: (form: any) => api.post('/api/v1/reply', form),
+  updateReply: (replyId: number, form: any) =>
+    api.put(`/api/v1/reply/${replyId}`, form),
+  deleteReply: (replyId: number) => api.delete(`/api/v1/reply/${replyId}`),
+};
 
 export const CategoryAPI = {
   getCategoryList: () => api.get(`/api/v1/category`),

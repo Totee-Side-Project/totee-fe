@@ -1,6 +1,7 @@
 import React from 'react';
 import { Counter, Modal } from '@components/atoms';
-import { Banner, Categories, Search, PostList } from '@components/common';
+import { Banner, Categories, PostList, Search } from '@components/common';
+import RecommendCard from '@components/common/RecommendCard/RecommendCard';
 
 export function MainPage() {
   return (
@@ -9,6 +10,7 @@ export function MainPage() {
       <Search />
       <Categories />
       <PostList />
+      <RecommendCard />
     </div>
   );
 }
