@@ -18,19 +18,17 @@ const RecommendCard = () => {
 
   console.log(recommendData);
 
-  return (
-    recommendData && (
-      <div className="recommend_container">
-        <div className="title_wrapper">
-          <span className="title_sub">Level Up project</span>
-          <h2 className="title_main">커리어 성장을 위한 프로젝트</h2>
-        </div>
-        <div className="recommend_content">
-          <RecommendSlider recommendData={recommendData} />
-        </div>
+  return recommendData ? (
+    <div className="recommend_container">
+      <div className="title_wrapper">
+        <span className="title_sub">Level Up project</span>
+        <h2 className="title_main">커리어 성장을 위한 프로젝트</h2>
       </div>
-    )
-  );
+      <div className="recommend_content">
+        <RecommendSlider recommendData={recommendData} />
+      </div>
+    </div>
+  ) : null;
 };
 
 export default RecommendCard;
