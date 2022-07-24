@@ -8,13 +8,15 @@ const RecommendCard = () => {
   const [user, setUser] = useRecoilState(UserState);
   const { data } = useGetRecommendList();
 
-  const [recommendData, setRecommendData] = useState([]);
+  const [recommendData, setRecommendData] = useState();
 
   useEffect(() => {
     if (user.email !== '') {
       setRecommendData(data?.data.body.data.content);
     }
   }, [data]);
+
+  console.log(recommendData);
 
   return (
     recommendData && (
