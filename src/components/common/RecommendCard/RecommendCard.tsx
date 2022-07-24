@@ -16,8 +16,6 @@ const RecommendCard = () => {
     }
   }, [data]);
 
-  console.log(recommendData);
-
   return recommendData ? (
     <div className="recommend_container">
       <div className="title_wrapper">

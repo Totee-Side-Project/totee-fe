@@ -7,11 +7,14 @@ import 'slick-carousel/slick/slick-theme.css';
 import styled from '@emotion/styled';
 import './recommend.scss';
 import { useMediaQuery } from 'react-responsive';
+import { useNavigate } from 'react-router-dom';
 
 function RecommendSlider(props: any) {
   const isPc = useMediaQuery({ minWidth: 1163 });
   const isTablet = useMediaQuery({ maxWidth: 1163, minWidth: 750 });
   const isPhone = useMediaQuery({ maxWidth: 750 });
+
+  let navigate = useNavigate();
 
   const changeSlide = () => {
     if (isPc) {
@@ -62,13 +65,21 @@ function RecommendSlider(props: any) {
     }
   };
 
+  const clickCard = (e: any) => {
+    navigate(`/detail/${e.target.id}`);
+  };
+
   return (
     props.recommendData && (
       <div className="content_wrapper">
         <StyledSlider {...settings}>
           {props.recommendData.map((arr: any) => {
             return (
-              <div className="card_container">
+              <div
+                className="card_container"
+                onClick={clickCard}
+                id={arr.postId}
+              >
                 <div className="card_image_wrapper"></div>
                 <div className="card_title">{arr.title}</div>
                 <div
