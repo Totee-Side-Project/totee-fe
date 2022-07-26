@@ -4,7 +4,8 @@ import { Checkbox } from '@components/atoms';
 import './select.scss';
 import recentIcon from '../../../assets/recentIcon.svg';
 import recentLine from '../../../assets/recentLine.svg';
-import {handleSelectValues} from '@utils/handleSelectValue';
+import {handleSelectValues, checkingDetailPeriod} from '@utils/handleSelectValue';
+
 
 
 interface ISelectPropsType{
@@ -44,9 +45,9 @@ export const Select=({values, setValues, optionData, variable, isChecked, setIsC
         <div className="recent_value">
           { (variable === '모집분야'|| values[keyOfValues] == '' )? (
             <span className="value_placeholder">{`${variable} 선택`}</span>
-          ) : (
-            values[keyOfValues]
-          )}
+          ) : variable === '진행기간' && ['VeryShortTerm', 'ShortTerm', 'MidTerm', 'LongTerm'].includes(values[keyOfValues]) ?
+          checkingDetailPeriod(values[keyOfValues]) : values[keyOfValues]
+          }
         </div>
         <img src={recentLine} className="recent_line" alt="|" />
         <img src={recentIcon} className="recent_icon" alt=">" />

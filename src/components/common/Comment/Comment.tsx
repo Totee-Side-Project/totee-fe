@@ -42,11 +42,16 @@ export function Comment({ postId, comment }: ICommentPropsType) {
       })
       .catch((err) => console.log(err));
   };
+  console.log(comment);
 
   return (
     <div className={classes.comment_container}>
       <div className={classes.profile_wrapper}>
-        <div className={classes.profile_img}></div>
+        <div className={classes.profile_img} style={{
+          backgroundRepeat:"no-repeat",
+          backgroundSize: "cover",
+          backgroundImage : `url(${comment.profileImageUrl})`
+        }}></div>
         <div className={classes.vertical_line}></div>
       </div>
       <div className={classes.content_wrapper}>

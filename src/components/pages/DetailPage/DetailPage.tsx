@@ -8,11 +8,13 @@ import IconMessage from '../../../assets/detail_message.png';
 import IconLike from '../../../assets/detail_like.png';
 import likeButton from '../../../assets/detail_button.png';
 import Option from '../../../assets/detail_option.png';
-import { LikeAPI, PostAPI } from '@api/api';
+import { api, LikeAPI, PostAPI } from '@api/api';
 import { Comment, CommentInput } from '@components/common';
 import { useRecoilValue } from 'recoil';
 import classNames from 'classnames';
 import { UserSelector } from '@store/user';
+import {checkingDetailPeriod} from '@utils/handleSelectValue';
+import Swal from 'sweetalert2';
 
 function DetailPage() {
   const navigate = useNavigate();
@@ -22,6 +24,7 @@ function DetailPage() {
   const [Like, setLike] = useState<any>(false);
   const [status, setStatus] = useState<any>(detailData.status);
   const LoginLabel = useRecoilValue(UserSelector);
+  const [isShowToggle, setIsShowToggle]=useState(false);
 
   useEffect(() => {
     if (data && data.data?.header.code === 200) {
@@ -57,23 +60,36 @@ function DetailPage() {
     likeStatus();
   }, []);
 
-  const checkingDetailPeriod = () => {
-    if (detailData.period == 'VeryShortTerm') {
-      return <span>1개월미만</span>;
-    } else if (detailData.period == 'ShortTerm') {
-      return <span>1~3개월</span>;
-    } else if (detailData.period == 'MidTerm') {
-      return <span>3~6개월</span>;
-    } else if (detailData.period == 'LongTerm') {
-      return <span>6개월이상</span>;
-    } else {
-      return null;
-    }
-  };
-
   const OptionShow = () => {
     if (detailData.author == LoginLabel.nickname) {
-      return <img className="summary_title_icon" src={Option} onClick={()=>navigate(`/edit/${id}`)}/>;
+      return (
+        <div className="detail_setting">
+          <img className="summary_title_icon" src={Option} onClick={()=>setIsShowToggle(!isShowToggle)}/>
+          {isShowToggle && 
+          <div className="detail-toggle-container">
+            <ul>
+              <li onClick={()=>navigate(`/edit/${id}`)}>수정</li>
+              <li onClick={()=>
+                PostAPI.deletePost(parseInt(id as string))
+                      .then((res)=>{
+                        if(res.status===200){
+                          Swal.fire({
+                            title: '삭제 성공!',
+                            text: '게시물 삭제가 완료되었습니다',
+                            icon: 'success',
+                            confirmButtonText: '확인'
+                          }).then((result)=>{
+                            navigate('/');
+                          })
+                        }
+                      })
+              }
+              >삭제</li>
+            </ul>
+          </div>
+          }
+        </div>
+      );
     } else {
       return null;
     }
@@ -104,7 +120,10 @@ function DetailPage() {
             </div>
             <div
               className="detail_profile"
-              style={{ backgroundImage: `url("${detailData.imageUrl}")` }}
+              style={{           
+                backgroundRepeat:"no-repeat",
+                backgroundSize: "cover",
+                backgroundImage: `url("${detailData.imageUrl}")` }}
             ></div>
             <div className="detail_summary_container">
               <div className="summary_title_wrapper">
@@ -126,7 +145,7 @@ function DetailPage() {
                     {detailData.recruitNum}
                   </div>
                   <div className="summary_category_name">
-                    {detailData.period ? checkingDetailPeriod() : null}
+                    {detailData.period ? checkingDetailPeriod(detailData.period) : null}
                   </div>
                 </div>
                 <div className="summary_category_right">

@@ -32,6 +32,34 @@
   background-position: center;
   border-radius: 50%;
 }
+.detail_setting{
+  position: relative;
+}
+.detail-toggle-container{
+  position:absolute;
+  top:0;
+  left: 40px;
+  width:100px;
+  height:100px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 10%);
+  border-radius: 5px;
+  z-index: 999;
+  li{
+    width:100%;
+    height:50px;
+    line-height:50px;
+    text-align: center;
+    &:hover{
+      cursor: pointer;
+      box-shadow: inset 0 1000px rgba(0, 0, 0, 0.03) !important;
+
+    }
+    &:last-child{
+      border-top: 1px solid #E6E6E6;
+    }
+  }
+}
 
 .detail_summary_container {
   width: 80%;
