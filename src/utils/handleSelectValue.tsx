@@ -11,3 +11,18 @@ export const handleSelectValues=(variable:string)=>{
     }
     return SeletValueNames[variable];
 }
+
+
+export const checkingDetailPeriod = (period:string) => {
+    if (period == 'VeryShortTerm') {
+      return <span>1개월미만</span>;
+    } else if (period == 'ShortTerm') {
+      return <span>1~3개월</span>;
+    } else if (period == 'MidTerm') {
+      return <span>3~6개월</span>;
+    } else if (period == 'LongTerm') {
+      return <span>6개월이상</span>;
+    } else {
+      return null;
+    }
+};
