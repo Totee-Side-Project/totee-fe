@@ -46,7 +46,13 @@ export function ReplyComment({postId, comment, commentId}:ICommentPropsType) {
     return (
         <div className={classNames(classes.comment_container, classes.reply)}>
             <div className={classes.profile_wrapper}>
-                <div className={classes.profile_img}></div>
+                <div className={classes.profile_img}
+                    style={{
+                        backgroundRepeat:"no-repeat",
+                        backgroundSize: "cover",
+                        backgroundImage : `url(${comment.profileImageUrl})`
+                    }}
+                ></div>
             </div>
             <div className={classNames(classes.content_wrapper,classes.reply_comment)}>
                 <div className={classes.title}>

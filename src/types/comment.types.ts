@@ -5,6 +5,7 @@ export interface CommentType{
     replyList?: CommentType[],
     created_at : string;
     replyId?:number,
+    profileImageUrl?:string;
 }
 
 export interface ICommentPropsType{

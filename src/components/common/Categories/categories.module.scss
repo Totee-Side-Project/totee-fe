@@ -13,6 +13,9 @@
     background: #FFFFFF;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &:hover{
         cursor: pointer;
