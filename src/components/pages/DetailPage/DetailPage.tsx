@@ -68,7 +68,7 @@ function DetailPage() {
           {isShowToggle && 
           <div className="detail-toggle-container">
             <ul>
-              <li onClick={()=>navigate(`/edit/${id}`)}>수정</li>
+              <li onClick={()=>navigate(`/edit/${id}`)}>글 <span>수정</span>하기</li>
               <li onClick={()=>
                 PostAPI.deletePost(parseInt(id as string))
                       .then((res)=>{
@@ -84,7 +84,7 @@ function DetailPage() {
                         }
                       })
               }
-              >삭제</li>
+              >글  <span>삭제</span>하기</li>
             </ul>
           </div>
           }

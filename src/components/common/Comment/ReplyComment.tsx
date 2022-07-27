@@ -68,9 +68,13 @@ export function ReplyComment({postId, comment, commentId}:ICommentPropsType) {
                     </div>
                     :
                     <div className={classes.text_button}>
-                        <span onClick={()=>setIsEdit(true)}>수정</span>
-                        <hr className={classes.vertical_line2}></hr>
-                        <span onClick={onClickDeleteBtn}>삭제</span>
+                         {user.nickname === comment.nickname &&
+                         <>
+                            <span onClick={()=>setIsEdit(true)}>수정</span>
+                            <hr className={classes.vertical_line2}></hr>
+                            <span onClick={onClickDeleteBtn}>삭제</span>
+                        </>
+                         }
                     </div>
                     }
                 </div>

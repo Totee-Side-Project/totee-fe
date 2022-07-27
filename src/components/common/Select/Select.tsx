@@ -39,14 +39,17 @@ export const Select=({values, setValues, optionData, variable, isChecked, setIsC
     setIsChecked(result);
   };
 
+  const selectedValue = variable === '진행기간' && ['VeryShortTerm', 'ShortTerm', 'MidTerm', 'LongTerm'].includes(values[keyOfValues]) ?
+  checkingDetailPeriod(values[keyOfValues]) : values[keyOfValues]
+
+
   return (
     <div className="box_container" onClick={handleLabelClick}>
       <label className="recent_wrapper">
         <div className="recent_value">
           { (variable === '모집분야'|| values[keyOfValues] == '' )? (
             <span className="value_placeholder">{`${variable} 선택`}</span>
-          ) : variable === '진행기간' && ['VeryShortTerm', 'ShortTerm', 'MidTerm', 'LongTerm'].includes(values[keyOfValues]) ?
-          checkingDetailPeriod(values[keyOfValues]) : values[keyOfValues]
+          ) : <span>{selectedValue}</span>
           }
         </div>
         <img src={recentLine} className="recent_line" alt="|" />
@@ -62,13 +65,14 @@ export const Select=({values, setValues, optionData, variable, isChecked, setIsC
                     handleChange={handleOnChange}
                     label="A"
                     data={data}
+                    isChecked={isChecked.includes(data)}
                   />
                 </div>
               );
             } else {
               return (
                 <li
-                  className="recent_list_item"
+                  className={selectedValue === data? "recent_list_item_selected" :"recent_list_item"}
                   key={i}
                   value={data}
                   onClick={handleOnChangeSelectValue}

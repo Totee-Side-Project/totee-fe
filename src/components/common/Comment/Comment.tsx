@@ -62,6 +62,7 @@ export function Comment({ postId, comment }: ICommentPropsType) {
               {handleTime(comment?.created_at)}
             </div>
           </div>
+         
           {isEdit ? (
             <div className={classes.text_button}>
               <span
@@ -76,11 +77,16 @@ export function Comment({ postId, comment }: ICommentPropsType) {
               <span onClick={onClickUpdateBtn}>수정</span>
             </div>
           ) : (
+
             <div className={classes.text_button}>
-              <span onClick={() => setIsEdit(true)}>수정</span>
-              <hr className={classes.vertical_line2}></hr>
-              <span onClick={onClickDeleteBtn}>삭제</span>
-              <hr className={classes.vertical_line2}></hr>
+               {user.nickname === comment.nickname &&
+               <>
+                <span onClick={() => setIsEdit(true)}>수정</span>
+                <hr className={classes.vertical_line2}></hr>
+                <span onClick={onClickDeleteBtn}>삭제</span>
+                <hr className={classes.vertical_line2}></hr>
+              </>
+              }
               <div
                 className={classes.reply_button}
                 onClick={() => setIsReply(!isReply)}

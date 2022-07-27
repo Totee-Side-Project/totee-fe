@@ -19,7 +19,7 @@ export function SignInModal({ isOpen, setIsOpen }: ISignInModalProps) {
       <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
         <section className={classes.onboardModal}>
           <h1>
-            <span>토티</span> 에 오신 것을 환경합니다.
+            <span>토티</span> 에 오신 것을 환영합니다.
           </h1>
           <h2>소셜 아이디로 쉽게 로그인해 보세요!</h2>
           <div className={classes.footer}>

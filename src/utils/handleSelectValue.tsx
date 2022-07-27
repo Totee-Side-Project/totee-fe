@@ -15,13 +15,13 @@ export const handleSelectValues=(variable:string)=>{
 
 export const checkingDetailPeriod = (period:string) => {
     if (period == 'VeryShortTerm') {
-      return <span>1개월미만</span>;
+      return '1개월미만';
     } else if (period == 'ShortTerm') {
-      return <span>1~3개월</span>;
+      return '1~3개월';
     } else if (period == 'MidTerm') {
-      return <span>3~6개월</span>;
+      return '3~6개월';
     } else if (period == 'LongTerm') {
-      return <span>6개월이상</span>;
+      return '6개월이상';
     } else {
       return null;
     }
