@@ -22,7 +22,7 @@ interface IEditStudyPagePropsType {
 export function EditStudyPage({ type, initialData }: IEditStudyPagePropsType) {
   let navigate = useNavigate();
   const [user, setUser] = useRecoilState(UserState);
-  const [values, setValues] = useState({
+  const [values, setValues] = useState<any>({
     categoryName: '',
     contactLink: '',
     contactMethod: '',
@@ -186,7 +186,7 @@ export function EditStudyPage({ type, initialData }: IEditStudyPagePropsType) {
         confirmButtonText: '확인',
       });
     }
-    let formData = new FormData();
+    let formData: any = new FormData();
     for (const [key, value] of Object.entries(values)) {
       formData.append(key, value);
     }
@@ -229,21 +229,20 @@ export function EditStudyPage({ type, initialData }: IEditStudyPagePropsType) {
           text: '마이페이지에서 확인하세요',
           icon: 'success',
           confirmButtonText: '확인',
-        }).then(
-          setValues({
-            categoryName: '',
-            contactLink: '',
-            contactMethod: '',
-            content: '',
-            onlineOrOffline: '',
-            period: '',
-            positionList: '',
-            recruitNum: '',
-            status: 'Y',
-            title: '',
-          }),
-          navigate(`/detail/${initialData?.postId as number}`),
-        );
+        });
+        setValues({
+          categoryName: '',
+          contactLink: '',
+          contactMethod: '',
+          content: '',
+          onlineOrOffline: '',
+          period: '',
+          positionList: '',
+          recruitNum: '',
+          status: 'Y',
+          title: '',
+        });
+        navigate(`/detail/${initialData?.postId as number}`);
       } else {
         console.log('실패');
       }
