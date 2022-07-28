@@ -9,16 +9,17 @@ import { Editor, Select } from '@components/common';
 import studypageIcon from '../../../assets/studyPageIcon.png';
 import dashedLine from '../../../assets/dashedLine.png';
 import './editStudy.scss';
+import Swal from 'sweetalert2';
 
-import {IPostDetailType} from 'types/post.types';
+import { IPostDetailType } from 'types/post.types';
 
 // 클릭한 값 보여주기
-interface IEditStudyPagePropsType{
-    type: "create" | "edit";
-    initialData? : IPostDetailType
+interface IEditStudyPagePropsType {
+  type: 'create' | 'edit';
+  initialData?: IPostDetailType;
 }
 
-export function EditStudyPage({type, initialData}:IEditStudyPagePropsType) {
+export function EditStudyPage({ type, initialData }: IEditStudyPagePropsType) {
   let navigate = useNavigate();
   const [user, setUser] = useRecoilState(UserState);
   const [values, setValues] = useState({
@@ -36,25 +37,24 @@ export function EditStudyPage({type, initialData}:IEditStudyPagePropsType) {
   const [title, setTitle] = useState('');
   const [isChecked, setIsChecked] = useState<string[]>([]);
 
-  useEffect(()=>{
-    if(type === "edit" && initialData){
-        setValues({
-            categoryName: initialData?.categoryName,
-            contactLink: initialData?.contactLink,
-            contactMethod: initialData?.contactMethod,
-            content: initialData?.content,
-            onlineOrOffline: initialData?.onlineOrOffline,
-            period: initialData?.period,
-            positionList: initialData?.positionList.join(','),
-            recruitNum: initialData?.recruitNum,
-            status: initialData?.status,
-            title: initialData?.title,
-        })
-        setTitle(initialData?.title);
-        setIsChecked(initialData?.positionList);
+  useEffect(() => {
+    if (type === 'edit' && initialData) {
+      setValues({
+        categoryName: initialData?.categoryName,
+        contactLink: initialData?.contactLink,
+        contactMethod: initialData?.contactMethod,
+        content: initialData?.content,
+        onlineOrOffline: initialData?.onlineOrOffline,
+        period: initialData?.period,
+        positionList: initialData?.positionList.join(','),
+        recruitNum: initialData?.recruitNum,
+        status: initialData?.status,
+        title: initialData?.title,
+      });
+      setTitle(initialData?.title);
+      setIsChecked(initialData?.positionList);
     }
-  },[type,initialData]);
-
+  }, [type, initialData]);
 
   //select
   const sort: any = ['스터디', '프로젝트', '동아리', '멘토멘티'];
@@ -101,14 +101,12 @@ export function EditStudyPage({type, initialData}:IEditStudyPagePropsType) {
     });
   }, [isChecked]);
 
-
   useEffect(() => {
     setValues({
       ...values,
       ['title']: title,
     });
   }, [title]);
-
 
   const Categories = () => {
     const maping = select.map((arr: any, i: any) => {
@@ -148,10 +146,12 @@ export function EditStudyPage({type, initialData}:IEditStudyPagePropsType) {
               className="contact_link"
               placeholder="사용하실 연락 방식의 링크를 입력해주세요."
               value={values.contactLink}
-              onChange={(e)=> setValues({
-                ...values,
-                ['contactLink']: e.target.value,
-              })}
+              onChange={(e) =>
+                setValues({
+                  ...values,
+                  ['contactLink']: e.target.value,
+                })
+              }
             />
           ) : null}
         </div>
@@ -170,14 +170,66 @@ export function EditStudyPage({type, initialData}:IEditStudyPagePropsType) {
   const updatePostMutation = useUpdatePost(initialData?.postId as number);
 
   const onClickUploadButton = async () => {
+    const checkValue = Object.values(values);
+    const checking = checkValue.map((arr) => {
+      if (arr == '') {
+        return false;
+      } else {
+        return true;
+      }
+    });
+    if (checking.toString().includes('false')) {
+      return Swal.fire({
+        title: '게시 실패',
+        text: '모든 정보를 입력해주세요',
+        icon: 'error',
+        confirmButtonText: '확인',
+      });
+    }
     let formData = new FormData();
     for (const [key, value] of Object.entries(values)) {
       formData.append(key, value);
     }
 
-    if(type==="create"){
-        const result = await addPostMutation.mutateAsync(formData);
-        if (result.status == 200) {
+    if (type === 'create') {
+      const result = await addPostMutation.mutateAsync(formData);
+      if (result.status == 200) {
+        Swal.fire({
+          title: '등록 완료!',
+          text: '마이페이지에서 확인하세요',
+          icon: 'success',
+          confirmButtonText: '확인',
+        });
+        setValues({
+          categoryName: '',
+          contactLink: '',
+          contactMethod: '',
+          content: '',
+          onlineOrOffline: '',
+          period: '',
+          positionList: '',
+          recruitNum: '',
+          status: 'Y',
+          title: '',
+        });
+        document.location.href = '/';
+      } else {
+        Swal.fire({
+          title: '에러 발생',
+          text: '재로그인 후 다시 작성해주세요',
+          icon: 'error',
+          confirmButtonText: '확인',
+        });
+      }
+    } else {
+      const result = await updatePostMutation.mutateAsync(formData);
+      if (result.status == 200) {
+        Swal.fire({
+          title: '수정 완료!',
+          text: '마이페이지에서 확인하세요',
+          icon: 'success',
+          confirmButtonText: '확인',
+        }).then(
           setValues({
             categoryName: '',
             contactLink: '',
@@ -189,31 +241,12 @@ export function EditStudyPage({type, initialData}:IEditStudyPagePropsType) {
             recruitNum: '',
             status: 'Y',
             title: '',
-          });
-          document.location.href = '/';
-        } else {
-          console.log('실패');
-        }
-    }
-    else{
-        const result = await updatePostMutation.mutateAsync(formData);
-        if (result.status == 200) {
-          setValues({
-            categoryName: '',
-            contactLink: '',
-            contactMethod: '',
-            content: '',
-            onlineOrOffline: '',
-            period: '',
-            positionList: '',
-            recruitNum: '',
-            status: 'Y',
-            title: '',
-          });
-          navigate(`/detail/${initialData?.postId as number}`);
-        } else {
-          console.log('실패');
-        }
+          }),
+          navigate(`/detail/${initialData?.postId as number}`),
+        );
+      } else {
+        console.log('실패');
+      }
     }
   };
 
@@ -248,7 +281,7 @@ export function EditStudyPage({type, initialData}:IEditStudyPagePropsType) {
         type="text"
         value={title}
         placeholder="제목을 입력해주세요."
-        onChange={(e)=>setTitle(e.target.value)}
+        onChange={(e) => setTitle(e.target.value)}
       />
       <Editor values={values} setValues={setValues} />
       <div className="button_container">
@@ -257,7 +290,11 @@ export function EditStudyPage({type, initialData}:IEditStudyPagePropsType) {
           type="submit"
           onClick={onClickUploadButton}
         >
-          {type==="create"? <span>글 올리기</span> : <span>글 수정하기</span>}
+          {type === 'create' ? (
+            <span>글 올리기</span>
+          ) : (
+            <span>글 수정하기</span>
+          )}
         </button>
         <button className="cancel_button" onClick={handlerCancelClick}>
           취소
