@@ -8,9 +8,12 @@ function MyPage() {
 
   return (
     <div className="myPageWrapper">
-      <div className="myPageBackground" />
+      {/*<div className="myPageBackground" />*/}
       <div className="myProfileWrapper">
-        <img className="myProfileImg" src={user.profileImageUrl} />
+        <div className="myPageBackground">
+          <img className="myProfileImg" src={user.profileImageUrl} />
+          <button className="myEditProfile">프로필 수정</button>
+        </div>
         <div className="myNickName">{user.nickname}</div>
         <div className="myInfo">{user.roleType}</div>
         <div className="myInfo">{user.email}</div>

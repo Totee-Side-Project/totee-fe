@@ -8,10 +8,10 @@
 
 .myPageBackground{
   margin-top: -30px;
-  height: 230px;
+  height: 250px;
   width: 100%;
   background-color: #D9D9D9;
-  z-index: -1;
+  //z-index: -1;
   position: relative;
 }
 
@@ -23,10 +23,10 @@
   border-radius: 50%;
   width: 170px;
   height: 170px;
-  margin-top: -120px;
+  margin-top: 130px;
 }
 .myNickName{
-  margin: 15px;
+  margin: 70px auto 12px auto;
   font-weight: 700;
   font-size: 36px;
   color: #484848;
@@ -36,6 +36,16 @@
   font-weight: 400;
   font-size: 16px;
   color: #767676;
+}
+.myIntro{
+  width: 42%;
+  height: 30px;
+  text-align: center;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #767676;
+  margin: 25px auto;
 }
 
 
@@ -100,13 +110,18 @@
   border: 1px solid #D9D9D9;
 }
 
-.myIntro{
-  width: 45%;
-  height: 30px;
-  text-align: center;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
-  color: #767676;
-  margin: 31px auto;
+
+.myEditProfile{
+  padding: 6px 20px;
+  margin: -25px auto auto 73%;
+  border-radius: 30px;
+  border: 0.7px solid #898989;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  color: #898989;
+  background-color: #fff;
+  cursor: pointer;
 }
