@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+.edit_myPageWrapper{
+  //text-align: center;
+  //margin: 0 auto 100px auto;
+
+}
+
+
+.edit_myPageBackground{
+  height: 250px;
+  width: 100%;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #D9D9D9;
+  background-blend-mode: multiply, normal;
+  position: relative;
+}
+
+
+.edit_myPageProfileWrapper{
+
+}
+
+.edit_myImgWrapper{
+  //position: relative;
+  //display: flex;
+}
+.edit_myChangeImg{
+  cursor: pointer;
+  margin: 60px 20px auto 345px;
+}
+.edit_myRemoveImg{
+  cursor: pointer;
+  margin: auto auto auto auto;
+}
+
+
+.edit_myProfileImg{
+  border-radius: 50%;
+  width: 170px;
+  height: 170px;
+  margin-top: 20px;
+  margin-left: 315px;
+}
+.edit_myNickName{
+  margin: 80px auto 20px 21.5%;
+  font-weight: 700;
+  font-size: 36px;
+  color: #484848;
+  text-align: center;
+  border: none;
+  border-bottom: 1.5px solid #c2c2c2;
+  outline: none;
+}
+.edit_myInfo{
+  margin-bottom: 5px;
+  text-align: center;
+  font-weight: 400;
+  font-size: 16px;
+  color: #767676;
+}
+.edit_myIntro{
+  width: 800px;
+  height: 130px;
+  text-align: center;
+  padding: 30px 10px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #767676;
+  margin: 25px auto 0 auto;
+  resize: none;
+  background: #F9F9F9;
+  border: 1.5px solid #E4E4E4;
+  border-radius: 10px;
+}
+
+
+.edit_myPositionWrapper{
+  position: relative;
+  height: 50px;
+  width: 100%;
+  text-align: center;
+}
+.edit_myPosition{
+  display: inline-block;
+  margin: 40px 20px auto auto;
+  font-weight: 700;
+  font-size: 15px;
+  width: fit-content;
+  padding: 10px;
+  height: 35px;
+  color: #FFFFFF;
+  background: #000000;
+  border-radius: 5px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.edit_myEditPositionBtn{
+  display: inline-block;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  text-align: center;
+  color: #54B1E6;
+  cursor: pointer;
+}
+
+
+.edit_myBtnWrapper{
+  position: relative;
+  height: 50px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  font-weight: 500;
+  font-size: 16px;
+  display: flex;
+  //align-items: center;
+  color: #FFFFFF;
+}
+.edit_myEditBtn{
+  width: 210px;
+  height: 50px;
+  background: #568A35;
+  border-radius: 10px;
+  padding: 15px;
+  cursor: pointer;
+  margin: 40px 10px auto auto;
+  font-family: 'Noto Sans KR', sans-serif;
+  text-align: center;
+}
+.edit_myCancelBtn{
+  width: 210px;
+  height: 50px;
+  background: #FFFFFF;
+  border: 1.5px solid #898989;
+  border-radius: 10px;
+  color: #898989;
+  padding: 15px;
+  cursor: pointer;
+  margin: 40px auto auto 10px;
+  font-family: 'Noto Sans KR', sans-serif;
+  text-align: center;
+}
