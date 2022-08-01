@@ -44,8 +44,15 @@
   display: block;
   margin: 20px auto;
 }
+.edit_myNicknameWrapper{
+  width:100%;
+  display: flex;
+  justify-content: center;
+  margin: 80px 0px 20px 0px;
+}
 .edit_myNickName{
-  margin: 80px auto 20px 25.5%;
+  width:fit-content;
+  margin: 0 auto;
   font-weight: 700;
   font-size: 36px;
   color: #484848;
@@ -53,6 +60,7 @@
   border: none;
   border-bottom: 1.5px solid #c2c2c2;
   outline: none;
+ 
 }
 .edit_myInfo{
   margin-bottom: 5px;
@@ -75,7 +83,12 @@
   background: #F9F9F9;
   border: 1.5px solid #E4E4E4;
   border-radius: 10px;
+  // &:focus{
+  //   outline: none !important;
+  //   border: 1.5px solid #7BA364 !important; 
+  // }
 }
+
 
 
 .edit_myPositionWrapper{

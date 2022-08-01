@@ -32,16 +32,18 @@ export function EditProfileModal({
                 </div>
                 <img className="edit_myProfileImg" src={user.profileImageUrl} />
               </div>
-              <input
-                className="edit_myNickName"
-                value="닉네임"
-                // placeholder="최대 5글자"
-              />
+              <div className="edit_myNicknameWrapper">
+                <input
+                  className="edit_myNickName"
+                  value="닉네임"
+                  // placeholder="최대 5글자"
+                />
+              </div>
               <div className="edit_myInfo">{user.roleType}</div>
               <div className="edit_myInfo">{user.email}</div>
             </div>
             <textarea
-              className="edit_myIntro"
+              className="edit_myIntro border"
               value="본인에 대한 짧은 소개입니다.본인에 대한 짧은 소개입니다.본인에
               대한 짧은 소개입니다. 본인에 대한 짧은 소개입니다.본인에 대한 짧은
               소개입니다."

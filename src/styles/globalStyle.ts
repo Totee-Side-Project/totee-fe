@@ -137,8 +137,24 @@ const globalStyle = css`
     text-decoration: none;
     color: inherit;
   }
-  #root{
-    position:relative;
+  #root {
+    position: relative;
+  }
+  input {
+    &.border {
+      &:focus {
+        outline: none !important;
+        border: 2px solid #7ba364 !important;
+      }
+    }
+  }
+  textarea {
+    &.border {
+      &:focus {
+        outline: none !important;
+        border: 2px solid #7ba364 !important;
+      }
+    }
   }
 `;
 

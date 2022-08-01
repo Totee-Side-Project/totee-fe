@@ -143,7 +143,7 @@ export function EditStudyPage({ type, initialData }: IEditStudyPagePropsType) {
           ) : null}
           {i === 5 ? (
             <input
-              className="contact_link"
+              className="contact_link border"
               placeholder="사용하실 연락 방식의 링크를 입력해주세요."
               value={values.contactLink}
               onChange={(e) =>
@@ -276,7 +276,7 @@ export function EditStudyPage({ type, initialData }: IEditStudyPagePropsType) {
       <div className="category_title_line"></div>
       <div className="title_title">제목</div>
       <input
-        className="title_input"
+        className="title_input border"
         type="text"
         value={title}
         placeholder="제목을 입력해주세요."
