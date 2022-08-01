@@ -1,9 +1,9 @@
-import { Modal } from '@components/atoms';
 import './EditProfileModal.scss';
-import classes from '@components/atoms/CategoryButton/categoryButton.module.scss';
+import { EditModal } from '@components/atoms/Modal/EditModal';
 import { UserState } from '@store/user';
 import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
+import { EditPositionModal } from '@components/common/EditProfileModal/EditPositionModal';
 import removeImg from '../../../assets/removeImg.svg';
 import changeImg from '../../../assets/changeImg.svg';
 
@@ -17,10 +17,11 @@ export function EditProfileModal({
   setIsOpen,
 }: IEditProfileModalProps) {
   const [user, setUser] = useRecoilState(UserState);
+  const [isEditPositionModal, setIsEditPositionModal] = useState(false);
 
   return (
     <>
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+      <EditModal isOpen={isOpen} setIsOpen={setIsOpen}>
         <section>
           <div className="edit_PageWrapper">
             <div className="edit_myProfileWrapper">
@@ -47,15 +48,29 @@ export function EditProfileModal({
             />
             <div className="edit_myPositionWrapper">
               <div className="edit_myPosition">{user.position}</div>
-              <div className="edit_myEditPositionBtn">수정</div>
+              <div
+                className="edit_myEditPositionBtn"
+                onClick={() => setIsEditPositionModal(true)}
+              >
+                수정
+              </div>
             </div>
             <div className="edit_myBtnWrapper">
               <div className="edit_myEditBtn">저장하기</div>
-              <div className="edit_myCancelBtn">수정 취소하기</div>
+              <div
+                className="edit_myCancelBtn"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                수정 취소하기
+              </div>
             </div>
           </div>
         </section>
-      </Modal>
+      </EditModal>
+      <EditPositionModal
+        isOpen={isEditPositionModal}
+        setIsOpen={setIsEditPositionModal}
+      ></EditPositionModal>
     </>
   );
 }
