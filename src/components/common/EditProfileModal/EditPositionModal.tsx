@@ -50,7 +50,7 @@ export function EditPositionModal({
       }
     }
     setValues({
-      position: positionKey,
+      position: positionKey as string,
     });
   }, [user]);
 
