@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 
 import { Button } from '@components/atoms';
@@ -6,28 +6,33 @@ import { Button } from '@components/atoms';
 import classes from './onboardmodal.module.scss';
 import { IModalPropsType } from 'types/modal.types';
 
-export default function CheckPositionModal({ step, setStep,values, setValues, setIsOpenModal, onClickConfimButton }: IModalPropsType) {
+export default function CheckPositionModal({
+  step,
+  setStep,
+  values,
+  setValues,
+  setIsOpenModal,
+  onClickConfimButton,
+}: IModalPropsType) {
   const [selectedPosition, setSelectedPosition] = useState('');
 
-  const positionList:any = {
-    '프론트엔드': "FRONT_END",
-    '백엔드' : "BACK_END",
-    'ML': "ML",
-    '게임': "GAME",
-    '안드로이드': "ANDROID",
-    'IOS':" IOS",
-    '디자인' :"DESIGN",
-    '기타':"OTHERS",
+  const positionList: any = {
+    프론트엔드: 'FRONT_END',
+    백엔드: 'BACK_END',
+    ML: 'ML',
+    게임: 'GAME',
+    안드로이드: 'ANDROID',
+    IOS: ' IOS',
+    디자인: 'DESIGN',
+    기타: 'OTHERS',
   };
 
-
-  useEffect(()=>{
+  useEffect(() => {
     setValues({
       ...values,
-      ["position"]:selectedPosition
-    })
-  },[selectedPosition])
-
+      ['position']: selectedPosition,
+    });
+  }, [selectedPosition]);
 
   return (
     <>
@@ -41,7 +46,9 @@ export default function CheckPositionModal({ step, setStep,values, setValues, se
             <div
               className={classNames(
                 classes.tag,
-                positionList[position] === selectedPosition ? classes.selected : '',
+                positionList[position] === selectedPosition
+                  ? classes.selected
+                  : '',
               )}
               key={`position-${position}`}
               onClick={() => setSelectedPosition(positionList[position])}
@@ -70,7 +77,7 @@ export default function CheckPositionModal({ step, setStep,values, setValues, se
             color: '#fff',
           }}
           onClick={onClickConfimButton}
-          disable={selectedPosition? false: true}
+          disable={selectedPosition ? false : true}
         />
       </div>
       <div className={classes.page}>2/2</div>

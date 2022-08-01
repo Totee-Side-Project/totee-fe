@@ -12,17 +12,26 @@ interface IModalPropsType {
   children: React.ReactNode;
 }
 
-export function Modal({ isOpen, setIsOpen, isCloseBtn=true, children }: IModalPropsType) {
+export function Modal({
+  isOpen,
+  setIsOpen,
+  isCloseBtn = true,
+  children,
+}: IModalPropsType) {
   return (
     <>
       <section
         className={classNames(classes.modal, isOpen ? classes.open : '')}
       >
         <div className={classes.content}>
-          {isCloseBtn &&
-          <div className={classes.closeBtn} onClick={() => setIsOpen(!isOpen)}>
-            <XIcon></XIcon>
-          </div>}
+          {isCloseBtn && (
+            <div
+              className={classes.closeBtn}
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              <XIcon></XIcon>
+            </div>
+          )}
           {isOpen && <>{children}</>}
         </div>
       </section>

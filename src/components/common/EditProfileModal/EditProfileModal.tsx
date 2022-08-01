@@ -72,6 +72,7 @@ export function EditProfileModal({
       <EditPositionModal
         isOpen={isEditPositionModal}
         setIsOpen={setIsEditPositionModal}
+        user={user}
       ></EditPositionModal>
     </>
   );

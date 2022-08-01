@@ -12,7 +12,7 @@ const RecommendCard = () => {
 
   useEffect(() => {
     if (user.email !== '') {
-      setRecommendData(data?.data.body.data.content);
+      setRecommendData(data?.data?.body?.data.content);
     }
   }, [data]);
 

@@ -83,10 +83,10 @@
   background: #F9F9F9;
   border: 1.5px solid #E4E4E4;
   border-radius: 10px;
-  // &:focus{
-  //   outline: none !important;
-  //   border: 1.5px solid #7BA364 !important; 
-  // }
+  &:focus{
+    outline: none !important;
+    border: 2px solid #7BA364 !important; 
+  }
 }
 
 
@@ -199,7 +199,7 @@
   width: 100px;
   height: 40px;
   padding: 8px;
-  margin: 50px 0 10px -30px;
+  margin: 50px 0 10px 0px;
 }
 
 .edit_Position_select{
