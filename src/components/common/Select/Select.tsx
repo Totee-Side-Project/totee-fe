@@ -8,6 +8,7 @@ import {
   checkingDetailPeriod,
   handleSelectValues,
 } from '@utils/handleSelectValue';
+import { positionList } from '@utils/position.const';
 
 interface ISelectPropsType {
   values: any;

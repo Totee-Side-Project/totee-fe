@@ -7,7 +7,7 @@ import { EditPositionModal } from '@components/common/EditProfileModal/EditPosit
 import removeImg from '../../../assets/removeImg.svg';
 import changeImg from '../../../assets/changeImg.svg';
 import useProfileImage from '@hooks/useProfileImage';
-
+import { positionListKey } from '@utils/position.const';
 interface IEditProfileModalProps {
   isOpen: boolean;
   setIsOpen: (e: boolean) => void;
@@ -23,6 +23,7 @@ export function EditProfileModal({
     useProfileImage({
       initialImage: user.profileImageUrl,
     });
+
   const [values, setValues] = useState({
     backgroundImage: '',
     intro: '',
@@ -33,13 +34,17 @@ export function EditProfileModal({
   });
 
   useEffect(() => {
+    handleInitialData();
+  }, [user]);
+
+  const handleInitialData = () => {
     setValues({
       ...values,
-      position: user.position,
+      position: positionListKey[user.position],
       nickname: user.nickname,
       profileImage: user.profileImageUrl,
     });
-  }, [user]);
+  };
 
   useEffect(() => {
     setValues({
@@ -74,7 +79,9 @@ export function EditProfileModal({
                   <img
                     className="edit_myRemoveImg"
                     src={removeImg}
-                    onClick={() => handleInitialImage()}
+                    onClick={() => {
+                      handleInitialImage();
+                    }}
                   />
                 </div>
                 <div className="edit_myProfileImg">
@@ -114,7 +121,10 @@ export function EditProfileModal({
               <div className="edit_myEditBtn">저장하기</div>
               <div
                 className="edit_myCancelBtn"
-                onClick={() => setIsOpen(!isOpen)}
+                onClick={() => {
+                  handleInitialData();
+                  setIsOpen(!isOpen);
+                }}
               >
                 수정 취소하기
               </div>
@@ -125,7 +135,8 @@ export function EditProfileModal({
       <EditPositionModal
         isOpen={isEditPositionModal}
         setIsOpen={setIsEditPositionModal}
-        user={user}
+        values={values}
+        setValues={setValues}
       ></EditPositionModal>
     </>
   );

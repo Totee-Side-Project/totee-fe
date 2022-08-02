@@ -4,6 +4,7 @@ import { UserState } from '@store/user';
 import React, { useState } from 'react';
 import './MyPage.scss';
 import { useRecoilState } from 'recoil';
+import { positionListKey } from '@utils/position.const';
 
 function MyPage() {
   const [user, setUser] = useRecoilState(UserState);
@@ -32,7 +33,7 @@ function MyPage() {
           소개입니다.
         </div>
         <div className="myPositionWrapper">
-          <div className="myPosition">{user.position}</div>
+          <div className="myPosition">{positionListKey[user.position]}</div>
         </div>
         <div className="myPostsWrapper">
           <div className="myPosts">작성한 글 보기</div>

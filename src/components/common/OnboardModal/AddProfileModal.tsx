@@ -23,7 +23,9 @@ export default function AddProfileModal({
 
   const [user, setUser] = useRecoilState(UserState);
 
-  const { files, setFiles, ProfileImage } = useProfileImage();
+  const { files, setFiles, ProfileImage } = useProfileImage({
+    initalData: undefined,
+  });
 
   useEffect(() => {
     setValues({

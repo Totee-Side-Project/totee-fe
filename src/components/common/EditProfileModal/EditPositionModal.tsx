@@ -1,60 +1,38 @@
 import { EditModal } from '@components/atoms/Modal/EditModal';
 import { Select } from '../Select/Select';
 import React, { useEffect, useState } from 'react';
-
+import { positionList } from '@utils/position.const';
+type valueType = {
+  backgroundImage: string;
+  intro: string;
+  newNickname: string;
+  nickname: string;
+  position: string;
+  profileImage: string;
+};
 interface IEditPositionModalProps {
   isOpen: boolean;
   setIsOpen: (e: boolean) => void;
-  user: {
-    email: string;
-    nickname: string;
-    position: string;
-    profileImageUrl: string;
-    roleType: string;
-  };
+  values: valueType;
+  setValues: (e: any) => void;
 }
 
 export function EditPositionModal({
   isOpen,
   setIsOpen,
-  user,
+  values,
+  setValues,
 }: IEditPositionModalProps) {
-  const [values, setValues] = useState({
-    position: '',
-  });
+  const [tempValues, setTempValues] = useState<valueType>();
+  // useEffect(() => {
+  //   if (!isOpen) {
+  //     handleInitialData();
+  //   }
+  // }, [isOpen]);
 
   useEffect(() => {
-    if (!isOpen) {
-      handleInitialData();
-    }
-  }, [isOpen]);
-
-  const positionList: any = {
-    프론트엔드: 'FRONT_END',
-    백엔드: 'BACK_END',
-    ML: 'ML',
-    게임: 'GAME',
-    안드로이드: 'ANDROID',
-    IOS: ' IOS',
-    디자인: 'DESIGN',
-    기타: 'OTHERS',
-  };
-
-  const handleInitialData = () => {
-    let positionKey;
-    for (const [key, value] of Object.entries(positionList)) {
-      if (value === user.position) {
-        positionKey = key;
-      }
-    }
-    setValues({
-      position: positionKey as string,
-    });
-  };
-
-  useEffect(() => {
-    handleInitialData();
-  }, [user]);
+    setTempValues(values);
+  }, [values]);
 
   return (
     <>
@@ -69,8 +47,8 @@ export function EditPositionModal({
             <div className="edit_Position_selectBoxWrapper">
               <Select
                 variable={'포지션'}
-                values={values}
-                setValues={setValues}
+                values={tempValues}
+                setValues={setTempValues}
                 optionData={Object.keys(positionList)}
               />
               {/* <select className="edit_Position_select">
@@ -82,7 +60,15 @@ export function EditPositionModal({
             </div>
           </div>
           <div className="edit_myBtnWrapper">
-            <div className="edit_myEditBtn">수정</div>
+            <div
+              className="edit_myEditBtn"
+              onClick={() => {
+                setValues(tempValues);
+                setIsOpen(!isOpen);
+              }}
+            >
+              수정
+            </div>
             <div
               className="edit_myCancelBtn"
               onClick={() => setIsOpen(!isOpen)}
