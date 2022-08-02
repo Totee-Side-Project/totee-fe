@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Modal, Alert } from '@components/atoms';
+import { useNavigate } from 'react-router-dom';
+import { Alert, Button, Modal } from '@components/atoms';
 import classes from './onboardmodal.module.scss';
 import AddProfileModal from './AddProfileModal';
 import CheckPositionModal from './CheckPositionModal';
@@ -19,6 +20,7 @@ export function OnboardModal({ isOpen, setIsOpen }: IOnboardModalProps) {
   const [step, setStep] = useState(0);
 
   const addUserMutation = useAddUserInfo();
+  let navigate = useNavigate();
 
   const onClickConfimButton = async () => {
     let formData = new FormData();
@@ -29,13 +31,12 @@ export function OnboardModal({ isOpen, setIsOpen }: IOnboardModalProps) {
     const result = await addUserMutation.mutateAsync(formData);
     if (result.status === 200) {
       setTimeout(() => {
+        setIsOpen(false);
         setIsShowAlert(false);
+        navigate('/');
       }, 3000);
 
-      if (setIsOpen) {
-        setIsOpen(false);
-        setIsShowAlert(true);
-      }
+      setIsShowAlert(true);
     }
   };
 

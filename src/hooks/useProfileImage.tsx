@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-export default function useProfileImage() {
+export default function useProfileImage(props: any) {
   const [files, setFiles] = useState<any>();
 
   const ImgInput = useRef<HTMLInputElement>(null);
@@ -12,10 +12,23 @@ export default function useProfileImage() {
   };
 
   useEffect(() => {
+    handleInitialImage();
+  }, [props]);
+
+  useEffect(() => {
     preview();
 
     return () => preview();
   });
+
+  const handleInitialImage = () => {
+    if (!props?.initialImage) return;
+    const imgEl = ImgPlaceholder.current as HTMLDivElement;
+    if (!imgEl) return;
+    imgEl.style.backgroundRepeat = 'no-repeat';
+    imgEl.style.backgroundSize = 'cover';
+    imgEl.style.backgroundImage = `url(${props.initialImage})`;
+  };
 
   const preview = (): any => {
     if (!files) return;
@@ -25,6 +38,7 @@ export default function useProfileImage() {
     const imgEl = ImgPlaceholder.current as HTMLDivElement;
 
     if (!imgEl) return;
+
     reader.onload = () => {
       imgEl.style.backgroundRepeat = 'no-repeat';
       imgEl.style.backgroundSize = 'cover';
@@ -71,5 +85,7 @@ export default function useProfileImage() {
     ProfileImage,
     files,
     setFiles,
+    handleInitialImage,
+    onPhotoBtnClick,
   };
 }

@@ -25,9 +25,7 @@ export function EditPositionModal({
 
   useEffect(() => {
     if (!isOpen) {
-      setValues({
-        position: '',
-      });
+      handleInitialData();
     }
   }, [isOpen]);
 
@@ -42,7 +40,7 @@ export function EditPositionModal({
     기타: 'OTHERS',
   };
 
-  useEffect(() => {
+  const handleInitialData = () => {
     let positionKey;
     for (const [key, value] of Object.entries(positionList)) {
       if (value === user.position) {
@@ -52,6 +50,10 @@ export function EditPositionModal({
     setValues({
       position: positionKey as string,
     });
+  };
+
+  useEffect(() => {
+    handleInitialData();
   }, [user]);
 
   return (
@@ -61,7 +63,7 @@ export function EditPositionModal({
           <div className="edit_Position_Wrapper">
             <div className="edit_Position_title">나의 포지션을 수정할까요?</div>
             <div className="edit_Position_subTitle">
-              사용하실 프로필 사진과 닉네임을 입력해주세요.
+              변경할 포지션을 선택해주세요.
             </div>
             <div className="edit_Position_label">포지션</div>
             <div className="edit_Position_selectBoxWrapper">
