@@ -43,6 +43,7 @@ export function EditProfileModal({
       position: positionListKey[user.position],
       nickname: user.nickname,
       profileImage: user.profileImageUrl,
+      intro: user.intro,
     });
   };
 
@@ -63,6 +64,9 @@ export function EditProfileModal({
     });
   };
 
+  useEffect(() => {
+    console.log(values);
+  }, [values]);
   return (
     <>
       <EditModal isOpen={isOpen} setIsOpen={setIsOpen}>
