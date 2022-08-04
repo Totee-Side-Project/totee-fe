@@ -1,24 +1,36 @@
-import React, { useEffect } from 'react';
+import React, { useRef } from 'react';
 import { useState } from 'react';
 import { Checkbox } from '@components/atoms';
 import './select.scss';
 import recentIcon from '../../../assets/recentIcon.svg';
 import recentLine from '../../../assets/recentLine.svg';
-import {handleSelectValues, checkingDetailPeriod} from '@utils/handleSelectValue';
+import {
+  checkingDetailPeriod,
+  handleSelectValues,
+} from '@utils/handleSelectValue';
+import { positionList } from '@utils/position.const';
+import { useOutsideAlerter } from '@hooks/useOutsideAlerter';
 
-
-
-interface ISelectPropsType{
-    values:any;
-    setValues: (e:any)=>void;
-    optionData: any;
-    variable: any;
-    isChecked:any;
-    setIsChecked:(e:any)=>void;
-    initialData?:any;
+interface ISelectPropsType {
+  values: any;
+  setValues: (e: any) => void;
+  optionData: any;
+  variable: any;
+  isChecked?: any;
+  setIsChecked?: (e: any) => void;
+  initialData?: any;
 }
 
-export const Select=({values, setValues, optionData, variable, isChecked, setIsChecked, initialData}: ISelectPropsType) =>{
+export const Select = ({
+  values,
+  setValues,
+  optionData,
+  variable,
+  isChecked,
+  setIsChecked = () => {},
+}: ISelectPropsType) => {
+  const toggleRef = useRef(null as any);
+
   const [showOptions, setShowOptions] = useState(false);
   const keyOfValues = handleSelectValues(variable);
 
@@ -26,11 +38,15 @@ export const Select=({values, setValues, optionData, variable, isChecked, setIsC
     setShowOptions((prev) => !prev);
   };
 
+  useOutsideAlerter(toggleRef, () => {
+    setShowOptions(false);
+  });
+
   const handleOnChangeSelectValue = (e: any) => {
     setValues({
-        ...values,
-        [keyOfValues]: e.target.getAttribute('value'),
-      });
+      ...values,
+      [keyOfValues]: e.target.getAttribute('value'),
+    });
   };
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,18 +55,23 @@ export const Select=({values, setValues, optionData, variable, isChecked, setIsC
     setIsChecked(result);
   };
 
-  const selectedValue = variable === '진행기간' && ['VeryShortTerm', 'ShortTerm', 'MidTerm', 'LongTerm'].includes(values[keyOfValues]) ?
-  checkingDetailPeriod(values[keyOfValues]) : values[keyOfValues]
-
+  const selectedValue =
+    variable === '진행기간' &&
+    ['VeryShortTerm', 'ShortTerm', 'MidTerm', 'LongTerm'].includes(
+      values[keyOfValues],
+    )
+      ? checkingDetailPeriod(values[keyOfValues])
+      : values[keyOfValues];
 
   return (
-    <div className="box_container" onClick={handleLabelClick}>
+    <div className="box_container" onClick={handleLabelClick} ref={toggleRef}>
       <label className="recent_wrapper">
         <div className="recent_value">
-          { (variable === '모집분야'|| values[keyOfValues] == '' )? (
+          {variable === '모집분야' || values[keyOfValues] == '' ? (
             <span className="value_placeholder">{`${variable} 선택`}</span>
-          ) : <span>{selectedValue}</span>
-          }
+          ) : (
+            <span>{selectedValue}</span>
+          )}
         </div>
         <img src={recentLine} className="recent_line" alt="|" />
         <img src={recentIcon} className="recent_icon" alt=">" />
@@ -72,7 +93,11 @@ export const Select=({values, setValues, optionData, variable, isChecked, setIsC
             } else {
               return (
                 <li
-                  className={selectedValue === data? "recent_list_item_selected" :"recent_list_item"}
+                  className={
+                    selectedValue === data
+                      ? 'recent_list_item_selected'
+                      : 'recent_list_item'
+                  }
                   key={i}
                   value={data}
                   onClick={handleOnChangeSelectValue}
@@ -86,5 +111,4 @@ export const Select=({values, setValues, optionData, variable, isChecked, setIsC
       ) : null}
     </div>
   );
-}
-
+};

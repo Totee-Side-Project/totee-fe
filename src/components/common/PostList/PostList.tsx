@@ -30,13 +30,14 @@ export function PostList() {
       handleCategory([...searchResult.data]);
     } else {
       if (data?.data) {
-        setPosts(data.data.body.data.content);
-        handleCategory(data.data.body.data.content);
+        setPosts(data.data?.body?.data.content);
+        handleCategory(data.data?.body?.data.content);
       }
     }
   }, [searchResult, data, categoryName]);
 
   const handleCategory = (data: IPostType[]) => {
+    if (!data || data.length === 0) return;
     if (categoryName === '전체') {
       setPostsFiltered(sortingData(data));
     } else {
@@ -64,7 +65,7 @@ export function PostList() {
   }, [searchParams]);
 
   useEffect(() => {
-    if (posts) {
+    if (posts && posts.length > 0) {
       refetch();
       setPosts([...sortingData(posts)]);
     }
@@ -138,11 +139,13 @@ export function PostList() {
           )}
         </div>
         <div className={classes.postWrapper}>
-          {postsFiltered
-            .slice(0, isShowTotal ? postsFiltered.length : 8)
-            .map((post: IPostType, idx: number) => (
-              <PostCard key={`postCard-${idx}`} post={post} />
-            ))}
+          {postsFiltered &&
+            postsFiltered.length > 0 &&
+            postsFiltered
+              .slice(0, isShowTotal ? postsFiltered.length : 8)
+              .map((post: IPostType, idx: number) => (
+                <PostCard key={`postCard-${idx}`} post={post} />
+              ))}
           {/* <div className={classes.upIconWrapper}>
           <div className={classes.upIcon}>
             <div><UpIcon/></div>

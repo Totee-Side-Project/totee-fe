@@ -1,6 +1,9 @@
 .box_container{
     position: relative;
     margin-top: 15px;
+    *{
+      font-size: 18px;
+    }
   }
   
   
@@ -40,11 +43,26 @@
     position: absolute;
     width: inherit;
     width: 100%;
+    max-height:250px;
+    overflow-y:overlay;
     background-color: white;
     border: 1px solid #BFBFBF;
     z-index: 10;
     color: #BFBFBF;
     border-radius: 5px;
+    &::-webkit-scrollbar {
+      width: 4px !important;
+      height: 4px !important;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+        position: absolute;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color:  #878787;
+        border-radius: 5px;
+    }
 
   }
   .recent_list_item{

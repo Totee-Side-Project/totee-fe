@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { loginState, UserState } from '@store/index';
-import { SignInModal, OnboardModal, ToggleIcon } from '@components/common';
+import { UserState, loginState } from '@store/index';
+import { defaultUserState } from '@store/user';
+import { OnboardModal, SignInModal, ToggleIcon } from '@components/common';
 import { Button } from '@components/atoms';
 import MeIcon from '@assets/me.jpeg';
 import Swal from 'sweetalert2';
@@ -42,13 +43,7 @@ const Header = () => {
       state: false,
       token: '',
     });
-    setUser({
-      email: '',
-      nickname: '',
-      position: '',
-      profileImageUrl: '',
-      roleType: '',
-    });
+    setUser({ ...defaultUserState });
   };
 
   useEffect(() => {
@@ -57,8 +52,6 @@ const Header = () => {
       setIsOpenOnboardModal(true);
     }
   }, [login, user]);
-
-  console.log(login);
 
   return (
     <>

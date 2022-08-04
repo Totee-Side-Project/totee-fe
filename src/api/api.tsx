@@ -41,7 +41,7 @@ export const PostAPI = {
         'Content-Type': 'multipart/form-data',
       },
     }),
-  deletePost : (postId:number)=>api.delete(`/api/v1/post/${postId}`),
+  deletePost: (postId: number) => api.delete(`/api/v1/post/${postId}`),
   recommendPostList: () => api.get(`/api/v1/post/recommend`),
 };
 

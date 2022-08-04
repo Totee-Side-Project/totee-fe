@@ -2,9 +2,9 @@ import MyPage from '@pages/MyPage/MyPage';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { loginState, UserState } from '@store/index';
-import Swal from 'sweetalert2';
+import { UserState, loginState } from '@store/index';
 import toggleimage from '../../assets/dropdown_down.svg';
+import { defaultUserState } from '@store/user';
 import './loginafter.scss';
 
 function LoginAfter() {
@@ -19,13 +19,7 @@ function LoginAfter() {
       state: false,
       token: '',
     });
-    setUser({
-      email: '',
-      nickname: '',
-      position: '',
-      profileImageUrl: '',
-      roleType: '',
-    });
+    setUser({ ...defaultUserState });
     document.location.href = '/';
   };
 
