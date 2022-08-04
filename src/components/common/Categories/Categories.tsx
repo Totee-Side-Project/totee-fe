@@ -53,22 +53,6 @@ export function Categories() {
       : setIsShowTotal(true);
   }, [searchParams]);
 
-  const renderIcon = (name: string, color: string) => {
-    console.log(name);
-    switch (name) {
-      case '전체':
-        return <TotalIcon color={color}></TotalIcon>;
-      case '스터디':
-        return <StudyIcon color={'black'}></StudyIcon>;
-      case '프로젝트':
-        return <ProjectIcon color={color}></ProjectIcon>;
-      case '멘토멘티':
-        return <MentoIcon color={color}></MentoIcon>;
-      case '동아리':
-        return <GroupIcon color={color}></GroupIcon>;
-    }
-  };
-
   const ImgButton = ({ isSelected, name }: IImgButtonProps) => {
     let color = isSelected ? '#fff' : '#568A35';
 
@@ -80,11 +64,51 @@ export function Categories() {
         )}
       >
         <div>
-          {name === '전체' && <TotalIcon fill={color}></TotalIcon>}
-          {name === '스터디' && <StudyIcon fill={color}></StudyIcon>}
-          {name === '프로젝트' && <ProjectIcon fill={color}></ProjectIcon>}
-          {name === '멘토멘티' && <MentoIcon fill={color}></MentoIcon>}
-          {name === '동아리' && <GroupIcon fill={color}></GroupIcon>}
+          {name === '전체' && (
+            <TotalIcon
+              fill={'transparent'}
+              stroke={color}
+              strokeWidth={2}
+              width={45}
+              height={45}
+            ></TotalIcon>
+          )}
+          {name === '스터디' && (
+            <StudyIcon
+              fill={'transparent'}
+              stroke={color}
+              strokeWidth={2}
+              width={45}
+              height={45}
+            ></StudyIcon>
+          )}
+          {name === '프로젝트' && (
+            <ProjectIcon
+              fill={'transparent'}
+              stroke={color}
+              strokeWidth={2}
+              width={45}
+              height={45}
+            ></ProjectIcon>
+          )}
+          {name === '멘토멘티' && (
+            <MentoIcon
+              fill={'transparent'}
+              stroke={color}
+              strokeWidth={2}
+              width={45}
+              height={45}
+            ></MentoIcon>
+          )}
+          {name === '동아리' && (
+            <GroupIcon
+              fill={'transparent'}
+              stroke={color}
+              strokeWidth={2}
+              width={45}
+              height={45}
+            ></GroupIcon>
+          )}
         </div>
       </div>
     );

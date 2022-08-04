@@ -53,10 +53,23 @@ export function ToggleIcon({
                   <li>관리자 페이지</li>
                 ) : (
                   <Link to="/mypage">
-                    <li>내 정보 수정</li>
+                    <li
+                      onClick={() => {
+                        setIsShowToggle(!isShowToggle);
+                      }}
+                    >
+                      내 정보 수정
+                    </li>
                   </Link>
                 )}
-                <li onClick={handleLogout}>로그아웃</li>
+                <li
+                  onClick={() => {
+                    setIsShowToggle(!isShowToggle);
+                    handleLogout();
+                  }}
+                >
+                  로그아웃
+                </li>
               </ul>
             </div>
           </div>

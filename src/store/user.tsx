@@ -1,23 +1,24 @@
-import {atom, selector} from "recoil";
+import { atom, selector } from 'recoil';
 
-export const defaultUserState={
-    email: "",
-    nickname: "",
-    position: "",
-    profileImageUrl: "",
-    roleType:""
-}
+export const defaultUserState = {
+  email: '',
+  nickname: '',
+  position: '',
+  profileImageUrl: '',
+  backgroundImageUrl: '',
+  roleType: '',
+  intro: '',
+};
 
-
-export const UserState=atom({
-    key:"userState",
-    default:{...defaultUserState}
-})
+export const UserState = atom({
+  key: 'userState',
+  default: { ...defaultUserState },
+});
 
 export const UserSelector = selector({
-    key:"userSelector",
-    get:({get})=>{
-        const user = get(UserState)
-        return user;
-    }
-})
+  key: 'userSelector',
+  get: ({ get }) => {
+    const user = get(UserState);
+    return user;
+  },
+});
