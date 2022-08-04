@@ -5,6 +5,7 @@ export const defaultUserState = {
   nickname: '',
   position: '',
   profileImageUrl: '',
+  backgroundImageUrl: '',
   roleType: '',
   intro: '',
 };

@@ -19,18 +19,34 @@ export function EditProfileModal({
 }: IEditProfileModalProps) {
   const [user, setUser] = useRecoilState(UserState);
   const [isEditPositionModal, setIsEditPositionModal] = useState(false);
-  const { files, setFiles, ProfileImage, handleInitialImage, onPhotoBtnClick } =
-    useProfileImage({
-      initialImage: user.profileImageUrl,
-    });
+  const {
+    files: profileFile,
+    UploadImage: UploadProfileImage,
+    handleInitialImage: handleInitialProfileImage,
+    resetFiles: resetProfileFiles,
+  } = useProfileImage({
+    initialImage: user.profileImageUrl,
+  });
+
+  const {
+    files: backgroundFile,
+    UploadBackgroundImage,
+    ImgPlaceholder,
+    handleInitialImage: handleInitialBackgroundImage,
+    resetFiles: resetBackgroundFiles,
+  } = useProfileImage({
+    initialImage: user.backgroundImageUrl,
+  });
 
   const [values, setValues] = useState({
-    backgroundImage: '',
+    backgroundImageUrl: '',
+    email: '',
     intro: '',
     newNickname: '',
     nickname: '',
     position: '',
-    profileImage: '',
+    profileImageUrl: '',
+    roleType: '',
   });
 
   useEffect(() => {
@@ -38,21 +54,35 @@ export function EditProfileModal({
   }, [user]);
 
   const handleInitialData = () => {
+    handleInitialProfileImage();
+    handleInitialBackgroundImage();
+    resetProfileFiles();
+    resetBackgroundFiles();
     setValues({
-      ...values,
-      position: positionListKey[user.position],
-      nickname: user.nickname,
-      profileImage: user.profileImageUrl,
+      backgroundImageUrl: user.backgroundImageUrl,
+      email: user.email,
       intro: user.intro,
+      newNickname: user.nickname,
+      nickname: user.nickname,
+      position: positionListKey[user.position],
+      profileImageUrl: user.profileImageUrl,
+      roleType: user.roleType,
     });
   };
 
   useEffect(() => {
     setValues({
       ...values,
-      ['profileImage']: files,
+      ['profileImageUrl']: profileFile,
     });
-  }, [files]);
+  }, [profileFile]);
+
+  useEffect(() => {
+    setValues({
+      ...values,
+      ['backgroundImageUrl']: backgroundFile,
+    });
+  }, [backgroundFile]);
 
   const onChangeInput = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -73,31 +103,18 @@ export function EditProfileModal({
         <section>
           <div className="edit_PageWrapper">
             <div className="edit_myProfileWrapper">
-              <div className="edit_myPageBackground">
-                <div className="edit_myImgBtnWrapper">
-                  <img
-                    className="edit_myChangeImg"
-                    src={changeImg}
-                    onClick={onPhotoBtnClick}
-                  />
-                  <img
-                    className="edit_myRemoveImg"
-                    src={removeImg}
-                    onClick={() => {
-                      handleInitialImage();
-                    }}
-                  />
-                </div>
+              <div className="edit_myPageBackground" ref={ImgPlaceholder}>
+                <UploadBackgroundImage />
                 <div className="edit_myProfileImg">
-                  <ProfileImage />
+                  <UploadProfileImage />
                 </div>
                 {/* <img className="edit_myProfileImg" src={user.profileImageUrl} /> */}
               </div>
               <div className="edit_myNicknameWrapper">
                 <input
-                  name="nickname"
+                  name="newNickname"
                   className="edit_myNickName"
-                  value={values.nickname}
+                  value={values.newNickname}
                   onChange={onChangeInput}
                   // placeholder="최대 5글자"
                 />

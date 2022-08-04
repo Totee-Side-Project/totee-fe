@@ -3,12 +3,12 @@ import { Select } from '../Select/Select';
 import React, { useEffect, useState } from 'react';
 import { positionList } from '@utils/position.const';
 type valueType = {
-  backgroundImage: string;
+  backgroundImageUrl: string;
   intro: string;
   newNickname: string;
   nickname: string;
   position: string;
-  profileImage: string;
+  profileImageUrl: string;
 };
 interface IEditPositionModalProps {
   isOpen: boolean;
