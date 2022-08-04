@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { UserState, loginState } from '@store/index';
+import { defaultUserState } from '@store/user';
 import { OnboardModal, SignInModal, ToggleIcon } from '@components/common';
 import { Button } from '@components/atoms';
 import MeIcon from '@assets/me.jpeg';
@@ -33,13 +34,7 @@ const Header = () => {
       state: false,
       token: '',
     });
-    setUser({
-      email: '',
-      nickname: '',
-      position: '',
-      profileImageUrl: '',
-      roleType: '',
-    });
+    setUser({ ...defaultUserState });
   };
 
   useEffect(() => {
