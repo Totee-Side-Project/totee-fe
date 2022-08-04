@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useRef } from 'react';
 import { useState } from 'react';
 import { Checkbox } from '@components/atoms';
 import './select.scss';
@@ -9,6 +9,7 @@ import {
   handleSelectValues,
 } from '@utils/handleSelectValue';
 import { positionList } from '@utils/position.const';
+import { useOutsideAlerter } from '@hooks/useOutsideAlerter';
 
 interface ISelectPropsType {
   values: any;
@@ -28,12 +29,18 @@ export const Select = ({
   isChecked,
   setIsChecked = () => {},
 }: ISelectPropsType) => {
+  const toggleRef = useRef(null as any);
+
   const [showOptions, setShowOptions] = useState(false);
   const keyOfValues = handleSelectValues(variable);
 
   const handleLabelClick = () => {
     setShowOptions((prev) => !prev);
   };
+
+  useOutsideAlerter(toggleRef, () => {
+    setShowOptions(false);
+  });
 
   const handleOnChangeSelectValue = (e: any) => {
     setValues({
@@ -57,7 +64,7 @@ export const Select = ({
       : values[keyOfValues];
 
   return (
-    <div className="box_container" onClick={handleLabelClick}>
+    <div className="box_container" onClick={handleLabelClick} ref={toggleRef}>
       <label className="recent_wrapper">
         <div className="recent_value">
           {variable === '모집분야' || values[keyOfValues] == '' ? (
