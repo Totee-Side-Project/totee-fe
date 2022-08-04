@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { loginState, UserState } from '@store/index';
+import Swal from 'sweetalert2';
 import toggleimage from '../../assets/dropdown_down.svg';
 import './loginafter.scss';
 

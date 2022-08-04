@@ -1,3 +1,4 @@
+import { loginState } from '@store/login';
 import React, { useEffect, useState } from 'react';
 import { useGetPostByPostId } from '@hooks/useGetQuery';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -9,11 +10,11 @@ import IconLike from '../../../assets/detail_like.png';
 import likeButton from '../../../assets/detail_button.png';
 import Option from '../../../assets/detail_option.png';
 import { api, LikeAPI, PostAPI } from '@api/api';
-import { Comment, CommentInput } from '@components/common';
-import { useRecoilValue } from 'recoil';
+import { Comment, CommentInput, SignInModal } from '@components/common';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import classNames from 'classnames';
 import { UserSelector } from '@store/user';
-import {checkingDetailPeriod} from '@utils/handleSelectValue';
+import { checkingDetailPeriod } from '@utils/handleSelectValue';
 import Swal from 'sweetalert2';
 
 function DetailPage() {
@@ -24,7 +25,9 @@ function DetailPage() {
   const [Like, setLike] = useState<any>(false);
   const [status, setStatus] = useState<any>(detailData.status);
   const LoginLabel = useRecoilValue(UserSelector);
-  const [isShowToggle, setIsShowToggle]=useState(false);
+  const [isShowToggle, setIsShowToggle] = useState(false);
+  const [login, setLogin] = useRecoilState(loginState);
+  const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
 
   useEffect(() => {
     if (data && data.data?.header.code === 200) {
@@ -47,7 +50,11 @@ function DetailPage() {
   };
 
   const handlerLikeButtonClick = () => {
-    clickLike();
+    if (login.state) {
+      clickLike();
+    } else {
+      setIsOpenLoginModal(true);
+    }
   };
 
   useEffect(() => {
@@ -64,30 +71,38 @@ function DetailPage() {
     if (detailData.author == LoginLabel.nickname) {
       return (
         <div className="detail_setting">
-          <img className="summary_title_icon" src={Option} onClick={()=>setIsShowToggle(!isShowToggle)}/>
-          {isShowToggle && 
-          <div className="detail-toggle-container">
-            <ul>
-              <li onClick={()=>navigate(`/edit/${id}`)}>글 <span>수정</span>하기</li>
-              <li onClick={()=>
-                PostAPI.deletePost(parseInt(id as string))
-                      .then((res)=>{
-                        if(res.status===200){
-                          Swal.fire({
-                            title: '삭제 성공!',
-                            text: '게시물 삭제가 완료되었습니다',
-                            icon: 'success',
-                            confirmButtonText: '확인'
-                          }).then((result)=>{
-                            navigate('/');
-                          })
-                        }
-                      })
-              }
-              >글  <span>삭제</span>하기</li>
-            </ul>
-          </div>
-          }
+          <img
+            className="summary_title_icon"
+            src={Option}
+            onClick={() => setIsShowToggle(!isShowToggle)}
+          />
+          {isShowToggle && (
+            <div className="detail-toggle-container">
+              <ul>
+                <li onClick={() => navigate(`/edit/${id}`)}>
+                  글 <span>수정</span>하기
+                </li>
+                <li
+                  onClick={() =>
+                    PostAPI.deletePost(parseInt(id as string)).then((res) => {
+                      if (res.status === 200) {
+                        Swal.fire({
+                          title: '삭제 성공!',
+                          text: '게시물 삭제가 완료되었습니다',
+                          icon: 'success',
+                          confirmButtonText: '확인',
+                        }).then((result) => {
+                          navigate('/');
+                        });
+                      }
+                    })
+                  }
+                >
+                  글 <span>삭제</span>하기
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
       );
     } else {
@@ -120,10 +135,11 @@ function DetailPage() {
             </div>
             <div
               className="detail_profile"
-              style={{           
-                backgroundRepeat:"no-repeat",
-                backgroundSize: "cover",
-                backgroundImage: `url("${detailData.imageUrl}")` }}
+              style={{
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
+                backgroundImage: `url("${detailData.imageUrl}")`,
+              }}
             ></div>
             <div className="detail_summary_container">
               <div className="summary_title_wrapper">
@@ -145,7 +161,9 @@ function DetailPage() {
                     {detailData.recruitNum}
                   </div>
                   <div className="summary_category_name">
-                    {detailData.period ? checkingDetailPeriod(detailData.period) : null}
+                    {detailData.period
+                      ? checkingDetailPeriod(detailData.period)
+                      : null}
                   </div>
                 </div>
                 <div className="summary_category_right">
@@ -240,6 +258,10 @@ function DetailPage() {
           <CommentInput postId={parseInt(id as string)} type="comment" />
         </div>
       )}
+      <SignInModal
+        isOpen={isOpenLoginModal}
+        setIsOpen={setIsOpenLoginModal}
+      ></SignInModal>
     </div>
   );
 }

@@ -1,8 +1,10 @@
+import { SignInModal } from '@components/common';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import classes from './comment.module.scss';
 import { handleTime } from '@utils/handleTime';
 import { useRecoilState } from 'recoil';
-import { UserState } from '@store/index';
+import { loginState, UserState } from '@store/index';
 import { Input, Button } from '@components/atoms';
 import { useUpdateComment, useDeleteComment } from '@hooks/useMutateQuery';
 import { CommentInput } from '../CommentInput/CommentInput';
@@ -18,6 +20,17 @@ export function Comment({ postId, comment }: ICommentPropsType) {
 
   const UpdateCommentMutate = useUpdateComment(postId, comment.commentId);
   const DeleteCommentMutate = useDeleteComment(postId, comment.commentId);
+
+  const [login, setLogin] = useRecoilState(loginState);
+  const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
+
+  const checkLogin = () => {
+    if (login.state) {
+      setIsReply(!isReply);
+    } else {
+      setIsOpenLoginModal(true);
+    }
+  };
 
   const onClickUpdateBtn = () => [
     UpdateCommentMutate.mutateAsync({
@@ -47,11 +60,14 @@ export function Comment({ postId, comment }: ICommentPropsType) {
   return (
     <div className={classes.comment_container}>
       <div className={classes.profile_wrapper}>
-        <div className={classes.profile_img} style={{
-          backgroundRepeat:"no-repeat",
-          backgroundSize: "cover",
-          backgroundImage : `url(${comment.profileImageUrl})`
-        }}></div>
+        <div
+          className={classes.profile_img}
+          style={{
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            backgroundImage: `url(${comment.profileImageUrl})`,
+          }}
+        ></div>
         <div className={classes.vertical_line}></div>
       </div>
       <div className={classes.content_wrapper}>
@@ -62,7 +78,7 @@ export function Comment({ postId, comment }: ICommentPropsType) {
               {handleTime(comment?.created_at)}
             </div>
           </div>
-         
+
           {isEdit ? (
             <div className={classes.text_button}>
               <span
@@ -77,19 +93,19 @@ export function Comment({ postId, comment }: ICommentPropsType) {
               <span onClick={onClickUpdateBtn}>수정</span>
             </div>
           ) : (
-
             <div className={classes.text_button}>
-               {user.nickname === comment.nickname &&
-               <>
-                <span onClick={() => setIsEdit(true)}>수정</span>
-                <hr className={classes.vertical_line2}></hr>
-                <span onClick={onClickDeleteBtn}>삭제</span>
-                <hr className={classes.vertical_line2}></hr>
-              </>
-              }
+              {user.nickname === comment.nickname && (
+                <>
+                  <span onClick={() => setIsEdit(true)}>수정</span>
+                  <hr className={classes.vertical_line2}></hr>
+                  <span onClick={onClickDeleteBtn}>삭제</span>
+                  <hr className={classes.vertical_line2}></hr>
+                </>
+              )}
               <div
                 className={classes.reply_button}
-                onClick={() => setIsReply(!isReply)}
+                // onClick={() => setIsReply(!isReply)}
+                onClick={checkLogin}
               >
                 답글달기
               </div>
@@ -137,6 +153,10 @@ export function Comment({ postId, comment }: ICommentPropsType) {
           ></CommentInput>
         )}
       </div>
+      <SignInModal
+        isOpen={isOpenLoginModal}
+        setIsOpen={setIsOpenLoginModal}
+      ></SignInModal>
     </div>
   );
 }
