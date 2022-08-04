@@ -94,9 +94,6 @@ export function EditProfileModal({
     });
   };
 
-  useEffect(() => {
-    console.log(values);
-  }, [values]);
   return (
     <>
       <EditModal isOpen={isOpen} setIsOpen={setIsOpen}>
