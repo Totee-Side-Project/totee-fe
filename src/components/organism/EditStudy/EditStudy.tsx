@@ -180,7 +180,7 @@ export function EditStudyPage({ type, initialData }: IEditStudyPagePropsType) {
     });
     if (checking.toString().includes('false')) {
       return Swal.fire({
-        title: '게시 실패',
+        title: '등록 실패!',
         text: '모든 정보를 입력해주세요',
         icon: 'error',
         confirmButtonText: '확인',
@@ -198,7 +198,9 @@ export function EditStudyPage({ type, initialData }: IEditStudyPagePropsType) {
           title: '등록 완료!',
           text: '마이페이지에서 확인하세요',
           icon: 'success',
-          confirmButtonText: '확인',
+          confirmButtonText: '<a href = "/">확인</a>',
+        }).then((result) => {
+          navigate('/');
         });
         setValues({
           categoryName: '',
@@ -212,7 +214,7 @@ export function EditStudyPage({ type, initialData }: IEditStudyPagePropsType) {
           status: 'Y',
           title: '',
         });
-        document.location.href = '/';
+        // document.location.href = '/';
       } else {
         Swal.fire({
           title: '에러 발생',

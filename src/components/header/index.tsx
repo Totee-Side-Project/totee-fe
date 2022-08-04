@@ -6,6 +6,7 @@ import { defaultUserState } from '@store/user';
 import { OnboardModal, SignInModal, ToggleIcon } from '@components/common';
 import { Button } from '@components/atoms';
 import MeIcon from '@assets/me.jpeg';
+import Swal from 'sweetalert2';
 import logo from '../../assets/toteelogo-kr.png';
 import './header.scss';
 
@@ -29,6 +30,14 @@ const Header = () => {
 
   //로그아웃 버튼
   const handleLogout = () => {
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: '로그아웃 완료!',
+      iconColor: '#f48484',
+      showConfirmButton: false,
+      timer: 1100,
+    });
     localStorage.removeItem('loginData');
     setLogin({
       state: false,
