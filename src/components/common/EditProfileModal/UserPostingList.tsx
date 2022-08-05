@@ -18,7 +18,7 @@ function UserPostingList() {
   const [deleteState, setDeleteState] = useState(false);
 
   const getMyPostList = async () => {
-    await PostAPI.myPost().then((res) => setMyPost(res.data.body.data.content));
+    await PostAPI.myPost().then((res) => setMyPost(res.data.body.data));
   };
 
   useEffect(() => {

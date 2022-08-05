@@ -18,9 +18,7 @@ function LikePostingList() {
   const [deleteState, setDeleteState] = useState(false);
 
   const getLikeList = async () => {
-    await LikeAPI.LikeList().then((res) =>
-      setLikePost(res.data.body.data.content),
-    );
+    await LikeAPI.LikeList().then((res) => setLikePost(res.data.body.data));
   };
 
   useEffect(() => {
