@@ -147,13 +147,7 @@ function LikePostingList() {
         {deleteModalState ? (
           <div className="delete_modal">
             <img className="delete_icon" src={deleteicon} alt="" />
-            <div
-              onClick={() => {
-                setDeleteUseState(true);
-              }}
-            >
-              글 삭제하기
-            </div>
+            <div>글 삭제하기</div>
           </div>
         ) : null}
         <img
