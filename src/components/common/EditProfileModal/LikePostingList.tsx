@@ -8,6 +8,7 @@ import like from '@assets/favorite.svg';
 import nextArrow from '../../../assets/arrow_next.png';
 import prevArrow from '../../../assets/arrow_prev.png';
 import deleteicon from '../../../assets/delete.png';
+import { useNavigate } from 'react-router-dom';
 
 function LikePostingList() {
   const [likePost, setLikePost] = useState<any>();
@@ -20,10 +21,6 @@ function LikePostingList() {
   const getLikeList = async () => {
     await LikeAPI.LikeList().then((res) => setLikePost(res.data.body.data));
   };
-
-  useEffect(() => {
-    getLikeList();
-  }, []);
 
   const pageNumberList: any = [];
   let listItems: any = [];
@@ -38,12 +35,25 @@ function LikePostingList() {
     return listItems;
   };
 
+  useEffect(() => {
+    getLikeList();
+  }, []);
+
   likePost && currentPosts(likePost);
+
+  let navigate = useNavigate();
+  const clickHandlerURLParameter = (arr: any): any => {
+    navigate(`/detail/${arr.postId}`);
+  };
 
   const showLikePost = () => {
     const maping = listItems.map((arr: any, i: number) => {
       return (
-        <div key={i} className="postCard">
+        <div
+          key={i}
+          className="postCard"
+          onClick={() => clickHandlerURLParameter(arr)}
+        >
           <div className="postWrapper">
             <div className="postImgWrapper">
               <div className="postImgBox">
@@ -147,20 +157,26 @@ function LikePostingList() {
           onClick={deleteClickHandler}
         />
       </div>
-      <div className="list_wrapper">{likePost && showLikePost()}</div>
-      <div className="page_wrapper">
-        <div
-          className="list_arrow"
-          style={{ backgroundImage: `url(${prevArrow})` }}
-          onClick={prevArrowClick}
-        ></div>
-        <div className="page_number">{showPageNumber}</div>
-        <div
-          className="list_arrow"
-          style={{ backgroundImage: `url(${nextArrow})` }}
-          onClick={nextArrowClick}
-        ></div>
-      </div>
+      <div className="list_wrapper">{listItems && showLikePost()}</div>
+      {listItems.length !== 0 ? (
+        <div className="page_wrapper">
+          <div
+            className="list_arrow"
+            style={{ backgroundImage: `url(${prevArrow})` }}
+            onClick={prevArrowClick}
+          ></div>
+          <div className="page_number">{showPageNumber}</div>
+          <div
+            className="list_arrow"
+            style={{ backgroundImage: `url(${nextArrow})` }}
+            onClick={nextArrowClick}
+          ></div>
+        </div>
+      ) : (
+        <div className="list_none">
+          <span>아직 관심목록에 추가한 스터디 글이 없습니다</span>
+        </div>
+      )}
     </div>
   );
 }

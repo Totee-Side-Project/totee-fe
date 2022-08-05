@@ -8,6 +8,7 @@ import like from '@assets/favorite.svg';
 import nextArrow from '../../../assets/arrow_next.png';
 import prevArrow from '../../../assets/arrow_prev.png';
 import deleteicon from '../../../assets/delete.png';
+import { useNavigate } from 'react-router-dom';
 
 function UserPostingList() {
   const [myPost, setMyPost] = useState<any>();
@@ -38,10 +39,19 @@ function UserPostingList() {
 
   myPost && currentPosts(myPost);
 
+  let navigate = useNavigate();
+  const clickHandlerURLParameter = (arr: any): any => {
+    navigate(`/detail/${arr.postId}`);
+  };
+
   const showMyPost = () => {
     const maping = listItems.map((arr: any, i: number) => {
       return (
-        <div key={i} className="postCard">
+        <div
+          key={i}
+          className="postCard"
+          onClick={() => clickHandlerURLParameter(arr)}
+        >
           <div className="postWrapper">
             <div className="postImgWrapper">
               <div className="postImgBox">
@@ -66,7 +76,7 @@ function UserPostingList() {
               <div className="postInfoBox">
                 <div className="postInfoName">
                   {arr.position}
-                  {arr.author}
+                  {arr.nickname}
                 </div>
                 <div className="postIconBox">
                   <div className="postInfo">
@@ -148,19 +158,25 @@ function UserPostingList() {
         />
       </div>
       <div className="list_wrapper">{myPost && showMyPost()}</div>
-      <div className="page_wrapper">
-        <div
-          className="list_arrow"
-          style={{ backgroundImage: `url(${prevArrow})` }}
-          onClick={prevArrowClick}
-        ></div>
-        <div className="page_number">{showPageNumber}</div>
-        <div
-          className="list_arrow"
-          style={{ backgroundImage: `url(${nextArrow})` }}
-          onClick={nextArrowClick}
-        ></div>
-      </div>
+      {listItems.length !== 0 ? (
+        <div className="page_wrapper">
+          <div
+            className="list_arrow"
+            style={{ backgroundImage: `url(${prevArrow})` }}
+            onClick={prevArrowClick}
+          ></div>
+          <div className="page_number">{showPageNumber}</div>
+          <div
+            className="list_arrow"
+            style={{ backgroundImage: `url(${nextArrow})` }}
+            onClick={nextArrowClick}
+          ></div>
+        </div>
+      ) : (
+        <div className="list_none">
+          <span>아직 작성한 스터디 글이 없습니다</span>
+        </div>
+      )}
     </div>
   );
 }
