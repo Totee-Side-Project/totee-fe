@@ -6,6 +6,8 @@ import { useRecoilState } from 'recoil';
 import { EditPositionModal } from '@components/common/EditProfileModal/EditPositionModal';
 import removeImg from '../../../assets/removeImg.svg';
 import changeImg from '../../../assets/changeImg.svg';
+import UserPostingList from './UserPostingList';
+import LikePostingList from './LikePostingList';
 
 interface IEditProfileModalProps {
   isOpen: boolean;
@@ -71,6 +73,8 @@ export function EditProfileModal({
         isOpen={isEditPositionModal}
         setIsOpen={setIsEditPositionModal}
       ></EditPositionModal>
+      <UserPostingList />
+      <LikePostingList />
     </>
   );
 }

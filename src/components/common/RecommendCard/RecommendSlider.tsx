@@ -16,23 +16,14 @@ function RecommendSlider(props: any) {
 
   let navigate = useNavigate();
 
-  const changeSlide = () => {
-    if (isPc) {
-      return 3;
-    } else if (isTablet) {
-      return 2;
-    } else if (isPhone) {
-      return 1;
-    }
-  };
-
   const settings = {
     className: 'center',
     centerMode: true,
     infinite: true,
     centerPadding: '60px',
-    slidesToShow: changeSlide(),
+    slidesToShow: 1,
     speed: 500,
+    variableWidth: true,
     prevArrow: (
       <div>
         <div
@@ -72,42 +63,48 @@ function RecommendSlider(props: any) {
   return (
     props.recommendData && (
       <div className="content_wrapper">
-        <StyledSlider {...settings}>
-          {props.recommendData.map((arr: any) => {
-            return (
+        <>
+          <StyledSlider {...settings}>
+            {props.recommendData.map((arr: any) => {
+              return (
+                <div
+                  className="card_container"
+                  onClick={clickCard}
+                  id={arr.postId}
+                  style={{ width: 400 + 'px' }}
+                >
+                  <div className="card_image_wrapper"></div>
+                  <div className="card_title">{arr.title}</div>
+                  <div
+                    className="card_content"
+                    dangerouslySetInnerHTML={{ __html: arr.content }}
+                  ></div>
+                  <div className="card_category">
+                    <div className="card_category_content">
+                      {periodChange(arr)}
+                    </div>
+                    <div className="card_category_content">
+                      {arr.categoryName}
+                    </div>
+                    <div className="card_category_content">
+                      {arr.status ? '모집중' : '모집완료'}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+            {/* {props.recommendData.length < 4 ? (
               <div
                 className="card_container"
                 onClick={clickCard}
-                id={arr.postId}
+                style={{ width: 400 }}
               >
                 <div className="card_image_wrapper"></div>
-                <div className="card_title">{arr.title}</div>
-                <div
-                  className="card_content"
-                  dangerouslySetInnerHTML={{ __html: arr.content }}
-                ></div>
-                <div className="card_category">
-                  <div className="card_category_content">
-                    {periodChange(arr)}
-                  </div>
-                  <div className="card_category_content">
-                    {arr.categoryName}
-                  </div>
-                  <div className="card_category_content">
-                    {arr.status ? '모집중' : '모집완료'}
-                  </div>
-                </div>
+                <div className="card_title"></div>
               </div>
-            );
-          })}
-          {props.recommendData.length < 4 ? (
-            <div className="card_container">
-              <div className="card_image_wrapper"></div>
-              <div></div>
-              <div className="card_content"></div>
-            </div>
-          ) : null}
-        </StyledSlider>
+            ) : null} */}
+          </StyledSlider>
+        </>
       </div>
     )
   );
@@ -117,11 +114,11 @@ export default RecommendSlider;
 
 const StyledSlider = styled(Slider)`
   height: 260px;
-  width: 90%;
+  width: none;
   margin: 100px;
   position: relative;
-  .slick-slide .div {
+  /* .slick-slide {
     width: 400px;
     cursor: pointer;
-  }
+  } */
 `;

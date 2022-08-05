@@ -90,7 +90,9 @@
 
 .slick-slide div:not(.card_image_wrapper, .card_category_content) {
   cursor: pointer;
-  width: 80%;
+  margin-left: 30px;
+  // width: 80%;
+  // margin: 0 auto;
 }
 
 .card_category {
@@ -115,3 +117,7 @@
   justify-content: center;
   align-items: center;
 }
+
+// .content_wrapper {
+//   width: 800px;
+// }
