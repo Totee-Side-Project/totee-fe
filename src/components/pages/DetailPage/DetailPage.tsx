@@ -68,7 +68,7 @@ function DetailPage() {
   }, []);
 
   const OptionShow = () => {
-    if (detailData.author == LoginLabel.nickname) {
+    if (detailData.nickname == LoginLabel.nickname) {
       return (
         <div className="detail_setting">
           <img

@@ -16,7 +16,7 @@ function LikePostingList() {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(4);
 
-  const [deleteState, setDeleteState] = useState(false);
+  const [deleteModalState, setDeleteModalState] = useState(false);
 
   const getLikeList = async () => {
     await LikeAPI.LikeList().then((res) => setLikePost(res.data.body.data));
@@ -78,7 +78,7 @@ function LikePostingList() {
               <div className="postInfoBox">
                 <div className="postInfoName">
                   {arr.position}
-                  {arr.author}
+                  {arr.nickname}
                 </div>
                 <div className="postIconBox">
                   <div className="postInfo">
@@ -137,17 +137,23 @@ function LikePostingList() {
   };
 
   const deleteClickHandler = () => {
-    setDeleteState((prev) => !prev);
+    setDeleteModalState((prev) => !prev);
   };
 
   return (
     <div>
       <div className="list_container">
         <div className="list_title">내가 관심목록에 추가한 스터디 글</div>
-        {deleteState ? (
+        {deleteModalState ? (
           <div className="delete_modal">
             <img className="delete_icon" src={deleteicon} alt="" />
-            <div>글 삭제하기</div>
+            <div
+              onClick={() => {
+                setDeleteUseState(true);
+              }}
+            >
+              글 삭제하기
+            </div>
           </div>
         ) : null}
         <img

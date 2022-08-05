@@ -43,7 +43,7 @@ export function PostCard({ post }: Props) {
             <div className={classes.postInfoBox}>
               <div className={classes.postInfoName}>
                 {post?.position}
-                {post?.author}
+                {post?.nickname}
               </div>
               <div className={classes.postIconBox}>
                 <div className={classes.postInfo}>

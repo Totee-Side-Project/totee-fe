@@ -16,7 +16,7 @@ function UserPostingList() {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(4);
 
-  const [deleteState, setDeleteState] = useState(false);
+  const [deleteModalState, setDeleteModalState] = useState(false);
 
   const getMyPostList = async () => {
     await PostAPI.myPost().then((res) => setMyPost(res.data.body.data));
@@ -137,14 +137,14 @@ function UserPostingList() {
   };
 
   const deleteClickHandler = () => {
-    setDeleteState((prev) => !prev);
+    setDeleteModalState((prev) => !prev);
   };
 
   return (
     <div>
       <div className="list_container">
         <div className="list_title">내가 작성한 스터디 글</div>
-        {deleteState ? (
+        {deleteModalState ? (
           <div className="delete_modal">
             <img className="delete_icon" src={deleteicon} alt="" />
             <div>글 삭제하기</div>
