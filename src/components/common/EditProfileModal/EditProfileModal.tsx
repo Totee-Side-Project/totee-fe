@@ -8,6 +8,10 @@ import removeImg from '../../../assets/removeImg.svg';
 import changeImg from '../../../assets/changeImg.svg';
 import useProfileImage from '@hooks/useProfileImage';
 import { positionListKey } from '@utils/position.const';
+
+import UserPostingList from './UserPostingList';
+import LikePostingList from './LikePostingList';
+
 interface IEditProfileModalProps {
   isOpen: boolean;
   setIsOpen: (e: boolean) => void;
@@ -156,6 +160,8 @@ export function EditProfileModal({
         values={values}
         setValues={setValues}
       ></EditPositionModal>
+      <UserPostingList />
+      <LikePostingList />
     </>
   );
 }

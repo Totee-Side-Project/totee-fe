@@ -43,6 +43,7 @@ export const PostAPI = {
     }),
   deletePost: (postId: number) => api.delete(`/api/v1/post/${postId}`),
   recommendPostList: () => api.get(`/api/v1/post/recommend`),
+  myPost: () => api.get(`/api/v1/post/mypost`),
 };
 
 export const CommentAPI = {
@@ -79,6 +80,7 @@ export const UserAPI = {
 export const LikeAPI = {
   getIsLikeInfo: (postId: any) => api.get(`/api/v1/post/isLike/${postId}`),
   postLike: (postId: any) => api.post(`/api/v1/post/like/${postId}`),
+  LikeList: () => api.get(`/api/v1/post/like`),
 };
 
 // 로그인 리다이렉트 uri - 우선 local에서 테스트할 수 있게 작업함
