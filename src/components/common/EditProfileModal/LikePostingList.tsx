@@ -10,7 +10,7 @@ import prevArrow from '../../../assets/arrow_prev.png';
 import deleteicon from '../../../assets/delete.png';
 
 function LikePostingList() {
-  const [likePost, setLikePost] = useState();
+  const [likePost, setLikePost] = useState<any>();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(4);

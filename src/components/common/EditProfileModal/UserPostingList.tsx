@@ -10,7 +10,7 @@ import prevArrow from '../../../assets/arrow_prev.png';
 import deleteicon from '../../../assets/delete.png';
 
 function UserPostingList() {
-  const [myPost, setMyPost] = useState();
+  const [myPost, setMyPost] = useState<any>();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(4);
