@@ -40,7 +40,6 @@ export function PostList() {
       pageSize: 5,
     });
 
-  console.log(data);
   // const { data, isFetching, refetch } = useGetPostListAPI();
 
   useEffect(() => {

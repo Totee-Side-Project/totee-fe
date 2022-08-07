@@ -127,7 +127,7 @@ export function EditProfileModal({
               </div>
             </div>
             <div className="edit_myBtnWrapper">
-              <div className="edit_myEditBtn" onClick={onClickSubmitBtn}>
+              <div className="edit_myEditBtn" onClick={() => {}}>
                 저장하기
               </div>
               <div
