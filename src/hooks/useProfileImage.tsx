@@ -6,7 +6,6 @@ import removeImg from '../assets/removeImg.svg';
 import changeImg from '../assets/changeImg.svg';
 
 export default function useUploadImage(props: any) {
-  const [user, setUser] = useRecoilState(UserState);
   const [files, setFiles] = useState<any>();
   const ImgInput = useRef<HTMLInputElement>(null);
   const ImgPlaceholder = useRef<HTMLDivElement>(null);
@@ -62,7 +61,7 @@ export default function useUploadImage(props: any) {
     }
   };
 
-  const UploadImage = () => {
+  const UploadImage = useCallback(() => {
     return (
       <div
         style={{
@@ -88,7 +87,7 @@ export default function useUploadImage(props: any) {
         ></input>
       </div>
     );
-  };
+  }, []);
 
   const UploadBackgroundImage = () => {
     return (

@@ -6,14 +6,14 @@ import { UserAPI } from '@api/api';
 import classNames from 'classnames';
 import { useRecoilState } from 'recoil';
 import { UserState } from '@store/index';
-import useProfileImage from '@hooks/useProfileImage';
-import { useIsFetching } from 'react-query';
 
 export default function AddProfileModal({
   step,
   setStep,
   values,
   setValues,
+  files,
+  ProfileImage,
 }: IModalPropsType) {
   const [nickname, setNickname] = useState('');
   const [isValidate, setIsValidate] = useState<boolean>(false);
@@ -22,14 +22,6 @@ export default function AddProfileModal({
   const ImgPlaceholder = useRef<HTMLDivElement>(null);
 
   const [user, setUser] = useRecoilState(UserState);
-
-  const {
-    files,
-    setFiles,
-    UploadImage: ProfileImage,
-  } = useProfileImage({
-    initalData: undefined,
-  });
 
   useEffect(() => {
     setValues({
@@ -79,7 +71,7 @@ export default function AddProfileModal({
       </h1>
       <h2>사용하실 프로필 사진과 닉네임을 입력해주세요</h2>
       <div className={classes.body}>
-        <ProfileImage />
+        {ProfileImage && <ProfileImage />}
         <div className={classes.flex}>
           <div style={{ width: '100%' }}>
             <Input

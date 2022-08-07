@@ -5,12 +5,15 @@ import classes from './onboardmodal.module.scss';
 import AddProfileModal from './AddProfileModal';
 import CheckPositionModal from './CheckPositionModal';
 import { useAddUserInfo } from '@hooks/useMutateQuery';
+import useProfileImage from '@hooks/useProfileImage';
 
 interface IOnboardModalProps {
   isOpen: boolean;
   setIsOpen: (e: boolean) => void;
 }
 export function OnboardModal({ isOpen, setIsOpen }: IOnboardModalProps) {
+  let navigate = useNavigate();
+
   const [isShowAlert, setIsShowAlert] = useState(false);
   const [values, setValues] = useState({
     nickname: '',
@@ -18,9 +21,11 @@ export function OnboardModal({ isOpen, setIsOpen }: IOnboardModalProps) {
     profileImage: null as any,
   });
   const [step, setStep] = useState(0);
-
   const addUserMutation = useAddUserInfo();
-  let navigate = useNavigate();
+
+  const { files, UploadImage: ProfileImage } = useProfileImage({
+    initalData: undefined,
+  });
 
   const onClickConfimButton = async () => {
     let formData = new FormData();
@@ -53,6 +58,8 @@ export function OnboardModal({ isOpen, setIsOpen }: IOnboardModalProps) {
             setStep={setStep}
             values={values}
             setValues={setValues}
+            files={files}
+            ProfileImage={ProfileImage}
           />
         );
       case 1:
