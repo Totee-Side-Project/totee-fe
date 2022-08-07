@@ -1,72 +1,55 @@
+import React, { useEffect, useState } from 'react';
+
 import './EditProfileModal.scss';
 import { EditModal } from '@components/atoms/Modal/EditModal';
-import { UserState } from '@store/user';
-import React, { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
+
 import { EditPositionModal } from '@components/common/EditProfileModal/EditPositionModal';
-import removeImg from '../../../assets/removeImg.svg';
-import changeImg from '../../../assets/changeImg.svg';
 import useProfileImage from '@hooks/useProfileImage';
 import { positionListKey } from '@utils/position.const';
+import { User } from 'types/user.types';
 
 import UserPostingList from './UserPostingList';
 import LikePostingList from './LikePostingList';
 
 interface IEditProfileModalProps {
+  user: User;
   isOpen: boolean;
   setIsOpen: (e: boolean) => void;
+  resetImages: () => void;
+  files: any;
+  Images: any;
+  ImgPlaceholder: any;
 }
 
 export function EditProfileModal({
+  user,
   isOpen,
   setIsOpen,
+  resetImages,
+  files,
+  Images,
+  ImgPlaceholder,
 }: IEditProfileModalProps) {
-  const [user, setUser] = useRecoilState(UserState);
   const [isEditPositionModal, setIsEditPositionModal] = useState(false);
-  const {
-    files: profileFile,
-    UploadImage: UploadProfileImage,
-    handleInitialImage: handleInitialProfileImage,
-    resetFiles: resetProfileFiles,
-  } = useProfileImage({
-    initialImage: user.profileImageUrl,
-  });
-
-  const {
-    files: backgroundFile,
-    UploadBackgroundImage,
-    ImgPlaceholder,
-    handleInitialImage: handleInitialBackgroundImage,
-    resetFiles: resetBackgroundFiles,
-  } = useProfileImage({
-    initialImage: user.backgroundImageUrl,
-  });
+  const { profileFile, backgroundFile } = files;
+  const { UploadBackgroundImage, UploadProfileImage } = Images;
 
   const [values, setValues] = useState({
-    backgroundImageUrl: '',
-    email: '',
-    intro: '',
-    newNickname: '',
-    nickname: '',
-    position: '',
-    profileImageUrl: '',
-    roleType: '',
+    backgroundImageUrl: user.backgroundImageUrl,
+    email: user.email,
+    intro: user.intro,
+    nickname: user.nickname,
+    position: positionListKey[user.position],
+    profileImageUrl: user.profileImageUrl,
+    roleType: user.roleType,
   });
 
-  useEffect(() => {
-    handleInitialData();
-  }, [user]);
-
   const handleInitialData = () => {
-    handleInitialProfileImage();
-    handleInitialBackgroundImage();
-    resetProfileFiles();
-    resetBackgroundFiles();
+    resetImages();
     setValues({
       backgroundImageUrl: user.backgroundImageUrl,
       email: user.email,
       intro: user.intro,
-      newNickname: user.nickname,
       nickname: user.nickname,
       position: positionListKey[user.position],
       profileImageUrl: user.profileImageUrl,
@@ -98,6 +81,10 @@ export function EditProfileModal({
     });
   };
 
+  const onClickSubmitBtn = (e: React.MouseEvent<HTMLDivElement>) => {
+    console.log(values);
+  };
+
   return (
     <>
       <EditModal isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -113,9 +100,9 @@ export function EditProfileModal({
               </div>
               <div className="edit_myNicknameWrapper">
                 <input
-                  name="newNickname"
+                  name="nickname"
                   className="edit_myNickName"
-                  value={values.newNickname}
+                  value={values.nickname}
                   onChange={onChangeInput}
                   // placeholder="최대 5글자"
                 />
@@ -127,7 +114,7 @@ export function EditProfileModal({
               name="intro"
               className="edit_myIntro border"
               placeholder="본인에 대한 짧은 소개입니다."
-              value={values.intro}
+              value={values.intro || undefined}
               onChange={onChangeInput}
             />
             <div className="edit_myPositionWrapper">
@@ -140,7 +127,9 @@ export function EditProfileModal({
               </div>
             </div>
             <div className="edit_myBtnWrapper">
-              <div className="edit_myEditBtn">저장하기</div>
+              <div className="edit_myEditBtn" onClick={onClickSubmitBtn}>
+                저장하기
+              </div>
               <div
                 className="edit_myCancelBtn"
                 onClick={() => {

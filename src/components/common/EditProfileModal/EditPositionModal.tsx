@@ -5,7 +5,6 @@ import { positionList } from '@utils/position.const';
 type valueType = {
   backgroundImageUrl: string;
   intro: string;
-  newNickname: string;
   nickname: string;
   position: string;
   profileImageUrl: string;
