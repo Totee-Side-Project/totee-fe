@@ -1,10 +1,9 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { useSearchParams } from 'react-router-dom';
+import { motion, useAnimation } from 'framer-motion';
 
 import { searchState } from '@store/search';
-import { useGetPostListAPI } from '@hooks/useGetQuery';
 import useInfiniteQuerywithScroll from '@hooks/useInfiniteQuerywithScroll';
 import { ReactComponent as EllipseIcon } from '@assets/ellipse-icon.svg';
 import { ReactComponent as UpIcon } from '@assets/up-icon.svg';
@@ -13,6 +12,16 @@ import { PostAPI } from '@api/api';
 import { PostCard } from '../PostCard/PostCard';
 import { IPostType } from 'types/post.types';
 import classes from './postList.module.scss';
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.5,
+    },
+  },
+};
 
 export function PostList() {
   const [posts, setPosts] = useState<IPostType[]>([]);
@@ -24,13 +33,12 @@ export function PostList() {
 
   let [searchParams, setSearchParams] = useSearchParams();
 
-  const { data, isFetching, ObservationComponent } = useInfiniteQuerywithScroll(
-    {
+  const { data, isFetching, ObservationComponent, controls } =
+    useInfiniteQuerywithScroll({
       getData: PostAPI.getPostList,
       queryKey: 'postTest',
       pageSize: 5,
-    },
-  );
+    });
 
   console.log(data);
   // const { data, isFetching, refetch } = useGetPostListAPI();
@@ -77,7 +85,6 @@ export function PostList() {
 
   useEffect(() => {
     if (posts && posts.length > 0) {
-      refetch();
       setPosts([...sortingData(posts)]);
     }
   }, [selectedFilter]);
@@ -103,7 +110,7 @@ export function PostList() {
     <>
       {searchResult && searchResult.data && searchResult.data.length > 0 && (
         <div className={classes.searchResult}>
-          " {searchResult.keyword}" 에 대한 검색 결과{' '}
+          &quot; {searchResult.keyword} &quot; 에 대한 검색 결과{' '}
           <span>{searchResult.data.length}</span> 개
         </div>
       )}
@@ -149,21 +156,27 @@ export function PostList() {
             </ul>
           )}
         </div>
-        <div className={classes.postWrapper}>
-          {postsFiltered &&
-            postsFiltered.length > 0 &&
-            postsFiltered
-              .slice(0, isShowTotal ? postsFiltered.length : 8)
-              .map((post: IPostType, idx: number) => (
-                <PostCard key={`postCard-${idx}`} post={post} />
-              ))}
-          {/* <div className={classes.upIconWrapper}>
+        <motion.ul initial="hidden" animate="show" variants={container}>
+          <div className={classes.postWrapper}>
+            {postsFiltered &&
+              postsFiltered.length > 0 &&
+              postsFiltered
+                .slice(0, isShowTotal ? postsFiltered.length : 8)
+                .map((post: IPostType, idx: number) => (
+                  <PostCard
+                    key={`postCard-${idx}`}
+                    post={post}
+                    controls={controls}
+                  />
+                ))}
+            {/* <div className={classes.upIconWrapper}>
           <div className={classes.upIcon}>
             <div><UpIcon/></div>
           </div>
           </div> */}
-          <ObservationComponent />
-        </div>
+            <ObservationComponent />
+          </div>
+        </motion.ul>
       </div>
     </>
   );

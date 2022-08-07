@@ -1,4 +1,5 @@
 import React, { ReactElement, useEffect, useState } from 'react';
+import { motion, useAnimation } from 'framer-motion';
 
 import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from 'react-query';
@@ -13,6 +14,7 @@ interface useInfiniteQuerywithScrollReturnTypes {
   data: any | undefined;
   error: string | undefined | unknown;
   isFetching: boolean;
+  controls: any;
   ObservationComponent: () => ReactElement;
 }
 
@@ -21,6 +23,8 @@ const useInfiniteQuerywithScroll = ({
   queryKey,
   pageSize = 5,
 }: useInfiniteQuerywithScrollPropsTypes): useInfiniteQuerywithScrollReturnTypes => {
+  const controls = useAnimation();
+
   const [pageParm, setPageParam] = useState(0);
   const getDataWithPageInfo = async ({ pageParam = 0 }) => {
     setPageParam(pageParam);
@@ -60,6 +64,12 @@ const useInfiniteQuerywithScroll = ({
       else return;
     }, [inView]);
 
+    useEffect(() => {
+      if (inView) {
+        controls.start('show');
+      }
+    }, [inView, controls]);
+
     return <div ref={ref} />;
   };
 
@@ -67,6 +77,7 @@ const useInfiniteQuerywithScroll = ({
     data: data?.pages[pageParm],
     error,
     isFetching,
+    controls,
     ObservationComponent,
   };
 };
