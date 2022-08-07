@@ -5,10 +5,30 @@ import React, { useState } from 'react';
 import './MyPage.scss';
 import { useRecoilState } from 'recoil';
 import { positionListKey } from '@utils/position.const';
+import useProfileImage from '@hooks/useProfileImage';
 
 function MyPage() {
   const [user, setUser] = useRecoilState(UserState);
   const [isEditProfileModal, setIsEditProfileModal] = useState(false);
+
+  const {
+    files: profileFile,
+    UploadImage: UploadProfileImage,
+    handleInitialImage: handleInitialProfileImage,
+    resetFiles: resetProfileFiles,
+  } = useProfileImage({
+    initialImage: user.profileImageUrl,
+  });
+
+  const {
+    files: backgroundFile,
+    UploadBackgroundImage,
+    ImgPlaceholder,
+    handleInitialImage: handleInitialBackgroundImage,
+    resetFiles: resetBackgroundFiles,
+  } = useProfileImage({
+    initialImage: user.backgroundImageUrl,
+  });
 
   return (
     <>
@@ -42,8 +62,24 @@ function MyPage() {
         <div className="myLine" />
       </div>
       <EditProfileModal
+        user={user}
         isOpen={isEditProfileModal}
         setIsOpen={setIsEditProfileModal}
+        resetImages={() => {
+          handleInitialProfileImage();
+          handleInitialBackgroundImage();
+          resetProfileFiles();
+          resetBackgroundFiles();
+        }}
+        files={{
+          profileFile: profileFile,
+          backgroundFile: backgroundFile,
+        }}
+        Images={{
+          UploadBackgroundImage: UploadBackgroundImage,
+          UploadProfileImage: UploadProfileImage,
+        }}
+        ImgPlaceholder={ImgPlaceholder}
       ></EditProfileModal>
     </>
   );

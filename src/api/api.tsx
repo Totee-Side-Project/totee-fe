@@ -25,7 +25,8 @@ api.interceptors.request.use((config: any) => {
 // https://api.totee.link/swagger-ui.html#/
 
 export const PostAPI = {
-  getPostList: () => api.get(`/api/v1/post/list`),
+  getPostList: (page = 0, size = 5) =>
+    api.get(`/api/v1/post/list?page=${page}&size=${size}`),
   getPostByPostId: (postId: number) => api.get(`/api/v1/post/${postId}`),
   searchPostList: (title: string) => api.get(`/api/v1/post/search/${title}`),
   statusChange: (postId: number) => api.post(`api/v1/post/status/${postId}`),
