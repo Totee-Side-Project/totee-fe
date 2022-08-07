@@ -5,8 +5,10 @@ import { useSearchParams } from 'react-router-dom';
 
 import { searchState } from '@store/search';
 import { useGetPostListAPI } from '@hooks/useGetQuery';
+import useInfiniteQuerywithScroll from '@hooks/useInfiniteQuerywithScroll';
 import { ReactComponent as EllipseIcon } from '@assets/ellipse-icon.svg';
 import { ReactComponent as UpIcon } from '@assets/up-icon.svg';
+import { PostAPI } from '@api/api';
 
 import { PostCard } from '../PostCard/PostCard';
 import { IPostType } from 'types/post.types';
@@ -22,16 +24,25 @@ export function PostList() {
 
   let [searchParams, setSearchParams] = useSearchParams();
 
-  const { data, isFetching, refetch } = useGetPostListAPI();
+  const { data, isFetching, ObservationComponent } = useInfiniteQuerywithScroll(
+    {
+      getData: PostAPI.getPostList,
+      queryKey: 'postTest',
+      pageSize: 5,
+    },
+  );
+
+  console.log(data);
+  // const { data, isFetching, refetch } = useGetPostListAPI();
 
   useEffect(() => {
     if (searchResult && searchResult.data && searchResult.data.length > 0) {
       setPosts([...searchResult.data]);
       handleCategory([...searchResult.data]);
     } else {
-      if (data?.data) {
-        setPosts(data.data?.body?.data.content);
-        handleCategory(data.data?.body?.data.content);
+      if (data?.result?.content) {
+        setPosts([...posts, ...data.result.content]);
+        handleCategory([...posts, ...data.result.content]);
       }
     }
   }, [searchResult, data, categoryName]);
@@ -151,6 +162,7 @@ export function PostList() {
             <div><UpIcon/></div>
           </div>
           </div> */}
+          <ObservationComponent />
         </div>
       </div>
     </>

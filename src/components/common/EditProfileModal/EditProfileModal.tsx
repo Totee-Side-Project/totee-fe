@@ -81,9 +81,9 @@ export function EditProfileModal({
     });
   };
 
-  const onClickSubmitBtn = (e: React.MouseEvent<HTMLDivElement>) => {
-    console.log(values);
-  };
+  // const onClickSubmitBtn = (e: React.MouseEvent<HTMLDivElement>) => {
+  //   console.log(values);
+  // };
 
   return (
     <>
