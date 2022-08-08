@@ -39,6 +39,7 @@ export function PostList() {
       queryKey: 'postTest',
       pageSize: 5,
     });
+    console.log(data);
 
   // const { data, isFetching, refetch } = useGetPostListAPI();
 
@@ -84,12 +85,16 @@ export function PostList() {
 
   useEffect(() => {
     if (posts && posts.length > 0) {
-      setPosts([...sortingData(posts)]);
+      const newData = [...sortingData(posts)]
+      setPosts(newData);
+      handleCategory(newData);
     }
   }, [selectedFilter]);
+  
+
 
   const sortingData = (data: IPostType[]): IPostType[] => {
-    let newData = data;
+    let newData = [...data];
     switch (selectedFilter) {
       case '최신순':
         newData.sort((a, b) => +new Date(b.createdAt) - +new Date(a.createdAt));
@@ -173,8 +178,8 @@ export function PostList() {
             <div><UpIcon/></div>
           </div>
           </div> */}
-            <ObservationComponent />
           </div>
+          <ObservationComponent />
         </motion.ul>
       </div>
     </>

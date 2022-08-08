@@ -126,26 +126,30 @@
   background-color: $bgcolor;
   color: $fontcolor;
 }
+
+@mixin hover(){
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+    transition: transform 0.5s;
+  }
+}
 .summary_category_name {
   @include category(white, #568a35, #568a35);
 }
 
 .summary_category_status_true {
   @include category(#f09933, #f09933, white);
-  cursor: pointer;
-  &:hover {
-    transform: scale(1.2);
-    transition: transform 0.5s;
+  &.hover{
+   @include hover();
   }
 }
 
 .summary_category_status_false {
   @include category(gray, gray, white);
-  cursor: pointer;
-  &:hover {
-    transform: scale(1.2);
-    transition: transform 0.5s;
-  }
+  &.hover{
+    @include hover();
+   }
 }
 
 .summary_category_right {

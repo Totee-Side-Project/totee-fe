@@ -112,7 +112,7 @@ function DetailPage() {
 
   const handlerStatusClick = async () => {
     let postId = id;
-    if (detailData.author == LoginLabel.nickname) {
+    if (detailData.nickname === LoginLabel.nickname) {
       await PostAPI.statusChange(postId as unknown as number)
         .then(async (res) => await refetch())
         .catch((err) => console.log(err));
@@ -185,14 +185,14 @@ function DetailPage() {
 
                   {detailData.status == 'Y' ? (
                     <div
-                      className="summary_category_status_true"
+                      className={`summary_category_status_true ${detailData.nickname == LoginLabel.nickname? 'hover': ''}`}
                       onClick={handlerStatusClick}
                     >
                       <span>모집중</span>
                     </div>
                   ) : (
                     <div
-                      className="summary_category_status_false"
+                      className={`summary_category_status_false  ${detailData.nickname == LoginLabel.nickname? 'hover': ''}`}
                       onClick={handlerStatusClick}
                     >
                       <span>모집완료</span>

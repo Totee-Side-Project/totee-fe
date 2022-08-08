@@ -10,9 +10,10 @@ import { motion, useAnimation } from 'framer-motion';
 interface Props {
   post: IPostType;
   controls: any;
+  ref? :any;
 }
 
-export function PostCard({ post, controls }: Props) {
+export function PostCard({ post, controls, ref }: Props) {
   let navigate = useNavigate();
   const clickHandlerURLParameter = () => {
     navigate(`/detail/${post.postId}`);
@@ -31,7 +32,7 @@ export function PostCard({ post, controls }: Props) {
   };
   return (
     <>
-      <motion.li variants={item} initial="hidden" animate={controls}>
+      <motion.li variants={item} initial="hidden" animate={controls} ref={ref}>
         <div className={classes.postCard} onClick={clickHandlerURLParameter}>
           <div className={classes.postWrapper}>
             <div className={classes.postImgWrapper}>
