@@ -31,6 +31,7 @@ export default function useUploadImage(props: any) {
 
   const handleInitialImage = () => {
     const imgEl = ImgPlaceholder.current as HTMLDivElement;
+    // setFiles(undefined);
     if (!imgEl) return;
     imgEl.style.backgroundRepeat = 'no-repeat';
     imgEl.style.backgroundSize = 'cover';

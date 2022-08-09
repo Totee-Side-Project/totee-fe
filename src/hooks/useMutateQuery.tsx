@@ -4,7 +4,7 @@ import { useQueryClient } from "react-query";
 
 export const useAddUserInfo =()=>{
     const queryClient = useQueryClient();
-    return useMutation((form:any)=>UserAPI.updateUserInfo(form),{
+    return useMutation((form:any)=>UserAPI.addUserInfo(form),{
         onSuccess: ()=>queryClient.invalidateQueries("user")
     })
 }
@@ -52,5 +52,12 @@ export const useDeleteReply =(postId:number, replyId:number)=>{
     const queryClient = useQueryClient();
     return useMutation(()=>ReplyAPI.deleteReply(replyId),{
         onSuccess: ()=>queryClient.invalidateQueries(["post", postId])
+    })
+}
+
+export const useUpdateUser = ()=>{
+    const queryClient = useQueryClient();
+    return useMutation((form:any)=>UserAPI.updateUserInfo(form),{
+        onSuccess: ()=>queryClient.invalidateQueries("user")
     })
 }
