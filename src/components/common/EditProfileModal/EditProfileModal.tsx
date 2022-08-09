@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 
 import './EditProfileModal.scss';
 import { EditModal } from '@components/atoms/Modal/EditModal';
@@ -92,10 +93,21 @@ export function EditProfileModal({
     }
 
     await useUpdateUserMutate.mutateAsync(formData)
-                             .then((res)=>console.log(res))
+                             .then(handleSuccess)
                               .catch((err)=>console.log(err))
-
   };
+
+  const handleSuccess = ()=>{
+    Swal.fire({
+      title: '수정 완료!',
+      text: '마이페이지에서 확인하세요',
+      icon: 'success',
+      confirmButtonText: '<a href = "/">확인</a>',
+    }).then((result) => {
+      setIsOpen(false);
+    });
+
+  }
 
   const handleFormData=(values:UpdateUser)=>{
 

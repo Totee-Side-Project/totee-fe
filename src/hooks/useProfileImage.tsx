@@ -1,6 +1,4 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useRecoilState } from 'recoil';
-import { UserState } from '@store/user';
 
 import removeImg from '../assets/removeImg.svg';
 import changeImg from '../assets/changeImg.svg';
