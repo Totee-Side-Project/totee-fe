@@ -1,23 +1,33 @@
-import { SignInModal } from '@components/common';
-import { EditProfileModal } from '@components/common/EditProfileModal/EditProfileModal';
-import { UserState } from '@store/user';
-import React, { useState } from 'react';
+
+import React, { useState, useEffect} from 'react';
 import './MyPage.scss';
-import { useRecoilState } from 'recoil';
+
+import { EditProfileModal } from '@components/common/EditProfileModal/EditProfileModal';
 import { positionListKey } from '@utils/position.const';
+
 import useProfileImage from '@hooks/useProfileImage';
+import {useGetUserAPI} from '@hooks/useGetQuery';
+import {User} from 'types/user.types';
 
 function MyPage() {
-  const [user, setUser] = useRecoilState(UserState);
+  // const [user, setUser] = useRecoilState(UserState);
+  const [user, setUser]=useState<User>();
   const [isEditProfileModal, setIsEditProfileModal] = useState(false);
+  const {data} = useGetUserAPI();
 
+  useEffect(()=>{
+    if(data && data.status===200){
+      setUser(data.data.body.data);
+    }
+  },[data])
+  
   const {
     files: profileFile,
     UploadImage: UploadProfileImage,
     handleInitialImage: handleInitialProfileImage,
     resetFiles: resetProfileFiles,
   } = useProfileImage({
-    initialImage: user.profileImageUrl,
+    initialImage: user?.profileImageUrl,
   });
 
   const {
@@ -27,15 +37,21 @@ function MyPage() {
     handleInitialImage: handleInitialBackgroundImage,
     resetFiles: resetBackgroundFiles,
   } = useProfileImage({
-    initialImage: user.backgroundImageUrl,
+    initialImage: user?.backgroundImageUrl,
   });
 
   return (
     <>
       <div className="myPageWrapper">
         <div className="myProfileWrapper">
-          <div className="myPageBackground">
-            <img className="myProfileImg" src={user.profileImageUrl} />
+          <div className="myPageBackground"
+            style={{
+              backgroundRepeat: 'no-repeat',
+              backgroundSize : 'cover',
+              backgroundImage : `url(${user?.backgroundImageUrl})`
+            }}
+          >
+            <img className="myProfileImg" src={user?.profileImageUrl} />
             <button
               className="myEditProfile"
               onClick={() => setIsEditProfileModal(true)}
@@ -43,17 +59,15 @@ function MyPage() {
               프로필 수정
             </button>
           </div>
-          <div className="myNickName">{user.nickname}</div>
-          <div className="myInfo">{user.roleType}</div>
-          <div className="myInfo">{user.email}</div>
+          <div className="myNickName">{user?.nickname}</div>
+          <div className="myInfo">{user?.roleType}</div>
+          <div className="myInfo">{user?.email}</div>
         </div>
         <div className="myIntro">
-          본인에 대한 짧은 소개입니다.본인에 대한 짧은 소개입니다.본인에 대한
-          짧은 소개입니다. 본인에 대한 짧은 소개입니다.본인에 대한 짧은
-          소개입니다.
+          {user?.intro}
         </div>
         <div className="myPositionWrapper">
-          <div className="myPosition">{positionListKey[user.position]}</div>
+          <div className="myPosition">{positionListKey[user?.position as string]}</div>
         </div>
         <div className="myPostsWrapper">
           <div className="myPosts">작성한 글 보기</div>
@@ -61,6 +75,7 @@ function MyPage() {
         </div>
         <div className="myLine" />
       </div>
+      {user&&
       <EditProfileModal
         user={user}
         isOpen={isEditProfileModal}
@@ -81,6 +96,7 @@ function MyPage() {
         }}
         ImgPlaceholder={ImgPlaceholder}
       ></EditProfileModal>
+    }
     </>
   );
 }

@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 
 import './EditProfileModal.scss';
 import { EditModal } from '@components/atoms/Modal/EditModal';
 
 import { EditPositionModal } from '@components/common/EditProfileModal/EditPositionModal';
-import useProfileImage from '@hooks/useProfileImage';
-import { positionListKey } from '@utils/position.const';
-import { User } from 'types/user.types';
+
+import { positionListKey, positionList } from '@utils/position.const';
+import { UpdateUser, User } from 'types/user.types';
 
 import UserPostingList from './UserPostingList';
 import LikePostingList from './LikePostingList';
 
+import {useUpdateUser} from '@hooks/useMutateQuery';
 interface IEditProfileModalProps {
-  user: User;
+  user: User ;
   isOpen: boolean;
   setIsOpen: (e: boolean) => void;
   resetImages: () => void;
@@ -34,25 +36,27 @@ export function EditProfileModal({
   const { profileFile, backgroundFile } = files;
   const { UploadBackgroundImage, UploadProfileImage } = Images;
 
+  const useUpdateUserMutate =useUpdateUser();
+
   const [values, setValues] = useState({
-    backgroundImageUrl: user.backgroundImageUrl,
+    backgroundImage: undefined,
     email: user.email,
     intro: user.intro,
     nickname: user.nickname,
     position: positionListKey[user.position],
-    profileImageUrl: user.profileImageUrl,
+    profileImage: undefined,
     roleType: user.roleType,
   });
 
   const handleInitialData = () => {
     resetImages();
     setValues({
-      backgroundImageUrl: user.backgroundImageUrl,
+      backgroundImage: undefined,
       email: user.email,
       intro: user.intro,
       nickname: user.nickname,
       position: positionListKey[user.position],
-      profileImageUrl: user.profileImageUrl,
+      profileImage: undefined,
       roleType: user.roleType,
     });
   };
@@ -60,14 +64,14 @@ export function EditProfileModal({
   useEffect(() => {
     setValues({
       ...values,
-      ['profileImageUrl']: profileFile,
+      ['profileImage']: profileFile,
     });
   }, [profileFile]);
 
   useEffect(() => {
     setValues({
       ...values,
-      ['backgroundImageUrl']: backgroundFile,
+      ['backgroundImage']: backgroundFile,
     });
   }, [backgroundFile]);
 
@@ -81,9 +85,61 @@ export function EditProfileModal({
     });
   };
 
-  // const onClickSubmitBtn = (e: React.MouseEvent<HTMLDivElement>) => {
-  //   console.log(values);
-  // };
+  const onClickSubmitBtn = async(e: React.MouseEvent<HTMLDivElement>) => {
+    let newFormData = handleFormData(values);
+    let formData = new FormData();
+    for (const [key, value] of Object.entries(newFormData)) {
+      formData.append(key, value);
+    }
+
+    await useUpdateUserMutate.mutateAsync(formData)
+                             .then(handleSuccess)
+                              .catch((err)=>console.log(err))
+  };
+
+  const handleSuccess = ()=>{
+    Swal.fire({
+      title: '수정 완료!',
+      text: '마이페이지에서 확인하세요',
+      icon: 'success',
+      confirmButtonText: '<a href = "/">확인</a>',
+    }).then((result) => {
+      setIsOpen(false);
+    });
+
+  }
+
+  const handleFormData=(values:UpdateUser)=>{
+
+    let newFormData= {
+      intro: values.intro,
+      nickname : values.nickname,
+      position: positionList[values.position],
+    } as UpdateUser;
+
+
+    if(values.profileImage !==  undefined){
+      newFormData["keepProfileImage"] = "N"
+      newFormData["profileImage"] = values.profileImage;
+    }
+    else{
+      let blob = new Blob();
+      newFormData["keepProfileImage"] = "Y"
+      newFormData["profileImage"] = blob;
+    }
+
+    if(values.backgroundImage !== undefined){
+      newFormData["keepBackgroundImage"] = "N";
+      newFormData["backgroundImage"] = values.backgroundImage;
+    }
+    else{
+      let blob = new Blob();
+      newFormData["keepBackgroundImage"] = "Y";
+      newFormData["backgroundImage"] = blob;
+    }
+
+    return newFormData;
+  }
 
   return (
     <>
@@ -127,7 +183,7 @@ export function EditProfileModal({
               </div>
             </div>
             <div className="edit_myBtnWrapper">
-              <div className="edit_myEditBtn" onClick={() => {}}>
+              <div className="edit_myEditBtn" onClick={onClickSubmitBtn}>
                 저장하기
               </div>
               <div

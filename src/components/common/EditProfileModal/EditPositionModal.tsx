@@ -2,12 +2,13 @@ import { EditModal } from '@components/atoms/Modal/EditModal';
 import { Select } from '../Select/Select';
 import React, { useEffect, useState } from 'react';
 import { positionList } from '@utils/position.const';
+
 type valueType = {
-  backgroundImageUrl: string;
+  backgroundImage: any;
   intro: string;
   nickname: string;
   position: string;
-  profileImageUrl: string;
+  profileImage: any;
 };
 interface IEditPositionModalProps {
   isOpen: boolean;

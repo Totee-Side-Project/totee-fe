@@ -1,6 +1,4 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useRecoilState } from 'recoil';
-import { UserState } from '@store/user';
 
 import removeImg from '../assets/removeImg.svg';
 import changeImg from '../assets/changeImg.svg';
@@ -31,6 +29,7 @@ export default function useUploadImage(props: any) {
 
   const handleInitialImage = () => {
     const imgEl = ImgPlaceholder.current as HTMLDivElement;
+    // setFiles(undefined);
     if (!imgEl) return;
     imgEl.style.backgroundRepeat = 'no-repeat';
     imgEl.style.backgroundSize = 'cover';

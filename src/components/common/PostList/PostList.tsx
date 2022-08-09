@@ -39,10 +39,8 @@ export function PostList() {
       queryKey: 'postTest',
       pageSize: 5,
     });
-    console.log(data);
 
-  // const { data, isFetching, refetch } = useGetPostListAPI();
-
+    
   useEffect(() => {
     if (searchResult && searchResult.data && searchResult.data.length > 0) {
       setPosts([...searchResult.data]);

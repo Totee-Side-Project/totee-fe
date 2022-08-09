@@ -7,3 +7,16 @@ export type User = {
   profileImageUrl: string;
   roleType: string;
 };
+
+
+export type UpdateUser = {
+  backgroundImage: any;
+  email: string;
+  intro: string;
+  nickname: string;
+  position: string;
+  profileImage: any,
+  roleType: string;
+  keepProfileImage? : "Y" | "N";
+  keepBackgroundImage? : "Y" | "N";
+};
