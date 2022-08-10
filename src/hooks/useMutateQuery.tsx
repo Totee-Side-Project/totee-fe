@@ -1,5 +1,5 @@
 import { useMutation } from "react-query";
-import { UserAPI, CommentAPI, ReplyAPI } from "@api/api";
+import { UserAPI, CommentAPI, ReplyAPI, LikeAPI } from "@api/api";
 import { useQueryClient } from "react-query";
 
 export const useAddUserInfo =()=>{
@@ -59,5 +59,16 @@ export const useUpdateUser = ()=>{
     const queryClient = useQueryClient();
     return useMutation((form:any)=>UserAPI.updateUserInfo(form),{
         onSuccess: ()=>queryClient.invalidateQueries("user")
+    })
+}
+
+export const useUpdateLike = (postId:string)=>{
+    const queryClient = useQueryClient();
+    return useMutation((postId:any)=>LikeAPI.postLike(postId),{
+        onSuccess: ()=>{
+            queryClient.invalidateQueries("posts");
+            queryClient.invalidateQueries(["post", postId]);
+            queryClient.invalidateQueries(["like", postId]);
+        }
     })
 }

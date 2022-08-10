@@ -102,7 +102,7 @@ export function EditProfileModal({
       title: '수정 완료!',
       text: '마이페이지에서 확인하세요',
       icon: 'success',
-      confirmButtonText: '<a href = "/">확인</a>',
+      confirmButtonText: '확인',
     }).then((result) => {
       setIsOpen(false);
     });
