@@ -1,5 +1,5 @@
 import { QueryCache, QueryClient, useQuery } from 'react-query';
-import { PostAPI, UserAPI, CategoryAPI } from '@api/api';
+import { PostAPI, UserAPI, CategoryAPI, LikeAPI } from '@api/api';
 import { useRecoilState } from 'recoil';
 import { UserState } from '@store/user';
 import debounce from 'lodash';
@@ -24,7 +24,7 @@ export function useGetUserAPI() {
 }
 
 export function useGetPostListAPI() {
-  return useQuery(['posts'], () => PostAPI.getPostList().catch((err) => err), {
+  return useQuery(['postsAll'], () => PostAPI.getPostList().catch((err) => err), {
     // 브라우저 focus 됐을 때 재시작?
     retry: false,
     refetchOnWindowFocus: true,
@@ -35,7 +35,7 @@ export function useGetPostListAPI() {
   });
 }
 
-export function useGetPostByPostId(postId: number) {
+export function useGetPostByPostId(postId: string) {
   return useQuery(
     ['post', postId],
     () => PostAPI.getPostByPostId(postId).catch((err) => err),
@@ -85,6 +85,18 @@ export function useGetCategoryList() {
 
 export function useGetRecommendList() {
   return useQuery(['recommend'], () => PostAPI.recommendPostList(), {
+    // 브라우저 focus 됐을 때 재시작?
+    retry: false,
+    refetchOnWindowFocus: false,
+    // 자동으로 가져오는 옵션
+    enabled: true,
+    // 캐시 타임
+    staleTime: 10 * 600 * 1000,
+  });
+}
+
+export function useGetLikeofPost(postId:string){
+  return useQuery(['like', postId], () => LikeAPI.getIsLikeInfo(postId), {
     // 브라우저 focus 됐을 때 재시작?
     retry: false,
     refetchOnWindowFocus: false,

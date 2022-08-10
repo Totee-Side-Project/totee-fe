@@ -27,7 +27,7 @@ api.interceptors.request.use((config: any) => {
 export const PostAPI = {
   getPostList: (page = 0, size = 5) =>
     api.get(`/api/v1/post/list?page=${page}&size=${size}`),
-  getPostByPostId: (postId: number) => api.get(`/api/v1/post/${postId}`),
+  getPostByPostId: (postId: string) => api.get(`/api/v1/post/${postId}`),
   searchPostList: (title: string) => api.get(`/api/v1/post/search/${title}`),
   statusChange: (postId: number) => api.post(`api/v1/post/status/${postId}`),
   createPost: (form: any) =>

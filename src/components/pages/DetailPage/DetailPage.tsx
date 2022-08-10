@@ -16,37 +16,49 @@ import classNames from 'classnames';
 import { UserSelector } from '@store/user';
 import { checkingDetailPeriod } from '@utils/handleSelectValue';
 import Swal from 'sweetalert2';
+import { useGetLikeofPost } from '@hooks/useGetQuery';
+import { useUpdateLike } from '@hooks/useMutateQuery';
 
 function DetailPage() {
   const navigate = useNavigate();
   let { id } = useParams();
-  const { data, refetch } = useGetPostByPostId(parseInt(id as string));
+
+  const { data: postData, refetch } = useGetPostByPostId(id as string);
+  const { data:likeData } = useGetLikeofPost(id as string);
+  const LikeUpdateMutation = useUpdateLike(id as string);
+
+
   const [detailData, setDetailData] = useState<any>([]);
   const [Like, setLike] = useState<any>(false);
   const [status, setStatus] = useState<any>(detailData.status);
-  const LoginLabel = useRecoilValue(UserSelector);
   const [isShowToggle, setIsShowToggle] = useState(false);
-  const [login, setLogin] = useRecoilState(loginState);
   const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
 
+  const [login, setLogin] = useRecoilState(loginState);
+  const LoginLabel = useRecoilValue(UserSelector);
+
+
   useEffect(() => {
-    if (data && data.data?.header.code === 200) {
-      setDetailData(data.data.body.data);
+    if (postData && postData.data?.header.code === 200) {
+      setDetailData(postData.data.body.data);
     }
-  }, [data, status]);
+  }, [postData, status]);
+
+  useEffect(()=>{
+    if(likeData && likeData.data?.header.code === 200){
+      setLike(likeData.data.body.data);
+    }
+  },[likeData])
 
   const handlerBackArrowClick = () => {
     navigate('/');
   };
 
-  const clickLike = async () => {
+  const clickLike =  () => {
     let postId = id;
-    await LikeAPI.postLike(postId).then(async (res) => {
-      refetch();
-      await LikeAPI.getIsLikeInfo(postId)
-        .then((res) => setLike(res.data.body.data))
-        .catch((err) => console.log(err));
-    });
+     LikeUpdateMutation.mutateAsync(postId)
+                       .then((res)=>res)
+                       .catch((err)=>console.log(err))
   };
 
   const handlerLikeButtonClick = () => {
@@ -56,16 +68,6 @@ function DetailPage() {
       setIsOpenLoginModal(true);
     }
   };
-
-  useEffect(() => {
-    const likeStatus = async () => {
-      let postId = id;
-      await LikeAPI.getIsLikeInfo(postId)
-        .then((res) => setLike(res.data.body.data))
-        .catch((err) => console.log(err));
-    };
-    likeStatus();
-  }, []);
 
   const OptionShow = () => {
     if (detailData.nickname == LoginLabel.nickname) {

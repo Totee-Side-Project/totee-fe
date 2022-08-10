@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { useSearchParams } from 'react-router-dom';
-import { motion, useAnimation } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { useQueryClient } from 'react-query';
 
 import { searchState } from '@store/search';
 import useInfiniteQuerywithScroll from '@hooks/useInfiniteQuerywithScroll';
 import { ReactComponent as EllipseIcon } from '@assets/ellipse-icon.svg';
-import { ReactComponent as UpIcon } from '@assets/up-icon.svg';
 import { PostAPI } from '@api/api';
 
 import { PostCard } from '../PostCard/PostCard';
@@ -32,14 +32,21 @@ export function PostList() {
   const [searchResult, setSearchResult] = useRecoilState(searchState);
 
   let [searchParams, setSearchParams] = useSearchParams();
+  const queryClient = useQueryClient();
 
   const { data, isFetching, ObservationComponent, controls } =
     useInfiniteQuerywithScroll({
       getData: PostAPI.getPostList,
-      queryKey: 'postTest',
+      queryKey: 'posts',
       pageSize: 5,
     });
 
+  useEffect(()=>{
+    return()=>{
+      setPosts([]);
+      queryClient.removeQueries("posts");
+    }
+  },[])
     
   useEffect(() => {
     if (searchResult && searchResult.data && searchResult.data.length > 0) {
@@ -71,8 +78,9 @@ export function PostList() {
       ? setCategoryName(searchParams.get('cateogory') as string)
       : setCategoryName('전체');
 
-    searchParams.get('filter') !== null &&
-      setSelectedFilter(searchParams.get('filter') as string);
+    searchParams.get('filter') !== null
+     ? setSelectedFilter(searchParams.get('filter') as string)
+     : setSelectedFilter("최신순");
 
     searchParams.get('isShowTotal') !== null
       ? setIsShowTotal(
