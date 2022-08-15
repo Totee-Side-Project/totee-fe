@@ -85,3 +85,12 @@
     cursor: pointer;
   }
 }
+
+.alarmButton{
+  cursor: pointer;
+  width: 22px;
+  height: 25px;
+  &:hover{
+    transform: scale(1.05);
+  }
+}

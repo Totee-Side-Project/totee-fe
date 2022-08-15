@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
+.flex{
+  display: flex;
+  align-items: center;
+}
+.alarmWrapper{
+  position: relative;
+  .alarmContainer{
+    position: absolute;
+    overflow: auto;
+    top: 0px;
+    left: -10px;
+    width: 400px;
+    height: 360px;
+    background: #FFFFFF;
+    margin-top: 21px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 7px;
+    //border-radius: 10px 10px 0px 0px;
+    border: 1px solid #BFBFBF;
+    section{
+      height:128px;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      div{
+        display: inline-block;
+        width: 400px;
+        height: 80px;
+        margin:0 !important;
+        padding:20px 20px;
+        text-align: left;
+        font-size: 13px;
+        border-bottom: 1px solid #E6E6E6;
+
+        &:hover{
+          cursor: pointer;
+          box-shadow: inset 0 1000px rgba(0, 0, 0, 0.03) !important;
+        }
+      }
+
+      p{
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 400;
+        font-family: 'Noto Sans KR',sans-serif;
+        color: #767676;
+        padding: 2px;
+      }
+    }
+    ul{
+      margin-top: 40px;
+      display: list-item;
+      }
+    }
+    .alarmTitle{
+      position: fixed;
+      display: inline-block;
+      width: 398px;
+      text-align: center;
+      font-family: 'Noto Sans KR',sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      color: #343434;
+      padding: 10px;
+      height: 40px;
+      background: #F7F7F7;
+      border-bottom: 1px solid #E6E6E6;
+      border-radius: 10px 10px 0px 0px;
+    }
+  }
+  .alarmContainer::-webkit-scrollbar{
+    display:none;
+  }
+
+.alarmDate {
+  text-align: right;
+  font-size: 11px !important;
+}
+.closeIcon{
+  display: inline-block;
+  position: fixed;
+  cursor: pointer;
+  z-index: 100;
+  padding: 7px;
+  margin-left: 350px;
+}
+.scrollBtn{
+  text-align: center;
+  background: #F7F7F7;
+  height: 35px;
+  width: 399px;
+  display: inline-block;
+  position: fixed;
+  top: 425px;
+  border: 1px solid #BFBFBF;
+  border-radius: 0px 0px 10px 10px;
+  font-family: 'Noto Sans KR',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  color: #343434;
+}
+.DownIcon{
+  margin-top: 11px;
+}
+.emptyContent{
+  text-align: center;
+  margin: 30% auto;
+  font-family: 'Noto Sans KR',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  color: #8C8C8C;
+}
