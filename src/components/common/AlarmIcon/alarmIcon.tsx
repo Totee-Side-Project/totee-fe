@@ -7,11 +7,7 @@ import alarm from '../../../assets/alarmicon.svg';
 import DownIcon from '../../../assets/dropdown_down.svg';
 import close from '../../../assets/xicon.svg';
 
-export function AlarmIcon({
-  isShowAlarm,
-  setIsShowAlarm,
-  onClick,
-}: AlarmIconProps) {
+export function AlarmIcon({ isShowAlarm, setIsShowAlarm }: AlarmIconProps) {
   const AlarmRef = useRef(null as any);
 
   useOutsideAlerter(AlarmRef, () => {
@@ -61,11 +57,21 @@ export function AlarmIcon({
                     <p>누구님이 게시글에 좋아요를 남겼습니다.</p>
                     <p className={classes.alarmDate}>1일전</p>
                   </div>
+                  <div>
+                    <p>누구님이 게시글에 좋아요를 남겼습니다.</p>
+                    <p>누구님이 게시글에 좋아요를 남겼습니다.</p>
+                    <p className={classes.alarmDate}>1일전</p>
+                  </div>
+                  <div>
+                    <p>누구님이 게시글에 좋아요를 남겼습니다.</p>
+                    <p>누구님이 게시글에 좋아요를 남겼습니다.</p>
+                    <p className={classes.alarmDate}>1일전</p>
+                  </div>
                 </ul>
                 {/*알림이 많을 경우*/}
-                {/*<p className={classes.scrollBtn}>*/}
-                {/*  <img src={DownIcon} className={classes.DownIcon} />*/}
-                {/*</p>*/}
+                <p className={classes.scrollBtn}>
+                  <img src={DownIcon} className={classes.DownIcon} />
+                </p>
               </section>
             </div>
           </div>
