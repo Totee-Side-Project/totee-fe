@@ -1,3 +1,4 @@
+import { AlarmIcon } from '@components/common/AlarmIcon/alarmIcon';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
@@ -8,12 +9,14 @@ import { Button } from '@components/atoms';
 import MeIcon from '@assets/me.jpeg';
 import Swal from 'sweetalert2';
 import logo from '../../assets/toteelogo-kr.png';
+import alarm from '../../assets/alarmicon.svg';
 import './header.scss';
 
 const Header = () => {
   const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
   const [isOpenOnboardModal, setIsOpenOnboardModal] = useState(false);
   const [isShowToggle, setIsShowToggle] = useState(false);
+  const [isShowAlarm, setIsShowAlarm] = useState(false);
 
   //로그인 state 관리
   const [login, setLogin] = useRecoilState(loginState);
@@ -62,6 +65,19 @@ const Header = () => {
           </Link>
           <div className="buttonWrapper">
             <ul className="profile_wrapper">
+              <li>
+                {!login.state ? null : (
+                  // <img src={alarm} className="alarmButton" />
+                  <>
+                    <AlarmIcon
+                      imageUrl={alarm}
+                      isShowAlarm={isShowAlarm}
+                      setIsShowAlarm={setIsShowAlarm}
+                      onClick={() => setIsShowAlarm(!isShowAlarm)}
+                    ></AlarmIcon>
+                  </>
+                )}
+              </li>
               <li>
                 <button className="createButton" onClick={handleStudyClick}>
                   스터디 개설
