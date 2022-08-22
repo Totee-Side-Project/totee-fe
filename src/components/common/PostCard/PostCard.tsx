@@ -32,7 +32,7 @@ export function PostCard({ post, controls, ref }: Props) {
   };
   return (
     <>
-      <motion.li variants={item} initial="hidden" animate={controls} ref={ref}>
+      <motion.li variants={item} initial="hidden" ref={ref}>
         <div className={classes.postCard} onClick={clickHandlerURLParameter}>
           <div className={classes.postWrapper}>
             <div className={classes.postImgWrapper}>

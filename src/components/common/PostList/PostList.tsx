@@ -34,12 +34,13 @@ export function PostList() {
   let [searchParams, setSearchParams] = useSearchParams();
   const queryClient = useQueryClient();
 
-  const { data, isFetching, ObservationComponent, controls } =
-    useInfiniteQuerywithScroll({
+  const { data, isFetching, ObservationComponent } = useInfiniteQuerywithScroll(
+    {
       getData: PostAPI.getPostList,
       queryKey: 'posts',
       pageSize: 5,
-    });
+    },
+  );
 
   useEffect(() => {
     return () => {
@@ -171,11 +172,7 @@ export function PostList() {
               postsFiltered
                 .slice(0, isShowTotal ? postsFiltered.length : 8)
                 .map((post: IPostType, idx: number) => (
-                  <PostCard
-                    key={`postCard-${idx}`}
-                    post={post}
-                    controls={controls}
-                  />
+                  <PostCard key={`postCard-${idx}`} post={post} />
                 ))}
             {/* <div className={classes.upIconWrapper}>
           <div className={classes.upIcon}>
