@@ -9,3 +9,4 @@ export * from './Comment/Comment';
 export * from './CommentInput/CommentInput';
 export * from './Editor/Editor';
 export * from './Select/Select';
+export * from './AlarmIcon/AlarmIcon';

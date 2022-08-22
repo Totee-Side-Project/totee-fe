@@ -48,6 +48,7 @@ const useInfiniteQuerywithScroll = ({
     getDataWithPageInfo,
     {
       getNextPageParam: (lastPage) => lastPage.nextPage,
+      refetchOnWindowFocus: false,
     },
   );
 

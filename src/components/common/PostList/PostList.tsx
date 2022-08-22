@@ -41,13 +41,13 @@ export function PostList() {
       pageSize: 5,
     });
 
-  useEffect(()=>{
-    return()=>{
+  useEffect(() => {
+    return () => {
       setPosts([]);
-      queryClient.removeQueries("posts");
-    }
-  },[])
-    
+      queryClient.removeQueries('posts');
+    };
+  }, []);
+
   useEffect(() => {
     if (searchResult && searchResult.data && searchResult.data.length > 0) {
       setPosts([...searchResult.data]);
@@ -79,8 +79,8 @@ export function PostList() {
       : setCategoryName('전체');
 
     searchParams.get('filter') !== null
-     ? setSelectedFilter(searchParams.get('filter') as string)
-     : setSelectedFilter("최신순");
+      ? setSelectedFilter(searchParams.get('filter') as string)
+      : setSelectedFilter('최신순');
 
     searchParams.get('isShowTotal') !== null
       ? setIsShowTotal(
@@ -91,13 +91,11 @@ export function PostList() {
 
   useEffect(() => {
     if (posts && posts.length > 0) {
-      const newData = [...sortingData(posts)]
+      const newData = [...sortingData(posts)];
       setPosts(newData);
       handleCategory(newData);
     }
   }, [selectedFilter]);
-  
-
 
   const sortingData = (data: IPostType[]): IPostType[] => {
     let newData = [...data];

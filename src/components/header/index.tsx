@@ -1,12 +1,10 @@
-import { AlarmIcon } from '@components/common/AlarmIcon/alarmIcon';
+import { AlarmIcon } from '@components/common';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { UserState, loginState } from '@store/index';
 import { defaultUserState } from '@store/user';
 import { OnboardModal, SignInModal, ToggleIcon } from '@components/common';
-import { Button } from '@components/atoms';
-import MeIcon from '@assets/me.jpeg';
 import Swal from 'sweetalert2';
 import logo from '../../assets/toteelogo-kr.png';
 import alarm from '../../assets/alarmicon.svg';

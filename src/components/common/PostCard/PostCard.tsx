@@ -10,7 +10,7 @@ import { motion, useAnimation } from 'framer-motion';
 interface Props {
   post: IPostType;
   controls: any;
-  ref? :any;
+  ref?: any;
 }
 
 export function PostCard({ post, controls, ref }: Props) {
