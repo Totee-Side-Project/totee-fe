@@ -1,11 +1,10 @@
 import React from 'react';
-import { Counter, Modal } from '@components/atoms';
 import { Banner, Categories, PostList, Search } from '@components/common';
-import RecommendCard from '@components/common/RecommendCard/RecommendCard';
+import { RecommendCard } from '@components/common';
 
 export function MainPage() {
   return (
-    <div className='mainPage_section_wrapper'>
+    <div className="mainPage_section_wrapper">
       <section className="section">
         <Banner />
         <Search />

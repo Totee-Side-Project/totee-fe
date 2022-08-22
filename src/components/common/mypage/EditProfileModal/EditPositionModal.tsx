@@ -1,5 +1,5 @@
 import { EditModal } from '@components/atoms/Modal/EditModal';
-import { Select } from '../Select/Select';
+import { Select } from '../../detail/Select/Select';
 import React, { useEffect, useState } from 'react';
 import { positionList } from '@utils/position.const';
 

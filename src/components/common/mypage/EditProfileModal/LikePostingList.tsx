@@ -1,32 +1,30 @@
+import { LikeAPI } from '@api/api';
 import React, { useEffect, useState } from 'react';
-import { PostAPI } from '@api/api';
 import './postingList.scss';
-import deleteButton from '../../../assets/my-page-delete.png';
+import deleteButton from '@assets/my-page-delete.png';
 import com from '@assets/sms.svg';
 import view from '@assets/visibility.svg';
 import like from '@assets/favorite.svg';
-import nextArrow from '../../../assets/arrow_next.png';
-import prevArrow from '../../../assets/arrow_prev.png';
-import deleteicon from '../../../assets/delete.png';
+import nextArrow from '@assets/arrow_next.png';
+import prevArrow from '@assets/arrow_prev.png';
+import deleteicon from '@assets/delete.png';
 import { useNavigate } from 'react-router-dom';
 
-function UserPostingList() {
-  const [myPost, setMyPost] = useState<any>();
+function LikePostingList() {
+  const [likePost, setLikePost] = useState<any>();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(4);
 
   const [deleteModalState, setDeleteModalState] = useState(false);
 
-  const getMyPostList = async () => {
-    await PostAPI.myPost().then((res) => setMyPost(res.data.body.data));
+  const getLikeList = async () => {
+    await LikeAPI.LikeList().then((res) => setLikePost(res.data.body.data));
   };
 
-  useEffect(() => {
-    getMyPostList();
-  }, []);
-
+  const pageNumberList: any = [];
   let listItems: any = [];
+
   const indexOfLast = currentPage * postsPerPage;
   const indexOfFirst = indexOfLast - postsPerPage;
 
@@ -37,14 +35,18 @@ function UserPostingList() {
     return listItems;
   };
 
-  myPost && currentPosts(myPost);
+  useEffect(() => {
+    getLikeList();
+  }, []);
+
+  likePost && currentPosts(likePost);
 
   let navigate = useNavigate();
   const clickHandlerURLParameter = (arr: any): any => {
     navigate(`/detail/${arr.postId}`);
   };
 
-  const showMyPost = () => {
+  const showLikePost = () => {
     const maping = listItems.map((arr: any, i: number) => {
       return (
         <div
@@ -99,13 +101,11 @@ function UserPostingList() {
     return maping;
   };
 
-  const pageNumberList = [];
-  if (myPost !== undefined) {
-    for (let i = 1; i <= Math.ceil(myPost.length / postsPerPage); i++) {
+  if (likePost !== undefined) {
+    for (let i = 1; i <= Math.ceil(likePost.length / postsPerPage); i++) {
       pageNumberList.push(i);
     }
   }
-
   const showPageNumber = pageNumberList.map((arr: any, i: number) => {
     return (
       <div
@@ -143,7 +143,7 @@ function UserPostingList() {
   return (
     <div>
       <div className="list_container">
-        <div className="list_title">내가 작성한 스터디 글</div>
+        <div className="list_title">내가 관심목록에 추가한 스터디 글</div>
         {deleteModalState ? (
           <div className="delete_modal">
             <img className="delete_icon" src={deleteicon} alt="" />
@@ -157,7 +157,7 @@ function UserPostingList() {
           onClick={deleteClickHandler}
         />
       </div>
-      <div className="list_wrapper">{myPost && showMyPost()}</div>
+      <div className="list_wrapper">{listItems && showLikePost()}</div>
       {listItems.length !== 0 ? (
         <div className="page_wrapper">
           <div
@@ -174,11 +174,11 @@ function UserPostingList() {
         </div>
       ) : (
         <div className="list_none">
-          <span>아직 작성한 스터디 글이 없습니다</span>
+          <span>아직 관심목록에 추가한 스터디 글이 없습니다</span>
         </div>
       )}
     </div>
   );
 }
 
-export default UserPostingList;
+export default LikePostingList;

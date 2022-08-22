@@ -1,13 +1,12 @@
 import { ScrollTopButton } from '@components/atoms/ScrollTopButton/ScrollTopButton';
-import Footer from '@components/footer';
-import Header from '@components/header';
+import { Footer, Header } from '@components/common';
 
 import './App.css';
 import { MainPage, PostsPage } from '@components/pages';
 import { useEffect, useState } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import LoginOauth from '@components/login/LoginOauth';
+import LoginOauth from '@components/common/login/LoginOauth';
 
 import CreateStudyPage from '@components/pages/CreateStudyPage/CreateStudyPage';
 import DetailPage from '@components/pages/DetailPage/DetailPage';
@@ -16,10 +15,10 @@ import MyPage from '@pages/MyPage/MyPage';
 
 import { useGetUserAPI } from '@hooks/useGetQuery';
 import {
-  loginState,
   UserState,
   defaultLoginState,
   defaultUserState,
+  loginState,
 } from '@store/index';
 
 function App() {

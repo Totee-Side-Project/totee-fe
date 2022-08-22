@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import RecommendSlider from './RecommendSlider';
 
-const RecommendCard = () => {
+export const RecommendCard = () => {
   const [user, setUser] = useRecoilState(UserState);
   const { data } = useGetRecommendList();
 
@@ -28,5 +28,3 @@ const RecommendCard = () => {
     </div>
   ) : null;
 };
-
-export default RecommendCard;

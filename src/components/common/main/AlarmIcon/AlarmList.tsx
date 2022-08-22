@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import classes from './alarmIcon.module.scss';
-import CloseIcon from '../../../assets/xicon.svg';
-import DownIcon from '../../../assets/dropdown_down.svg';
+import CloseIcon from '@assets/xicon.svg';
+import DownIcon from '@assets/dropdown_down.svg';
 import { useGetAlarm } from '@hooks/useGetQuery';
 import AlarmItem from './AlarmItem';
 

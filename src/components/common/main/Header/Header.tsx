@@ -6,11 +6,11 @@ import { UserState, loginState } from '@store/index';
 import { defaultUserState } from '@store/user';
 import { OnboardModal, SignInModal, ToggleIcon } from '@components/common';
 import Swal from 'sweetalert2';
-import logo from '../../assets/toteelogo-kr.png';
-import alarm from '../../assets/alarmicon.svg';
+import logo from '@assets/toteelogo-kr.png';
+import alarm from '@assets/alarmicon.svg';
 import './header.scss';
 
-const Header = () => {
+export const Header = () => {
   const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
   const [isOpenOnboardModal, setIsOpenOnboardModal] = useState(false);
   const [isShowToggle, setIsShowToggle] = useState(false);
@@ -123,5 +123,3 @@ const Header = () => {
     </>
   );
 };
-
-export default Header;

@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { AlarmIconProps } from 'types/icon.types';
 import classes from './alarmIcon.module.scss';
 import { useOutsideAlerter } from '@hooks/useOutsideAlerter';
-import alarm from '../../../assets/alarmicon.svg';
+import alarm from '@assets/alarmicon.svg';
 
 import AlarmList from './AlarmList';
 

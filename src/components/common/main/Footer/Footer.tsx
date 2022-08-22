@@ -1,13 +1,13 @@
 import React from 'react';
 import './footer.scss';
-import logo from '../../assets/ToteeLogo.png';
-import facebook from '../../assets/Facebook.svg';
-import twitter from '../../assets/Twitter.svg';
-import LinkedIn from '../../assets/LinkedIn.svg';
-import instagram from '../../assets/Instagram.svg';
-import youtube from '../../assets/YouTube.svg';
+import logo from '@assets/ToteeLogo.png';
+import facebook from '@assets/Facebook.svg';
+import twitter from '@assets/Twitter.svg';
+import LinkedIn from '@assets/LinkedIn.svg';
+import instagram from '@assets/Instagram.svg';
+import youtube from '@assets/YouTube.svg';
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <>
       <div className="footer">
@@ -88,4 +88,3 @@ const Footer = () => {
     </>
   );
 };
-export default Footer;

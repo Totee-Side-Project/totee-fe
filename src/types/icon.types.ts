@@ -18,7 +18,9 @@ export interface ToggleIconProps extends IIconProps {
   setIsShowToggle: (e: boolean) => void;
 }
 
-export interface AlarmIconProps extends IIconProps {
+export interface AlarmIconProps {
+  imageUrl: string;
+  onClick: () => void;
   isShowAlarm: boolean;
   setIsShowAlarm: (e: boolean) => void;
 }

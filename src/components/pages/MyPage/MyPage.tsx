@@ -1,26 +1,25 @@
-
-import React, { useState, useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import './MyPage.scss';
 
-import { EditProfileModal } from '@components/common/EditProfileModal/EditProfileModal';
+import { EditProfileModal } from '@components/common/mypage/EditProfileModal/EditProfileModal';
 import { positionListKey } from '@utils/position.const';
 
 import useProfileImage from '@hooks/useProfileImage';
-import {useGetUserAPI} from '@hooks/useGetQuery';
-import {User} from 'types/user.types';
+import { useGetUserAPI } from '@hooks/useGetQuery';
+import { User } from 'types/user.types';
 
 function MyPage() {
   // const [user, setUser] = useRecoilState(UserState);
-  const [user, setUser]=useState<User>();
+  const [user, setUser] = useState<User>();
   const [isEditProfileModal, setIsEditProfileModal] = useState(false);
-  const {data} = useGetUserAPI();
+  const { data } = useGetUserAPI();
 
-  useEffect(()=>{
-    if(data && data.status===200){
+  useEffect(() => {
+    if (data && data.status === 200) {
       setUser(data.data.body.data);
     }
-  },[data])
-  
+  }, [data]);
+
   const {
     files: profileFile,
     UploadImage: UploadProfileImage,
@@ -44,11 +43,12 @@ function MyPage() {
     <>
       <div className="myPageWrapper">
         <div className="myProfileWrapper">
-          <div className="myPageBackground"
+          <div
+            className="myPageBackground"
             style={{
               backgroundRepeat: 'no-repeat',
-              backgroundSize : 'cover',
-              backgroundImage : `url(${user?.backgroundImageUrl})`
+              backgroundSize: 'cover',
+              backgroundImage: `url(${user?.backgroundImageUrl})`,
             }}
           >
             <img className="myProfileImg" src={user?.profileImageUrl} />
@@ -63,11 +63,11 @@ function MyPage() {
           <div className="myInfo">{user?.roleType}</div>
           <div className="myInfo">{user?.email}</div>
         </div>
-        <div className="myIntro">
-          {user?.intro}
-        </div>
+        <div className="myIntro">{user?.intro}</div>
         <div className="myPositionWrapper">
-          <div className="myPosition">{positionListKey[user?.position as string]}</div>
+          <div className="myPosition">
+            {positionListKey[user?.position as string]}
+          </div>
         </div>
         <div className="myPostsWrapper">
           <div className="myPosts">작성한 글 보기</div>
@@ -75,28 +75,28 @@ function MyPage() {
         </div>
         <div className="myLine" />
       </div>
-      {user&&
-      <EditProfileModal
-        user={user}
-        isOpen={isEditProfileModal}
-        setIsOpen={setIsEditProfileModal}
-        resetImages={() => {
-          handleInitialProfileImage();
-          handleInitialBackgroundImage();
-          resetProfileFiles();
-          resetBackgroundFiles();
-        }}
-        files={{
-          profileFile: profileFile,
-          backgroundFile: backgroundFile,
-        }}
-        Images={{
-          UploadBackgroundImage: UploadBackgroundImage,
-          UploadProfileImage: UploadProfileImage,
-        }}
-        ImgPlaceholder={ImgPlaceholder}
-      ></EditProfileModal>
-    }
+      {user && (
+        <EditProfileModal
+          user={user}
+          isOpen={isEditProfileModal}
+          setIsOpen={setIsEditProfileModal}
+          resetImages={() => {
+            handleInitialProfileImage();
+            handleInitialBackgroundImage();
+            resetProfileFiles();
+            resetBackgroundFiles();
+          }}
+          files={{
+            profileFile: profileFile,
+            backgroundFile: backgroundFile,
+          }}
+          Images={{
+            UploadBackgroundImage: UploadBackgroundImage,
+            UploadProfileImage: UploadProfileImage,
+          }}
+          ImgPlaceholder={ImgPlaceholder}
+        ></EditProfileModal>
+      )}
     </>
   );
 }
