@@ -3,7 +3,7 @@ import { loginState } from '@store/login';
 import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import classes from './commentInput.module.scss';
-import { Input, Button } from '@components/atoms';
+import { Button, Input } from '@components/atoms';
 import { useAddComment, useAddReply } from '@hooks/useMutateQuery';
 interface ICommentInputPropsType {
   postId?: number;

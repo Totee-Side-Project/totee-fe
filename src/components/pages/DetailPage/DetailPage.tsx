@@ -9,7 +9,7 @@ import IconMessage from '../../../assets/detail_message.png';
 import IconLike from '../../../assets/detail_like.png';
 import likeButton from '../../../assets/detail_button.png';
 import Option from '../../../assets/detail_option.png';
-import { api, LikeAPI, PostAPI } from '@api/api';
+import { LikeAPI, PostAPI, api } from '@api/api';
 import { Comment, CommentInput, SignInModal } from '@components/common';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import classNames from 'classnames';
@@ -23,10 +23,11 @@ function DetailPage() {
   const navigate = useNavigate();
   let { id } = useParams();
 
-  const { data: postData, refetch } = useGetPostByPostId(id as string);
-  const { data:likeData } = useGetLikeofPost(id as string);
+  const { data: postData, refetch } = useGetPostByPostId(
+    parseInt(id as string),
+  );
+  const { data: likeData } = useGetLikeofPost(id as string);
   const LikeUpdateMutation = useUpdateLike(id as string);
-
 
   const [detailData, setDetailData] = useState<any>([]);
   const [Like, setLike] = useState<any>(false);
@@ -37,28 +38,27 @@ function DetailPage() {
   const [login, setLogin] = useRecoilState(loginState);
   const LoginLabel = useRecoilValue(UserSelector);
 
-
   useEffect(() => {
     if (postData && postData.data?.header.code === 200) {
       setDetailData(postData.data.body.data);
     }
   }, [postData, status]);
 
-  useEffect(()=>{
-    if(likeData && likeData.data?.header.code === 200){
+  useEffect(() => {
+    if (likeData && likeData.data?.header.code === 200) {
       setLike(likeData.data.body.data);
     }
-  },[likeData])
+  }, [likeData]);
 
   const handlerBackArrowClick = () => {
     navigate('/');
   };
 
-  const clickLike =  () => {
+  const clickLike = () => {
     let postId = id;
-     LikeUpdateMutation.mutateAsync(postId)
-                       .then((res)=>res)
-                       .catch((err)=>console.log(err))
+    LikeUpdateMutation.mutateAsync(postId)
+      .then((res) => res)
+      .catch((err) => console.log(err));
   };
 
   const handlerLikeButtonClick = () => {
@@ -187,14 +187,22 @@ function DetailPage() {
 
                   {detailData.status == 'Y' ? (
                     <div
-                      className={`summary_category_status_true ${detailData.nickname == LoginLabel.nickname? 'hover': ''}`}
+                      className={`summary_category_status_true ${
+                        detailData.nickname == LoginLabel.nickname
+                          ? 'hover'
+                          : ''
+                      }`}
                       onClick={handlerStatusClick}
                     >
                       <span>모집중</span>
                     </div>
                   ) : (
                     <div
-                      className={`summary_category_status_false  ${detailData.nickname == LoginLabel.nickname? 'hover': ''}`}
+                      className={`summary_category_status_false  ${
+                        detailData.nickname == LoginLabel.nickname
+                          ? 'hover'
+                          : ''
+                      }`}
                       onClick={handlerStatusClick}
                     >
                       <span>모집완료</span>

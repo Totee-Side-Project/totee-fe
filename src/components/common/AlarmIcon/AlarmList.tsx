@@ -12,10 +12,6 @@ interface Props {
 export default function AlarmList({ onClickClose }: Props) {
   const { data, isFetching } = useGetAlarm();
 
-  const showNoAlarmList = () => {
-    return <p className={classes.emptyContent}>아직 새로운 소식이 없어요.</p>;
-  };
-
   return (
     <div className={classes.alarmWrapper}>
       <div className={classes.alarmContainer}>
@@ -27,18 +23,27 @@ export default function AlarmList({ onClickClose }: Props) {
         </div>
         <section className={classes.alarmContent}>
           <ul>
-            {data?.data.body.data.length === 0
-              ? showNoAlarmList()
-              : data?.data.body.data.map((alarm: any) => (
+            {data?.data.body.data.filter((alarm: any) => alarm.isRead === 'N')
+              .length === 0 ? (
+              <p className={classes.emptyContent}>아직 새로운 소식이 없어요.</p>
+            ) : (
+              data?.data.body.data.map((alarm: any) => {
+                if (alarm.isRead === 'Y') return;
+                return (
                   <AlarmItem
                     key={`alarm-${alarm.notificationId}`}
                     alarm={alarm}
+                    onClose={() => onClickClose()}
                   />
-                ))}
+                );
+              })
+            )}
             {/*알림이 많을 경우*/}
-            <p className={classes.scrollBtn}>
-              <img src={DownIcon} className={classes.DownIcon} />
-            </p>
+            {data?.data.body.data.length > 4 && (
+              <p className={classes.scrollBtn}>
+                <img src={DownIcon} className={classes.DownIcon} />
+              </p>
+            )}
           </ul>
         </section>
       </div>

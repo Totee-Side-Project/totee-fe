@@ -1,8 +1,7 @@
-import { QueryCache, QueryClient, useQuery } from 'react-query';
+import { useQuery } from 'react-query';
 import { AlarmAPI, CategoryAPI, LikeAPI, PostAPI, UserAPI } from '@api/api';
 import { useRecoilState } from 'recoil';
 import { UserState } from '@store/user';
-import debounce from 'lodash';
 
 export function useGetUserAPI() {
   const [user, setUser] = useRecoilState(UserState);
@@ -39,7 +38,7 @@ export function useGetPostListAPI() {
   );
 }
 
-export function useGetPostByPostId(postId: string) {
+export function useGetPostByPostId(postId: number) {
   return useQuery(
     ['post', postId],
     () => PostAPI.getPostByPostId(postId).catch((err) => err),

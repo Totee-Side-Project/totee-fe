@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import classes from './comment.module.scss';
 import { handleTime } from '@utils/handleTime';
 import { useRecoilState } from 'recoil';
-import { loginState, UserState } from '@store/index';
-import { Input, Button } from '@components/atoms';
-import { useUpdateComment, useDeleteComment } from '@hooks/useMutateQuery';
+import { UserState, loginState } from '@store/index';
+import { Button, Input } from '@components/atoms';
+import { useDeleteComment, useUpdateComment } from '@hooks/useMutateQuery';
 import { CommentInput } from '../CommentInput/CommentInput';
 import { ICommentPropsType } from 'types/comment.types';
 import { ReplyComment } from './ReplyComment';
@@ -39,11 +39,10 @@ export function Comment({ postId, comment }: ICommentPropsType) {
     })
       .then((res) => {
         if (res.status === 200) {
-          console.log('넨');
           setIsEdit(false);
         }
       })
-      .catch((err) => console.log(err)),
+      .catch((err) => err),
   ];
 
   const onClickDeleteBtn = () => {
@@ -53,9 +52,8 @@ export function Comment({ postId, comment }: ICommentPropsType) {
           setIsEdit(false);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => err);
   };
-  console.log(comment);
 
   return (
     <div className={classes.comment_container}>
@@ -138,6 +136,7 @@ export function Comment({ postId, comment }: ICommentPropsType) {
           {comment.replyList &&
             comment.replyList.map((reply) => (
               <ReplyComment
+                key={`reply-${reply.commentId}`}
                 postId={postId}
                 comment={reply}
                 commentId={comment.commentId}
