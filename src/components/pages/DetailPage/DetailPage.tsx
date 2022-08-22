@@ -9,10 +9,9 @@ import IconMessage from '../../../assets/detail_message.png';
 import IconLike from '../../../assets/detail_like.png';
 import likeButton from '../../../assets/detail_button.png';
 import Option from '../../../assets/detail_option.png';
-import { LikeAPI, PostAPI, api } from '@api/api';
+import { PostAPI } from '@api/api';
 import { Comment, CommentInput, SignInModal } from '@components/common';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import classNames from 'classnames';
 import { UserSelector } from '@store/user';
 import { checkingDetailPeriod } from '@utils/handleSelectValue';
 import Swal from 'sweetalert2';
@@ -58,7 +57,7 @@ function DetailPage() {
     let postId = id;
     LikeUpdateMutation.mutateAsync(postId)
       .then((res) => res)
-      .catch((err) => console.log(err));
+      .catch((err) => err);
   };
 
   const handlerLikeButtonClick = () => {
@@ -117,7 +116,7 @@ function DetailPage() {
     if (detailData.nickname === LoginLabel.nickname) {
       await PostAPI.statusChange(postId as unknown as number)
         .then(async (res) => await refetch())
-        .catch((err) => console.log(err));
+        .catch((err) => err);
     } else {
       return null;
     }

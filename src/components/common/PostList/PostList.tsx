@@ -59,7 +59,11 @@ export function PostList() {
         handleCategory([...posts, ...data.result.content]);
       }
     }
-  }, [searchResult, data, categoryName]);
+  }, [searchResult, data]);
+
+  useEffect(() => {
+    handleCategory(posts);
+  }, [posts, categoryName]);
 
   const handleCategory = (data: IPostType[]) => {
     if (!data || data.length === 0) return;

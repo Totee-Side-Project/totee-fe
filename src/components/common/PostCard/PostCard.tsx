@@ -9,11 +9,10 @@ import { motion, useAnimation } from 'framer-motion';
 
 interface Props {
   post: IPostType;
-  controls: any;
   ref?: any;
 }
 
-export function PostCard({ post, controls, ref }: Props) {
+export function PostCard({ post, ref }: Props) {
   let navigate = useNavigate();
   const clickHandlerURLParameter = () => {
     navigate(`/detail/${post.postId}`);
