@@ -14,7 +14,7 @@ export default function AlarmItem({ alarm, onClose }: Props) {
   const alarmMutation = useUpdateAlarm(`${alarm.notificationId}`);
   const navigate = useNavigate();
   const onClick = async () => {
-    // const result = await alarmMutation.mutateAsync();
+    const result = await alarmMutation.mutateAsync();
 
     navigate(`/detail/${alarm.postId}`);
     onClose();

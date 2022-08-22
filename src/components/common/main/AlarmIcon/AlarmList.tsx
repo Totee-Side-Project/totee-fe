@@ -2,16 +2,15 @@ import { useEffect } from 'react';
 import classes from './alarmIcon.module.scss';
 import CloseIcon from '@assets/xicon.svg';
 import DownIcon from '@assets/dropdown_down.svg';
-import { useGetAlarm } from '@hooks/useGetQuery';
 import AlarmItem from './AlarmItem';
+import { Alarm } from 'types/alarm.types';
 
 interface Props {
+  alarms: Alarm[];
   onClickClose: () => void;
 }
 
-export default function AlarmList({ onClickClose }: Props) {
-  const { data, isFetching } = useGetAlarm();
-
+export default function AlarmList({ alarms, onClickClose }: Props) {
   return (
     <div className={classes.alarmWrapper}>
       <div className={classes.alarmContainer}>
@@ -23,11 +22,11 @@ export default function AlarmList({ onClickClose }: Props) {
         </div>
         <section className={classes.alarmContent}>
           <ul>
-            {data?.data.body.data.filter((alarm: any) => alarm.isRead === 'N')
-              .length === 0 ? (
+            {alarms?.filter((alarm: any) => alarm.isRead === 'N').length ===
+            0 ? (
               <p className={classes.emptyContent}>아직 새로운 소식이 없어요.</p>
             ) : (
-              data?.data.body.data.map((alarm: any) => {
+              alarms?.map((alarm: any) => {
                 if (alarm.isRead === 'Y') return;
                 return (
                   <AlarmItem
@@ -39,7 +38,7 @@ export default function AlarmList({ onClickClose }: Props) {
               })
             )}
             {/*알림이 많을 경우*/}
-            {data?.data.body.data.length > 4 && (
+            {alarms?.length > 4 && (
               <p className={classes.scrollBtn}>
                 <img src={DownIcon} className={classes.DownIcon} />
               </p>
