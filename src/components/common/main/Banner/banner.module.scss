@@ -1,12 +1,8 @@
 .banner_wrapper{
-    padding: 30px 0px;
     position: relative;
     color: #1f221f;
-    background-color: #E3F1DA;
     width:100%;
-    height:296px;
     top:-30px;
-    text-align: center;
     @font-face {
       font-family: 'yg-jalnan';
       src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff')
@@ -15,9 +11,12 @@
       font-style: normal;
     }
     font-family: 'yg-jalnan';
+    .banner_description{
+      position: absolute;
+      left: 150px;
+      bottom: 150px;
+    }
     .circle{
-        height: 500px;
-        border-radius: 100%;
         overflow: hidden;
         background-color: #E3F1DA;  
         display: flex;
@@ -25,26 +24,28 @@
     }
     .title{
         width:100%;
-        position: absolute;
-        top: 60px;
         color: #454545;
-        line-height: 2;
-        font-size:40px;
+        line-height: 1.5;
+        font-size: 40px;
         font-weight: 500;
         .highlight{
           font-size: 50px;
           font-weight: 700;
+          color: #568A35;
         }
     }
-    .img{
-      height: 450px;
-      margin: 65px auto 0px auto;
+    .subtitle{
+      margin-top:16px;
+      color: #454545;
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 1.5;
 
-      
     }
-}
-
-.banner_footer{
-  width:100%;
-  height:260px;
+    .img{
+      width:100%;
+      height:560px;
+      object-fit:cover
+    }
 }
