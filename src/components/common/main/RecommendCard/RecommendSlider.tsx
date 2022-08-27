@@ -8,6 +8,8 @@ import styled from '@emotion/styled';
 import './recommend.scss';
 import { useMediaQuery } from 'react-responsive';
 import { useNavigate } from 'react-router-dom';
+import RecommendPostCard from './RecommendPostCard';
+import RecommendMentorCard from './RecommendMentorCard';
 
 function RecommendSlider(props: any) {
   const isPc = useMediaQuery({ minWidth: 1163 });
@@ -65,34 +67,30 @@ function RecommendSlider(props: any) {
       <div className="content_wrapper">
         <>
           <StyledSlider {...settings}>
-            {props.recommendData.map((arr: any) => {
+            {/* {props.recommendData.map((item: any) => {
               return (
-                <div
-                  className="card_container"
-                  onClick={clickCard}
-                  id={arr.postId}
-                  style={{ width: 400 + 'px' }}
-                >
-                  <div className="card_image_wrapper"></div>
-                  <div className="card_title">{arr.title}</div>
-                  <div
-                    className="card_content"
-                    dangerouslySetInnerHTML={{ __html: arr.content }}
-                  ></div>
-                  <div className="card_category">
-                    <div className="card_category_content">
-                      {periodChange(arr)}
-                    </div>
-                    <div className="card_category_content">
-                      {arr.categoryName}
-                    </div>
-                    <div className="card_category_content">
-                      {arr.status ? '모집중' : '모집완료'}
-                    </div>
-                  </div>
-                </div>
+                <>
+                <RecommendPostCard onClickCard={clickCard} item={item}/>
+                <RecommendPostCard onClickCard={clickCard} item={item}/>
+
+                </>
               );
-            })}
+            })} */}
+            {/* {props.recommendData.map((item: any) => {
+              return (
+                <>
+                <RecommendMentorCard key={`recommend-mento-card-${item.id}`}/>
+                <RecommendMentorCard key={`recommend-mento-card-1`}/>
+                </>
+              );
+            })} */}
+            <RecommendMentorCard key={`recommend-mento-card-1`}/>
+            <RecommendMentorCard key={`recommend-mento-card-2`}/>
+            <RecommendMentorCard key={`recommend-mento-card-3`}/>
+            <RecommendMentorCard key={`recommend-mento-card-4`}/>
+
+
+
             {/* {props.recommendData.length < 4 ? (
               <div
                 className="card_container"
@@ -102,7 +100,15 @@ function RecommendSlider(props: any) {
                 <div className="card_image_wrapper"></div>
                 <div className="card_title"></div>
               </div>
-            ) : null} */}
+            ) : null}
+            <div
+                className="card_container"
+                onClick={clickCard}
+                style={{ width: 400 }}
+              >
+                <div className="card_image_wrapper"></div>
+                <div className="card_title"></div>
+              </div> */}
           </StyledSlider>
         </>
       </div>
