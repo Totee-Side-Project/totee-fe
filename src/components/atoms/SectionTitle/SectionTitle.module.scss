@@ -1,0 +1,41 @@
+.title_wrapper {
+    margin: 97px 0;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 27px;
+    letter-spacing: -0.05em;
+    color: #6a6a6a;
+    display: flex;
+    align-items:flex-end;
+    justify-content: space-between;
+
+    .title_main {
+        font-weight: 700;
+        font-size: 48px;
+        line-height: 65px;
+        letter-spacing: -0.05em;
+        color: #333333;
+    }
+    .title_sub{
+        width:100%;
+        text-align: left;
+    }
+    .title_description{
+        width: 450px;
+        display: flex;
+        flex-wrap: wrap;
+        text-align: left;
+    }
+
+    .total_button_wrapper{
+        display: flex;
+        align-items: center;
+        line-height: 65px;
+        column-gap: 5px;
+        &:hover{
+          cursor: pointer;
+        }
+      }
+      
+}
+

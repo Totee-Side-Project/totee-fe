@@ -1,8 +1,7 @@
 .mainPage_section_wrapper{
-    scroll-snap-type: y mandatory;
-    overflow-y:scroll;
-
-    .section{
-        scroll-snap-align: start;
+  
+    .body_section{
+        width:1180px;
+        margin : 0 auto;
     }
 }

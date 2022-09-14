@@ -6,12 +6,13 @@ import { useQueryClient } from 'react-query';
 
 import { searchState } from '@store/search';
 import useInfiniteQuerywithScroll from '@hooks/useInfiniteQuerywithScroll';
-import { ReactComponent as EllipseIcon } from '@assets/ellipse-icon.svg';
+import { SectionTitle } from '@components/atoms';
 import { PostAPI } from '@api/api';
 
 import { PostCard } from '../PostCard/PostCard';
 import { IPostType } from 'types/post.types';
 import classes from './postList.module.scss';
+
 
 const container = {
   hidden: { opacity: 0 },
@@ -129,7 +130,7 @@ export function PostList() {
       )}
       <div className={classes.postListContainer}>
         <div className={classes.postListContainerHeader}>
-          {!isShowTotal ? (
+          {/* {!isShowTotal ? (
             <span
               onClick={() => {
                 setSearchParams({
@@ -167,7 +168,8 @@ export function PostList() {
                 ),
               )}
             </ul>
-          )}
+          )} */}
+          <SectionTitle title={'커리어 성장을 위한 스터디'} sub={"Level Up Study"} description={"커리어 성장을 위한 스터디를 찾으시나요? 토티에는 이런저런 여러분야의 스터디가 모여있어요."}/>
         </div>
         <motion.ul initial="hidden" animate="show" variants={container}>
           <div className={classes.postWrapper}>

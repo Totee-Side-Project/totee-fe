@@ -67,6 +67,7 @@ const StyledSlider = styled(Slider)`
   width: none;
   margin: 100px;
   position: relative;
+  
   /* .slick-slide {
     width: 400px;
     cursor: pointer;
