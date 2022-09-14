@@ -1,5 +1,5 @@
 import React from 'react'
-import './recommend.scss';
+import './recommendMentorCard.scss';
 
 export default function RecommendMentorCard() {
   return (
@@ -18,13 +18,14 @@ export default function RecommendMentorCard() {
             </div>
             </div>
         </div>
-        <hr className="mento_card_line"></hr>
+        <div className="mento_card_line"></div>
         <div className="mento_card_body">
         미국 뉴욕의 테크 회사에서 프로덕트 디자이너로 활동 중인 에릭입니다. UX, UI디자인, 유저 리서치...
         </div>
         <div className="mento_card_footer">
-            <div className="mento_card_profile_image">이미지</div>
+            <div className="mento_card_profile_image"></div>
             <div className="mento_card_nickname">닉네임</div>
+            <div className='mento_v_line'></div>
             <div className="mento_card_time">일주일 1회</div>
         </div>
 

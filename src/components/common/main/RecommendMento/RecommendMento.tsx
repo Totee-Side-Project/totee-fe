@@ -2,9 +2,12 @@ import { useGetRecommendList } from '@hooks/useGetQuery';
 import { UserState } from '@store/user';
 import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import RecommendSlider from './RecommendSlider';
+import RecommendSlider from './RecommendMentoSlider';
 
-export const RecommendCard = () => {
+interface Props{
+  type: "recommend" | "best"
+}
+export const RecommendMento = ({type="recommend"}:Props) => {
   const [user, setUser] = useRecoilState(UserState);
   const { data } = useGetRecommendList();
 
@@ -16,14 +19,29 @@ export const RecommendCard = () => {
     }
   }, [data]);
 
+  const recommendInfo = {
+    desc: "Level Up project",
+    title:"커리어 성장을 위한 프로젝트" 
+  }
+
+  const bestInfo ={
+    desc : "The best Mentor in Totee",
+    title: "이달의 베스트 멘토"
+  }
+
+  const Info ={
+    "recommend": recommendInfo,
+    "best" :bestInfo,
+  }
+
   return recommendData ? (
     <div className="recommend_container">
       <div className="title_wrapper">
-        <span className="title_sub">Level Up project</span>
-        <h2 className="title_main">커리어 성장을 위한 프로젝트</h2>
+        <span className="title_sub">{Info[type]["desc"]}</span>
+        <h2 className="title_main">{Info[type]["title"]}</h2>
       </div>
       <div className="recommend_content">
-        <RecommendSlider recommendData={recommendData} />
+        <RecommendSlider recommendData={recommendData} type={type}/>
       </div>
     </div>
   ) : null;

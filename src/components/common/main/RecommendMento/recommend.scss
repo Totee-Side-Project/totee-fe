@@ -87,7 +87,9 @@
   border: 1px solid #568a35;
   border-radius: 50%;
 }
-
+.slick-list{
+  padding: 10px 60px !important;
+}
 // .slick-slide div:not(.card_image_wrapper, .card_category_content) {
 //   cursor: pointer;
 //   margin-left: 30px;
@@ -123,53 +125,3 @@
 //   column-gap: 30px;
 // }
 
-
-.mento_card_container{
-  // margin:0 !important;
-  margin-left:30px;
-  width: 240px;
-  height: 265px;
-  background: #FFFFFF;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-  border-radius: 10px;
-  padding:18px;
-
-  .mento_card_header{
-    .mento_card_title{
-      font-weight: 400;
-      font-size: 16px;
-      color: #1B1C1D;
-      margin-bottom: 13px;
-    }
-    .mento_card_description_wrapper{
-      display: grid;
-      row-gap:8px;
-    }
-    .mento_card_description{
-      display: flex;
-      column-gap: 20px;
-      font-weight: 400;
-      font-size: 14px;
-      color: #747474;
-    }
-  }
-  .mento_card_line{
-    margin: 17px 0px;
-    color: #747474;
-  }
-  .mento_card_body{
-
-  }
-
-  .mento_card_footer{
-    .mento_card_profile_image{
-
-    }
-    .mento_card_nickname{
-
-    }
-    .mento_card_time{
-
-    }
-  }
-}
