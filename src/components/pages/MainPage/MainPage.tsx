@@ -1,6 +1,6 @@
 import React from 'react';
 import { Banner, Categories, PostList, Search } from '@components/common';
-import { RecommendMento } from '@components/common';
+import { RecommendMento, MentorReviewSection } from '@components/common';
 
 export function MainPage() {
   return (
@@ -16,6 +16,7 @@ export function MainPage() {
       <section className="section">
         <RecommendMento type="recommend"/>
       </section>
+      <MentorReviewSection/>
       <section className="section">
         <RecommendMento type="best"/>
       </section>

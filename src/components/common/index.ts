@@ -15,3 +15,5 @@ export * from './detail/Comment/Comment';
 export * from './detail/CommentInput/CommentInput';
 export * from './detail/Editor/Editor';
 export * from './detail/Select/Select';
+
+export * from './section/MentorReviewSection/MentorReviewSection';

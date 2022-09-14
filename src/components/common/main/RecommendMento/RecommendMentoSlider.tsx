@@ -8,9 +8,8 @@ import styled from '@emotion/styled';
 import './recommend.scss';
 import { useMediaQuery } from 'react-responsive';
 import { useNavigate } from 'react-router-dom';
-import RecommendPostCard from './RecommendPostCard';
-import RecommendMentorCard from './RecommentMentorCard/RecommendMentorCard';
-import BestMentorCard from './BestMentorCard/BestMentorCard';
+import RecommendMentorCard from '../../card/RecommentMentorCard/RecommendMentorCard';
+import BestMentorCard from '../../card/BestMentorCard/BestMentorCard';
 
 function RecommendMentoSlider(props: any) {
   const isPc = useMediaQuery({ minWidth: 1163 });
@@ -48,7 +47,6 @@ function RecommendMentoSlider(props: any) {
   const Mentorcard  = ()=> props.type==="recommend"? <RecommendMentorCard/> : <BestMentorCard/>
 
   return (
-    props.recommendData && (
       <div className="content_wrapper">
         <>
           <StyledSlider {...settings}>
@@ -59,8 +57,7 @@ function RecommendMentoSlider(props: any) {
           </StyledSlider>
         </>
       </div>
-    )
-  );
+  )
 }
 
 export default RecommendMentoSlider;

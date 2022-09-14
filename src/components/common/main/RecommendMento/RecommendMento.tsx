@@ -34,7 +34,7 @@ export const RecommendMento = ({type="recommend"}:Props) => {
     "best" :bestInfo,
   }
 
-  return recommendData ? (
+  return(
     <div className="recommend_container">
       <div className="title_wrapper">
         <span className="title_sub">{Info[type]["desc"]}</span>
@@ -44,5 +44,5 @@ export const RecommendMento = ({type="recommend"}:Props) => {
         <RecommendSlider recommendData={recommendData} type={type}/>
       </div>
     </div>
-  ) : null;
+  );
 };
