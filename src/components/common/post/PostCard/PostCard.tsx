@@ -1,6 +1,6 @@
-import com from '@assets/sms.svg';
-import view from '@assets/visibility.svg';
-import like from '@assets/favorite.svg';
+import like from '@assets/heart.svg';
+import com from '@assets/message-square.svg';
+import view from '@assets/eye.svg';
 import { IPostType } from 'types/post.types';
 import classes from './postCard.module.scss';
 import { useNavigate } from 'react-router-dom';
