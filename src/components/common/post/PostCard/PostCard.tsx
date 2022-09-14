@@ -37,6 +37,10 @@ export function PostCard({ post, ref }: Props) {
             <div className={classes.postImgWrapper}>
               <div className={classes.postImgBox}>
                 <img className={classes.img} src={post?.imageUrl} />
+                <div className={classes.postInfoName}>
+                  {post?.position}
+                  {post?.nickname}
+                </div>
               </div>
               <div className={classes.postStatusWrapper}>
                 {post?.status === 'Y' ? (
@@ -55,20 +59,17 @@ export function PostCard({ post, ref }: Props) {
                 ></div>
               </div>
               <div className={classes.postInfoBox}>
-                <div className={classes.postInfoName}>
-                  {post?.position}
-                  {post?.nickname}
-                </div>
+                <div className={classes.postInfoLine} />
                 <div className={classes.postIconBox}>
+                  <div className={classes.postInfo}>
+                    <img src={like} /> {post?.likeNum}
+                  </div>
                   <div className={classes.postInfo}>
                     <img src={com} />
                     {post?.commentNum}
                   </div>
                   <div className={classes.postInfo}>
                     <img src={view} /> {post?.view}
-                  </div>
-                  <div className={classes.postInfo}>
-                    <img src={like} /> {post?.likeNum}
                   </div>
                 </div>
               </div>
