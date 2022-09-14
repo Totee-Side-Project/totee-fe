@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import classes from './alarmIcon.module.scss';
 import CloseIcon from '@assets/xicon.svg';
-import DownIcon from '@assets/dropdown_down.svg';
+// import DownIcon from '@assets/dropdown_down.svg';
 import AlarmItem from './AlarmItem';
 import { Alarm } from 'types/alarm.types';
 
@@ -40,7 +40,7 @@ export default function AlarmList({ alarms, onClickClose }: Props) {
             {/*알림이 많을 경우*/}
             {alarms?.length > 4 && (
               <p className={classes.scrollBtn}>
-                <img src={DownIcon} className={classes.DownIcon} />
+                {/* <img src={DownIcon} className={classes.DownIcon} /> */}
               </p>
             )}
           </ul>

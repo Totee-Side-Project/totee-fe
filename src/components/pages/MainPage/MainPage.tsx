@@ -1,7 +1,7 @@
 import React from 'react';
 import { Banner, Categories, PostList, Search } from '@components/common';
-import { RecommendCard } from '@components/common';
 import BottomBanner from '@components/common/main/Banner/BottomBanner';
+import { RecommendMento, MentorReviewSection } from '@components/common';
 
 export function MainPage() {
   return (
@@ -15,7 +15,11 @@ export function MainPage() {
         <PostList />
       </section>
       <section className="section">
-        <RecommendCard />
+        <RecommendMento type="recommend"/>
+      </section>
+      <MentorReviewSection/>
+      <section className="section">
+        <RecommendMento type="best"/>
       </section>
       <section>
         <BottomBanner />

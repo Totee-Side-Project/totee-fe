@@ -11,6 +11,10 @@ import alarm from '@assets/alarmicon.svg';
 import './header.scss';
 
 export const Header = () => {
+  const [listening, setListening] = useState(false);
+  const [meventSource, msetEventSource] = useState<any>(undefined);
+
+
   const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
   const [isOpenOnboardModal, setIsOpenOnboardModal] = useState(false);
   const [isShowToggle, setIsShowToggle] = useState(false);
@@ -53,6 +57,40 @@ export const Header = () => {
       setIsOpenOnboardModal(true);
     }
   }, [login, user]);
+
+  useEffect(()=>{
+    let eventSource:any;
+    console.log(user);
+    // if(!listening && user && login.state){
+    //   eventSource = new EventSource(`https://api.totee.link/subscribe/${user.id}`);
+    //   msetEventSource(eventSource);
+
+    //   eventSource.onopen = (event:any) => {
+    //     console.log("connection opened", event);
+    //   };
+
+    //   eventSource.onmessage = (event:any) => {
+    //     console.log("result", event.data);
+    //   };
+
+    //   eventSource.onerror = (event:any) => {
+    //     console.log(event.target.readyState);
+    //     eventSource.close();
+    //   };
+
+    //   setListening(true);
+    // }
+
+    return () => {
+      if(listening && eventSource){
+        eventSource.close();
+        console.log("eventsource closed");
+      }
+    };
+
+       //구독
+
+  },[user, login])
 
   return (
     <>
