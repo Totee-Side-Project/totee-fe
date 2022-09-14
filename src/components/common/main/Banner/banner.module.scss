@@ -11,10 +11,22 @@
       font-style: normal;
     }
     font-family: 'yg-jalnan';
-    .banner_description{
+    .banner_inner_wrapper{
+      width:1180px;
+      margin: 0 auto; 
       position: absolute;
-      left: 150px;
-      bottom: 150px;
+      top: 50%;  /* position the top  edge of the element at the middle of the parent */
+      left: 50%; /* position the left edge of the element at the middle of the parent */
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+    }
+    .banner_item{
+      width: 100%;
+    }
+    .banner_icon{
+      width: 700px;
+      margin: 0 auto;
     }
     .circle{
         overflow: hidden;
@@ -25,18 +37,17 @@
     .title{
         width:100%;
         color: #454545;
-        line-height: 1.5;
+        line-height: 61px;
         font-size: 40px;
-        font-weight: 500;
+        font-weight: 700;
         .highlight{
           font-size: 50px;
           font-weight: 700;
           color: #568A35;
         }
     }
-    .subtitle{
-      
-      margin-top:16px;
+    .subtitle{ 
+      margin-top: 25px;
       color: #454545;
       text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       font-weight: 400;
@@ -46,7 +57,7 @@
     }
     .img{
       width:100%;
-      height:560px;
-      object-fit:cover
+      max-height:560px;
+      object-fit:cover;
     }
 }
