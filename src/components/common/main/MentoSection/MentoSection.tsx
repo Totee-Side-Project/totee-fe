@@ -2,13 +2,16 @@ import { useGetRecommendList } from '@hooks/useGetQuery';
 import { UserState } from '@store/user';
 import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import RecommendSlider from './RecommendMentoSlider';
-import {ReactComponent as ChevronIcon} from '@assets/chevron-down.svg';
+import {SectionSlider} from '@components/common';
 import {SectionTitle} from '@components/atoms';
+import RecommendMentorCard from '../../card/RecommentMentorCard/RecommendMentorCard';
+import BestMentorCard from '../../card/BestMentorCard/BestMentorCard';
+import './recommend.scss';
+
 interface Props{
   type: "recommend" | "best"
 }
-export const RecommendMento = ({type="recommend"}:Props) => {
+export const MentoSection = ({type="recommend"}:Props) => {
   const [user, setUser] = useRecoilState(UserState);
   const { data } = useGetRecommendList();
 
@@ -37,11 +40,19 @@ export const RecommendMento = ({type="recommend"}:Props) => {
     "best" :bestInfo,
   }
 
+    const Mentorcard  = ()=> type==="recommend"? <RecommendMentorCard/> : <BestMentorCard/>
+
+
   return(
     <div className="recommend_container">
       <SectionTitle title={Info[type]["title"]} sub={Info[type]["sub"]} description={Info[type]["desc"]}/>
-      <div className="recommend_content">
-        <RecommendSlider recommendData={recommendData} type={type}/>
+      <div>
+        <SectionSlider>
+            <Mentorcard key={`mentor-card-1`}/>
+            <Mentorcard key={`mentor-card-2`}/> 
+            <Mentorcard key={`mentor-card-3`}/>
+            <Mentorcard key={`mentor-card-4`}/>
+        </SectionSlider>
       </div>
     </div>
   );

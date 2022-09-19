@@ -7,6 +7,7 @@ import { useQueryClient } from 'react-query';
 import { searchState } from '@store/search';
 import useInfiniteQuerywithScroll from '@hooks/useInfiniteQuerywithScroll';
 import { SectionTitle } from '@components/atoms';
+import { SectionSlider } from '@components/common/main/SectionSlider/SectionSlider';
 import { PostAPI } from '@api/api';
 
 import { PostCard } from '../PostCard/PostCard';
@@ -152,7 +153,8 @@ export function PostList() {
             </ul>
         </div>
         <motion.ul initial="hidden" animate="show" variants={container}>
-          <div className={classes.postWrapper}>
+          <div>
+            <SectionSlider>
             {postsFiltered &&
               postsFiltered.length > 0 &&
               postsFiltered
@@ -160,11 +162,7 @@ export function PostList() {
                 .map((post: IPostType, idx: number) => (
                   <PostCard key={`postCard-${idx}`} post={post} />
                 ))}
-            {/* <div className={classes.upIconWrapper}>
-          <div className={classes.upIcon}>
-            <div><UpIcon/></div>
-          </div>
-          </div> */}
+          </SectionSlider>
           </div>
           <ObservationComponent />
         </motion.ul>

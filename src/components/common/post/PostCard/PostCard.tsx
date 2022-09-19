@@ -31,6 +31,7 @@ export function PostCard({ post, ref }: Props) {
   };
   return (
     <>
+    <div>
       <motion.li variants={item} initial="hidden" ref={ref}>
         <div className={classes.postCard} onClick={clickHandlerURLParameter}>
           <div className={classes.postWrapper}>
@@ -77,6 +78,7 @@ export function PostCard({ post, ref }: Props) {
           </div>
         </div>
       </motion.li>
+      </div>
     </>
   );
 }
