@@ -96,9 +96,7 @@ export const Header = () => {
     <>
       <header className="header">
         <div className="content">
-          <Link to="/">
-            <img src={logo} alt="토티 로고" />
-          </Link>
+            <img src={logo} alt="토티 로고" onClick={()=>window.location.href= "/"}/>
           <div className="buttonWrapper">
             <ul className="profile_wrapper">
               <li>

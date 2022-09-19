@@ -32,8 +32,8 @@ export function Search() {
       });
     } else {
       setSearchResult({
-        data: null,
-        keyword: '',
+        data: [],
+        keyword: null,
       });
     }
   };

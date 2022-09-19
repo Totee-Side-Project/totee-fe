@@ -51,9 +51,10 @@ export function PostList() {
   }, []);
 
   useEffect(() => {
-    if (searchResult && searchResult.data && searchResult.data.length > 0) {
+    if(searchResult.keyword === null) return; 
+    if (searchResult && searchResult.data) {
       setPosts([...searchResult.data]);
-      handleCategory([...searchResult.data]);
+      handleCategory([...searchResult.data]); 
     } else {
       if (data?.result?.content) {
         setPosts([...posts, ...data.result.content]);
@@ -67,7 +68,7 @@ export function PostList() {
   }, [posts, categoryName]);
 
   const handleCategory = (data: IPostType[]) => {
-    if (!data || data.length === 0) return;
+    if (!data) return;
     if (categoryName === '전체') {
       setPostsFiltered(sortingData(data));
     } else {
@@ -122,7 +123,7 @@ export function PostList() {
 
   return (
     <>
-      {searchResult && searchResult.data && searchResult.data.length > 0 && (
+      {searchResult && searchResult.data && searchResult.keyword !== null&& (
         <div className={classes.searchResult}>
           &quot; {searchResult.keyword} &quot; 에 대한 검색 결과{' '}
           <span>{searchResult.data.length}</span> 개
