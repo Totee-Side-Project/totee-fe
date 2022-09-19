@@ -7,6 +7,7 @@ import { useQueryClient } from 'react-query';
 import { searchState } from '@store/search';
 import useInfiniteQuerywithScroll from '@hooks/useInfiniteQuerywithScroll';
 import { SectionTitle } from '@components/atoms';
+import { SectionSlider } from '@components/common/main/SectionSlider/SectionSlider';
 import { PostAPI } from '@api/api';
 
 import { PostCard } from '../PostCard/PostCard';
@@ -51,13 +52,13 @@ export function PostList() {
   }, []);
 
   useEffect(() => {
-    if (searchResult && searchResult.data && searchResult.data.length > 0) {
+    if (searchResult && searchResult.data) {
       setPosts([...searchResult.data]);
-      handleCategory([...searchResult.data]);
+      handleCategory([...searchResult.data]); 
     } else {
       if (data?.result?.content) {
-        setPosts([...posts, ...data.result.content]);
-        handleCategory([...posts, ...data.result.content]);
+        setPosts([...data.result.content]);
+        handleCategory([...data.result.content]);
       }
     }
   }, [searchResult, data]);
@@ -67,7 +68,7 @@ export function PostList() {
   }, [posts, categoryName]);
 
   const handleCategory = (data: IPostType[]) => {
-    if (!data || data.length === 0) return;
+    if (!data) return;
     if (categoryName === '전체') {
       setPostsFiltered(sortingData(data));
     } else {
@@ -122,27 +123,10 @@ export function PostList() {
 
   return (
     <>
-      {searchResult && searchResult.data && searchResult.data.length > 0 && (
-        <div className={classes.searchResult}>
-          &quot; {searchResult.keyword} &quot; 에 대한 검색 결과{' '}
-          <span>{searchResult.data.length}</span> 개
-        </div>
-      )}
       <div className={classes.postListContainer}>
         <div className={classes.postListContainerHeader}>
-          {/* {!isShowTotal ? (
-            <span
-              onClick={() => {
-                setSearchParams({
-                  ...Object.fromEntries(searchParams),
-                  ['isShowTotal']: '전체보기',
-                });
-              }}
-            >
-              전체보기 &gt;
-            </span>
-          ) : (
-            <ul className={classes.filterList}>
+          <SectionTitle title={'커리어 성장을 위한 스터디'} sub={"Level Up Study"} description={"커리어 성장을 위한 스터디를 찾으시나요? 토티에는 이런저런 여러분야의 스터디가 모여있어요."}/>
+          <ul className={classes.filterList}>
               {['최신순', '댓글많은순', '좋아요순'].map(
                 (item: string, idx: number) => (
                   <li
@@ -152,27 +136,25 @@ export function PostList() {
                         ['filter']: item,
                       })
                     }
+                    className={
+                      selectedFilter === item ? classes.selected : ''
+                    }
                     key={`filter-${idx}`}
                   >
-                    <EllipseIcon
-                      fill={selectedFilter === item ? '#568A35' : '#A0AEC0'}
-                    />
-                    <span
-                      className={
-                        selectedFilter === item ? classes.selected : ''
-                      }
-                    >
-                      {item}
+                    <span className={classes.tag_wrapper}>
+                      <div className={classes.outer_circle}>
+                        <div className={classes.inner_circle}></div>
+                      </div>
+                      #{item}
                     </span>
                   </li>
                 ),
               )}
             </ul>
-          )} */}
-          <SectionTitle title={'커리어 성장을 위한 스터디'} sub={"Level Up Study"} description={"커리어 성장을 위한 스터디를 찾으시나요? 토티에는 이런저런 여러분야의 스터디가 모여있어요."}/>
         </div>
         <motion.ul initial="hidden" animate="show" variants={container}>
-          <div className={classes.postWrapper}>
+          <div>
+            <SectionSlider>
             {postsFiltered &&
               postsFiltered.length > 0 &&
               postsFiltered
@@ -180,11 +162,7 @@ export function PostList() {
                 .map((post: IPostType, idx: number) => (
                   <PostCard key={`postCard-${idx}`} post={post} />
                 ))}
-            {/* <div className={classes.upIconWrapper}>
-          <div className={classes.upIcon}>
-            <div><UpIcon/></div>
-          </div>
-          </div> */}
+          </SectionSlider>
           </div>
           <ObservationComponent />
         </motion.ul>

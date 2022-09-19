@@ -40,5 +40,5 @@ export interface IPostDetailType{
 
 export interface ISearchType{
   data : IPostType[] | null;
-  keyword: string;
+  keyword: string| null;
 }

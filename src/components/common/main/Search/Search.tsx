@@ -24,18 +24,20 @@ export function Search() {
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setIsOpenPreview(false);
     if (inputValue.length > 0) {
-      setIsOpenPreview(false);
       setSearchResult({
         data: data?.data?.body.data.content,
         keyword: inputValue as string,
-      });
-    } else {
-      setSearchResult({
-        data: null,
-        keyword: '',
-      });
+      }); 
     }
+    else{
+       setSearchResult({
+        data: null,
+        keyword: null,
+      });  
+    }
+
   };
 
   useEffect(() => {
@@ -109,6 +111,14 @@ export function Search() {
               </ul>
             </div>
           )}
+        </div>
+      )}
+      {searchResult && searchResult.data && searchResult.keyword !== null&& (
+        <div className={classes.searchResult}>
+          <div>
+          &quot; {searchResult.keyword} &quot; 에 대한 검색 결과{' '}
+          <span>{searchResult.data.length}</span> 개
+          </div>
         </div>
       )}
     </section>

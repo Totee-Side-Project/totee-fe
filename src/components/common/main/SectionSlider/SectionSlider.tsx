@@ -1,17 +1,16 @@
-import React, { useEffect } from 'react';
 import Slider from 'react-slick';
 import next from '@assets/nextarrow.png';
 import prev from '@assets/prevarrow.png';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import styled from '@emotion/styled';
-import './recommend.scss';
+import './sectionSlider.scss';
 import { useMediaQuery } from 'react-responsive';
 import { useNavigate } from 'react-router-dom';
-import RecommendMentorCard from '../../card/RecommentMentorCard/RecommendMentorCard';
-import BestMentorCard from '../../card/BestMentorCard/BestMentorCard';
-
-function RecommendMentoSlider(props: any) {
+interface Props{
+  children: JSX.Element | JSX.Element[] | boolean;
+}
+export function SectionSlider({children}:Props) {
   const isPc = useMediaQuery({ minWidth: 1163 });
   const isTablet = useMediaQuery({ maxWidth: 1163, minWidth: 750 });
   const isPhone = useMediaQuery({ maxWidth: 750 });
@@ -19,7 +18,8 @@ function RecommendMentoSlider(props: any) {
   let navigate = useNavigate();
 
   const settings = {
-    className: 'center',
+    // className: 'center',
+    // dots: true,
     centerMode: true,
     infinite: true,
     centerPadding: '60px',
@@ -29,7 +29,7 @@ function RecommendMentoSlider(props: any) {
     prevArrow: (
       <div>
         <div
-          className="ArrowWrapper"
+          className="ArrowWrapper left"
           style={{ backgroundImage: `url("${prev}")` }}
         ></div>
       </div>
@@ -37,35 +37,26 @@ function RecommendMentoSlider(props: any) {
     nextArrow: (
       <div>
         <div
-          className="ArrowWrapper"
+          className="ArrowWrapper right"
           style={{ backgroundImage: `url("${next}")` }}
         ></div>
       </div>
     ),
   };
   
-  const Mentorcard  = ()=> props.type==="recommend"? <RecommendMentorCard/> : <BestMentorCard/>
 
   return (
-      <div className="content_wrapper">
-        <>
+      <div className="section_slider_container">
           <StyledSlider {...settings}>
-            <Mentorcard key={`recommend-mento-card-1`}/>
-            <Mentorcard key={`recommend-mento-card-2`}/>
-            <Mentorcard key={`recommend-mento-card-3`}/>
-            <Mentorcard key={`recommend-mento-card-4`}/>
+            {children}
           </StyledSlider>
-        </>
       </div>
   )
 }
 
-export default RecommendMentoSlider;
-
 const StyledSlider = styled(Slider)`
-  height: 260px;
+  height: 300px;
   width: none;
-  margin: 100px;
   position: relative;
   
   /* .slick-slide {
