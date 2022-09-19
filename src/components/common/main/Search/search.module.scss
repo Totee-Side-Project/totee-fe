@@ -1,7 +1,8 @@
 .search_wrapper{
     display: block;
-    display: flex;
-    justify-content: center;
+    width: fit-content;
+    margin: 0 auto;
+    position: relative;
 }
 
 .input_wrapper{
@@ -38,5 +39,19 @@
                 background-blend-mode: multiply;
             }
         }
+    }
+}
+
+.searchResult{
+    position: absolute;
+    top: 70px;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
+    font-weight:400;
+    margin-top: 35px;
+    span{
+        font-weight: 700;
     }
 }

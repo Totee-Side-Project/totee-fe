@@ -51,14 +51,13 @@ export function PostList() {
   }, []);
 
   useEffect(() => {
-    if(searchResult.keyword === null) return; 
     if (searchResult && searchResult.data) {
       setPosts([...searchResult.data]);
       handleCategory([...searchResult.data]); 
     } else {
       if (data?.result?.content) {
-        setPosts([...posts, ...data.result.content]);
-        handleCategory([...posts, ...data.result.content]);
+        setPosts([...data.result.content]);
+        handleCategory([...data.result.content]);
       }
     }
   }, [searchResult, data]);
@@ -123,12 +122,14 @@ export function PostList() {
 
   return (
     <>
-      {searchResult && searchResult.data && searchResult.keyword !== null&& (
+      {/* {searchResult && searchResult.data && searchResult.keyword !== null&& (
         <div className={classes.searchResult}>
+          <div>
           &quot; {searchResult.keyword} &quot; 에 대한 검색 결과{' '}
           <span>{searchResult.data.length}</span> 개
+          </div>
         </div>
-      )}
+      )} */}
       <div className={classes.postListContainer}>
         <div className={classes.postListContainerHeader}>
           {/* {!isShowTotal ? (
