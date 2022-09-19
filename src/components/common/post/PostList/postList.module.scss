@@ -19,21 +19,51 @@
 
     .filterList{
         display: flex;
-        justify-content: flex-end;
+        margin-top: 50px;
         column-gap: 20px;
         li{
             display: flex;
             align-items: center;
-            span{
-                margin-left:10px;
-                color: #3D3D3D;
-                font-size: 22px;
-                font-weight: 400;
-
-                &.selected{
-                    font-weight: 500;
+            width:135px;
+            height: 38px;
+            border-radius: 100px;
+            border-radius: 100px;
+            background: #C0C0C0;
+            .tag_wrapper{
+                display: flex;
+                align-items: center;
+                margin: 0 auto;
+                column-gap: 4px;
+            }
+            .outer_circle{
+                width: 18px;
+                height: 18px;
+                border-radius: 100%;
+                background: #FFFFFF;
+                border: 1px solid #222222;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                .inner_circle{
+                    width:10px;
+                    height:10px;
+                    border-radius: 100%;
+                    background-color: #fff;
                 }
             }
+            span{
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 15px;
+                color: #222222;
+            }
+
+            &.selected{
+                background: #FFD02C;           
+                .inner_circle{
+                    background-color: #FFD02C;
+                } 
+            } 
         }
     }
 }
