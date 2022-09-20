@@ -68,7 +68,7 @@ export function Search() {
               name="search"
               id="search"
               placeholder="찾고있는 스터디의 이름 등등 뭔가.. 검색유도하는 글"
-              img={<SearchIcon width={22.5} height={22.5}></SearchIcon>}
+              img={<SearchIcon width={25} height={25}></SearchIcon>}
               onChange={(e) => setInputValue(e.target.value)}
             ></Input>
           </form>
@@ -83,7 +83,7 @@ export function Search() {
               name="search"
               id="search"
               placeholder="찾고있는 스터디의 이름 등등 뭔가.. 검색유도하는 글"
-              img={<SearchIcon width={22.5} height={22.5}></SearchIcon>}
+              img={<SearchIcon width={25} height={25}></SearchIcon>}
               onChange={(e) => setInputValue(e.target.value)}
             ></Input>
           </form>

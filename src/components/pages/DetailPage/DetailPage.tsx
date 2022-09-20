@@ -24,9 +24,8 @@ function DetailPage() {
   let { id } = useParams();
 
   const { data: postData, refetch } = useGetPostByPostId(id as string);
-  const { data:likeData } = useGetLikeofPost(id as string);
+  const { data: likeData } = useGetLikeofPost(id as string);
   const LikeUpdateMutation = useUpdateLike(id as string);
-
 
   const [detailData, setDetailData] = useState<any>([]);
   const [Like, setLike] = useState<any>(false);
@@ -37,28 +36,27 @@ function DetailPage() {
   const [login, setLogin] = useRecoilState(loginState);
   const LoginLabel = useRecoilValue(UserSelector);
 
-
   useEffect(() => {
     if (postData && postData.data?.header.code === 200) {
       setDetailData(postData.data.body.data);
     }
   }, [postData, status]);
 
-  useEffect(()=>{
-    if(likeData && likeData.data?.header.code === 200){
+  useEffect(() => {
+    if (likeData && likeData.data?.header.code === 200) {
       setLike(likeData.data.body.data);
     }
-  },[likeData])
+  }, [likeData]);
 
   const handlerBackArrowClick = () => {
     navigate('/');
   };
 
-  const clickLike =  () => {
+  const clickLike = () => {
     let postId = id;
-     LikeUpdateMutation.mutateAsync(postId)
-                       .then((res)=>res)
-                       .catch((err)=>console.log(err))
+    LikeUpdateMutation.mutateAsync(postId)
+      .then((res) => res)
+      .catch((err) => console.log(err));
   };
 
   const handlerLikeButtonClick = () => {
@@ -187,14 +185,22 @@ function DetailPage() {
 
                   {detailData.status == 'Y' ? (
                     <div
-                      className={`summary_category_status_true ${detailData.nickname == LoginLabel.nickname? 'hover': ''}`}
+                      className={`summary_category_status_true ${
+                        detailData.nickname == LoginLabel.nickname
+                          ? 'hover'
+                          : ''
+                      }`}
                       onClick={handlerStatusClick}
                     >
                       <span>모집중</span>
                     </div>
                   ) : (
                     <div
-                      className={`summary_category_status_false  ${detailData.nickname == LoginLabel.nickname? 'hover': ''}`}
+                      className={`summary_category_status_false  ${
+                        detailData.nickname == LoginLabel.nickname
+                          ? 'hover'
+                          : ''
+                      }`}
                       onClick={handlerStatusClick}
                     >
                       <span>모집완료</span>
@@ -206,21 +212,24 @@ function DetailPage() {
           </div>
 
           <div className="detail_sort_wrapper">
-            {detailData.positionList
-              ? detailData.positionList.map((arr: any, i: number) => {
-                  return (
-                    <div
-                      className="detail_sort_content"
-                      key={`sort-content-${arr}`}
-                    >
-                      모집분야 - {arr}
-                    </div>
-                  );
-                })
-              : null}
+            <div className="detail_sort_content">
+              모집분야&nbsp;- &nbsp;
+              {detailData.positionList
+                ? detailData.positionList.map((arr: any, i: number) => {
+                    return (
+                      <div
+                        className="detail_sort_position"
+                        key={`sort-content-${arr}`}
+                      >
+                        {arr}
+                      </div>
+                    );
+                  })
+                : null}
+            </div>
           </div>
           <div className="detail_contact">
-            연락방식 -{' '}
+            연락방식 -&nbsp;{' '}
             <a href={detailData.contactLink}>{detailData.contactLink}</a>
           </div>
           <div className="detail_line"></div>

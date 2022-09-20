@@ -1,4 +1,5 @@
 import { ScrollTopButton } from '@components/atoms/ScrollTopButton/ScrollTopButton';
+import { Banner } from '@components/common';
 import Footer from '@components/footer';
 import Header from '@components/header';
 

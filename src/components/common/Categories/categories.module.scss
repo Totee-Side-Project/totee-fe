@@ -3,9 +3,9 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin: 60px auto;
+    margin: 55px auto;
     column-gap: 60px;
-    row-gap:20px;
+    row-gap: 20px;
 }
 .imgButton{
     width: 85px;
@@ -30,6 +30,7 @@
     padding:9px 17px;
     color: #878787;
     font-size:20px;
+    font-weight: 300;
 
     &:hover{
         cursor: pointer;
@@ -38,8 +39,9 @@
     &.selected{
         border-radius: 5px;
         color: #fff;
-        font-weight:bold;
+        //font-weight:bold;
         background : #568A35;
+        font-weight: 500;
     }
 }
 

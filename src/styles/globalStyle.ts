@@ -127,7 +127,9 @@ const globalStyle = css`
   }
   * {
     box-sizing: border-box;
-    font-family: 'Spoqa Han Sans Neo', 'Spoqa Han Sans JP', sans-serif;
+    font-family:
+            //'Spoqa Han Sans Neo', 'Spoqa Han Sans JP',
+      'Noto Sans KR', sans-serif;
     font-style: normal;
     margin: 0;
     word-break: keep-all;

@@ -5,7 +5,7 @@ import RecommendCard from '@components/common/RecommendCard/RecommendCard';
 
 export function MainPage() {
   return (
-    <div className='mainPage_section_wrapper'>
+    <div className="mainPage_section_wrapper">
       <section className="section">
         <Banner />
         <Search />
