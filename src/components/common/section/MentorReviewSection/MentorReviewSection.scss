@@ -1,0 +1,53 @@
+.mentorReviewSection_container{
+    width:100%;
+    height: 335px;
+    background: #89B66D;
+    padding: 73px 220px;
+    margin-bottom: 100px;
+    .inner_container{
+        width:100%;
+        display: flex;
+        // flex-wrap: wrap;
+        .description_wrapper{
+            width:500px;
+            .title{
+                color: #424242;
+                font-weight: 700;
+                font-size: 25px;
+                margin-bottom: 10px;
+                .highlight{
+                    color: #fff;
+                    font-weight: 700;
+                    font-size: 30px;
+                }
+            }
+            .description{
+                font-weight: 400;
+                font-size: 18px;
+                color: #424242;
+                line-height: 26px;
+            }
+            .button{
+                padding: 10px;
+                width: 180px;
+                height: 45px;
+                border-radius: 4px;
+                border: 1px solid #fff;
+                background-color: transparent;
+                color: #FFFFFF;
+                font-weight: 500;
+                font-size: 18px;
+                margin-top: 40px;
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+        }
+        .cards_wrapper{
+            display: flex;
+            column-gap: 43px;
+            margin: 0 auto;
+            width: fit-content;
+        }
+    }
+}

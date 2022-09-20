@@ -1,21 +1,28 @@
 import React from 'react';
-import { Counter, Modal } from '@components/atoms';
 import { Banner, Categories, PostList, Search } from '@components/common';
-import RecommendCard from '@components/common/RecommendCard/RecommendCard';
-
+import BottomBanner from '@components/common/main/Banner/BottomBanner';
+import { MentoSection, MentorReviewSection } from '@components/common';
+import './MainPage.scss';
 export function MainPage() {
   return (
     <div className="mainPage_section_wrapper">
       <section className="section">
         <Banner />
         <Search />
-        <Categories />
+        {/* <Categories /> */}
       </section>
-      <section className="section">
+      <section className="body_section">
         <PostList />
       </section>
-      <section className="section">
-        <RecommendCard />
+      <section className="body_section">
+        <MentoSection type="recommend"/>
+      </section>
+      <MentorReviewSection/>
+      <section className="body_section">
+        <MentoSection type="best"/>
+      </section>
+      <section>
+        <BottomBanner />
       </section>
     </div>
   );

@@ -27,7 +27,7 @@ api.interceptors.request.use((config: any) => {
 export const PostAPI = {
   getPostList: (page = 0, size = 5) =>
     api.get(`/api/v1/post/list?page=${page}&size=${size}`),
-  getPostByPostId: (postId: string) => api.get(`/api/v1/post/${postId}`),
+  getPostByPostId: (postId: number) => api.get(`/api/v1/post/${postId}`),
   searchPostList: (title: string) => api.get(`/api/v1/post/search/${title}`),
   statusChange: (postId: number) => api.post(`api/v1/post/status/${postId}`),
   createPost: (form: any) =>
@@ -74,12 +74,12 @@ export const UserAPI = {
         'Content-Type': 'multipart/form-data',
       },
     }),
-  updateUserInfo : (form:any)=>
-  api.put('/api/v1/info', form, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  }),
+  updateUserInfo: (form: any) =>
+    api.put('/api/v1/info', form, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }),
   validateNickname: (nickname: string) =>
     api.post('/api/v1/validate/nickname', { nickname: nickname }),
 };
@@ -88,6 +88,12 @@ export const LikeAPI = {
   getIsLikeInfo: (postId: any) => api.get(`/api/v1/post/isLike/${postId}`),
   postLike: (postId: any) => api.post(`/api/v1/post/like/${postId}`),
   LikeList: () => api.get(`/api/v1/post/like`),
+};
+
+export const AlarmAPI = {
+  getAlarm: () => api.get(`/api/v1/notification`),
+  updateAlarm: (notificationId: string) =>
+    api.post(`/api/v1/notification/${notificationId}`),
 };
 
 // 로그인 리다이렉트 uri - 우선 local에서 테스트할 수 있게 작업함
