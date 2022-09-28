@@ -2,6 +2,7 @@
 .postListContainer{
     width: 100%;
     padding-bottom: 100px;
+    //background-color: #FAFBFC;
 }
 .postListContainerHeader{
     width:100%;
@@ -59,7 +60,7 @@
             }
 
             &.selected{
-                background: #FFD02C;           
+                background: #FFD02C;
                 .inner_circle{
                     background-color: #FFD02C;
                 } 

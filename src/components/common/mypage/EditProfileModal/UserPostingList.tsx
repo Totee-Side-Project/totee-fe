@@ -1,3 +1,4 @@
+import classes from '@components/common/post/PostCard/postCard.module.scss';
 import React, { useEffect, useState } from 'react';
 import { PostAPI } from '@api/api';
 import './postingList.scss';
@@ -57,6 +58,10 @@ function UserPostingList() {
               <div className="postImgBox">
                 <img className="img" src={arr.imageUrl} />
               </div>
+              <div className="postInfoName">
+                {arr.position}
+                {arr.nickname}
+              </div>
               <div className="postStatusWrapper">
                 {arr.status === 'Y' ? (
                   <div className="postStatus">모집중</div>
@@ -74,10 +79,11 @@ function UserPostingList() {
                 ></div>
               </div>
               <div className="postInfoBox">
-                <div className="postInfoName">
-                  {arr.position}
-                  {arr.nickname}
-                </div>
+                <div className={classes.postInfoLine} />
+                {/*<div className="postInfoName">*/}
+                {/*  {arr.position}*/}
+                {/*  {arr.nickname}*/}
+                {/*</div>*/}
                 <div className="postIconBox">
                   <div className="postInfo">
                     <img src={com} />
