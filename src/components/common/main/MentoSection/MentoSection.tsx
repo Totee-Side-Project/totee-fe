@@ -45,7 +45,9 @@ export const MentoSection = ({type="recommend"}:Props) => {
 
   return(
     <div className="recommend_container">
-      <SectionTitle title={Info[type]["title"]} sub={Info[type]["sub"]} description={Info[type]["desc"]}/>
+      <div className='title_container'>
+        <SectionTitle title={Info[type]["title"]} sub={Info[type]["sub"]} description={Info[type]["desc"]}/>
+      </div>
       <div>
         <SectionSlider>
             <Mentorcard key={`mentor-card-1`}/>

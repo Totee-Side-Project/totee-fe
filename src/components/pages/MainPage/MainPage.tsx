@@ -3,6 +3,7 @@ import { Banner, Categories, PostList, Search } from '@components/common';
 import BottomBanner from '@components/common/main/Banner/BottomBanner';
 import { MentoSection, MentorReviewSection } from '@components/common';
 import './MainPage.scss';
+import LetterBanner from '@components/common/main/Banner/LetterBanner';
 export function MainPage() {
   return (
     <div className="mainPage_section_wrapper">
@@ -20,6 +21,9 @@ export function MainPage() {
       <MentorReviewSection/>
       <section className="body_section">
         <MentoSection type="best"/>
+      </section>
+      <section>
+        <LetterBanner />
       </section>
       <section>
         <BottomBanner />
