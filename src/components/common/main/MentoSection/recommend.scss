@@ -1,3 +1,7 @@
+.title_container {
+  padding-left: 110px;
+}
+
 .title_wrapper {
   margin: 97px 0;
   font-weight: 400;
@@ -103,4 +107,8 @@
   &:hover{
     cursor: pointer;
   }
+}
+
+.recommend_container{
+  overflow: visible;
 }

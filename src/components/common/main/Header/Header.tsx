@@ -95,6 +95,7 @@ export const Header = () => {
   return (
     <>
       <header className="header">
+        
         <div className="content">
             <img src={logo} alt="토티 로고" onClick={()=>window.location.href= "/"}/>
           <div className="buttonWrapper">
@@ -113,8 +114,13 @@ export const Header = () => {
                 )}
               </li>
               <li>
-                <button className="createButton" onClick={handleStudyClick}>
+                <button className="createStudyButton" onClick={handleStudyClick}>
                   스터디 개설
+                </button>
+              </li>
+              <li>
+                <button className="createMentorButton" onClick={handleStudyClick}>
+                  멘토 지원
                 </button>
               </li>
               <li className="line" />
