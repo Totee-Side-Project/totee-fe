@@ -67,6 +67,7 @@ export const Footer = () => {
             >
               Hazel
             </p>
+            <p>Yoon</p>
           </div>
           <div className="footerName">
             <h2>Contacts us</h2>
