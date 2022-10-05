@@ -133,19 +133,36 @@ function DetailPage() {
                 onClick={handlerBackArrowClick}
               />
             </div>
-            <div
-              className="detail_profile"
-              style={{
-                backgroundRepeat: 'no-repeat',
-                backgroundSize: 'cover',
-                backgroundImage: `url("${detailData.imageUrl}")`,
-              }}
-            ></div>
+            {/*<div*/}
+            {/*  className="detail_profile"*/}
+            {/*  style={{*/}
+            {/*    backgroundRepeat: 'no-repeat',*/}
+            {/*    backgroundSize: 'cover',*/}
+            {/*    backgroundImage: `url("${detailData.imageUrl}")`,*/}
+            {/*  }}*/}
+            {/*></div>*/}
             <div className="detail_summary_container">
               <div className="summary_title_wrapper">
                 <div className="summary_title_addoption">
                   <div className="summary_title_text"> {detailData.title}</div>
-                  {OptionShow()}
+                  <div className="summary_title_right">
+                    <div className="summary_like_button">
+                      {Like ? (
+                        <img
+                          src={likeButton}
+                          className="summary_like_true_button"
+                          onClick={handlerLikeButtonClick}
+                        />
+                      ) : (
+                        <img
+                          src={likeButton}
+                          className="summary_like_false_button"
+                          onClick={handlerLikeButtonClick}
+                        />
+                      )}
+                    </div>
+                    {OptionShow()}
+                  </div>
                 </div>
                 <div className="summary_title_line"></div>
               </div>
@@ -167,22 +184,6 @@ function DetailPage() {
                   </div>
                 </div>
                 <div className="summary_category_right">
-                  <div className="summary_like_button">
-                    {Like ? (
-                      <img
-                        src={likeButton}
-                        className="summary_like_true_button"
-                        onClick={handlerLikeButtonClick}
-                      />
-                    ) : (
-                      <img
-                        src={likeButton}
-                        className="summary_like_false_button"
-                        onClick={handlerLikeButtonClick}
-                      />
-                    )}
-                  </div>
-
                   {detailData.status == 'Y' ? (
                     <div
                       className={`summary_category_status_true ${
@@ -213,7 +214,7 @@ function DetailPage() {
 
           <div className="detail_sort_wrapper">
             <div className="detail_sort_content">
-              모집분야&nbsp;- &nbsp;
+              지역&nbsp;- &nbsp;
               {detailData.positionList
                 ? detailData.positionList.map((arr: any, i: number) => {
                     return (
