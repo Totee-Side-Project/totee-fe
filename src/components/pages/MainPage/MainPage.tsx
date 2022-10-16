@@ -2,25 +2,28 @@ import React from 'react';
 import { Banner, Categories, PostList, Search } from '@components/common';
 import BottomBanner from '@components/common/main/Banner/BottomBanner';
 import { MentoSection, MentorReviewSection } from '@components/common';
-import './MainPage.scss';
 import LetterBanner from '@components/common/main/Banner/LetterBanner';
+import './MainPage.scss';
+
 export function MainPage() {
   return (
     <div className="mainPage_section_wrapper">
-      <section className="section">
+      <section className="hero">
         <Banner />
-        <Search />
         {/* <Categories /> */}
       </section>
-      <section className="body_section">
+      <section className="search">
+        <Search />
+      </section>
+      <section className="post body_section">
         <PostList />
       </section>
-      <section className="body_section">
-        <MentoSection type="recommend"/>
+      <section className="mento_recommend body_section">
+        <MentoSection type="recommend" />
       </section>
-      <MentorReviewSection/>
-      <section className="body_section">
-        <MentoSection type="best"/>
+      <MentorReviewSection />
+      <section className="best_mento body_section">
+        <MentoSection type="best" />
       </section>
       <section>
         <LetterBanner />

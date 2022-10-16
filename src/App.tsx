@@ -21,9 +21,9 @@ import {
 } from '@store/index';
 
 function App() {
-  const padding: any = {
-    paddingTop: '100px',
-  };
+  // const padding: any = {
+  //   paddingTop: '100px',
+  // };
   const [login, setLogin] = useRecoilState(loginState);
   const [user, setUser] = useRecoilState(UserState);
 
@@ -47,7 +47,7 @@ function App() {
   return (
     <>
       <Header />
-      <div style={padding} />
+      {/* <div style={padding} /> */}
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/posts" element={<PostsPage />} />

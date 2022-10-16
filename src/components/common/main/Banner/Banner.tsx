@@ -1,50 +1,62 @@
 import React from 'react';
 import Banner1Img from '@assets/main_banner.png';
-import Banner2Img from '@assets/study_banner.png'
-import Banner3Img from '@assets/mentor_mentee_banner.png'
-import Banner1Icon from '@assets/banner_icon_1.png';
+import Banner2Img from '@assets/study_banner.png';
+import Banner3Img from '@assets/mentor_mentee_banner.png';
+// import Banner1Icon from '@assets/banner_icon_1.png';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import classes from './banner.module.scss';
-
-import { Swiper, SwiperSlide } from "swiper/react";
-import 'swiper/swiper-bundle.min.css'
+import 'swiper/swiper-bundle.min.css';
 import 'swiper/components/navigation/navigation.min.css';
-import SwiperCore, {Navigation, Pagination, Autoplay} from "swiper";
-SwiperCore.use([Navigation, Pagination, Autoplay]);
+// import my custom pagination.scss
+import './pagination.scss';
+import SwiperCore, { Autoplay, Pagination } from 'swiper';
+SwiperCore.use([Autoplay, Pagination]);
 
 export function Banner() {
   return (
-    
-    <div>
-      <Swiper
-        className="banner"
-        spaceBetween={10}
-        slidesPerView={1}
-        autoplay={{ delay: 4000 }}	// 추가
-        observer = {true}
-        observeParents = {true}
-      >
-        <SwiperSlide>
-          <section className={classes.banner_wrapper}>
-              <img src={Banner1Img} alt="배경화면" className={classes.img}/>
-          </section>
-        </SwiperSlide>
-        <SwiperSlide>
-          <section className={classes.banner_wrapper}>
-              <img src={Banner2Img} alt="배경화면" className={classes.img}/>
-          </section>
-        </SwiperSlide>
-        <SwiperSlide>
-          <section className={classes.banner_wrapper}>
-              <img src={Banner3Img} alt="배경화면" className={classes.img}/>
-          </section>
-        </SwiperSlide>
-      </Swiper>
+    <div className="css_banner_wrap">
+      <div className={classes.banner_wrap}>
+        <Swiper
+          className={classes.banner}
+          spaceBetween={50}
+          slidesPerView={1}
+          pagination={{
+            clickable: true,
+            type: 'bullets',
+          }}
+          autoplay={{ delay: 4000, disableOnInteraction: false }} // 추가
+          // observer={true}
+          // observeParents={true}
+        >
+          <SwiperSlide className={classes.banner_item}>
+            <img
+              src={Banner1Img}
+              alt="스터디와 멘토를 찾는 가장 편안한 방법"
+              className={classes.banner_img}
+            />
+          </SwiperSlide>
+          <SwiperSlide className={classes.banner_item}>
+            <img
+              src={Banner2Img}
+              alt="커리어 성장을 위한 다양한 스터디 탐색"
+              className={classes.banner_img}
+            />
+          </SwiperSlide>
+          <SwiperSlide className={classes.banner_item}>
+            <img
+              src={Banner3Img}
+              alt="커리어 성장을 위한 다양한 스터디 탐색"
+              className={classes.banner_img}
+            />
+          </SwiperSlide>
+        </Swiper>
+      </div>
     </div>
-  )
+  );
 }
 
-
-{/* <SwiperSlide>
+{
+  /* <SwiperSlide>
   <section className={classes.banner_wrapper}>
     <div className={classes.banner_inner_wrapper}>
         <div className={classes.banner_item}>
@@ -56,7 +68,8 @@ export function Banner() {
         <div className={classes.banner_item}>
           <img src={Banner1Icon} alt="배너 아이콘" className={classes.banner_icon}/>
         </div>
-      {/* <img src={BackgroundImg} alt="" className={classes.backgroundImg}/> */}
+      {/* <img src={BackgroundImg} alt="" className={classes.backgroundImg}/> */
+}
 //       </div>
 //       <img src={Banner1Img} alt="배경화면" className={classes.img}/>
 //   </section>
