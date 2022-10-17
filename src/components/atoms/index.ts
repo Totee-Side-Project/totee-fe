@@ -7,3 +7,4 @@ export * from './CategoryButton/CategoryButton';
 export * from './Icon/Icon';
 export * from './CheckBox/CheckBox';
 export * from './SectionTitle/SectionTitle';
+export * from './Select/SelectItem';
