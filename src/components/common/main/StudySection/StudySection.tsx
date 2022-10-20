@@ -1,35 +1,106 @@
-//
-
 import { PostAPI } from '@api/api';
 import { SectionTitle, SelectItem } from '@components/atoms';
 import { Carousel } from '@components/common';
 import { PostCard } from '@components/common/post/PostCard/PostCard';
+import { useInfiniteQueryTest } from '@hooks/useInfiniteQueryTest';
 import { useEffect, useRef, useState } from 'react';
-import { useQuery } from 'react-query';
+import { useQueryClient } from 'react-query';
 import { useSearchParams } from 'react-router-dom';
-import { IPostType } from 'types/post.types';
+import type { IPostType } from 'types/post.types';
 import classes from './studySection.module.scss';
-// interface Props {}
+import './studySection.scss';
+// 처음 studySection 이 mount될때 비동기적으로 server에 limit 16으로 받아오고
+// 프론트단에서 4단위로 끊어서 보여주는것은 어떨까?
 
 export function StudySection() {
-  // const [posts, setPosts] = useState<IPostType[]>([]);
+  const [filteredPageList, setFilteredPageList] = useState<IPostType[][]>([]);
   const filterList = useRef(['전체', '최신순', '인기순', '조회순']).current;
   const [selectedFilter, setSelectedFilter] = useState(filterList[0]);
-
   // urldml params를 읽고 수정할 수 있다.
   const [searchParams, setSearchParams] = useSearchParams();
-  const { data } = useQuery(['studyPosts'], () =>
-    PostAPI.getPostList(0, 4).then((res: any) => res.data.body.data),
-  );
+  const queryClient = useQueryClient();
+  // const { data } = useQuery(['studySectionPosts'], () =>
+  //   PostAPI.getPostList(0, 20).then((res) => res.data.body.data),
+  // );
 
-  // unmount되면 studyPosts 키값을 가진 query를 제거해주어야할까?
-  // out of data일 가능성이 있으면 제거해주는것이 좋을것 같다.
+  const { data, fetchNextPage, status } = useInfiniteQueryTest({
+    getData: PostAPI.getPostList,
+    queryKey: 'test',
+    responseKeys: ['body', 'data'],
+    pageSize: 4,
+  });
+
+  useEffect(() => {
+    return () => {
+      setFilteredPageList([]);
+      queryClient.removeQueries('test');
+    };
+  }, []);
 
   useEffect(() => {
     const filterParams = searchParams.get('filter');
 
     filterParams ? setSelectedFilter(filterParams) : setSelectedFilter('전체');
   }, [searchParams]);
+
+  useEffect(() => {
+    if (!data) return;
+    if (data[data.length - 1].isLast) {
+      const newPosts = data.map((e) => e.postPage.content);
+      setFilteredPageList(() => newPosts);
+      return;
+    }
+
+    if (data.length < 4) {
+      fetchNextPage();
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (data && data.length) {
+      const newPosts = data.map((e) => e.postPage.content);
+      const flatData = newPosts.flatMap((pageList) => pageList);
+      const sortedData = sortingData(flatData);
+      const chunkedData = chunkData(sortedData, 4);
+      setFilteredPageList([...chunkedData]);
+    }
+  }, [selectedFilter]);
+
+  const chunkData = <T, _>(data: T[], parts: number): T[][] => {
+    let chunkedData = [];
+    const maxIndex = Math.ceil(data.length / parts);
+
+    for (let i = 0; i < maxIndex; i++) {
+      if (i === maxIndex - 1) {
+        chunkedData.push(data.slice(parts * i, data.length));
+        break;
+      }
+      chunkedData.push(data.slice(parts * i, parts * (i + 1)));
+    }
+    return chunkedData;
+  };
+
+  const sortingData = (data: IPostType[]): IPostType[] => {
+    let newData = [...data];
+    switch (selectedFilter) {
+      case '최신순':
+        newData.sort(
+          (a, b) =>
+            // 1970년 과 주어진 시간과의 ms 간격 내림차순으로 정렬
+            Number(new Date(b.createdAt)) - Number(new Date(a.createdAt)),
+        );
+        break;
+      case '인기순':
+        newData.sort((a, b) => b.likeNum - a.likeNum);
+        break;
+      case '조회순':
+        newData.sort((a, b) => b.view - a.view);
+        break;
+    }
+
+    return newData;
+  };
+
   // select trigger를 눌렀을 때 option에 따라서 비동기함수를 호출하고 이를 보여주는 기능을한다.
   return (
     <>
@@ -52,10 +123,9 @@ export function StudySection() {
                     ? `${classes.filter_item} ${classes.selected}`
                     : classes.filter_item
                 }
-                key={index}
+                key={`filter-${index}`}
               >
                 <SelectItem
-                  key={`filter-${index}`}
                   className={classes.tag_wrap}
                   onClick={() =>
                     // [key, value][] 타입을 객체로 만들어 주기위해 사용
@@ -79,7 +149,7 @@ export function StudySection() {
         </div>
       </div>
       <div className={classes.section_body}>
-        {data && (
+        {filterList && (
           <Carousel
             style={{
               paddingTop: '20px',
@@ -95,50 +165,23 @@ export function StudySection() {
               observeParents: true,
             }}
           >
-            <div
-              style={{
-                display: 'flex',
-                height: '100%',
-                alignItems: 'center',
-                justifyContent: 'space-around',
-              }}
-            >
-              {data.content.map((studyPost: IPostType, index: number) => (
-                <li key={index}>
-                  {/* <li key={index} style={{ margin: '0 12px' }}> */}
-                  <PostCard key={index} post={studyPost} />
-                </li>
-              ))}
-            </div>
-            <div
-              style={{
-                display: 'flex',
-                height: '100%',
-                alignItems: 'center',
-                justifyContent: 'space-around',
-              }}
-            >
-              {data.content.map((studyPost: IPostType, index: number) => (
-                <li key={index} style={{ margin: '0 12px' }}>
-                  <PostCard key={index} post={studyPost} />
-                </li>
-              ))}
-            </div>
-            <div
-              style={{
-                display: 'flex',
-                margin: '0 auto',
-                height: '100%',
-                alignItems: 'center',
-                justifyContent: 'space-around',
-              }}
-            >
-              {data.content.map((studyPost: IPostType, index: number) => (
-                <li key={index} style={{ margin: '0 12px' }}>
-                  <PostCard key={index} post={studyPost} />
-                </li>
-              ))}
-            </div>
+            {filteredPageList.map((postPage, index) => (
+              <div
+                key={'pages' + index}
+                style={{
+                  display: 'flex',
+                  height: '100%',
+                  alignItems: 'center',
+                  justifyContent: 'space-around',
+                }}
+              >
+                {postPage.map((post: IPostType) => (
+                  <li key={post.postId}>
+                    <PostCard post={post} />
+                  </li>
+                ))}
+              </div>
+            ))}
           </Carousel>
         )}
       </div>

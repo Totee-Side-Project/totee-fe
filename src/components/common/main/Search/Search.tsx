@@ -29,15 +29,13 @@ export function Search() {
       setSearchResult({
         data: data?.data?.body.data.content,
         keyword: inputValue as string,
-      }); 
-    }
-    else{
-       setSearchResult({
+      });
+    } else {
+      setSearchResult({
         data: null,
         keyword: null,
-      });  
+      });
     }
-
   };
 
   useEffect(() => {
@@ -113,11 +111,11 @@ export function Search() {
           )}
         </div>
       )}
-      {searchResult && searchResult.data && searchResult.keyword !== null&& (
+      {searchResult && searchResult.data && searchResult.keyword !== null && (
         <div className={classes.searchResult}>
           <div>
-          &quot; {searchResult.keyword} &quot; 에 대한 검색 결과{' '}
-          <span>{searchResult.data.length}</span> 개
+            &quot; {searchResult.keyword} &quot; 에 대한 검색 결과{' '}
+            <span>{searchResult.data.length}</span> 개
           </div>
         </div>
       )}
