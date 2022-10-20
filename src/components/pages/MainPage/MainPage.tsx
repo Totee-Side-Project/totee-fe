@@ -21,9 +21,9 @@ export function MainPage() {
       <section className="search">
         <Search />
       </section>
-      <section className="post body_section">
+      {/* <section className="post body_section">
         <PostList />
-      </section>
+      </section> */}
       <section className="study_section">
         <StudySection />
       </section>
