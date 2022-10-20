@@ -1,4 +1,4 @@
-import { CommentType } from "./comment.types";
+import { CommentType } from './comment.types';
 export interface IPostType {
   status: 'Y' | 'N';
   title: string;
@@ -15,7 +15,7 @@ export interface IPostType {
   categoryName: string;
 }
 
-export interface IPostDetailType{
+export interface IPostDetailType {
   author: string;
   authorPosition: string;
   categoryName: string;
@@ -37,8 +37,7 @@ export interface IPostDetailType{
   view: number;
 }
 
-
-export interface ISearchType{
-  data : IPostType[] | null;
-  keyword: string| null;
+export interface ISearchType {
+  data: IPostType[] | null;
+  keyword: string | null;
 }

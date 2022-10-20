@@ -9,6 +9,8 @@ export * from './main/AlarmIcon/AlarmIcon';
 export * from './main/Footer/Footer';
 export * from './main/Header/Header';
 export * from './main/MentoSection/MentoSection';
+export * from './main/Carousel/Carousel';
+export * from './main/StudySection/StudySection';
 
 export * from './post/PostList/PostList';
 export * from './detail/Comment/Comment';
