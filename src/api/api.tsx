@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
+import { IGetPostListResponse } from './responseType';
 
 const BASE_URL = 'https://api.totee.link/';
 
@@ -25,7 +26,10 @@ api.interceptors.request.use((config: any) => {
 // https://api.totee.link/swagger-ui.html#/
 
 export const PostAPI = {
-  getPostList: (page = 0, size = 5) =>
+  getPostList: (
+    page = 0,
+    size = 5,
+  ): Promise<AxiosResponse<IGetPostListResponse>> =>
     api.get(`/api/v1/post/list?page=${page}&size=${size}`),
   getPostByPostId: (postId: number) => api.get(`/api/v1/post/${postId}`),
   searchPostList: (title: string) => api.get(`/api/v1/post/search/${title}`),
