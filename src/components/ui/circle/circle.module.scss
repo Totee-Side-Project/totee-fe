@@ -1,0 +1,22 @@
+.outer_circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  margin-right: 7px;
+  border-radius: 100%;
+  background-color: #ffffff;
+  border: 1px solid #222222;
+
+  .inner_circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background-color: #ffffff;
+  }
+
+  .select {
+    background-color: #ffd02c;
+  }
+}
