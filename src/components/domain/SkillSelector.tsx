@@ -3,12 +3,27 @@
 import { SelectItem } from '@components/atoms';
 import { Circle } from '@components/ui/circle/Circle';
 import { MouseEvent, ReactNode, useEffect, useState } from 'react';
-
+import icon from '@components/common/svg';
 const skills = {
-  frontEnd: ['JavaScript', 'TypeScript', 'Next.js', 'Svelte', 'React'],
-  backEnd: ['asd', 'a', 'b'],
-  mobile: ['a', 'd', 'd'],
-  etc: ['e', 't', 'c'],
+  frontEnd: ['JavaScript', 'Nextjs', 'React', 'Svelte', 'typescript'],
+  backEnd: [
+    'Django',
+    'Express',
+    'Firebase',
+    'Go',
+    'GraphQL',
+    'JAVA',
+    'Kotlin',
+    'MongoDB',
+    'MySQL',
+    'Nestjs',
+    'Nodejs',
+    'php',
+    'Python',
+    'Spring',
+  ],
+  mobile: ['Flutter', 'Kotlin', 'ReactNative', 'Swift', 'Unity'],
+  etc: ['AWS', 'C', 'Docker', 'Figma', 'Git', 'Jest', 'Kubernetes', 'Zeplin'],
 } as {
   [key: string]: string[];
 };
@@ -37,7 +52,7 @@ export const SkillSelector = () => {
     [key: string]: boolean;
   }>({});
 
-  const onClickWithFilterItem = (
+  const onClickFilterItem = (
     e: MouseEvent<HTMLUListElement | HTMLLIElement>,
   ) => {
     if (e.currentTarget === e.target) return;
@@ -45,7 +60,7 @@ export const SkillSelector = () => {
     setSelectedFilter(target.innerText);
   };
 
-  const onClickWithSkillItem = (
+  const onClickSkillItem = (
     e: MouseEvent<HTMLUListElement | HTMLLIElement>,
   ) => {
     const currentTaget = e.currentTarget;
@@ -78,18 +93,15 @@ export const SkillSelector = () => {
   }, [selectedSkiilsTypeObject]);
 
   return (
-    <>
+    <div>
       <div>모집언어</div>
-      <Categories
-        selectedFilter={selectedFilter}
-        onClick={onClickWithFilterItem}
-      />
+      <Categories selectedFilter={selectedFilter} onClick={onClickFilterItem} />
       <Selector
         filteredSkills={filteredSkills}
         selectedSkiilsTypeObject={selectedSkiilsTypeObject}
-        onClick={onClickWithSkillItem}
+        onClick={onClickSkillItem}
       />
-    </>
+    </div>
   );
 };
 
@@ -109,13 +121,14 @@ const Categories = ({ selectedFilter, onClick }: CategoriesProps) => {
         onClick={onClick}
       >
         {categories.map((category, index) => (
-          <SelectItem
-            key={category + index}
-            style={{ cursor: 'pointer' }}
-            bottom={<div style={{ borderBottom: '1px solid green' }}></div>}
-          >
-            {category}
-          </SelectItem>
+          <li key={category + index} style={{ fontSize: '30px' }}>
+            <SelectItem
+              style={{ cursor: 'pointer' }}
+              bottom={<div style={{ borderBottom: '1px solid green' }}></div>}
+            >
+              {category}
+            </SelectItem>
+          </li>
         ))}
       </ul>
     </span>
@@ -132,37 +145,37 @@ const Selector = ({
   selectedSkiilsTypeObject,
   onClick,
 }: SelectorProps) => {
-  // filteredSkills
   return (
     <div>
-      <ul style={{ display: 'flex', justifyContent: 'space-around' }}>
-        {filteredSkills.map((skill, index) => (
-          <SkillItem
-            key={skill + index}
-            dataValue={skill}
-            isSelect={selectedSkiilsTypeObject[skill]}
-            onClick={onClick}
-          >
-            {skill}
-          </SkillItem>
-        ))}
+      <ul
+        style={{
+          display: 'flex',
+        }}
+      >
+        {filteredSkills.map((skill, index) => {
+          return (
+            <SkillItem
+              key={skill + index}
+              dataValue={skill}
+              isSelect={selectedSkiilsTypeObject[skill]}
+              src={icon[skill]}
+              onClick={onClick}
+            ></SkillItem>
+          );
+        })}
       </ul>
     </div>
   );
 };
 
 interface SkillItemProps {
-  children: ReactNode;
+  // children: ReactNode;
   dataValue: string;
   isSelect: boolean;
+  src: string;
   onClick: (e: MouseEvent<HTMLUListElement | HTMLLIElement>) => void;
 }
-const SkillItem = ({
-  children,
-  dataValue,
-  isSelect,
-  onClick,
-}: SkillItemProps) => {
+const SkillItem = ({ dataValue, isSelect, src, onClick }: SkillItemProps) => {
   return (
     <li
       className={isSelect ? 'select' : ''}
@@ -172,9 +185,24 @@ const SkillItem = ({
     >
       <SelectItem
         left={<Circle selected={isSelect}></Circle>}
-        style={{ display: 'flex' }}
+        style={{ display: 'flex', alignItems: 'center' }}
       >
-        <div className="asdsad">{children}</div>
+        <div className="">
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+            }}
+          >
+            <img
+              style={{
+                objectPosition: '0px 5px',
+              }}
+              src={src}
+            />
+            <div>{dataValue}</div>
+          </div>
+        </div>
       </SelectItem>
     </li>
   );
