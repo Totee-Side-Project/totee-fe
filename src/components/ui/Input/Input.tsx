@@ -1,5 +1,4 @@
-import { unset } from 'lodash';
-import { ChangeEvent, HTMLInputTypeAttribute, ReactNode, useRef } from 'react';
+import { ChangeEvent, HTMLInputTypeAttribute, ReactNode } from 'react';
 interface Props {
   className: string;
   top: ReactNode;
@@ -35,7 +34,6 @@ const styleNoneSpinButton = {
 };
 
 export const Input = ({ className, top, leftValue, ...props }: Props) => {
-  const inputRef = useRef(null);
   return (
     <div className="input_container">
       {top}
