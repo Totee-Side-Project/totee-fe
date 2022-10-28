@@ -1,8 +1,9 @@
-import { EditStudyPage } from '@components/organism';
+// import { EditStudyPage } from '@components/organism';
+import { CreateStudy } from '@components/organism/CreateStudy/CreateStudy';
 // 클릭한 값 보여주기
 
 function CreateStudyPage() {
-  return <EditStudyPage type="create" />;
+  return <CreateStudy />;
 }
 
 export default CreateStudyPage;
