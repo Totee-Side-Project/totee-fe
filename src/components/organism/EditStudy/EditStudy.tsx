@@ -12,6 +12,8 @@ import './editStudy.scss';
 import Swal from 'sweetalert2';
 
 import { IPostDetailType } from 'types/post.types';
+// import { MultiSelect } from '@components/ui/select/MultiSelect';
+import { SkillSelector } from '@components/domain/SkillSelector';
 
 // 클릭한 값 보여주기
 interface IEditStudyPagePropsType {
@@ -58,7 +60,7 @@ export function EditStudyPage({ type, initialData }: IEditStudyPagePropsType) {
 
   //select
   const sort: any = ['스터디', '프로젝트', '동아리', '멘토멘티'];
-  const people: any = ['제한없음', '1~2명', '3~5명', '5명이상'];
+  // const people: any = ['제한없음', '1~2명', '3~5명', '5명이상'];
   const area: any = [
     '프론트엔드',
     '백엔드',
@@ -73,7 +75,8 @@ export function EditStudyPage({ type, initialData }: IEditStudyPagePropsType) {
   const duration: any = ['1개월미만', '1~3개월', '3~6개월', '6개월이상'];
   const contact: any = ['카카오톡 오픈채팅', '이메일', '노션', '기타'];
 
-  const select = [sort, process, people, duration, area, contact];
+  // const select = [sort, process, people, duration, area, contact];
+  const select = [sort, process, duration, area, contact];
   const variable = [
     '모집구분',
     '진행방식',
@@ -111,7 +114,7 @@ export function EditStudyPage({ type, initialData }: IEditStudyPagePropsType) {
   const Categories = () => {
     const maping = select.map((arr: any, i: any) => {
       return (
-        <div className="category_label_wrapper">
+        <div className="category_label_wrapper" key={i}>
           <div className="category_label">
             <span>{variable[i]}</span>
           </div>
@@ -125,9 +128,9 @@ export function EditStudyPage({ type, initialData }: IEditStudyPagePropsType) {
           />
           {i === 4 ? (
             <div className="checked_wrapper">
-              {isChecked.map((arr) => {
+              {isChecked.map((arr, i) => {
                 return (
-                  <div className="checked_item">
+                  <div className="checked_item" key={i}>
                     <div className="select_item">{arr}</div>
                     <div
                       className="checked_cancel"
@@ -271,6 +274,9 @@ export function EditStudyPage({ type, initialData }: IEditStudyPagePropsType) {
           <img src={dashedLine} />
         </div>
         <div className="category_content_wrapper">{Categories()}</div>
+        <div className="category_content_wrapper">
+          <SkillSelector />
+        </div>
       </div>
       <div className="category_title_text">
         <span>개설하려는 스터디에 대해 소개해주세요.</span>

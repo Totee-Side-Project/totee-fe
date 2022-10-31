@@ -1,0 +1,18 @@
+// 컨테이너
+.studypage_container {
+  width: 80%;
+  margin: 50px auto 70px auto;
+  * {
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+}
+.studypage_input {
+  padding: 15px;
+  max-height: 250px;
+  border-radius: 10px;
+  border: 1.5px solid #bfbfbf;
+  margin-top: 20px;
+}
+.vertical_line {
+  margin: 0px 15px;
+}
