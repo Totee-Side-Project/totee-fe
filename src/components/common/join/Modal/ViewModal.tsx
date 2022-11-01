@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Modal } from '@components/atoms';
-import './JoinerViewModal.scss';
+import './joinerViewModal.scss';
 
 interface IViewModalProps {
   isOpen: boolean;

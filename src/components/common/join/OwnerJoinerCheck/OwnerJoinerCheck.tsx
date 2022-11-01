@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ViewModal } from '../Modal/ViewModal';
-import './OwnerJoinerCheck.scss';
+import './ownerJoinerCheck.scss';
 
 function OwnerJoinerCheck() {
   const [isOpenApplyStatusModal, setIsOpenApplyStatusModal] = useState(false);

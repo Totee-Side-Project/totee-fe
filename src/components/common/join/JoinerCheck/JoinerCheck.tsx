@@ -1,7 +1,7 @@
 import { JoinModal } from '@components/common/join/Modal/JoinModal';
 import OwnerJoinerCheck from '@components/common/join/OwnerJoinerCheck/OwnerJoinerCheck';
 import React, { useState } from 'react';
-import './JoinerCheck.scss';
+import './joinerCheck.scss';
 
 function JoinerCheck() {
   const [isOpenJoinModal, setIsOpenJoinModal] = useState(false);
