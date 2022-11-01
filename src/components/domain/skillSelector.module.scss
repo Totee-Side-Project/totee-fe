@@ -1,0 +1,35 @@
+.skill_selector_container {
+  width: 100%;
+
+  .selector_background {
+    background-color: #f8f8f8;
+    padding: 10px;
+    border: 1px solid #a8a8a8;
+    border-radius: 10px;
+  }
+
+  .category_wrap {
+    display: flex;
+    align-items: center;
+    width: 60%;
+    justify-content: space-around;
+    margin: 0 auto;
+    margin-bottom: 44px;
+
+    .category_item {
+      font-size: 30px;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .select {
+      border-bottom: 3px solid #7ba364;
+    }
+  }
+
+  .select_item_wrap {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}
