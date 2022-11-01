@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700&display=swap');
+$FONT : 'Noto Sans KR', sans-serif;
+
+
+.mentorCardWrapper{
+  width: 290px;
+  height: 309px;
+  margin: 100px 100px 100px 100px;
+  border: black 1px solid;
+  border-radius: 10px;
+}
+.mentorCardImg{
+  margin: 25px auto 15px auto;
+  width: 100px;
+  height: 100px;
+  border: 1px solid #000000;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 10px;
+}
+.mentorCardInfoWrapper{
+  text-align: center;
+  line-height: 25px;
+}
+.mentorCardName{
+  font-family:  $FONT;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 25px;
+  color: #1B1C1D;
+}
+.mentorCardPosition{
+  font-family: $FONT;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 25px;
+  color: #4F4F4F;
+}
+.mentorCardEmail{
+  font-size: 13px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  color: #767676;
+}
+.mentorCardLine{
+  border: #E9E9E9 1px solid;
+  margin: 10px 30px 20px 30px;
+}
+.mentorCardLineUnder{
+  display: flex;
+}
+.mentorCardLine2{
+  border: #E9E9E9 1px solid;
+  height: 35px;
+}
+.mentorCardLike{
+  margin: auto auto;
+}
+.mentorCardHeart{
+
+}
+.mentorCardScore{
+ margin: auto auto;
+}

@@ -1,3 +1,4 @@
+import MentorCard from '@components/common/card/MentorCard/MentorCard';
 import { loginState } from '@store/login';
 import React, { useEffect, useState } from 'react';
 import { useGetPostByPostId } from '@hooks/useGetQuery';
@@ -123,6 +124,7 @@ function DetailPage() {
 
   return (
     <div>
+      <MentorCard />
       {detailData && (
         <div className="detail_container">
           <div className="detail_profile_wrapper">
