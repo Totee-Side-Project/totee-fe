@@ -6,7 +6,7 @@ interface Props {
   type: HTMLInputTypeAttribute;
   value: string | number;
   placeholder: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>, key?: string) => void;
 }
 
 import './input.css';
