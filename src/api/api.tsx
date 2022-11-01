@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+import { PostRequestDto } from './requestType';
 import { IGetPostListResponse } from './responseType';
 
 const BASE_URL = 'https://api.totee.link/';
@@ -34,7 +35,7 @@ export const PostAPI = {
   getPostByPostId: (postId: number) => api.get(`/api/v1/post/${postId}`),
   searchPostList: (title: string) => api.get(`/api/v1/post/search/${title}`),
   statusChange: (postId: number) => api.post(`api/v1/post/status/${postId}`),
-  createPost: (form: any) =>
+  createPost: (form: PostRequestDto) =>
     api.post('/api/v1/post', form, {
       headers: {
         'Content-Type': 'multipart/form-data',

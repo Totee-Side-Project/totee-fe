@@ -4,6 +4,8 @@ import { SelectItem } from '@components/atoms';
 import { Circle } from '@components/ui/circle/Circle';
 import { MouseEvent, ReactNode, useEffect, useState } from 'react';
 import icon from '@components/common/svg';
+import classes from './skillSelector.module.scss';
+
 const skills = {
   frontEnd: ['JavaScript', 'Nextjs', 'React', 'Svelte', 'typescript'],
   backEnd: [
@@ -39,8 +41,14 @@ const skiilsWithKR = {
 const categories = ['프론트엔드', '백엔드', '모바일', '기타'];
 
 // selectedFilter에 따라 Selector에 렌더링할 data 를 넘겨주는 역할
+// selectedSkills가 변경될 때 마다 상위 Component의 상태를 변경해주는 useEffect를 사용하면 어떨까?
 
-export const SkillSelector = () => {
+interface Props {
+  onChangeArray: (data: (undefined | string)[]) => void;
+  top?: ReactNode;
+}
+
+export const SkillSelector = ({ onChangeArray, top }: Props) => {
   const [selectedFilter, setSelectedFilter] = useState(categories[0]);
   const [filteredSkills, setFilteredSkills] = useState<string[]>(
     skills[skiilsWithKR[selectedFilter]],
@@ -74,6 +82,10 @@ export const SkillSelector = () => {
   };
 
   useEffect(() => {
+    onChangeArray(selectedSkills);
+  }, [selectedSkills]);
+
+  useEffect(() => {
     const keys = skills[skiilsWithKR[selectedFilter]];
     setFilteredSkills(keys);
 
@@ -93,14 +105,16 @@ export const SkillSelector = () => {
   }, [selectedSkiilsTypeObject]);
 
   return (
-    <div>
-      <div>모집언어</div>
+    <div className={classes.skill_selector_container}>
+      {top}
       <Categories selectedFilter={selectedFilter} onClick={onClickFilterItem} />
-      <Selector
-        filteredSkills={filteredSkills}
-        selectedSkiilsTypeObject={selectedSkiilsTypeObject}
-        onClick={onClickSkillItem}
-      />
+      <div className={classes.selector_background}>
+        <Selector
+          filteredSkills={filteredSkills}
+          selectedSkiilsTypeObject={selectedSkiilsTypeObject}
+          onClick={onClickSkillItem}
+        />
+      </div>
     </div>
   );
 };
@@ -111,27 +125,20 @@ interface CategoriesProps {
 }
 const Categories = ({ selectedFilter, onClick }: CategoriesProps) => {
   return (
-    <span>
-      <ul
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-around',
-        }}
-        onClick={onClick}
-      >
-        {categories.map((category, index) => (
-          <li key={category + index} style={{ fontSize: '30px' }}>
-            <SelectItem
-              style={{ cursor: 'pointer' }}
-              bottom={<div style={{ borderBottom: '1px solid green' }}></div>}
-            >
-              {category}
-            </SelectItem>
-          </li>
-        ))}
-      </ul>
-    </span>
+    <ul className={classes.category_wrap} onClick={onClick}>
+      {categories.map((category, index) => (
+        <li
+          className={
+            category === selectedFilter
+              ? classes.category_item + ' ' + classes.select
+              : classes.category_item
+          }
+          key={category + index}
+        >
+          {category}
+        </li>
+      ))}
+    </ul>
   );
 };
 
@@ -146,25 +153,17 @@ const Selector = ({
   onClick,
 }: SelectorProps) => {
   return (
-    <div>
-      <ul
-        style={{
-          display: 'flex',
-        }}
-      >
-        {filteredSkills.map((skill, index) => {
-          return (
-            <SkillItem
-              key={skill + index}
-              dataValue={skill}
-              isSelect={selectedSkiilsTypeObject[skill]}
-              src={icon[skill]}
-              onClick={onClick}
-            ></SkillItem>
-          );
-        })}
-      </ul>
-    </div>
+    <ul className={classes.select_item_wrap}>
+      {filteredSkills.map((skill, index) => (
+        <SkillItem
+          key={skill + index}
+          dataValue={skill}
+          isSelect={selectedSkiilsTypeObject[skill]}
+          src={icon[skill]}
+          onClick={onClick}
+        />
+      ))}
+    </ul>
   );
 };
 
@@ -179,13 +178,17 @@ const SkillItem = ({ dataValue, isSelect, src, onClick }: SkillItemProps) => {
   return (
     <li
       className={isSelect ? 'select' : ''}
-      style={{ cursor: 'pointer' }}
+      style={{ flex: '0 0 25%' }}
       onClick={onClick}
       data-value={dataValue}
     >
       <SelectItem
-        left={<Circle selected={isSelect}></Circle>}
-        style={{ display: 'flex', alignItems: 'center' }}
+        left={<Circle selected={isSelect} backgroundColor="#7BA364" />}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          cursor: 'pointer',
+        }}
       >
         <div className="">
           <div
