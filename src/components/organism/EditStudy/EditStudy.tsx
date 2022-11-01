@@ -1,4 +1,4 @@
-import { SelectAPI } from '@api/api';
+import { PostAPI, SelectAPI } from '@api/api';
 import { useAddPost, useUpdatePost } from '@hooks/usePostQuery';
 import { UserState } from '@store/user';
 import { createHashHistory } from 'history';
@@ -169,7 +169,7 @@ export function EditStudyPage({ type, initialData }: IEditStudyPagePropsType) {
   };
 
   //업로드 버튼
-  const addPostMutation = useAddPost();
+  const addPostMutation = useAddPost(PostAPI.createPost);
   const updatePostMutation = useUpdatePost(initialData?.postId as number);
 
   const onClickUploadButton = async () => {
@@ -274,9 +274,7 @@ export function EditStudyPage({ type, initialData }: IEditStudyPagePropsType) {
           <img src={dashedLine} />
         </div>
         <div className="category_content_wrapper">{Categories()}</div>
-        <div className="category_content_wrapper">
-          <SkillSelector />
-        </div>
+        <div className="category_content_wrapper"></div>
       </div>
       <div className="category_title_text">
         <span>개설하려는 스터디에 대해 소개해주세요.</span>
