@@ -15,11 +15,12 @@ $FONT : 'Noto Sans KR', sans-serif;
   margin: 25px auto 15px auto;
   width: 100px;
   height: 100px;
-  border: 1px solid #767676;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  border-radius: 10px;
 }
 .mentorCardInfoWrapper{
   text-align: center;
