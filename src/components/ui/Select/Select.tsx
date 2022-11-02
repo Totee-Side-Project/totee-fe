@@ -30,15 +30,15 @@ export const Select = ({ label, trigger, onChange, options }: Props) => {
 };
 
 const DropDown = (props: Props) => {
-  const { value, open, close, toggle } = useBoolean(false);
+  const { isBoolean, setOpen, setClose, setToggle } = useBoolean(false);
 
   return (
     <DropDownContext.Provider
       value={{
-        isOpen: value,
-        setOpen: open,
-        setClose: close,
-        setToggle: toggle,
+        isOpen: isBoolean,
+        setOpen,
+        setClose,
+        setToggle,
       }}
     >
       <div className={classes.dropdown_wrap}>

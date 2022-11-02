@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
 export const useBoolean = (defaultValue: boolean) => {
-  const [value, setValue] = useState(defaultValue);
+  const [isBoolean, setBoolean] = useState(defaultValue);
 
-  const open = () => setValue(true);
-  const close = () => setValue(false);
-  const toggle = () => setValue((state) => !state);
+  const setOpen = () => setBoolean(true);
+  const setClose = () => setBoolean(false);
+  const setToggle = () => setBoolean((state) => !state);
 
-  return { value, open, close, toggle };
+  return { isBoolean, setOpen, setClose, setToggle };
 };
