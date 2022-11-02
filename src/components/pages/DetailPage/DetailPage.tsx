@@ -1,3 +1,4 @@
+import JoinerCheck from '@components/common/join/JoinerCheck/JoinerCheck';
 import { loginState } from '@store/login';
 import React, { useEffect, useState } from 'react';
 import { useGetPostByPostId } from '@hooks/useGetQuery';
@@ -123,6 +124,7 @@ function DetailPage() {
 
   return (
     <div>
+      <JoinerCheck />
       {detailData && (
         <div className="detail_container">
           <div className="detail_profile_wrapper">
