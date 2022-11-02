@@ -22,14 +22,14 @@ function MentorCard() {
         </div>
         <div className="mentorCardLine" />
         <div className="mentorCardLineUnder">
-          <div className="mentorCardLike">
+          <div className="mentorCardLikeWrap">
             <img className="mentorCardHeart" src={mentorheart} />
-            12
+            <div className="mentorCardHeartNum">12</div>
           </div>
           <div className="mentorCardLine2" />
-          <div className="mentorCardScore">
-            <img src={star} />
-            4.5
+          <div className="mentorCardScoreWrap">
+            <img className="mentorCardScore" src={star} />
+            <div className="mentorCardScoreNum">4.5</div>
           </div>
         </div>
       </div>

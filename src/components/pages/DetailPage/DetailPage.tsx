@@ -124,7 +124,8 @@ function DetailPage() {
 
   return (
     <div>
-      <MentorCard />
+      {/*MentorCard => 멘토 카드*/}
+      {/*<MentorCard />*/}
       {detailData && (
         <div className="detail_container">
           <div className="detail_profile_wrapper">

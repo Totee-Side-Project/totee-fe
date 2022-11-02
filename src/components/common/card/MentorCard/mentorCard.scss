@@ -5,15 +5,17 @@ $FONT : 'Noto Sans KR', sans-serif;
 .mentorCardWrapper{
   width: 290px;
   height: 309px;
-  margin: 100px 100px 100px 100px;
-  border: black 1px solid;
   border-radius: 10px;
+  //멘토 카드 사용시 margin 값 변경
+  margin: 100px;
+  padding-top: 1px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
 }
 .mentorCardImg{
   margin: 25px auto 15px auto;
   width: 100px;
   height: 100px;
-  border: 1px solid #000000;
+  border: 1px solid #767676;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -52,17 +54,37 @@ $FONT : 'Noto Sans KR', sans-serif;
 }
 .mentorCardLineUnder{
   display: flex;
+  color: #4f4f4f;
 }
 .mentorCardLine2{
   border: #E9E9E9 1px solid;
   height: 35px;
 }
-.mentorCardLike{
+.mentorCardLikeWrap{
+  display: flex;
   margin: auto auto;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: #848484;
 }
 .mentorCardHeart{
 
 }
+.mentorCardHeartNum{
+  margin: 1px 0 0 5px;
+}
+.mentorCardScoreWrap{
+  display: flex;
+  margin: auto auto;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: #848484;
+}
 .mentorCardScore{
- margin: auto auto;
+  margin-left: -10px;
+}
+.mentorCardScoreNum{
+  margin: 2px 0 0 5px;
 }
