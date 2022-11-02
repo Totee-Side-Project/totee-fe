@@ -1,16 +1,7 @@
 import { useBoolean } from '@hooks/useBoolean';
 import React, { useContext } from 'react';
-import { ReactNode, SelectHTMLAttributes } from 'react';
-import './select.scss';
-
-interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
-  label: ReactNode;
-  value: any;
-  trigger: ReactNode;
-  onChange: () => void;
-  options: any[];
-  children?: ReactNode;
-}
+import { ReactNode } from 'react';
+import classes from './select.module.scss';
 
 const DropDownContext = React.createContext({
   isOpen: false,
@@ -18,11 +9,19 @@ const DropDownContext = React.createContext({
   setClose: () => {},
   setToggle: () => {},
 });
-export const Select = ({ label, trigger, value, onChange, options }: Props) => {
+
+interface Props {
+  label: ReactNode;
+  trigger: ReactNode;
+  onChange: (e: any, key?: any) => void;
+  options: any[];
+  children?: ReactNode;
+}
+
+export const Select = ({ label, trigger, onChange, options }: Props) => {
   return (
     <DropDown
       label={label}
-      value={value}
       trigger={trigger}
       onChange={onChange}
       options={options}
@@ -31,21 +30,21 @@ export const Select = ({ label, trigger, value, onChange, options }: Props) => {
 };
 
 const DropDown = (props: Props) => {
-  const { value, open, close, toggle } = useBoolean(false);
+  const { isBoolean, setOpen, setClose, setToggle } = useBoolean(false);
 
   return (
     <DropDownContext.Provider
       value={{
-        isOpen: value,
-        setOpen: open,
-        setClose: close,
-        setToggle: toggle,
+        isOpen: isBoolean,
+        setOpen,
+        setClose,
+        setToggle,
       }}
     >
-      <div className="dropdown_wrap">
+      <div className={classes.dropdown_wrap}>
         {props.label}
         <Trigger trigger={props.trigger} />
-        <Menu>
+        <Menu onMouseDown={props.onChange}>
           {props.options.map((option) => (
             <Item key={option}>{option}</Item>
           ))}
@@ -57,18 +56,28 @@ const DropDown = (props: Props) => {
 
 const Trigger = ({ trigger }: { trigger: ReactNode }) => {
   const { setToggle } = useContext(DropDownContext);
-  return <div onClick={setToggle}>{trigger}</div>;
+  return <span onClick={setToggle}>{trigger}</span>;
 };
 
-const Menu = ({ children }: { children: ReactNode }) => {
+const Menu = ({
+  children,
+  onMouseDown,
+}: {
+  children: ReactNode;
+  onMouseDown: (e: any) => void;
+}) => {
   const { isOpen, setClose } = useContext(DropDownContext);
-  return (
-    <ul className="recent_list" onClick={setClose}>
-      {isOpen ? children : null}
+  return isOpen ? (
+    <ul
+      className={classes.recent_list}
+      onClick={setClose}
+      onMouseDown={onMouseDown}
+    >
+      {children}
     </ul>
-  );
+  ) : null;
 };
 
 const Item = ({ children }: { children: ReactNode }) => {
-  return <li className="recent_list_item">{children}</li>;
+  return <li className={classes.recent_list_item}>{children}</li>;
 };

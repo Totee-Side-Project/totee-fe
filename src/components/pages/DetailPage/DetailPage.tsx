@@ -1,4 +1,5 @@
 import MentorCard from '@components/common/card/MentorCard/MentorCard';
+import JoinerCheck from '@components/common/join/JoinerCheck/JoinerCheck';
 import { loginState } from '@store/login';
 import React, { useEffect, useState } from 'react';
 import { useGetPostByPostId } from '@hooks/useGetQuery';
@@ -126,6 +127,7 @@ function DetailPage() {
     <div>
       {/*MentorCard => 멘토 카드*/}
       {/*<MentorCard />*/}
+      <JoinerCheck />
       {detailData && (
         <div className="detail_container">
           <div className="detail_profile_wrapper">

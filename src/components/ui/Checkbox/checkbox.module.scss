@@ -1,0 +1,23 @@
+.checkbox_wrap {
+  display: inline-block;
+  .checkbox {
+    display: none;
+  }
+
+  .label_wrap {
+    display: flex;
+    cursor: pointer;
+  }
+
+  .custom_checkbox {
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+  }
+}
+
+label {
+  cursor: pointer;
+}
