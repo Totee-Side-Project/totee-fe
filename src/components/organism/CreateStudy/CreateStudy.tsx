@@ -1,56 +1,90 @@
-import { ChangeEvent, MouseEvent, ReactNode, useReducer } from 'react';
+import type { ChangeEvent, MouseEvent, ReactNode } from 'react';
+import type { Idata } from './data';
+import { useReducer } from 'react';
 import { Label } from '@components/atoms/label/Label';
 import { SkillSelector } from '@components/domain/SkillSelector';
 import { Input } from '@components/ui/Input/Input';
 import { Select } from '@components/ui/Select/Select';
 import { Checkbox } from '@components/ui/Checkbox/Checkbox';
+import { Editor } from '@components/common';
 import VerticalLine from '@assets/recentLine.svg';
 import DownArrow from '@assets/recentIcon.svg';
 import paragraphLine from '@assets/paragraph_line.png';
 
 import { useAddPost, useUpdatePost } from '@hooks/usePostQuery';
+
 import { PostAPI } from '@api/api';
 import { PostRequestDto } from '@api/requestType';
 
 import { defaultForm, reducerOfStudyPost } from './reducerOfStudyPost';
 import { data } from './data';
+
 import classes from './createStudy.module.scss';
 
 export const CreateStudy = () => {
-  return (
-    <div className="studypage_container">
-      <DefaultForm />
-    </div>
-  );
-};
-
-const DefaultForm = () => {
   const [form, dispatch] = useReducer(reducerOfStudyPost, defaultForm);
 
-  const onChangeByInput = (e: ChangeEvent<HTMLInputElement>, key: any) => {
-    // 숫자만 들어오게 해야한다.
-    dispatch({ type: key, payload: e.target.value });
+  // 숫자만 들어오게 해야한다.
+  const onChangeByInput = (e: ChangeEvent<HTMLInputElement>, id: any) => {
+    dispatch({ type: id, payload: e.target.value });
   };
-
   // select를 클릭해서 onChange event가 발생하게되면 dispatch를 날리거나 useContext를 사용해주자
-  const onChangeBySelect = (e: MouseEvent<HTMLElement>, key: any) => {
+  const onChangeBySelect = (e: MouseEvent<HTMLElement>, id: any) => {
     const currentTarget = e.currentTarget;
     const target = e.target as HTMLElement;
 
     if (currentTarget === target) return;
 
-    dispatch({ type: key, payload: target.innerText });
+    dispatch({ type: id, payload: target.innerText });
   };
 
-  // 인자로 자식의 변경된 state를 넘겨받안 dispatch 하는 부분
+  // 인자로 자식의 변경된 state를 넘겨받안 setState해주는 부분
   const onChangeByChildrenState = (data: (undefined | string)[]) => {
     dispatch({ type: 'skillList', payload: data });
   };
-
-  const onChangeByOnlineOrOffline = (data: string) => {
-    dispatch({ type: 'OnlineOrOffline', payload: data });
+  const onChangeByCheckbox = (data: string) => {
+    dispatch({ type: 'onlineOrOffline', payload: data });
   };
 
+  const onChangeByEditor = (content: any) => {
+    dispatch({ type: 'content', payload: content });
+  };
+
+  return (
+    <div className="studypage_container">
+      <DefaultForm
+        form={form}
+        onChangeByInput={onChangeByInput}
+        onChangeBySelect={onChangeBySelect}
+        onChangeByChildrenState={onChangeByChildrenState}
+        onChangeByCheckbox={onChangeByCheckbox}
+      />
+      <DetailForm
+        form={form}
+        data={data}
+        onChangeByInput={onChangeByInput}
+        onChangeByEditor={onChangeByEditor}
+      />
+      {/* <SubmitButton /> */}
+      {/* <ResetButton /> */}
+    </div>
+  );
+};
+
+interface DefaultFormProps {
+  form: PostRequestDto;
+  onChangeByInput: (e: ChangeEvent<HTMLInputElement>, key: any) => void;
+  onChangeBySelect: (e: MouseEvent<HTMLElement>, key: any) => void;
+  onChangeByChildrenState: (data: (undefined | string)[]) => void;
+  onChangeByCheckbox: (data: string) => void;
+}
+const DefaultForm = ({
+  form,
+  onChangeByInput,
+  onChangeBySelect,
+  onChangeByChildrenState,
+  onChangeByCheckbox,
+}: DefaultFormProps) => {
   return (
     <section>
       <div className={classes.study_form_header}>
@@ -62,26 +96,28 @@ const DefaultForm = () => {
           alt="paragraph_line"
         />
       </div>
-      {Object.entries(data.select).map(([id, [title, type, placeholder]]) => (
-        <DefaultFormElement
-          key={id}
-          id={id}
-          title={title}
-          type={type}
-          placeholder={placeholder}
-          value={form[id]}
-          onChangeByInput={(e) => onChangeByInput(e, id)}
-          onChangeBySelect={(e) => onChangeBySelect(e, id)}
-          onChangeByChildrenState={onChangeByChildrenState}
-          onChangeByOnlineOrOffline={onChangeByOnlineOrOffline}
-        />
-      ))}
-      <SubmitButton form={form} />
+      {Object.entries(data.defaultFormElements).map(
+        ([id, [title, type, placeholder]]) => (
+          <DefaultFormElement
+            key={id}
+            id={id}
+            title={title}
+            type={type}
+            placeholder={placeholder}
+            value={form[id]}
+            onChangeByInput={(e) => onChangeByInput(e, id)}
+            onChangeBySelect={(e) => onChangeBySelect(e, id)}
+            onChangeByChildrenState={onChangeByChildrenState}
+            onChangeByCheckbox={onChangeByCheckbox}
+          />
+        ),
+      )}
+      {/* <SubmitButton className={form={form} /> */}
     </section>
   );
 };
 
-interface StudySelectProps {
+interface DefaultFormElementProps {
   id: string;
   title: string;
   type: string;
@@ -90,7 +126,7 @@ interface StudySelectProps {
   onChangeByInput: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeBySelect: (e: MouseEvent<HTMLElement>) => void;
   onChangeByChildrenState: (data: (undefined | string)[]) => void;
-  onChangeByOnlineOrOffline: (data: string) => void;
+  onChangeByCheckbox: (data: string) => void;
 }
 
 export const DefaultFormElement = ({
@@ -102,8 +138,8 @@ export const DefaultFormElement = ({
   onChangeByInput,
   onChangeBySelect,
   onChangeByChildrenState,
-  onChangeByOnlineOrOffline,
-}: StudySelectProps) => {
+  onChangeByCheckbox,
+}: DefaultFormElementProps) => {
   if (type === 'select') {
     return (
       <div className={classes.form_element_wrap}>
@@ -195,7 +231,7 @@ export const DefaultFormElement = ({
       <div className={classes.form_checkbox_wrap}>
         <DefaultFormCheckbox
           top={<Label text={title} />}
-          onChangeByOnlineOrOffline={onChangeByOnlineOrOffline}
+          onChangeByCheckbox={onChangeByCheckbox}
         />
       </div>
     );
@@ -206,22 +242,28 @@ export const DefaultFormElement = ({
 // 어떤것을 보여줄지 넘겨주고 중간역할
 const DefaultFormCheckbox = ({
   top,
-  onChangeByOnlineOrOffline,
+  onChangeByCheckbox,
 }: {
   top: ReactNode;
-  onChangeByOnlineOrOffline: (data: string) => void;
+  onChangeByCheckbox: (data: string) => void;
 }) => {
   return (
     <Checkbox
       top={top}
-      options={data.checkbosOptions}
-      onClick={onChangeByOnlineOrOffline}
+      options={data.checkboxOptions}
+      onClick={onChangeByCheckbox}
       className={classes.checkbox_wrap}
     />
   );
 };
 
-const SubmitButton = ({ form }: { form: PostRequestDto }) => {
+const SubmitButton = ({
+  className,
+  form,
+}: {
+  className: string;
+  form: PostRequestDto;
+}) => {
   // 폼 data를 mutate 해주는 것은 버튼의 역할이다.
   const addPostMutation = useAddPost(PostAPI.createPost);
 
@@ -234,5 +276,61 @@ const SubmitButton = ({ form }: { form: PostRequestDto }) => {
 
     addPostMutation.mutateAsync(formData);
   };
-  return <button onClick={handleClick}>생성하기</button>;
+  return (
+    <button className={className} onClick={handleClick}>
+      글 올리기
+    </button>
+  );
+};
+
+interface DetailFormProps {
+  children?: ReactNode;
+  form: PostRequestDto;
+  data: Idata;
+  onChangeByInput: (e: ChangeEvent<HTMLInputElement>, key: any) => void;
+  onChangeByEditor: (content: any) => void;
+}
+const DetailForm = ({
+  children,
+  form,
+  data,
+  onChangeByInput,
+  onChangeByEditor,
+}: DetailFormProps) => {
+  return (
+    <>
+      <div className="category_title_text">
+        <span>개설하려는 스터디에 대해 소개해주세요.</span>
+      </div>
+      <div className="category_title_line"></div>
+      <Input
+        className="title_input"
+        top={<div className="title_title">제목</div>}
+        leftValue={undefined}
+        type={data.detailFormElements.title[1]}
+        value={form.title}
+        placeholder="제목을 입력해주세요."
+        onChange={(e) => onChangeByInput(e, 'title')}
+      />
+      <Editor values={form} onChange={onChangeByEditor} />
+      <div className="button_container">
+        <SubmitButton className={'upload_button'} form={form} />
+        {/* <button
+          className="upload_button"
+          type="submit"
+          // onClick={onClickUploadButton}
+        > */}
+        {/* <span>글 올리기</span> */}
+        {/* {type === 'create' ? (
+            <span>글 올리기</span>
+          ) : (
+            <span>글 수정하기</span>
+          )} */}
+        {/* </button> */}
+        <button className="cancel_button" onClick={() => {}}>
+          취소-동작x
+        </button>
+      </div>
+    </>
+  );
 };

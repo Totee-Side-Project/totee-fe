@@ -3,8 +3,11 @@ import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import './editor.scss';
 
-export const Editor: any = ({ values, setValues }: any) => {
-  // const ReactQuill = require('react-quill');
+interface Props {
+  values: any;
+  onChange: (content: any) => void;
+}
+export const Editor: any = ({ values, onChange }: Props) => {
   const QuillRef = useRef<ReactQuill>();
 
   const modules = {
@@ -51,12 +54,13 @@ export const Editor: any = ({ values, setValues }: any) => {
           }
         }}
         value={values.content}
-        onChange={(content: any) => {
-          setValues({
-            ...values,
-            ['content']: content,
-          });
-        }}
+        // onChange={(content: any) => {
+        //   setValues({
+        //     ...values,
+        //     ['content']: content,
+        //   });
+        // }}
+        onChange={(content) => onChange(content)}
         className="editor_wrapper"
         theme="snow"
         modules={modules}
