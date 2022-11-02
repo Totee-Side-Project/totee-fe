@@ -7,10 +7,10 @@ export interface IPostRequestDto {
   onlineOrOffline: string; // 미팅 방식 (온라인 or 오프라인),
   region: string; // 지역,
   period: string; // 예상 기간 (ex 1개월 미만 or 1~3개월 or 3~6개월 or 6개월 이상),
-  recruitNum: number; // 모집 인원 수,
+  recruitNum: string; // 모집 인원 수,
   skillList: string[]; // 기술 스택 리스트 (ex JavaScript, C, Java),
 }
 
 export interface PostRequestDto extends IPostRequestDto {
-  [key: string]: string | number | string[];
+  [key: string]: string | string[];
 }

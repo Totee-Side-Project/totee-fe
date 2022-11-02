@@ -12,27 +12,9 @@ import { useAddPost, useUpdatePost } from '@hooks/usePostQuery';
 import { PostAPI } from '@api/api';
 import { PostRequestDto } from '@api/requestType';
 
-import { reducerOfStudyPost } from './reducerOfStudyPost';
+import { defaultForm, reducerOfStudyPost } from './reducerOfStudyPost';
+import { data } from './data';
 import classes from './createStudy.module.scss';
-// import './createStudy.scss';
-
-const select = {
-  period: ['진행기간', 'select'],
-  recruitNum: ['모집인원', 'number'],
-  language: ['모집언어', 'multiSelect'],
-  process: ['진행방식', 'checkbox'],
-  region: ['진행지역', 'text'],
-  contactMethod: ['연락방식', 'select'],
-};
-
-const selectOptions = {
-  period: ['1개월미만', '1~3개월', '3~6개월', '6개월이상'],
-  contactMethod: ['카카오톡 오픈채팅', '이메일', '노션', '기타'],
-} as {
-  [key: string]: string[];
-};
-
-const checkbosOptions = ['온라인', '오프라인'];
 
 export const CreateStudy = () => {
   return (
@@ -43,18 +25,7 @@ export const CreateStudy = () => {
 };
 
 const DefaultForm = () => {
-  const [form, dispatch] = useReducer(reducerOfStudyPost, {
-    title: '', // 제목
-    content: '', // 내용,
-    contactLink: '', // 연락 링크,
-    contactMethod: '', // 연락 방법,
-    detailedRegion: '', // 상세주소,
-    onlineOrOffline: '', // 미팅 방식 (온라인 or 오프라인),
-    region: '', // 지역,
-    period: '', // 예상 기간 (ex 1개월 미만 or 1~3개월 or 3~6개월 or 6개월 이상),
-    recruitNum: 2, // 모집 인원 수,
-    skillList: ['JavaScript'], // 기술 스택 리스트 (ex JavaScript, C, Java),
-  });
+  const [form, dispatch] = useReducer(reducerOfStudyPost, defaultForm);
 
   const onChangeByInput = (e: ChangeEvent<HTMLInputElement>, key: any) => {
     // 숫자만 들어오게 해야한다.
@@ -71,7 +42,7 @@ const DefaultForm = () => {
     dispatch({ type: key, payload: target.innerText });
   };
 
-  // 인자로 자식의 변경된 state를 넘겨받안 setState해주는 부분
+  // 인자로 자식의 변경된 state를 넘겨받안 dispatch 하는 부분
   const onChangeByChildrenState = (data: (undefined | string)[]) => {
     dispatch({ type: 'skillList', payload: data });
   };
@@ -91,12 +62,13 @@ const DefaultForm = () => {
           alt="paragraph_line"
         />
       </div>
-      {Object.entries(select).map(([id, [title, type]], index) => (
+      {Object.entries(data.select).map(([id, [title, type, placeholder]]) => (
         <DefaultFormElement
           key={id}
           id={id}
           title={title}
           type={type}
+          placeholder={placeholder}
           value={form[id]}
           onChangeByInput={(e) => onChangeByInput(e, id)}
           onChangeBySelect={(e) => onChangeBySelect(e, id)}
@@ -113,6 +85,7 @@ interface StudySelectProps {
   id: string;
   title: string;
   type: string;
+  placeholder: string;
   value: string | number | string[];
   onChangeByInput: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeBySelect: (e: MouseEvent<HTMLElement>) => void;
@@ -124,23 +97,23 @@ export const DefaultFormElement = ({
   id,
   title,
   type,
+  placeholder,
   value,
   onChangeByInput,
   onChangeBySelect,
   onChangeByChildrenState,
   onChangeByOnlineOrOffline,
 }: StudySelectProps) => {
-  if (type === 'select')
+  if (type === 'select') {
     return (
-      <div key={id} className={classes.form_element_wrap}>
+      <div className={classes.form_element_wrap}>
         <Select
-          key={title}
           label={<Label text={title} />}
           trigger={
             <label className="recent_wrapper">
               <div className="recent_value">
                 <span className="value_placeholder">
-                  {!value ? '선택' : `${value}`}
+                  {!value ? placeholder : `${value}`}
                 </span>
               </div>
               <img
@@ -152,15 +125,33 @@ export const DefaultFormElement = ({
             </label>
           }
           onChange={onChangeBySelect}
-          options={selectOptions[id]}
+          options={data.selectOptions[id]}
         />
       </div>
     );
+  }
+  if (type === 'text') {
+    return (
+      <div className={classes.form_input_wrap}>
+        <Input
+          type="text"
+          className={classes.studypage_input}
+          top={title ? title : undefined}
+          leftValue={
+            <img src={VerticalLine} className={classes.vertical_line} alt="|" />
+          }
+          value={value as string}
+          placeholder={placeholder}
+          onChange={onChangeByInput}
+        />
+      </div>
+    );
+  }
   if (type === 'number')
     return (
-      <div key={id} className={classes.form_input_wrap}>
+      <div className={classes.form_input_wrap}>
         <Input
-          type="number"
+          type={type}
           placeholder="최소 1명 ~ 최대 15명"
           className={classes.studypage_input}
           top={<Label text={title} />}
@@ -168,6 +159,8 @@ export const DefaultFormElement = ({
             <img src={VerticalLine} className={classes.vertical_line} alt="|" />
           }
           value={value as string}
+          max={15}
+          min={1}
           onChange={onChangeByInput}
         />
       </div>
@@ -221,7 +214,7 @@ const DefaultFormCheckbox = ({
   return (
     <Checkbox
       top={top}
-      options={checkbosOptions}
+      options={data.checkbosOptions}
       onClick={onChangeByOnlineOrOffline}
       className={classes.checkbox_wrap}
     />

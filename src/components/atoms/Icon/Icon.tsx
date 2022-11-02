@@ -1,6 +1,6 @@
-import React from 'react';
+// import React from 'react';
 import classes from './icon.module.scss';
-import Background from '@assets/background-image.png';
+// import Background from '@assets/background-image.png';
 import { IIconProps } from 'types/icon.types';
 
 export function Icon({ imageUrl, style, onClick }: IIconProps) {

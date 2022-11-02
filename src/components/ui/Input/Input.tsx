@@ -1,14 +1,4 @@
 import { ChangeEvent, HTMLInputTypeAttribute, ReactNode } from 'react';
-interface Props {
-  className: string;
-  top: ReactNode;
-  leftValue: ReactNode;
-  type: HTMLInputTypeAttribute;
-  value: string | number;
-  placeholder: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>, key?: string) => void;
-}
-
 import './input.css';
 // why inline style ?? 해당 파일 코드 하나만 복사하면 어느 프로젝트에서든 재사용할 수 있도록 하기 위해서
 
@@ -32,6 +22,18 @@ const styleNoneBorder = {
 const styleNoneSpinButton = {
   // WebkitAppearance:,
 };
+
+interface Props {
+  type: HTMLInputTypeAttribute;
+  className?: string;
+  placeholder: string;
+  top?: ReactNode;
+  leftValue?: ReactNode;
+  value: string | number;
+  max?: number;
+  min?: number;
+  onChange: (e: ChangeEvent<HTMLInputElement>, key?: string) => void;
+}
 
 export const Input = ({ className, top, leftValue, ...props }: Props) => {
   return (

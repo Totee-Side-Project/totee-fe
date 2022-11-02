@@ -1,5 +1,5 @@
-import React from 'react';
-import { ReactNode, useEffect, useState } from 'react';
+import type { ReactNode } from 'react';
+import { useEffect, useState } from 'react';
 import { Circle } from '../circle/Circle';
 import classes from './checkbox.module.scss';
 
@@ -30,7 +30,7 @@ export const Checkbox = ({ top, options, onClick, className }: Props) => {
 
   useEffect(() => {
     setIsCheckeds((oldState) =>
-      oldState.map(({ id, isChecked }) => ({
+      oldState.map(({ id }) => ({
         id,
         isChecked: isCheckedId === id ? true : false,
       })),
