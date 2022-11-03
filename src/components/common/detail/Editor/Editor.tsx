@@ -1,6 +1,7 @@
-import React, { Component, useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import classes from './editor.module.scss';
 import './editor.scss';
 
 interface Props {
@@ -46,7 +47,7 @@ export const Editor: any = ({ values, onChange }: Props) => {
   ];
 
   return (
-    <div className="editor_container">
+    <div className={classes.editor_container}>
       <ReactQuill
         ref={(element: any) => {
           if (element !== null) {
@@ -54,14 +55,8 @@ export const Editor: any = ({ values, onChange }: Props) => {
           }
         }}
         value={values.content}
-        // onChange={(content: any) => {
-        //   setValues({
-        //     ...values,
-        //     ['content']: content,
-        //   });
-        // }}
         onChange={(content) => onChange(content)}
-        className="editor_wrapper"
+        className={classes.editor_wrapper}
         theme="snow"
         modules={modules}
         formats={formats}

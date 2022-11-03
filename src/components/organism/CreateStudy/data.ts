@@ -35,6 +35,7 @@ export const data: Idata = {
   },
   detailFormElements: {
     title: ['', 'text', '제목을 입력해주세요'],
+    // 추후에 에디터 컨텐츠의 기본 폼 양식을 추가해야할 수도 있다.
     content: ['', 'textEditor'],
   },
 };

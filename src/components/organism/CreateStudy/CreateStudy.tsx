@@ -20,6 +20,10 @@ import { defaultForm, reducerOfStudyPost } from './reducerOfStudyPost';
 import { data } from './data';
 
 import classes from './createStudy.module.scss';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { AxiosResponse } from 'axios';
+import Swal from 'sweetalert2';
+import { Line } from '@components/atoms/Line/Line';
 
 export const CreateStudy = () => {
   const [form, dispatch] = useReducer(reducerOfStudyPost, defaultForm);
@@ -51,7 +55,7 @@ export const CreateStudy = () => {
   };
 
   return (
-    <div className="studypage_container">
+    <div className={classes.studypage_container}>
       <DefaultForm
         form={form}
         onChangeByInput={onChangeByInput}
@@ -266,16 +270,31 @@ const SubmitButton = ({
 }) => {
   // 폼 data를 mutate 해주는 것은 버튼의 역할이다.
   const addPostMutation = useAddPost(PostAPI.createPost);
-
   const handleClick = async () => {
     const formData = new FormData();
-
     Object.entries(form).forEach(([key, value]) =>
       formData.append(key, String(value)),
     );
+    const response: AxiosResponse = await addPostMutation.mutateAsync(formData);
 
-    addPostMutation.mutateAsync(formData);
+    if (response.status === 200) {
+      await Swal.fire({
+        title: '등록 완료',
+        text: '마이페이지에서 확인하세요',
+        icon: 'success',
+        confirmButtonText: '<a href="/">확인</a>',
+      });
+      // 홈으로 네비게이트
+      return;
+    }
+    await Swal.fire({
+      title: '등록 실패',
+      text: '재 접속후 다시 작성해주세요',
+      icon: 'error',
+      confirmButtonText: '확인',
+    });
   };
+
   return (
     <button className={className} onClick={handleClick}>
       글 올리기
@@ -297,40 +316,36 @@ const DetailForm = ({
   onChangeByInput,
   onChangeByEditor,
 }: DetailFormProps) => {
+  const navigate = useNavigate();
+
+  const navigateRootOnClick = () => navigate('/');
   return (
-    <>
-      <div className="category_title_text">
-        <span>개설하려는 스터디에 대해 소개해주세요.</span>
+    <section className={classes.detail_editor_container}>
+      <div className={classes.title_line} />
+      <div className={classes.title_text}>
+        <p>개설하려는 스터디에 대해 소개해주세요.</p>
       </div>
-      <div className="category_title_line"></div>
+      <Line className={classes.title_line} />
       <Input
-        className="title_input"
-        top={<div className="title_title">제목</div>}
-        leftValue={undefined}
+        className={classes.title_input}
+        top={<div className={classes.title_title}>제목</div>}
         type={data.detailFormElements.title[1]}
         value={form.title}
         placeholder="제목을 입력해주세요."
         onChange={(e) => onChangeByInput(e, 'title')}
       />
-      <Editor values={form} onChange={onChangeByEditor} />
-      <div className="button_container">
-        <SubmitButton className={'upload_button'} form={form} />
-        {/* <button
-          className="upload_button"
-          type="submit"
-          // onClick={onClickUploadButton}
-        > */}
-        {/* <span>글 올리기</span> */}
-        {/* {type === 'create' ? (
-            <span>글 올리기</span>
-          ) : (
-            <span>글 수정하기</span>
-          )} */}
-        {/* </button> */}
-        <button className="cancel_button" onClick={() => {}}>
-          취소-동작x
-        </button>
+      <div>
+        <Editor values={form} onChange={onChangeByEditor} />
+        <div className={classes.button_container}>
+          <SubmitButton className={classes.upload_button} form={form} />
+          <button
+            className={classes.cancel_button}
+            onClick={navigateRootOnClick}
+          >
+            취소
+          </button>
+        </div>
       </div>
-    </>
+    </section>
   );
 };

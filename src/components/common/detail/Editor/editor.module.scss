@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
 
-// // 컨테이너
+// 컨테이너
 // .studypage_container {
 //   width: 80%;
 //   margin: 50px auto 70px auto;
@@ -181,9 +181,9 @@
 //   align-items: center;
 // }
 
-// // .select_item{
+// .select_item{
 
-// // }
+// }
 
 // .checked_cancel {
 //   width: 15px;
@@ -198,29 +198,17 @@
 //   margin: 3px;
 // }
 
-// //editor
-// .editor_container > * {
-//   border: none;
-//   // width: 95%;
-//   // margin-left: 3%;
-// }
-
-// .editor_wrapper {
-//   height: 200px;
-//   background: #ffffff;
-//   border: 1px solid gray;
-//   border-radius: 10px;
-//   overflow: hidden;
-// }
-
-.ql-toolbar.ql-snow {
+//editor
+.editor_container > * {
   border: none;
-  border-bottom: 1px solid gray;
-  box-sizing: border-box;
-  font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
-  padding: 8px;
+  // width: 95%;
+  // margin-left: 3%;
 }
 
-.ql-container.ql-snow {
-  border: none;
+.editor_wrapper {
+  height: 600px;
+  background: #ffffff;
+  border: 1px solid gray;
+  border-radius: 10px;
+  overflow: hidden;
 }
