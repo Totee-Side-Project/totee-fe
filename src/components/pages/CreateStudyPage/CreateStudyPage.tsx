@@ -6,6 +6,7 @@ import { CreateStudy } from '@components/organism/CreateStudy/CreateStudy';
 function CreateStudyPage() {
   return (
     <>
+      <div>test netlify</div>
       <Banner />
       <CreateStudy />
     </>
