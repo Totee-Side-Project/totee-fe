@@ -52,13 +52,15 @@ interface IchildrenReactNode {
 }
 
 export const NewDetailPage = () => {
-  // const navigate = useNavigate();
   const { id } = useParams();
 
-  if (!id) return;
+  // if (!id) return null;
   const { data: postData, status, refetch } = useGetPostByPostId(Number(id));
   const responseData: IResponseDto = postData?.data.body.data;
 
+  // useEffect(() => {
+  //   if (!id) return;
+  // }, []);
   // const [responseData, setResponseData] = useState(null);
 
   // useEffect(() => {
@@ -118,6 +120,7 @@ export const NewDetailPage = () => {
       </div>
     );
   }
+  return null;
 };
 
 const Bottom = ({ children }: IchildrenReactNode) => {
