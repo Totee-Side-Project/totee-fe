@@ -1,4 +1,4 @@
-import { ImgHTMLAttributes } from 'react';
+import type { ImgHTMLAttributes } from 'react';
 import classes from './icon.module.scss';
 
 interface Props extends ImgHTMLAttributes<HTMLImageElement> {}
