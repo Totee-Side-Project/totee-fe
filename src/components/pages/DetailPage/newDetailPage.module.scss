@@ -90,11 +90,24 @@
 .content_wrap {
   min-height: 680px;
   padding: 20px 5%;
-  // text-align: center;
 }
 
 .detail_line {
   border: 1px solid #eef3eb;
   width: 100%;
   margin: 20px auto;
+}
+
+.comment_wrap {
+  .comment_list_wrap {
+    margin-bottom: 30px;
+  }
+
+  .comment_input_wrap {
+    .comment_input {
+      border: 1px solid green;
+      width: 100%;
+      padding: 18px 44px;
+    }
+  }
 }

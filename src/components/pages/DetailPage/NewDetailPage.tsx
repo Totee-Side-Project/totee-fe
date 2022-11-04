@@ -1,6 +1,6 @@
-import { Banner, Categories } from '@components/common';
+import { Banner, Categories, CommentInput } from '@components/common';
 import { useGetPostByPostId } from '@hooks/useGetQuery';
-import { ReactNode, useEffect } from 'react';
+import { ChangeEvent, ReactNode, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import HeartIcon from '@assets/svg/common/heart.svg';
 import SettingIcon from '@assets/svg/common/setting.svg';
@@ -12,9 +12,22 @@ import { useCustomNavigate } from '@hooks/useCustomNavigate';
 import { Line } from '@components/atoms/Line/Line';
 import { NewIcon } from '@components/atoms/Icon/NewIcon';
 import JoinerCheck from '@components/common/join/JoinerCheck/JoinerCheck';
+import { Comment } from '@components/common';
 import { createMarkup } from '@utils/createMarkup';
+import { Input } from '@components/ui/Input/Input';
+import { NewComments } from '@components/common/detail/Comment/NewComment';
 
-interface IResponseDto {
+export interface ICommentDto {
+  id: number;
+  nickname: string;
+  content: string;
+  createdAt: Date;
+  modifiedAt: Date;
+  commentId: number;
+  userSeq: number;
+  profileImageUrl: string;
+}
+export interface IResponsePostDetail {
   postId: number;
   title: string;
   content: string;
@@ -22,13 +35,13 @@ interface IResponseDto {
   view: number;
   likeNum: number;
   commentNum: number;
-  commentDTOList: [];
+  commentDTOList: ICommentDto[];
   imageUrl: string;
   createdAt: string;
   onlineOrOffline: string;
   period: string;
   status: string;
-  positionList: [];
+  positionList: string[];
   skillList: {
     [key: string]: string;
   };
@@ -58,7 +71,7 @@ export const NewDetailPage = () => {
 
   // if (!id) return null;
   const { data: postData, status, refetch } = useGetPostByPostId(Number(id));
-  const responseData: IResponseDto = postData?.data.body.data;
+  const responseData: IResponsePostDetail = postData?.data.body.data;
 
   // useEffect(() => {
   //   if (!id) return;
@@ -112,10 +125,10 @@ export const NewDetailPage = () => {
               />
             </SectionHeader>
             <SectionContent content={responseData.content} />
-            <Bottom>
+            <SectionFooter>
               <LikeCommentViewCount />
-              <Comment />
-            </Bottom>
+              <Comments commentDTOList={responseData.commentDTOList} />
+            </SectionFooter>
           </NewDetailPageSection>
           <RightSidebar />
         </main>
@@ -125,12 +138,41 @@ export const NewDetailPage = () => {
   return null;
 };
 
-const Bottom = ({ children }: IchildrenReactNode) => {
-  return <>{children}</>;
+const SectionFooter = ({ children }: IchildrenReactNode) => {
+  return <footer>{children}</footer>;
 };
 
-const Comment = () => {
-  return <div>comment</div>;
+const Comments = ({
+  commentDTOList,
+}: Pick<IResponsePostDetail, 'commentDTOList'>) => {
+  const [commentValue, setCommentValue] = useState('');
+  const onChangeCommentValue = (e: ChangeEvent<HTMLInputElement>) =>
+    setCommentValue(e.target.value);
+
+  return (
+    <div className={classes.comment_wrap}>
+      <div className={classes.comment_list_wrap}>
+        <NewComments commentDTOList={commentDTOList} />
+        {/* {commentDTOList &&
+          commentDTOList.map((comment: any) => (
+            <Comment
+              postId={parseInt(id as string)}
+              comment={comment}
+              key={`comment-${comment.commentId}`}
+            ></Comment>
+          ))} */}
+      </div>
+      <div className={classes.comment_input_wrap}>
+        <Input
+          type="text"
+          placeholder="댓글을 입력해주세요"
+          value={commentValue}
+          onChange={onChangeCommentValue}
+        />
+      </div>
+    </div>
+  );
+  /* <CommentInput postId={parseInt(id as string)} type="comment" /> */
 };
 
 const LikeCommentViewCount = () => {
@@ -142,7 +184,7 @@ const NewDetailPageSection = ({ children }: IchildrenReactNode) => {
 };
 
 const SectionHeader = ({ children }: IchildrenReactNode) => {
-  return <>{children}</>;
+  return <header>{children}</header>;
 };
 
 const SectionTitle = (props: Pick<SectionHeaderProps, 'title'>) => {
@@ -171,13 +213,15 @@ const SectionCategory = ({
   return (
     <div className={classes.category_wrap}>
       <div className={classes.flex_wrap + ' ' + classes.category_left}>
-        <div className={classes.category_button}>{categoryName}</div>
+        {/* <div className={classes.category_button}>{categoryName}</div> */}
         <div className={classes.category_button}>{onlineOrOffline}</div>
         <div className={classes.category_button}>{recruitNum + '명'}</div>
         <div className={classes.category_button}>{status}</div>
       </div>
       <div className={classes.category_right}>
-        <div className={classes.status_button}>모집중</div>
+        <div className={classes.status_button}>
+          status에 따라 다르게 보여줘야한다.
+        </div>
       </div>
     </div>
   );
@@ -189,14 +233,14 @@ interface SectionContentProps {
 
 const SectionContent = (props: SectionContentProps) => {
   return (
-    <div className={classes.content_container}>
+    <article className={classes.content_container}>
       <Line className={classes.detail_line} />
       <div
         className={classes.content_wrap}
         dangerouslySetInnerHTML={createMarkup(props.content)}
       />
       <Line className={classes.detail_line} />
-    </div>
+    </article>
   );
 };
 
@@ -219,11 +263,12 @@ const LeftSidebar = () => {
 };
 
 interface RightSidebarProps {}
+
 const RightSidebar = () => {
   return <aside className={classes.aside_right}>{/* <JoinerCheck /> */}</aside>;
 };
 
-// const DetailPostCategory = ({ detailData }: { detailData: IResponseDto }) => {
+// const DetailPostCategory = ({ detailData }: { detailData: IResponsePostDetail }) => {
 //   return (
 //     <div className="summary_category_wrapper">
 //       <div className="summary_category_left">

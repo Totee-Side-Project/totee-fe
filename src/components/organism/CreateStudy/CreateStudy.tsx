@@ -177,7 +177,7 @@ export const DefaultFormElement = ({
           type="text"
           className={classes.studypage_input}
           top={title ? title : undefined}
-          leftValue={
+          left={
             <img src={VerticalLine} className={classes.vertical_line} alt="|" />
           }
           value={value as string}
@@ -195,7 +195,7 @@ export const DefaultFormElement = ({
           placeholder="최소 1명 ~ 최대 15명"
           className={classes.studypage_input}
           top={<Label text={title} />}
-          leftValue={
+          left={
             <img src={VerticalLine} className={classes.vertical_line} alt="|" />
           }
           value={value as string}
