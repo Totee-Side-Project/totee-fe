@@ -21,8 +21,8 @@ export interface ICommentDto {
   id: number;
   nickname: string;
   content: string;
-  createdAt: Date;
-  modifiedAt: Date;
+  createdAt: string;
+  modifiedAt: string;
   commentId: number;
   userSeq: number;
   profileImageUrl: string;
