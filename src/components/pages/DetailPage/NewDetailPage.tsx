@@ -11,6 +11,8 @@ import classes from './newDetailPage.module.scss';
 import { useCustomNavigate } from '@hooks/useCustomNavigate';
 import { Line } from '@components/atoms/Line/Line';
 import { NewIcon } from '@components/atoms/Icon/NewIcon';
+import JoinerCheck from '@components/common/join/JoinerCheck/JoinerCheck';
+import { createMarkup } from '@utils/createMarkup';
 
 interface IResponseDto {
   postId: number;
@@ -184,10 +186,15 @@ const SectionCategory = ({
 interface SectionContentProps {
   content: string;
 }
+
 const SectionContent = (props: SectionContentProps) => {
   return (
-    <div>
-      <div>{props.content}</div>
+    <div className={classes.content_container}>
+      <Line className={classes.detail_line} />
+      <div
+        className={classes.content_wrap}
+        dangerouslySetInnerHTML={createMarkup(props.content)}
+      />
       <Line className={classes.detail_line} />
     </div>
   );
@@ -213,7 +220,7 @@ const LeftSidebar = () => {
 
 interface RightSidebarProps {}
 const RightSidebar = () => {
-  return <aside className={classes.aside_right}>right</aside>;
+  return <aside className={classes.aside_right}>{/* <JoinerCheck /> */}</aside>;
 };
 
 // const DetailPostCategory = ({ detailData }: { detailData: IResponseDto }) => {
