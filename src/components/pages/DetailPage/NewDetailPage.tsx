@@ -1,21 +1,22 @@
-import { Banner, Categories, CommentInput } from '@components/common';
-import { useGetPostByPostId } from '@hooks/useGetQuery';
-import { ChangeEvent, ReactNode, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import HeartIcon from '@assets/svg/common/heart.svg';
-import SettingIcon from '@assets/svg/common/setting.svg';
-import EyeIcon from '@assets/svg/common/eye.svg';
-import LeftArrowHasBorderIcon from '@assets/svg/common/left_arrow_has_border.svg';
+import { ChangeEvent, ReactNode, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-import classes from './newDetailPage.module.scss';
-import { useCustomNavigate } from '@hooks/useCustomNavigate';
+import { Banner } from '@components/common';
 import { Line } from '@components/atoms/Line/Line';
 import { NewIcon } from '@components/atoms/Icon/NewIcon';
 import JoinerCheck from '@components/common/join/JoinerCheck/JoinerCheck';
-import { Comment } from '@components/common';
-import { createMarkup } from '@utils/createMarkup';
-import { Input } from '@components/ui/Input/Input';
 import { NewComments } from '@components/common/detail/Comment/NewComment';
+// import { Input } from '@components/ui/Input/Input';
+// import { Comment } from '@components/common';
+import { useGetPostByPostId } from '@hooks/useGetQuery';
+import { useCustomNavigate } from '@hooks/useCustomNavigate';
+import { createMarkup } from '@utils/createMarkup';
+import HeartIcon from '@assets/svg/common/heart.svg';
+import SettingIcon from '@assets/svg/common/setting.svg';
+import EyeIcon from '@assets/svg/common/eye.svg';
+import MessageIcon from '@assets/svg/common/message-square.svg';
+import LeftArrowHasBorderIcon from '@assets/svg/common/left_arrow_has_border.svg';
+import classes from './newDetailPage.module.scss';
 
 export interface ICommentDto {
   id: number;
@@ -73,16 +74,6 @@ export const NewDetailPage = () => {
   const { data: postData, status, refetch } = useGetPostByPostId(Number(id));
   const responseData: IResponsePostDetail = postData?.data.body.data;
 
-  // useEffect(() => {
-  //   if (!id) return;
-  // }, []);
-  // const [responseData, setResponseData] = useState(null);
-
-  // useEffect(() => {
-  //   if (!postData) return;
-  //   setResponseData({ ...postData?.data.body.data });
-  // }, [postData]);
-
   // Render Loading Component
   if (status === 'loading') return <div>loading...</div>;
 
@@ -108,10 +99,7 @@ export const NewDetailPage = () => {
     return (
       <div>
         <Banner />
-        <main
-          className={classes.study_detail_page_main}
-          // style={{ margin: '100px 0', width: '100%' }}
-        >
+        <main className={classes.study_detail_page_main}>
           <LeftSidebar />
           <NewDetailPageSection>
             <SectionHeader>
@@ -126,7 +114,11 @@ export const NewDetailPage = () => {
             </SectionHeader>
             <SectionContent content={responseData.content} />
             <SectionFooter>
-              <LikeCommentViewCount />
+              <LikeCommentViewCount
+                likeNum={responseData.likeNum}
+                commentNum={responseData.commentNum}
+                view={responseData.view}
+              />
               <Comments commentDTOList={responseData.commentDTOList} />
             </SectionFooter>
           </NewDetailPageSection>
@@ -146,8 +138,11 @@ const Comments = ({
   commentDTOList,
 }: Pick<IResponsePostDetail, 'commentDTOList'>) => {
   const [commentValue, setCommentValue] = useState('');
-  const onChangeCommentValue = (e: ChangeEvent<HTMLInputElement>) =>
-    setCommentValue(e.target.value);
+  // const onChangeCommentValue = (e: ChangeEvent<HTMLInputElement>) =>
+  //   setCommentValue(e.target.value);
+  const onChangeCommentValueByTextarea = (
+    e: ChangeEvent<HTMLTextAreaElement>,
+  ) => setCommentValue(e.target.value);
 
   return (
     <div className={classes.comment_wrap}>
@@ -162,21 +157,48 @@ const Comments = ({
             ></Comment>
           ))} */}
       </div>
-      <div className={classes.comment_input_wrap}>
+      textarea로 변경될 수 있음
+      <textarea
+        className={classes.comment_textarea}
+        placeholder="댓글을 입력해주세요"
+        value={commentValue}
+        onChange={onChangeCommentValueByTextarea}
+      />
+      {/* <div className={classes.comment_input_wrap}>
         <Input
           type="text"
           placeholder="댓글을 입력해주세요"
           value={commentValue}
           onChange={onChangeCommentValue}
         />
-      </div>
+      </div> */}
     </div>
   );
-  /* <CommentInput postId={parseInt(id as string)} type="comment" /> */
 };
 
-const LikeCommentViewCount = () => {
-  return <div>line, comment, view count</div>;
+const LikeCommentViewCount = (
+  props: Pick<IResponsePostDetail, 'likeNum' | 'commentNum' | 'view'>,
+) => {
+  // 컴포넌트 내부에서 값을 바꾸지 않는다. 리렌더링이 일어날 경우 해당 변수는 초기화되기 때문에 문제는 없다.
+  // 즉 props가 바뀌지 않으면 해당 컴포넌트는 리렌더링이 될 필요가 없지 않나?
+  const footerItems = {
+    like: [HeartIcon, props.likeNum],
+    comment: [MessageIcon, props.commentNum],
+    view: [EyeIcon, props.view],
+  };
+
+  const createFooterItems = () => {
+    return Object.entries(footerItems).map(([key, [src, value]], index) => (
+      <div key={key + index} className={classes.footer_item_wrap}>
+        <NewIcon src={src as string} alt={`${key}_icon`} onClick={() => {}} />
+        {value}
+      </div>
+    ));
+  };
+
+  return (
+    <div className={classes.footer_item_list_wrap}>{createFooterItems()}</div>
+  );
 };
 
 const NewDetailPageSection = ({ children }: IchildrenReactNode) => {
@@ -213,7 +235,6 @@ const SectionCategory = ({
   return (
     <div className={classes.category_wrap}>
       <div className={classes.flex_wrap + ' ' + classes.category_left}>
-        {/* <div className={classes.category_button}>{categoryName}</div> */}
         <div className={classes.category_button}>{onlineOrOffline}</div>
         <div className={classes.category_button}>{recruitNum + '명'}</div>
         <div className={classes.category_button}>{status}</div>
@@ -227,11 +248,7 @@ const SectionCategory = ({
   );
 };
 
-interface SectionContentProps {
-  content: string;
-}
-
-const SectionContent = (props: SectionContentProps) => {
+const SectionContent = (props: { content: string }) => {
   return (
     <article className={classes.content_container}>
       <Line className={classes.detail_line} />
@@ -262,10 +279,14 @@ const LeftSidebar = () => {
   );
 };
 
-interface RightSidebarProps {}
+// interface RightSidebarProps {}
 
 const RightSidebar = () => {
-  return <aside className={classes.aside_right}>{/* <JoinerCheck /> */}</aside>;
+  return (
+    <aside className={classes.aside_right}>
+      <JoinerCheck />
+    </aside>
+  );
 };
 
 // const DetailPostCategory = ({ detailData }: { detailData: IResponsePostDetail }) => {
