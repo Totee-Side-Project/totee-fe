@@ -2,25 +2,73 @@ import { NewIcon } from '@components/atoms/Icon/NewIcon';
 import { Line } from '@components/atoms/Line/Line';
 import { IResponsePostDetail } from '@components/pages/DetailPage/NewDetailPage';
 import { ICommentDto } from '@components/pages/DetailPage/NewDetailPage';
+import { useDeleteComment } from '@hooks/useMutateQuery';
 import { createMarkup } from '@utils/createMarkup';
+import { handleErrorType } from '@utils/handleErrorType';
 import { handleTime } from '@utils/handleTime';
+import Swal from 'sweetalert2';
 import classes from './newComment.module.scss';
 
 export const NewComments = ({
+  postId,
   commentDTOList,
-}: Pick<IResponsePostDetail, 'commentDTOList'>) => {
+}: Pick<IResponsePostDetail, 'commentDTOList' | 'postId'>) => {
   // 수정 삭제 답글 { title, onClick }[]
   return (
     <div className={classes.comments_container}>
       {commentDTOList.map((comment) => (
-        <NewCommentItem key={comment.commentId} comment={comment} />
+        <NewCommentItem
+          key={comment.commentId}
+          comment={comment}
+          postId={postId}
+        />
       ))}
     </div>
   );
 };
 
-const NewCommentItem = ({ comment }: { comment: ICommentDto }) => {
+const NewCommentItem = ({
+  postId,
+  comment,
+}: {
+  postId: number;
+  comment: ICommentDto;
+}) => {
   // comment를 가져와서 date를 변경하자.
+  // const deleteCommentQuery = useDeleteComment(postId, comment.commentId);
+  const deleteCommentQuery = useDeleteComment(postId, comment.commentId);
+  const onClickByModifyButton = () => {};
+  const onClickByRemoveButton = () => {
+    Swal.fire({
+      title: '댓글 삭제',
+      text: '댓글을 삭제하시겠어요?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#568A35',
+      confirmButtonText: '삭제',
+      cancelButtonColor: '#C0C0C0',
+      cancelButtonText: '취소',
+      preConfirm: async () => {
+        try {
+          await deleteCommentQuery.mutateAsync();
+        } catch (error) {
+          const errorMessage = handleErrorType(error);
+          Swal.showValidationMessage(errorMessage);
+        }
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        return Swal.fire({
+          title: '삭제완료!',
+          text: '삭제가 완료되었습니다.',
+          icon: 'success',
+          confirmButtonText: '확인',
+          confirmButtonColor: '#568A35',
+        });
+      }
+    });
+  };
+  const onClickByReplyButton = () => {};
   return (
     <div className={classes.comment_container}>
       <div className={classes.left_item_wrap}>
@@ -51,7 +99,12 @@ const NewCommentItem = ({ comment }: { comment: ICommentDto }) => {
               ele === 'line' ? (
                 <Line type="flexItem" key={'comment_header-right_' + index} />
               ) : (
-                <span key={'comment_header-right_' + ele}>{ele}</span>
+                <span
+                  key={'comment_header-right_' + ele}
+                  onClick={onClickByRemoveButton}
+                >
+                  {ele}
+                </span>
               ),
             )}
           </div>

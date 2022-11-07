@@ -1,8 +1,19 @@
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 30%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+}
+
 .comment_container {
   display: flex;
   min-height: 150px;
-
   gap: 2%;
+  animation: fadeInUp 0.5s;
 
   .left_item_wrap {
     flex-basis: 50px;

@@ -25,6 +25,7 @@ import {
 import { Button } from '@components/ui/Button/Button';
 import { useAddComment } from '@hooks/useMutateQuery';
 import { replaceLineBreakStringIntoTag } from '@utils/replaceLineBreakStringIntoTag';
+import { validateData } from '@utils/validateData';
 
 export interface ICommentDto {
   id: number;
@@ -150,30 +151,37 @@ const SectionFooter = ({ children }: IchildrenReactNode) => {
   return <footer>{children}</footer>;
 };
 
+// interface CommentsProps {
+//   commentDTOList: ICommentDto[];
+//   postId: number;
+//   // children: ReactNode;
+// }
 const Comments = ({
   commentDTOList,
   postId,
 }: Pick<IResponsePostDetail, 'commentDTOList' | 'postId'>) => {
-  const [commentValue, setCommentValue] = useState('');
-  const addCommentMutate = useAddComment(postId);
+  // CommentsProps) => {
+  // const [commentValue, setCommentValue] = useState('');
+  // const addCommentMutate = useAddComment(postId);
 
-  const onChangeCommentValueByTextarea = (
-    e: ChangeEvent<HTMLTextAreaElement>,
-  ) => setCommentValue(e.target.value);
+  // const onChangeCommentValueByTextarea = (
+  //   e: ChangeEvent<HTMLTextAreaElement>,
+  // ) => setCommentValue(e.target.value);
 
-  const onSubmitCommentValueByButton = () => {
-    const textList = replaceLineBreakStringIntoTag(commentValue);
-    const content = textList.map((text) => `<p>${text}</p>`).join('');
-    addCommentMutate.mutateAsync({
-      postId,
-      content,
-    });
-    // .then((response) => console.log(response));
-  };
+  // const onSubmitCommentValueByButton = () => {
+  //   if (!validateData(commentValue)) return;
+  //   const textList = replaceLineBreakStringIntoTag(commentValue);
+  //   const content = textList.map((text) => `<p>${text}</p>`).join('');
+
+  //   addCommentMutate.mutateAsync({
+  //     postId,
+  //     content,
+  //   });
+  // .then((response) => console.log(response.data.header));
   return (
     <div className={classes.comment_wrap}>
       <div className={classes.comment_list_wrap}>
-        <NewComments commentDTOList={commentDTOList} />
+        <NewComments commentDTOList={commentDTOList} postId={postId} />
         {/* {commentDTOList &&
           commentDTOList.map((comment: any) => (
             <Comment
@@ -183,33 +191,50 @@ const Comments = ({
             ></Comment>
           ))} */}
       </div>
+      <CommentSubmitArea postId={postId} />
+    </div>
+  );
+};
+
+const CommentSubmitArea = ({ postId }: { postId: number }) => {
+  const [value, setValue] = useState('');
+  const addCommentMutate = useAddComment(postId);
+
+  const onChangeCommentValueByTextarea = (
+    e: ChangeEvent<HTMLTextAreaElement>,
+  ) => setValue(e.target.value);
+
+  const onSubmitCommentValueByButton = () => {
+    if (!validateData(value)) return;
+    const textList = replaceLineBreakStringIntoTag(value);
+    const content = textList.map((text) => `<p>${text}</p>`).join('');
+
+    addCommentMutate
+      .mutateAsync({
+        postId,
+        content,
+      })
+      .then((response) => response.status === 200 && setValue(''));
+  };
+
+  return (
+    <>
       <textarea
         className={classes.comment_textarea}
         placeholder="댓글을 입력해주세요"
-        value={commentValue}
+        value={value}
         onChange={onChangeCommentValueByTextarea}
       />
-
       <div className={classes.comment_button_wrap}>
         <Button text={'댓글 등록'} onClick={onSubmitCommentValueByButton} />
       </div>
-      {/* <div className={classes.comment_input_wrap}>
-        <Input
-          type="text"
-          placeholder="댓글을 입력해주세요"
-          value={commentValue}
-          onChange={onChangeCommentValue}
-        />
-      </div> */}
-    </div>
+    </>
   );
 };
 
 const LikeCommentViewCount = (
   props: Pick<IResponsePostDetail, 'likeNum' | 'commentNum' | 'view'>,
 ) => {
-  // 컴포넌트 내부에서 값을 바꾸지 않는다. 리렌더링이 일어날 경우 해당 변수는 초기화되기 때문에 문제는 없다.
-  // 즉 props가 바뀌지 않으면 해당 컴포넌트는 리렌더링이 될 필요가 없지 않나?
   const footerItems = {
     like: [HeartIcon, props.likeNum],
     comment: [MessageIcon, props.commentNum],
