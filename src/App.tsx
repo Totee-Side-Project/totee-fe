@@ -19,6 +19,7 @@ import {
   defaultUserState,
   loginState,
 } from '@store/index';
+import { NewDetailPage } from '@components/pages/DetailPage/NewDetailPage';
 
 function App() {
   // const padding: any = {
@@ -53,7 +54,7 @@ function App() {
         <Route path="/posts" element={<PostsPage />} />
         <Route path="/oauth/redirect" element={<LoginOauth />} />
         <Route path="/setupstudy" element={<CreateStudyPage />} />
-        <Route path="/detail/:id" element={<DetailPage />} />
+        <Route path="/detail/:id" element={<NewDetailPage />} />
         <Route path="/edit/:id" element={<EditPage />} />
         <Route path="/mypage" element={<MyPage />} />
       </Routes>

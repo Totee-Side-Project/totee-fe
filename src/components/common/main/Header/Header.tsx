@@ -14,7 +14,6 @@ export const Header = () => {
   const [listening, setListening] = useState(false);
   const [meventSource, msetEventSource] = useState<any>(undefined);
 
-
   const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
   const [isOpenOnboardModal, setIsOpenOnboardModal] = useState(false);
   const [isShowToggle, setIsShowToggle] = useState(false);
@@ -58,9 +57,9 @@ export const Header = () => {
     }
   }, [login, user]);
 
-  useEffect(()=>{
-    let eventSource:any;
-    console.log(user);
+  useEffect(() => {
+    let eventSource: any;
+    // console.log(user);
     // if(!listening && user && login.state){
     //   eventSource = new EventSource(`https://api.totee.link/subscribe/${user.id}`);
     //   msetEventSource(eventSource);
@@ -82,22 +81,24 @@ export const Header = () => {
     // }
 
     return () => {
-      if(listening && eventSource){
+      if (listening && eventSource) {
         eventSource.close();
-        console.log("eventsource closed");
+        console.log('eventsource closed');
       }
     };
 
-       //구독
-
-  },[user, login])
+    //구독
+  }, [user, login]);
 
   return (
     <>
       <header className="header">
-        
         <div className="content">
-            <img src={logo} alt="토티 로고" onClick={()=>window.location.href= "/"}/>
+          <img
+            src={logo}
+            alt="토티 로고"
+            onClick={() => (window.location.href = '/')}
+          />
           <div className="buttonWrapper">
             <ul className="profile_wrapper">
               <li>
@@ -114,12 +115,18 @@ export const Header = () => {
                 )}
               </li>
               <li>
-                <button className="createStudyButton" onClick={handleStudyClick}>
+                <button
+                  className="createStudyButton"
+                  onClick={handleStudyClick}
+                >
                   스터디 개설
                 </button>
               </li>
               <li>
-                <button className="createMentorButton" onClick={handleStudyClick}>
+                <button
+                  className="createMentorButton"
+                  onClick={handleStudyClick}
+                >
                   멘토 지원
                 </button>
               </li>

@@ -27,6 +27,12 @@ export const useDeleteComment = (postId: number, commentId: number) => {
   const queryClient = useQueryClient();
   return useMutation(() => CommentAPI.deleteComment(commentId), {
     onSuccess: () => queryClient.invalidateQueries(['post', postId]),
+    onError: () => {
+      throw new Error(`
+      에러가 지속될 경우 해당 이메일로 문의해주세요.
+      <br />
+      toteedev@gmail.com`);
+    },
   });
 };
 
