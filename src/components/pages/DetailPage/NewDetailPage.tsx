@@ -21,6 +21,10 @@ import {
   checkingDetailPeriod,
   handleSelectValues,
 } from '@utils/handleSelectValue';
+// import { Button } from '@components/atoms';
+import { Button } from '@components/ui/Button/Button';
+import { useAddComment } from '@hooks/useMutateQuery';
+import { replaceLineBreakStringIntoTag } from '@utils/replaceLineBreakStringIntoTag';
 
 export interface ICommentDto {
   id: number;
@@ -128,7 +132,10 @@ export const NewDetailPage = () => {
                 commentNum={responseData.commentNum}
                 view={responseData.view}
               />
-              <Comments commentDTOList={responseData.commentDTOList} />
+              <Comments
+                commentDTOList={responseData.commentDTOList}
+                postId={responseData.postId}
+              />
             </SectionFooter>
           </NewDetailPageSection>
           <RightSidebar />
@@ -145,14 +152,24 @@ const SectionFooter = ({ children }: IchildrenReactNode) => {
 
 const Comments = ({
   commentDTOList,
-}: Pick<IResponsePostDetail, 'commentDTOList'>) => {
+  postId,
+}: Pick<IResponsePostDetail, 'commentDTOList' | 'postId'>) => {
   const [commentValue, setCommentValue] = useState('');
-  // const onChangeCommentValue = (e: ChangeEvent<HTMLInputElement>) =>
-  //   setCommentValue(e.target.value);
+  const addCommentMutate = useAddComment(postId);
+
   const onChangeCommentValueByTextarea = (
     e: ChangeEvent<HTMLTextAreaElement>,
   ) => setCommentValue(e.target.value);
 
+  const onSubmitCommentValueByButton = () => {
+    const textList = replaceLineBreakStringIntoTag(commentValue);
+    const content = textList.map((text) => `<p>${text}</p>`).join('');
+    addCommentMutate.mutateAsync({
+      postId,
+      content,
+    });
+    // .then((response) => console.log(response));
+  };
   return (
     <div className={classes.comment_wrap}>
       <div className={classes.comment_list_wrap}>
@@ -166,13 +183,16 @@ const Comments = ({
             ></Comment>
           ))} */}
       </div>
-      textarea로 변경될 수 있음
       <textarea
         className={classes.comment_textarea}
         placeholder="댓글을 입력해주세요"
         value={commentValue}
         onChange={onChangeCommentValueByTextarea}
       />
+
+      <div className={classes.comment_button_wrap}>
+        <Button text={'댓글 등록'} onClick={onSubmitCommentValueByButton} />
+      </div>
       {/* <div className={classes.comment_input_wrap}>
         <Input
           type="text"

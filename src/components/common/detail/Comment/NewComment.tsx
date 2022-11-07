@@ -2,6 +2,7 @@ import { NewIcon } from '@components/atoms/Icon/NewIcon';
 import { Line } from '@components/atoms/Line/Line';
 import { IResponsePostDetail } from '@components/pages/DetailPage/NewDetailPage';
 import { ICommentDto } from '@components/pages/DetailPage/NewDetailPage';
+import { createMarkup } from '@utils/createMarkup';
 import { handleTime } from '@utils/handleTime';
 import classes from './newComment.module.scss';
 
@@ -19,8 +20,6 @@ export const NewComments = ({
 };
 
 const NewCommentItem = ({ comment }: { comment: ICommentDto }) => {
-  console.log(comment);
-
   // comment를 가져와서 date를 변경하자.
   return (
     <div className={classes.comment_container}>
@@ -58,9 +57,10 @@ const NewCommentItem = ({ comment }: { comment: ICommentDto }) => {
           </div>
         </div>
         <Line />
-        <div className={classes.right_item_content}>
-          <p>{comment.content}</p>
-        </div>
+        <div
+          className={classes.right_item_content}
+          dangerouslySetInnerHTML={createMarkup(comment.content)}
+        ></div>
       </div>
     </div>
   );
