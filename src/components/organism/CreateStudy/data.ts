@@ -1,6 +1,6 @@
-export const data = {
-  checkbosOptions: ['온라인', '오프라인'],
-  select: {
+export const data: Idata = {
+  checkboxOptions: ['온라인', '오프라인'],
+  defaultFormElements: {
     period: ['진행기간', 'select', '선택'],
     recruitNum: ['모집인원', 'number', '최소 1명 ~ 최대 15명'],
     language: ['모집언어', 'multiSelect'],
@@ -32,7 +32,29 @@ export const data = {
       '경남',
       '제주',
     ],
-  } as {
-    [key: string]: string[];
+  },
+  detailFormElements: {
+    title: ['', 'text', '제목을 입력해주세요'],
+    // 추후에 에디터 컨텐츠의 기본 폼 양식을 추가해야할 수도 있다.
+    content: ['', 'textEditor'],
   },
 };
+
+export interface Idata {
+  checkboxOptions: string[];
+  defaultFormElements: {
+    period: string[];
+    recruitNum: string[];
+    language: string[];
+    process: string[];
+    region: string[];
+    detailedRegion: string[];
+    contactMethod: string[];
+    contactLink: string[];
+  };
+  selectOptions: { [key in string]: string[] };
+  detailFormElements: {
+    title: string[];
+    content: string[];
+  };
+}

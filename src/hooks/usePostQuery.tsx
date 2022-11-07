@@ -16,7 +16,7 @@ import { useQueryClient } from 'react-query';
 
 export const useAddPost = (postAPI: (data: any) => Promise<any>) => {
   return useMutation((data: any) => postAPI(data), {
-    onSuccess: () => alert('success'),
+    // onSuccess: () => ('salertuccess'),
   });
 };
 // export const useAddPost = (postForm: (data?: any): Promise<any> => {} )=> {
