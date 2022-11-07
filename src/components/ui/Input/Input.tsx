@@ -1,5 +1,6 @@
 import { ChangeEvent, HTMLInputTypeAttribute, ReactNode } from 'react';
-import classes from './input.module.scss';
+import './input.css';
+// why inline style ?? 해당 파일 코드 하나만 복사하면 어느 프로젝트에서든 재사용할 수 있도록 하기 위해서
 
 const styleFlex = {
   display: 'flex',
@@ -27,54 +28,28 @@ interface Props {
   className?: string;
   placeholder: string;
   top?: ReactNode;
-  left?: ReactNode;
-  right?: ReactNode;
-  bottom?: ReactNode;
+  leftValue?: ReactNode;
   value: string | number;
   max?: number;
   min?: number;
   onChange: (e: ChangeEvent<HTMLInputElement>, key?: string) => void;
 }
 
-// 추가해야할 기능
-// left right 가 있을 경우에 focus시 border color가 변경되지 않는다.
-export const Input = ({
-  className,
-  top,
-  left,
-  bottom,
-  right,
-  ...props
-}: Props) => {
+export const Input = ({ className, top, leftValue, ...props }: Props) => {
   return (
     <div className="input_container">
       {top}
-      {left || right ? (
-        <div
-          className={className ? className : classes.default_input_wrap}
-          style={styleFlex}
-        >
-          {left}
-          <input
-            style={{
-              ...styleFullSize,
-              ...styleNoneBorder,
-              ...styleNoneSpinButton,
-            }}
-            {...props}
-          />
-          {right}
-        </div>
-      ) : (
+      <div className={className} style={styleFlex}>
+        {leftValue}
         <input
-          className={classes.default_input}
           style={{
             ...styleFullSize,
+            ...styleNoneBorder,
+            ...styleNoneSpinButton,
           }}
           {...props}
         />
-      )}
-      {bottom}
+      </div>
     </div>
   );
 };

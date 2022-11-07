@@ -8,7 +8,7 @@ import { useRecoilState } from 'recoil';
 import { Editor, Select } from '@components/common';
 import studypageIcon from '../../../assets/studyPageIcon.png';
 import dashedLine from '../../../assets/dashedLine.png';
-// import './editStudy.scss';
+import './editStudy.scss';
 import Swal from 'sweetalert2';
 
 import { IPostDetailType } from 'types/post.types';

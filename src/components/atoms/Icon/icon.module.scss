@@ -1,10 +1,6 @@
-.icon {
-  //   border-radius: 100%;
-  width: 35px;
-  height: 35px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  &:hover {
-    cursor: pointer;
-  }
+.icon{
+    border-radius: 100%;
+    &:hover{
+        cursor: pointer;
+    }
 }

@@ -1,217 +1,222 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
 
-// // 컨테이너
-// .studypage_container {
-//   width: 80%;
-//   margin: 50px auto 70px auto;
-//   * {
-//     font-family: 'Noto Sans KR', sans-serif;
-//   }
+// 컨테이너
+.studypage_container {
+  width: 80%;
+  margin: 50px auto 70px auto;
+  *{
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+}
+
+.studypage_profile{
+  width: 100px;
+  height: 100px;
+  border:1px solid white;
+  margin-bottom: 24px;
+  margin-left: 28px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50%;
+}
+
+.studypage_icon{
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top:-70px;
+  left:130px;
+}
+
+//타이틀
+.title_input{
+  width: 95%;
+  height: 75px;
+  font-weight: 400;
+  font-size: 20px;
+  padding-left: 30px;
+  background: #FFFFFF;
+  margin-bottom: 40px;
+  margin-left: 3%;
+  border: 1.5px solid #BFBFBF;
+  border-radius: 10px;
+}
+
+.title_title{
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  color: #343434;
+  margin-left: 6%;
+  margin-bottom: 15px;
+  padding-top: 20px;
+}
+
+
+//카테고리
+// 카테고리 - 컨텐트
+.category_container{
+  width: 100%;
+  border: 10px solid #EEF3EB;
+  border-radius: 20px;
+  position: relative;
+  padding-bottom: 50px;
+}
+.category_title_text{
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 43px;
+  text-align: center;
+  color: #454545;
+  margin: 60px 0 30px 0;
+}
+.category_title_line{
+  border: 2px solid #EEF3EB;
+  width: 90%;
+  margin: 20px auto;
+}
+
+.category_content_wrapper{
+  display: grid;
+	grid-template-columns: 50% 50%;
+	grid-template-rows: 150px 150px 150px;
+}
+
+.category_content_col{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 20px;
+}
+
+.category_label{
+  width: 100px;
+  height: 40px;
+  border: 1px solid #7BA364;
+  background-color: #7BA364;
+  color: white;
+  font-weight: 400;
+  font-size: 18px;
+  border-radius: 10px;
+  display : flex;
+  justify-content : center;
+  align-items : center;
+}
+
+.category_label_wrapper{
+  padding: 20px 50px;
+}
+
+.category_content_line{
+  position: absolute;
+  top:35%;
+  left: 50%;
+  width: 100px;
+  height: 30%;
+}
+
+.contact_link{
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1.5px solid #BFBFBF;
+  padding-left: 20px;
+  width: 100%;
+  height: 40px;
+}
+
+// 카테고리-에디터
+
+
+
+
+
+//버튼
+.button_container {
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.cancel_button {
+  width: 150px;
+  height: 45px;
+  color: #6A6A6A;
+  background-color: #fff;
+  float:right;
+  cursor: pointer;
+  border: 2px solid #BFBFBF;
+  border-radius: 10px;
+  margin-right: 5px;
+
+  //버튼 텍스트
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.upload_button {
+  margin-left: 10px;
+  float:right;
+  cursor: pointer;
+  width: 250px;
+  height: 45px;
+  background: #568A35;
+  border: none;
+  border-radius: 8px;
+  //버튼 텍스트
+
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: white;
+}
+
+.checked_wrapper{
+  display: flex;
+  width: 100%;
+}
+
+.checked_item{
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// .select_item{
+
 // }
 
-// .studypage_profile {
-//   width: 100px;
-//   height: 100px;
-//   border: 1px solid white;
-//   margin-bottom: 24px;
-//   margin-left: 28px;
-//   background-size: contain;
-//   background-repeat: no-repeat;
-//   background-position: center;
-//   border-radius: 50%;
-// }
+.checked_cancel{
+  width: 15px;
+  height: 15px;
+  font-size: 12px;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid #98B487;
+  background-color: #98B487;
+  color: white;
+  border-radius: 6px;
+  margin: 3px;
+}
 
-// .studypage_icon {
-//   width: 50px;
-//   height: 50px;
-//   position: absolute;
-//   top: -70px;
-//   left: 130px;
-// }
+//editor
+.editor_container > * {
+  border: none;
+  width: 95%;
+  margin-left: 3%;
+}
 
-// //타이틀
-// .title_input {
-//   // width: 95%;
-//   height: 75px;
-//   font-weight: 400;
-//   font-size: 20px;
-//   padding-left: 30px;
-//   background: #ffffff;
-//   margin-bottom: 40px;
-//   // margin-left: 3%;
-//   border: 1.5px solid #bfbfbf;
-//   border-radius: 10px;
-// }
-
-// .title_title {
-//   font-family: 'Noto Sans KR';
-//   font-style: normal;
-//   font-weight: 400;
-//   font-size: 24px;
-//   color: #343434;
-//   // margin-left: 6%;
-//   margin-bottom: 15px;
-//   padding-top: 20px;
-// }
-
-// //카테고리
-// // 카테고리 - 컨텐트
-// .category_container {
-//   width: 100%;
-//   border: 10px solid #eef3eb;
-//   border-radius: 20px;
-//   position: relative;
-//   padding-bottom: 50px;
-// }
-// .category_title_text {
-//   font-weight: 500;
-//   font-size: 30px;
-//   line-height: 43px;
-//   text-align: center;
-//   color: #454545;
-//   margin: 60px 0 30px 0;
-// }
-// .category_title_line {
-//   border: 2px solid #eef3eb;
-//   width: 90%;
-//   margin: 20px auto;
-// }
-
-// .category_content_wrapper {
-//   display: grid;
-//   grid-template-columns: 50% 50%;
-//   grid-template-rows: 150px 150px 150px;
-// }
-
-// .category_content_col {
-//   display: flex;
-//   flex-direction: column;
-//   width: 50%;
-//   margin: 20px;
-// }
-
-// .category_label {
-//   width: 100px;
-//   height: 40px;
-//   border: 1px solid #7ba364;
-//   background-color: #7ba364;
-//   color: white;
-//   font-weight: 400;
-//   font-size: 18px;
-//   border-radius: 10px;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// }
-
-// .category_label_wrapper {
-//   padding: 20px 50px;
-// }
-
-// .category_content_line {
-//   position: absolute;
-//   top: 35%;
-//   left: 50%;
-//   width: 100px;
-//   height: 30%;
-// }
-
-// .contact_link {
-//   margin-top: 10px;
-//   border-radius: 5px;
-//   border: 1.5px solid #bfbfbf;
-//   padding-left: 20px;
-//   width: 100%;
-//   height: 40px;
-// }
-
-// // 카테고리-에디터
-
-// //버튼
-// .button_container {
-//   padding: 20px;
-//   margin-top: 20px;
-// }
-
-// .cancel_button {
-//   width: 150px;
-//   height: 45px;
-//   color: #6a6a6a;
-//   background-color: #fff;
-//   float: right;
-//   cursor: pointer;
-//   border: 2px solid #bfbfbf;
-//   border-radius: 10px;
-//   margin-right: 5px;
-
-//   //버튼 텍스트
-//   font-style: normal;
-//   font-weight: 400;
-//   font-size: 20px;
-//   line-height: 24px;
-// }
-
-// .upload_button {
-//   margin-left: 10px;
-//   float: right;
-//   cursor: pointer;
-//   width: 250px;
-//   height: 45px;
-//   background: #568a35;
-//   border: none;
-//   border-radius: 8px;
-//   //버튼 텍스트
-
-//   font-style: normal;
-//   font-weight: 500;
-//   font-size: 20px;
-//   line-height: 24px;
-//   color: white;
-// }
-
-// .checked_wrapper {
-//   display: flex;
-//   width: 100%;
-// }
-
-// .checked_item {
-//   height: 20px;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// }
-
-// // .select_item{
-
-// // }
-
-// .checked_cancel {
-//   width: 15px;
-//   height: 15px;
-//   font-size: 12px;
-//   text-align: center;
-//   cursor: pointer;
-//   border: 1px solid #98b487;
-//   background-color: #98b487;
-//   color: white;
-//   border-radius: 6px;
-//   margin: 3px;
-// }
-
-// //editor
-// .editor_container > * {
-//   border: none;
-//   // width: 95%;
-//   // margin-left: 3%;
-// }
-
-// .editor_wrapper {
-//   height: 200px;
-//   background: #ffffff;
-//   border: 1px solid gray;
-//   border-radius: 10px;
-//   overflow: hidden;
-// }
+.editor_wrapper {
+  height: 600px;
+  background: #FFFFFF;
+  border: 1px solid gray;
+  border-radius: 10px;
+  overflow: hidden;
+}
 
 .ql-toolbar.ql-snow {
   border: none;
@@ -221,6 +226,6 @@
   padding: 8px;
 }
 
-.ql-container.ql-snow {
+.ql-container.ql-snow{
   border: none;
 }
