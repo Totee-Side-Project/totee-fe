@@ -32,7 +32,7 @@ function App() {
 
   let loginLocalStorage: any = localStorage.getItem('loginData');
   loginLocalStorage = JSON.parse(loginLocalStorage);
-
+  // console.log(window.location.host);
   useEffect(() => {
     if (data && data.status === 200) {
       setLogin(loginLocalStorage);
