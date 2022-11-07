@@ -17,6 +17,10 @@ import EyeIcon from '@assets/svg/common/eye.svg';
 import MessageIcon from '@assets/svg/common/message-square.svg';
 import LeftArrowHasBorderIcon from '@assets/svg/common/left_arrow_has_border.svg';
 import classes from './newDetailPage.module.scss';
+import {
+  checkingDetailPeriod,
+  handleSelectValues,
+} from '@utils/handleSelectValue';
 
 export interface ICommentDto {
   id: number;
@@ -55,13 +59,18 @@ export interface IResponsePostDetail {
   authorPosition: string;
 }
 
-interface SectionHeaderProps {
-  title: string;
-  categoryName: string;
-  onlineOrOffline: string;
-  recruitNum: number;
-  status: string;
-}
+type SectionHeaderProps = Pick<
+  IResponsePostDetail,
+  'title' | 'onlineOrOffline' | 'recruitNum' | 'status' | 'period'
+>;
+
+// interface SectionHeaderProps {
+//   title: string;
+//   categoryName: string;
+//   onlineOrOffline: string;
+//   recruitNum: number;
+//   status: string;
+// }
 
 interface IchildrenReactNode {
   children: ReactNode;
@@ -106,10 +115,10 @@ export const NewDetailPage = () => {
               <SectionTitle title={responseData.title} />
               <Line className={classes.detail_line} />
               <SectionCategory
-                categoryName={responseData.categoryName}
                 onlineOrOffline={responseData.onlineOrOffline}
                 recruitNum={responseData.recruitNum}
                 status={responseData.status}
+                period={responseData.period}
               />
             </SectionHeader>
             <SectionContent content={responseData.content} />
@@ -224,24 +233,33 @@ const SectionTitle = (props: Pick<SectionHeaderProps, 'title'>) => {
 };
 
 const SectionCategory = ({
-  categoryName,
+  // categoryName,
   recruitNum,
   onlineOrOffline,
   status,
+  period,
 }: Pick<
   SectionHeaderProps,
-  'categoryName' | 'recruitNum' | 'onlineOrOffline' | 'status'
+  'recruitNum' | 'onlineOrOffline' | 'status' | 'period'
 >) => {
   return (
     <div className={classes.category_wrap}>
       <div className={classes.flex_wrap + ' ' + classes.category_left}>
         <div className={classes.category_button}>{onlineOrOffline}</div>
         <div className={classes.category_button}>{recruitNum + '명'}</div>
-        <div className={classes.category_button}>{status}</div>
+        <div className={classes.category_button}>
+          {checkingDetailPeriod(period)}
+        </div>
       </div>
       <div className={classes.category_right}>
-        <div className={classes.status_button}>
-          status에 따라 다르게 보여줘야한다.
+        <div
+          className={
+            status === 'Y'
+              ? classes.status_button
+              : classes.status_button + ' ' + classes.false
+          }
+        >
+          {status === 'Y' ? '모집중' : '모집완료'}
         </div>
       </div>
     </div>
