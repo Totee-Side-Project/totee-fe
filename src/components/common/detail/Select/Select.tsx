@@ -2,8 +2,8 @@ import React, { useRef } from 'react';
 import { useState } from 'react';
 import { Checkbox } from '@components/atoms';
 import './select.scss';
-import recentIcon from '@assets/recentIcon.svg';
-import recentLine from '@assets/recentLine.svg';
+import recentIcon from '@assets/svg/recentIcon.svg';
+import recentLine from '@assets/svg/recentLine.svg';
 import {
   checkingDetailPeriod,
   handleSelectValues,

@@ -3,7 +3,7 @@ import { Icon } from '@components/atoms';
 import { ToggleIconProps } from 'types/icon.types';
 import classes from './toggleIcon.module.scss';
 import { useOutsideAlerter } from '@hooks/useOutsideAlerter';
-import DownIcon from '@assets/toggle-icon.svg';
+import DownIcon from '@assets/svg/toggle-icon.svg';
 import { Link } from 'react-router-dom';
 
 export function ToggleIcon({

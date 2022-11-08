@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import classes from './modal.module.scss';
 import classNames from 'classnames';
-import { ReactComponent as XIcon } from '@assets/xicon.svg';
+import { ReactComponent as XIcon } from '@assets/svg/xicon.svg';
 
 interface IModalPropsType {
   isOpen: boolean;

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import removeImg from '../assets/removeImg.svg';
-import changeImg from '../assets/changeImg.svg';
+import removeImg from '../assets/svg/removeImg.svg';
+import changeImg from '../assets/svg/changeImg.svg';
 
 export default function useUploadImage(props: any) {
   const [files, setFiles] = useState<any>();

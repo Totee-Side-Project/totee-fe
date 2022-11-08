@@ -2,13 +2,13 @@ import classes from '@components/common/post/PostCard/postCard.module.scss';
 import React, { useEffect, useState } from 'react';
 import { PostAPI } from '@api/api';
 import './postingList.scss';
-import deleteButton from '@assets/my-page-delete.png';
-import com from '@assets/sms.svg';
-import view from '@assets/visibility.svg';
-import like from '@assets/favorite.svg';
-import nextArrow from '@assets/arrow_next.png';
-import prevArrow from '@assets/arrow_prev.png';
-import deleteicon from '@assets/delete.png';
+import deleteButton from '@assets/png/my-page-delete.png';
+import com from '@assets/svg/sms.svg';
+import view from '@assets/svg/visibility.svg';
+import like from '@assets/svg/favorite.svg';
+import nextArrow from '@assets/png/arrow_next.png';
+import prevArrow from '@assets/png/arrow_prev.png';
+import deleteicon from '@assets/png/delete.png';
 import { useNavigate } from 'react-router-dom';
 
 function UserPostingList() {
