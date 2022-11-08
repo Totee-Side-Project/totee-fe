@@ -15,8 +15,8 @@ import classes from './newComment.module.scss';
 export const NewComments = ({
   postId,
   commentDTOList,
-  nickname,
-}: Pick<IResponsePostDetail, 'commentDTOList' | 'postId' | 'nickname'>) => {
+}: // nickname,
+Pick<IResponsePostDetail, 'commentDTOList' | 'postId' | 'nickname'>) => {
   // 수정 삭제 답글 { title, onClick }[]
   return (
     <div className={classes.comments_container}>
@@ -25,7 +25,7 @@ export const NewComments = ({
           key={comment.commentId}
           comment={comment}
           postId={postId}
-          nickname={nickname}
+          // nickname={nickname}
         />
       ))}
     </div>
@@ -35,11 +35,11 @@ export const NewComments = ({
 const NewCommentItem = ({
   postId,
   comment,
-  nickname,
-}: {
+}: // nickname,
+{
   postId: number;
   comment: ICommentDto;
-  nickname: string;
+  // nickname: string;
 }) => {
   const deleteCommentQuery = useDeleteComment(postId, comment.commentId);
   const { nickname: currentUserNickname } = useRecoilValue(UserState);
@@ -62,7 +62,6 @@ const NewCommentItem = ({
         : { reply: ['답글', onClickByReplyButton] };
     setCommentItemData(newCommentItemData);
   }, []);
-
   const onClickByModifyButton = () => {};
   const onClickByRemoveButton = () => {
     Swal.fire({
@@ -95,7 +94,6 @@ const NewCommentItem = ({
     });
   };
   const onClickByReplyButton = () => {};
-
   const renderCommentItemButton = () =>
     Object.values(commentItemData).map(([text, onClick], index) => (
       <>

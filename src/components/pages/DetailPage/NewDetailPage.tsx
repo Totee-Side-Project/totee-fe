@@ -1,5 +1,5 @@
-import type { MouseEvent } from 'react';
-import { ChangeEvent, ReactNode, useEffect, useState } from 'react';
+import type { ChangeEvent, MouseEvent } from 'react';
+import { ReactNode, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Banner } from '@components/common';
 import { Line } from '@components/atoms/Line/Line';
@@ -8,7 +8,6 @@ import JoinerCheck from '@components/common/join/JoinerCheck/JoinerCheck';
 import { NewComments } from '@components/common/detail/Comment/NewComment';
 import { Button } from '@components/ui/Button/Button';
 import { useGetLikeofPost, useGetPostByPostId } from '@hooks/useGetQuery';
-import { useCustomNavigate } from '@hooks/useCustomNavigate';
 import { createMarkup } from '@utils/createMarkup';
 import FullHeartIcon from '@assets/svg/common/full_heart.svg';
 import HeartIcon from '@assets/svg/common/heart.svg';
@@ -29,6 +28,19 @@ import { useRecoilValue } from 'recoil';
 import { UserState } from '@store/index';
 import { Select } from '@components/ui/Select/Select';
 import { useDeletePost } from '@hooks/usePostQuery';
+import { useCustomNavigate } from '@hooks/useCustomNavigate';
+// =======
+// import classes from './newDetailPage.module.scss';
+// import {
+//   checkingDetailPeriod,
+//   handleSelectValues,
+// } from '@utils/handleSelectValue';
+// // import { Button } from '@components/atoms';
+// import { Button } from '@components/ui/Button/Button';
+// import { useAddComment } from '@hooks/useMutateQuery';
+// import { replaceLineBreakStringIntoTag } from '@utils/replaceLineBreakStringIntoTag';
+// import { validateData } from '@utils/validateData';
+// >>>>>>> 594f340974b1321a8b2137ce2487f9c16f7cf43f
 
 export interface ICommentDto {
   id: number;
@@ -143,7 +155,7 @@ export const NewDetailPage = () => {
               <Comments
                 commentDTOList={responseData.commentDTOList}
                 postId={responseData.postId}
-                nickname={responseData.nickname}
+                nickname={''}
               />
             </SectionFooter>
           </NewDetailPageSection>
