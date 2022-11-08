@@ -12,7 +12,7 @@ import 'swiper/components/navigation/navigation.min.css';
 // import my custom pagination.scss
 import './pagination.scss';
 import SwiperCore, { Autoplay, Pagination } from 'swiper';
-import { ImageWithWebp } from '@components/ui/Picture/Picture';
+import { ImageWithWebp } from '@components/ui/Image/ImageWithWebp';
 SwiperCore.use([Autoplay, Pagination]);
 
 export function Banner() {
