@@ -3,16 +3,20 @@ import { Line } from '@components/atoms/Line/Line';
 import { IResponsePostDetail } from '@components/pages/DetailPage/NewDetailPage';
 import { ICommentDto } from '@components/pages/DetailPage/NewDetailPage';
 import { useDeleteComment } from '@hooks/useMutateQuery';
+import { UserState } from '@store/user';
 import { createMarkup } from '@utils/createMarkup';
 import { handleErrorType } from '@utils/handleErrorType';
 import { handleTime } from '@utils/handleTime';
+import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import Swal from 'sweetalert2';
 import classes from './newComment.module.scss';
 
 export const NewComments = ({
   postId,
   commentDTOList,
-}: Pick<IResponsePostDetail, 'commentDTOList' | 'postId'>) => {
+  nickname,
+}: Pick<IResponsePostDetail, 'commentDTOList' | 'postId' | 'nickname'>) => {
   // 수정 삭제 답글 { title, onClick }[]
   return (
     <div className={classes.comments_container}>
@@ -21,6 +25,7 @@ export const NewComments = ({
           key={comment.commentId}
           comment={comment}
           postId={postId}
+          nickname={nickname}
         />
       ))}
     </div>
@@ -30,13 +35,34 @@ export const NewComments = ({
 const NewCommentItem = ({
   postId,
   comment,
+  nickname,
 }: {
   postId: number;
   comment: ICommentDto;
+  nickname: string;
 }) => {
-  // comment를 가져와서 date를 변경하자.
-  // const deleteCommentQuery = useDeleteComment(postId, comment.commentId);
   const deleteCommentQuery = useDeleteComment(postId, comment.commentId);
+  const { nickname: currentUserNickname } = useRecoilValue(UserState);
+  const [commentItemData, setCommentItemData] = useState<{
+    [key in string]: [string, () => void];
+  }>({
+    modify: ['수정', () => {}],
+    remove: ['삭제', () => {}],
+    reply: ['답글', () => {}],
+  });
+
+  useEffect(() => {
+    const newCommentItemData: { [key in string]: [string, () => void] } =
+      currentUserNickname === comment.nickname
+        ? {
+            modify: ['수정', onClickByModifyButton],
+            remove: ['삭제', onClickByRemoveButton],
+            reply: ['답글', onClickByReplyButton],
+          }
+        : { reply: ['답글', onClickByReplyButton] };
+    setCommentItemData(newCommentItemData);
+  }, []);
+
   const onClickByModifyButton = () => {};
   const onClickByRemoveButton = () => {
     Swal.fire({
@@ -69,6 +95,19 @@ const NewCommentItem = ({
     });
   };
   const onClickByReplyButton = () => {};
+
+  const renderCommentItemButton = () =>
+    Object.values(commentItemData).map(([text, onClick], index) => (
+      <>
+        <span key={'comment_header-right_' + text} onClick={onClick}>
+          {text}
+        </span>
+        {index < Object.values(commentItemData).length - 1 && (
+          <Line type="flexItem" key={'comment_header-right_' + index} />
+        )}
+      </>
+    ));
+
   return (
     <div className={classes.comment_container}>
       <div className={classes.left_item_wrap}>
@@ -95,18 +134,7 @@ const NewCommentItem = ({
             <div className={classes.date}>{handleTime(comment.createdAt)}</div>
           </div>
           <div className={classes.right_item_header_right}>
-            {['수정', 'line', '삭제', 'line', '답글'].map((ele, index) =>
-              ele === 'line' ? (
-                <Line type="flexItem" key={'comment_header-right_' + index} />
-              ) : (
-                <span
-                  key={'comment_header-right_' + ele}
-                  onClick={onClickByRemoveButton}
-                >
-                  {ele}
-                </span>
-              ),
-            )}
+            {renderCommentItemButton()}
           </div>
         </div>
         <Line />
@@ -118,6 +146,3 @@ const NewCommentItem = ({
     </div>
   );
 };
-
-// 댓글 최대 글자수를 둬야겠다.
-// 또한 간략히 보기도 있으면 좋을 것 같다.
