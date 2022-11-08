@@ -155,7 +155,6 @@ export const NewDetailPage = () => {
               <Comments
                 commentDTOList={responseData.commentDTOList}
                 postId={responseData.postId}
-                nickname={''}
               />
             </SectionFooter>
           </NewDetailPageSection>
@@ -174,15 +173,14 @@ const SectionFooter = ({ children }: IchildrenReactNode) => {
 const Comments = ({
   commentDTOList,
   postId,
-  nickname,
-}: Pick<IResponsePostDetail, 'commentDTOList' | 'postId' | 'nickname'>) => {
+}: Pick<IResponsePostDetail, 'commentDTOList' | 'postId'>) => {
   return (
     <div className={classes.comment_wrap}>
       <div className={classes.comment_list_wrap}>
         <NewComments
           commentDTOList={commentDTOList}
           postId={postId}
-          nickname={nickname}
+          // nickname={nickname}
         />
         {/* {commentDTOList &&
           commentDTOList.map((comment: any) => (

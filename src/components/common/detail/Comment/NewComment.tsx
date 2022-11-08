@@ -16,25 +16,25 @@ export const NewComments = ({
   postId,
   commentDTOList,
 }: Pick<IResponsePostDetail, 'commentDTOList' | 'postId'>) => {
-  <div className={classes.comments_container}>
-    {commentDTOList.map((comment) => (
-      <NewCommentItem
-        key={comment.commentId}
-        comment={comment}
-        postId={postId}
-      />
-    ))}
-  </div>;
+  return (
+    <div className={classes.comments_container}>
+      {commentDTOList.map((comment) => (
+        <NewCommentItem
+          key={comment.commentId}
+          comment={comment}
+          postId={postId}
+        />
+      ))}
+    </div>
+  );
 };
 
 const NewCommentItem = ({
   postId,
   comment,
-}: // nickname,
-{
+}: {
   postId: number;
   comment: ICommentDto;
-  // nickname: string;
 }) => {
   const deleteCommentQuery = useDeleteComment(postId, comment.commentId);
   const { nickname: currentUserNickname } = useRecoilValue(UserState);
