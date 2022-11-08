@@ -15,21 +15,16 @@ import classes from './newComment.module.scss';
 export const NewComments = ({
   postId,
   commentDTOList,
-}: // nickname,
-Pick<IResponsePostDetail, 'commentDTOList' | 'postId' | 'nickname'>) => {
-  // 수정 삭제 답글 { title, onClick }[]
-  return (
-    <div className={classes.comments_container}>
-      {commentDTOList.map((comment) => (
-        <NewCommentItem
-          key={comment.commentId}
-          comment={comment}
-          postId={postId}
-          // nickname={nickname}
-        />
-      ))}
-    </div>
-  );
+}: Pick<IResponsePostDetail, 'commentDTOList' | 'postId'>) => {
+  <div className={classes.comments_container}>
+    {commentDTOList.map((comment) => (
+      <NewCommentItem
+        key={comment.commentId}
+        comment={comment}
+        postId={postId}
+      />
+    ))}
+  </div>;
 };
 
 const NewCommentItem = ({
@@ -62,6 +57,7 @@ const NewCommentItem = ({
         : { reply: ['답글', onClickByReplyButton] };
     setCommentItemData(newCommentItemData);
   }, []);
+
   const onClickByModifyButton = () => {};
   const onClickByRemoveButton = () => {
     Swal.fire({
