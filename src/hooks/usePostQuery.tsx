@@ -31,3 +31,10 @@ export const useUpdatePost = (postId: number) => {
     onSuccess: () => queryClient.invalidateQueries(['post', postId]),
   });
 };
+
+export const useDeletePost = (postId: number) => {
+  const queryClient = useQueryClient();
+  return useMutation(() => PostAPI.deletePost(postId), {
+    onSuccess: () => queryClient.invalidateQueries(['post', postId]),
+  });
+};

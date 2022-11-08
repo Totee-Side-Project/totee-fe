@@ -1,31 +1,34 @@
-import { ChangeEvent, ReactNode, useState } from 'react';
+import type { MouseEvent } from 'react';
+import { ChangeEvent, ReactNode, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
 import { Banner } from '@components/common';
 import { Line } from '@components/atoms/Line/Line';
 import { NewIcon } from '@components/atoms/Icon/NewIcon';
 import JoinerCheck from '@components/common/join/JoinerCheck/JoinerCheck';
 import { NewComments } from '@components/common/detail/Comment/NewComment';
-// import { Input } from '@components/ui/Input/Input';
-// import { Comment } from '@components/common';
-import { useGetPostByPostId } from '@hooks/useGetQuery';
+import { Button } from '@components/ui/Button/Button';
+import { useGetLikeofPost, useGetPostByPostId } from '@hooks/useGetQuery';
 import { useCustomNavigate } from '@hooks/useCustomNavigate';
 import { createMarkup } from '@utils/createMarkup';
+import FullHeartIcon from '@assets/svg/common/full_heart.svg';
 import HeartIcon from '@assets/svg/common/heart.svg';
 import SettingIcon from '@assets/svg/common/setting.svg';
 import EyeIcon from '@assets/svg/common/eye.svg';
 import MessageIcon from '@assets/svg/common/message-square.svg';
 import LeftArrowHasBorderIcon from '@assets/svg/common/left_arrow_has_border.svg';
-import classes from './newDetailPage.module.scss';
 import {
-  checkingDetailPeriod,
-  handleSelectValues,
-} from '@utils/handleSelectValue';
-// import { Button } from '@components/atoms';
-import { Button } from '@components/ui/Button/Button';
-import { useAddComment } from '@hooks/useMutateQuery';
+  useAddComment,
+  useUpdateLike,
+  useUpdatePostStatus,
+} from '@hooks/useMutateQuery';
+import { checkingDetailPeriod } from '@utils/handleSelectValue';
 import { replaceLineBreakStringIntoTag } from '@utils/replaceLineBreakStringIntoTag';
 import { validateData } from '@utils/validateData';
+import classes from './newDetailPage.module.scss';
+import { useRecoilValue } from 'recoil';
+import { UserState } from '@store/index';
+import { Select } from '@components/ui/Select/Select';
+import { useDeletePost } from '@hooks/usePostQuery';
 
 export interface ICommentDto {
   id: number;
@@ -66,16 +69,14 @@ export interface IResponsePostDetail {
 
 type SectionHeaderProps = Pick<
   IResponsePostDetail,
-  'title' | 'onlineOrOffline' | 'recruitNum' | 'status' | 'period'
+  | 'title'
+  | 'onlineOrOffline'
+  | 'recruitNum'
+  | 'status'
+  | 'period'
+  | 'postId'
+  | 'nickname'
 >;
-
-// interface SectionHeaderProps {
-//   title: string;
-//   categoryName: string;
-//   onlineOrOffline: string;
-//   recruitNum: number;
-//   status: string;
-// }
 
 interface IchildrenReactNode {
   children: ReactNode;
@@ -117,13 +118,19 @@ export const NewDetailPage = () => {
           <LeftSidebar />
           <NewDetailPageSection>
             <SectionHeader>
-              <SectionTitle title={responseData.title} />
+              <SectionTitle
+                title={responseData.title}
+                postId={responseData.postId}
+                nickname={responseData.nickname}
+              />
               <Line className={classes.detail_line} />
               <SectionCategory
                 onlineOrOffline={responseData.onlineOrOffline}
                 recruitNum={responseData.recruitNum}
                 status={responseData.status}
                 period={responseData.period}
+                postId={responseData.postId}
+                nickName={responseData.nickname}
               />
             </SectionHeader>
             <SectionContent content={responseData.content} />
@@ -136,6 +143,7 @@ export const NewDetailPage = () => {
               <Comments
                 commentDTOList={responseData.commentDTOList}
                 postId={responseData.postId}
+                nickname={responseData.nickname}
               />
             </SectionFooter>
           </NewDetailPageSection>
@@ -151,37 +159,19 @@ const SectionFooter = ({ children }: IchildrenReactNode) => {
   return <footer>{children}</footer>;
 };
 
-// interface CommentsProps {
-//   commentDTOList: ICommentDto[];
-//   postId: number;
-//   // children: ReactNode;
-// }
 const Comments = ({
   commentDTOList,
   postId,
-}: Pick<IResponsePostDetail, 'commentDTOList' | 'postId'>) => {
-  // CommentsProps) => {
-  // const [commentValue, setCommentValue] = useState('');
-  // const addCommentMutate = useAddComment(postId);
-
-  // const onChangeCommentValueByTextarea = (
-  //   e: ChangeEvent<HTMLTextAreaElement>,
-  // ) => setCommentValue(e.target.value);
-
-  // const onSubmitCommentValueByButton = () => {
-  //   if (!validateData(commentValue)) return;
-  //   const textList = replaceLineBreakStringIntoTag(commentValue);
-  //   const content = textList.map((text) => `<p>${text}</p>`).join('');
-
-  //   addCommentMutate.mutateAsync({
-  //     postId,
-  //     content,
-  //   });
-  // .then((response) => console.log(response.data.header));
+  nickname,
+}: Pick<IResponsePostDetail, 'commentDTOList' | 'postId' | 'nickname'>) => {
   return (
     <div className={classes.comment_wrap}>
       <div className={classes.comment_list_wrap}>
-        <NewComments commentDTOList={commentDTOList} postId={postId} />
+        <NewComments
+          commentDTOList={commentDTOList}
+          postId={postId}
+          nickname={nickname}
+        />
         {/* {commentDTOList &&
           commentDTOList.map((comment: any) => (
             <Comment
@@ -263,49 +253,119 @@ const SectionHeader = ({ children }: IchildrenReactNode) => {
   return <header>{children}</header>;
 };
 
-const SectionTitle = (props: Pick<SectionHeaderProps, 'title'>) => {
+const SectionTitle = (
+  props: Pick<SectionHeaderProps, 'title' | 'postId' | 'nickname'>,
+) => {
+  const { nickname: currentUserNickname } = useRecoilValue(UserState);
+  const { data: isLikeData, status } = useGetLikeofPost(props.postId);
+  const deletePostQuery = useDeletePost(props.postId);
+  const updateLikeQuery = useUpdateLike(props.postId);
+
+  const updateLikeOnClick = () => updateLikeQuery.mutateAsync(props.postId);
+  const handleOnClickBySelect = (e: MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    const target = e.target as HTMLLIElement;
+    const { innerText } = target;
+
+    if (innerText === '글 수정') return alert(innerText);
+    deletePostQuery
+      .mutateAsync()
+      .then((res) => res.status === 200 && alert('삭제가 완료되었습니다.'));
+  };
+
+  // if (status === 'loading')
+  //   return (
+  //     <div className={classes.header_title_wrap + ' ' + classes.loading}>
+  //       loading{' '}
+  //     </div>
+  //   );
+
   return (
     <div className={classes.header_title_wrap}>
       <div className={classes.title_left}>
         <h1 className={classes.title_left}>{props.title}</h1>
       </div>
       <div className={classes.title_right}>
-        <NewIcon src={HeartIcon} alt="heart_icon" onClick={() => {}} />
-        <NewIcon src={SettingIcon} alt="setting_icon" onClick={() => {}} />
+        <NewIcon
+          className={classes.like_icon}
+          src={isLikeData?.data.body.data ? FullHeartIcon : HeartIcon}
+          alt="heart_icon"
+          onClick={updateLikeOnClick}
+        />
+        {props.nickname == currentUserNickname && (
+          <Select
+            trigger={<NewIcon src={SettingIcon} alt="setting_icon" />}
+            style={{
+              width: '110px',
+              right: 0,
+              fontSize: '16px',
+              textAlign: 'center',
+            }}
+            onChange={handleOnClickBySelect}
+            options={['글 수정', '글 삭제']}
+          />
+        )}
       </div>
     </div>
   );
 };
 
+interface SectionCategoryProps
+  extends Pick<
+    SectionHeaderProps,
+    'recruitNum' | 'onlineOrOffline' | 'status' | 'period' | 'postId'
+  > {
+  nickName: string;
+}
+
 const SectionCategory = ({
-  // categoryName,
+  nickName,
   recruitNum,
   onlineOrOffline,
   status,
   period,
-}: Pick<
-  SectionHeaderProps,
-  'recruitNum' | 'onlineOrOffline' | 'status' | 'period'
->) => {
+  postId,
+}: SectionCategoryProps) => {
+  const updatePostStatusQuery = useUpdatePostStatus(postId);
+  const { nickname: currentUserNickname } = useRecoilValue(UserState);
+  const changeStatusOnClickByButton = () => {
+    updatePostStatusQuery.mutateAsync();
+  };
+
   return (
     <div className={classes.category_wrap}>
       <div className={classes.flex_wrap + ' ' + classes.category_left}>
-        <div className={classes.category_button}>{onlineOrOffline}</div>
-        <div className={classes.category_button}>{recruitNum + '명'}</div>
-        <div className={classes.category_button}>
+        <div className={classes.category_item}>{onlineOrOffline}</div>
+        <div className={classes.category_item}>{recruitNum + '명'}</div>
+        <div className={classes.category_item}>
           {checkingDetailPeriod(period)}
         </div>
       </div>
       <div className={classes.category_right}>
-        <div
-          className={
-            status === 'Y'
-              ? classes.status_button
-              : classes.status_button + ' ' + classes.false
-          }
-        >
-          {status === 'Y' ? '모집중' : '모집완료'}
-        </div>
+        {nickName === currentUserNickname ? (
+          <div
+            className={
+              status === 'Y'
+                ? [classes.status_button, classes.hover].join(' ')
+                : [classes.status_button, classes.hover, classes.false].join(
+                    ' ',
+                  )
+            }
+            onClick={changeStatusOnClickByButton}
+          >
+            {status === 'Y' ? '모집중' : '모집완료'}
+          </div>
+        ) : (
+          <div
+            className={
+              status === 'Y'
+                ? classes.status_button
+                : [classes.status_button, classes.false].join(' ')
+            }
+          >
+            {status === 'Y' ? '모집중' : '모집완료'}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -324,7 +384,6 @@ const SectionContent = (props: { content: string }) => {
   );
 };
 
-interface LeftSidebarProps {}
 const LeftSidebar = () => {
   const { navigatePrevious } = useCustomNavigate();
   return (
@@ -342,8 +401,6 @@ const LeftSidebar = () => {
   );
 };
 
-// interface RightSidebarProps {}
-
 const RightSidebar = () => {
   return (
     <aside className={classes.aside_right}>
@@ -351,41 +408,3 @@ const RightSidebar = () => {
     </aside>
   );
 };
-
-// const DetailPostCategory = ({ detailData }: { detailData: IResponsePostDetail }) => {
-//   return (
-//     <div className="summary_category_wrapper">
-//       <div className="summary_category_left">
-//         <div className="summary_category_name">{detailData.categoryName}</div>
-//         <div className="summary_category_name">
-//           {detailData.onlineOrOffline}
-//         </div>
-//         <div className="summary_category_name">{detailData.recruitNum}</div>
-//         <div className="summary_category_name">
-//           {detailData.period ? checkingDetailPeriod(detailData.period) : null}
-//         </div>
-//       </div>
-//       <div className="summary_category_right">
-//         {/* {detailData.status == 'Y' ? (
-//           <div
-//             className={`summary_category_status_true ${
-//               detailData.nickname == LoginLabel.nickname ? 'hover' : ''
-//             }`}
-//             onClick={handlerStatusClick}
-//           >
-//             <span>모집중</span>
-//           </div>
-//         ) : (
-//           <div
-//             className={`summary_category_status_false  ${
-//               detailData.nickname == LoginLabel.nickname ? 'hover' : ''
-//             }`}
-//             onClick={handlerStatusClick}
-//           >
-//             <span>모집완료</span>
-//           </div>
-//         )} */}
-//       </div>
-//     </div>
-//   );
-// };
