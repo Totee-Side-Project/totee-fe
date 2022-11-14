@@ -35,6 +35,6 @@ export const useUpdatePost = (postId: number) => {
 export const useDeletePost = (postId: number) => {
   const queryClient = useQueryClient();
   return useMutation(() => PostAPI.deletePost(postId), {
-    onSuccess: () => queryClient.invalidateQueries(['post', postId]),
+    // queryClient에서 ['post', postId]를 component에서 업데이트가 일어날 때 query를 지워버려 error가 뜬다.
   });
 };

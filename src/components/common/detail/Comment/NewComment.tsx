@@ -1,12 +1,16 @@
 import { NewIcon } from '@components/atoms/Icon/NewIcon';
 import { Line } from '@components/atoms/Line/Line';
-import { IResponsePostDetail } from '@components/pages/DetailPage/NewDetailPage';
+import {
+  CommentSubmitArea,
+  IResponsePostDetail,
+} from '@components/pages/DetailPage/NewDetailPage';
 import { ICommentDto } from '@components/pages/DetailPage/NewDetailPage';
-import { useDeleteComment } from '@hooks/useMutateQuery';
+import { useDeleteComment, useUpdateComment } from '@hooks/useMutateQuery';
 import { UserState } from '@store/user';
 import { createMarkup } from '@utils/createMarkup';
 import { handleErrorType } from '@utils/handleErrorType';
 import { handleTime } from '@utils/handleTime';
+import { replaceLineBreakStringIntoTag } from '@utils/replaceLineBreakStringIntoTag';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import Swal from 'sweetalert2';
@@ -20,7 +24,7 @@ export const NewComments = ({
     <div className={classes.comments_container}>
       {commentDTOList.map((comment) => (
         <NewCommentItem
-          key={comment.commentId}
+          key={`comment${comment.commentId}`}
           comment={comment}
           postId={postId}
         />
@@ -36,8 +40,8 @@ const NewCommentItem = ({
   postId: number;
   comment: ICommentDto;
 }) => {
-  const deleteCommentQuery = useDeleteComment(postId, comment.commentId);
   const { nickname: currentUserNickname } = useRecoilValue(UserState);
+  const [isModify, setIsModify] = useState(false);
   const [commentItemData, setCommentItemData] = useState<{
     [key in string]: [string, () => void];
   }>({
@@ -45,6 +49,7 @@ const NewCommentItem = ({
     remove: ['삭제', () => {}],
     reply: ['답글', () => {}],
   });
+  const deleteCommentQuery = useDeleteComment(postId, comment.commentId);
 
   useEffect(() => {
     const newCommentItemData: { [key in string]: [string, () => void] } =
@@ -58,7 +63,10 @@ const NewCommentItem = ({
     setCommentItemData(newCommentItemData);
   }, []);
 
-  const onClickByModifyButton = () => {};
+  const onClickByModifyButton = () => {
+    setIsModify((pre) => !pre);
+  };
+
   const onClickByRemoveButton = () => {
     Swal.fire({
       title: '댓글 삭제',
@@ -93,7 +101,7 @@ const NewCommentItem = ({
   const renderCommentItemButton = () =>
     Object.values(commentItemData).map(([text, onClick], index) => (
       <>
-        <span key={'comment_header-right_' + text} onClick={onClick}>
+        <span key={'comment_header-right_' + text + index} onClick={onClick}>
           {text}
         </span>
         {index < Object.values(commentItemData).length - 1 && (
@@ -132,10 +140,21 @@ const NewCommentItem = ({
           </div>
         </div>
         <Line />
-        <div
-          className={classes.right_item_content}
-          dangerouslySetInnerHTML={createMarkup(comment.content)}
-        ></div>
+        {isModify ? (
+          <div className={classes.right_item_modify_wrap}>
+            <CommentSubmitArea
+              postId={postId}
+              comment={comment}
+              isModify={isModify}
+              toggleParentState={() => setIsModify((pre) => !pre)}
+            />
+          </div>
+        ) : (
+          <div
+            className={classes.right_item_content}
+            dangerouslySetInnerHTML={createMarkup(comment.content)}
+          ></div>
+        )}
       </div>
     </div>
   );

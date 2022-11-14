@@ -1,6 +1,6 @@
-import type { ChangeEvent, MouseEvent } from 'react';
+import { ChangeEvent, MouseEvent, useEffect } from 'react';
 import { ReactNode, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams, useRoutes } from 'react-router-dom';
 import { Banner } from '@components/common';
 import { Line } from '@components/atoms/Line/Line';
 import { NewIcon } from '@components/atoms/Icon/NewIcon';
@@ -17,11 +17,15 @@ import MessageIcon from '@assets/svg/common/message-square.svg';
 import LeftArrowHasBorderIcon from '@assets/svg/common/left_arrow_has_border.svg';
 import {
   useAddComment,
+  useUpdateComment,
   useUpdateLike,
   useUpdatePostStatus,
 } from '@hooks/useMutateQuery';
 import { checkingDetailPeriod } from '@utils/handleSelectValue';
-import { replaceLineBreakStringIntoTag } from '@utils/replaceLineBreakStringIntoTag';
+import {
+  replaceLineBreakStringIntoTag,
+  replaceLineBreakTagIntoString,
+} from '@utils/replaceLineBreakStringIntoTag';
 import { validateData } from '@utils/validateData';
 import classes from './newDetailPage.module.scss';
 import { useRecoilValue } from 'recoil';
@@ -29,18 +33,7 @@ import { UserState } from '@store/index';
 import { Select } from '@components/ui/Select/Select';
 import { useDeletePost } from '@hooks/usePostQuery';
 import { useCustomNavigate } from '@hooks/useCustomNavigate';
-// =======
-// import classes from './newDetailPage.module.scss';
-// import {
-//   checkingDetailPeriod,
-//   handleSelectValues,
-// } from '@utils/handleSelectValue';
-// // import { Button } from '@components/atoms';
-// import { Button } from '@components/ui/Button/Button';
-// import { useAddComment } from '@hooks/useMutateQuery';
-// import { replaceLineBreakStringIntoTag } from '@utils/replaceLineBreakStringIntoTag';
-// import { validateData } from '@utils/validateData';
-// >>>>>>> 594f340974b1321a8b2137ce2487f9c16f7cf43f
+import Swal from 'sweetalert2';
 
 export interface ICommentDto {
   id: number;
@@ -177,11 +170,7 @@ const Comments = ({
   return (
     <div className={classes.comment_wrap}>
       <div className={classes.comment_list_wrap}>
-        <NewComments
-          commentDTOList={commentDTOList}
-          postId={postId}
-          // nickname={nickname}
-        />
+        <NewComments commentDTOList={commentDTOList} postId={postId} />
         {/* {commentDTOList &&
           commentDTOList.map((comment: any) => (
             <Comment
@@ -196,37 +185,93 @@ const Comments = ({
   );
 };
 
-const CommentSubmitArea = ({ postId }: { postId: number }) => {
+export const CommentSubmitArea = ({
+  postId,
+  comment,
+  isModify = false,
+  toggleParentState,
+}: {
+  postId: number;
+  comment?: ICommentDto;
+  isModify?: boolean;
+  toggleParentState?: () => void;
+}) => {
   const [value, setValue] = useState('');
-  const addCommentMutate = useAddComment(postId);
+  const { mutateAsync: addCommentMutateAsync } = useAddComment(postId);
+  const { mutateAsync: updateCommentMutateAsync } = useUpdateComment(
+    postId,
+    comment?.commentId ? comment?.commentId : 0,
+  );
+
+  useEffect(() => {
+    if (!comment?.content) return;
+    const newValue = replaceLineBreakTagIntoString(comment.content);
+    setValue(newValue);
+  }, [comment?.content]);
 
   const onChangeCommentValueByTextarea = (
     e: ChangeEvent<HTMLTextAreaElement>,
   ) => setValue(e.target.value);
 
-  const onSubmitCommentValueByButton = () => {
+  const validateWithReplaceData = () => {
     if (!validateData(value)) return;
     const textList = replaceLineBreakStringIntoTag(value);
-    const content = textList.map((text) => `<p>${text}</p>`).join('');
-
-    addCommentMutate
-      .mutateAsync({
-        postId,
-        content,
-      })
-      .then((response) => response.status === 200 && setValue(''));
+    return textList.map((text) => `<p>${text}</p>`).join('');
   };
+
+  const onSubmitCommentByButton = () => {
+    const content = validateWithReplaceData();
+    addCommentMutateAsync({
+      postId,
+      content,
+    }).then((response) => {
+      if (response.status === 200) return setValue('');
+      Swal.fire({
+        title: '댓글 작성 실패',
+        text: '댓글 작성이 실패했습니다.',
+        icon: 'error',
+      });
+    });
+  };
+
+  const onUpdateCommentByButton = () => {
+    const content = validateWithReplaceData();
+    updateCommentMutateAsync({
+      postId,
+      content,
+    }).then((response) => {
+      if (response.status === 200 && toggleParentState)
+        return toggleParentState();
+      Swal.fire({
+        title: '댓글 수정 실패',
+        text: '댓글 수정이 실패했습니다.',
+        icon: 'error',
+      });
+    });
+  };
+
+  const onClickCancleButton = () => toggleParentState && toggleParentState();
 
   return (
     <>
       <textarea
         className={classes.comment_textarea}
-        placeholder="댓글을 입력해주세요"
+        placeholder={isModify ? '' : '댓글을 입력해주세요'}
         value={value}
         onChange={onChangeCommentValueByTextarea}
       />
       <div className={classes.comment_button_wrap}>
-        <Button text={'댓글 등록'} onClick={onSubmitCommentValueByButton} />
+        {isModify && (
+          <Button
+            className={classes.cancle_button}
+            text={'취소'}
+            onClick={onClickCancleButton}
+          />
+        )}
+        <Button
+          text={isModify ? '댓글 수정' : '댓글 등록'}
+          onClick={isModify ? onUpdateCommentByButton : onSubmitCommentByButton}
+        />
       </div>
     </>
   );
@@ -270,6 +315,7 @@ const SectionTitle = (
   const { data: isLikeData, status } = useGetLikeofPost(props.postId);
   const deletePostQuery = useDeletePost(props.postId);
   const updateLikeQuery = useUpdateLike(props.postId);
+  const navigate = useNavigate();
 
   const updateLikeOnClick = () => updateLikeQuery.mutateAsync(props.postId);
   const handleOnClickBySelect = (e: MouseEvent<HTMLElement>) => {
@@ -277,10 +323,21 @@ const SectionTitle = (
     const target = e.target as HTMLLIElement;
     const { innerText } = target;
 
-    if (innerText === '글 수정') return alert(innerText);
-    deletePostQuery
-      .mutateAsync()
-      .then((res) => res.status === 200 && alert('삭제가 완료되었습니다.'));
+    if (innerText === '글 수정') {
+      navigate('/setupstudy');
+      return;
+    }
+    deletePostQuery.mutateAsync().then(
+      (res) =>
+        res.status === 200 &&
+        Swal.fire({
+          title: '게시물 삭제',
+          text: '게시물 삭제가 완료되었습니다.',
+          timer: 2000,
+        })
+          .then(() => navigate(-1))
+          .catch((err) => err),
+    );
   };
 
   // if (status === 'loading')
