@@ -1,0 +1,100 @@
+.mentorModal{
+  padding: 20px 0px;
+  width: 700px;
+  max-height: 780px;
+}
+.headerTitle{
+  margin-left: 70px;
+  font-size: 21px;
+  font-weight: 500;
+  display: flex;
+}
+.topLine{
+  margin-top: 12px;
+  border: #8c8c8c 1px solid;
+}
+
+
+.contentWrapper{
+  margin: 35px 70px;
+}
+.title{
+  color: #2F855A;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.profile{
+  display: flex;
+  text-align: center;
+  margin: 20px 0 20px 0;
+  gap: 14px;
+  height: 30px;
+}
+.img{
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  border: #4C4C4C 1px solid;
+}
+.name{
+  color: black;
+  font-weight: 500;
+  margin: auto 0;
+  font-size: 15px;
+}
+
+.detail{
+  color: #767676;
+  margin-bottom: 10px;
+  display: flex;
+  font-size: 15px;
+}
+
+.position{
+  margin-right: 10px;
+  font-size: 15px;
+}
+.career{
+  margin-right: 10px;
+  font-size: 15px;
+}
+
+.price{
+  font-size: 14px;
+  font-weight: 400;
+  margin: 25px 0 30px 0;
+}
+
+.contentLine{
+  border: #c2c2c2 1px solid;
+}
+
+.content{
+  height: 350px;
+  margin: 40px 0 0 0;
+  font-size: 15px;
+  line-height: 25px;
+  font-weight: 300;
+  //overflow-y: scroll;
+}
+
+
+.bottomLine{
+  margin: 15px 0 10px 0;
+  border: #c2c2c2 1px solid;
+}
+
+.btn{
+  text-align: center;
+  width: 160px;
+  height: 40px;
+  background: #568A35;
+  color: #fff;
+  font-size: 20px;
+  padding: 8px;
+  font-weight: 400;
+  margin: auto;
+  border-radius: 8px;
+  cursor: pointer;
+}
