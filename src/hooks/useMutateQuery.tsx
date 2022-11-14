@@ -8,6 +8,10 @@ import {
   UserAPI,
 } from '@api/api';
 import { useQueryClient } from 'react-query';
+export interface IReplyRequest {
+  commentId: number;
+  content: string;
+}
 
 export const useAddUserInfo = () => {
   const queryClient = useQueryClient();
@@ -45,7 +49,7 @@ export const useDeleteComment = (postId: number, commentId: number) => {
 
 export const useAddReply = (postId: number) => {
   const queryClient = useQueryClient();
-  return useMutation((form: any) => ReplyAPI.createReply(form), {
+  return useMutation((form: IReplyRequest) => ReplyAPI.createReply(form), {
     onSuccess: () => {
       queryClient.invalidateQueries(['post', postId]);
     },

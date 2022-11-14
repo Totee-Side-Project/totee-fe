@@ -69,6 +69,7 @@
       }
     }
     .right_item_content {
+      min-height: 100px;
       width: 100%;
       padding: 10px 0;
       word-break: break-all;
@@ -80,6 +81,11 @@
     .right_item_modify_wrap {
       width: 100%;
       padding: 10px 0;
+    }
+    .right_item_reply_wrap {
+      display: grid;
+      width: 100%;
+      grid-row-gap: 10px;
     }
   }
 }

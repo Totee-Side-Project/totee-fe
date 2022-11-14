@@ -1,6 +1,6 @@
-import { ChangeEvent, MouseEvent, useEffect } from 'react';
-import { ReactNode, useState } from 'react';
-import { useNavigate, useParams, useRoutes } from 'react-router-dom';
+import type { ChangeEvent, MouseEvent, ReactNode } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Banner } from '@components/common';
 import { Line } from '@components/atoms/Line/Line';
 import { NewIcon } from '@components/atoms/Icon/NewIcon';
@@ -17,6 +17,7 @@ import MessageIcon from '@assets/svg/common/message-square.svg';
 import LeftArrowHasBorderIcon from '@assets/svg/common/left_arrow_has_border.svg';
 import {
   useAddComment,
+  useAddReply,
   useUpdateComment,
   useUpdateLike,
   useUpdatePostStatus,
@@ -26,7 +27,7 @@ import {
   replaceLineBreakStringIntoTag,
   replaceLineBreakTagIntoString,
 } from '@utils/replaceLineBreakStringIntoTag';
-import { validateData } from '@utils/validateData';
+// import { validateData } from '@utils/validateData';
 import classes from './newDetailPage.module.scss';
 import { useRecoilValue } from 'recoil';
 import { UserState } from '@store/index';
@@ -34,17 +35,39 @@ import { Select } from '@components/ui/Select/Select';
 import { useDeletePost } from '@hooks/usePostQuery';
 import { useCustomNavigate } from '@hooks/useCustomNavigate';
 import Swal from 'sweetalert2';
+import {
+  SubmitCommentButton,
+  SubmitModifyButton,
+  SubmitReplyButton,
+} from '@components/common/detail/Button/Button';
 
-export interface ICommentDto {
-  id: number;
+// export interface ICommentDto {
+//   commentId: number;
+//   content: string;
+//   nickname: string;
+//   createdAt: string;
+//   modifiedAt: string;
+//   replyList: IReplyDto[];
+//   profileImageUrl: string;
+// }
+
+interface ICommentDto {
   nickname: string;
   content: string;
   createdAt: string;
   modifiedAt: string;
-  commentId: number;
-  userSeq: number;
   profileImageUrl: string;
 }
+
+export interface IPostCommentDto extends ICommentDto {
+  commentId: number;
+  replyList: IReplyDto[];
+}
+export interface IReplyDto extends ICommentDto {
+  commentId(commentId: any): unknown;
+  replyId: number;
+}
+
 export interface IResponsePostDetail {
   postId: number;
   title: string;
@@ -53,7 +76,7 @@ export interface IResponsePostDetail {
   view: number;
   likeNum: number;
   commentNum: number;
-  commentDTOList: ICommentDto[];
+  commentDTOList: IPostCommentDto[];
   imageUrl: string;
   createdAt: string;
   onlineOrOffline: string;
@@ -89,32 +112,11 @@ interface IchildrenReactNode {
 
 export const NewDetailPage = () => {
   const { id } = useParams();
-
-  // if (!id) return null;
   const { data: postData, status, refetch } = useGetPostByPostId(Number(id));
   const responseData: IResponsePostDetail = postData?.data.body.data;
 
   // Render Loading Component
   if (status === 'loading') return <div>loading...</div>;
-
-  /*
-  게시물 좋아요 관련 로직
-
-  토글관련 로직
-  로그인 유무 로직
-
-  게시물 데이터가 존재할 경우 상태가 200 이라면 setState해준다?
-
-  좋아요 관련 useEffect 서버의 상태와 클라이언트 상태를 동기화시켜주는 부분?
-
-  뒤로가기 클릭시 루트로 보내주는 부분
-  좋아요 관련 함수
-  로그인이 안되어 있다면 로그인 모달으 열어주는 부분
-
-  로그인이 안되어 있을 떄 공통적으로 거쳐야하는 컨테이터적인 함수를 생성한다면?
-  공통적으로 모달을 오픈시켜줄 수 있지 않을까?
-  */
-
   if (status === 'success' && responseData) {
     return (
       <div>
@@ -171,16 +173,8 @@ const Comments = ({
     <div className={classes.comment_wrap}>
       <div className={classes.comment_list_wrap}>
         <NewComments commentDTOList={commentDTOList} postId={postId} />
-        {/* {commentDTOList &&
-          commentDTOList.map((comment: any) => (
-            <Comment
-              postId={parseInt(id as string)}
-              comment={comment}
-              key={`comment-${comment.commentId}`}
-            ></Comment>
-          ))} */}
       </div>
-      <CommentSubmitArea postId={postId} />
+      <CommentSubmitArea postId={postId} type={'comment'} />
     </div>
   );
 };
@@ -188,90 +182,83 @@ const Comments = ({
 export const CommentSubmitArea = ({
   postId,
   comment,
+  reply,
+  type,
   isModify = false,
-  toggleParentState,
+  isReply,
+  toggleParentBoolean,
 }: {
   postId: number;
-  comment?: ICommentDto;
+  comment?: IPostCommentDto;
+  reply?: IReplyDto;
+  type: 'comment' | 'reply';
   isModify?: boolean;
-  toggleParentState?: () => void;
+  isReply?: boolean;
+  toggleParentBoolean?: () => void;
 }) => {
-  const [value, setValue] = useState('');
-  const { mutateAsync: addCommentMutateAsync } = useAddComment(postId);
-  const { mutateAsync: updateCommentMutateAsync } = useUpdateComment(
-    postId,
-    comment?.commentId ? comment?.commentId : 0,
-  );
-
+  const [formData, setFormData] = useState('');
   useEffect(() => {
-    if (!comment?.content) return;
-    const newValue = replaceLineBreakTagIntoString(comment.content);
-    setValue(newValue);
-  }, [comment?.content]);
+    if (comment?.content && isModify) {
+      const newValue = replaceLineBreakTagIntoString(comment.content);
+      setFormData(newValue);
+    }
+    if (reply?.content && isModify) {
+      const newValue = replaceLineBreakTagIntoString(reply.content);
+      setFormData(newValue);
+    }
+  }, [comment?.content, isModify]);
 
-  const onChangeCommentValueByTextarea = (
-    e: ChangeEvent<HTMLTextAreaElement>,
-  ) => setValue(e.target.value);
-
-  const validateWithReplaceData = () => {
-    if (!validateData(value)) return;
-    const textList = replaceLineBreakStringIntoTag(value);
-    return textList.map((text) => `<p>${text}</p>`).join('');
-  };
-
-  const onSubmitCommentByButton = () => {
-    const content = validateWithReplaceData();
-    addCommentMutateAsync({
-      postId,
-      content,
-    }).then((response) => {
-      if (response.status === 200) return setValue('');
-      Swal.fire({
-        title: '댓글 작성 실패',
-        text: '댓글 작성이 실패했습니다.',
-        icon: 'error',
-      });
-    });
-  };
-
-  const onUpdateCommentByButton = () => {
-    const content = validateWithReplaceData();
-    updateCommentMutateAsync({
-      postId,
-      content,
-    }).then((response) => {
-      if (response.status === 200 && toggleParentState)
-        return toggleParentState();
-      Swal.fire({
-        title: '댓글 수정 실패',
-        text: '댓글 수정이 실패했습니다.',
-        icon: 'error',
-      });
-    });
-  };
-
-  const onClickCancleButton = () => toggleParentState && toggleParentState();
+  const onChangeCommentValueByTextrea = (e: ChangeEvent<HTMLTextAreaElement>) =>
+    setFormData(e.target.value);
+  const onClickCancleButton = () =>
+    toggleParentBoolean && toggleParentBoolean();
 
   return (
     <>
       <textarea
         className={classes.comment_textarea}
-        placeholder={isModify ? '' : '댓글을 입력해주세요'}
-        value={value}
-        onChange={onChangeCommentValueByTextarea}
+        placeholder={
+          isModify
+            ? ''
+            : type === 'reply'
+            ? '답글을 입력해주세요'
+            : '댓글을 입력해주세요'
+        }
+        value={formData}
+        onChange={onChangeCommentValueByTextrea}
       />
       <div className={classes.comment_button_wrap}>
-        {isModify && (
+        {isModify || isReply ? (
           <Button
             className={classes.cancle_button}
             text={'취소'}
             onClick={onClickCancleButton}
           />
+        ) : null}
+        {type === 'comment' && !isModify ? (
+          <SubmitCommentButton
+            formData={formData}
+            postId={postId}
+            clearParentFormData={() => setFormData('')}
+          />
+        ) : isModify ? (
+          <SubmitModifyButton
+            formData={formData}
+            postId={postId}
+            replyId={reply ? reply?.replyId : undefined}
+            comment={comment as IPostCommentDto}
+            toggleParentBoolean={toggleParentBoolean}
+            clearParentFormData={() => setFormData('')}
+          />
+        ) : (
+          <SubmitReplyButton
+            postId={postId}
+            formData={formData}
+            comment={comment as IPostCommentDto}
+            toggleParentBoolean={toggleParentBoolean}
+            clearParentFormData={() => setFormData('')}
+          />
         )}
-        <Button
-          text={isModify ? '댓글 수정' : '댓글 등록'}
-          onClick={isModify ? onUpdateCommentByButton : onSubmitCommentByButton}
-        />
       </div>
     </>
   );

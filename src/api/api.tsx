@@ -1,3 +1,4 @@
+import { IReplyRequest } from '@hooks/useMutateQuery';
 import axios, { AxiosResponse } from 'axios';
 import { PostRequestDto } from './requestType';
 import { IGetPostListResponse } from './responseType';
@@ -61,7 +62,7 @@ export const CommentAPI = {
 };
 
 export const ReplyAPI = {
-  createReply: (form: any) => api.post('/api/v1/reply', form),
+  createReply: (form: IReplyRequest) => api.post('/api/v1/reply', form),
   updateReply: (replyId: number, form: any) =>
     api.put(`/api/v1/reply/${replyId}`, form),
   deleteReply: (replyId: number) => api.delete(`/api/v1/reply/${replyId}`),
