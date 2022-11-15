@@ -1,6 +1,17 @@
 import { useMutation } from 'react-query';
-import { AlarmAPI, CommentAPI, LikeAPI, ReplyAPI, UserAPI } from '@api/api';
+import {
+  AlarmAPI,
+  CommentAPI,
+  LikeAPI,
+  PostAPI,
+  ReplyAPI,
+  UserAPI,
+} from '@api/api';
 import { useQueryClient } from 'react-query';
+export interface IReplyRequest {
+  commentId: number;
+  content: string;
+}
 
 export const useAddUserInfo = () => {
   const queryClient = useQueryClient();
@@ -38,7 +49,7 @@ export const useDeleteComment = (postId: number, commentId: number) => {
 
 export const useAddReply = (postId: number) => {
   const queryClient = useQueryClient();
-  return useMutation((form: any) => ReplyAPI.createReply(form), {
+  return useMutation((form: IReplyRequest) => ReplyAPI.createReply(form), {
     onSuccess: () => {
       queryClient.invalidateQueries(['post', postId]);
     },
@@ -59,6 +70,15 @@ export const useDeleteReply = (postId: number, replyId: number) => {
   });
 };
 
+export const useUpdatePostStatus = (postId: number) => {
+  const queryClient = useQueryClient();
+  return useMutation(() => PostAPI.statusChange(postId), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['post', postId]);
+    },
+  });
+};
+
 export const useUpdateUser = () => {
   const queryClient = useQueryClient();
   return useMutation((form: any) => UserAPI.updateUserInfo(form), {
@@ -66,7 +86,7 @@ export const useUpdateUser = () => {
   });
 };
 
-export const useUpdateLike = (postId: string) => {
+export const useUpdateLike = (postId: string | number) => {
   const queryClient = useQueryClient();
   return useMutation((postId: any) => LikeAPI.postLike(postId), {
     onSuccess: () => {

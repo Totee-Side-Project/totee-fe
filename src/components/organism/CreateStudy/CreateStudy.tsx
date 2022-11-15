@@ -24,6 +24,8 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
 import Swal from 'sweetalert2';
 import { Line } from '@components/atoms/Line/Line';
+import { validateData } from '@utils/validateData';
+import { useCustomNavigate } from '@hooks/useCustomNavigate';
 
 export const CreateStudy = () => {
   const [form, dispatch] = useReducer(reducerOfStudyPost, defaultForm);
@@ -270,7 +272,16 @@ const SubmitButton = ({
 }) => {
   // 폼 data를 mutate 해주는 것은 버튼의 역할이다.
   const addPostMutation = useAddPost(PostAPI.createPost);
+  const { navigateRoot } = useCustomNavigate();
   const handleClick = async () => {
+    if (!validateData(form))
+      return Swal.fire({
+        title: '등록 실패',
+        text: '모든 정보를 입력해주세요!',
+        icon: 'warning',
+        confirmButtonText: '확인',
+      });
+
     const formData = new FormData();
     Object.entries(form).forEach(([key, value]) =>
       formData.append(key, String(value)),
@@ -282,8 +293,8 @@ const SubmitButton = ({
         title: '등록 완료',
         text: '마이페이지에서 확인하세요',
         icon: 'success',
-        confirmButtonText: '<a href="/">확인</a>',
-      });
+        confirmButtonText: '확인',
+      }).then(navigateRoot);
       // 홈으로 네비게이트
       return;
     }
@@ -317,7 +328,6 @@ const DetailForm = ({
   onChangeByEditor,
 }: DetailFormProps) => {
   const navigate = useNavigate();
-
   const navigateRootOnClick = () => navigate('/');
   return (
     <section className={classes.detail_editor_container}>

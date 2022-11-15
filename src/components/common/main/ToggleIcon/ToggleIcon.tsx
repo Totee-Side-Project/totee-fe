@@ -1,42 +1,44 @@
-import React, { useRef } from 'react';
-import { Icon } from '@components/atoms';
-import { ToggleIconProps } from 'types/icon.types';
-import classes from './toggleIcon.module.scss';
+import { useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { NewIcon } from '@components/atoms/Icon/NewIcon';
 import { useOutsideAlerter } from '@hooks/useOutsideAlerter';
 import DownIcon from '@assets/toggle-icon.svg';
-import { Link } from 'react-router-dom';
+import { ToggleIconProps } from 'types/icon.types';
+import classes from './toggleIcon.module.scss';
 
 export function ToggleIcon({
   imageUrl,
-  style,
   userInfo,
   handleLogout,
   isShowToggle,
   setIsShowToggle,
-  onClick,
 }: ToggleIconProps) {
   const toggleRef = useRef(null as any);
-
-  useOutsideAlerter(toggleRef, () => {
-    setIsShowToggle(false);
-  });
+  const toggleOnClick = () => setIsShowToggle(!isShowToggle);
+  const toggleWithLogoutOnClick = () => {
+    toggleOnClick();
+    handleLogout();
+  };
+  useOutsideAlerter(toggleRef, () => setIsShowToggle(false));
 
   return (
     <>
       <span ref={toggleRef}>
         <div className={classes.flex}>
-          <Icon
-            imageUrl={imageUrl}
-            style={{ ...style }}
-            onClick={() => setIsShowToggle(!isShowToggle)}
-          ></Icon>
-          <img
+          <NewIcon
+            src={imageUrl}
+            alt="user_profile_img"
+            style={{ width: '60px', height: '60px', borderRadius: '50%' }}
+            onClick={toggleOnClick}
+          />
+          <NewIcon
             src={DownIcon}
             className="DownIcon"
+            alt="down_toggle_icon"
             width={20}
             height={20}
-            onClick={() => setIsShowToggle(!isShowToggle)}
-          ></img>
+            onClick={toggleOnClick}
+          />
         </div>
         {isShowToggle && (
           <div className={classes.toggleWrapper}>
@@ -53,23 +55,10 @@ export function ToggleIcon({
                   <li>관리자 페이지</li>
                 ) : (
                   <Link to="/mypage">
-                    <li
-                      onClick={() => {
-                        setIsShowToggle(!isShowToggle);
-                      }}
-                    >
-                      내 정보 수정
-                    </li>
+                    <li onClick={toggleOnClick}>내 정보 수정</li>
                   </Link>
                 )}
-                <li
-                  onClick={() => {
-                    setIsShowToggle(!isShowToggle);
-                    handleLogout();
-                  }}
-                >
-                  로그아웃
-                </li>
+                <li onClick={toggleWithLogoutOnClick}>로그아웃</li>
               </ul>
             </div>
           </div>
