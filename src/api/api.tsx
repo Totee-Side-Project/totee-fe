@@ -102,6 +102,13 @@ export const AlarmAPI = {
     api.post(`/api/v1/notification/${notificationId}`),
 };
 
+export const ApplicationAPI = {
+  getApplicant: (postId: any) => api.get(`/api/v1/applicant/${postId}`),
+  postApplicant: (postId: any, message: string) =>
+    api.post(`/api/v1/applicant/${postId}`, { message }),
+  deleteApplicant: (postId: any) => api.delete(`/api/v1/applicant/${postId}`),
+};
+
 // window.location.host;
 // 로그인 리다이렉트 uri - 우선 local에서 테스트할 수 있게 작업함
 // ? `${window.location.host}/oauth/redirect`

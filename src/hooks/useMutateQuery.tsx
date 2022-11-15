@@ -1,6 +1,7 @@
-import { useMutation } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import {
   AlarmAPI,
+  ApplicationAPI,
   CommentAPI,
   LikeAPI,
   PostAPI,
@@ -101,5 +102,22 @@ export const useUpdateAlarm = (notificationId: string) => {
   const queryClient = useQueryClient();
   return useMutation(() => AlarmAPI.updateAlarm(notificationId), {
     onSuccess: () => queryClient.invalidateQueries('alarms'),
+  });
+};
+
+export const useUpdateApplicant = (postId: string | undefined) => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    (message: string) => ApplicationAPI.postApplicant(postId, message),
+    {
+      onSuccess: () => queryClient.invalidateQueries(['applicant', postId]),
+    },
+  );
+};
+
+export const useDeleteApplicant = (postId: string | undefined) => {
+  const queryClient = useQueryClient();
+  return useMutation(() => ApplicationAPI.deleteApplicant(postId), {
+    onSuccess: () => {},
   });
 };
