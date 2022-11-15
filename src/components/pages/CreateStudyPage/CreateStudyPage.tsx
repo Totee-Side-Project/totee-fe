@@ -8,7 +8,7 @@ function CreateStudyPage() {
   return (
     <>
       {/*<Banner />*/}
-      <img src={Banner} alt="스터디 배너" />
+      <img src={Banner} alt="스터디 배너" style={{ width: '100%' }} />
       <CreateStudy />
     </>
   );
