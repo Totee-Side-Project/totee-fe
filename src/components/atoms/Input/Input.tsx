@@ -40,8 +40,8 @@ export function Input({
   autoFocus = true,
   onChange,
   setStatus,
-  maxlength,
-}: InputProps) {
+}: // maxlength,
+InputProps) {
   const [inputType, setInputType] = useState('default');
 
   useEffect(() => {
@@ -82,7 +82,7 @@ export function Input({
         onFocus={() => handleFocus()}
         onBlur={() => handleBlur()}
         value={value}
-        maxLength={maxlength}
+        // maxLength={maxlength}
       ></input>
       {img && (
         <>
