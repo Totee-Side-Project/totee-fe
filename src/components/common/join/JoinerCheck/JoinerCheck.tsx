@@ -11,11 +11,18 @@ function JoinerCheck() {
   const [isOpenJoinModal, setIsOpenJoinModal] = useState(false);
   const userState = useRecoilValue(UserState);
   const { id } = useParams();
-  const { data: postData, status: postDataStatus } = useGetPostByPostId(id);
-  const { data: applicantData, status: applicantDataStatus } =
-    useGetApplicant(id);
+
+  if (!id) return <div>올바른 접속이 아닙니다.</div>;
+
+  const { data: postData, status: postDataStatus } = useGetPostByPostId(
+    Number(id),
+  );
+  const { data: applicantData, status: applicantDataStatus } = useGetApplicant(
+    Number(id),
+  );
 
   if (postDataStatus === 'loading') return <div>loading...</div>;
+
   return (
     <div className="JoinWrapper">
       {userState.nickname !== postData.data.body.data.nickname && (
@@ -42,6 +49,7 @@ function JoinerCheck() {
             <JoinModal
               isOpen={isOpenJoinModal}
               setIsOpen={setIsOpenJoinModal}
+              postId={id}
             />
           </div>
         </div>

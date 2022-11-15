@@ -9,17 +9,17 @@ import { UserState } from '@store/user';
 interface IJoinModalProps {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  postId: string;
 }
 
-export function JoinModal({ isOpen, setIsOpen }: IJoinModalProps) {
+export function JoinModal({ isOpen, setIsOpen, postId }: IJoinModalProps) {
   const useProfile = useRecoilValue(UserState);
   const [formData, setFormData] = useState('');
-  const { id } = useParams();
-  const addApplicantQuery = useUpdateApplicant(id);
-  const applyApplicationQuery = useDeleteApplicant(id);
+  const { mutateAsync: addApplicantMutateAsync } = useUpdateApplicant(postId);
+  const applyApplicationQuery = useDeleteApplicant(postId);
 
   const addApplicationOnClick = () => {
-    addApplicantQuery.mutateAsync(formData).then((response) => {
+    addApplicantMutateAsync(formData).then((response) => {
       if (response.status === 200) {
         setIsOpen((pre) => !pre);
         alert('성공');
