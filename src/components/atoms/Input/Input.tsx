@@ -14,6 +14,7 @@ interface InputProps {
   autoFocus?: boolean;
   setStatus?: (e: any) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  // maxlength: string | any;
 }
 
 /**
@@ -39,7 +40,8 @@ export function Input({
   autoFocus = true,
   onChange,
   setStatus,
-}: InputProps) {
+}: // maxlength,
+InputProps) {
   const [inputType, setInputType] = useState('default');
 
   useEffect(() => {
@@ -80,6 +82,7 @@ export function Input({
         onFocus={() => handleFocus()}
         onBlur={() => handleBlur()}
         value={value}
+        // maxLength={maxlength}
       ></input>
       {img && (
         <>

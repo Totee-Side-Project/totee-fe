@@ -1,4 +1,9 @@
-import { ChangeEvent, HTMLInputTypeAttribute, ReactNode } from 'react';
+import {
+  ChangeEvent,
+  HTMLInputTypeAttribute,
+  InputHTMLAttributes,
+  ReactNode,
+} from 'react';
 import classes from './input.module.scss';
 
 const styleFlex = {
@@ -22,18 +27,19 @@ const styleNoneSpinButton = {
   // WebkitAppearance:,
 };
 
-interface Props {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   type: HTMLInputTypeAttribute;
   className?: string;
   placeholder: string;
+  label?: string;
   top?: ReactNode;
   left?: ReactNode;
   right?: ReactNode;
   bottom?: ReactNode;
-  value: string | number;
+  value?: string | number;
   max?: number;
   min?: number;
-  onChange: (e: ChangeEvent<HTMLInputElement>, key?: string) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>, key?: string) => void;
 }
 
 // 추가해야할 기능
