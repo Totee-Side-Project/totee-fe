@@ -15,11 +15,19 @@ interface Props {
   trigger: ReactNode;
   onChange: (e: any, key?: any) => void;
   options: any[];
+  disabled?: string;
   children?: ReactNode;
   style?: CSS.Properties;
 }
 
-export const Select = ({ label, trigger, onChange, options, style }: Props) => {
+export const Select = ({
+  label,
+  trigger,
+  onChange,
+  disabled,
+  options,
+  style,
+}: Props) => {
   return (
     <DropDown
       label={label}
@@ -27,6 +35,7 @@ export const Select = ({ label, trigger, onChange, options, style }: Props) => {
       onChange={onChange}
       options={options}
       style={style}
+      disabled={disabled}
     />
   );
 };
@@ -45,7 +54,10 @@ const DropDown = (props: Props) => {
     >
       <div className={classes.dropdown_wrap}>
         {props.label}
-        <Trigger trigger={props.trigger} />
+        <Trigger
+          trigger={props.trigger}
+          disabled={props.disabled ? props.disabled : ''}
+        />
         <Menu onMouseDown={props.onChange} style={props.style}>
           {props.options.map((option) => (
             <Item key={option}>{option}</Item>
@@ -56,9 +68,15 @@ const DropDown = (props: Props) => {
   );
 };
 
-const Trigger = ({ trigger }: { trigger: ReactNode }) => {
+const Trigger = ({
+  trigger,
+  disabled,
+}: {
+  trigger: ReactNode;
+  disabled: string;
+}) => {
   const { setToggle } = useContext(DropDownContext);
-  return <span onClick={setToggle}>{trigger}</span>;
+  return <span onClick={!disabled ? setToggle : () => {}}>{trigger}</span>;
 };
 
 const Menu = ({

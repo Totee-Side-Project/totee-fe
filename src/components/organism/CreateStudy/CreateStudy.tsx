@@ -1,4 +1,4 @@
-import type { ChangeEvent, MouseEvent, ReactNode } from 'react';
+import { ChangeEvent, MouseEvent, ReactNode, useEffect, useState } from 'react';
 import type { Idata } from './data';
 import { useReducer } from 'react';
 import { Label } from '@components/atoms/label/Label';
@@ -11,7 +11,7 @@ import VerticalLine from '@assets/recentLine.svg';
 import DownArrow from '@assets/recentIcon.svg';
 import paragraphLine from '@assets/paragraph_line.png';
 
-import { useAddPost, useUpdatePost } from '@hooks/usePostQuery';
+import { useAddPost } from '@hooks/usePostQuery';
 
 import { PostAPI } from '@api/api';
 import { PostRequestDto } from '@api/requestType';
@@ -20,11 +20,11 @@ import { defaultForm, reducerOfStudyPost } from './reducerOfStudyPost';
 import { data } from './data';
 
 import classes from './createStudy.module.scss';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
 import Swal from 'sweetalert2';
 import { Line } from '@components/atoms/Line/Line';
-import { validateData } from '@utils/validateData';
+import { validateFormData } from '@utils/validateData';
 import { useCustomNavigate } from '@hooks/useCustomNavigate';
 
 export const CreateStudy = () => {
@@ -71,8 +71,6 @@ export const CreateStudy = () => {
         onChangeByInput={onChangeByInput}
         onChangeByEditor={onChangeByEditor}
       />
-      {/* <SubmitButton /> */}
-      {/* <ResetButton /> */}
     </div>
   );
 };
@@ -91,6 +89,13 @@ const DefaultForm = ({
   onChangeByChildrenState,
   onChangeByCheckbox,
 }: DefaultFormProps) => {
+  const [formElements, setFormElements] = useState(data.defaultFormElements);
+
+  useEffect(() => {
+    if (form.onlineOrOffline === '온라인')
+      return setFormElements(data.defaultFormElementsWithOnline);
+    return setFormElements(data.defaultFormElements);
+  }, [form]);
   return (
     <section>
       <div className={classes.study_form_header}>
@@ -102,14 +107,16 @@ const DefaultForm = ({
           alt="paragraph_line"
         />
       </div>
-      {Object.entries(data.defaultFormElements).map(
-        ([id, [title, type, placeholder]]) => (
+      {/* {Object.entries(data.defaultFormElements).map( */}
+      {Object.entries(formElements).map(
+        ([id, [title, type, placeholder, disabled]]) => (
           <DefaultFormElement
             key={id}
             id={id}
             title={title}
             type={type}
             placeholder={placeholder}
+            disabled={disabled}
             value={form[id]}
             onChangeByInput={(e) => onChangeByInput(e, id)}
             onChangeBySelect={(e) => onChangeBySelect(e, id)}
@@ -127,6 +134,7 @@ interface DefaultFormElementProps {
   title: string;
   type: string;
   placeholder: string;
+  disabled: string;
   value: string | number | string[];
   onChangeByInput: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeBySelect: (e: MouseEvent<HTMLElement>) => void;
@@ -140,6 +148,7 @@ export const DefaultFormElement = ({
   type,
   placeholder,
   value,
+  disabled,
   onChangeByInput,
   onChangeBySelect,
   onChangeByChildrenState,
@@ -149,7 +158,7 @@ export const DefaultFormElement = ({
     return (
       <div className={classes.form_element_wrap}>
         <Select
-          label={<Label text={title} />}
+          label={<Label text={title} disabled={disabled} />}
           trigger={
             <label className="recent_wrapper">
               <div className="recent_value">
@@ -167,6 +176,7 @@ export const DefaultFormElement = ({
           }
           onChange={onChangeBySelect}
           options={data.selectOptions[id]}
+          disabled={disabled}
         />
       </div>
     );
@@ -183,6 +193,7 @@ export const DefaultFormElement = ({
           }
           value={value as string}
           placeholder={placeholder}
+          disabled={disabled}
           onChange={onChangeByInput}
         />
       </div>
@@ -203,6 +214,7 @@ export const DefaultFormElement = ({
           max={15}
           min={1}
           onChange={onChangeByInput}
+          disabled={disabled}
         />
       </div>
     );
@@ -273,17 +285,24 @@ const SubmitButton = ({
   const addPostMutation = useAddPost(PostAPI.createPost);
   const { navigateRoot } = useCustomNavigate();
   const handleClick = async () => {
-    if (!validateData(form))
+    const formData = new FormData();
+    if (form.onlineOrOffline === '온라인') {
+      Object.entries(form).forEach(([key, value]) => {
+        if (key === 'region' || key === 'detailedRegion') return;
+        formData.append(key, String(value));
+      });
+    } else {
+      Object.entries(form).forEach(([key, value]) => {
+        formData.append(key, String(value));
+      });
+    }
+    if (!validateFormData(formData))
       return Swal.fire({
         title: '등록 실패',
         text: '모든 정보를 입력해주세요!',
         icon: 'warning',
         confirmButtonText: '확인',
       });
-    const formData = new FormData();
-    Object.entries(form).forEach(([key, value]) =>
-      formData.append(key, String(value)),
-    );
     const response: AxiosResponse = await addPostMutation.mutateAsync(formData);
 
     if (response.status === 200) {

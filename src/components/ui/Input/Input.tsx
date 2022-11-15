@@ -30,6 +30,7 @@ interface Props {
   left?: ReactNode;
   right?: ReactNode;
   bottom?: ReactNode;
+  disabled?: string;
   value: string | number;
   max?: number;
   min?: number;
@@ -44,6 +45,7 @@ export const Input = ({
   left,
   bottom,
   right,
+  disabled,
   ...props
 }: Props) => {
   return (
@@ -61,6 +63,7 @@ export const Input = ({
               ...styleNoneBorder,
               ...styleNoneSpinButton,
             }}
+            disabled={!disabled ? false : true}
             {...props}
           />
           {right}
