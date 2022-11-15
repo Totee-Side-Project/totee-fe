@@ -1,19 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700&display=swap');
-$FONT : 'Noto Sans KR', sans-serif;
+$FONT: 'Noto Sans KR', sans-serif;
 
-.JoinWrapper{
+.JoinWrapper {
   position: fixed;
-  margin-left: 80%;
-  margin-top: 110px;
+  // margin-left: 80%;
+  // margin-top: 110px;
+  left: 80%;
+  top: 10%;
 }
 
-.Status_Wrapper{
+.Status_Wrapper {
   //position: fixed;
   //margin-left: 80%;
   //margin-top: 50px;
 }
 
-.Status_Profile{
+.Status_Profile {
   margin-left: 75px;
   margin-bottom: 15px;
   width: 80px;
@@ -25,10 +27,10 @@ $FONT : 'Noto Sans KR', sans-serif;
   border-radius: 50%;
 }
 
-.Status_Box{
+.Status_Box {
   width: 230px;
   height: 300px;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 4px 13px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
   font-family: $FONT;
@@ -40,37 +42,37 @@ $FONT : 'Noto Sans KR', sans-serif;
   color: #333333;
 }
 
-.Status_Title{
+.Status_Title {
   padding-top: 20px;
 }
 
-.Status_Title_Line{
+.Status_Title_Line {
   border: 1px solid #568a35;
   width: 145px;
   margin: 10px auto 10px auto;
 }
 
-.Status_AllApplicant{
+.Status_AllApplicant {
   margin-top: 20px;
 }
 
-.Status_Line{
+.Status_Line {
   border: 1px solid #568a35;
   width: 145px;
   margin: 10px auto 10px auto;
 }
 
-.Status_Count{
+.Status_Count {
   margin-top: 5px;
   font-family: $FONT;
   font-style: normal;
   font-weight: 900;
   font-size: 22px;
   line-height: 30px;
-  color: #568A35;
+  color: #568a35;
 }
 
-.Status_Btn{
+.Status_Btn {
   width: 145px;
   height: 40px;
   margin-top: 100px;
@@ -78,7 +80,7 @@ $FONT : 'Noto Sans KR', sans-serif;
   font-weight: 500;
   font-size: 20px;
   color: #fff;
-  background: #568A35;
+  background: #568a35;
   border: #fff solid 1.5px;
   border-radius: 5px;
   cursor: pointer;

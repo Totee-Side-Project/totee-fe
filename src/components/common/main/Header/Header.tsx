@@ -9,11 +9,11 @@ import Swal from 'sweetalert2';
 import logo from '@assets/toteelogo-kr.png';
 import alarm from '@assets/alarmicon.svg';
 import './header.scss';
+import { NewIcon } from '@components/atoms/Icon/NewIcon';
 
 export const Header = () => {
   const [listening, setListening] = useState(false);
   const [meventSource, msetEventSource] = useState<any>(undefined);
-
 
   const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
   const [isOpenOnboardModal, setIsOpenOnboardModal] = useState(false);
@@ -58,9 +58,9 @@ export const Header = () => {
     }
   }, [login, user]);
 
-  useEffect(()=>{
-    let eventSource:any;
-    console.log(user);
+  useEffect(() => {
+    let eventSource: any;
+    // console.log(user);
     // if(!listening && user && login.state){
     //   eventSource = new EventSource(`https://api.totee.link/subscribe/${user.id}`);
     //   msetEventSource(eventSource);
@@ -82,22 +82,26 @@ export const Header = () => {
     // }
 
     return () => {
-      if(listening && eventSource){
+      if (listening && eventSource) {
         eventSource.close();
-        console.log("eventsource closed");
+        console.log('eventsource closed');
       }
     };
 
-       //구독
-
-  },[user, login])
+    //구독
+  }, [user, login]);
 
   return (
     <>
       <header className="header">
-        
         <div className="content">
-            <img src={logo} alt="토티 로고" onClick={()=>window.location.href= "/"}/>
+          <NewIcon
+            // <img
+            src={logo}
+            alt="토티 로고"
+            onClick={() => navigate('/')}
+            // onClick={() => (window.location.href = '/')}
+          />
           <div className="buttonWrapper">
             <ul className="profile_wrapper">
               <li>
@@ -113,16 +117,16 @@ export const Header = () => {
                   </>
                 )}
               </li>
-              <li>
-                <button className="createStudyButton" onClick={handleStudyClick}>
-                  스터디 개설
-                </button>
-              </li>
-              <li>
-                <button className="createMentorButton" onClick={handleStudyClick}>
-                  멘토 지원
-                </button>
-              </li>
+              {['스터디 개설', '멘토 지원'].map((text) => (
+                <li key={text}>
+                  <button
+                    className="createStudyButton"
+                    onClick={handleStudyClick}
+                  >
+                    {text}
+                  </button>
+                </li>
+              ))}
               <li className="line" />
               <li>
                 {!login.state ? (

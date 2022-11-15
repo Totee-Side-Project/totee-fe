@@ -98,7 +98,7 @@ export function useGetRecommendList() {
   });
 }
 
-export function useGetLikeofPost(postId: string) {
+export function useGetLikeofPost(postId: string | number) {
   return useQuery(['like', postId], () => LikeAPI.getIsLikeInfo(postId), {
     // 브라우저 focus 됐을 때 재시작?
     retry: false,
