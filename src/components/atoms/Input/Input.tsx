@@ -14,7 +14,7 @@ interface InputProps {
   autoFocus?: boolean;
   setStatus?: (e: any) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  maxlength: string | any;
+  // maxlength: string | any;
 }
 
 /**
