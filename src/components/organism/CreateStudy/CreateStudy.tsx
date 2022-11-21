@@ -344,7 +344,7 @@ const DetailForm = ({
         placeholder="제목을 입력해주세요."
         onChange={(e) => onChangeByInput(e, 'title')}
       />
-      <div>
+      <div className={classes.editor_wrap}>
         <Editor values={form} onChange={onChangeByEditor} />
         <div className={classes.button_container}>
           <SubmitButton className={classes.upload_button} form={form} />
