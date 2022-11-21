@@ -12,10 +12,6 @@ interface Props {
 
 export const Line = ({ className, type = 'row', style }: Props) => {
   return (
-    <div
-      // className={className ? className : classes.default_line}
-      className={className ? className : classes[type]}
-      style={style}
-    />
+    <div className={className ? className : classes[type]} style={style} />
   );
 };

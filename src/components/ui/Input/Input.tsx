@@ -3,6 +3,7 @@ import {
   HTMLInputTypeAttribute,
   InputHTMLAttributes,
   ReactNode,
+  useEffect,
 } from 'react';
 import classes from './input.module.scss';
 
@@ -36,10 +37,12 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   left?: ReactNode;
   right?: ReactNode;
   bottom?: ReactNode;
-  value?: string | number;
+  disabled?: boolean;
+  value: string | number;
   max?: number;
   min?: number;
   onChange?: (e: ChangeEvent<HTMLInputElement>, key?: string) => void;
+  onResetInputValue?: () => void;
 }
 
 // 추가해야할 기능
@@ -50,8 +53,13 @@ export const Input = ({
   left,
   bottom,
   right,
+  disabled,
+  onResetInputValue,
   ...props
 }: Props) => {
+  useEffect(() => {
+    if (disabled && onResetInputValue) onResetInputValue();
+  }, [disabled]);
   return (
     <div className="input_container">
       {top}
@@ -67,6 +75,7 @@ export const Input = ({
               ...styleNoneBorder,
               ...styleNoneSpinButton,
             }}
+            disabled={disabled}
             {...props}
           />
           {right}
