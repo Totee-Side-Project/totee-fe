@@ -1,11 +1,15 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Button, Input } from '@components/atoms';
+import {
+  Button,
+  // Input
+} from '@components/atoms';
 import classes from './onboardmodal.module.scss';
 import { IModalPropsType } from 'types/modal.types';
 import { UserAPI } from '@api/api';
 import classNames from 'classnames';
 import { useRecoilState } from 'recoil';
 import { UserState } from '@store/index';
+import { Input } from '../../../ui/Input/Input';
 
 export default function AddProfileModal({
   step,
@@ -64,6 +68,12 @@ export default function AddProfileModal({
       .catch((err) => err);
   };
 
+  // const onBlur(value) {
+  //   if (value.length > MAX_LENGTH) {
+  //     text = value.slice(0, MAX_LENGTH);
+  //   }
+  // }
+
   return (
     <>
       <h1>
@@ -75,6 +85,7 @@ export default function AddProfileModal({
         <div className={classes.flex}>
           <div style={{ width: '100%' }}>
             <Input
+              maxLength={5}
               value={nickname}
               label="닉네임"
               type="text"
@@ -82,6 +93,7 @@ export default function AddProfileModal({
               id="nickname"
               placeholder="최대 5글자"
               onChange={onChange}
+              // onBlur={onBlur}
             />
           </div>
           <Button
