@@ -1,4 +1,10 @@
-import { ChangeEvent, HTMLInputTypeAttribute, ReactNode } from 'react';
+import {
+  ChangeEvent,
+  HTMLInputTypeAttribute,
+  InputHTMLAttributes,
+  ReactNode,
+  useEffect,
+} from 'react';
 import classes from './input.module.scss';
 
 const styleFlex = {
@@ -22,19 +28,21 @@ const styleNoneSpinButton = {
   // WebkitAppearance:,
 };
 
-interface Props {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   type: HTMLInputTypeAttribute;
   className?: string;
   placeholder: string;
+  label?: string;
   top?: ReactNode;
   left?: ReactNode;
   right?: ReactNode;
   bottom?: ReactNode;
-  disabled?: string;
+  disabled?: boolean;
   value: string | number;
   max?: number;
   min?: number;
-  onChange: (e: ChangeEvent<HTMLInputElement>, key?: string) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>, key?: string) => void;
+  onResetInputValue?: () => void;
 }
 
 // 추가해야할 기능
@@ -46,8 +54,12 @@ export const Input = ({
   bottom,
   right,
   disabled,
+  onResetInputValue,
   ...props
 }: Props) => {
+  useEffect(() => {
+    if (disabled && onResetInputValue) onResetInputValue();
+  }, [disabled]);
   return (
     <div className="input_container">
       {top}
@@ -63,7 +75,7 @@ export const Input = ({
               ...styleNoneBorder,
               ...styleNoneSpinButton,
             }}
-            disabled={!disabled ? false : true}
+            disabled={disabled}
             {...props}
           />
           {right}
