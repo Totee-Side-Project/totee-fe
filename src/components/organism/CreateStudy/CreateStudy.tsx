@@ -56,6 +56,11 @@ export const CreateStudy = () => {
     dispatch({ type: 'content', payload: content });
   };
 
+  const onResetValueByDisabled = () => {
+    dispatch({ type: 'region', payload: '' });
+    dispatch({ type: 'detailedRegion', payload: '' });
+  };
+
   return (
     <div className={classes.studypage_container}>
       <DefaultForm
@@ -64,6 +69,7 @@ export const CreateStudy = () => {
         onChangeBySelect={onChangeBySelect}
         onChangeByChildrenState={onChangeByChildrenState}
         onChangeByCheckbox={onChangeByCheckbox}
+        onResetValueByDisabled={onResetValueByDisabled}
       />
       <DetailForm
         form={form}
@@ -81,6 +87,7 @@ interface DefaultFormProps {
   onChangeBySelect: (e: MouseEvent<HTMLElement>, key: any) => void;
   onChangeByChildrenState: (data: (undefined | string)[]) => void;
   onChangeByCheckbox: (data: string) => void;
+  onResetValueByDisabled: () => void;
 }
 const DefaultForm = ({
   form,
@@ -88,14 +95,17 @@ const DefaultForm = ({
   onChangeBySelect,
   onChangeByChildrenState,
   onChangeByCheckbox,
+  onResetValueByDisabled,
 }: DefaultFormProps) => {
   const [formElements, setFormElements] = useState(data.defaultFormElements);
-
   useEffect(() => {
-    if (form.onlineOrOffline === '온라인')
-      return setFormElements(data.defaultFormElementsWithOnline);
+    if (form.onlineOrOffline === '온라인') {
+      setFormElements(data.defaultFormElementsWithOnline);
+      return onResetValueByDisabled();
+    }
     return setFormElements(data.defaultFormElements);
-  }, [form]);
+  }, [form.onlineOrOffline]);
+
   return (
     <section>
       <div className={classes.study_form_header}>
@@ -193,7 +203,7 @@ export const DefaultFormElement = ({
           }
           value={value as string}
           placeholder={placeholder}
-          disabled={disabled}
+          disabled={!disabled ? false : true}
           onChange={onChangeByInput}
         />
       </div>
@@ -214,7 +224,7 @@ export const DefaultFormElement = ({
           max={15}
           min={1}
           onChange={onChangeByInput}
-          disabled={disabled}
+          disabled={!disabled ? false : true}
         />
       </div>
     );
