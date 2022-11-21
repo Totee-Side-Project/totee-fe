@@ -13,3 +13,10 @@ export const validateData = (data: string | number | object) => {
 
   return true;
 };
+
+export const validateFormData = (formData: FormData) => {
+  for (const [key, value] of formData) {
+    if (!value) return false;
+  }
+  return true;
+};

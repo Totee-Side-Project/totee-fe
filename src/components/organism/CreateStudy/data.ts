@@ -10,6 +10,21 @@ export const data: Idata = {
     contactMethod: ['연락방식', 'select', '선택'],
     contactLink: ['', 'text', '사용하실 연락 방식의 링크를 입력해주세요.'],
   },
+  defaultFormElementsWithOnline: {
+    period: ['진행기간', 'select', '선택'],
+    recruitNum: ['모집인원', 'number', '최소 1명 ~ 최대 15명'],
+    language: ['모집언어', 'multiSelect'],
+    process: ['진행방식', 'checkbox'],
+    region: ['진행지역', 'select', '선택', 'disabled'],
+    detailedRegion: [
+      '',
+      'text',
+      '스터디룸의 상세 주소를 입력해주세요.',
+      'disabled',
+    ],
+    contactMethod: ['연락방식', 'select', '선택'],
+    contactLink: ['', 'text', '사용하실 연락 방식의 링크를 입력해주세요.'],
+  },
   selectOptions: {
     period: ['1개월미만', '1~3개월', '3~6개월', '6개월이상'],
     contactMethod: ['카카오톡 오픈채팅', '이메일', '노션', '기타'],
@@ -43,6 +58,16 @@ export const data: Idata = {
 export interface Idata {
   checkboxOptions: string[];
   defaultFormElements: {
+    period: string[];
+    recruitNum: string[];
+    language: string[];
+    process: string[];
+    region: string[];
+    detailedRegion: string[];
+    contactMethod: string[];
+    contactLink: string[];
+  };
+  defaultFormElementsWithOnline: {
     period: string[];
     recruitNum: string[];
     language: string[];
