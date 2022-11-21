@@ -23,14 +23,14 @@ export function MentorModal({
           className={classNames(classes.modal, isOpen ? classes.open : '')}
         >
           <div className={classes.content}>
-            {isCloseBtn && (
-              <div
-                className={classes.closeBtn}
-                onClick={() => setIsOpen(!isOpen)}
-              >
-                <XIcon />
-              </div>
-            )}
+            {/*{isCloseBtn && (*/}
+            {/*  <div*/}
+            {/*    className={classes.closeBtn}*/}
+            {/*    onClick={() => setIsOpen(!isOpen)}*/}
+            {/*  >*/}
+            {/*    <XIcon />*/}
+            {/*  </div>*/}
+            {/*)}*/}
             {children}
           </div>
         </section>

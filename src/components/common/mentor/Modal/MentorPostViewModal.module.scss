@@ -1,27 +1,46 @@
+
 .mentorModal{
   padding: 20px 0px;
-  width: 700px;
-  max-height: 780px;
+  width: 600px;
+  max-height: 700px;
 }
-.headerTitle{
-  margin-left: 70px;
-  font-size: 21px;
-  font-weight: 500;
+.headerBox{
+  height: 45px;
+  background: #fff;
+  box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.15);
   display: flex;
 }
-.topLine{
-  margin-top: 12px;
-  border: #8c8c8c 1px solid;
+.headerTitle{
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 145%;
+  color: #333333;
+  margin-left: 68px;
 }
-
-
+.closeBtn{
+  cursor: pointer;
+  margin-top: -7px;
+  margin-left: 360px;
+}
+.bottomBox{
+  height: 72px;
+  background: #fff;
+  box-shadow: 0px -7px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 0 0 20px 20px;
+  display: flex;
+}
 .contentWrapper{
   margin: 35px 70px;
 }
 .title{
-  color: #2F855A;
+  font-style: normal;
+  font-weight: 500;
   font-size: 20px;
-  font-weight: 400;
+  line-height: 29px;
+  display: flex;
+  align-items: center;
+  color: #568A35;
 }
 
 .profile{
@@ -39,62 +58,73 @@
 }
 .name{
   color: black;
-  font-weight: 500;
   margin: auto 0;
-  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .detail{
-  color: #767676;
   margin-bottom: 10px;
   display: flex;
-  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: #858A8D;
 }
 
 .position{
   margin-right: 10px;
-  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: #858A8D;
 }
 .career{
   margin-right: 10px;
-  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: #858A8D;
 }
 
 .price{
-  font-size: 14px;
-  font-weight: 400;
   margin: 25px 0 30px 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
 }
 
 .contentLine{
-  border: #c2c2c2 1px solid;
+  border: 1px solid #D8D8D8;
 }
 
 .content{
-  height: 350px;
+  height: 240px;
   margin: 40px 0 0 0;
   font-size: 15px;
-  line-height: 25px;
+  line-height: 165%;
   font-weight: 300;
   //overflow-y: scroll;
 }
 
-
-.bottomLine{
-  margin: 15px 0 10px 0;
-  border: #c2c2c2 1px solid;
-}
-
 .btn{
+  margin: auto;
   text-align: center;
-  width: 160px;
+  width: 150px;
   height: 40px;
   background: #568A35;
   color: #fff;
-  font-size: 20px;
-  padding: 8px;
-  font-weight: 400;
-  margin: auto;
-  border-radius: 8px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+  padding: 7px;
+  border-radius: 10px;
   cursor: pointer;
 }
