@@ -1,6 +1,6 @@
 import type { ChangeEvent, MouseEvent, ReactNode } from 'react';
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Banner } from '@components/common';
 import { Line } from '@components/atoms/Line/Line';
 import { NewIcon } from '@components/atoms/Icon/NewIcon';
@@ -40,6 +40,7 @@ import {
   SubmitModifyButton,
   SubmitReplyButton,
 } from '@components/common/detail/Button/Button';
+import { IPostDetailType } from 'types/post.types';
 
 // export interface ICommentDto {
 //   commentId: number;
@@ -139,6 +140,7 @@ export const NewDetailPage = () => {
                 postId={responseData.postId}
                 nickName={responseData.nickname}
               />
+              <SectionContactView postData={postData.data.body.data} />
             </SectionHeader>
             <SectionContent content={responseData.content} />
             <SectionFooter>
@@ -421,6 +423,31 @@ const SectionCategory = ({
           </div>
         )}
       </div>
+    </div>
+  );
+};
+
+const SectionContactView = ({
+  postData,
+}: {
+  postData: IResponsePostDetail;
+}) => {
+  return (
+    <div style={{ margin: '30px 5%', textAlign: 'left' }}>
+      <p>
+        진행지역 :
+        {!postData.detailedRegion ? '온라인으로 진행' : postData.detailedRegion}
+      </p>
+      <p>
+        연락방식 :
+        <Link
+          to={postData.contactLink}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {postData.contactLink}
+        </Link>
+      </p>
     </div>
   );
 };
