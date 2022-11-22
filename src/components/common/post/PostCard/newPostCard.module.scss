@@ -78,9 +78,34 @@
       height: 40%;
       .post_card_skills {
         display: flex;
+        gap: 10px;
+        justify-content: center;
+
         .post_card_skill {
-          width: 25px;
-          height: 25px;
+          background: #ffffff;
+          border-radius: 50%;
+          box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .post_card_skill_over_wrap {
+          position: relative;
+          width: 20px;
+          height: 20px;
+          .post_card_skill_over {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            background: #ffffff;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+            border-radius: 50%;
+          }
+        }
+        .post_card_skills_ellipsis {
+          & img {
+            height: 20px;
+            width: 14px;
+            margin-top: 10px;
+          }
         }
       }
     }

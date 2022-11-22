@@ -83,9 +83,7 @@ export interface IResponsePostDetail {
   period: string;
   status: string;
   positionList: string[];
-  skillList: {
-    [key: string]: string;
-  };
+  skillList: string[];
   recruitNum: number;
   contactMethod: string;
   contactLink: string;

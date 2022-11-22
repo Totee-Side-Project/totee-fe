@@ -1,11 +1,11 @@
 import { NewIcon } from '@components/atoms/Icon/NewIcon';
 import type { IResponsePostDetail } from '@components/pages/DetailPage/NewDetailPage';
-import { PostCard } from './PostCard';
 import classes from './newPostCard.module.scss';
 import { createMarkup } from '@utils/createMarkup';
 import { useNavigate } from 'react-router-dom';
 import HeartIcon from '@assets/svg/common/heart.svg';
 import EyeIcon from '@assets/svg/common/eye.svg';
+import EllipsisIcon from '@assets/svg/common/ellipsis.svg';
 import MessageIcon from '@assets/svg/common/message-square.svg';
 import icon from '@components/common/svg';
 
@@ -48,7 +48,6 @@ const NewPostCardHeader = ({ post }: NewPostCardProps) => {
 };
 
 const NewPostCardCenter = ({ post }: NewPostCardProps) => {
-  console.log(post.skillList);
   return (
     <div className={classes.post_card_center}>
       <div className={classes.post_card_title}>
@@ -59,13 +58,7 @@ const NewPostCardCenter = ({ post }: NewPostCardProps) => {
         dangerouslySetInnerHTML={createMarkup(post.content)}
       />
       <div className={classes.post_card_skills_wrap}>
-        <ul className={classes.post_card_skills}>
-          {post.skillList.map((skill) => (
-            <li className={classes.post_card_skill} key={skill}>
-              <img src={icon[skill]} alt="" />
-            </li>
-          ))}
-        </ul>
+        <NewPostSkills post={post} />
       </div>
     </div>
   );
@@ -108,9 +101,44 @@ const NewPostCardFooter = ({ post }: NewPostCardProps) => {
   );
 };
 
+const NewPostSkills = ({ post }: NewPostCardProps) => {
+  const renderOverLimitSkills = () => (
+    <ul className={classes.post_card_skills}>
+      {post.skillList
+        .filter((skill, index) => index < 5)
+        .map((skill) => (
+          <li className={classes.post_card_skill_over_wrap} key={skill}>
+            <div className={classes.post_card_skill_over}>
+              <NewIcon src={icon[skill]} alt="skill_icon" />
+            </div>
+          </li>
+        ))}
+      <li className={classes.post_card_skills_ellipsis}>
+        <img src={EllipsisIcon} alt="ellipssis_icon" />
+      </li>
+    </ul>
+  );
+
+  const renderUnOverLimitSkills = () => (
+    <ul className={classes.post_card_skills}>
+      {post.skillList.map((skill) => (
+        <li className={classes.post_card_skill} key={skill}>
+          <NewIcon src={icon[skill]} alt="" />
+        </li>
+      ))}
+    </ul>
+  );
+
+  return (
+    <>
+      {post.skillList.length >= 5
+        ? renderOverLimitSkills()
+        : renderUnOverLimitSkills()}
+    </>
+  );
+};
+
 const NewPostCardStatusBadge = ({ post }: NewPostCardProps) => {
-  // background-color: #878787;
-  // color: #fff;
   return (
     <div
       className={
