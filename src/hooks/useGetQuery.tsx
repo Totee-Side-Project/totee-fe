@@ -46,19 +46,15 @@ export function useGetPostListAPI() {
 }
 
 export function useGetPostByPostId(postId: number) {
-  return useQuery(
-    ['post', postId],
-    () => PostAPI.getPostByPostId(postId).catch((err) => err),
-    {
-      // 브라우저 focus 됐을 때 재시작?
-      retry: false,
-      refetchOnWindowFocus: true,
-      // 자동으로 가져오는 옵션
-      enabled: true,
-      // 캐시 타임
-      staleTime: 10 * 600 * 1000,
-    },
-  );
+  return useQuery(['post', postId], () => PostAPI.getPostByPostId(postId), {
+    // 브라우저 focus 됐을 때 재시작?
+    retry: false,
+    refetchOnWindowFocus: true,
+    // 자동으로 가져오는 옵션
+    enabled: true,
+    // 캐시 타임
+    staleTime: 10 * 600 * 1000,
+  });
 }
 
 export function useGetSearchPostList(title: string) {

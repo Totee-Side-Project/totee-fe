@@ -63,10 +63,19 @@ export function ViewModal({ isOpen, setIsOpen, applicant }: IViewModalProps) {
             ></div>
             <div className="ApplyName">{applicant.nickname}</div>
             <div className="ApplyEmail">dlapdlf@gmail.com</div>
-            <textarea
+            {/* <div className="AppliMessage">{applicant.message}</div> */}
+            <div className="ApplyMessage">
+              본인에 대한 짧은 소개입니다. 본인에 대한 짧은 소개입니다. 본인에
+              대한 짧은 소개입니다. 본인에 대한 짧은 소개입니다.본인에 대한 짧은
+              소개입니다. 본인에 대한 짧은 소개입니다. 본인에 대한 짧은
+              소개입니다. 본인에 대한 짧은 소개입니다.본인에 대한 짧은
+              소개입니다. 본인에 대한 짧은 소개입니다. 본인에 대한 짧은
+              소개입니다. 본인에 대한 짧은 소개입니다.
+            </div>
+            {/* <textarea
               className="ApplyIntro"
               placeholder="본인에 대한 짧은 소개입니다. 본인에 대한 짧은 소개입니다. 본인에 대한 짧은 소개입니다. 본인에 대한 짧은 소개입니다."
-            />
+            /> */}
             <div className="BtnWrapper">
               <Button
                 text="승인 거부"

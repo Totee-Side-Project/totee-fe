@@ -22,10 +22,10 @@ export function JoinModal({ isOpen, setIsOpen, postId }: IJoinModalProps) {
     addApplicantMutateAsync(formData).then((response) => {
       if (response.status === 200) {
         setIsOpen((pre) => !pre);
-        alert('성공');
+        alert('지원을 성공했어요.');
         return;
       }
-      return alert('실패했습니다.');
+      return alert('지원에 실패했어요.');
     });
   };
   const onChangeByTextarea = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -39,7 +39,9 @@ export function JoinModal({ isOpen, setIsOpen, postId }: IJoinModalProps) {
         <div className="ApplyTitle">지원 하기</div>
         <div className="SubTitle">지원하실 포지션과 소개를 적어주세요.</div>
         <div>
-          <div className="ApplyProfile"></div>
+          <div className="ApplyProfile">
+            <img src={useProfile.profileImageUrl} alt="userProfile_image" />
+          </div>
           <div className="ApplyName">{useProfile.nickname}</div>
           <div className="ApplyEmail">{useProfile.email}</div>
           <textarea
