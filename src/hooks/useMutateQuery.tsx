@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from 'react-query';
+import { QueryClient, useMutation, useQuery } from 'react-query';
 import {
   AlarmAPI,
   ApplicationAPI,
@@ -6,9 +6,11 @@ import {
   LikeAPI,
   PostAPI,
   ReplyAPI,
+  TeamAPI,
   UserAPI,
 } from '@api/api';
 import { useQueryClient } from 'react-query';
+import { IPostTeamRequestFormData } from '@api/requestType';
 export interface IReplyRequest {
   commentId: number;
   content: string;
@@ -120,4 +122,18 @@ export const useDeleteApplicant = (postId: string | undefined) => {
   return useMutation(() => ApplicationAPI.deleteApplicant(postId), {
     onSuccess: () => {},
   });
+};
+
+export const usePostTeam = (
+  postId: string,
+  // formData: IPostTeamRequestFormData,
+) => {
+  const queryClient = useQueryClient();
+  return useMutation((formData: IPostTeamRequestFormData) =>
+    TeamAPI.postTeam(postId, formData),
+  );
+};
+export const useResignateTeam = (postId: string) => {
+  const queryClient = useQueryClient();
+  return useMutation(() => TeamAPI.resignateTeam(postId));
 };
