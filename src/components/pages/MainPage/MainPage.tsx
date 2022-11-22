@@ -32,12 +32,12 @@ export function MainPage() {
         <StudySection />
       </section>
       <section className="mento_recommend body_section">
-        {/*<button onClick={() => setIsOpenMentorPostViewModal(true)}>모달</button>*/}
+        {/* <button onClick={() => setIsOpenMentorPostViewModal(true)}>모달</button> */}
         <MentoSection type="recommend" />
-        <MentorPostViewModal
+        {/* <MentorPostViewModal
           isOpen={isOpenMentorPostViewModal}
           setIsOpen={setIsOpenMentorPostViewModal}
-        />
+        /> */}
       </section>
       <MentorReviewSection />
       <section className="best_mento body_section">

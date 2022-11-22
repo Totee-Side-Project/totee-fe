@@ -43,8 +43,14 @@ export const MentoSection = ({ type = 'recommend' }: Props) => {
     best: bestInfo,
   };
 
-  const Mentorcard = () =>
-    type === 'recommend' ? <RecommendMentorCard /> : <BestMentorCard />;
+  const Mentorcard = ({ onClick }: { onClick: () => void }) =>
+    type === 'recommend' ? (
+      <RecommendMentorCard onClick={onClick} />
+    ) : (
+      <BestMentorCard onClick={onClick} />
+    );
+
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="recommend_container">
@@ -57,12 +63,25 @@ export const MentoSection = ({ type = 'recommend' }: Props) => {
       </div>
       <div>
         <SectionSlider>
-          <Mentorcard key={`mentor-card-1`} />
-          <Mentorcard key={`mentor-card-2`} />
-          <Mentorcard key={`mentor-card-3`} />
-          <Mentorcard key={`mentor-card-4`} />
+          <Mentorcard
+            key={`mentor-card-1`}
+            // isOpen={isOpen}
+            onClick={() => setIsOpen((pre) => !pre)}
+          />
+          <Mentorcard
+            key={`mentor-card-2`}
+            // isOpen={isOpen}
+            onClick={() => setIsOpen((pre) => !pre)}
+          />
+          <Mentorcard
+            key={`mentor-card-3`}
+            // isOpen={isOpen}
+            onClick={() => setIsOpen((pre) => !pre)}
+          />
+          {/* <Mentorcard key={`mentor-card-4`} /> */}
         </SectionSlider>
       </div>
+      {isOpen && <MentorPostViewModal isOpen={isOpen} setIsOpen={setIsOpen} />}
     </div>
   );
 };

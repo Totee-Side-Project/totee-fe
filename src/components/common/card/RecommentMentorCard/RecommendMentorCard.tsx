@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import './recommendMentorCard.scss';
 
-export default function RecommendMentorCard() {
+export default function RecommendMentorCard({
+  onClick,
+}: {
+  onClick: () => void;
+}) {
   return (
-    <div>
+    <div onClick={onClick}>
       <div>
         <div className="mento_card_container">
           <div className="mento_card_header">
