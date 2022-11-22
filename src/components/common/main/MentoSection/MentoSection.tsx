@@ -13,6 +13,7 @@ import './recommend.scss';
 interface Props {
   type: 'recommend' | 'best';
 }
+
 export const MentoSection = ({ type = 'recommend' }: Props) => {
   const [user, setUser] = useRecoilState(UserState);
   const { data } = useGetRecommendList();
@@ -45,14 +46,8 @@ export const MentoSection = ({ type = 'recommend' }: Props) => {
   const Mentorcard = () =>
     type === 'recommend' ? <RecommendMentorCard /> : <BestMentorCard />;
 
-  // const [isOpenMentorPostViewModal, setIsOpenMentorPostViewModal] =
-  //   useState(false);
-
   return (
-    <div
-      className="recommend_container"
-      // onClick={() => setIsOpenMentorPostViewModal(true)}
-    >
+    <div className="recommend_container">
       <div className="title_container">
         <SectionTitle
           title={Info[type]['title']}
@@ -67,10 +62,6 @@ export const MentoSection = ({ type = 'recommend' }: Props) => {
           <Mentorcard key={`mentor-card-3`} />
           <Mentorcard key={`mentor-card-4`} />
         </SectionSlider>
-        {/*<MentorPostViewModal*/}
-        {/*  isOpen={isOpenMentorPostViewModal}*/}
-        {/*  setIsOpen={setIsOpenMentorPostViewModal}*/}
-        {/*/>*/}
       </div>
     </div>
   );
