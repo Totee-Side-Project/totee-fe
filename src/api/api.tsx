@@ -1,7 +1,7 @@
 import { IReplyRequest } from '@hooks/useMutateQuery';
 import axios, { AxiosResponse } from 'axios';
-import { PostRequestDto } from './requestType';
-import { IGetPostListResponse } from './responseType';
+import { IPostTeamRequestFormData, PostRequestDto } from './requestType';
+import { IGetApplicantResponse, IGetPostListResponse } from './responseType';
 
 const BASE_URL = 'https://api.totee.link/';
 
@@ -103,10 +103,21 @@ export const AlarmAPI = {
 };
 
 export const ApplicationAPI = {
-  getApplicant: (postId: any) => api.get(`/api/v1/applicant/${postId}`),
+  getApplicant: (postId: any): Promise<AxiosResponse<IGetApplicantResponse>> =>
+    api.get(`/api/v1/applicant/${postId}`),
   postApplicant: (postId: any, message: string) =>
     api.post(`/api/v1/applicant/${postId}`, { message }),
   deleteApplicant: (postId: any) => api.delete(`/api/v1/applicant/${postId}`),
+};
+
+export const TeamAPI = {
+  getTeam: (postId: string) => api.get(`api/v1/team/${postId}`),
+  postTeam: (postId: string, formData: IPostTeamRequestFormData) =>
+    api.post(`api/v1/team/${postId}`, { ...formData }),
+  resignateTeam: (postId: string) =>
+    api.delete(`api/v1/team/resignation/${postId}`),
+  secessionTeam: (postId: string) =>
+    api.delete(`api/v1/team/secession/${postId}`),
 };
 
 // window.location.host;

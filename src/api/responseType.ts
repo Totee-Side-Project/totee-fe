@@ -32,3 +32,17 @@ export interface IGetPostListResponse extends IResponseOfPage {
     };
   };
 }
+
+export interface IGetApplicantResponse {
+  body: {
+    data: IApplicantDetail[];
+  };
+}
+
+export interface IApplicantDetail {
+  nickname: string;
+  profileImg: string;
+  email: string;
+  message: string;
+  applicationDate: string;
+}
