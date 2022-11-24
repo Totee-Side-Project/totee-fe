@@ -14,3 +14,8 @@ export interface IPostRequestDto {
 export interface PostRequestDto extends IPostRequestDto {
   [key: string]: string | string[];
 }
+
+export interface IPostTeamRequestFormData {
+  accept: boolean;
+  nickname: string;
+}

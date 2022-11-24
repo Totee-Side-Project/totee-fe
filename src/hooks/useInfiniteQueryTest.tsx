@@ -1,5 +1,4 @@
 import { AxiosResponse } from 'axios';
-// import { ReactElement, useState } from 'react';
 import { QueryKey, useInfiniteQuery } from 'react-query';
 
 interface Props {

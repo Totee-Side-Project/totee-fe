@@ -30,6 +30,10 @@ export const SubmitReplyButton = ({
   const addReplyQuery = useAddReply(postId);
   const onSubmitReplyByButton = () => {
     const content = validateWithReplaceData(formData);
+    if (!content) {
+      alert('댓글을 입력해주세요.');
+      return;
+    }
     addReplyQuery
       .mutateAsync({
         commentId: comment.commentId,
@@ -72,6 +76,10 @@ export const SubmitModifyButton = ({
   const updateReplyQuery = useUpdateReply(postId, replyId as number);
   const updateCommentOnClick = () => {
     const content = validateWithReplaceData(formData);
+    if (!content) {
+      alert('댓글을 입력해주세요.');
+      return;
+    }
     updateCommentQuery
       .mutateAsync({
         postId,
@@ -132,6 +140,10 @@ export const SubmitCommentButton = ({
   const addCommentQuery = useAddComment(postId);
   const onSubmitCommentByButton = () => {
     const content = validateWithReplaceData(formData);
+    if (!content) {
+      alert('댓글을 입력해주세요.');
+      return;
+    }
     addCommentQuery
       .mutateAsync({
         postId,

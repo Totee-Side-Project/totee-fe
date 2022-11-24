@@ -1,13 +1,16 @@
-import { useMutation } from 'react-query';
+import { QueryClient, useMutation, useQuery } from 'react-query';
 import {
   AlarmAPI,
+  ApplicationAPI,
   CommentAPI,
   LikeAPI,
   PostAPI,
   ReplyAPI,
+  TeamAPI,
   UserAPI,
 } from '@api/api';
 import { useQueryClient } from 'react-query';
+import { IPostTeamRequestFormData } from '@api/requestType';
 export interface IReplyRequest {
   commentId: number;
   content: string;
@@ -102,4 +105,35 @@ export const useUpdateAlarm = (notificationId: string) => {
   return useMutation(() => AlarmAPI.updateAlarm(notificationId), {
     onSuccess: () => queryClient.invalidateQueries('alarms'),
   });
+};
+
+export const useUpdateApplicant = (postId: string | undefined) => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    (message: string) => ApplicationAPI.postApplicant(postId, message),
+    {
+      onSuccess: () => queryClient.invalidateQueries(['applicant', postId]),
+    },
+  );
+};
+
+export const useDeleteApplicant = (postId: string | undefined) => {
+  const queryClient = useQueryClient();
+  return useMutation(() => ApplicationAPI.deleteApplicant(postId), {
+    onSuccess: () => {},
+  });
+};
+
+export const usePostTeam = (
+  postId: string,
+  // formData: IPostTeamRequestFormData,
+) => {
+  const queryClient = useQueryClient();
+  return useMutation((formData: IPostTeamRequestFormData) =>
+    TeamAPI.postTeam(postId, formData),
+  );
+};
+export const useResignateTeam = (postId: string) => {
+  const queryClient = useQueryClient();
+  return useMutation(() => TeamAPI.resignateTeam(postId));
 };
