@@ -202,6 +202,7 @@ const SkillItem = ({ dataValue, isSelect, src, onClick }: SkillItemProps) => {
                 objectPosition: '0px 5px',
               }}
               src={src}
+              alt={dataValue}
             />
             <div>{dataValue}</div>
           </div>
