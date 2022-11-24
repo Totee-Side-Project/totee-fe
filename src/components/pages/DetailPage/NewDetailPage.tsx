@@ -111,11 +111,11 @@ interface IchildrenReactNode {
 export const NewDetailPage = () => {
   const { id } = useParams();
   const { data: postData, status, refetch } = useGetPostByPostId(Number(id));
-  const responseData: IResponsePostDetail = postData?.data.body.data;
 
   // Render Loading Component
   if (status === 'loading') return <div>loading...</div>;
-  if (status === 'success' && responseData) {
+  if (status === 'success') {
+    const responseData: IResponsePostDetail = postData?.data.body.data;
     return (
       <div>
         <Banner />
@@ -310,6 +310,7 @@ const SectionTitle = (
 
     if (innerText === '글 수정') {
       navigate('/setupstudy');
+      navigate(`/edit/${props.postId}`);
       return;
     }
     deletePostQuery.mutateAsync().then(

@@ -27,8 +27,15 @@ import { Line } from '@components/atoms/Line/Line';
 import { validateFormData } from '@utils/validateData';
 import { useCustomNavigate } from '@hooks/useCustomNavigate';
 
-export const CreateStudy = () => {
-  const [form, dispatch] = useReducer(reducerOfStudyPost, defaultForm);
+export const CreateStudy = ({
+  initialData,
+}: {
+  initialData?: PostRequestDto;
+}) => {
+  const [form, dispatch] = useReducer(
+    reducerOfStudyPost,
+    !initialData ? defaultForm : initialData,
+  );
 
   // 숫자만 들어오게 해야한다.
   const onChangeByInput = (e: ChangeEvent<HTMLInputElement>, id: any) => {
@@ -201,7 +208,7 @@ export const DefaultFormElement = ({
           left={
             <img src={VerticalLine} className={classes.vertical_line} alt="|" />
           }
-          value={value as string}
+          value={(value as string) ?? ''}
           placeholder={placeholder}
           disabled={!disabled ? false : true}
           onChange={onChangeByInput}
@@ -244,6 +251,7 @@ export const DefaultFormElement = ({
               <Label text={title} />
             </div>
           }
+          initialState={value as string[]}
           onChangeArray={onChangeByChildrenState}
         />
         <img

@@ -3,7 +3,7 @@ export const data: Idata = {
   defaultFormElements: {
     period: ['진행기간', 'select', '선택'],
     recruitNum: ['모집인원', 'number', '최소 1명 ~ 최대 15명'],
-    language: ['모집언어', 'multiSelect'],
+    skillList: ['모집언어', 'multiSelect'],
     process: ['진행방식', 'checkbox'],
     region: ['진행지역', 'select', '선택'],
     detailedRegion: ['', 'text', '스터디룸의 상세 주소를 입력해주세요.'],
@@ -13,7 +13,7 @@ export const data: Idata = {
   defaultFormElementsWithOnline: {
     period: ['진행기간', 'select', '선택'],
     recruitNum: ['모집인원', 'number', '최소 1명 ~ 최대 15명'],
-    language: ['모집언어', 'multiSelect'],
+    skillList: ['모집언어', 'multiSelect'],
     process: ['진행방식', 'checkbox'],
     region: ['진행지역', 'select', '선택', 'disabled'],
     detailedRegion: [
@@ -60,7 +60,7 @@ export interface Idata {
   defaultFormElements: {
     period: string[];
     recruitNum: string[];
-    language: string[];
+    skillList: string[];
     process: string[];
     region: string[];
     detailedRegion: string[];
@@ -70,7 +70,7 @@ export interface Idata {
   defaultFormElementsWithOnline: {
     period: string[];
     recruitNum: string[];
-    language: string[];
+    skillList: string[];
     process: string[];
     region: string[];
     detailedRegion: string[];
