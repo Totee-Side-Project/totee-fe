@@ -25,15 +25,15 @@ export const Checkbox = ({
     options.map((option, index) => ({ id: option, isChecked: false })),
   );
   const [isCheckedId, setIsCheckedId] = useState(!isChecked ? '' : isChecked);
-  const handleClick = (key: string) => {
-    if (isCheckedId === key) {
+  const handleClick = (payload: string) => {
+    if (isCheckedId === payload) {
       setIsCheckedId('');
       onClick('');
       return;
     }
-    // onClick(options[key]);
-    onClick(key);
-    setIsCheckedId(key);
+    // onClick(options[payload]);
+    onClick(payload);
+    setIsCheckedId(payload);
   };
 
   useEffect(() => {
