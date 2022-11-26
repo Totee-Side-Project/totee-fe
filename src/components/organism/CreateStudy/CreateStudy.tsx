@@ -264,9 +264,12 @@ export const DefaultFormElement = ({
   if (type === 'checkbox')
     return (
       <div className={classes.form_checkbox_wrap}>
-        <DefaultFormCheckbox
+        <Checkbox
           top={<Label text={title} />}
-          onChangeByCheckbox={onChangeByCheckbox}
+          isChecked={value as string}
+          options={data.checkboxOptions}
+          onClick={onChangeByCheckbox}
+          className={classes.checkbox_wrap}
         />
       </div>
     );
@@ -275,22 +278,23 @@ export const DefaultFormElement = ({
 };
 
 // 어떤것을 보여줄지 넘겨주고 중간역할
-const DefaultFormCheckbox = ({
-  top,
-  onChangeByCheckbox,
-}: {
-  top: ReactNode;
-  onChangeByCheckbox: (data: string) => void;
-}) => {
-  return (
-    <Checkbox
-      top={top}
-      options={data.checkboxOptions}
-      onClick={onChangeByCheckbox}
-      className={classes.checkbox_wrap}
-    />
-  );
-};
+// Review: 단순히 거쳐가는 역할만 하게되니까 없애도 될 것 같다.
+// const DefaultFormCheckbox = ({
+//   top,
+//   onChangeByCheckbox,
+// }: {
+//   top: ReactNode;
+//   onChangeByCheckbox: (data: string) => void;
+// }) => {
+//   return (
+//     <Checkbox
+//       top={top}
+//       options={data.checkboxOptions}
+//       onClick={onChangeByCheckbox}
+//       className={classes.checkbox_wrap}
+//     />
+//   );
+// };
 
 const SubmitButton = ({
   className,
