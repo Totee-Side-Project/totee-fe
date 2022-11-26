@@ -17,7 +17,8 @@ function EditPage() {
 
   useEffect(() => {
     if (data && data.status === 200) {
-      setInitialData(data.data.body.data);
+      const responseData = data.data.body.data;
+      // setInitialData(responseData);
     }
   }, [data, status]);
 

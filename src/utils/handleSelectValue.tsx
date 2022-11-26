@@ -22,6 +22,6 @@ export const checkingDetailPeriod = (period: string) => {
   } else if (period == 'LongTerm') {
     return '6개월이상';
   } else {
-    return null;
+    return '';
   }
 };

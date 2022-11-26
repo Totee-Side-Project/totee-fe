@@ -1,7 +1,11 @@
 import { IReplyRequest } from '@hooks/useMutateQuery';
 import axios, { AxiosResponse } from 'axios';
 import { IPostTeamRequestFormData, PostRequestDto } from './requestType';
-import { IGetApplicantResponse, IGetPostListResponse } from './responseType';
+import {
+  IGetApplicantResponse,
+  IGetPostDetailResponse,
+  IGetPostListResponse,
+} from './responseType';
 
 const BASE_URL = 'https://api.totee.link/';
 
@@ -33,7 +37,9 @@ export const PostAPI = {
     size = 5,
   ): Promise<AxiosResponse<IGetPostListResponse>> =>
     api.get(`/api/v1/post/list?page=${page}&size=${size}`),
-  getPostByPostId: (postId: number): Promise<AxiosResponse<any>> =>
+  getPostByPostId: (
+    postId: number,
+  ): Promise<AxiosResponse<IGetPostDetailResponse>> =>
     api.get(`/api/v1/post/${postId}`),
   searchPostList: (title: string) => api.get(`/api/v1/post/search/${title}`),
   statusChange: (postId: number) => api.post(`api/v1/post/status/${postId}`),

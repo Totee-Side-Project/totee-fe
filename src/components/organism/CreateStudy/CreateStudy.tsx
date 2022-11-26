@@ -11,7 +11,7 @@ import VerticalLine from '@assets/recentLine.svg';
 import DownArrow from '@assets/recentIcon.svg';
 import paragraphLine from '@assets/paragraph_line.png';
 
-import { useAddPost } from '@hooks/usePostQuery';
+import { useAddPost, useUpdatePost } from '@hooks/usePostQuery';
 
 import { PostAPI } from '@api/api';
 import { PostRequestDto } from '@api/requestType';
@@ -20,15 +20,22 @@ import { defaultForm, reducerOfStudyPost } from './reducerOfStudyPost';
 import { data } from './data';
 
 import classes from './createStudy.module.scss';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
 import Swal from 'sweetalert2';
 import { Line } from '@components/atoms/Line/Line';
 import { validateFormData } from '@utils/validateData';
 import { useCustomNavigate } from '@hooks/useCustomNavigate';
 
-export const CreateStudy = () => {
-  const [form, dispatch] = useReducer(reducerOfStudyPost, defaultForm);
+export const CreateStudy = ({
+  initialData,
+}: {
+  initialData?: PostRequestDto;
+}) => {
+  const [form, dispatch] = useReducer(
+    reducerOfStudyPost,
+    !initialData ? defaultForm : initialData,
+  );
 
   // 숫자만 들어오게 해야한다.
   const onChangeByInput = (e: ChangeEvent<HTMLInputElement>, id: any) => {
@@ -201,7 +208,7 @@ export const DefaultFormElement = ({
           left={
             <img src={VerticalLine} className={classes.vertical_line} alt="|" />
           }
-          value={value as string}
+          value={(value as string) ?? ''}
           placeholder={placeholder}
           disabled={!disabled ? false : true}
           onChange={onChangeByInput}
@@ -244,6 +251,7 @@ export const DefaultFormElement = ({
               <Label text={title} />
             </div>
           }
+          initialState={value as string[]}
           onChangeArray={onChangeByChildrenState}
         />
         <img
@@ -256,9 +264,12 @@ export const DefaultFormElement = ({
   if (type === 'checkbox')
     return (
       <div className={classes.form_checkbox_wrap}>
-        <DefaultFormCheckbox
+        <Checkbox
           top={<Label text={title} />}
-          onChangeByCheckbox={onChangeByCheckbox}
+          isChecked={value as string}
+          options={data.checkboxOptions}
+          onClick={onChangeByCheckbox}
+          className={classes.checkbox_wrap}
         />
       </div>
     );
@@ -267,32 +278,36 @@ export const DefaultFormElement = ({
 };
 
 // 어떤것을 보여줄지 넘겨주고 중간역할
-const DefaultFormCheckbox = ({
-  top,
-  onChangeByCheckbox,
-}: {
-  top: ReactNode;
-  onChangeByCheckbox: (data: string) => void;
-}) => {
-  return (
-    <Checkbox
-      top={top}
-      options={data.checkboxOptions}
-      onClick={onChangeByCheckbox}
-      className={classes.checkbox_wrap}
-    />
-  );
-};
+// Review: 단순히 거쳐가는 역할만 하게되니까 없애도 될 것 같다.
+// const DefaultFormCheckbox = ({
+//   top,
+//   onChangeByCheckbox,
+// }: {
+//   top: ReactNode;
+//   onChangeByCheckbox: (data: string) => void;
+// }) => {
+//   return (
+//     <Checkbox
+//       top={top}
+//       options={data.checkboxOptions}
+//       onClick={onChangeByCheckbox}
+//       className={classes.checkbox_wrap}
+//     />
+//   );
+// };
 
 const SubmitButton = ({
   className,
   form,
+  id,
 }: {
   className: string;
   form: PostRequestDto;
+  id?: number;
 }) => {
   // 폼 data를 mutate 해주는 것은 버튼의 역할이다.
   const addPostMutation = useAddPost(PostAPI.createPost);
+  const updatePostMutation = !id ? null : useUpdatePost(id);
   const { navigateRoot } = useCustomNavigate();
   const handleClick = async () => {
     const formData = new FormData();
@@ -313,7 +328,11 @@ const SubmitButton = ({
         icon: 'warning',
         confirmButtonText: '확인',
       });
-    const response: AxiosResponse = await addPostMutation.mutateAsync(formData);
+
+    // if (updatePostMutation)
+    const response: AxiosResponse = updatePostMutation
+      ? await updatePostMutation.mutateAsync(formData)
+      : await addPostMutation.mutateAsync(formData);
 
     if (response.status === 200) {
       await Swal.fire({
@@ -354,6 +373,7 @@ const DetailForm = ({
   onChangeByInput,
   onChangeByEditor,
 }: DetailFormProps) => {
+  const { id } = useParams();
   const navigate = useNavigate();
   const navigateRootOnClick = () => navigate('/');
   return (
@@ -374,7 +394,11 @@ const DetailForm = ({
       <div className={classes.editor_wrap}>
         <Editor values={form} onChange={onChangeByEditor} />
         <div className={classes.button_container}>
-          <SubmitButton className={classes.upload_button} form={form} />
+          <SubmitButton
+            className={classes.upload_button}
+            form={form}
+            id={Number(id)}
+          />
           <button
             className={classes.cancel_button}
             onClick={navigateRootOnClick}
