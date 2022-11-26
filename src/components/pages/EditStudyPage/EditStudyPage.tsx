@@ -1,6 +1,7 @@
 import Banner from '@assets/svg/Study Banner.svg';
 import { CreateStudy } from '@components/organism/CreateStudy/CreateStudy';
 import { useGetPostByPostId } from '@hooks/useGetQuery';
+import { checkingDetailPeriod } from '@utils/handleSelectValue';
 import { useParams } from 'react-router-dom';
 
 export const EditStudyPage = () => {
@@ -17,12 +18,11 @@ export const EditStudyPage = () => {
       detailedRegion: responseData.detailedRegion,
       onlineOrOffline: responseData.onlineOrOffline,
       region: responseData.region,
-      period: responseData.period,
+      period: checkingDetailPeriod(responseData.period),
       recruitNum: String(responseData.recruitNum),
       skillList: responseData.skillList,
     };
 
-    console.log(initialData);
     return (
       <>
         <img src={Banner} alt="스터디 배너" style={{ width: '100%' }} />

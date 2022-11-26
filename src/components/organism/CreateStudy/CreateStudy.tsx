@@ -11,7 +11,7 @@ import VerticalLine from '@assets/recentLine.svg';
 import DownArrow from '@assets/recentIcon.svg';
 import paragraphLine from '@assets/paragraph_line.png';
 
-import { useAddPost } from '@hooks/usePostQuery';
+import { useAddPost, useUpdatePost } from '@hooks/usePostQuery';
 
 import { PostAPI } from '@api/api';
 import { PostRequestDto } from '@api/requestType';
@@ -20,7 +20,7 @@ import { defaultForm, reducerOfStudyPost } from './reducerOfStudyPost';
 import { data } from './data';
 
 import classes from './createStudy.module.scss';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
 import Swal from 'sweetalert2';
 import { Line } from '@components/atoms/Line/Line';
@@ -295,12 +295,15 @@ const DefaultFormCheckbox = ({
 const SubmitButton = ({
   className,
   form,
+  id,
 }: {
   className: string;
   form: PostRequestDto;
+  id?: number;
 }) => {
   // 폼 data를 mutate 해주는 것은 버튼의 역할이다.
   const addPostMutation = useAddPost(PostAPI.createPost);
+  const updatePostMutation = !id ? null : useUpdatePost(id);
   const { navigateRoot } = useCustomNavigate();
   const handleClick = async () => {
     const formData = new FormData();
@@ -321,7 +324,11 @@ const SubmitButton = ({
         icon: 'warning',
         confirmButtonText: '확인',
       });
-    const response: AxiosResponse = await addPostMutation.mutateAsync(formData);
+
+    // if (updatePostMutation)
+    const response: AxiosResponse = updatePostMutation
+      ? await updatePostMutation.mutateAsync(formData)
+      : await addPostMutation.mutateAsync(formData);
 
     if (response.status === 200) {
       await Swal.fire({
@@ -362,6 +369,7 @@ const DetailForm = ({
   onChangeByInput,
   onChangeByEditor,
 }: DetailFormProps) => {
+  const { id } = useParams();
   const navigate = useNavigate();
   const navigateRootOnClick = () => navigate('/');
   return (
@@ -382,7 +390,11 @@ const DetailForm = ({
       <div className={classes.editor_wrap}>
         <Editor values={form} onChange={onChangeByEditor} />
         <div className={classes.button_container}>
-          <SubmitButton className={classes.upload_button} form={form} />
+          <SubmitButton
+            className={classes.upload_button}
+            form={form}
+            id={Number(id)}
+          />
           <button
             className={classes.cancel_button}
             onClick={navigateRootOnClick}
