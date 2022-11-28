@@ -8,6 +8,10 @@ import EyeIcon from '@assets/svg/common/eye.svg';
 import EllipsisIcon from '@assets/svg/common/ellipsis.svg';
 import MessageIcon from '@assets/svg/common/message-square.svg';
 import icon from '@components/common/svg';
+import {
+  OverLimitIcons,
+  UnOverLimitIcons,
+} from '@components/atoms/SkillIcon/SkillIcons';
 
 interface NewPostCardProps {
   post: IResponsePostDetail;
@@ -129,11 +133,16 @@ const NewPostSkills = ({ post }: NewPostCardProps) => {
     </ul>
   );
 
+  // ? renderOverLimitSkills()
+  // : renderUnOverLimitSkills()}
+
   return (
     <>
-      {post.skillList.length >= 5
-        ? renderOverLimitSkills()
-        : renderUnOverLimitSkills()}
+      {post.skillList.length >= 5 ? (
+        <OverLimitIcons list={post.skillList} limit={5} />
+      ) : (
+        <UnOverLimitIcons list={post.skillList} />
+      )}
     </>
   );
 };

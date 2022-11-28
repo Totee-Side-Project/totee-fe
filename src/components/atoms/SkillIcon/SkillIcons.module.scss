@@ -1,0 +1,35 @@
+.default_skillIcons_wrap {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+
+  .default_skillIcons_over_wrap {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    .default_skillIcons_over {
+      position: absolute;
+      top: 0;
+      left: -100%;
+      background: #ffffff;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+      border-radius: 50%;
+    }
+  }
+
+  .default_skillIcons_ellipsis {
+    & img {
+      height: 20px;
+      width: 14px;
+      margin-top: 10px;
+    }
+  }
+}
+
+// .post_card_skills_ellipsis {
+//   & img {
+//     height: 20px;
+//     width: 14px;
+//     margin-top: 10px;
+//   }
+// }
