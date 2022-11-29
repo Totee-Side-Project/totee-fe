@@ -2,15 +2,12 @@
 $FONT: 'Noto Sans KR', sans-serif;
 
 .StatusM_Wrapper {
-  //position: fixed;
-  //margin-left: 80%;
-  //margin-top: 21%;
-  margin-top: 15px;
 }
 
 .StatusM_Box {
   width: 230px;
   height: 270px;
+  padding: 20px;
   background: #ffffff;
   box-shadow: 0px 4px 13px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
@@ -28,14 +25,19 @@ $FONT: 'Noto Sans KR', sans-serif;
   height: 90px;
 }
 
+.StatusM_Full {
+  height: inherit;
+}
+
 .StatusM_NameBox {
-  margin: 0 auto 7px auto;
+  display: flex;
+  align-items: center;
   width: 150px;
   height: 40px;
+  margin: 0 auto 7px auto;
+  padding: 5px;
   border-radius: 10px;
   background-color: #efefef;
-  padding: 5px;
-  display: flex;
   cursor: pointer;
 }
 
@@ -59,7 +61,7 @@ $FONT: 'Noto Sans KR', sans-serif;
 }
 
 .StatusM_Title {
-  padding-top: 20px;
+  // padding-top: 20px;
 }
 
 .StatusM_Title_Line {

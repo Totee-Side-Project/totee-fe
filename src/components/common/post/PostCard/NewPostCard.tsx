@@ -5,9 +5,11 @@ import { createMarkup } from '@utils/createMarkup';
 import { useNavigate } from 'react-router-dom';
 import HeartIcon from '@assets/svg/common/heart.svg';
 import EyeIcon from '@assets/svg/common/eye.svg';
-import EllipsisIcon from '@assets/svg/common/ellipsis.svg';
 import MessageIcon from '@assets/svg/common/message-square.svg';
-import icon from '@components/common/svg';
+import {
+  OverLimitIcons,
+  UnOverLimitIcons,
+} from '@components/atoms/SkillIcon/SkillIcons';
 
 interface NewPostCardProps {
   post: IResponsePostDetail;
@@ -65,75 +67,36 @@ const NewPostCardCenter = ({ post }: NewPostCardProps) => {
 };
 
 const NewPostCardFooter = ({ post }: NewPostCardProps) => {
-  post.commentNum;
-  post.likeNum;
-  post.recruitNum;
-  // like, comment, view
   return (
     <div className={classes.post_card_footer}>
       <ul className={classes.post_card_footer_items}>
-        <li className={classes.post_card_footer_item}>
-          <NewIcon
-            src={HeartIcon}
-            alt="heart_icon"
-            style={{ width: '20px', height: '20px' }}
-          />
-          <div>{post.likeNum}</div>
-        </li>
-        <li className={classes.post_card_footer_item}>
-          <NewIcon
-            src={EyeIcon}
-            alt="eye_icon"
-            style={{ width: '20px', height: '20px' }}
-          />
-          <div>{post.commentNum}</div>
-        </li>
-        <li className={classes.post_card_footer_item}>
-          <NewIcon
-            src={MessageIcon}
-            alt="message_icon"
-            style={{ width: '20px', height: '20px' }}
-          />
-          <div>{post.view}</div>
-        </li>
+        {[
+          [HeartIcon, 'heart_icon', post.likeNum],
+          [MessageIcon, 'message_icon', post.commentNum],
+          [EyeIcon, 'view_icon', post.view],
+        ].map(([src, alt, data]) => (
+          <li className={classes.post_card_footer_item} key={alt}>
+            <NewIcon
+              src={src as string}
+              alt="heart_icon"
+              style={{ width: '20px', height: '20px' }}
+            />
+            <div>{data}</div>
+          </li>
+        ))}
       </ul>
     </div>
   );
 };
 
 const NewPostSkills = ({ post }: NewPostCardProps) => {
-  const renderOverLimitSkills = () => (
-    <ul className={classes.post_card_skills}>
-      {post.skillList
-        .filter((skill, index) => index < 5)
-        .map((skill) => (
-          <li className={classes.post_card_skill_over_wrap} key={skill}>
-            <div className={classes.post_card_skill_over}>
-              <NewIcon src={icon[skill]} alt="skill_icon" />
-            </div>
-          </li>
-        ))}
-      <li className={classes.post_card_skills_ellipsis}>
-        <img src={EllipsisIcon} alt="ellipssis_icon" />
-      </li>
-    </ul>
-  );
-
-  const renderUnOverLimitSkills = () => (
-    <ul className={classes.post_card_skills}>
-      {post.skillList.map((skill) => (
-        <li className={classes.post_card_skill} key={skill}>
-          <NewIcon src={icon[skill]} alt="" />
-        </li>
-      ))}
-    </ul>
-  );
-
   return (
     <>
-      {post.skillList.length >= 5
-        ? renderOverLimitSkills()
-        : renderUnOverLimitSkills()}
+      {post.skillList.length >= 5 ? (
+        <OverLimitIcons list={post.skillList} limit={5} />
+      ) : (
+        <UnOverLimitIcons list={post.skillList} />
+      )}
     </>
   );
 };

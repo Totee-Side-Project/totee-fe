@@ -1,7 +1,7 @@
 import React, { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 import { Button, Modal } from '@components/atoms';
 import './joinModal.scss';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import { useDeleteApplicant, useUpdateApplicant } from '@hooks/useMutateQuery';
 import { useRecoilValue } from 'recoil';
 import { UserState } from '@store/user';
@@ -45,6 +45,7 @@ export function JoinModal({ isOpen, setIsOpen, postId }: IJoinModalProps) {
           <div className="ApplyName">{useProfile.nickname}</div>
           <div className="ApplyEmail">{useProfile.email}</div>
           <textarea
+            maxLength={500}
             className="ApplyIntro"
             placeholder="본인에 대한 짧은 소개입니다. 본인에 대한 짧은 소개입니다. 본인에 대한 짧은 소개입니다. 본인에 대한 짧은 소개입니다."
             value={formData}
