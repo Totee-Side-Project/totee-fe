@@ -90,7 +90,7 @@ const NewPostCardFooter = ({ post }: NewPostCardProps) => {
             alt="eye_icon"
             style={{ width: '20px', height: '20px' }}
           />
-          <div>{post.commentNum}</div>
+          <div>{post.view}</div>
         </li>
         <li className={classes.post_card_footer_item}>
           <NewIcon
@@ -98,7 +98,7 @@ const NewPostCardFooter = ({ post }: NewPostCardProps) => {
             alt="message_icon"
             style={{ width: '20px', height: '20px' }}
           />
-          <div>{post.view}</div>
+          <div>{post.commentNum}</div>
         </li>
       </ul>
     </div>
@@ -106,32 +106,32 @@ const NewPostCardFooter = ({ post }: NewPostCardProps) => {
 };
 
 const NewPostSkills = ({ post }: NewPostCardProps) => {
-  const renderOverLimitSkills = () => (
-    <ul className={classes.post_card_skills}>
-      {post.skillList
-        .filter((skill, index) => index < 5)
-        .map((skill) => (
-          <li className={classes.post_card_skill_over_wrap} key={skill}>
-            <div className={classes.post_card_skill_over}>
-              <NewIcon src={icon[skill]} alt="skill_icon" />
-            </div>
-          </li>
-        ))}
-      <li className={classes.post_card_skills_ellipsis}>
-        <img src={EllipsisIcon} alt="ellipssis_icon" />
-      </li>
-    </ul>
-  );
+  // const renderOverLimitSkills = () => (
+  //   <ul className={classes.post_card_skills}>
+  //     {post.skillList
+  //       .filter((skill, index) => index < 5)
+  //       .map((skill) => (
+  //         <li className={classes.post_card_skill_over_wrap} key={skill}>
+  //           <div className={classes.post_card_skill_over}>
+  //             <NewIcon src={icon[skill]} alt="skill_icon" />
+  //           </div>
+  //         </li>
+  //       ))}
+  //     <li className={classes.post_card_skills_ellipsis}>
+  //       <img src={EllipsisIcon} alt="ellipssis_icon" />
+  //     </li>
+  //   </ul>
+  // );
 
-  const renderUnOverLimitSkills = () => (
-    <ul className={classes.post_card_skills}>
-      {post.skillList.map((skill) => (
-        <li className={classes.post_card_skill} key={skill}>
-          <NewIcon src={icon[skill]} alt="" />
-        </li>
-      ))}
-    </ul>
-  );
+  // const renderUnOverLimitSkills = () => (
+  //   <ul className={classes.post_card_skills}>
+  //     {post.skillList.map((skill) => (
+  //       <li className={classes.post_card_skill} key={skill}>
+  //         <NewIcon src={icon[skill]} alt="" />
+  //       </li>
+  //     ))}
+  //   </ul>
+  // );
 
   // ? renderOverLimitSkills()
   // : renderUnOverLimitSkills()}
