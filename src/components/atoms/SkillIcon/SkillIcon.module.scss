@@ -1,4 +1,6 @@
 .default {
+  list-style: none;
+  background-color: white;
   width: 35px;
   height: 35px;
   border-radius: 50%;
@@ -7,5 +9,11 @@
   & img {
     height: 100%;
     width: 100%;
+    object-fit: contain;
   }
+}
+
+.userProfile {
+  width: 28px;
+  height: 28px;
 }
