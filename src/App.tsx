@@ -2,7 +2,15 @@ import { ScrollTopButton } from '@components/atoms/ScrollTopButton/ScrollTopButt
 import { Footer, Header } from '@components/common';
 import './App.css';
 import { MainPage, PostsPage } from '@components/pages';
-import { useEffect, useState } from 'react';
+import {
+  // FC,
+  // ReactComponentElement,
+  // Suspense,
+  // createElement,
+  // lazy,
+  useEffect,
+  // useState,
+} from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import LoginOauth from '@components/common/login/LoginOauth';
@@ -17,7 +25,25 @@ import {
 } from '@store/index';
 import { NewDetailPage } from '@components/pages/DetailPage/NewDetailPage';
 import { EditStudyPage } from '@components/pages/EditStudyPage/EditStudyPage';
-import { NotMatchPage } from '@components/pages/NotMatchPage';
+import NotMatchPage from '@components/pages/NotMatchPage';
+// import React from 'react';
+
+// const NotMatchPage = React.lazy(() => import('@components/pages/NotMatchPage'));
+// const NewDetailPage = React.lazy(
+//   () => import('@components/pages/DetailPage/NewDetailPage'),
+// );
+const isNotLoginRoutes = [
+  { path: '/', element: <MainPage /> },
+  { path: '/posts', element: <PostsPage /> },
+  { path: '/oauth/redirect', element: <LoginOauth /> },
+  { path: '/detail/:id', element: <NewDetailPage /> },
+];
+
+export const isLoginRoutes = [
+  { path: '/setupstudy', element: <CreateStudyPage /> },
+  { path: '/mypage', element: <MyPage /> },
+  { path: '/edit/:id', element: <EditStudyPage /> },
+];
 
 function App() {
   const [login, setLogin] = useRecoilState(loginState);
@@ -28,7 +54,6 @@ function App() {
   let loginLocalStorage: any = localStorage.getItem('loginData');
   // javascript 객체로 변경해줘야한다.
   loginLocalStorage = JSON.parse(loginLocalStorage);
-  // console.log(window.location.host);
   useEffect(() => {
     if (data && data.status === 200) {
       setLogin(loginLocalStorage);
@@ -45,24 +70,45 @@ function App() {
   return (
     <>
       <Header />
+      {/* <Suspense
+        fallback={
+          <div style={{ height: '300px', padding: '100px' }}>loading...</div>
+        }
+      > */}
       <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/posts" element={<PostsPage />} />
-        <Route path="/oauth/redirect" element={<LoginOauth />} />
-        <Route path="/detail/:id" element={<NewDetailPage />} />
-        {login.state && (
-          <>
-            <Route path="/setupstudy" element={<CreateStudyPage />} />
-            <Route path="/mypage" element={<MyPage />} />
-            <Route path="/edit/:id" element={<EditStudyPage />} />
-          </>
-        )}
+        {isNotLoginRoutes.map(({ path, element }) => (
+          <Route key={path} path={path} element={element} />
+        ))}
+        {login.state &&
+          isLoginRoutes.map(({ path, element }) => (
+            <Route key={path} path={path} element={element} />
+          ))}
+
         <Route path="*" element={<NotMatchPage status={status} />} />
       </Routes>
+      {/* </Suspense> */}
       <ScrollTopButton />
       <Footer />
     </>
   );
 }
+
+// const RouteComponent = ({ path }: { path: string }) => {
+//   console.log(path);
+//   const url = `./pages/${path}.tsx`;
+//   const [Component, setComponent] = useState<FC | null>(null);
+//   useEffect(() => {
+//     const Component = lazy(() => import(url));
+//     setComponent(Component);
+//   }, [path]);
+
+//   console.log(Component);
+
+//   return Component ? (
+//     <Suspense>
+//       <Component />
+//     </Suspense>
+//   ) : null;
+// };
 
 export default App;
