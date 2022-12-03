@@ -13,7 +13,16 @@ import { theme } from '@styles/theme';
 import './index.css';
 import ScrollToTop from '@components/atoms/ScrollTop';
 
-const queryClient = new QueryClient();
+// default cacheTime은 5분
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      // cacheTime: 1000 * 5,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 ReactDOM.render(
   <React.StrictMode>

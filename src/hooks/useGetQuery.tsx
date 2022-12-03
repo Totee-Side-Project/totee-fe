@@ -10,24 +10,17 @@ import {
 import { useRecoilState } from 'recoil';
 import { UserState } from '@store/user';
 
-export function useGetUserAPI() {
+export const useGetUserAPI = () => {
   const [user, setUser] = useRecoilState(UserState);
 
-  return useQuery(['user'], () => UserAPI.getUserInfo().catch((err) => err), {
-    // 브라우저 focus 됐을 때 재시작?
-    retry: false,
-    refetchOnWindowFocus: false,
-    // 자동으로 가져오는 옵션
-    enabled: true,
-    // 캐시 타임
-    staleTime: 10 * 600 * 1000,
+  return useQuery(['user'], () => UserAPI.getUserInfo(), {
     onSuccess: (res) => {
-      if (res?.data?.body.data) {
+      if (res.data.body.data) {
         setUser(res.data.body.data);
       }
     },
   });
-}
+};
 
 export function useGetPostListAPI() {
   return useQuery(
