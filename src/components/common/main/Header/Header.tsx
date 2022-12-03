@@ -1,24 +1,23 @@
 import { AlarmIcon } from '@components/common';
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { UserState, loginState } from '@store/index';
-import { defaultUserState } from '@store/user';
-import { OnboardModal, SignInModal, ToggleIcon } from '@components/common';
-import Swal from 'sweetalert2';
+import { OnboardModal, SignInModal } from '@components/common';
+import { NewIcon } from '@components/atoms/Icon/NewIcon';
+import { HeaderUserProfileNav } from './HeaderUserProfileNav';
 import logo from '@assets/toteelogo-kr.png';
 import alarm from '@assets/alarmicon.svg';
 import './header.scss';
-import { NewIcon } from '@components/atoms/Icon/NewIcon';
 
 export const Header = () => {
-  const [listening, setListening] = useState(false);
-  const [meventSource, msetEventSource] = useState<any>(undefined);
+  // const [listening, setListening] = useState(false);
+  // const [meventSource, msetEventSource] = useState<any>(undefined);
 
   const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
   const [isOpenOnboardModal, setIsOpenOnboardModal] = useState(false);
-  const [isShowToggle, setIsShowToggle] = useState(false);
   const [isShowAlarm, setIsShowAlarm] = useState(false);
+  // const [isShowToggle, setIsShowToggle] = useState(false);
 
   //로그인 state 관리
   const [login, setLogin] = useRecoilState(loginState);
@@ -34,22 +33,22 @@ export const Header = () => {
   };
 
   //로그아웃 버튼
-  const handleLogout = () => {
-    Swal.fire({
-      position: 'top-end',
-      icon: 'success',
-      title: '로그아웃 완료!',
-      iconColor: '#f48484',
-      showConfirmButton: false,
-      timer: 1100,
-    });
-    localStorage.removeItem('loginData');
-    setLogin({
-      state: false,
-      token: '',
-    });
-    setUser({ ...defaultUserState });
-  };
+  // const handleLogout = () => {
+  //   Swal.fire({
+  //     position: 'top-end',
+  //     icon: 'success',
+  //     title: '로그아웃 완료!',
+  //     iconColor: '#f48484',
+  //     showConfirmButton: false,
+  //     timer: 1100,
+  //   });
+  //   localStorage.removeItem('loginData');
+  //   setLogin({
+  //     state: false,
+  //     token: '',
+  //   });
+  //   setUser({ ...defaultUserState });
+  // };
 
   useEffect(() => {
     // 첫방문일 경우 온보딩 모달 띄우기
@@ -81,12 +80,11 @@ export const Header = () => {
     //   setListening(true);
     // }
 
-    return () => {
-      if (listening && eventSource) {
-        eventSource.close();
-        console.log('eventsource closed');
-      }
-    };
+    // return () => {
+    //   if (listening && eventSource) {
+    //     eventSource.close();
+    //   }
+    // };
 
     //구독
   }, [user, login]);
@@ -95,18 +93,11 @@ export const Header = () => {
     <>
       <header className="header">
         <div className="content">
-          <NewIcon
-            // <img
-            src={logo}
-            alt="토티 로고"
-            onClick={() => navigate('/')}
-            // onClick={() => (window.location.href = '/')}
-          />
+          <NewIcon src={logo} alt="토티 로고" onClick={() => navigate('/')} />
           <div className="buttonWrapper">
             <ul className="profile_wrapper">
               <li>
                 {!login.state ? null : (
-                  // <img src={alarm} className="alarmButton" />
                   <>
                     <AlarmIcon
                       imageUrl={alarm}
@@ -117,16 +108,22 @@ export const Header = () => {
                   </>
                 )}
               </li>
-              {['스터디 개설', '멘토 지원'].map((text) => (
-                <li key={text}>
-                  <button
-                    className="createStudyButton"
-                    onClick={handleStudyClick}
-                  >
-                    {text}
-                  </button>
-                </li>
-              ))}
+              <li>
+                <button
+                  className="createStudyButton"
+                  onClick={handleStudyClick}
+                >
+                  스터디 개설
+                </button>
+              </li>
+              <li>
+                <button
+                  className="createStudyButton"
+                  onClick={() => navigate('reading')}
+                >
+                  멘토 지원
+                </button>
+              </li>
               <li className="line" />
               <li>
                 {!login.state ? (
@@ -137,21 +134,7 @@ export const Header = () => {
                     로그인
                   </button>
                 ) : (
-                  <>
-                    <ToggleIcon
-                      imageUrl={user.profileImageUrl}
-                      style={{ width: '65px', height: '65px' }}
-                      userInfo={{
-                        roleType: user.roleType,
-                        nickname: user.nickname,
-                        email: user.email,
-                      }}
-                      handleLogout={handleLogout}
-                      isShowToggle={isShowToggle}
-                      setIsShowToggle={setIsShowToggle}
-                      onClick={() => setIsShowToggle(!isShowToggle)}
-                    ></ToggleIcon>
-                  </>
+                  <HeaderUserProfileNav />
                 )}
               </li>
             </ul>
