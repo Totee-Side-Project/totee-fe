@@ -17,14 +17,16 @@ import {
 } from '@store/index';
 import { NewDetailPage } from '@components/pages/DetailPage/NewDetailPage';
 import { EditStudyPage } from '@components/pages/EditStudyPage/EditStudyPage';
+import { NotMatchPage } from '@components/pages/NotMatchPage';
 
 function App() {
   const [login, setLogin] = useRecoilState(loginState);
   const [user, setUser] = useRecoilState(UserState);
+  const { data, status, isFetching, isError } = useGetUserAPI();
 
-  const { data, isFetching, isError } = useGetUserAPI();
-
+  // localStorage에서 loginData를 get한다.
   let loginLocalStorage: any = localStorage.getItem('loginData');
+  // javascript 객체로 변경해줘야한다.
   loginLocalStorage = JSON.parse(loginLocalStorage);
   // console.log(window.location.host);
   useEffect(() => {
@@ -39,6 +41,7 @@ function App() {
     }
   }, [data]);
 
+  // 여기서 로그인이 필요한 페이지 어디인가?
   return (
     <>
       <Header />
@@ -46,10 +49,15 @@ function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="/posts" element={<PostsPage />} />
         <Route path="/oauth/redirect" element={<LoginOauth />} />
-        <Route path="/setupstudy" element={<CreateStudyPage />} />
         <Route path="/detail/:id" element={<NewDetailPage />} />
-        <Route path="/edit/:id" element={<EditStudyPage />} />
-        <Route path="/mypage" element={<MyPage />} />
+        {login.state && (
+          <>
+            <Route path="/setupstudy" element={<CreateStudyPage />} />
+            <Route path="/mypage" element={<MyPage />} />
+            <Route path="/edit/:id" element={<EditStudyPage />} />
+          </>
+        )}
+        <Route path="*" element={<NotMatchPage status={status} />} />
       </Routes>
       <ScrollTopButton />
       <Footer />
