@@ -3,10 +3,25 @@ export const data: Idata = {
   defaultFormElements: {
     period: ['진행기간', 'select', '선택'],
     recruitNum: ['모집인원', 'number', '최소 1명 ~ 최대 15명'],
-    language: ['모집언어', 'multiSelect'],
-    process: ['진행방식', 'checkbox'],
+    skillList: ['모집언어', 'multiSelect'],
+    onlineOrOffline: ['진행방식', 'checkbox'],
     region: ['진행지역', 'select', '선택'],
     detailedRegion: ['', 'text', '스터디룸의 상세 주소를 입력해주세요.'],
+    contactMethod: ['연락방식', 'select', '선택'],
+    contactLink: ['', 'text', '사용하실 연락 방식의 링크를 입력해주세요.'],
+  },
+  defaultFormElementsWithOnline: {
+    period: ['진행기간', 'select', '선택'],
+    recruitNum: ['모집인원', 'number', '최소 1명 ~ 최대 15명'],
+    skillList: ['모집언어', 'multiSelect'],
+    onlineOrOffline: ['진행방식', 'checkbox'],
+    region: ['진행지역', 'select', '선택', 'disabled'],
+    detailedRegion: [
+      '',
+      'text',
+      '스터디룸의 상세 주소를 입력해주세요.',
+      'disabled',
+    ],
     contactMethod: ['연락방식', 'select', '선택'],
     contactLink: ['', 'text', '사용하실 연락 방식의 링크를 입력해주세요.'],
   },
@@ -45,8 +60,18 @@ export interface Idata {
   defaultFormElements: {
     period: string[];
     recruitNum: string[];
-    language: string[];
-    process: string[];
+    skillList: string[];
+    onlineOrOffline: string[];
+    region: string[];
+    detailedRegion: string[];
+    contactMethod: string[];
+    contactLink: string[];
+  };
+  defaultFormElementsWithOnline: {
+    period: string[];
+    recruitNum: string[];
+    skillList: string[];
+    onlineOrOffline: string[];
     region: string[];
     detailedRegion: string[];
     contactMethod: string[];

@@ -6,12 +6,8 @@ import { useEffect, useState } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import LoginOauth from '@components/common/login/LoginOauth';
-
 import CreateStudyPage from '@components/pages/CreateStudyPage/CreateStudyPage';
-import DetailPage from '@components/pages/DetailPage/DetailPage';
-import EditPage from '@components/pages/EditPage/EditPage';
 import MyPage from '@pages/MyPage/MyPage';
-
 import { useGetUserAPI } from '@hooks/useGetQuery';
 import {
   UserState,
@@ -20,11 +16,9 @@ import {
   loginState,
 } from '@store/index';
 import { NewDetailPage } from '@components/pages/DetailPage/NewDetailPage';
+import { EditStudyPage } from '@components/pages/EditStudyPage/EditStudyPage';
 
 function App() {
-  // const padding: any = {
-  //   paddingTop: '100px',
-  // };
   const [login, setLogin] = useRecoilState(loginState);
   const [user, setUser] = useRecoilState(UserState);
 
@@ -48,14 +42,13 @@ function App() {
   return (
     <>
       <Header />
-      {/* <div style={padding} /> */}
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/posts" element={<PostsPage />} />
         <Route path="/oauth/redirect" element={<LoginOauth />} />
         <Route path="/setupstudy" element={<CreateStudyPage />} />
         <Route path="/detail/:id" element={<NewDetailPage />} />
-        <Route path="/edit/:id" element={<EditPage />} />
+        <Route path="/edit/:id" element={<EditStudyPage />} />
         <Route path="/mypage" element={<MyPage />} />
       </Routes>
       <ScrollTopButton />

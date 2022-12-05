@@ -1,7 +1,9 @@
 import { PostAPI } from '@api/api';
 import { SectionTitle, SelectItem } from '@components/atoms';
 import { Carousel } from '@components/common';
+import { NewPostCard } from '@components/common/post/PostCard/NewPostCard';
 import { PostCard } from '@components/common/post/PostCard/PostCard';
+import { IResponsePostDetail } from '@components/pages/DetailPage/NewDetailPage';
 import { useInfiniteQueryTest } from '@hooks/useInfiniteQueryTest';
 import { useEffect, useRef, useState } from 'react';
 import { useQueryClient } from 'react-query';
@@ -13,7 +15,9 @@ import './studySection.scss';
 // 프론트단에서 4단위로 끊어서 보여주는것은 어떨까?
 
 export function StudySection() {
-  const [filteredPageList, setFilteredPageList] = useState<IPostType[][]>([]);
+  const [filteredPageList, setFilteredPageList] = useState<
+    IResponsePostDetail[][]
+  >([]);
   const filterList = useRef(['전체', '최신순', '인기순', '조회순']).current;
   const [selectedFilter, setSelectedFilter] = useState(filterList[0]);
   // urldml params를 읽고 수정할 수 있다.
@@ -80,7 +84,7 @@ export function StudySection() {
     return chunkedData;
   };
 
-  const sortingData = (data: IPostType[]): IPostType[] => {
+  const sortingData = (data: IResponsePostDetail[]): IResponsePostDetail[] => {
     let newData = [...data];
     switch (selectedFilter) {
       case '최신순':
@@ -175,9 +179,10 @@ export function StudySection() {
                   justifyContent: 'space-around',
                 }}
               >
-                {postPage.map((post: IPostType) => (
+                {postPage.map((post) => (
                   <li key={post.postId}>
-                    <PostCard post={post} />
+                    {/* <PostCard post={post} /> */}
+                    <NewPostCard post={post} />
                   </li>
                 ))}
               </div>

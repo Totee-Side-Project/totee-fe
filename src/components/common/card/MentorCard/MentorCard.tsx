@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './mentorCard.scss';
 import mentorheart from '../../../../assets/mentorheart.svg';
 import star from '../../../../assets/star.svg';

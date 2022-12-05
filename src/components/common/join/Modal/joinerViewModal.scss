@@ -1,21 +1,21 @@
-.ApplyModalWrapper{
+.ApplyModalWrapper {
   //width: 400px;
   //height: 500px;
   text-align: center;
 }
-.ApplyTitle{
-  color: #568A35;
+.ApplyTitle {
+  color: #568a35;
   font-size: 38px;
   font-weight: bold;
 }
 
-.SubTitle{
-  color: #4C4C4C;
+.SubTitle {
+  color: #4c4c4c;
   font-size: 20px;
   margin-top: 15px;
 }
 
-.ApplyProfile{
+.ApplyProfile {
   margin: 25px auto 10px auto;
   width: 100px;
   height: 100px;
@@ -26,19 +26,34 @@
   border-radius: 50%;
 }
 
-.ApplyName{
+.ApplyName {
   font-size: 25px;
   color: #484848;
   margin-bottom: 5px;
 }
 
-.ApplyEmail{
+.ApplyEmail {
   font-size: 16px;
   color: #767676;
   margin-bottom: 20px;
 }
 
-.ApplyIntro{
+.ApplyMessage {
+  width: 390px;
+  height: 150px;
+  margin: 0 auto;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 10px;
+  color: #767676;
+  resize: none;
+  background: #f9f9f9;
+  border: 1.5px solid #e4e4e4;
+  border-radius: 12px;
+  overflow: auto;
+}
+
+.ApplyIntro {
   width: 390px;
   height: 150px;
   font-size: 16px;
@@ -46,16 +61,16 @@
   padding: 20px 15px 10px 15px;
   color: #767676;
   resize: none;
-  background: #F9F9F9;
-  border: 1.5px solid #E4E4E4;
+  background: #f9f9f9;
+  border: 1.5px solid #e4e4e4;
   border-radius: 12px;
-  &:focus{
+  &:focus {
     outline: none !important;
-    border: 2px solid #7BA364 !important;
+    border: 2px solid #7ba364 !important;
   }
 }
 
-.BtnWrapper{
+.BtnWrapper {
   display: flex;
   gap: 15px;
 }

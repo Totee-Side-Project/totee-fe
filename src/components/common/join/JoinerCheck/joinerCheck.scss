@@ -2,11 +2,11 @@
 $FONT: 'Noto Sans KR', sans-serif;
 
 .JoinWrapper {
-  position: fixed;
+  position: sticky;
   // margin-left: 80%;
   // margin-top: 110px;
   left: 80%;
-  top: 10%;
+  top: 15%;
 }
 
 .Status_Wrapper {
@@ -25,11 +25,18 @@ $FONT: 'Noto Sans KR', sans-serif;
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 50%;
+  overflow: hidden;
+  & img {
+    width: 100%;
+    height: 100%;
+    // object-fit: cover;
+  }
 }
 
 .Status_Box {
   width: 230px;
   height: 300px;
+  padding: 19px;
   background: #ffffff;
   box-shadow: 0px 4px 13px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
@@ -43,7 +50,7 @@ $FONT: 'Noto Sans KR', sans-serif;
 }
 
 .Status_Title {
-  padding-top: 20px;
+  // padding-top: 20px;
 }
 
 .Status_Title_Line {
@@ -52,8 +59,15 @@ $FONT: 'Noto Sans KR', sans-serif;
   margin: 10px auto 10px auto;
 }
 
+.Status_Title_Lint_Soft {
+  border: 1px solid #568a35;
+  width: 145px;
+  margin: 10px auto 10px auto;
+  opacity: 0.4;
+}
+
 .Status_AllApplicant {
-  margin-top: 20px;
+  // margin-top: 20px;
 }
 
 .Status_Line {
@@ -64,6 +78,7 @@ $FONT: 'Noto Sans KR', sans-serif;
 
 .Status_Count {
   margin-top: 5px;
+  margin-bottom: 12px;
   font-family: $FONT;
   font-style: normal;
   font-weight: 900;
@@ -75,7 +90,7 @@ $FONT: 'Noto Sans KR', sans-serif;
 .Status_Btn {
   width: 145px;
   height: 40px;
-  margin-top: 100px;
+  margin-top: 22px;
   font-family: $FONT;
   font-weight: 500;
   font-size: 20px;
@@ -84,4 +99,17 @@ $FONT: 'Noto Sans KR', sans-serif;
   border: #fff solid 1.5px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.Status_Applicant_imgs {
+  display: flex;
+  justify-content: center;
+  .Status_Applicant_img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    overflow: hidden;
+    // border: 1px solid green;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  }
 }

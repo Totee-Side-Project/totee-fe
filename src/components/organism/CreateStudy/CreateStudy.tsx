@@ -1,4 +1,4 @@
-import type { ChangeEvent, MouseEvent, ReactNode } from 'react';
+import { ChangeEvent, MouseEvent, ReactNode, useEffect, useState } from 'react';
 import type { Idata } from './data';
 import { useReducer } from 'react';
 import { Label } from '@components/atoms/label/Label';
@@ -20,13 +20,22 @@ import { defaultForm, reducerOfStudyPost } from './reducerOfStudyPost';
 import { data } from './data';
 
 import classes from './createStudy.module.scss';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
 import Swal from 'sweetalert2';
 import { Line } from '@components/atoms/Line/Line';
+import { validateFormData } from '@utils/validateData';
+import { useCustomNavigate } from '@hooks/useCustomNavigate';
 
-export const CreateStudy = () => {
-  const [form, dispatch] = useReducer(reducerOfStudyPost, defaultForm);
+export const CreateStudy = ({
+  initialData,
+}: {
+  initialData?: PostRequestDto;
+}) => {
+  const [form, dispatch] = useReducer(
+    reducerOfStudyPost,
+    !initialData ? defaultForm : initialData,
+  );
 
   // 숫자만 들어오게 해야한다.
   const onChangeByInput = (e: ChangeEvent<HTMLInputElement>, id: any) => {
@@ -54,6 +63,11 @@ export const CreateStudy = () => {
     dispatch({ type: 'content', payload: content });
   };
 
+  const onResetValueByDisabled = () => {
+    dispatch({ type: 'region', payload: '' });
+    dispatch({ type: 'detailedRegion', payload: '' });
+  };
+
   return (
     <div className={classes.studypage_container}>
       <DefaultForm
@@ -62,6 +76,7 @@ export const CreateStudy = () => {
         onChangeBySelect={onChangeBySelect}
         onChangeByChildrenState={onChangeByChildrenState}
         onChangeByCheckbox={onChangeByCheckbox}
+        onResetValueByDisabled={onResetValueByDisabled}
       />
       <DetailForm
         form={form}
@@ -69,8 +84,6 @@ export const CreateStudy = () => {
         onChangeByInput={onChangeByInput}
         onChangeByEditor={onChangeByEditor}
       />
-      {/* <SubmitButton /> */}
-      {/* <ResetButton /> */}
     </div>
   );
 };
@@ -81,6 +94,7 @@ interface DefaultFormProps {
   onChangeBySelect: (e: MouseEvent<HTMLElement>, key: any) => void;
   onChangeByChildrenState: (data: (undefined | string)[]) => void;
   onChangeByCheckbox: (data: string) => void;
+  onResetValueByDisabled: () => void;
 }
 const DefaultForm = ({
   form,
@@ -88,7 +102,17 @@ const DefaultForm = ({
   onChangeBySelect,
   onChangeByChildrenState,
   onChangeByCheckbox,
+  onResetValueByDisabled,
 }: DefaultFormProps) => {
+  const [formElements, setFormElements] = useState(data.defaultFormElements);
+  useEffect(() => {
+    if (form.onlineOrOffline === '온라인') {
+      setFormElements(data.defaultFormElementsWithOnline);
+      return onResetValueByDisabled();
+    }
+    return setFormElements(data.defaultFormElements);
+  }, [form.onlineOrOffline]);
+
   return (
     <section>
       <div className={classes.study_form_header}>
@@ -100,14 +124,16 @@ const DefaultForm = ({
           alt="paragraph_line"
         />
       </div>
-      {Object.entries(data.defaultFormElements).map(
-        ([id, [title, type, placeholder]]) => (
+      {/* {Object.entries(data.defaultFormElements).map( */}
+      {Object.entries(formElements).map(
+        ([id, [title, type, placeholder, disabled]]) => (
           <DefaultFormElement
             key={id}
             id={id}
             title={title}
             type={type}
             placeholder={placeholder}
+            disabled={disabled}
             value={form[id]}
             onChangeByInput={(e) => onChangeByInput(e, id)}
             onChangeBySelect={(e) => onChangeBySelect(e, id)}
@@ -116,7 +142,6 @@ const DefaultForm = ({
           />
         ),
       )}
-      {/* <SubmitButton className={form={form} /> */}
     </section>
   );
 };
@@ -126,6 +151,7 @@ interface DefaultFormElementProps {
   title: string;
   type: string;
   placeholder: string;
+  disabled: string;
   value: string | number | string[];
   onChangeByInput: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeBySelect: (e: MouseEvent<HTMLElement>) => void;
@@ -139,6 +165,7 @@ export const DefaultFormElement = ({
   type,
   placeholder,
   value,
+  disabled,
   onChangeByInput,
   onChangeBySelect,
   onChangeByChildrenState,
@@ -148,7 +175,7 @@ export const DefaultFormElement = ({
     return (
       <div className={classes.form_element_wrap}>
         <Select
-          label={<Label text={title} />}
+          label={<Label text={title} disabled={disabled} />}
           trigger={
             <label className="recent_wrapper">
               <div className="recent_value">
@@ -166,6 +193,7 @@ export const DefaultFormElement = ({
           }
           onChange={onChangeBySelect}
           options={data.selectOptions[id]}
+          disabled={disabled}
         />
       </div>
     );
@@ -180,8 +208,9 @@ export const DefaultFormElement = ({
           left={
             <img src={VerticalLine} className={classes.vertical_line} alt="|" />
           }
-          value={value as string}
+          value={(value as string) ?? ''}
           placeholder={placeholder}
+          disabled={!disabled ? false : true}
           onChange={onChangeByInput}
         />
       </div>
@@ -202,6 +231,7 @@ export const DefaultFormElement = ({
           max={15}
           min={1}
           onChange={onChangeByInput}
+          disabled={!disabled ? false : true}
         />
       </div>
     );
@@ -221,6 +251,7 @@ export const DefaultFormElement = ({
               <Label text={title} />
             </div>
           }
+          initialState={value as string[]}
           onChangeArray={onChangeByChildrenState}
         />
         <img
@@ -233,9 +264,12 @@ export const DefaultFormElement = ({
   if (type === 'checkbox')
     return (
       <div className={classes.form_checkbox_wrap}>
-        <DefaultFormCheckbox
+        <Checkbox
           top={<Label text={title} />}
-          onChangeByCheckbox={onChangeByCheckbox}
+          isChecked={value as string}
+          options={data.checkboxOptions}
+          onClick={onChangeByCheckbox}
+          className={classes.checkbox_wrap}
         />
       </div>
     );
@@ -244,46 +278,69 @@ export const DefaultFormElement = ({
 };
 
 // 어떤것을 보여줄지 넘겨주고 중간역할
-const DefaultFormCheckbox = ({
-  top,
-  onChangeByCheckbox,
-}: {
-  top: ReactNode;
-  onChangeByCheckbox: (data: string) => void;
-}) => {
-  return (
-    <Checkbox
-      top={top}
-      options={data.checkboxOptions}
-      onClick={onChangeByCheckbox}
-      className={classes.checkbox_wrap}
-    />
-  );
-};
+// Review: 단순히 거쳐가는 역할만 하게되니까 없애도 될 것 같다.
+// const DefaultFormCheckbox = ({
+//   top,
+//   onChangeByCheckbox,
+// }: {
+//   top: ReactNode;
+//   onChangeByCheckbox: (data: string) => void;
+// }) => {
+//   return (
+//     <Checkbox
+//       top={top}
+//       options={data.checkboxOptions}
+//       onClick={onChangeByCheckbox}
+//       className={classes.checkbox_wrap}
+//     />
+//   );
+// };
 
 const SubmitButton = ({
   className,
   form,
+  id,
 }: {
   className: string;
   form: PostRequestDto;
+  id?: number;
 }) => {
   // 폼 data를 mutate 해주는 것은 버튼의 역할이다.
   const addPostMutation = useAddPost(PostAPI.createPost);
+  const updatePostMutation = !id ? null : useUpdatePost(id);
+  const { navigateRoot } = useCustomNavigate();
   const handleClick = async () => {
     const formData = new FormData();
-    Object.entries(form).forEach(([key, value]) =>
-      formData.append(key, String(value)),
-    );
-    const response: AxiosResponse = await addPostMutation.mutateAsync(formData);
+    if (form.onlineOrOffline === '온라인') {
+      Object.entries(form).forEach(([key, value]) => {
+        if (key === 'region' || key === 'detailedRegion') return;
+        formData.append(key, String(value));
+      });
+    } else {
+      Object.entries(form).forEach(([key, value]) => {
+        formData.append(key, String(value));
+      });
+    }
+    if (!validateFormData(formData))
+      return Swal.fire({
+        title: '등록 실패',
+        text: '모든 정보를 입력해주세요!',
+        icon: 'warning',
+        confirmButtonText: '확인',
+      });
+
+    // if (updatePostMutation)
+    const response: AxiosResponse = updatePostMutation
+      ? await updatePostMutation.mutateAsync(formData)
+      : await addPostMutation.mutateAsync(formData);
 
     if (response.status === 200) {
       await Swal.fire({
         title: '등록 완료',
         text: '마이페이지에서 확인하세요',
         icon: 'success',
-        confirmButtonText: '<a href="/">확인</a>',
-      });
+        confirmButtonText: '확인',
+      }).then(navigateRoot);
       // 홈으로 네비게이트
       return;
     }
@@ -316,8 +373,8 @@ const DetailForm = ({
   onChangeByInput,
   onChangeByEditor,
 }: DetailFormProps) => {
+  const { id } = useParams();
   const navigate = useNavigate();
-
   const navigateRootOnClick = () => navigate('/');
   return (
     <section className={classes.detail_editor_container}>
@@ -334,10 +391,14 @@ const DetailForm = ({
         placeholder="제목을 입력해주세요."
         onChange={(e) => onChangeByInput(e, 'title')}
       />
-      <div>
+      <div className={classes.editor_wrap}>
         <Editor values={form} onChange={onChangeByEditor} />
         <div className={classes.button_container}>
-          <SubmitButton className={classes.upload_button} form={form} />
+          <SubmitButton
+            className={classes.upload_button}
+            form={form}
+            id={Number(id)}
+          />
           <button
             className={classes.cancel_button}
             onClick={navigateRootOnClick}

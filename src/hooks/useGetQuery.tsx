@@ -1,5 +1,12 @@
 import { useQuery } from 'react-query';
-import { AlarmAPI, CategoryAPI, LikeAPI, PostAPI, UserAPI } from '@api/api';
+import {
+  AlarmAPI,
+  ApplicationAPI,
+  CategoryAPI,
+  LikeAPI,
+  PostAPI,
+  UserAPI,
+} from '@api/api';
 import { useRecoilState } from 'recoil';
 import { UserState } from '@store/user';
 
@@ -39,19 +46,15 @@ export function useGetPostListAPI() {
 }
 
 export function useGetPostByPostId(postId: number) {
-  return useQuery(
-    ['post', postId],
-    () => PostAPI.getPostByPostId(postId).catch((err) => err),
-    {
-      // 브라우저 focus 됐을 때 재시작?
-      retry: false,
-      refetchOnWindowFocus: true,
-      // 자동으로 가져오는 옵션
-      enabled: true,
-      // 캐시 타임
-      staleTime: 10 * 600 * 1000,
-    },
-  );
+  return useQuery(['post', postId], () => PostAPI.getPostByPostId(postId), {
+    // 브라우저 focus 됐을 때 재시작?
+    retry: false,
+    refetchOnWindowFocus: true,
+    // 자동으로 가져오는 옵션
+    enabled: true,
+    // 캐시 타임
+    staleTime: 10 * 600 * 1000,
+  });
 }
 
 export function useGetSearchPostList(title: string) {
@@ -98,7 +101,7 @@ export function useGetRecommendList() {
   });
 }
 
-export function useGetLikeofPost(postId: string) {
+export function useGetLikeofPost(postId: string | number) {
   return useQuery(['like', postId], () => LikeAPI.getIsLikeInfo(postId), {
     // 브라우저 focus 됐을 때 재시작?
     retry: false,
@@ -117,4 +120,19 @@ export function useGetAlarm() {
     enabled: true,
     staleTime: 0,
   });
+}
+
+export function useGetApplicant(postId: number) {
+  return useQuery(
+    ['applicant', postId],
+    () => ApplicationAPI.getApplicant(postId),
+    {
+      retry: false,
+      refetchOnWindowFocus: true,
+      // 자동으로 가져오는 옵션
+      enabled: true,
+      // 캐시 타임
+      staleTime: 10 * 600 * 1000,
+    },
+  );
 }

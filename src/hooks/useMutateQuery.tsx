@@ -1,6 +1,20 @@
-import { useMutation } from 'react-query';
-import { AlarmAPI, CommentAPI, LikeAPI, ReplyAPI, UserAPI } from '@api/api';
+import { QueryClient, useMutation, useQuery } from 'react-query';
+import {
+  AlarmAPI,
+  ApplicationAPI,
+  CommentAPI,
+  LikeAPI,
+  PostAPI,
+  ReplyAPI,
+  TeamAPI,
+  UserAPI,
+} from '@api/api';
 import { useQueryClient } from 'react-query';
+import { IPostTeamRequestFormData } from '@api/requestType';
+export interface IReplyRequest {
+  commentId: number;
+  content: string;
+}
 
 export const useAddUserInfo = () => {
   const queryClient = useQueryClient();
@@ -38,7 +52,7 @@ export const useDeleteComment = (postId: number, commentId: number) => {
 
 export const useAddReply = (postId: number) => {
   const queryClient = useQueryClient();
-  return useMutation((form: any) => ReplyAPI.createReply(form), {
+  return useMutation((form: IReplyRequest) => ReplyAPI.createReply(form), {
     onSuccess: () => {
       queryClient.invalidateQueries(['post', postId]);
     },
@@ -59,6 +73,15 @@ export const useDeleteReply = (postId: number, replyId: number) => {
   });
 };
 
+export const useUpdatePostStatus = (postId: number) => {
+  const queryClient = useQueryClient();
+  return useMutation(() => PostAPI.statusChange(postId), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['post', postId]);
+    },
+  });
+};
+
 export const useUpdateUser = () => {
   const queryClient = useQueryClient();
   return useMutation((form: any) => UserAPI.updateUserInfo(form), {
@@ -66,7 +89,7 @@ export const useUpdateUser = () => {
   });
 };
 
-export const useUpdateLike = (postId: string) => {
+export const useUpdateLike = (postId: string | number) => {
   const queryClient = useQueryClient();
   return useMutation((postId: any) => LikeAPI.postLike(postId), {
     onSuccess: () => {
@@ -82,4 +105,35 @@ export const useUpdateAlarm = (notificationId: string) => {
   return useMutation(() => AlarmAPI.updateAlarm(notificationId), {
     onSuccess: () => queryClient.invalidateQueries('alarms'),
   });
+};
+
+export const useUpdateApplicant = (postId: string | undefined) => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    (message: string) => ApplicationAPI.postApplicant(postId, message),
+    {
+      onSuccess: () => queryClient.invalidateQueries(['applicant', postId]),
+    },
+  );
+};
+
+export const useDeleteApplicant = (postId: string | undefined) => {
+  const queryClient = useQueryClient();
+  return useMutation(() => ApplicationAPI.deleteApplicant(postId), {
+    onSuccess: () => {},
+  });
+};
+
+export const usePostTeam = (
+  postId: string,
+  // formData: IPostTeamRequestFormData,
+) => {
+  const queryClient = useQueryClient();
+  return useMutation((formData: IPostTeamRequestFormData) =>
+    TeamAPI.postTeam(postId, formData),
+  );
+};
+export const useResignateTeam = (postId: string) => {
+  const queryClient = useQueryClient();
+  return useMutation(() => TeamAPI.resignateTeam(postId));
 };

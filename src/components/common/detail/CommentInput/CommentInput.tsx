@@ -38,12 +38,12 @@ export function CommentInput({
         .then((res) => res)
         .catch((err) => err);
     } else {
-      AddPostReplyMutate.mutateAsync({
-        commentId: commentId,
-        content: inputValue,
-      })
-        .then((res) => res)
-        .catch((err) => err);
+      // AddPostReplyMutate.mutateAsync({
+      // commentId: commentId,
+      // content: inputValue,
+      // })
+      // .then((res) => res)
+      // .catch((err) => err);
     }
   };
 

@@ -1,5 +1,6 @@
 // api reesponse types
 
+import { IResponsePostDetail } from '@components/pages/DetailPage/NewDetailPage';
 import type { IPostType } from 'types/post.types';
 
 export interface IResponseOfPage {
@@ -31,4 +32,24 @@ export interface IGetPostListResponse extends IResponseOfPage {
       empty: boolean;
     };
   };
+}
+
+export interface IGetPostDetailResponse {
+  body: {
+    data: IResponsePostDetail;
+  };
+}
+
+export interface IGetApplicantResponse {
+  body: {
+    data: IApplicantDetail[];
+  };
+}
+
+export interface IApplicantDetail {
+  nickname: string;
+  profileImg: string;
+  email: string;
+  message: string;
+  applicationDate: string;
 }

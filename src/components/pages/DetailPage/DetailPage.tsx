@@ -39,9 +39,9 @@ function DetailPage() {
   const LoginLabel = useRecoilValue(UserSelector);
 
   useEffect(() => {
-    if (postData && postData.data?.header.code === 200) {
-      setDetailData(postData.data.body.data);
-    }
+    // if (postData && postData.data?.header.code === 200) {
+    //   setDetailData(postData.data.body.data);
+    // }
   }, [postData, status]);
 
   useEffect(() => {

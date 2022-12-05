@@ -1,14 +1,17 @@
-// skill
-
 import { SelectItem } from '@components/atoms';
 import { Circle } from '@components/ui/circle/Circle';
 import { MouseEvent, ReactNode, useEffect, useState } from 'react';
-import icon from '@components/common/svg';
 import classes from './skillSelector.module.scss';
+import icon from '@components/common/svg';
 
-const skills = {
-  frontEnd: ['JavaScript', 'Nextjs', 'React', 'Svelte', 'typescript'],
-  backEnd: [
+export type stringKeyStringListValueType = { [key: string]: string[] };
+export type stringKeyBooleanValueType = { [key: string]: boolean };
+
+// TODO: hooks로 분리할 예정입니다.
+
+const skillList: stringKeyStringListValueType = {
+  프론트엔드: ['JavaScript', 'Nextjs', 'React', 'Svelte', 'typescript'],
+  백엔드: [
     'Django',
     'Express',
     'Firebase',
@@ -24,41 +27,72 @@ const skills = {
     'Python',
     'Spring',
   ],
-  mobile: ['Flutter', 'Kotlin', 'ReactNative', 'Swift', 'Unity'],
-  etc: ['AWS', 'C', 'Docker', 'Figma', 'Git', 'Jest', 'Kubernetes', 'Zeplin'],
-} as {
-  [key: string]: string[];
+  모바일: ['Flutter', 'Kotlin', 'ReactNative', 'Swift', 'Unity'],
+  기타: ['AWS', 'C', 'Docker', 'Figma', 'Git', 'Jest', 'Kubernetes', 'Zeplin'],
 };
 
-const skiilsWithKR = {
-  프론트엔드: 'frontEnd',
-  백엔드: 'backEnd',
-  모바일: 'mobile',
-  기타: 'etc',
-} as {
-  [key: string]: string;
+const getSkillObject = (
+  skillList: stringKeyStringListValueType,
+  selectedSkillList: string[],
+): { [key: string]: { [key: string]: boolean } } => {
+  const booleanObjectList = getBooleanObjectList(skillList, selectedSkillList);
+  return reduceObjectWithArray(skillList, booleanObjectList);
+};
+
+const getBooleanObjectList = (
+  object: stringKeyStringListValueType,
+  list: string[],
+) => {
+  return Object.entries(object).map(([key, value]) => {
+    const result: stringKeyBooleanValueType = {};
+    value.forEach((key) => {
+      if (list.includes(key)) return (result[key] = true);
+      result[key] = false;
+    });
+    return result;
+  });
+};
+
+const reduceObjectWithArray = (
+  object: {},
+  array: stringKeyBooleanValueType[],
+) => {
+  return Object.keys(object).reduce(
+    (acc, value, index) => ({ ...acc, [value]: array[index] }),
+    {},
+  );
 };
 const categories = ['프론트엔드', '백엔드', '모바일', '기타'];
 
-// selectedFilter에 따라 Selector에 렌더링할 data 를 넘겨주는 역할
-// selectedSkills가 변경될 때 마다 상위 Component의 상태를 변경해주는 useEffect를 사용하면 어떨까?
+const getSelectedFilter = (
+  object: stringKeyStringListValueType,
+  list: string[] = ['123'],
+) => {
+  for (const [key, value] of Object.entries(object)) {
+    if (value.includes(list[0])) return key;
+  }
+  return '';
+};
 
 interface Props {
+  initialState: string[];
   onChangeArray: (data: (undefined | string)[]) => void;
   top?: ReactNode;
 }
 
-export const SkillSelector = ({ onChangeArray, top }: Props) => {
-  const [selectedFilter, setSelectedFilter] = useState(categories[0]);
-  const [filteredSkills, setFilteredSkills] = useState<string[]>(
-    skills[skiilsWithKR[selectedFilter]],
+export const SkillSelector = ({ initialState, onChangeArray, top }: Props) => {
+  const filterString = getSelectedFilter(skillList, initialState);
+  const [selectedFilter, setSelectedFilter] = useState(
+    filterString || categories[0],
   );
-  const [selectedSkills, setSelectedSkills] = useState<(undefined | string)[]>(
-    [],
-  );
-  const [selectedSkiilsTypeObject, setSelectedSkiilsTypeObject] = useState<{
-    [key: string]: boolean;
-  }>({});
+  const [skills, setSkills] = useState(getSkillObject(skillList, initialState));
+
+  useEffect(() => {
+    setSkills((state) => ({
+      ...state,
+      ...getSkillObject(skillList, initialState),
+    }));
+  }, [initialState]);
 
   const onClickFilterItem = (
     e: MouseEvent<HTMLUListElement | HTMLLIElement>,
@@ -74,35 +108,12 @@ export const SkillSelector = ({ onChangeArray, top }: Props) => {
     const currentTaget = e.currentTarget;
     const dataValue = currentTaget.getAttribute('data-value');
     if (!dataValue) return;
-
-    setSelectedSkiilsTypeObject((state) => ({
-      ...state,
-      ...{ [dataValue]: !state[dataValue] },
-    }));
+    if (initialState.includes(dataValue)) {
+      onChangeArray([...initialState.filter((skill) => skill !== dataValue)]);
+      return;
+    }
+    onChangeArray([...initialState, dataValue]);
   };
-
-  useEffect(() => {
-    onChangeArray(selectedSkills);
-  }, [selectedSkills]);
-
-  useEffect(() => {
-    const keys = skills[skiilsWithKR[selectedFilter]];
-    setFilteredSkills(keys);
-
-    const newState = {} as { [key: string]: boolean };
-    keys.forEach((key) => (newState[key] = false));
-    setSelectedSkiilsTypeObject(() => newState);
-  }, [selectedFilter]);
-
-  useEffect(() => {
-    const newState = Object.entries(selectedSkiilsTypeObject).map(
-      ([key, value]) => {
-        if (value) return key;
-      },
-    );
-
-    setSelectedSkills(newState);
-  }, [selectedSkiilsTypeObject]);
 
   return (
     <div className={classes.skill_selector_container}>
@@ -110,8 +121,8 @@ export const SkillSelector = ({ onChangeArray, top }: Props) => {
       <Categories selectedFilter={selectedFilter} onClick={onClickFilterItem} />
       <div className={classes.selector_background}>
         <Selector
-          filteredSkills={filteredSkills}
-          selectedSkiilsTypeObject={selectedSkiilsTypeObject}
+          filteredSkills={skills[selectedFilter]}
+          selectedSkiilsTypeObject={skills[selectedFilter]}
           onClick={onClickSkillItem}
         />
       </div>
@@ -143,7 +154,7 @@ const Categories = ({ selectedFilter, onClick }: CategoriesProps) => {
 };
 
 interface SelectorProps {
-  filteredSkills: string[];
+  filteredSkills: stringKeyBooleanValueType;
   selectedSkiilsTypeObject: { [key: string]: boolean };
   onClick: (e: MouseEvent<HTMLUListElement | HTMLLIElement>) => void;
 }
@@ -154,7 +165,7 @@ const Selector = ({
 }: SelectorProps) => {
   return (
     <ul className={classes.select_item_wrap}>
-      {filteredSkills.map((skill, index) => (
+      {Object.keys(filteredSkills).map((skill, index) => (
         <SkillItem
           key={skill + index}
           dataValue={skill}
@@ -190,7 +201,7 @@ const SkillItem = ({ dataValue, isSelect, src, onClick }: SkillItemProps) => {
           cursor: 'pointer',
         }}
       >
-        <div className="">
+        <div>
           <div
             style={{
               display: 'inline-flex',
@@ -202,6 +213,7 @@ const SkillItem = ({ dataValue, isSelect, src, onClick }: SkillItemProps) => {
                 objectPosition: '0px 5px',
               }}
               src={src}
+              alt={dataValue}
             />
             <div>{dataValue}</div>
           </div>

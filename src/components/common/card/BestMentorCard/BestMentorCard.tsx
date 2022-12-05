@@ -3,9 +3,10 @@ import './bestMentorCard.scss';
 import { ReactComponent as HeartIcon } from '@assets/svg/heart.svg';
 import { ReactComponent as MessageIcon } from '@assets/svg/message-square.svg';
 import { ReactComponent as EyeIcon } from '@assets/svg/eye.svg';
-export default function BestMentorCard() {
+export default function BestMentorCard({ onClick }: { onClick: () => void }) {
   return (
-    <div>
+    <div onClick={onClick}>
+      {/* >>>>>>> e00500473b4a552cfed31157c6ae56d1a0c7be86 */}
       <div className="bestMentoCard_container">
         <div className="head">
           <div className="image"></div>

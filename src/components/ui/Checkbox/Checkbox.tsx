@@ -5,6 +5,7 @@ import classes from './checkbox.module.scss';
 
 interface Props {
   top?: ReactNode;
+  isChecked?: string;
   options: string[];
   onClick: (data: string) => void;
   className: string;
@@ -13,19 +14,26 @@ interface Props {
 // single mode만 지원하는 상태
 // 다수모드에서는?
 // isCheckedId type이 array가 되면 될 것 같다.
-export const Checkbox = ({ top, options, onClick, className }: Props) => {
+export const Checkbox = ({
+  top,
+  isChecked,
+  options,
+  onClick,
+  className,
+}: Props) => {
   const [isCheckeds, setIsCheckeds] = useState(
-    options.map((option, index) => ({ id: index, isChecked: false })),
+    options.map((option, index) => ({ id: option, isChecked: false })),
   );
-  const [isCheckedId, setIsCheckedId] = useState(-1);
-  const handleClick = (idx: number) => {
-    if (isCheckedId === idx) {
-      setIsCheckedId(-1);
+  const [isCheckedId, setIsCheckedId] = useState(!isChecked ? '' : isChecked);
+  const handleClick = (payload: string) => {
+    if (isCheckedId === payload) {
+      setIsCheckedId('');
       onClick('');
       return;
     }
-    onClick(options[idx]);
-    setIsCheckedId(idx);
+    // onClick(options[payload]);
+    onClick(payload);
+    setIsCheckedId(payload);
   };
 
   useEffect(() => {
@@ -50,9 +58,8 @@ export const Checkbox = ({ top, options, onClick, className }: Props) => {
             ></input>
             <Trigger
               isSelected={isCheckeds[idx].isChecked}
-              idx={idx}
               option={option}
-              onClick={handleClick}
+              onClick={() => handleClick(option)}
             />
           </span>
         </span>
@@ -64,16 +71,14 @@ export const Checkbox = ({ top, options, onClick, className }: Props) => {
 const Trigger = ({
   option,
   isSelected,
-  idx,
   onClick,
 }: {
   option: ReactNode;
   isSelected: boolean;
-  idx: number;
-  onClick: (data: any) => void;
+  onClick: () => void;
 }) => {
   return (
-    <span className={classes.label_wrap} onClick={() => onClick(idx)}>
+    <span className={classes.label_wrap} onClick={onClick}>
       <Circle selected={isSelected} backgroundColor="#7BA364" />
       <label htmlFor={`check_${option}`}>{option}</label>
     </span>
