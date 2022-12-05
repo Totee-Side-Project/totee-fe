@@ -14,7 +14,6 @@ import { PostCard } from '../PostCard/PostCard';
 import { IPostType } from 'types/post.types';
 import classes from './postList.module.scss';
 
-
 const container = {
   hidden: { opacity: 0 },
   show: {
@@ -54,7 +53,7 @@ export function PostList() {
   useEffect(() => {
     if (searchResult && searchResult.data) {
       setPosts([...searchResult.data]);
-      handleCategory([...searchResult.data]); 
+      handleCategory([...searchResult.data]);
     } else {
       if (data?.result?.content) {
         setPosts([...data.result.content]);
@@ -125,44 +124,48 @@ export function PostList() {
     <>
       <div className={classes.postListContainer}>
         <div className={classes.postListContainerHeader}>
-          <SectionTitle title={'커리어 성장을 위한 스터디'} sub={"Level Up Study"} description={"커리어 성장을 위한 스터디를 찾으시나요? 토티에는 이런저런 여러분야의 스터디가 모여있어요."}/>
+          <SectionTitle
+            title={'커리어 성장을 위한 스터디'}
+            sub={'Level Up Study'}
+            description={
+              '커리어 성장을 위한 스터디를 찾으시나요? 토티에는 이런저런 여러분야의 스터디가 모여있어요.'
+            }
+          />
           <ul className={classes.filterList}>
-              {['최신순', '댓글많은순', '좋아요순'].map(
-                (item: string, idx: number) => (
-                  <li
-                    onClick={() =>
-                      setSearchParams({
-                        ...Object.fromEntries(searchParams),
-                        ['filter']: item,
-                      })
-                    }
-                    className={
-                      selectedFilter === item ? classes.selected : ''
-                    }
-                    key={`filter-${idx}`}
-                  >
-                    <span className={classes.tag_wrapper}>
-                      <div className={classes.outer_circle}>
-                        <div className={classes.inner_circle}></div>
-                      </div>
-                      #{item}
-                    </span>
-                  </li>
-                ),
-              )}
-            </ul>
+            {['최신순', '댓글많은순', '좋아요순'].map(
+              (item: string, idx: number) => (
+                <li
+                  onClick={() =>
+                    setSearchParams({
+                      ...Object.fromEntries(searchParams),
+                      ['filter']: item,
+                    })
+                  }
+                  className={selectedFilter === item ? classes.selected : ''}
+                  key={`filter-${idx}`}
+                >
+                  <span className={classes.tag_wrapper}>
+                    <div className={classes.outer_circle}>
+                      <div className={classes.inner_circle}></div>
+                    </div>
+                    #{item}
+                  </span>
+                </li>
+              ),
+            )}
+          </ul>
         </div>
         <motion.ul initial="hidden" animate="show" variants={container}>
           <div>
             <SectionSlider>
-            {postsFiltered &&
-              postsFiltered.length > 0 &&
-              postsFiltered
-                .slice(0, isShowTotal ? postsFiltered.length : 8)
-                .map((post: IPostType, idx: number) => (
-                  <PostCard key={`postCard-${idx}`} post={post} />
-                ))}
-          </SectionSlider>
+              {postsFiltered &&
+                postsFiltered.length > 0 &&
+                postsFiltered
+                  .slice(0, isShowTotal ? postsFiltered.length : 8)
+                  .map((post: IPostType, idx: number) => (
+                    <PostCard key={`postCard-${idx}`} post={post} />
+                  ))}
+            </SectionSlider>
           </div>
           <ObservationComponent />
         </motion.ul>

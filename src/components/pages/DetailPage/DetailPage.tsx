@@ -23,11 +23,9 @@ import { useUpdateLike } from '@hooks/useMutateQuery';
 function DetailPage() {
   const navigate = useNavigate();
   let { id } = useParams();
-  const { data: postData, refetch } = useGetPostByPostId(
-    parseInt(id as string),
-  );
-  const { data: likeData } = useGetLikeofPost(id as string);
-  const LikeUpdateMutation = useUpdateLike(id as string);
+  const { data: postData, refetch } = useGetPostByPostId(Number(id));
+  const { data: likeData } = useGetLikeofPost(Number(id));
+  const LikeUpdateMutation = useUpdateLike(Number(id));
 
   const [detailData, setDetailData] = useState<any>([]);
   const [Like, setLike] = useState<any>(false);
