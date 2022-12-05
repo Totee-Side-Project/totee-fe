@@ -37,7 +37,6 @@ function JoinerCheck() {
     }
     setIsOpenJoinModal(true);
   };
-
   if (postDataStatus === 'loading') return <div>loading...</div>;
   if (postDataStatus === 'success' && applicantDataStatus === 'success')
     return (

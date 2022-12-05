@@ -107,12 +107,19 @@ export const useUpdateAlarm = (notificationId: string) => {
   });
 };
 
-export const useUpdateApplicant = (postId: string | undefined) => {
+export const useUpdateApplicant = (postId: number | undefined) => {
   const queryClient = useQueryClient();
   return useMutation(
     (message: string) => ApplicationAPI.postApplicant(postId, message),
     {
-      onSuccess: () => queryClient.invalidateQueries(['applicant', postId]),
+      onSuccess: () => {
+        alert('지원을 성공했어요.');
+        return queryClient.invalidateQueries(['applicant', postId]);
+      },
+      onError: () => {
+        alert('지원에 실패했어요.');
+        return queryClient.invalidateQueries(['applicant', postId]);
+      },
     },
   );
 };
