@@ -1,13 +1,26 @@
-import { AlarmIcon } from '@components/common';
+// <<<<<<< HEAD
+// import React, { useEffect, useState } from 'react';
+// import { Link, useNavigate } from 'react-router-dom';
+// import { useRecoilState } from 'recoil';
+// import { UserState, loginState } from '@store/index';
+// import { defaultUserState } from '@store/user';
+// import { OnboardModal, SignInModal, ToggleIcon } from '@components/common';
+// import { AlarmIcon } from '@components/common';
+// import Swal from 'sweetalert2';
+// import logo from '@assets/png/toteelogo-kr.png';
+// import alarm from '@assets/svg/alarmicon.svg';
+// =======
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { UserState, loginState } from '@store/index';
-import { OnboardModal, SignInModal } from '@components/common';
 import { NewIcon } from '@components/atoms/Icon/NewIcon';
+import { OnboardModal, SignInModal } from '@components/common';
+import { AlarmIcon } from '@components/common';
 import { HeaderUserProfileNav } from './HeaderUserProfileNav';
-import logo from '@assets/toteelogo-kr.png';
-import alarm from '@assets/alarmicon.svg';
+import logo from '@assets/png/toteelogo-kr.png';
+import alarm from '@assets/svg/alarmicon.svg';
+// >>>>>>> e00500473b4a552cfed31157c6ae56d1a0c7be86
 import './header.scss';
 
 export const Header = () => {

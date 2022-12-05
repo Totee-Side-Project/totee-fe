@@ -3,7 +3,7 @@ import { useRecoilState } from 'recoil';
 import { searchState } from '@store/search';
 import classes from './search.module.scss';
 import { Input } from '@components/atoms';
-import { ReactComponent as SearchIcon } from '@assets/search-icon.svg';
+import { ReactComponent as SearchIcon } from '@assets/svg/search-icon.svg';
 import { useGetSearchPostList } from '@hooks/useGetQuery';
 import { useOutsideAlerter } from '@hooks/useOutsideAlerter';
 import useDebounceInput from '@hooks/useDebounceInput';

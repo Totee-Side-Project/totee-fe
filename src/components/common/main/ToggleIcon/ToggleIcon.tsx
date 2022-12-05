@@ -1,8 +1,7 @@
 import { NewIcon } from '@components/atoms/Icon/NewIcon';
-import DownIcon from '@assets/toggle-icon.svg';
 import { ToggleIconProps } from 'types/icon.types';
 import classes from './toggleIcon.module.scss';
-
+import DownIcon from '@assets/svg/toggle-icon.svg';
 export function ToggleIcon({ imageUrl, onClick }: ToggleIconProps) {
   return (
     <span>

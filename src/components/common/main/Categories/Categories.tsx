@@ -4,11 +4,11 @@ import { CategoryButton } from '@components/atoms';
 import classNames from 'classnames';
 import { useSearchParams } from 'react-router-dom';
 import { useGetCategoryList } from 'hooks/useGetQuery';
-import { ReactComponent as TotalIcon } from '@assets/total.svg';
-import { ReactComponent as GroupIcon } from '@assets/group.svg';
-import { ReactComponent as MentoIcon } from '@assets/mento.svg';
-import { ReactComponent as ProjectIcon } from '@assets/project.svg';
-import { ReactComponent as StudyIcon } from '@assets/study.svg';
+import { ReactComponent as TotalIcon } from '@assets/svg/total.svg';
+import { ReactComponent as GroupIcon } from '@assets/svg/group.svg';
+import { ReactComponent as MentoIcon } from '@assets/svg/mento.svg';
+import { ReactComponent as ProjectIcon } from '@assets/svg/project.svg';
+import { ReactComponent as StudyIcon } from '@assets/svg/study.svg';
 
 interface IImgButtonProps {
   isSelected: boolean;
