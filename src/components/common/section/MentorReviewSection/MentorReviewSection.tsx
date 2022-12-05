@@ -17,7 +17,8 @@ export function MentorReviewSection() {
             보고 자신에게 필요한 분야의 멘토를 찾아보세요!
           </div>
           <button className="button" onClick={() => setIsOpen((pre) => !pre)}>
-            다른 수강평 더보기
+            {/*다른 수강평 더보기*/}
+            멘토링 등록
           </button>
         </div>
         <div className="cards_wrapper">
