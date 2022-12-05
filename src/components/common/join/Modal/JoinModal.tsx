@@ -15,17 +15,16 @@ interface IJoinModalProps {
 export function JoinModal({ isOpen, setIsOpen, postId }: IJoinModalProps) {
   const useProfile = useRecoilValue(UserState);
   const [formData, setFormData] = useState('');
-  const { mutateAsync: addApplicantMutateAsync } = useUpdateApplicant(postId);
+  const { mutateAsync: addApplicantMutateAsync } = useUpdateApplicant(
+    Number(postId),
+  );
   const applyApplicationQuery = useDeleteApplicant(postId);
 
   const addApplicationOnClick = () => {
-    addApplicantMutateAsync(formData).then((response) => {
-      if (response.status === 200) {
+    addApplicantMutateAsync(formData, {
+      onSuccess: () => {
         setIsOpen((pre) => !pre);
-        alert('지원을 성공했어요.');
-        return;
-      }
-      return alert('지원에 실패했어요.');
+      },
     });
   };
   const onChangeByTextarea = (e: ChangeEvent<HTMLTextAreaElement>) => {
