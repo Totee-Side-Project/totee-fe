@@ -1,9 +1,9 @@
-import MentorPostViewModal from '@components/common/mentor/Modal/MentorPostViewModal';
-import React, { useState } from 'react';
+// import MentorPostViewModal from '@components/common/mentor/Modal/MentorPostViewModal';
+// import React, { useState } from 'react';
 import {
   Banner,
-  Categories,
-  PostList,
+  // Categories,
+  // PostList,
   Search,
   StudySection,
 } from '@components/common';
@@ -13,9 +13,6 @@ import LetterBanner from '@components/common/main/Banner/LetterBanner';
 import './MainPage.scss';
 
 export function MainPage() {
-  const [isOpenMentorPostViewModal, setIsOpenMentorPostViewModal] =
-    useState(false);
-
   return (
     <div className="mainPage_section_wrapper">
       <section className="hero">
