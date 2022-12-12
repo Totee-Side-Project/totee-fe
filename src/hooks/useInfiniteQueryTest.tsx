@@ -14,8 +14,6 @@ export const useInfiniteQueryTest = ({
   pageSize,
   responseKeys,
 }: Props) => {
-  // const [returnPageParam, setReturnPageParam] = useState(0);
-
   const getPageInfo = async ({ pageParam = 0 }) => {
     // setReturnPageParam(pageParam);
     const response = await getData(pageParam, pageSize);
