@@ -2,13 +2,14 @@ import { PostAPI } from '@api/api';
 import { SectionTitle, SelectItem } from '@components/atoms';
 import { Carousel } from '@components/common';
 import { NewPostCard } from '@components/common/post/PostCard/NewPostCard';
-import { PostCard } from '@components/common/post/PostCard/PostCard';
+// import { PostCard } from '@components/common/post/PostCard/PostCard';
 import { IResponsePostDetail } from '@components/pages/DetailPage/NewDetailPage';
+import { queryKeys } from '@hooks/query';
 import { useInfiniteQueryTest } from '@hooks/useInfiniteQueryTest';
 import { useEffect, useRef, useState } from 'react';
 import { useQueryClient } from 'react-query';
 import { useSearchParams } from 'react-router-dom';
-import type { IPostType } from 'types/post.types';
+// import type { IPostType } from 'types/post.types';
 import classes from './studySection.module.scss';
 import './studySection.scss';
 // 처음 studySection 이 mount될때 비동기적으로 server에 limit 16으로 받아오고
@@ -29,7 +30,7 @@ export function StudySection() {
 
   const { data, fetchNextPage, status } = useInfiniteQueryTest({
     getData: PostAPI.getPostList,
-    queryKey: 'test',
+    queryKey: queryKeys.postsAll,
     responseKeys: ['body', 'data'],
     pageSize: 4,
   });

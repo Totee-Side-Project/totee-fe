@@ -3,6 +3,7 @@ import { Circle } from '@components/ui/circle/Circle';
 import { MouseEvent, ReactNode, useEffect, useState } from 'react';
 import classes from './skillSelector.module.scss';
 import icon from '@components/common/svg';
+import { SkillIcon } from '@components/atoms/SkillIcon/SkillIcon';
 
 export type stringKeyStringListValueType = { [key: string]: string[] };
 export type stringKeyBooleanValueType = { [key: string]: boolean };
@@ -10,14 +11,14 @@ export type stringKeyBooleanValueType = { [key: string]: boolean };
 // TODO: hooks로 분리할 예정입니다.
 
 const skillList: stringKeyStringListValueType = {
-  프론트엔드: ['JavaScript', 'Nextjs', 'React', 'Svelte', 'typescript'],
+  프론트엔드: ['JavaScript', 'Nextjs', 'React', 'Svelte', 'TypeScript'],
   백엔드: [
     'Django',
     'Express',
     'Firebase',
     'Go',
     'GraphQL',
-    'JAVA',
+    'Java',
     'Kotlin',
     'MongoDB',
     'MySQL',
@@ -208,13 +209,16 @@ const SkillItem = ({ dataValue, isSelect, src, onClick }: SkillItemProps) => {
               alignItems: 'center',
             }}
           >
-            <img
-              style={{
-                objectPosition: '0px 5px',
-              }}
+            <SkillIcon src={src} alt={dataValue} />
+            {/* <img
+              style={
+                {
+                  // objectPosition: '0px 5px',
+                }
+              }
               src={src}
               alt={dataValue}
-            />
+            /> */}
             <div>{dataValue}</div>
           </div>
         </div>
