@@ -288,7 +288,7 @@ export function EditStudyPage({ type, initialData }: IEditStudyPagePropsType) {
         placeholder="제목을 입력해주세요."
         onChange={(e) => setTitle(e.target.value)}
       />
-      <Editor values={values} setValues={setValues} />
+      {/* <Editor values={values} setValues={setValues} /> */}
       <div className="button_container">
         <button
           className="upload_button"

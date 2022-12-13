@@ -1,4 +1,4 @@
-import { PostRequestDto } from '@api/requestType';
+// import { PostRequestDto } from '@api/requestType';
 import { ReactComponent as XIcon } from '@assets/xicon.svg';
 import { Editor } from '@components/common';
 import { MentorModal } from '../MentorModal/MentorModal';
@@ -9,16 +9,19 @@ interface IMentorPostViewModalProps {
   isOpen: boolean;
   setIsOpen: (e: boolean) => void;
   isCloseBtn?: boolean;
-  form: PostRequestDto;
-  onChangeByEditor: (content: any) => void;
+  // form: PostRequestDto;
+  // onChangeByEditor: (content: any) => void;
 }
 
 export function CreateMentorModal({
   isOpen,
   setIsOpen,
-  form,
-  onChangeByEditor,
-}: IMentorPostViewModalProps) {
+}: // form,
+// onChangeByEditor,
+IMentorPostViewModalProps) {
+  // Editor에서 필요로하는 values를 state로 선언
+  // Editor에서 필요로하는 onChange함수 선언
+
   return (
     <MentorModal isOpen={isOpen} setIsOpen={setIsOpen}>
       <div className={classes.createMentorModal}>
@@ -37,8 +40,9 @@ export function CreateMentorModal({
             className={classes.titleInput}
             placeholder="제목을 입력해주세요."
           />
-          <textarea className={classes.content} placeholder="에디터 추가" />
-          {/*<Editor />*/}
+          {/* <textarea className={classes.content} placeholder="에디터 추가" /> */}
+
+          {/*<Editor /> */}
           <div className={classes.priceWrapper}>
             <div className={classes.priceBox}>1회 멘토링 비용</div>
             <div className={classes.priceInput}>선택안함</div>
