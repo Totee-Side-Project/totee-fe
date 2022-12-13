@@ -1,5 +1,5 @@
 // import { PostRequestDto } from '@api/requestType';
-import { ReactComponent as XIcon } from '@assets/xicon.svg';
+import { ReactComponent as XIcon } from '@assets/svg/xicon.svg';
 import { Editor } from '@components/common';
 import { MentorModal } from '../MentorModal/MentorModal';
 import './createMentorModal.module.scss';
