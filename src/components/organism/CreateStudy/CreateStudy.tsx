@@ -7,9 +7,9 @@ import { Input } from '@components/ui/Input/Input';
 import { Select } from '@components/ui/Select/Select';
 import { Checkbox } from '@components/ui/Checkbox/Checkbox';
 import { Editor } from '@components/common';
-import VerticalLine from '@assets/recentLine.svg';
-import DownArrow from '@assets/recentIcon.svg';
-import paragraphLine from '@assets/paragraph_line.png';
+import VerticalLine from '@assets/svg/recentLine.svg';
+import DownArrow from '@assets/svg/recentIcon.svg';
+import paragraphLine from '@assets/png/paragraph_line.png';
 
 import { useAddPost, useUpdatePost } from '@hooks/usePostQuery';
 

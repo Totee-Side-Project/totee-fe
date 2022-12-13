@@ -2,13 +2,13 @@ import JavaScript from '@assets/svg/skills/frontEnd/JavaScript.svg';
 import Nextjs from '@assets/svg/skills/frontEnd/Nextjs.svg';
 import React from '@assets/svg/skills/frontEnd/React.svg';
 import Svelte from '@assets/svg/skills/frontEnd/Svelte.svg';
-import typescript from '@assets/svg/skills/frontEnd/typescript.svg';
+import TypeScript from '@assets/svg/skills/frontEnd/TypeScript.svg';
 import Django from '@assets/svg/skills/backEnd/Django.svg';
 import Express from '@assets/svg/skills/backEnd/Express.svg';
 import Firebase from '@assets/svg/skills/backEnd/Firebase.svg';
 import Go from '@assets/svg/skills/backEnd/Go.svg';
 import GraphQL from '@assets/svg/skills/backEnd/GraphQL.svg';
-import JAVA from '@assets/svg/skills/backEnd/JAVA.svg';
+import Java from '@assets/svg/skills/backEnd/Java.svg';
 import Kotlin from '@assets/svg/skills/backEnd/Kotlin.svg';
 import MongoDB from '@assets/svg/skills/backEnd/MongoDB.svg';
 import MySQL from '@assets/svg/skills/backEnd/MySQL.svg';
@@ -35,13 +35,13 @@ const svgList = {
   Nextjs,
   React,
   Svelte,
-  typescript,
+  TypeScript,
   Django,
   Express,
   Firebase,
   Go,
   GraphQL,
-  JAVA,
+  Java,
   Kotlin,
   MongoDB,
   MySQL,

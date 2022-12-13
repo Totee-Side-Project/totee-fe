@@ -1,4 +1,4 @@
-import ScrollTopBtn from '../../../assets/scrolltopBtn.svg';
+import ScrollTopBtn from '../../../assets/svg/scrolltopBtn.svg';
 import classes from './scrolltopButton.module.scss';
 
 export function ScrollTopButton() {
