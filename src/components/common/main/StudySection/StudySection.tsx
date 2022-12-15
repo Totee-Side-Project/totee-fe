@@ -1,32 +1,31 @@
+import { useEffect, useState } from 'react';
+import { useQueryClient } from 'react-query';
+import { useSearchParams } from 'react-router-dom';
+import 'react-loading-skeleton/dist/skeleton.css';
+
 import { PostAPI } from '@api/api';
 import { SectionTitle, SelectItem } from '@components/atoms';
 import { Carousel } from '@components/common';
 import { NewPostCard } from '@components/common/post/PostCard/NewPostCard';
-// import { PostCard } from '@components/common/post/PostCard/PostCard';
 import { IResponsePostDetail } from '@components/pages/DetailPage/NewDetailPage';
 import { queryKeys } from '@hooks/query';
 import { useInfiniteQueryTest } from '@hooks/useInfiniteQueryTest';
-import { useEffect, useRef, useState } from 'react';
-import { useQueryClient } from 'react-query';
-import { useSearchParams } from 'react-router-dom';
-// import type { IPostType } from 'types/post.types';
+
 import classes from './studySection.module.scss';
 import './studySection.scss';
 // 처음 studySection 이 mount될때 비동기적으로 server에 limit 16으로 받아오고
 // 프론트단에서 4단위로 끊어서 보여주는것은 어떨까?
+const filterList = ['전체', '최신순', '인기순', '조회순'];
 
 export function StudySection() {
   const [filteredPageList, setFilteredPageList] = useState<
     IResponsePostDetail[][]
   >([]);
-  const filterList = useRef(['전체', '최신순', '인기순', '조회순']).current;
+
   const [selectedFilter, setSelectedFilter] = useState(filterList[0]);
   // urldml params를 읽고 수정할 수 있다.
   const [searchParams, setSearchParams] = useSearchParams();
   const queryClient = useQueryClient();
-  // const { data } = useQuery(['studySectionPosts'], () =>
-  //   PostAPI.getPostList(0, 20).then((res) => res.data.body.data),
-  // );
 
   const { data, fetchNextPage, status } = useInfiniteQueryTest({
     getData: PostAPI.getPostList,
@@ -119,39 +118,7 @@ export function StudySection() {
             }
           />
         </div>
-        <div className={classes.filter_wrap}>
-          <ul className={classes.filter_list}>
-            {filterList.map((filter, index) => (
-              <li
-                className={
-                  filter === selectedFilter
-                    ? `${classes.filter_item} ${classes.selected}`
-                    : classes.filter_item
-                }
-                key={`filter-${index}`}
-              >
-                <SelectItem
-                  className={classes.tag_wrap}
-                  onClick={() =>
-                    // [key, value][] 타입을 객체로 만들어 주기위해 사용
-                    // 기존의 params가 초기화되어서는 안되기에 Spread 연산자를 사용하여 병합
-                    setSearchParams({
-                      ...Object.fromEntries(searchParams),
-                      filter: [filter],
-                    })
-                  }
-                  left={
-                    <div className={classes.outer_circle}>
-                      <div className={classes.inner_circle} />
-                    </div>
-                  }
-                >
-                  #{filter}
-                </SelectItem>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <SectionFilter filterList={filterList} />
       </div>
       <div className={classes.section_body}>
         {filterList && (
@@ -169,6 +136,7 @@ export function StudySection() {
               observer: true,
               observeParents: true,
             }}
+            fallback={<SectionSkeleton />}
           >
             {filteredPageList.map((postPage, index) => (
               <div
@@ -182,7 +150,6 @@ export function StudySection() {
               >
                 {postPage.map((post) => (
                   <li key={post.postId}>
-                    {/* <PostCard post={post} /> */}
                     <NewPostCard post={post} />
                   </li>
                 ))}
@@ -194,3 +161,69 @@ export function StudySection() {
     </>
   );
 }
+
+const SectionSkeleton = () => {
+  return (
+    <div className={classes.section_body}>
+      <ul
+        style={{
+          display: 'flex',
+          height: '100%',
+          alignItems: 'center',
+          justifyContent: 'space-around',
+        }}
+      >
+        {[0, 1, 2, 3].map((ele) => (
+          <li key={ele}>
+            <NewPostCard />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+const SectionFilter = ({ filterList }: { filterList: string[] }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [selectedFilter, setSelectedFilter] = useState(filterList[0]);
+
+  useEffect(() => {
+    const filterParams = searchParams.get('filter');
+
+    filterParams ? setSelectedFilter(filterParams) : setSelectedFilter('전체');
+  }, [searchParams]);
+
+  return (
+    <div className={classes.filter_wrap}>
+      <ul className={classes.filter_list}>
+        {filterList.map((filter, index) => (
+          <li
+            className={
+              filter === selectedFilter
+                ? `${classes.filter_item} ${classes.selected}`
+                : classes.filter_item
+            }
+            key={`filter-${index}`}
+          >
+            <SelectItem
+              className={classes.tag_wrap}
+              onClick={() =>
+                setSearchParams({
+                  ...Object.fromEntries(searchParams),
+                  filter: [filter],
+                })
+              }
+              left={
+                <div className={classes.outer_circle}>
+                  <div className={classes.inner_circle} />
+                </div>
+              }
+            >
+              #{filter}
+            </SelectItem>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
