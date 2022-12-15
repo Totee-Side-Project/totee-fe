@@ -39,7 +39,12 @@ export const CreateStudy = ({
 
   // 숫자만 들어오게 해야한다.
   const onChangeByInput = (e: ChangeEvent<HTMLInputElement>, id: any) => {
-    dispatch({ type: id, payload: e.target.value });
+    const { value, type, max } = e.target;
+    if (type === 'number' && Number(value) > Number(max)) {
+      alert(`모집인원은 ${max}명 이하여야 해요`);
+      return;
+    }
+    dispatch({ type: id, payload: value });
   };
   // select를 클릭해서 onChange event가 발생하게되면 dispatch를 날리거나 useContext를 사용해주자
   const onChangeBySelect = (e: MouseEvent<HTMLElement>, id: any) => {
@@ -49,6 +54,10 @@ export const CreateStudy = ({
     if (currentTarget === target) return;
 
     dispatch({ type: id, payload: target.innerText });
+  };
+
+  const onWheelWithBlur = (e: MouseEvent<HTMLInputElement>) => {
+    e.currentTarget.blur();
   };
 
   // 인자로 자식의 변경된 state를 넘겨받안 setState해주는 부분
@@ -77,6 +86,7 @@ export const CreateStudy = ({
         onChangeByChildrenState={onChangeByChildrenState}
         onChangeByCheckbox={onChangeByCheckbox}
         onResetValueByDisabled={onResetValueByDisabled}
+        onWheelWithBlur={onWheelWithBlur}
       />
       <DetailForm
         form={form}
@@ -95,6 +105,7 @@ interface DefaultFormProps {
   onChangeByChildrenState: (data: (undefined | string)[]) => void;
   onChangeByCheckbox: (data: string) => void;
   onResetValueByDisabled: () => void;
+  onWheelWithBlur: (e: MouseEvent<HTMLInputElement>) => void;
 }
 const DefaultForm = ({
   form,
@@ -103,6 +114,7 @@ const DefaultForm = ({
   onChangeByChildrenState,
   onChangeByCheckbox,
   onResetValueByDisabled,
+  onWheelWithBlur,
 }: DefaultFormProps) => {
   const [formElements, setFormElements] = useState(data.defaultFormElements);
   useEffect(() => {
@@ -124,7 +136,6 @@ const DefaultForm = ({
           alt="paragraph_line"
         />
       </div>
-      {/* {Object.entries(data.defaultFormElements).map( */}
       {Object.entries(formElements).map(
         ([id, [title, type, placeholder, disabled]]) => (
           <DefaultFormElement
@@ -139,6 +150,7 @@ const DefaultForm = ({
             onChangeBySelect={(e) => onChangeBySelect(e, id)}
             onChangeByChildrenState={onChangeByChildrenState}
             onChangeByCheckbox={onChangeByCheckbox}
+            onWheelWithBlur={onWheelWithBlur}
           />
         ),
       )}
@@ -157,6 +169,7 @@ interface DefaultFormElementProps {
   onChangeBySelect: (e: MouseEvent<HTMLElement>) => void;
   onChangeByChildrenState: (data: (undefined | string)[]) => void;
   onChangeByCheckbox: (data: string) => void;
+  onWheelWithBlur: (e: MouseEvent<HTMLInputElement>) => void;
 }
 
 export const DefaultFormElement = ({
@@ -170,6 +183,7 @@ export const DefaultFormElement = ({
   onChangeBySelect,
   onChangeByChildrenState,
   onChangeByCheckbox,
+  onWheelWithBlur,
 }: DefaultFormElementProps) => {
   if (type === 'select') {
     return (
@@ -231,6 +245,7 @@ export const DefaultFormElement = ({
           max={15}
           min={1}
           onChange={onChangeByInput}
+          onWheel={onWheelWithBlur}
           disabled={!disabled ? false : true}
         />
       </div>
