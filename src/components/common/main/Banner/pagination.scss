@@ -1,4 +1,6 @@
 .css_banner_wrap {
+  position: relative;
+  z-index: 0;
   .swiper-pagination {
     bottom: 43px;
     text-align: left;
