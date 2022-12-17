@@ -9,7 +9,6 @@ export type stringKeyStringListValueType = { [key: string]: string[] };
 export type stringKeyBooleanValueType = { [key: string]: boolean };
 
 // TODO: hooks로 분리할 예정입니다.
-
 const skillList: stringKeyStringListValueType = {
   프론트엔드: ['JavaScript', 'Nextjs', 'React', 'Svelte', 'TypeScript'],
   백엔드: [
@@ -190,7 +189,6 @@ const SkillItem = ({ dataValue, isSelect, src, onClick }: SkillItemProps) => {
   return (
     <li
       className={isSelect ? 'select' : ''}
-      style={{ flex: '0 0 25%' }}
       onClick={onClick}
       data-value={dataValue}
     >
@@ -207,18 +205,10 @@ const SkillItem = ({ dataValue, isSelect, src, onClick }: SkillItemProps) => {
             style={{
               display: 'inline-flex',
               alignItems: 'center',
+              gap: '10px',
             }}
           >
             <SkillIcon src={src} alt={dataValue} />
-            {/* <img
-              style={
-                {
-                  // objectPosition: '0px 5px',
-                }
-              }
-              src={src}
-              alt={dataValue}
-            /> */}
             <div>{dataValue}</div>
           </div>
         </div>

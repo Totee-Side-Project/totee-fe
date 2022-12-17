@@ -1,14 +1,11 @@
 import { useState } from 'react';
-import { Categories, PostList, Search, StudySection } from '@components/common';
+import { Search, StudySection } from '@components/common';
 import BottomBanner from '@components/common/main/Banner/BottomBanner';
 import { MentoSection, MentorReviewSection } from '@components/common';
 import LetterBanner from '@components/common/main/Banner/LetterBanner';
 import './MainPage.scss';
 
 export function MainPage() {
-  // const [isOpenMentorPostViewModal, setIsOpenMentorPostViewModal] =
-  //   useState(false);
-
   return (
     <div className="mainPage_section_wrapper">
       <section className="hero">{/* <Categories /> */}</section>
