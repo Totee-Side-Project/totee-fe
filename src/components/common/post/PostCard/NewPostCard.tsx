@@ -10,16 +10,32 @@ import {
   OverLimitIcons,
   UnOverLimitIcons,
 } from '@components/atoms/SkillIcon/SkillIcons';
+import Skeleton from 'react-loading-skeleton';
 
 interface NewPostCardProps {
   post: IResponsePostDetail;
 }
+interface OptionalProps {
+  post?: IResponsePostDetail;
+}
 
-export const NewPostCard = ({ post }: NewPostCardProps) => {
+export const NewPostCard = ({ post }: OptionalProps) => {
   const navigate = useNavigate();
   const clickHandlerURLParameter = () => {
-    navigate(`/detail/${post.postId}`);
+    post && navigate(`/detail/${post.postId}`);
   };
+
+  if (!post) {
+    return (
+      <div className={classes.post_card_container}>
+        <NewPostCardHeaderSkeleton />
+        <NewPostCardCenterSkeleton />
+        <div className={classes.post_info_line} />
+        <NewPostCardFooterSkeleton />
+      </div>
+    );
+  }
+
   return (
     <div
       className={classes.post_card_container}
@@ -32,6 +48,7 @@ export const NewPostCard = ({ post }: NewPostCardProps) => {
     </div>
   );
 };
+// };
 
 const NewPostCardHeader = ({ post }: NewPostCardProps) => {
   return (
@@ -44,6 +61,20 @@ const NewPostCardHeader = ({ post }: NewPostCardProps) => {
           <div>{post.nickname}</div>
         </div>
         <NewPostCardStatusBadge post={post} />
+      </div>
+    </div>
+  );
+};
+
+const NewPostCardHeaderSkeleton = () => {
+  return (
+    <div className={classes.post_card_header}>
+      <div className={classes.post_card_header_wrap}>
+        <div className={classes.post_card_header_left}>
+          <div className={classes.post_card_img_wrap}>
+            <Skeleton circle width={35} height={35} />
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -62,6 +93,21 @@ const NewPostCardCenter = ({ post }: NewPostCardProps) => {
       <div className={classes.post_card_skills_wrap}>
         <NewPostSkills post={post} />
       </div>
+    </div>
+  );
+};
+const NewPostCardCenterSkeleton = () => {
+  return (
+    <div className={classes.post_card_center}>
+      <div className={classes.post_card_title}>
+        <h2>
+          <Skeleton />
+        </h2>
+      </div>
+      <div className={classes.post_card_content}>
+        <Skeleton count={3} />
+      </div>
+      <div className={classes.post_card_skills_wrap}></div>
     </div>
   );
 };
@@ -85,6 +131,13 @@ const NewPostCardFooter = ({ post }: NewPostCardProps) => {
           </li>
         ))}
       </ul>
+    </div>
+  );
+};
+const NewPostCardFooterSkeleton = () => {
+  return (
+    <div className={classes.post_card_footer}>
+      <ul className={classes.post_card_footer_items}></ul>
     </div>
   );
 };
