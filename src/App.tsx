@@ -1,5 +1,5 @@
 import { ScrollTopButton } from '@components/atoms/ScrollTopButton/ScrollTopButton';
-import { Footer, Header } from '@components/common';
+import { Banner, Footer, Header } from '@components/common';
 import './App.css';
 import { MainPage, PostsPage } from '@components/pages';
 import { useEffect, useState } from 'react';
@@ -17,6 +17,7 @@ import {
 } from '@store/index';
 import { NewDetailPage } from '@components/pages/DetailPage/NewDetailPage';
 import { EditStudyPage } from '@components/pages/EditStudyPage/EditStudyPage';
+import studyBanner from '@assets/svg/Study Banner.svg';
 
 function App() {
   const [login, setLogin] = useRecoilState(loginState);
@@ -42,6 +43,19 @@ function App() {
   return (
     <>
       <Header />
+      <Routes>
+        <Route
+          path="/setupstudy"
+          element={
+            <img
+              src={studyBanner}
+              alt="스터디 배너"
+              style={{ width: '100%', marginTop: 70 }}
+            />
+          }
+        />
+        <Route path="*" element={<Banner />} />
+      </Routes>
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/posts" element={<PostsPage />} />

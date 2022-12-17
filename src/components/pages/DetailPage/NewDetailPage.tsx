@@ -1,7 +1,11 @@
 import type { ChangeEvent, MouseEvent, ReactNode } from 'react';
 import { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Banner } from '@components/common';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import Swal from 'sweetalert2';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+
 import { Line } from '@components/atoms/Line/Line';
 import { NewIcon } from '@components/atoms/Icon/NewIcon';
 import JoinerCheck from '@components/common/join/JoinerCheck/JoinerCheck';
@@ -15,42 +19,20 @@ import SettingIcon from '@assets/svg/common/setting.svg';
 import EyeIcon from '@assets/svg/common/eye.svg';
 import MessageIcon from '@assets/svg/common/message-square.svg';
 import LeftArrowHasBorderIcon from '@assets/svg/common/left_arrow_has_border.svg';
-import {
-  useAddComment,
-  useAddReply,
-  useUpdateComment,
-  useUpdateLike,
-  useUpdatePostStatus,
-} from '@hooks/useMutateQuery';
+import { useUpdateLike, useUpdatePostStatus } from '@hooks/useMutateQuery';
 import { checkingDetailPeriod } from '@utils/handleSelectValue';
-import {
-  replaceLineBreakStringIntoTag,
-  replaceLineBreakTagIntoString,
-} from '@utils/replaceLineBreakStringIntoTag';
-// import { validateData } from '@utils/validateData';
-import classes from './newDetailPage.module.scss';
-import { useRecoilValue } from 'recoil';
+import { replaceLineBreakTagIntoString } from '@utils/replaceLineBreakStringIntoTag';
+
 import { UserState } from '@store/index';
 import { Select } from '@components/ui/Select/Select';
 import { useDeletePost } from '@hooks/usePostQuery';
 import { useCustomNavigate } from '@hooks/useCustomNavigate';
-import Swal from 'sweetalert2';
 import {
   SubmitCommentButton,
   SubmitModifyButton,
   SubmitReplyButton,
 } from '@components/common/detail/Button/Button';
-import { IPostDetailType } from 'types/post.types';
-
-// export interface ICommentDto {
-//   commentId: number;
-//   content: string;
-//   nickname: string;
-//   createdAt: string;
-//   modifiedAt: string;
-//   replyList: IReplyDto[];
-//   profileImageUrl: string;
-// }
+import classes from './newDetailPage.module.scss';
 
 interface ICommentDto {
   nickname: string;
@@ -114,12 +96,33 @@ export const NewDetailPage = () => {
   const { data: postData, status, refetch } = useGetPostByPostId(Number(id));
 
   // Render Loading Component
-  if (status === 'loading') return <div>loading...</div>;
+  if (status === 'loading')
+    return (
+      <div>
+        <main className={classes.study_detail_page_main}>
+          <LeftSidebar />
+          <NewDetailPageSection>
+            <SectionHeader>
+              <h1 className={classes.title_left}>
+                <Skeleton height={30} />
+              </h1>
+            </SectionHeader>
+            <article className={classes.content_container}>
+              <Line className={classes.detail_line} />
+              <div className={classes.content_wrap}>
+                <Skeleton count={3} height={20} />
+              </div>
+              <Line className={classes.detail_line} />
+            </article>
+          </NewDetailPageSection>
+          <RightSidebar />
+        </main>
+      </div>
+    );
   if (status === 'success') {
     const responseData: IResponsePostDetail = postData?.data.body.data;
     return (
       <div>
-        <Banner />
         <main className={classes.study_detail_page_main}>
           <LeftSidebar />
           <NewDetailPageSection>

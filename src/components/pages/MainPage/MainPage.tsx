@@ -1,12 +1,5 @@
-// import MentorPostViewModal from '@components/common/mentor/Modal/MentorPostViewModal';
-// import React, { useState } from 'react';
-import {
-  Banner,
-  // Categories,
-  // PostList,
-  Search,
-  StudySection,
-} from '@components/common';
+import { useState } from 'react';
+import { Search, StudySection } from '@components/common';
 import BottomBanner from '@components/common/main/Banner/BottomBanner';
 import { MentoSection, MentorReviewSection } from '@components/common';
 import LetterBanner from '@components/common/main/Banner/LetterBanner';
@@ -15,10 +8,7 @@ import './MainPage.scss';
 export function MainPage() {
   return (
     <div className="mainPage_section_wrapper">
-      <section className="hero">
-        <Banner />
-        {/* <Categories /> */}
-      </section>
+      <section className="hero">{/* <Categories /> */}</section>
       <section className="search">
         <Search />
       </section>
