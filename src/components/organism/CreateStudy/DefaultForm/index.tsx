@@ -2,7 +2,7 @@
 import type { ChangeEvent, MouseEvent } from 'react';
 import { useEffect, useState } from 'react';
 
-import { PostRequestDto } from '@api/requestType';
+import { PostRequestDto } from 'types/api.types';
 import paragraphLine from '@assets/png/paragraph_line.png';
 
 import { data } from '../data';

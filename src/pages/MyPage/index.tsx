@@ -5,7 +5,7 @@ import { EditProfileModal } from '@components/common/mypage/EditProfileModal/Edi
 import { positionListKey } from '@utils/position.const';
 
 import useProfileImage from '@hooks/useProfileImage';
-import { useGetUserAPI } from '@hooks/useGetQuery';
+import { useGetUserAPI } from '@hooks/query/useGetQuery';
 import { User } from 'types/user.types';
 
 function MyPage() {

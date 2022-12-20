@@ -4,7 +4,7 @@ import { searchState } from '@store/search';
 import classes from './search.module.scss';
 import { Input } from '@components/atoms';
 import { ReactComponent as SearchIcon } from '@assets/svg/search-icon.svg';
-import { useGetSearchPostList } from '@hooks/useGetQuery';
+import { useGetSearchPostList } from '@hooks/query/useGetQuery';
 import { useOutsideAlerter } from '@hooks/useOutsideAlerter';
 import useDebounceInput from '@hooks/useDebounceInput';
 

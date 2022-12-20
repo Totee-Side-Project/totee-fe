@@ -8,8 +8,7 @@
       "@store/*": ["store/*"],
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"],
-      "@api/*": ["api/*"],
-      "@types/*": ["types/*"]
+      "@api/*": ["api/*"]
     },
     "target": "ESNext",
     "useDefineForClassFields": true,

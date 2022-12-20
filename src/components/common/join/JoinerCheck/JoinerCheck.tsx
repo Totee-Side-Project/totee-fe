@@ -2,7 +2,7 @@ import { NewIcon } from '@components/atoms/Icon/NewIcon';
 import { JoinModal } from '@components/common/join/Modal/JoinModal';
 import OwnerJoinerCheck from '@components/common/join/OwnerJoinerCheck/OwnerJoinerCheck';
 import { SignInModal } from '@components/common/onboard/OnboardModal/SignInModal';
-import { useGetApplicant, useGetPostByPostId } from '@hooks/useGetQuery';
+import { useGetApplicant, useGetPostByPostId } from '@hooks/query/useGetQuery';
 import { UserState } from '@store/user';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';

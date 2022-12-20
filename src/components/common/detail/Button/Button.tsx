@@ -7,7 +7,7 @@ import {
   useAddReply,
   useUpdateComment,
   useUpdateReply,
-} from '@hooks/useMutateQuery';
+} from '@hooks/query/useMutateQuery';
 import { replaceLineBreakStringIntoTag } from '@utils/replaceLineBreakStringIntoTag';
 import Swal from 'sweetalert2';
 

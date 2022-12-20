@@ -1,4 +1,5 @@
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
+
 import {
   AlarmAPI,
   ApplicationAPI,
@@ -9,13 +10,9 @@ import {
   TeamAPI,
   UserAPI,
 } from '@api/api';
-import { useQueryClient } from 'react-query';
-import { IPostTeamRequestFormData } from '@api/requestType';
-import { queryKeys } from './query';
-export interface IReplyRequest {
-  commentId: number;
-  content: string;
-}
+import { IPostTeamRequestFormData } from 'types/api.types';
+import { queryKeys } from '.';
+import { IRequestReply } from 'types/api.types';
 
 export const useAddUserInfo = () => {
   const queryClient = useQueryClient();
@@ -53,7 +50,7 @@ export const useDeleteComment = (postId: number, commentId: number) => {
 
 export const useAddReply = (postId: number) => {
   const queryClient = useQueryClient();
-  return useMutation((form: IReplyRequest) => ReplyAPI.createReply(form), {
+  return useMutation((form: IRequestReply) => ReplyAPI.createReply(form), {
     onSuccess: () => {
       queryClient.invalidateQueries(queryKeys.post(postId));
     },

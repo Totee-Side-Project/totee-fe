@@ -1,7 +1,7 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { Button, Modal } from '@components/atoms';
-import { IApplicantDetail } from '@api/responseType';
-import { usePostTeam } from '@hooks/useMutateQuery';
+import { IApplicantDetail } from 'types/api.types';
+import { usePostTeam } from '@hooks/query/useMutateQuery';
 import { useParams } from 'react-router-dom';
 import './joinerViewModal.scss';
 

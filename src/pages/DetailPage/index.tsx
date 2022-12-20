@@ -17,9 +17,12 @@ import JoinerCheck from '@components/common/join/JoinerCheck/JoinerCheck';
 import { NewComments } from '@components/common/detail/Comment/NewComment';
 import { Button } from '@components/ui/Button/Button';
 import { Select } from '@components/ui/Select/Select';
-import { useGetLikeofPost, useGetPostByPostId } from '@hooks/useGetQuery';
-import { useUpdateLike, useUpdatePostStatus } from '@hooks/useMutateQuery';
-import { useDeletePost } from '@hooks/usePostQuery';
+import { useGetLikeofPost, useGetPostByPostId } from '@hooks/query/useGetQuery';
+import {
+  useUpdateLike,
+  useUpdatePostStatus,
+} from '@hooks/query/useMutateQuery';
+import { useDeletePost } from '@hooks/query/usePostQuery';
 import { useCustomNavigate } from '@hooks/useCustomNavigate';
 import { createMarkup } from '@utils/createMarkup';
 import { checkingDetailPeriod } from '@utils/handleSelectValue';

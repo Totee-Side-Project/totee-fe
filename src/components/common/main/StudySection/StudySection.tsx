@@ -9,12 +9,11 @@ import { Carousel } from '@components/common';
 import { NewPostCard } from '@components/common/post/PostCard/PostCard';
 import { IResponsePostDetail } from 'types/api.types';
 import { queryKeys } from '@hooks/query';
-import { useInfiniteQueryTest } from '@hooks/useInfiniteQueryTest';
+import { useInfiniteQueryTest } from '@hooks/query/useInfiniteQueryCarousel';
 
 import classes from './studySection.module.scss';
 import './studySection.scss';
-// 처음 studySection 이 mount될때 비동기적으로 server에 limit 16으로 받아오고
-// 프론트단에서 4단위로 끊어서 보여주는것은 어떨까?
+
 const filterList = ['전체', '최신순', '인기순', '조회순'];
 
 export function StudySection() {

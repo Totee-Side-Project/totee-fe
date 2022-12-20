@@ -1,7 +1,7 @@
 import { ChangeEvent, MouseEvent } from 'react';
 import { useReducer } from 'react';
 
-import { PostRequestDto } from '@api/requestType';
+import { PostRequestDto } from 'types/api.types';
 
 import { defaultForm, reducerOfStudyPost } from './reducerOfStudyPost';
 import { data } from './data';

@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { useQueryClient } from 'react-query';
 
 import { searchState } from '@store/search';
-import useInfiniteQuerywithScroll from '@hooks/useInfiniteQuerywithScroll';
+import useInfiniteQuerywithScroll from '@hooks/query/useInfiniteQuerywithScroll';
 import { SectionTitle } from '@components/atoms';
 import { SectionSlider } from '@components/common/main/SectionSlider/SectionSlider';
 import { PostAPI } from '@api/api';

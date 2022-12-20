@@ -9,7 +9,7 @@ import {
 } from '@api/api';
 import { useRecoilState } from 'recoil';
 import { UserState } from '@store/user';
-import { queryKeys } from './query';
+import { queryKeys } from '.';
 
 export const useGetUserAPI = () => {
   const [user, setUser] = useRecoilState(UserState);

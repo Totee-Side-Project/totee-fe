@@ -1,5 +1,5 @@
 import { CreateStudy } from '@components/organism/CreateStudy/CreateStudy';
-import { useGetPostByPostId } from '@hooks/useGetQuery';
+import { useGetPostByPostId } from '@hooks/query/useGetQuery';
 import { checkingDetailPeriod } from '@utils/handleSelectValue';
 import { useParams } from 'react-router-dom';
 

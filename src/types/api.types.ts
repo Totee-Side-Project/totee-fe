@@ -145,6 +145,10 @@ export interface IPostTeamRequestFormData {
   accept: boolean;
   nickname: string;
 }
+export interface IRequestReply {
+  commentId: number;
+  content: string;
+}
 
 // export interface CommentType {
 //   nickname: string;

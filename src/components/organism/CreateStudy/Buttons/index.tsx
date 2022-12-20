@@ -2,9 +2,9 @@ import { AxiosResponse } from 'axios';
 import Swal from 'sweetalert2';
 
 import { PostAPI } from '@api/api';
-import { PostRequestDto } from '@api/requestType';
+import { PostRequestDto } from 'types/api.types';
 import { useCustomNavigate } from '@hooks/useCustomNavigate';
-import { useAddPost, useUpdatePost } from '@hooks/usePostQuery';
+import { useAddPost, useUpdatePost } from '@hooks/query/usePostQuery';
 import { validateFormData } from '@utils/validateData';
 
 interface SubmitButtonProps {

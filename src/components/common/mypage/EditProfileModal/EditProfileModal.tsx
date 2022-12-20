@@ -12,7 +12,7 @@ import { UpdateUser, User } from 'types/user.types';
 import UserPostingList from './UserPostingList';
 import LikePostingList from './LikePostingList';
 
-import { useUpdateUser } from '@hooks/useMutateQuery';
+import { useUpdateUser } from '@hooks/query/useMutateQuery';
 interface IEditProfileModalProps {
   user: User;
   isOpen: boolean;

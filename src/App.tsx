@@ -13,7 +13,7 @@ import {
 import { ScrollTopButton } from '@components/atoms/ScrollTopButton/ScrollTopButton';
 import { Banner, Footer, Header } from '@components/common';
 import LoginOauth from '@components/common/login/LoginOauth';
-import { useGetUserAPI } from '@hooks/useGetQuery';
+import { useGetUserAPI } from '@hooks/query/useGetQuery';
 import {
   UserState,
   defaultLoginState,

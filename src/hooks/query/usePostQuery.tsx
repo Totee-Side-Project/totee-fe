@@ -1,7 +1,7 @@
 import { useMutation } from 'react-query';
 import { PostAPI, UserAPI } from '@api/api';
 import { useQueryClient } from 'react-query';
-import { queryKeys } from './query';
+import { queryKeys } from '.';
 
 // export const useAddPost = () => {
 //   const queryClient = useQueryClient();

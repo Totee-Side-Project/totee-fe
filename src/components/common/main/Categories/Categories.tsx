@@ -3,7 +3,7 @@ import classes from './categories.module.scss';
 import { CategoryButton } from '@components/atoms';
 import classNames from 'classnames';
 import { useSearchParams } from 'react-router-dom';
-import { useGetCategoryList } from 'hooks/useGetQuery';
+import { useGetCategoryList } from '@hooks/query/useGetQuery';
 import { ReactComponent as TotalIcon } from '@assets/svg/total.svg';
 import { ReactComponent as GroupIcon } from '@assets/svg/group.svg';
 import { ReactComponent as MentoIcon } from '@assets/svg/mento.svg';

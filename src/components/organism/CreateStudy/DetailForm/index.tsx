@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { PostRequestDto } from '@api/requestType';
+import { PostRequestDto } from 'types/api.types';
 import { Line } from '@components/atoms/Line/Line';
 import { Editor } from '@components/common';
 import { Input } from '@components/ui/Input/Input';
