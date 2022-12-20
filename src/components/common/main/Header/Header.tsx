@@ -64,7 +64,7 @@ export const Header = () => {
   // };
 
   useEffect(() => {
-    // 첫방문일 경우 온보딩 모달 띄우기
+    // 가입되지 않은 유저일 경우 온보딩 모달 띄우기
     if (login.state && user.nickname === null) {
       setIsOpenOnboardModal(true);
     }
