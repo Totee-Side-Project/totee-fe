@@ -11,7 +11,7 @@ import { useRecoilState } from 'recoil';
 import { UserState } from '@store/user';
 import { queryKeys } from './query';
 
-export function useGetUserAPI() {
+export const useGetUserAPI = () => {
   const [user, setUser] = useRecoilState(UserState);
 
   return useQuery(
@@ -32,7 +32,7 @@ export function useGetUserAPI() {
       },
     },
   );
-}
+};
 
 export function useGetPostListAPI() {
   return useQuery(
