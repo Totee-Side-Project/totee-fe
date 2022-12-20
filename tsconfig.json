@@ -3,13 +3,13 @@
     "baseUrl": "src",
     "paths": {
       "@components/*": ["components/*"],
-      "@pages/*": ["components/pages/*"],
       "@assets/*": ["assets/*"],
       "@hooks/*": ["hooks/*"],
       "@store/*": ["store/*"],
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"],
-      "@api/*": ["api/*"]
+      "@api/*": ["api/*"],
+      "@types/*": ["types/*"]
     },
     "target": "ESNext",
     "useDefineForClassFields": true,

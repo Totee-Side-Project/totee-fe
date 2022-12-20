@@ -1,7 +1,6 @@
 // api reesponse types
 
-import { IResponsePostDetail } from '@components/pages/DetailPage/NewDetailPage';
-import type { IPostType } from 'types/post.types';
+import { IPostType, IResponsePostDetail } from 'types/api.types';
 
 export interface IResponseOfPage {
   header: {

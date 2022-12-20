@@ -1,5 +1,7 @@
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import classes from '@components/common/post/PostCard/postCard.module.scss';
-import React, { useEffect, useState } from 'react';
 import { PostAPI } from '@api/api';
 import './postingList.scss';
 import deleteButton from '@assets/png/my-page-delete.png';
@@ -9,7 +11,6 @@ import like from '@assets/svg/favorite.svg';
 import nextArrow from '@assets/png/arrow_next.png';
 import prevArrow from '@assets/png/arrow_prev.png';
 import deleteicon from '@assets/png/delete.png';
-import { useNavigate } from 'react-router-dom';
 
 function UserPostingList() {
   const [myPost, setMyPost] = useState<any>();

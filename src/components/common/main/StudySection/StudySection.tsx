@@ -6,8 +6,8 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import { PostAPI } from '@api/api';
 import { SectionTitle, SelectItem } from '@components/atoms';
 import { Carousel } from '@components/common';
-import { NewPostCard } from '@components/common/post/PostCard/NewPostCard';
-import { IResponsePostDetail } from '@components/pages/DetailPage/NewDetailPage';
+import { NewPostCard } from '@components/common/post/PostCard/PostCard';
+import { IResponsePostDetail } from 'types/api.types';
 import { queryKeys } from '@hooks/query';
 import { useInfiniteQueryTest } from '@hooks/useInfiniteQueryTest';
 

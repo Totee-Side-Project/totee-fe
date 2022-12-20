@@ -1,5 +1,4 @@
-import MyPage from '@pages/MyPage/MyPage';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { UserState, loginState } from '@store/index';
@@ -8,7 +7,6 @@ import { defaultUserState } from '@store/user';
 import './loginafter.scss';
 
 function LoginAfter() {
-  let navigate = useNavigate();
   const [login, setLogin] = useRecoilState(loginState);
   const [user, setUser] = useRecoilState(UserState);
   const [view, setView] = useState(false);

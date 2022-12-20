@@ -1,5 +1,5 @@
-import { atom, selector } from 'recoil';
-import { ISearchType } from 'types/post.types';
+import { atom } from 'recoil';
+import { ISearchType } from 'types/api.types';
 
 export const searchState = atom<ISearchType>({
   key: 'searchState',

@@ -1,6 +1,7 @@
 import { IReplyRequest } from '@hooks/useMutateQuery';
 import axios, { AxiosResponse } from 'axios';
 import { IPostTeamRequestFormData, PostRequestDto } from './requestType';
+// import { IPostTeamRequestFormData, PostRequestDto } from '@types/api.types';
 import {
   IGetApplicantResponse,
   IGetPostDetailResponse,
