@@ -1,5 +1,7 @@
 import { Button } from '@components/ui/Button/Button';
-import { IPostCommentDto } from '@components/pages/DetailPage/NewDetailPage';
+
+import { IPostCommentDto } from 'types/api.types';
+
 import {
   useAddComment,
   useAddReply,
