@@ -1,7 +1,7 @@
-import { ReactComponent as XIcon } from '@assets/xicon.svg';
+import { ReactComponent as XIcon } from '@assets/svg/xicon.svg';
 import classNames from 'classnames';
-import classes from './MentorPostViewModal.module.scss';
 import React from 'react';
+import classes from './MentorPostViewModal.module.scss';
 import './MentorPostViewModal.module.scss';
 import { MentorModal } from './MentorModal/MentorModal';
 

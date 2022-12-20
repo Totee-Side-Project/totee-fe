@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import removeImg from '../assets/removeImg.svg';
-import changeImg from '../assets/changeImg.svg';
+// 🟠 hooks라기 보다는 로직을 가지고 있는 component에 가깝다.
+import removeImg from '../assets/svg/removeImg.svg';
+import changeImg from '../assets/svg/changeImg.svg';
 
 export default function useUploadImage(props: any) {
   const [files, setFiles] = useState<any>();

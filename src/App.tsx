@@ -1,16 +1,8 @@
 import { ScrollTopButton } from '@components/atoms/ScrollTopButton/ScrollTopButton';
-import { Footer, Header } from '@components/common';
+import { Banner, Footer, Header } from '@components/common';
 import './App.css';
 import { MainPage, PostsPage } from '@components/pages';
-import {
-  // FC,
-  // ReactComponentElement,
-  // Suspense,
-  // createElement,
-  // lazy,
-  useEffect,
-  // useState,
-} from 'react';
+import { useEffect } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import LoginOauth from '@components/common/login/LoginOauth';
@@ -26,12 +18,7 @@ import {
 import { NewDetailPage } from '@components/pages/DetailPage/NewDetailPage';
 import { EditStudyPage } from '@components/pages/EditStudyPage/EditStudyPage';
 import NotMatchPage from '@components/pages/NotMatchPage';
-// import React from 'react';
-
-// const NotMatchPage = React.lazy(() => import('@components/pages/NotMatchPage'));
-// const NewDetailPage = React.lazy(
-//   () => import('@components/pages/DetailPage/NewDetailPage'),
-// );
+import studyBanner from '@assets/png/study_banner.png';
 const isNotLoginRoutes = [
   { path: '/', element: <MainPage /> },
   { path: '/posts', element: <PostsPage /> },
@@ -70,11 +57,19 @@ function App() {
   return (
     <>
       <Header />
-      {/* <Suspense
-        fallback={
-          <div style={{ height: '300px', padding: '100px' }}>loading...</div>
-        }
-      > */}
+      <Routes>
+        <Route
+          path="/setupstudy"
+          element={
+            <img
+              src={studyBanner}
+              alt="스터디 배너"
+              style={{ width: '100%', marginTop: 70 }}
+            />
+          }
+        />
+        <Route path="*" element={<Banner />} />
+      </Routes>
       <Routes>
         {isNotLoginRoutes.map(({ path, element }) => (
           <Route key={path} path={path} element={element} />
@@ -86,29 +81,10 @@ function App() {
 
         <Route path="*" element={<NotMatchPage status={status} />} />
       </Routes>
-      {/* </Suspense> */}
       <ScrollTopButton />
       <Footer />
     </>
   );
 }
-
-// const RouteComponent = ({ path }: { path: string }) => {
-//   console.log(path);
-//   const url = `./pages/${path}.tsx`;
-//   const [Component, setComponent] = useState<FC | null>(null);
-//   useEffect(() => {
-//     const Component = lazy(() => import(url));
-//     setComponent(Component);
-//   }, [path]);
-
-//   console.log(Component);
-
-//   return Component ? (
-//     <Suspense>
-//       <Component />
-//     </Suspense>
-//   ) : null;
-// };
 
 export default App;

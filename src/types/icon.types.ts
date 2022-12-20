@@ -8,14 +8,16 @@ export interface IIconProps {
 }
 
 export interface ToggleIconProps extends IIconProps {
-  userInfo: {
-    nickname: string;
-    email: string;
-    roleType: string;
-  };
-  handleLogout: () => void;
-  isShowToggle: boolean;
-  setIsShowToggle: (e: boolean) => void;
+  // export interface ToggleIconProps {
+  // userInfo: {
+  //   nickname: string;
+  //   email: string;
+  //   roleType: string;
+  // };
+  // handleLogout: () => void;
+  // isShowToggle: boolean;
+  // setIsShowToggle: (e: boolean) => void;
+  // toggleIsOpen: () => void;
 }
 
 export interface AlarmIconProps {
