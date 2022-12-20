@@ -1,15 +1,15 @@
-.mentorModal{
+.mentorModal {
   padding: 20px 0px;
   width: 600px;
   max-height: 700px;
 }
-.headerBox{
+.headerBox {
   height: 45px;
   background: #fff;
   box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.15);
   display: flex;
 }
-.headerTitle{
+.headerTitle {
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
@@ -17,45 +17,45 @@
   color: #333333;
   margin-left: 68px;
 }
-.closeBtn{
+.closeBtn {
   cursor: pointer;
   margin-top: -7px;
   margin-left: 360px;
 }
-.bottomBox{
+.bottomBox {
   height: 72px;
   background: #fff;
   box-shadow: 0px -7px 10px rgba(0, 0, 0, 0.15);
   border-radius: 0 0 20px 20px;
   display: flex;
 }
-.contentWrapper{
+.contentWrapper {
   margin: 35px 70px;
 }
-.title{
+.title {
   font-style: normal;
   font-weight: 500;
   font-size: 20px;
   line-height: 29px;
   display: flex;
   align-items: center;
-  color: #568A35;
+  color: #568a35;
 }
 
-.profile{
+.profile {
   display: flex;
   text-align: center;
   margin: 20px 0 20px 0;
   gap: 14px;
   height: 30px;
 }
-.img{
+.img {
   border-radius: 50%;
   width: 35px;
   height: 35px;
-  border: #4C4C4C 1px solid;
+  border: #4c4c4c 1px solid;
 }
-.name{
+.name {
   color: black;
   margin: auto 0;
   font-style: normal;
@@ -64,34 +64,34 @@
   line-height: 24px;
 }
 
-.detail{
+.detail {
   margin-bottom: 10px;
   display: flex;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 24px;
-  color: #858A8D;
+  color: #858a8d;
 }
 
-.position{
+.position {
   margin-right: 10px;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 24px;
-  color: #858A8D;
+  color: #858a8d;
 }
-.career{
+.career {
   margin-right: 10px;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 24px;
-  color: #858A8D;
+  color: #858a8d;
 }
 
-.price{
+.price {
   margin: 25px 0 30px 0;
   font-style: normal;
   font-weight: 500;
@@ -99,11 +99,11 @@
   line-height: 24px;
 }
 
-.contentLine{
-  border: 1px solid #D8D8D8;
+.contentLine {
+  border: 1px solid #d8d8d8;
 }
 
-.content{
+.content {
   height: 240px;
   margin: 40px 0 0 0;
   font-size: 15px;
@@ -112,12 +112,12 @@
   //overflow-y: scroll;
 }
 
-.btn{
+.btn {
   margin: auto;
   text-align: center;
   width: 150px;
   height: 40px;
-  background: #568A35;
+  background: #568a35;
   color: #fff;
   font-style: normal;
   font-weight: 700;

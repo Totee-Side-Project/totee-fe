@@ -1,100 +1,99 @@
-.reviewCard_container{
-    width: 332px;
+.reviewCard_container {
+  width: 332px;
+  height: 200px;
+  background: #ffffff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  padding: 24px;
+  &.primary {
+    .reviewCard_header {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      .flex {
+        display: flex;
+        align-items: center;
+      }
+      .profile_image {
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+        background: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.5);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+        margin-right: 7px;
+      }
+      .nickname {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        color: #4f4f4f;
+      }
+      .v_line {
+        border-left: 1px solid #d8d8d8;
+        height: 20px;
+        margin: 0px 8px;
+      }
+      .role {
+        font-weight: 350;
+        font-size: 14px;
+        line-height: 20px;
+        color: #747474;
+      }
+      .time {
+        font-weight: 350;
+        font-size: 14px;
+        line-height: 20px;
+        color: #747474;
+      }
+    }
+    .h_line {
+      width: 100%;
+      border-bottom: 1px solid #d8d8d8;
+      margin: 17px 0px;
+    }
+    .body {
+      .title {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 25px;
+        color: #1b1c1d;
+      }
+      .description {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        color: #747474;
+      }
+    }
+  }
+  &.secondary {
     height: 200px;
-    background: #FFFFFF;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    width: 200px;
+    background: #202020;
     border-radius: 10px;
     padding: 24px;
-    &.primary{
-        .reviewCard_header{
-            display: flex;
-            width: 100%;
-            align-items: center;
-            justify-content: space-between;
-            .flex{
-                display: flex;
-                align-items: center;
-            }
-            .profile_image{
-                width:30px;
-                height:30px;
-                border-radius: 100%;
-                background: #FFFFFF;
-                border: 1px solid rgba(0, 0, 0, 0.5);
-                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
-                margin-right: 7px;
-            }
-            .nickname{
-                font-weight: 500;
-                font-size: 14px;
-                line-height: 20px;
-                color: #4F4F4F;
-            }
-            .v_line{
-                border-left : 1px solid #D8D8D8;
-                height : 20px;
-                margin: 0px 8px;
-            }
-            .role{
-                font-weight: 350;
-                font-size: 14px;
-                line-height: 20px;
-                color: #747474;
-            }
-            .time{
-                font-weight: 350;
-                font-size: 14px;
-                line-height: 20px;
-                color: #747474;
-            }
-        }
-        .h_line{
-            width:100%;
-            border-bottom: 1px solid #D8D8D8;
-            margin: 17px 0px;
-        }
-        .body{
-            .title{
-                font-weight: 400;
-                font-size: 16px;
-                line-height: 25px;
-                color: #1B1C1D;
-            }
-            .description{
-                font-weight: 400;
-                font-size: 14px;
-                line-height: 20px;
-                color: #747474;
-            }
-        }
+    .title {
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 25px;
+      color: #ffffff;
     }
-    &.secondary{
-        height: 200px;
-        width: 200px;
-        background: #202020;
-        border-radius: 10px;
-        padding: 24px;
-        .title{
-            font-weight: 500;
-            font-size: 20px;
-            line-height: 25px;
-            color: #FFFFFF;
-        }
-        .h_line{
-            width:100%;
-            border-bottom: 1px solid #fff;
-            margin: 17px 0px;
-        }
-        .description_wrapper{
-            display: grid;
-            .description{
-                display: flex;
-                column-gap: 20px;
-                font-weight: 400;
-                font-size: 14px;
-                color: #fff;
-            }
-        }
+    .h_line {
+      width: 100%;
+      border-bottom: 1px solid #fff;
+      margin: 17px 0px;
     }
-     
+    .description_wrapper {
+      display: grid;
+      .description {
+        display: flex;
+        column-gap: 20px;
+        font-weight: 400;
+        font-size: 14px;
+        color: #fff;
+      }
+    }
+  }
 }

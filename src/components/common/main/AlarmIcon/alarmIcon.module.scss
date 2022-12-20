@@ -1,104 +1,104 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
-.alarmFlex{
+.alarmFlex {
   display: flex;
   align-items: center;
   position: relative;
-  &:hover{
+  &:hover {
     cursor: pointer;
   }
 
-  .alarmCount{
-    top:-5px;
-    right:-10px;
+  .alarmCount {
+    top: -5px;
+    right: -10px;
     position: absolute;
     border-radius: 100%;
-    width:20px;
-    height:20px;
+    width: 20px;
+    height: 20px;
     text-align: center;
     line-height: 20px;
-    background-color: #568A35;
-    color:#fff;
+    background-color: #568a35;
+    color: #fff;
     font-weight: bold;
   }
 }
 
-.flex{
+.flex {
   display: flex;
   align-items: center;
 }
-.alarmWrapper{
+.alarmWrapper {
   position: relative;
-  .alarmContainer{
+  .alarmContainer {
     position: absolute;
     overflow: auto;
     top: 0px;
     left: -10px;
     width: 400px;
     height: 360px;
-    background: #FFFFFF;
+    background: #ffffff;
     margin-top: 21px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
     border-radius: 7px;
     //border-radius: 10px 10px 0px 0px;
-    border: 1px solid #BFBFBF;
-    section{
-      height:128px;
+    border: 1px solid #bfbfbf;
+    section {
+      height: 128px;
       font-size: 13px;
       font-weight: 600;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      div{
+      div {
         display: inline-block;
         width: 400px;
         height: 80px;
-        margin:0 !important;
-        padding:20px 20px;
+        margin: 0 !important;
+        padding: 20px 20px;
         text-align: left;
         font-size: 13px;
-        border-bottom: 1px solid #E6E6E6;
+        border-bottom: 1px solid #e6e6e6;
 
-        &:hover{
+        &:hover {
           cursor: pointer;
           box-shadow: inset 0 1000px rgba(0, 0, 0, 0.03) !important;
         }
       }
 
-      p{
+      p {
         font-size: 13px;
         font-style: normal;
         font-weight: 400;
-        font-family: 'Noto Sans KR',sans-serif;
+        font-family: 'Noto Sans KR', sans-serif;
         color: #767676;
         padding: 2px;
       }
     }
-    ul{
+    ul {
       margin-top: 40px;
       display: list-item;
-      }
-    }
-    .alarmTitle{
-      position: fixed;
-      display: inline-block;
-      width: 398px;
-      text-align: center;
-      font-family: 'Noto Sans KR',sans-serif;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      color: #343434;
-      padding: 10px;
-      height: 40px;
-      background: #F7F7F7;
-      border-bottom: 1px solid #E6E6E6;
-      border-radius: 10px 10px 0px 0px;
     }
   }
-  .alarmContainer::-webkit-scrollbar{
-    display:none;
+  .alarmTitle {
+    position: fixed;
+    display: inline-block;
+    width: 398px;
+    text-align: center;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    color: #343434;
+    padding: 10px;
+    height: 40px;
+    background: #f7f7f7;
+    border-bottom: 1px solid #e6e6e6;
+    border-radius: 10px 10px 0px 0px;
   }
-.alarmItem{
+}
+.alarmContainer::-webkit-scrollbar {
+  display: none;
+}
+.alarmItem {
   position: relative;
 }
 .alarmDate {
@@ -108,7 +108,7 @@
   text-align: right;
   font-size: 11px !important;
 }
-.closeIcon{
+.closeIcon {
   display: inline-block;
   position: fixed;
   cursor: pointer;
@@ -116,31 +116,31 @@
   padding: 7px;
   margin-left: 350px;
 }
-.scrollBtn{
+.scrollBtn {
   text-align: center;
-  background: #F7F7F7;
+  background: #f7f7f7;
   height: 35px;
   width: 399px;
   display: inline-block;
   position: fixed;
   top: 425px;
-  border: 1px solid #BFBFBF;
+  border: 1px solid #bfbfbf;
   border-radius: 0px 0px 10px 10px;
-  font-family: 'Noto Sans KR',sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
   color: #343434;
 }
-.DownIcon{
+.DownIcon {
   margin-top: 11px;
 }
-.emptyContent{
+.emptyContent {
   text-align: center;
   margin: 30% auto;
-  font-family: 'Noto Sans KR',sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 15px;
-  color: #8C8C8C;
+  color: #8c8c8c;
 }

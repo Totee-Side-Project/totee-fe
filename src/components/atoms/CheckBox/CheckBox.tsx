@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 import './checkbox.scss';
 interface Props {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   label: string;
-  data:any
-  isChecked:boolean;
+  data: any;
+  isChecked: boolean;
 }
 
 export const Checkbox = (props: Props) => {
@@ -19,7 +19,7 @@ export const Checkbox = (props: Props) => {
           value={props.data}
           className="checkbox-input"
         />
-      <span className="checkbox-label">{props.data}</span>
+        <span className="checkbox-label">{props.data}</span>
       </label>
     </div>
   );

@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700&display=swap');
-$FONT : 'Noto Sans KR', sans-serif;
+$FONT: 'Noto Sans KR', sans-serif;
 
-
-.mentorCardWrapper{
+.mentorCardWrapper {
   width: 290px;
   height: 309px;
   border-radius: 10px;
@@ -11,7 +10,7 @@ $FONT : 'Noto Sans KR', sans-serif;
   padding-top: 1px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
 }
-.mentorCardImg{
+.mentorCardImg {
   margin: 25px auto 15px auto;
   width: 100px;
   height: 100px;
@@ -22,46 +21,46 @@ $FONT : 'Noto Sans KR', sans-serif;
   background-repeat: no-repeat;
   background-position: center;
 }
-.mentorCardInfoWrapper{
+.mentorCardInfoWrapper {
   text-align: center;
   line-height: 25px;
 }
-.mentorCardName{
-  font-family:  $FONT;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 25px;
-  color: #1B1C1D;
-}
-.mentorCardPosition{
+.mentorCardName {
   font-family: $FONT;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
   line-height: 25px;
-  color: #4F4F4F;
+  color: #1b1c1d;
 }
-.mentorCardEmail{
+.mentorCardPosition {
+  font-family: $FONT;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 25px;
+  color: #4f4f4f;
+}
+.mentorCardEmail {
   font-size: 13px;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
   color: #767676;
 }
-.mentorCardLine{
-  border: #E9E9E9 1px solid;
+.mentorCardLine {
+  border: #e9e9e9 1px solid;
   margin: 10px 30px 20px 30px;
 }
-.mentorCardLineUnder{
+.mentorCardLineUnder {
   display: flex;
   color: #4f4f4f;
 }
-.mentorCardLine2{
-  border: #E9E9E9 1px solid;
+.mentorCardLine2 {
+  border: #e9e9e9 1px solid;
   height: 35px;
 }
-.mentorCardLikeWrap{
+.mentorCardLikeWrap {
   display: flex;
   margin: auto auto;
   font-style: normal;
@@ -69,13 +68,12 @@ $FONT : 'Noto Sans KR', sans-serif;
   font-size: 14px;
   color: #848484;
 }
-.mentorCardHeart{
-
+.mentorCardHeart {
 }
-.mentorCardHeartNum{
+.mentorCardHeartNum {
   margin: 1px 0 0 5px;
 }
-.mentorCardScoreWrap{
+.mentorCardScoreWrap {
   display: flex;
   margin: auto auto;
   font-style: normal;
@@ -83,9 +81,9 @@ $FONT : 'Noto Sans KR', sans-serif;
   font-size: 14px;
   color: #848484;
 }
-.mentorCardScore{
+.mentorCardScore {
   margin-left: -10px;
 }
-.mentorCardScoreNum{
+.mentorCardScoreNum {
   margin: 2px 0 0 5px;
 }
