@@ -1,19 +1,20 @@
+import { ReactNode, useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import Swal from 'sweetalert2';
+
 import { NewIcon } from '@components/atoms/Icon/NewIcon';
 import { Line } from '@components/atoms/Line/Line';
-import {
-  CommentSubmitArea,
-  IReplyDto,
-  IResponsePostDetail,
-} from '@components/pages/DetailPage/NewDetailPage';
-import { IPostCommentDto } from '@components/pages/DetailPage/NewDetailPage';
+import { CommentSubmitArea } from 'pages/DetailPage';
 import { useDeleteComment, useDeleteReply } from '@hooks/useMutateQuery';
 import { UserState } from '@store/index';
 import { createMarkup } from '@utils/createMarkup';
 import { handleErrorType } from '@utils/handleErrorType';
 import { handleTime } from '@utils/handleTime';
-import { ReactNode, useState } from 'react';
-import { useRecoilValue } from 'recoil';
-import Swal from 'sweetalert2';
+import type {
+  IPostCommentDto,
+  IReplyDto,
+  IResponsePostDetail,
+} from 'types/api.types';
 import classes from './newComment.module.scss';
 
 export const NewComments = ({
