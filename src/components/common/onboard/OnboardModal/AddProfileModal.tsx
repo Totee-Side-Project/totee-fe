@@ -1,15 +1,13 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import {
-  Button,
-  // Input
-} from '@components/atoms';
-import classes from './onboardmodal.module.scss';
-import { IModalPropsType } from 'types/modal.types';
-import { UserAPI } from '@api/api';
-import classNames from 'classnames';
+import React, { useEffect, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
+import classNames from 'classnames';
+
+import { Button } from '@components/atoms';
+import { UserAPI } from '@api/api';
 import { UserState } from '@store/index';
 import { Input } from '../../../ui/Input/Input';
+import { IModalPropsType } from 'types/modal.types';
+import classes from './onboardmodal.module.scss';
 
 export default function AddProfileModal({
   step,
@@ -97,7 +95,7 @@ export default function AddProfileModal({
             />
           </div>
           <Button
-            text="중복확인"
+            center="중복확인"
             style={{
               backgroundColor: '#fff',
               color: 'rgba(137, 137, 137, 1)',
@@ -133,14 +131,14 @@ export default function AddProfileModal({
           onClick={() => setStep(step - 1)}
         /> */}
         <Button
-          text="다음으로"
+          center="다음으로"
           style={{
             width: '100%',
             backgroundColor: 'rgba(86, 138, 53, 1)',
             color: '#fff',
           }}
           onClick={() => setStep(step + 1)}
-          disable={
+          disabled={
             files && nickname && !isShowErrorMsg && isValidate ? false : true
           }
         />

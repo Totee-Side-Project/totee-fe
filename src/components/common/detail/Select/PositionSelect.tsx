@@ -5,8 +5,8 @@ import './select.scss';
 import recentIcon from '../../../assets/recentIcon.svg';
 import recentLine from '../../../assets/recentLine.svg';
 import {
-  handleSelectValues,
   checkingDetailPeriod,
+  handleSelectValues,
 } from '@utils/handleSelectValue';
 
 interface ISelectPropsType {

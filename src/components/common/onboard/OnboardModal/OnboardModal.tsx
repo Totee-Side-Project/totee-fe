@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Alert, Button, Modal } from '@components/atoms';
+import { Alert, Modal } from '@components/atoms';
 import classes from './onboardmodal.module.scss';
 import AddProfileModal from './AddProfileModal';
 import CheckPositionModal from './CheckPositionModal';

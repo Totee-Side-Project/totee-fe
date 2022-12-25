@@ -11,11 +11,10 @@ import {
   SubmitModifyButton,
   SubmitReplyButton,
 } from '@components/common/detail/Button/Button';
-import { Line } from '@components/atoms/Line/Line';
+import { Button, Line } from '@components/atoms';
 import { NewIcon } from '@components/atoms/Icon/NewIcon';
 import JoinerCheck from '@components/common/join/JoinerCheck/JoinerCheck';
 import { NewComments } from '@components/common/detail/Comment/NewComment';
-import { Button } from '@components/ui/Button/Button';
 import { Select } from '@components/ui/Select/Select';
 import { useGetLikeofPost, useGetPostByPostId } from '@hooks/query/useGetQuery';
 import {
@@ -198,7 +197,7 @@ export const CommentSubmitArea = ({
         {isModify || isReply ? (
           <Button
             className={classes.cancle_button}
-            text={'취소'}
+            center={'취소'}
             onClick={onClickCancleButton}
           />
         ) : null}
@@ -294,13 +293,6 @@ const SectionTitle = (
           .catch((err) => err),
     );
   };
-
-  // if (status === 'loading')
-  //   return (
-  //     <div className={classes.header_title_wrap + ' ' + classes.loading}>
-  //       loading{' '}
-  //     </div>
-  //   );
 
   return (
     <div className={classes.header_title_wrap}>
@@ -400,7 +392,6 @@ const SectionContactView = ({
 }) => {
   return (
     <div className={classes.contact_view_wrap}>
-      {/* <div style={{ margin: '30px 5%', textAlign: 'left' }}> */}
       <p>
         진행지역{' : '}
         {!postData.detailedRegion ? '온라인으로 진행' : postData.detailedRegion}

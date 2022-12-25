@@ -1,5 +1,4 @@
-import { Button } from '@components/ui/Button/Button';
-
+import { Button } from '@components/atoms';
 import { IPostCommentDto } from 'types/api.types';
 
 import {
@@ -56,7 +55,13 @@ export const SubmitReplyButton = ({
         }
       });
   };
-  return <Button text="답글 등록" onClick={onSubmitReplyByButton} />;
+  return (
+    <Button
+      style={{ width: '100%' }}
+      center="답글 등록"
+      onClick={onSubmitReplyByButton}
+    />
+  );
 };
 
 export const SubmitModifyButton = ({
@@ -124,7 +129,8 @@ export const SubmitModifyButton = ({
 
   return (
     <Button
-      text="댓글 수정"
+      center="댓글 수정"
+      style={{ width: '100%' }}
       onClick={replyId ? updateReplyOnClick : updateCommentOnClick}
     />
   );
@@ -160,5 +166,11 @@ export const SubmitCommentButton = ({
         });
       });
   };
-  return <Button text="댓글 등록" onClick={onSubmitCommentByButton} />;
+  return (
+    <Button
+      style={{ width: '100%' }}
+      center="댓글 등록"
+      onClick={onSubmitCommentByButton}
+    />
+  );
 };
