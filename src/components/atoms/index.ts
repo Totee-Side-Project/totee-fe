@@ -10,7 +10,7 @@ export * from './Alert/Alert';
 export * from './CategoryButton/CategoryButton';
 export * from './Line/Line';
 export * from './Icon/Icon';
-export * from './CheckBox/Checkbox';
+export * from './CheckBox/CheckBox';
 // export * from './CheckBox/OldCheckBox';
 
 export * from './SectionTitle/SectionTitle';
