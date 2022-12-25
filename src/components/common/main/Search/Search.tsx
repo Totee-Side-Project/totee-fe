@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { searchState } from '@store/search';
 import classes from './search.module.scss';
-import { Input } from '@components/atoms';
+import { SearchInput } from '@components/atoms';
 import { ReactComponent as SearchIcon } from '@assets/svg/search-icon.svg';
 import { useGetSearchPostList } from '@hooks/query/useGetQuery';
 import { useOutsideAlerter } from '@hooks/useOutsideAlerter';
@@ -61,7 +61,7 @@ export function Search() {
       {!isOpenPreview ? (
         <div className={classes.input_wrapper}>
           <form onSubmit={onSubmit}>
-            <Input
+            <SearchInput
               style="search"
               value={inputValue}
               type="text"
@@ -70,13 +70,13 @@ export function Search() {
               placeholder="찾고있는 스터디의 이름 등등 뭔가.. 검색유도하는 글"
               img={<SearchIcon width={25} height={25}></SearchIcon>}
               onChange={(e) => setInputValue(e.target.value)}
-            ></Input>
+            ></SearchInput>
           </form>
         </div>
       ) : (
         <div className={classes.input_wrapper} ref={inputRef}>
           <form onSubmit={onSubmit}>
-            <Input
+            <SearchInput
               style="search"
               value={inputValue}
               type="text"
@@ -85,7 +85,7 @@ export function Search() {
               placeholder="찾고있는 스터디의 이름 등등 뭔가.. 검색유도하는 글"
               img={<SearchIcon width={25} height={25}></SearchIcon>}
               onChange={(e) => setInputValue(e.target.value)}
-            ></Input>
+            ></SearchInput>
           </form>
           {previewResult && previewResult.length > 0 && (
             <div className={classes.preview_wrapper}>

@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { PostRequestDto } from 'types/api.types';
 import { Line } from '@components/atoms/Line/Line';
 import { Editor } from '@components/common';
-import { Input } from '@components/ui/Input/Input';
+import { Input } from '@components/atoms';
 
 import { SubmitButton } from '../Buttons';
 import { Idata } from '../data';

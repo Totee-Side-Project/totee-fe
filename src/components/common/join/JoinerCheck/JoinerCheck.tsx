@@ -1,19 +1,18 @@
-import { NewIcon } from '@components/atoms/Icon/NewIcon';
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+
 import { JoinModal } from '@components/common/join/Modal/JoinModal';
 import OwnerJoinerCheck from '@components/common/join/OwnerJoinerCheck/OwnerJoinerCheck';
 import { SignInModal } from '@components/common/onboard/OnboardModal/SignInModal';
 import { useGetApplicant, useGetPostByPostId } from '@hooks/query/useGetQuery';
 import { UserState } from '@store/user';
-import { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-import './joinerCheck.scss';
-// import icon from '@components/common/svg';
-// import { SkillIcon } from '@components/atoms/SkillIcon/SkillIcon';
 import {
   OverLimitIcons,
   UnOverLimitIcons,
 } from '@components/atoms/SkillIcon/SkillIcons';
+
+import './joinerCheck.scss';
 
 function JoinerCheck() {
   const [isOpenJoinModal, setIsOpenJoinModal] = useState(false);

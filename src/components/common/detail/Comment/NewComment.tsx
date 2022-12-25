@@ -3,13 +3,13 @@ import { useRecoilValue } from 'recoil';
 import Swal from 'sweetalert2';
 
 import { NewIcon } from '@components/atoms/Icon/NewIcon';
-import { Line } from '@components/atoms/Line/Line';
-import { CommentSubmitArea } from 'pages/DetailPage';
+import { Line } from '@components/atoms';
 import { useDeleteComment, useDeleteReply } from '@hooks/query/useMutateQuery';
 import { UserState } from '@store/index';
 import { createMarkup } from '@utils/createMarkup';
 import { handleErrorType } from '@utils/handleErrorType';
 import { handleTime } from '@utils/handleTime';
+import { CommentSubmitArea } from 'pages/DetailPage';
 import type {
   IPostCommentDto,
   IReplyDto,

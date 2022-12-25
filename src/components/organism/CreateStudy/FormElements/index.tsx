@@ -1,8 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { ChangeEvent, MouseEvent } from 'react';
 
-import { Label } from '@components/atoms/label/Label';
-import { Input } from '@components/ui/Input/Input';
+import { Input, Label } from '@components/atoms';
 import { Select } from '@components/ui/Select/Select';
 import { SkillSelector } from '@components/common/selector/SkillSelector';
 import { Checkbox } from '@components/ui/Checkbox/Checkbox';

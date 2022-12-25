@@ -2,10 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import classNames from 'classnames';
 
-import { Button } from '@components/atoms';
+import { Button, Input } from '@components/atoms';
 import { UserAPI } from '@api/api';
 import { UserState } from '@store/index';
-import { Input } from '../../../ui/Input/Input';
 import { IModalPropsType } from 'types/modal.types';
 import classes from './onboardmodal.module.scss';
 

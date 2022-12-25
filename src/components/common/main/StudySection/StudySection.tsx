@@ -4,10 +4,9 @@ import { useSearchParams } from 'react-router-dom';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 import { PostAPI } from '@api/api';
-import { SectionTitle, SelectItem } from '@components/atoms';
+import { Circle, SectionTitle, SelectItem } from '@components/atoms';
 import { Carousel } from '@components/common';
 import { NewPostCard } from '@components/common/post/PostCard/PostCard';
-import { Circle } from '@components/atoms/Circle/Circle';
 import { queryKeys } from '@hooks/query';
 import { useInfiniteQueryTest } from '@hooks/query/useInfiniteQueryCarousel';
 import { IResponsePostDetail } from 'types/api.types';
