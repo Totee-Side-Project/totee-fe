@@ -1,79 +1,28 @@
-.input_group {
-  position: relative;
-  &.default {
-    .label {
-      font-weight: 500;
-      margin-bottom: 5px;
-      display: block;
-      width: 100%;
-      text-align: left;
-      font-size: 16px;
-      color: rgba(131, 131, 131, 1);
-    }
-    input {
-      width: 100%;
-      font-size: 16px;
-      height: 45px;
-      padding: 10px;
-      background: #ffffff;
-      border-radius: 10px;
-      outline: none !important;
-      transition: transform 1000ms;
+.default_input_wrap {
+  border-radius: 5px;
+  border: 2px solid #c8c5cb;
 
-      &.default {
-        color: #c8c5cb;
-        border: 2px solid #c8c5cb;
-      }
-      &.active {
-        color: rgba(24, 14, 37, 1);
-        border: 2px solid #c8c5cb;
-      }
-
-      &.focused {
-        color: rgba(24, 14, 37, 1);
-        border: 2px solid #568a35;
-        // outline: 1.5px solid rgba(52, 52, 52, 1) !important;
-      }
-    }
-  }
-  &.search {
-    input {
-      width: 100%;
-      font-size: 17px;
-      font-weight: 300;
-      height: 55px;
-      padding: 12px 100px 15px 100px;
-      outline: none !important;
-      transition: transform 1000ms;
-      background: #ffffff;
-      border: 1.5px solid #568a35;
-      border-radius: 20px;
-
-      &.default {
-        color: #c8c5cb;
-        border: 1.5px solid #568a35;
-      }
-      &.active {
-        color: rgba(24, 14, 37, 1);
-        border: 2px solid #c8c5cb;
-      }
-
-      &.focused {
-        color: rgba(24, 14, 37, 1);
-        border: 2px solid #568a35;
-        // outline: 1.5px solid rgba(52, 52, 52, 1) !important;
-      }
-      &:hover {
-        cursor: pointer;
-      }
-    }
-  }
-  .img {
-    position: absolute;
-    top: 15px;
-    left: 30px;
-    &:hover {
-      cursor: pointer;
-    }
+  &:hover {
+    border: 2px solid #568a35;
   }
 }
+
+.default_input {
+  border-radius: 10px;
+  outline: none;
+  border: 2px solid #c8c5cb;
+  padding: 15px 30px;
+
+  &:focus {
+    border: 2px solid #568a35;
+  }
+}
+input {
+  background-color: transparent;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+//
