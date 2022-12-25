@@ -18,7 +18,6 @@ export const useLogout = (url: string = '/') => {
 
   const fireLogoutSwal = () => {
     Swal.fire({
-      position: 'top-end',
       icon: 'success',
       title: '로그아웃 완료!',
       iconColor: '#f48484',
