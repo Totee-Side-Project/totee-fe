@@ -6,7 +6,6 @@
 .headerBox {
   height: 45px;
   background: #fff;
-  box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.15);
   display: flex;
 }
 .headerTitle {
@@ -15,11 +14,12 @@
   font-size: 18px;
   line-height: 145%;
   color: #333333;
-  margin-left: 68px;
+  margin-left: 60px;
+  margin-top: 6px;
 }
 .closeBtn {
   cursor: pointer;
-  margin-top: -7px;
+  margin-top: -3px;
   margin-left: 360px;
 }
 .bottomBox {
@@ -30,7 +30,7 @@
   display: flex;
 }
 .contentWrapper {
-  margin: 35px 70px;
+  margin: 20px 70px 40px 70px;
 }
 .title {
   font-style: normal;
@@ -45,8 +45,8 @@
 .profile {
   display: flex;
   text-align: center;
-  margin: 20px 0 20px 0;
-  gap: 14px;
+  margin: 10px 0 20px 0;
+  gap: 10px;
   height: 30px;
 }
 .img {
@@ -57,7 +57,6 @@
 }
 .name {
   color: black;
-  margin: auto 0;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -105,11 +104,10 @@
 
 .content {
   height: 240px;
-  margin: 40px 0 0 0;
+  margin: 30px 0 0 0;
   font-size: 15px;
   line-height: 165%;
-  font-weight: 300;
-  //overflow-y: scroll;
+  font-weight: 350;
 }
 
 .btn {

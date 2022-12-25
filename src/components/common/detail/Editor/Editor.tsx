@@ -5,10 +5,12 @@ import classes from './editor.module.scss';
 import './editor.scss';
 
 interface Props {
-  values: any;
-  onChange: (content: any) => void;
+  values: {
+    content: string;
+  };
+  onChange: (content: string) => void;
 }
-export const Editor: any = ({ values, onChange }: Props) => {
+export const Editor = ({ values, onChange }: Props) => {
   const QuillRef = useRef<ReactQuill>();
 
   const modules = {
