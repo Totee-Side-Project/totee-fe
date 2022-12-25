@@ -1,6 +1,7 @@
 import React from 'react';
 import './footer.scss';
-import logo from '@assets/png/ToteeLogo.png';
+// import logo from '@assets/png/ToteeLogo.png';
+import ToteeLogo from '@assets/svg/toteeLogo.svg';
 import facebook from '@assets/svg/Facebook.svg';
 import twitter from '@assets/svg/Twitter.svg';
 import LinkedIn from '@assets/svg/LinkedIn.svg';
@@ -14,7 +15,7 @@ export const Footer = () => {
         <div className="footerWrap">
           <div className="footerAbout">
             <div>
-              <img src={logo} alt="토티 로고" />
+              <img src={ToteeLogo} alt="토티 로고" />
             </div>
             <p>스터디와 멘토&멘티를 찾는 가장 쉬운 방법</p>
             <p>토티에서 함께 할 멘토&멘티를 찾아보세요!</p>

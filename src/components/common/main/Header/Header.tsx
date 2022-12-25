@@ -7,7 +7,8 @@ import { Icon } from '@components/atoms';
 import { OnboardModal, SignInModal } from '@components/common';
 import { AlarmIcon } from '@components/common';
 import { HeaderUserProfileNav } from './HeaderUserProfileNav';
-import logo from '@assets/png/toteelogo-kr.png';
+// import logo from '@assets/png/toteelogo-kr.png';
+import ToteeLogo from '@assets/svg/toteeLogo.svg';
 import alarm from '@assets/svg/alarmicon.svg';
 import './header.scss';
 
@@ -90,7 +91,12 @@ export const Header = () => {
     <>
       <header className="header">
         <div className="content">
-          <Icon src={logo} alt="토티 로고" onClick={() => navigate('/')} />
+          <Icon
+            src={ToteeLogo}
+            alt="토티 로고"
+            style={{ width: '110px' }}
+            onClick={() => navigate('/')}
+          />
           <div className="buttonWrapper">
             <ul className="profile_wrapper">
               <li>
