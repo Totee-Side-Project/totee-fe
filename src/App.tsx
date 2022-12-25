@@ -10,7 +10,7 @@ import {
   NewDetailPage,
   NotMatchPage,
 } from 'pages';
-import { ScrollTopButton } from '@components/atoms/ScrollTopButton/ScrollTopButton';
+import { ScrollTopButton } from '@components/atoms';
 import { Banner, Footer, Header } from '@components/common';
 import LoginOauth from '@components/common/login/LoginOauth';
 import { useGetUserAPI } from '@hooks/query/useGetQuery';
