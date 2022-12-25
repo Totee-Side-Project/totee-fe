@@ -11,7 +11,7 @@ import {
   SubmitCommentButton,
   SubmitModifyButton,
   SubmitReplyButton,
-} from '@components/common/detail/Button/Button';
+} from '@components/common/detail/Buttons/Buttons';
 import JoinerCheck from '@components/common/join/JoinerCheck/JoinerCheck';
 import { NewComments } from '@components/common/detail/Comment/NewComment';
 import { useGetLikeofPost, useGetPostByPostId } from '@hooks/query/useGetQuery';
