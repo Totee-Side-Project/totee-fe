@@ -1,36 +1,20 @@
-// <<<<<<< HEAD
-// import React, { useEffect, useState } from 'react';
-// import { Link, useNavigate } from 'react-router-dom';
-// import { useRecoilState } from 'recoil';
-// import { UserState, loginState } from '@store/index';
-// import { defaultUserState } from '@store/user';
-// import { OnboardModal, SignInModal, ToggleIcon } from '@components/common';
-// import { AlarmIcon } from '@components/common';
-// import Swal from 'sweetalert2';
-// import logo from '@assets/png/toteelogo-kr.png';
-// import alarm from '@assets/svg/alarmicon.svg';
-// =======
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
+
 import { UserState, loginState } from '@store/index';
-import { NewIcon } from '@components/atoms/Icon/NewIcon';
+import { Icon } from '@components/atoms';
 import { OnboardModal, SignInModal } from '@components/common';
 import { AlarmIcon } from '@components/common';
 import { HeaderUserProfileNav } from './HeaderUserProfileNav';
 import logo from '@assets/png/toteelogo-kr.png';
 import alarm from '@assets/svg/alarmicon.svg';
-// >>>>>>> e00500473b4a552cfed31157c6ae56d1a0c7be86
 import './header.scss';
 
 export const Header = () => {
-  // const [listening, setListening] = useState(false);
-  // const [meventSource, msetEventSource] = useState<any>(undefined);
-
   const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
   const [isOpenOnboardModal, setIsOpenOnboardModal] = useState(false);
   const [isShowAlarm, setIsShowAlarm] = useState(false);
-  // const [isShowToggle, setIsShowToggle] = useState(false);
 
   //로그인 state 관리
   const [login, setLogin] = useRecoilState(loginState);
@@ -106,7 +90,7 @@ export const Header = () => {
     <>
       <header className="header">
         <div className="content">
-          <NewIcon src={logo} alt="토티 로고" onClick={() => navigate('/')} />
+          <Icon src={logo} alt="토티 로고" onClick={() => navigate('/')} />
           <div className="buttonWrapper">
             <ul className="profile_wrapper">
               <li>

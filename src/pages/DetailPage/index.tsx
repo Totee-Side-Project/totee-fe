@@ -6,13 +6,12 @@ import Swal from 'sweetalert2';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
+import { Button, Icon, Line, Select } from '@components/atoms';
 import {
   SubmitCommentButton,
   SubmitModifyButton,
   SubmitReplyButton,
 } from '@components/common/detail/Button/Button';
-import { Button, Line, Select } from '@components/atoms';
-import { NewIcon } from '@components/atoms/Icon/NewIcon';
 import JoinerCheck from '@components/common/join/JoinerCheck/JoinerCheck';
 import { NewComments } from '@components/common/detail/Comment/NewComment';
 import { useGetLikeofPost, useGetPostByPostId } from '@hooks/query/useGetQuery';
@@ -241,7 +240,7 @@ const LikeCommentViewCount = (
   const createFooterItems = () => {
     return Object.entries(footerItems).map(([key, [src, value]], index) => (
       <div key={key + index} className={classes.footer_item_wrap}>
-        <NewIcon src={src as string} alt={`${key}_icon`} onClick={() => {}} />
+        <Icon src={src as string} alt={`${key}_icon`} onClick={() => {}} />
         {value}
       </div>
     ));
@@ -299,7 +298,7 @@ const SectionTitle = (
         <h1 className={classes.title_left}>{props.title}</h1>
       </div>
       <div className={classes.title_right}>
-        <NewIcon
+        <Icon
           className={classes.like_icon}
           src={isLikeData?.data.body.data ? FullHeartIcon : HeartIcon}
           alt="heart_icon"
@@ -307,7 +306,7 @@ const SectionTitle = (
         />
         {props.nickname == currentUserNickname && (
           <Select
-            trigger={<NewIcon src={SettingIcon} alt="setting_icon" />}
+            trigger={<Icon src={SettingIcon} alt="setting_icon" />}
             style={{
               width: '110px',
               right: 0,
@@ -426,7 +425,7 @@ const LeftSidebar = () => {
   const { navigatePrevious } = useCustomNavigate();
   return (
     <aside className={classes.aside_left}>
-      <NewIcon
+      <Icon
         style={{
           width: '48px',
           height: '48px',

@@ -1,9 +1,8 @@
 import { MouseEvent, ReactNode, useEffect, useState } from 'react';
 
-import { SelectItem } from '@components/atoms';
-import { Circle } from '@components/atoms/Circle/Circle';
+import { Circle, SelectItem } from '@components/atoms';
 import { SkillIcon } from '@components/atoms/SkillIcon/SkillIcon';
-import icon from '@components/common/svg';
+import icon from '@components/atoms/svg';
 import classes from './skillSelector.module.scss';
 
 export type stringKeyStringListValueType = { [key: string]: string[] };

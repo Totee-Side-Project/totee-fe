@@ -5,7 +5,7 @@ import {
   OverLimitIcons,
   UnOverLimitIcons,
 } from '@components/atoms/SkillIcon/SkillIcons';
-import { NewIcon } from '@components/atoms/Icon/NewIcon';
+import { Icon } from '@components/atoms';
 import type { IResponsePostDetail } from 'types/api.types';
 import { createMarkup } from '@utils/createMarkup';
 import HeartIcon from '@assets/svg/common/heart.svg';
@@ -58,7 +58,7 @@ const NewPostCardHeader = ({ post }: NewPostCardProps) => {
       <div className={classes.post_card_header_wrap}>
         <div className={classes.post_card_header_left}>
           <div className={classes.post_card_img_wrap}>
-            <NewIcon src={post.imageUrl} />
+            <Icon src={post.imageUrl} />
           </div>
           <div>{post.nickname}</div>
         </div>
@@ -124,7 +124,7 @@ const NewPostCardFooter = ({ post }: NewPostCardProps) => {
           [EyeIcon, 'view_icon', post.view],
         ].map(([src, alt, data]) => (
           <li className={classes.post_card_footer_item} key={alt}>
-            <NewIcon
+            <Icon
               src={src as string}
               alt="heart_icon"
               style={{ width: '20px', height: '20px' }}

@@ -2,8 +2,7 @@ import { ReactNode, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import Swal from 'sweetalert2';
 
-import { NewIcon } from '@components/atoms/Icon/NewIcon';
-import { Line } from '@components/atoms';
+import { Icon, Line } from '@components/atoms';
 import { useDeleteComment, useDeleteReply } from '@hooks/query/useMutateQuery';
 import { UserState } from '@store/index';
 import { createMarkup } from '@utils/createMarkup';
@@ -350,7 +349,7 @@ const CommentItemProfile = ({
 }) => {
   return (
     <div className={classes.left_item_img_wrap}>
-      <NewIcon
+      <Icon
         src={comment.profileImageUrl}
         style={{
           width: '50px',
