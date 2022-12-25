@@ -13,5 +13,6 @@ export * from './Icon/Icon';
 export * from './CheckBox/CheckBox';
 
 export * from './SectionTitle/SectionTitle';
+export * from './Select/Select';
 export * from './Select/SelectItem';
 export * from './ScrollTopButton/ScrollTopButton';

@@ -1,8 +1,11 @@
-import { useBoolean } from '@hooks/useBoolean';
 import React, { useContext } from 'react';
-import { ReactNode } from 'react';
-import classes from './select.module.scss';
+import type { ReactNode } from 'react';
 import type CSS from 'csstype';
+
+import { useBoolean } from '@hooks/useBoolean';
+import './select.scss';
+import classes from './select.module.scss';
+
 const DropDownContext = React.createContext({
   isOpen: false,
   setOpen: () => {},

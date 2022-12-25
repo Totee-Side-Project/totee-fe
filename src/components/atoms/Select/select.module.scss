@@ -1,3 +1,16 @@
+.recent_wrapper {
+  border: 1.5px solid #bfbfbf;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  cursor: pointer;
+  &:hover {
+    cursor: pointer;
+    box-shadow: inset 0 1000px rgba(0, 0, 0, 0.03) !important;
+  }
+}
+
 .dropdown_wrap {
   width: 100%;
   position: relative;

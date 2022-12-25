@@ -11,11 +11,10 @@ import {
   SubmitModifyButton,
   SubmitReplyButton,
 } from '@components/common/detail/Button/Button';
-import { Button, Line } from '@components/atoms';
+import { Button, Line, Select } from '@components/atoms';
 import { NewIcon } from '@components/atoms/Icon/NewIcon';
 import JoinerCheck from '@components/common/join/JoinerCheck/JoinerCheck';
 import { NewComments } from '@components/common/detail/Comment/NewComment';
-import { Select } from '@components/ui/Select/Select';
 import { useGetLikeofPost, useGetPostByPostId } from '@hooks/query/useGetQuery';
 import {
   useUpdateLike,
