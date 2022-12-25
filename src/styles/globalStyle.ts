@@ -150,6 +150,9 @@ const globalStyle = css`
       }
     }
   }
+  button {
+    border: none;
+  }
   textarea {
     &.border {
       &:focus {

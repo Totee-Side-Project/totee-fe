@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import './EditProfileModal.scss';
 import { EditModal } from '@components/atoms/Modal/EditModal';
 
-import { EditPositionModal } from '@components/common/mypage/EditProfileModal/EditPositionModal';
+// import { EditPositionModal } from '@components/common/mypage/EditProfileModal/EditPositionModal';
 
 import { positionList, positionListKey } from '@utils/position.const';
 import { UpdateUser, User } from 'types/user.types';
@@ -12,7 +12,7 @@ import { UpdateUser, User } from 'types/user.types';
 import UserPostingList from './UserPostingList';
 import LikePostingList from './LikePostingList';
 
-import { useUpdateUser } from '@hooks/useMutateQuery';
+import { useUpdateUser } from '@hooks/query/useMutateQuery';
 interface IEditProfileModalProps {
   user: User;
   isOpen: boolean;
@@ -195,12 +195,12 @@ export function EditProfileModal({
           </div>
         </section>
       </EditModal>
-      <EditPositionModal
+      {/* <EditPositionModal
         isOpen={isEditPositionModal}
         setIsOpen={setIsEditPositionModal}
         values={values}
         setValues={setValues}
-      ></EditPositionModal>
+      ></EditPositionModal> */}
       <UserPostingList />
       <LikePostingList />
     </>

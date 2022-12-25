@@ -1,9 +1,10 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
+
 import { Button, Modal } from '@components/atoms';
 import { ReactComponent as KakakoIcon } from '@assets/svg/kakao-logo.svg';
 import { ReactComponent as GoogleIcon } from '@assets/svg/google-logo.svg';
-import classes from './onboardmodal.module.scss';
 import { GOOGLE_AUTH_URL, KAKAO_AUTH_URL } from '@api/api';
+import classes from './onboardmodal.module.scss';
 
 interface ISignInModalProps {
   isOpen: boolean;
@@ -24,14 +25,15 @@ export function SignInModal({ isOpen, setIsOpen }: ISignInModalProps) {
           <h2>소셜 아이디로 쉽게 로그인해 보세요!</h2>
           <div className={classes.footer}>
             <Button
-              text="구글로 로그인하기"
+              left={<GoogleIcon />}
+              center="구글로 로그인하기"
+              onClick={() => googleLoginRef.current.click()}
               style={{
                 width: '210px',
                 backgroundColor: '#fff',
                 border: '2px solid #C9C9C9',
+                color: '#1f1f1f',
               }}
-              icon={<GoogleIcon />}
-              onClick={() => googleLoginRef.current.click()}
             ></Button>
             <a
               style={{ display: 'none' }}
@@ -39,13 +41,14 @@ export function SignInModal({ isOpen, setIsOpen }: ISignInModalProps) {
               ref={googleLoginRef}
             ></a>
             <Button
-              text="카카오로 로그인하기"
+              left={<KakakoIcon />}
+              center="카카오로 로그인하기"
+              onClick={() => kakaoLoginRef.current.click()}
               style={{
                 width: '210px',
                 backgroundColor: 'rgba(255, 232, 18, 1)',
+                color: '#1f1f1f',
               }}
-              icon={<KakakoIcon />}
-              onClick={() => kakaoLoginRef.current.click()}
             ></Button>
             <a
               style={{ display: 'none' }}

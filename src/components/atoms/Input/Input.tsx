@@ -1,94 +1,95 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import {
+  ChangeEvent,
+  HTMLInputTypeAttribute,
+  InputHTMLAttributes,
+  ReactNode,
+  useEffect,
+} from 'react';
 import classes from './input.module.scss';
-import classNames from 'classnames';
 
-interface InputProps {
-  style?: string;
-  value: string;
-  label?: string;
-  type: string;
-  name: string;
-  id: string;
+const styleFlex = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+};
+
+const styleFullSize = {
+  width: '100%',
+  height: '100%',
+};
+const styleNoneBorder = {
+  width: '100%',
+  height: '100%',
+  border: 0,
+  outline: 'none',
+};
+
+const styleNoneSpinButton = {
+  // WebkitAppearance:,
+};
+
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
+  type: HTMLInputTypeAttribute;
+  className?: string;
   placeholder: string;
-  img?: any;
-  autoFocus?: boolean;
-  setStatus?: (e: any) => void;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  // maxlength: string | any;
+  label?: string;
+  top?: ReactNode;
+  left?: ReactNode;
+  right?: ReactNode;
+  bottom?: ReactNode;
+  disabled?: boolean;
+  value: string | number;
+  max?: number;
+  min?: number;
+  onChange?: (e: ChangeEvent<HTMLInputElement>, key?: string) => void;
+  onResetInputValue?: () => void;
 }
 
-/**
- *
- * @param value : input 값
- * @param label : input 라벨
- * @param type : input 종류 default | active | focused
- * @param name : input name
- * @param id : input id
- * @param placeholder : input placeholder
- * @param onChange : onChange 콜백 함수
- * @returns
- */
-export function Input({
-  style = 'default',
-  value,
-  label,
-  type,
-  name,
-  id,
-  placeholder,
-  img,
-  autoFocus = true,
-  onChange,
-  setStatus,
-}: // maxlength,
-InputProps) {
-  const [inputType, setInputType] = useState('default');
-
+// 추가해야할 기능
+// left right 가 있을 경우에 focus시 border color가 변경되지 않는다.
+export const Input = ({
+  className,
+  top,
+  left,
+  bottom,
+  right,
+  disabled,
+  onResetInputValue,
+  ...props
+}: Props) => {
   useEffect(() => {
-    if (setStatus) {
-      setStatus(inputType);
-    }
-  }, [inputType]);
-
-  const handleFocus = useCallback(() => {
-    setInputType('focused');
-  }, [inputType]);
-
-  const handleBlur = useCallback(() => {
-    if (value.length == 0) {
-      setInputType('default');
-    } else {
-      setInputType('active');
-    }
-  }, [value, inputType]);
-
-  useEffect(() => {
-    value.length > 0 ? setInputType('focused') : setInputType('default');
-  }, [value]);
-
+    if (disabled && onResetInputValue) onResetInputValue();
+  }, [disabled]);
   return (
-    <div className={classNames(classes.input_group, classes[style])}>
-      <label className={classes.label} htmlFor={name}>
-        {label}
-      </label>
-      <input
-        autoFocus={autoFocus}
-        className={classNames(classes[inputType], 'border')}
-        type={type}
-        name={name}
-        id={id}
-        placeholder={placeholder}
-        onChange={onChange}
-        onFocus={() => handleFocus()}
-        onBlur={() => handleBlur()}
-        value={value}
-        // maxLength={maxlength}
-      ></input>
-      {img && (
-        <>
-          <p className={classes.img}>{img}</p>
-        </>
+    <div className="input_container">
+      {top}
+      {left || right ? (
+        <div
+          className={className ? className : classes.default_input_wrap}
+          style={styleFlex}
+        >
+          {left}
+          <input
+            style={{
+              ...styleFullSize,
+              ...styleNoneBorder,
+              ...styleNoneSpinButton,
+            }}
+            disabled={disabled}
+            {...props}
+          />
+          {right}
+        </div>
+      ) : (
+        <input
+          className={classes.default_input}
+          style={{
+            ...styleFullSize,
+          }}
+          {...props}
+        />
       )}
+      {bottom}
     </div>
   );
-}
+};

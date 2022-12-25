@@ -13,10 +13,10 @@ export * from './main/Carousel/Carousel';
 export * from './main/StudySection/StudySection';
 
 export * from './post/PostList/PostList';
-export * from './detail/Comment/Comment';
 export * from './detail/CommentInput/CommentInput';
 export * from './detail/Editor/Editor';
 export * from './detail/Select/Select';
+export * from './selector/SkillSelector';
 
 export * from './section/MentorReviewSection/MentorReviewSection';
 

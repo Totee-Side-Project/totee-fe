@@ -1,27 +1,31 @@
-import { ScrollTopButton } from '@components/atoms/ScrollTopButton/ScrollTopButton';
-import { Banner, Footer, Header } from '@components/common';
-import './App.css';
-import { MainPage, PostsPage } from '@components/pages';
-import { useEffect } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
+
+import {
+  CreateStudyPage,
+  EditStudyPage,
+  MainPage,
+  MyPage,
+  NewDetailPage,
+  NotMatchPage,
+} from 'pages';
+import { ScrollTopButton } from '@components/atoms';
+import { Banner, Footer, Header } from '@components/common';
 import LoginOauth from '@components/common/login/LoginOauth';
-import CreateStudyPage from '@components/pages/CreateStudyPage/CreateStudyPage';
-import MyPage from '@pages/MyPage/MyPage';
-import { useGetUserAPI } from '@hooks/useGetQuery';
+import { useGetUserAPI } from '@hooks/query/useGetQuery';
 import {
   UserState,
   defaultLoginState,
   defaultUserState,
   loginState,
 } from '@store/index';
-import { NewDetailPage } from '@components/pages/DetailPage/NewDetailPage';
-import { EditStudyPage } from '@components/pages/EditStudyPage/EditStudyPage';
-import NotMatchPage from '@components/pages/NotMatchPage';
-import studyBanner from '@assets/png/study_banner.png';
+import studyBanner from '@assets/png/banner/study_banner2.png';
+import './App.css';
+
 const isNotLoginRoutes = [
   { path: '/', element: <MainPage /> },
-  { path: '/posts', element: <PostsPage /> },
+  // { path: '/posts', element: <PostsPage /> },
   { path: '/oauth/redirect', element: <LoginOauth /> },
   { path: '/detail/:id', element: <NewDetailPage /> },
 ];
@@ -35,7 +39,7 @@ export const isLoginRoutes = [
 function App() {
   const [login, setLogin] = useRecoilState(loginState);
   const [user, setUser] = useRecoilState(UserState);
-  const { data, status, isFetching, isError } = useGetUserAPI();
+  const { data, status } = useGetUserAPI();
 
   // localStorage에서 loginData를 get한다.
   let loginLocalStorage: any = localStorage.getItem('loginData');
@@ -53,13 +57,22 @@ function App() {
     }
   }, [data]);
 
-  // 여기서 로그인이 필요한 페이지 어디인가?
   return (
     <>
       <Header />
       <Routes>
         <Route
           path="/setupstudy"
+          element={
+            <img
+              src={studyBanner}
+              alt="스터디 배너"
+              style={{ width: '100%', marginTop: 70 }}
+            />
+          }
+        />
+        <Route
+          path="/edit/:id"
           element={
             <img
               src={studyBanner}
@@ -78,7 +91,6 @@ function App() {
           isLoginRoutes.map(({ path, element }) => (
             <Route key={path} path={path} element={element} />
           ))}
-
         <Route path="*" element={<NotMatchPage status={status} />} />
       </Routes>
       <ScrollTopButton />

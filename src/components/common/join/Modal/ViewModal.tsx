@@ -1,7 +1,7 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { Button, Modal } from '@components/atoms';
-import { IApplicantDetail } from '@api/responseType';
-import { usePostTeam } from '@hooks/useMutateQuery';
+import { IApplicantDetail } from 'types/api.types';
+import { usePostTeam } from '@hooks/query/useMutateQuery';
 import { useParams } from 'react-router-dom';
 import './joinerViewModal.scss';
 
@@ -60,7 +60,7 @@ export function ViewModal({ isOpen, setIsOpen, applicant }: IViewModalProps) {
             <div className="ApplyMessage">{applicant.message}</div>
             <div className="BtnWrapper">
               <Button
-                text="승인 거부"
+                center="승인 거부"
                 style={{
                   color: '#fff',
                   width: '210px',
@@ -70,7 +70,7 @@ export function ViewModal({ isOpen, setIsOpen, applicant }: IViewModalProps) {
                 onClick={rejectTeamOnClick}
               ></Button>
               <Button
-                text="승인 허용"
+                center="승인 허용"
                 style={{
                   color: '#fff',
                   width: '210px',

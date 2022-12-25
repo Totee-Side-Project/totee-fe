@@ -1,31 +1,25 @@
-.button{
-    width: fit-content;
-    height: 50px;
-    padding: 13px 20px;   
-    border: none;
-    outline:0;
-    box-sizing: border-box;
-    font-size: 16px;
-    font-weight: 700;
-    color: rgba(31, 31, 31, 1);
-    border-radius: 10px;
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    &.disable{
-        background-color: #EBEBEB !important;
-    }
-    &:hover{
-        cursor: pointer;
-    }
+.default {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: fit-content;
+  height: 50px;
+  padding: 13px 20px;
+  border-radius: 8px;
+  background-color: #568a35;
+  color: #fff;
+  white-space: nowrap;
+  font-size: 16px;
+  font-weight: 700;
 }
-.icon{
-    margin-right: 7px;
-}
-.hover{
-    &:hover{
-        cursor: pointer;
-        box-shadow: inset 0 1000px rgba(0, 0, 0, 0.03) !important;
-    }
+
+button {
+  transition: 0.1s;
+  &:disabled {
+    background-color: #ebebeb !important;
+  }
+  &:hover:enabled {
+    opacity: 0.8;
+    cursor: pointer;
+  }
 }

@@ -3,7 +3,7 @@ import { AlarmIconProps } from 'types/icon.types';
 import classes from './alarmIcon.module.scss';
 import { useOutsideAlerter } from '@hooks/useOutsideAlerter';
 import alarm from '@assets/svg/alarmicon.svg';
-import { useGetAlarm } from '@hooks/useGetQuery';
+import { useGetAlarm } from '@hooks/query/useGetQuery';
 import AlarmList from './AlarmList';
 
 export function AlarmIcon({ isShowAlarm, setIsShowAlarm }: AlarmIconProps) {

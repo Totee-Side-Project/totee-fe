@@ -1,18 +1,20 @@
-import React from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Autoplay, Pagination } from 'swiper';
+import 'swiper/swiper-bundle.min.css';
+import 'swiper/components/navigation/navigation.min.css';
+
+import { ImageWithWebp } from '@components/atoms';
 import Banner1Img from '@assets/png/main_banner.png';
 import Banner1ImgWebp from '@assets/webp/main_banner.webp';
 import Banner2Img from '@assets/webp/study_banner.webp';
 import Banner2ImgWebp from '@assets/webp/study_banner.webp';
 import Banner3Img from '@assets/webp/mentor_mentee_banner.webp';
 import Banner3ImgWebp from '@assets/webp/mentor_mentee_banner.webp';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import classes from './banner.module.scss';
-import 'swiper/swiper-bundle.min.css';
-import 'swiper/components/navigation/navigation.min.css';
+
 // import my custom pagination.scss
 import './pagination.scss';
-import SwiperCore, { Autoplay, Pagination } from 'swiper';
-import { ImageWithWebp } from '@components/ui/Image/ImageWithWebp';
+import classes from './banner.module.scss';
+
 SwiperCore.use([Autoplay, Pagination]);
 
 export function Banner() {

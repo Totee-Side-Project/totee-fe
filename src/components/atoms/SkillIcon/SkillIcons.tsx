@@ -1,9 +1,6 @@
-// import { IResponsePostDetail } from '@components/pages/DetailPage/NewDetailPage';
-import classes from './SkillIcons.module.scss';
-import icon from '@components/common/svg';
-import { NewIcon } from '../Icon/NewIcon';
 import EllipsisIcon from '@assets/svg/common/ellipsis.svg';
 import { SkillIcon } from './SkillIcon';
+import classes from './SkillIcons.module.scss';
 
 export const OverLimitIcons = ({
   list,
@@ -21,8 +18,8 @@ export const OverLimitIcons = ({
             className={classes.default_skillIcons_over_wrap}
             key={src + index}
           >
-            <div className={classes.default_skillIcons_over}>
-              <NewIcon src={icon[src] || src} alt="skill_icon" />
+            <div className={classes.default_skillIcons_cover}>
+              <SkillIcon key={src + index} src={src} alt="skill_icon" />
             </div>
           </li>
         ))}

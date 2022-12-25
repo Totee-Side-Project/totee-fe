@@ -1,6 +1,6 @@
 import { JoinModal } from '@components/common/join/Modal/JoinModal';
 import MentorPostViewModal from '@components/common/mentor/Modal/MentorPostViewModal';
-import { useGetRecommendList } from '@hooks/useGetQuery';
+import { useGetRecommendList } from '@hooks/query/useGetQuery';
 import { UserState } from '@store/user';
 import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';

@@ -1,21 +1,20 @@
-.categoryButton{
-    &:hover {
-        transform: scale(1.1);
-        transition: transform 0.4s;
-      }
-    &.big{
-        p{
-            font-size:20px;
-            color: #878787;
-            margin-top:22px;
-            width:100%;
-            text-align: center;
-        }
+.categoryButton {
+  &:hover {
+    transform: scale(1.1);
+    transition: transform 0.4s;
+  }
+  &.big {
+    p {
+      font-size: 20px;
+      color: #878787;
+      margin-top: 22px;
+      width: 100%;
+      text-align: center;
     }
+  }
 
-    &.small{
-        p{
-
-        }
+  &.small {
+    p {
     }
+  }
 }

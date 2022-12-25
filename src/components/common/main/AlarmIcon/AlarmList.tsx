@@ -3,10 +3,10 @@ import classes from './alarmIcon.module.scss';
 import CloseIcon from '@assets/svg/xicon.svg';
 // import DownIcon from '@assets/dropdown_down.svg';
 import AlarmItem from './AlarmItem';
-import { Alarm } from 'types/alarm.types';
+import { AlarmType } from 'types/api.types';
 
 interface Props {
-  alarms: Alarm[];
+  alarms: AlarmType[];
   onClickClose: () => void;
 }
 

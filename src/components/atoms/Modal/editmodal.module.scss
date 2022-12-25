@@ -1,4 +1,4 @@
-.modal{
+.modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -8,11 +8,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index:-1000;
+  z-index: -1000;
   opacity: 0;
 
-
-  .content{
+  .content {
     position: relative;
     width: fit-content;
     height: fit-content;
@@ -24,17 +23,15 @@
     border-radius: 20px;
   }
 
-  &.open{
+  &.open {
     display: flex;
     z-index: 1000;
     opacity: 1;
 
-    .content{
+    .content {
       transform: translateY(0);
       opacity: 1;
       transition: all 0.3s;
     }
   }
 }
-
-

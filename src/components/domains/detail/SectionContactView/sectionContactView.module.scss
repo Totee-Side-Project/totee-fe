@@ -1,0 +1,9 @@
+.contact_view_wrap {
+  margin: 30px 5%;
+  & p {
+    & a {
+      color: blue;
+      text-decoration-line: underline;
+    }
+  }
+}
