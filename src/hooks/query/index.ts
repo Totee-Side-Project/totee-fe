@@ -11,6 +11,3 @@ export const queryKeys = {
   // 구현 전
   // team: (postId: number) => ['team', postId],
 };
-
-// get 완료
-// mutate 완료

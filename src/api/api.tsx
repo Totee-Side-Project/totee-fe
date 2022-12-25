@@ -1,11 +1,12 @@
-import { IReplyRequest } from '@hooks/useMutateQuery';
 import axios, { AxiosResponse } from 'axios';
-import { IPostTeamRequestFormData, PostRequestDto } from './requestType';
 import {
   IGetApplicantResponse,
   IGetPostDetailResponse,
   IGetPostListResponse,
-} from './responseType';
+  IPostTeamRequestFormData,
+  IRequestReply,
+  PostRequestDto,
+} from 'types/api.types';
 
 const BASE_URL = 'https://api.totee.link/';
 
@@ -69,7 +70,7 @@ export const CommentAPI = {
 };
 
 export const ReplyAPI = {
-  createReply: (form: IReplyRequest) => api.post('/api/v1/reply', form),
+  createReply: (form: IRequestReply) => api.post('/api/v1/reply', form),
   updateReply: (replyId: number, form: any) =>
     api.put(`/api/v1/reply/${replyId}`, form),
   deleteReply: (replyId: number) => api.delete(`/api/v1/reply/${replyId}`),

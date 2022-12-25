@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 
 import { Button } from '@components/atoms';
-
-import classes from './onboardmodal.module.scss';
 import { IModalPropsType } from 'types/modal.types';
+import classes from './onboardmodal.module.scss';
 
 export default function CheckPositionModal({
   step,
@@ -60,7 +59,7 @@ export default function CheckPositionModal({
       </div>
       <div className={classes.footer}>
         <Button
-          text="이전으로"
+          center="이전으로"
           style={{
             width: '100%',
             backgroundColor: '#fff',
@@ -70,14 +69,14 @@ export default function CheckPositionModal({
           onClick={() => setStep(step - 1)}
         />
         <Button
-          text="완료"
+          center="완료"
           style={{
             width: '100%',
             backgroundColor: 'rgba(86, 138, 53, 1)',
             color: '#fff',
           }}
           onClick={onClickConfimButton}
-          disable={selectedPosition ? false : true}
+          disabled={selectedPosition ? false : true}
         />
       </div>
       <div className={classes.page}>2/2</div>

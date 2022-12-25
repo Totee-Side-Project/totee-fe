@@ -1,5 +1,4 @@
-import icon from '@components/common/svg';
-// import { IResponsePostDetail } from '@components/pages/DetailPage/NewDetailPage';
+import icon from '@components/atoms/svg';
 import classes from './SkillIcon.module.scss';
 interface Props {
   className?: string;

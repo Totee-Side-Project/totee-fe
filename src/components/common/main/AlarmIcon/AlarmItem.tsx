@@ -1,12 +1,12 @@
 import React from 'react';
 import classes from './alarmIcon.module.scss';
 import { useNavigate } from 'react-router-dom';
-import { Alarm } from 'types/alarm.types';
+import { AlarmType } from 'types/api.types';
 import { handleTime } from '@utils/handleTime';
-import { useUpdateAlarm } from '@hooks/useMutateQuery';
+import { useUpdateAlarm } from '@hooks/query/useMutateQuery';
 
 interface Props {
-  alarm: Alarm;
+  alarm: AlarmType;
   onClose: () => void;
 }
 

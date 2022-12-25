@@ -1,8 +1,10 @@
-import React, { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 import { Button, Modal } from '@components/atoms';
 import './joinModal.scss';
-// import { useParams } from 'react-router-dom';
-import { useDeleteApplicant, useUpdateApplicant } from '@hooks/useMutateQuery';
+import {
+  useDeleteApplicant,
+  useUpdateApplicant,
+} from '@hooks/query/useMutateQuery';
 import { useRecoilValue } from 'recoil';
 import { UserState } from '@store/user';
 
@@ -51,7 +53,7 @@ export function JoinModal({ isOpen, setIsOpen, postId }: IJoinModalProps) {
             onChange={onChangeByTextarea}
           />
           <Button
-            text="완료"
+            center="완료"
             style={{
               color: '#fff',
               width: '210px',

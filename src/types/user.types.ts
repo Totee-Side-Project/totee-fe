@@ -8,15 +8,14 @@ export type User = {
   roleType: string;
 };
 
-
 export type UpdateUser = {
   backgroundImage: any;
   email: string;
   intro: string;
   nickname: string;
   position: string;
-  profileImage: any,
+  profileImage: any;
   roleType: string;
-  keepProfileImage? : "Y" | "N";
-  keepBackgroundImage? : "Y" | "N";
+  keepProfileImage?: 'Y' | 'N';
+  keepBackgroundImage?: 'Y' | 'N';
 };

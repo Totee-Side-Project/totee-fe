@@ -5,13 +5,14 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { BrowserRouter } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
+
 import App from './App';
 import { Global } from '@emotion/react';
 import { ThemeProvider } from '@emotion/react';
 import globalStyle from '@styles/globalStyle';
 import { theme } from '@styles/theme';
 import './index.css';
-import ScrollToTop from '@components/atoms/ScrollTop';
+// import ScrollToTop from '@components/atoms';
 
 // default cacheTime은 5분
 const queryClient = new QueryClient({
@@ -31,7 +32,7 @@ ReactDOM.render(
         <RecoilRoot>
           <ThemeProvider theme={theme}>
             <Global styles={globalStyle} />
-            <ScrollToTop />
+            {/* <ScrollToTop /> */}
             <App />
           </ThemeProvider>
         </RecoilRoot>

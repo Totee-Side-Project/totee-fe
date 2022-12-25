@@ -1,8 +1,9 @@
-import { IApplicantDetail } from '@api/responseType';
-import { SkillIcon } from '@components/atoms/SkillIcon/SkillIcon';
-import { useGetApplicant, useGetPostByPostId } from '@hooks/useGetQuery';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+
+import { IApplicantDetail } from 'types/api.types';
+import { SkillIcon } from '@components/atoms/SkillIcon/SkillIcon';
+import { useGetApplicant, useGetPostByPostId } from '@hooks/query/useGetQuery';
 import { ViewModal } from '../Modal/ViewModal';
 import './ownerJoinerCheck.scss';
 

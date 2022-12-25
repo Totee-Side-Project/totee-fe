@@ -1,84 +1,171 @@
-import like from '@assets/svg/heart.svg';
-import com from '@assets/svg/message-square.svg';
-import view from '@assets/svg/eye.svg';
-import { IPostType } from 'types/post.types';
-import classes from './postCard.module.scss';
+import Skeleton from 'react-loading-skeleton';
 import { useNavigate } from 'react-router-dom';
-import { indexOf } from 'lodash';
-import { motion, useAnimation } from 'framer-motion';
 
-interface Props {
-  post: IPostType;
-  ref?: any;
+import {
+  OverLimitIcons,
+  UnOverLimitIcons,
+} from '@components/atoms/SkillIcon/SkillIcons';
+import { Icon } from '@components/atoms';
+import type { IResponsePostDetail } from 'types/api.types';
+import { createMarkup } from '@utils/createMarkup';
+import HeartIcon from '@assets/svg/common/heart.svg';
+import EyeIcon from '@assets/svg/common/eye.svg';
+import MessageIcon from '@assets/svg/common/message-square.svg';
+
+import classes from './PostCard.module.scss';
+
+interface NewPostCardProps {
+  post: IResponsePostDetail;
+}
+interface OptionalProps {
+  post?: IResponsePostDetail;
 }
 
-export function PostCard({ post, ref }: Props) {
-  let navigate = useNavigate();
+export const NewPostCard = ({ post }: OptionalProps) => {
+  const navigate = useNavigate();
   const clickHandlerURLParameter = () => {
-    navigate(`/detail/${post.postId}`);
+    post && navigate(`/detail/${post.postId}`);
   };
-  const item = {
-    hidden: {
-      opacity: 0,
-      y: 50,
-      transition: { ease: [0.78, 0.14, 0.15, 0.86] },
-    },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { ease: [0.78, 0.14, 0.15, 0.86] },
-    },
-  };
+
+  if (!post) {
+    return (
+      <div className={classes.post_card_container}>
+        <NewPostCardHeaderSkeleton />
+        <NewPostCardCenterSkeleton />
+        <div className={classes.post_info_line} />
+        <NewPostCardFooterSkeleton />
+      </div>
+    );
+  }
+
   return (
-    <>
-      {/* <div> */}
-      {/* <motion.li variants={item} initial="hidden" ref={ref}> */}
-      <div className={classes.postCard} onClick={clickHandlerURLParameter}>
-        <div className={classes.postWrapper}>
-          <div className={classes.postImgWrapper}>
-            <div className={classes.postImgBox}>
-              <img className={classes.img} src={post?.imageUrl} />
-              <div className={classes.postInfoName}>
-                {post?.position}
-                {post?.nickname}
-              </div>
-            </div>
-            <div className={classes.postStatusWrapper}>
-              {post?.status === 'Y' ? (
-                <div className={classes.postStatus}>모집중</div>
-              ) : (
-                <div className={classes.postStatusNo}>모집완료</div>
-              )}
-            </div>
+    <div
+      className={classes.post_card_container}
+      onClick={clickHandlerURLParameter}
+    >
+      <NewPostCardHeader post={post} />
+      <NewPostCardCenter post={post} />
+      <div className={classes.post_info_line} />
+      <NewPostCardFooter post={post} />
+    </div>
+  );
+};
+// };
+
+const NewPostCardHeader = ({ post }: NewPostCardProps) => {
+  return (
+    <div className={classes.post_card_header}>
+      <div className={classes.post_card_header_wrap}>
+        <div className={classes.post_card_header_left}>
+          <div className={classes.post_card_img_wrap}>
+            <Icon src={post.imageUrl} />
           </div>
-          <div className={classes.postContentBox}>
-            <div>
-              <div className={classes.postTitle}>{post?.title}</div>
-              <div
-                className={classes.postContent}
-                dangerouslySetInnerHTML={{ __html: post?.content }}
-              ></div>
-            </div>
-            <div className={classes.postInfoBox}>
-              <div className={classes.postInfoLine} />
-              <div className={classes.postIconBox}>
-                <div className={classes.postInfo}>
-                  <img src={like} /> {post?.likeNum}
-                </div>
-                <div className={classes.postInfo}>
-                  <img src={com} />
-                  {post?.commentNum}
-                </div>
-                <div className={classes.postInfo}>
-                  <img src={view} /> {post?.view}
-                </div>
-              </div>
-            </div>
+          <div>{post.nickname}</div>
+        </div>
+        <NewPostCardStatusBadge post={post} />
+      </div>
+    </div>
+  );
+};
+
+const NewPostCardHeaderSkeleton = () => {
+  return (
+    <div className={classes.post_card_header}>
+      <div className={classes.post_card_header_wrap}>
+        <div className={classes.post_card_header_left}>
+          <div className={classes.post_card_img_wrap}>
+            <Skeleton circle width={35} height={35} />
           </div>
         </div>
       </div>
-      {/* </motion.li> */}
-      {/* </div> */}
+    </div>
+  );
+};
+
+const NewPostCardCenter = ({ post }: NewPostCardProps) => {
+  return (
+    <div className={classes.post_card_center}>
+      <div className={classes.post_card_title}>
+        <h2>{post.title}</h2>
+      </div>
+      <div
+        className={classes.post_card_content}
+        dangerouslySetInnerHTML={createMarkup(post.content)}
+      />
+      <div className={classes.post_card_skills_wrap}>
+        <NewPostSkills post={post} />
+      </div>
+    </div>
+  );
+};
+const NewPostCardCenterSkeleton = () => {
+  return (
+    <div className={classes.post_card_center}>
+      <div className={classes.post_card_title}>
+        <h2>
+          <Skeleton />
+        </h2>
+      </div>
+      <div className={classes.post_card_content}>
+        <Skeleton count={3} />
+      </div>
+      <div className={classes.post_card_skills_wrap}></div>
+    </div>
+  );
+};
+
+const NewPostCardFooter = ({ post }: NewPostCardProps) => {
+  return (
+    <div className={classes.post_card_footer}>
+      <ul className={classes.post_card_footer_items}>
+        {[
+          [HeartIcon, 'heart_icon', post.likeNum],
+          [MessageIcon, 'message_icon', post.commentNum],
+          [EyeIcon, 'view_icon', post.view],
+        ].map(([src, alt, data]) => (
+          <li className={classes.post_card_footer_item} key={alt}>
+            <Icon
+              src={src as string}
+              alt="heart_icon"
+              style={{ width: '20px', height: '20px' }}
+            />
+            <div>{data}</div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+const NewPostCardFooterSkeleton = () => {
+  return (
+    <div className={classes.post_card_footer}>
+      <ul className={classes.post_card_footer_items}></ul>
+    </div>
+  );
+};
+
+const NewPostSkills = ({ post }: NewPostCardProps) => {
+  return (
+    <>
+      {post.skillList.length >= 5 ? (
+        <OverLimitIcons list={post.skillList} limit={5} />
+      ) : (
+        <UnOverLimitIcons list={post.skillList} />
+      )}
     </>
   );
-}
+};
+
+const NewPostCardStatusBadge = ({ post }: NewPostCardProps) => {
+  return (
+    <div
+      className={
+        post.status === 'Y'
+          ? classes.status_badge
+          : [classes.status_badge, classes.status_badge_no].join(' ')
+      }
+    >
+      {post.status === 'Y' ? '모집중' : '모집완료'}
+    </div>
+  );
+};

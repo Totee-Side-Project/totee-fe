@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans&family=Noto+Sans+KR:wght@500&display=swap');
-$DM : 'DM Sans', sans-serif;
+$DM: 'DM Sans', sans-serif;
 
-.footer{
+.footer {
   background-color: #575757;
   color: #fff;
   padding-top: 15px;
@@ -12,8 +12,8 @@ $DM : 'DM Sans', sans-serif;
   width: 100%;
 }
 
-.footerWrap{
- padding-left: 10px;
+.footerWrap {
+  padding-left: 10px;
   padding-right: 10px;
   width: 100%;
   display: flex;
@@ -22,22 +22,22 @@ $DM : 'DM Sans', sans-serif;
   gap: 20px;
 }
 
-.footerAbout{
+.footerAbout {
   display: inline-block;
   margin-right: 90px;
-  p{
+  p {
     font-size: 12px;
     margin: 7px 0;
   }
 }
 
-.footerIconWrap{
+.footerIconWrap {
   display: flex;
   margin: 23px auto;
   gap: 15px;
 }
 
-.footerName{
+.footerName {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -56,11 +56,11 @@ $DM : 'DM Sans', sans-serif;
   }
 }
 
-.footerLine{
-  border-top: 1px solid #D9DBE9;
+.footerLine {
+  border-top: 1px solid #d9dbe9;
 }
 
-.lineWrap{
+.lineWrap {
   gap: 600px;
   display: flex;
   justify-content: center;
@@ -68,27 +68,23 @@ $DM : 'DM Sans', sans-serif;
   background-color: #575757;
   color: #fff;
   padding: 15px 0;
-  p{
+  p {
     font-family: $DM;
     font-size: 13px;
     margin: 3px 0;
   }
 }
 
-.lineDownL{
+.lineDownL {
   display: flex;
   flex-direction: column;
   text-align: left;
   width: 160px;
 }
 
-.lineDownR{
+.lineDownR {
   display: flex;
   flex-direction: column;
   text-align: right;
   width: 280px;
 }
-
-
-
-

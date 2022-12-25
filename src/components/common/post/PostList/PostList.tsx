@@ -5,13 +5,14 @@ import { motion } from 'framer-motion';
 import { useQueryClient } from 'react-query';
 
 import { searchState } from '@store/search';
-import useInfiniteQuerywithScroll from '@hooks/useInfiniteQuerywithScroll';
+import useInfiniteQuerywithScroll from '@hooks/query/useInfiniteQuerywithScroll';
 import { SectionTitle } from '@components/atoms';
 import { SectionSlider } from '@components/common/main/SectionSlider/SectionSlider';
 import { PostAPI } from '@api/api';
 
-import { PostCard } from '../PostCard/PostCard';
-import { IPostType } from 'types/post.types';
+// import { NewPostCard } from '../PostCard/PostCard';
+import { IPostType } from 'types/api.types';
+
 import classes from './postList.module.scss';
 
 const container = {
@@ -158,13 +159,13 @@ export function PostList() {
         <motion.ul initial="hidden" animate="show" variants={container}>
           <div>
             <SectionSlider>
-              {postsFiltered &&
+              {/* {postsFiltered &&
                 postsFiltered.length > 0 &&
                 postsFiltered
                   .slice(0, isShowTotal ? postsFiltered.length : 8)
                   .map((post: IPostType, idx: number) => (
-                    <PostCard key={`postCard-${idx}`} post={post} />
-                  ))}
+                    <NewPostCard key={`postCard-${idx}`} post={post} />
+                  ))} */}
             </SectionSlider>
           </div>
           <ObservationComponent />
