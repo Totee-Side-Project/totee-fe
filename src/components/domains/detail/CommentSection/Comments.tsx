@@ -14,7 +14,7 @@ import type {
   IReplyDto,
   IResponsePostDetail,
 } from 'types/api.types';
-import classes from './Comments.module.scss';
+import classes from './comments.module.scss';
 
 export const Comments = ({
   postId,
