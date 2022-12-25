@@ -1,9 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { ChangeEvent, MouseEvent } from 'react';
 
-import { Input, Label, Select } from '@components/atoms';
+import { Checkbox, Input, Label, Select } from '@components/atoms';
 import { SkillSelector } from '@components/common/selector/SkillSelector';
-import { Checkbox } from '@components/ui/Checkbox/Checkbox';
 import VerticalLine from '@assets/svg/recentLine.svg';
 import DownArrow from '@assets/svg/recentIcon.svg';
 import paragraphLine from '@assets/png/paragraph_line.png';
