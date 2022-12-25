@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
-import { Circle } from '../circle/Circle';
+
+import { Circle } from '@components/atoms';
 import classes from './checkbox.module.scss';
 
 interface Props {

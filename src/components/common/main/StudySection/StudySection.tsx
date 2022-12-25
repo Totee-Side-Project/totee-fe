@@ -7,9 +7,10 @@ import { PostAPI } from '@api/api';
 import { SectionTitle, SelectItem } from '@components/atoms';
 import { Carousel } from '@components/common';
 import { NewPostCard } from '@components/common/post/PostCard/PostCard';
-import { IResponsePostDetail } from 'types/api.types';
+import { Circle } from '@components/atoms/Circle/Circle';
 import { queryKeys } from '@hooks/query';
 import { useInfiniteQueryTest } from '@hooks/query/useInfiniteQueryCarousel';
+import { IResponsePostDetail } from 'types/api.types';
 
 import classes from './studySection.module.scss';
 import './studySection.scss';
@@ -211,9 +212,10 @@ const SectionFilter = ({ filterList }: { filterList: string[] }) => {
                 })
               }
               left={
-                <div className={classes.outer_circle}>
-                  <div className={classes.inner_circle} />
-                </div>
+                <Circle
+                  selected={filter === selectedFilter}
+                  backgroundColor="#ffd02c"
+                />
               }
             >
               #{filter}

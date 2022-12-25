@@ -1,9 +1,10 @@
-import { SelectItem } from '@components/atoms';
-import { Circle } from '@components/ui/circle/Circle';
 import { MouseEvent, ReactNode, useEffect, useState } from 'react';
-import classes from './skillSelector.module.scss';
-import icon from '@components/common/svg';
+
+import { SelectItem } from '@components/atoms';
+import { Circle } from '@components/atoms/Circle/Circle';
 import { SkillIcon } from '@components/atoms/SkillIcon/SkillIcon';
+import icon from '@components/common/svg';
+import classes from './skillSelector.module.scss';
 
 export type stringKeyStringListValueType = { [key: string]: string[] };
 export type stringKeyBooleanValueType = { [key: string]: boolean };
