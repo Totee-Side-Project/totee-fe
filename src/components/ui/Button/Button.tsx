@@ -1,16 +1,20 @@
-import type { ButtonHTMLAttributes } from 'react';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import classes from './button.module.scss';
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  text: string;
+  left?: ReactNode;
+  center: ReactNode;
+  right?: ReactNode;
 }
 
-export const Button = ({ text, ...props }: Props) => {
+export const Button = ({ left, center, right, ...props }: Props) => {
   return (
     <button
       className={props.className ? props.className : classes.default}
       {...props}
     >
-      {text}
+      {left}
+      {center}
+      {right}
     </button>
   );
 };

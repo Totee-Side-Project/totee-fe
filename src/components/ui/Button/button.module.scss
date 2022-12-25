@@ -1,12 +1,10 @@
 .default {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   width: fit-content;
-  // width: 100%;
   height: 50px;
   padding: 13px 20px;
-  // border: 2px solid #568a35;
   border-radius: 10px;
   background-color: #568a35;
   color: #fff;
