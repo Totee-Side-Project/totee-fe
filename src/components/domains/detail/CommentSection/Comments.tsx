@@ -8,15 +8,15 @@ import { UserState } from '@store/index';
 import { createMarkup } from '@utils/createMarkup';
 import { handleErrorType } from '@utils/handleErrorType';
 import { handleTime } from '@utils/handleTime';
-import { CommentSubmitArea } from 'pages/DetailPage';
+import { CommentSubmitArea } from './CommentSubmitArea';
 import type {
   IPostCommentDto,
   IReplyDto,
   IResponsePostDetail,
 } from 'types/api.types';
-import classes from './newComment.module.scss';
+import classes from './Comments.module.scss';
 
-export const NewComments = ({
+export const Comments = ({
   postId,
   commentDTOList,
 }: Pick<IResponsePostDetail, 'commentDTOList' | 'postId'>) => {
