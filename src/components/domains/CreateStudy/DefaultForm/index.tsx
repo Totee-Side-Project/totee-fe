@@ -7,6 +7,7 @@ import paragraphLine from '@assets/png/paragraph_line.png';
 
 import { data } from '../data';
 import { DefaultFormElement } from '../FormElements';
+// import { DefaultFormElement } from '../FormElements';
 import classes from '../createStudy.module.scss';
 
 interface DefaultFormProps {
