@@ -5,14 +5,14 @@ interface Props {
   title: string;
   sub: string;
   description: string;
-  isTotal: boolean;
+  isTotal?: boolean;
   onClickTotal?: () => {};
 }
 export function SectionTitle({
   title,
   sub,
   description,
-  isTotal,
+  isTotal = true,
   onClickTotal,
 }: Props) {
   return (
