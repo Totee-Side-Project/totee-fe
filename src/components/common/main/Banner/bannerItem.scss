@@ -1,0 +1,51 @@
+.bannerItem {
+  position: relative;
+  height: 350px;
+  .bannerItem_left {
+    position: absolute;
+    display: flex;
+    left: 10%;
+    width: 45%;
+    height: 100%;
+    align-items: center;
+  }
+
+  .bannerItem_right {
+    height: 100%;
+    width: 700px;
+    margin-left: auto;
+
+    & > picture {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+
+      img {
+        max-height: 300px !important;
+      }
+    }
+  }
+}
+
+@media (min-width: 1023px) {
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* 브라우저 사이즈 768px이상, 1023px이하 일때,*/
+  .bannerItem {
+    height: 300px;
+    .bannerItem_right {
+      width: 500px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .bannerItem {
+    height: 250px;
+    .bannerItem_right {
+      width: 400px;
+    }
+  }
+}
