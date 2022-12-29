@@ -9,6 +9,7 @@ import { queryKeys } from '@hooks/query';
 // import { useSort } from '@hooks/useSort';
 import { PostsFilter } from '../PostsFilter';
 import classes from './postsSection.module.scss';
+import { NotMatchPage } from 'pages';
 
 export const PostsSection = () => {
   const navigate = useNavigate();
@@ -92,6 +93,16 @@ export const PostsSection = () => {
     );
   }
 
-  // 보여줄 데이터들이 없는 상태
-  return null;
+  //
+  // 🟠Todo: 보여줄 데이터들이 없거나 잘못된 정렬 카테고리가 선택된 경우 적절한 안내페이지르 보여줘야한다.
+  return (
+    <main>
+      <div>
+        <ul className={classes.postsSection}>
+          <h2>일치하는 게시물없음</h2>
+        </ul>
+      </div>
+      <div style={{ height: '200px' }} />
+    </main>
+  );
 };
