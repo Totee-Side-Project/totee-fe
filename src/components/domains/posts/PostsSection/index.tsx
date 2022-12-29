@@ -1,13 +1,14 @@
 import { useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { PostAPI } from '@api/api';
-import { NewPostCard } from '@components/common/post/PostCard/PostCard';
-import { queryKeys } from '@hooks/query';
-import { useInfiniteTotalPosts } from '@hooks/query/useInfiniteTotalPosts';
-import { PostsFilter, useSort } from '../PostsFilter';
-import classes from './postsSection.module.scss';
-import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Button } from '@components/atoms';
+import { NewPostCard } from '@components/common/post/PostCard/PostCard';
+import { useInfiniteTotalPosts } from '@hooks/query/useInfiniteTotalPosts';
+import { queryKeys } from '@hooks/query';
+import { useSort } from '@hooks/useSort';
+import { PostsFilter } from '../PostsFilter';
+import classes from './postsSection.module.scss';
 
 export const PostsSection = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -23,7 +24,6 @@ export const PostsSection = () => {
     sortedDatas: totalPosts,
     setSortedDatas: setTotalPosts,
     setSortFunctions,
-    sortFunctions,
   } = useSort(query.data?.pages.flatMap((page) => page.postData.content));
 
   useEffect(() => {
@@ -53,7 +53,7 @@ export const PostsSection = () => {
             }}
             element={undefined}
           />
-          <Button onClick={() => navigate('/createStudy')} center="글쓰기" />
+          <Button onClick={() => navigate('/setupStudy')} center="글쓰기" />
         </div>
         <section>
           <div>
