@@ -1,8 +1,9 @@
-.postsFilterWrap {
-  .filters {
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  .filter {
     display: flex;
-    align-items: flex-end;
-    .filter {
-    }
+    align-items: center;
   }
 }
