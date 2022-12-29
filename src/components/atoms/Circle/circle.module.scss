@@ -8,7 +8,6 @@
   border-radius: 100%;
   background-color: #ffffff;
   border: 1px solid #222222;
-
   .inner_circle {
     width: 10px;
     height: 10px;
@@ -18,5 +17,22 @@
 
   .select {
     background-color: #ffd02c;
+  }
+}
+
+.non_outer_circle {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  .inner_circle {
+    width: 10px;
+    height: 10px;
+    margin-right: 7px;
+    border-radius: 100%;
+    background-color: #a0aec0;
+  }
+
+  .select {
+    background-color: #568a35;
   }
 }
