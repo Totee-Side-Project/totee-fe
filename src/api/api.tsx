@@ -36,8 +36,13 @@ export const PostAPI = {
   getPostList: (
     page = 0,
     size = 5,
-  ): Promise<AxiosResponse<IGetPostListResponse>> =>
-    api.get(`/api/v1/post/list?page=${page}&size=${size}`),
+    filter?: string,
+  ): Promise<AxiosResponse<IGetPostListResponse>> => {
+    if (!filter) return api.get(`/api/v1/post/list?page=${page}&size=${size}`);
+    return api.get(
+      `/api/v1/post/list?page=${page}&size=${size}&sort=${filter},desc`,
+    );
+  },
   getPostByPostId: (
     postId: number,
   ): Promise<AxiosResponse<IGetPostDetailResponse>> =>
