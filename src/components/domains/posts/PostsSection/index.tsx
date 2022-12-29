@@ -27,7 +27,12 @@ export const PostsSection = () => {
   } = useSort(query.data?.pages.flatMap((page) => page.postData.content));
 
   useEffect(() => {
+    setSearchParams({ filter: 'recent' });
+  }, []);
+
+  useEffect(() => {
     const params = searchParams.get('filter');
+
     if (query.status === 'success' && query.data && params) {
       setSortFunctions[params]();
     }
