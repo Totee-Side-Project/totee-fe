@@ -3,39 +3,29 @@ import { useSearchParams } from 'react-router-dom';
 
 import { Circle } from '@components/atoms';
 import { IResponsePostDetail } from 'types/api.types';
-import { useSort } from '@hooks/useSort';
+// import { useSort } from '@hooks/useSort';
 import classes from './postsFilter.module.scss';
+import { ISortOptions, sortOptionNameType } from 'types/sort.types';
 
 interface Props {
-  datas: IResponsePostDetail[];
-  setDatas: Dispatch<SetStateAction<any>>;
+  datas?: IResponsePostDetail[];
+  setDatas?: Dispatch<SetStateAction<any>>;
   options: ISortOptions;
   element?: ReactNode;
 }
 
-// 이걸 객체로 받아서 key로 함수를 판단하고 value로 버튼의 text를 판단한다.
-interface ISortOptions {
-  [key: string]: string;
-}
-// 'recent' | 'comment' | 'like' | 'view'
-
 export const PostsFilter = ({ datas, setDatas, options, element }: Props) => {
-  const { sortedDatas, setSortFunctions } = useSort(datas);
   const [searchParams, setSearchParams] = useSearchParams();
-  useEffect(() => {
-    setDatas(sortedDatas);
-  }, [sortedDatas]);
 
-  // Todo: onClick도 useSort로 뺄 수 있지 않을까?
-  const onClick = (key: string) => {
+  const onClick = (key: sortOptionNameType) => {
     setSearchParams({ filter: key });
-    setSortFunctions[key];
   };
 
-  // 🟠 Todo: inlineStyle을 SCSS로 변경 예정
+  const filterList = Object.entries(options) as [sortOptionNameType, string][];
+
   return (
     <ul className={classes.filters}>
-      {Object.entries(options).map(([key, value]) => (
+      {filterList.map(([key, value]) => (
         <li key={key} className={classes.filter} onClick={() => onClick(key)}>
           <Circle
             selected={searchParams.get('filter') === key}

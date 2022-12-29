@@ -8,12 +8,14 @@ import { useIntersectionObserver } from './useIntersectionObserver';
 export type FetchPageFuntionType = (
   pageParam: number,
   pageSize: number,
+  filter?: string,
 ) => Promise<AxiosResponse<IResponseOfPage>>;
 
 interface Props {
   getPage: FetchPageFuntionType;
   queryKey: string[];
   pageSize?: number; // 몇개씩 불러올 것인지
+  filter?: string;
 }
 
 // default 값으로 4개씩 불러온다.
@@ -21,15 +23,18 @@ interface Props {
 
 export const useInfiniteTotalPosts = ({
   getPage,
-  pageSize = 4,
   queryKey,
+  pageSize = 4,
+  filter,
 }: Props) => {
+  // console.log(filter, 'useInfinite');
   // 초기값 pageParam은 0 서버에서 넘어오는 last값이 false일 경우(마지막이 아닌 경우) + 1 을 해준다.
   // pageParam(페이지의 넘버, ex)3페이지) , pageSize(한 페이지에 담긴 데이터의 갯수)
   const getPageInfo = async ({ pageParam = 0 }) => {
-    const postData = await getPage(pageParam, pageSize).then(
+    const postData = await getPage(pageParam, pageSize, filter).then(
       (response) => response.data.body.data,
     );
+
     const nextPageParam = !postData.last ? pageParam + 1 : undefined;
     return {
       postData,
@@ -44,6 +49,10 @@ export const useInfiniteTotalPosts = ({
     getNextPageParam: (lastPage, pages) => lastPage.nextPageParam,
     refetchOnWindowFocus: false,
   });
+
+  useEffect(() => {
+    postsQuery.refetch();
+  }, [filter]);
 
   const TriggerComponent = () => {
     const { ref, observer } = useIntersectionObserver(postsQuery.fetchNextPage);

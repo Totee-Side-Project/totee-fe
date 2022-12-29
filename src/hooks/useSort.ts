@@ -3,7 +3,6 @@ import { IResponsePostDetail } from 'types/api.types';
 
 type useSortPropsType = IResponsePostDetail[];
 
-// 🟠 Todo: hooks 폴더 내부로 이동시킬 예정
 export const useSort = (posts: useSortPropsType = []) => {
   const [sortedDatas, setSortedDatas] = useState<any[]>(posts);
 
@@ -42,19 +41,23 @@ export const useSort = (posts: useSortPropsType = []) => {
     setSortedDatas(result);
   };
 
-  const sortFunctions = {
+  type sortOptionNameType = 'recent' | 'commentNum' | 'likeNum' | 'view';
+  type ISortFunctions = Record<sortOptionNameType, () => IResponsePostDetail[]>;
+  type ISetSortFunctions = Record<sortOptionNameType, () => void>;
+
+  const sortFunctions: ISortFunctions = {
     recent: sortRecent,
-    comment: sortCommentCount,
-    like: sortLikeCount,
+    commentNum: sortCommentCount,
+    likeNum: sortLikeCount,
     view: sortViewCount,
   };
 
-  const setSortFunctions = {
+  const setSortFunctions: ISetSortFunctions = {
     recent: setSortRecent,
-    comment: setSortCommentCount,
-    like: setSortLikeCount,
+    commentNum: setSortCommentCount,
+    likeNum: setSortLikeCount,
     view: setSortViewCount,
-  } as { [key: string]: () => void };
+  };
 
   return { sortedDatas, setSortedDatas, setSortFunctions, sortFunctions };
 };
