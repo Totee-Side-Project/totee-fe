@@ -14,10 +14,7 @@ export const OverLimitIcons = ({
       {list
         .filter((value, index) => index < limit)
         .map((src, index) => (
-          <li
-            className={classes.default_skillIcons_over_wrap}
-            key={src + index}
-          >
+          <li className={classes.default_skillIcons_over_wrap} key={src}>
             <div className={classes.default_skillIcons_cover}>
               <SkillIcon key={src + index} src={src} alt="skill_icon" />
             </div>
