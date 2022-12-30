@@ -8,7 +8,7 @@ interface Props {
   responseKeys: string[];
 }
 
-// Todo: useInfiniteQuerywithScroll, useInfiniteTotalPosts와 합쳐져야함
+// 🟠Todo: useInfiniteQuerywithScroll, useInfiniteTotalPosts와 합쳐져야함
 export const useInfiniteQueryTest = ({
   getData,
   queryKey,
@@ -16,7 +16,6 @@ export const useInfiniteQueryTest = ({
   responseKeys,
 }: Props) => {
   const getPageInfo = async ({ pageParam = 0 }) => {
-    // setReturnPageParam(pageParam);
     const response = await getData(pageParam, pageSize);
     let postPage = { ...response }.data;
     // 파라미터로 받은 key 배열을 통해 탐색
@@ -40,7 +39,4 @@ export const useInfiniteQueryTest = ({
   );
 
   return { data: data?.pages, status, fetchNextPage };
-
-  // 무한스크롤을 구현하기 위한 observer관련 코드를 작성해야할 차례
-  // const ObservationComponent = () => {};
 };
