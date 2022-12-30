@@ -19,5 +19,6 @@ export * from './detail/Select/Select';
 export * from './selector/SkillSelector';
 
 export * from './section/MentorReviewSection/MentorReviewSection';
+export * from './section/SearchSection';
 
 export * from './main/SectionSlider/SectionSlider';

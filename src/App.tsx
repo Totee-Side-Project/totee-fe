@@ -9,6 +9,7 @@ import {
   MyPage,
   NewDetailPage,
   NotMatchPage,
+  PostsPage,
 } from 'pages';
 import { ScrollTopButton } from '@components/atoms';
 import { Banner, Footer, Header } from '@components/common';
@@ -25,7 +26,7 @@ import './App.css';
 
 const isNotLoginRoutes = [
   { path: '/', element: <MainPage /> },
-  // { path: '/posts', element: <PostsPage /> },
+  { path: '/posts', element: <PostsPage /> },
   { path: '/oauth/redirect', element: <LoginOauth /> },
   { path: '/detail/:id', element: <NewDetailPage /> },
 ];

@@ -7,8 +7,8 @@ interface Props {
 }
 export const SkillIcon = ({ className, src, alt }: Props) => {
   return (
-    <li className={[classes.default, className].join(' ')}>
+    <div className={[classes.default, className].join(' ')}>
       <img src={icon[src] || src} alt={!alt ? 'icon' : alt} />
-    </li>
+    </div>
   );
 };
