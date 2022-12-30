@@ -1,9 +1,8 @@
-import { Dispatch, ReactNode, SetStateAction, useEffect } from 'react';
+import { Dispatch, ReactNode, SetStateAction } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { Circle } from '@components/atoms';
 import { IResponsePostDetail } from 'types/api.types';
-// import { useSort } from '@hooks/useSort';
 import classes from './postsFilter.module.scss';
 import { ISortOptions, sortOptionNameType } from 'types/sort.types';
 
