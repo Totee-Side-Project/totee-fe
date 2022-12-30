@@ -1,3 +1,5 @@
+// component라기 보다는 constant로 가는게 좋을 것 같다.
+
 import JavaScript from '@assets/svg/skills/frontEnd/JavaScript.svg';
 import Nextjs from '@assets/svg/skills/frontEnd/Nextjs.svg';
 import React from '@assets/svg/skills/frontEnd/React.svg';

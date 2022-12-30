@@ -55,26 +55,6 @@ function OwnerJoinerCheck() {
                 <div className="StatusM_Name">{applicant.nickname}</div>
               </div>
             ))}
-            <div className="StatusM_NameBox">
-              <div className="StatusM_ProfileImg" />
-              <div className="StatusM_Name">dummy data</div>
-            </div>
-            <div className="StatusM_NameBox">
-              <div className="StatusM_ProfileImg" />
-              <div className="StatusM_Name">dummy data</div>
-            </div>
-            <div className="StatusM_NameBox">
-              <div className="StatusM_ProfileImg" />
-              <div className="StatusM_Name">dummy data</div>
-            </div>
-            <div className="StatusM_NameBox">
-              <div className="StatusM_ProfileImg" />
-              <div className="StatusM_Name">dummy data</div>
-            </div>
-            <div className="StatusM_NameBox">
-              <div className="StatusM_ProfileImg" />
-              <div className="StatusM_Name">dummy data</div>
-            </div>
           </div>
           <button
             className="StatusM_Btn"

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useQueryClient } from 'react-query';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 import { PostAPI } from '@api/api';
@@ -17,10 +17,11 @@ import './studySection.scss';
 const filterList = ['전체', '최신순', '인기순', '조회순'];
 
 export function StudySection() {
+  const navigate = useNavigate();
+
   const [filteredPageList, setFilteredPageList] = useState<
     IResponsePostDetail[][]
   >([]);
-
   const [selectedFilter, setSelectedFilter] = useState(filterList[0]);
   // urldml params를 읽고 수정할 수 있다.
   const [searchParams, setSearchParams] = useSearchParams();
@@ -28,11 +29,14 @@ export function StudySection() {
 
   const { data, fetchNextPage, status } = useInfiniteQueryTest({
     getData: PostAPI.getPostList,
-    queryKey: queryKeys.postsAll,
+    queryKey: queryKeys.postsSlider,
     responseKeys: ['body', 'data'],
     pageSize: 4,
   });
 
+  const onClickWithNavigate = () => {
+    navigate('/posts');
+  };
   useEffect(() => {
     return () => {
       setFilteredPageList([]);
@@ -113,6 +117,7 @@ export function StudySection() {
             title={'커리어 성장을 위한 스터디'}
             sub={'Level Up Study'}
             description={`커리어 성장을 위한 스터디를 찾으시나요?\n토티에는 이런저런 여러분야의 스터디가 모여있어요.`}
+            onClick={onClickWithNavigate}
           />
         </div>
         <SectionFilter filterList={filterList} />

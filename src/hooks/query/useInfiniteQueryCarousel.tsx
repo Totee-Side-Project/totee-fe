@@ -8,6 +8,7 @@ interface Props {
   responseKeys: string[];
 }
 
+// Todo: useInfiniteQuerywithScroll, useInfiniteTotalPosts와 합쳐져야함
 export const useInfiniteQueryTest = ({
   getData,
   queryKey,

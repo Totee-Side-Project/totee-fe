@@ -6,15 +6,10 @@ interface Props {
   sub: string;
   description: string;
   isTotal?: boolean;
-  onClickTotal?: () => {};
+  onClick?: () => void;
 }
-export function SectionTitle({
-  title,
-  sub,
-  description,
-  isTotal = true,
-  onClickTotal,
-}: Props) {
+
+export function SectionTitle({ title, sub, description, onClick }: Props) {
   return (
     <div className={classes.title_wrapper}>
       <div>
@@ -22,8 +17,8 @@ export function SectionTitle({
         <h2 className={classes.title_main}>{title}</h2>
         <div className={classes.title_description}>{description}</div>
       </div>
-      {isTotal && (
-        <div className={classes.total_button_wrapper} onClick={onClickTotal}>
+      {onClick && (
+        <div className={classes.total_button_wrapper} onClick={onClick}>
           <div className={classes.button_desc}>전체 보기</div>
           <ChevronIcon />
         </div>

@@ -1,0 +1,10 @@
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  .filter {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+}

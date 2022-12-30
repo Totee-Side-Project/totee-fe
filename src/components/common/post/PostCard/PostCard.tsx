@@ -50,7 +50,6 @@ export const NewPostCard = ({ post }: OptionalProps) => {
     </div>
   );
 };
-// };
 
 const NewPostCardHeader = ({ post }: NewPostCardProps) => {
   return (
