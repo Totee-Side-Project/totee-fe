@@ -40,7 +40,7 @@ export function StudySection() {
   useEffect(() => {
     return () => {
       setFilteredPageList([]);
-      queryClient.removeQueries('test');
+      queryClient.invalidateQueries(queryKeys.postsSlider);
     };
   }, []);
 
@@ -71,7 +71,7 @@ export function StudySection() {
       const chunkedData = chunkData(sortedData, 4);
       setFilteredPageList([...chunkedData]);
     }
-  }, [selectedFilter]);
+  }, [selectedFilter, data]);
 
   const chunkData = <T, _>(data: T[], parts: number): T[][] => {
     let chunkedData = [];
@@ -108,7 +108,6 @@ export function StudySection() {
     return newData;
   };
 
-  // select trigger를 눌렀을 때 option에 따라서 비동기함수를 호출하고 이를 보여주는 기능을한다.
   return (
     <>
       <div className={classes.section_header}>
