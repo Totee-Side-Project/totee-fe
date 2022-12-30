@@ -1,0 +1,19 @@
+.postsFilterContainer {
+  width: 100%;
+
+  position: sticky;
+  top: 70px;
+  z-index: 5;
+  padding: 0 10%;
+  margin-bottom: 15px;
+  // border-bottom: 1px solid gray;
+  background-color: white;
+
+  .postsFilterWrap {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100px;
+    gap: 10px;
+  }
+}

@@ -55,7 +55,10 @@ export const useInfiniteTotalPosts = ({
   }, [filter]);
 
   const TriggerComponent = () => {
-    const { ref, observer } = useIntersectionObserver(postsQuery.fetchNextPage);
+    const { ref, observer } = useIntersectionObserver(
+      postsQuery.fetchNextPage,
+      { rootMargin: '0px 0px 20% 0px' },
+    );
 
     useEffect(() => {
       if (!postsQuery.data) return;
