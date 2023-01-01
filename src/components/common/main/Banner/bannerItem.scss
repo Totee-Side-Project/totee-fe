@@ -35,8 +35,12 @@
   /* 브라우저 사이즈 768px이상, 1023px이하 일때,*/
   .bannerItem {
     height: 300px;
+    .bannerItem_left {
+      left: 10vw;
+    }
+
     .bannerItem_right {
-      width: 500px;
+      width: 60vw;
     }
   }
 }
@@ -44,8 +48,11 @@
 @media (max-width: 768px) {
   .bannerItem {
     height: 250px;
+    .bannerItem_left {
+      left: 5vw;
+    }
     .bannerItem_right {
-      width: 400px;
+      width: 50vw;
     }
   }
 }
