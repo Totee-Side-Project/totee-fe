@@ -48,7 +48,7 @@ export function StudySection() {
       <div className={classes.section_header}>
         <div className={classes.section_title_wrap}>
           <SectionTitle
-            title={'커리어 성장을 위한 스터디'}
+            title={'커리어 성장을 위한 <mark>스터디</mark>'}
             sub={'Level Up Study'}
             description={`커리어 성장을 위한 스터디를 찾으시나요?\n토티에는 이런저런 여러분야의 스터디가 모여있어요.`}
             to={routePaths.posts}
