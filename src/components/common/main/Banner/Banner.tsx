@@ -32,13 +32,12 @@ interface Props {
 }
 
 const BannerItem = ({ backgroundImg, left, right }: Props) => {
-  // img를 받아서 해줄꺼다. 근데 left right로 나누고 mobile tag로 나눈다.
   return (
     <div
       className="bannerItem"
       style={{
         backgroundImage: `url(${backgroundImg})`,
-        backgroundSize: 'auto 100%',
+        backgroundSize: 'cover',
         backgroundPosition: 'center center',
       }}
     >
@@ -60,7 +59,7 @@ export function Banner() {
             clickable: true,
             type: 'bullets',
           }}
-          autoplay={{ delay: 4000, disableOnInteraction: false }} // 추가
+          // autoplay={{ delay: 8000, disableOnInteraction: false }} // 추가
           // observer={true}
           // observeParents={true}
         >
