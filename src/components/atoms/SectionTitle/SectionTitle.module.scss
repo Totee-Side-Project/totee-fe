@@ -1,3 +1,5 @@
+$green: #568a35;
+
 .title_wrapper {
   font-weight: 400;
   font-size: 20px;
@@ -16,6 +18,11 @@
     letter-spacing: -0.05em;
     white-space: pre-line;
     color: #333333;
+
+    mark {
+      background: none;
+      color: $green;
+    }
   }
   .title_sub {
     width: 100%;

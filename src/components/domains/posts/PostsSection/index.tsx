@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { PostAPI } from '@api/api';
@@ -13,21 +12,17 @@ export const PostsSection = () => {
 
   const { query, TriggerComponent } = useInfiniteTotalPosts({
     getPage: PostAPI.getPostList,
-    pageSize: 5,
-    filter: param === 'recent' ? undefined : (param as string),
+    pageSize: 15,
+    filter: !param ? undefined : (param as string),
     queryKey: queryKeys.postsAll,
   });
-
-  useEffect(() => {
-    if (!param) setSearchParams({ filter: 'recent' });
-  }, [searchParams]);
 
   // 제일처음에 로딩을 할 때
   if (query.isLoading) {
     return (
       <section className={classes.postsSectionContainer}>
         <ul className={classes.postsSection}>
-          {Array(8)
+          {Array(10)
             .fill(0)
             .map((ele, index) => (
               <NewPostCard key={index} />

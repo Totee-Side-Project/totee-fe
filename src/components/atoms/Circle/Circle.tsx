@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes } from 'react';
 
 interface Props extends ButtonHTMLAttributes<HTMLDivElement> {
-  selected: boolean;
+  selected?: boolean;
   backgroundColor?: string;
   options?: {
     outCircle: boolean;

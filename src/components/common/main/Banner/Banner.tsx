@@ -5,17 +5,15 @@ import 'swiper/swiper-bundle.min.css';
 import 'swiper/components/navigation/navigation.min.css';
 
 import { ImageWithWebp, SectionTitle } from '@components/atoms';
-import Banner1Img from '@assets/png/main_banner.png';
-import Banner1ImgWebp from '@assets/webp/main_banner.webp';
-import Banner2Img from '@assets/webp/study_banner.webp';
-import Banner2ImgWebp from '@assets/webp/study_banner.webp';
-import Banner3Img from '@assets/webp/mentor_mentee_banner.webp';
-import Banner3ImgWebp from '@assets/webp/mentor_mentee_banner.webp';
-
+// import Banner1Img from '@assets/png/main_banner.png';
+// import Banner1ImgWebp from '@assets/webp/main_banner.webp';
+// import Banner2Img from '@assets/webp/study_banner.webp';
+// import Banner2ImgWebp from '@assets/webp/study_banner.webp';
+// import Banner3Img from '@assets/webp/mentor_mentee_banner.webp';
+// import Banner3ImgWebp from '@assets/webp/mentor_mentee_banner.webp';
 import mentorItem from '@assets/png/banner/mentor_item.png';
 import studyItem from '@assets/png/banner/study_item.png';
 import toteeItem from '@assets/png/banner/totee_item.png';
-
 import mentorBacakgroundImg from '@assets/png/banner/mentor_background.png';
 import studyBacakgroundImg from '@assets/png/banner/study_background.png';
 import toteeBacakgroundImg from '@assets/png/banner/totee_background.png';
@@ -34,14 +32,13 @@ interface Props {
 }
 
 const BannerItem = ({ backgroundImg, left, right }: Props) => {
-  // img를 받아서 해줄꺼다. 근데 left right로 나누고 mobile tag로 나눈다.
   return (
     <div
       className="bannerItem"
       style={{
         backgroundImage: `url(${backgroundImg})`,
-        // backgroundSize: '100% 100%',
-        backgroundSize: 'auto 100%',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center center',
       }}
     >
       <div className="bannerItem_left">{left}</div>
@@ -62,7 +59,7 @@ export function Banner() {
             clickable: true,
             type: 'bullets',
           }}
-          // autoplay={{ delay: 4000, disableOnInteraction: false }} // 추가
+          autoplay={{ delay: 8000, disableOnInteraction: false }} // 추가
           // observer={true}
           // observeParents={true}
         >
@@ -71,10 +68,11 @@ export function Banner() {
               backgroundImg={toteeBacakgroundImg}
               left={
                 <SectionTitle
-                  title={'스터디와 멘토 멘티를 찾는\n 가장 편안한 방법'}
+                  title={
+                    '스터디와 <mark>멘토·멘티</mark>를 찾는\n 가장 편안한 방법'
+                  }
                   sub={''}
                   description={`간단하게 내 주변의 실력있는 멘토를 찾아\n함께 배우고, 성장하며 나의 실력을 쌓아보세요.`}
-                  isTotal={false}
                 />
               }
               right={
@@ -96,7 +94,7 @@ export function Banner() {
                   title={'커리어 성장을 위한\n다양한 스터디 탐색'}
                   sub={''}
                   description={`커리어 성장을 위한 스터디를 찾으시나요?\n토티에는 이런저런 여러분야의 스터디가 모여있어요.`}
-                  isTotal={false}
+                  padding={'5% 0 0 0'}
                 />
               }
               right={
@@ -117,7 +115,6 @@ export function Banner() {
                   title={'커리어 성장을 위한 멘토링'}
                   sub={''}
                   description={`커리어 성장을 위한 멘토링을 찾으시나요?\n멘토와 멘티를 잇는 토티가 여러분께 딱 맞는 멘토링을 추천해드려요.`}
-                  isTotal={false}
                 />
               }
               right={
@@ -130,31 +127,6 @@ export function Banner() {
               }
             />
           </SwiperSlide>
-
-          {/* <SwiperSlide className={classes.banner_item}>
-            <ImageWithWebp
-              src={Banner1Img}
-              alt="스터디와 멘토를 찾는 가장 편안한 방법"
-              className={classes.banner_img}
-              srcSet={Banner1ImgWebp}
-            />
-          </SwiperSlide>
-          <SwiperSlide className={classes.banner_item}>
-            <ImageWithWebp
-              src={Banner2Img}
-              alt="커리어 성장을 위한 다양한 스터디 탐색"
-              className={classes.banner_img}
-              srcSet={Banner2ImgWebp}
-            />
-          </SwiperSlide>
-          <SwiperSlide className={classes.banner_item}>
-            <ImageWithWebp
-              src={Banner3Img}
-              alt="커리어 성장을 위한 다양한 스터디 탐색"
-              className={classes.banner_img}
-              srcSet={Banner3ImgWebp}
-            />
-          </SwiperSlide> */}
         </Swiper>
       </div>
     </div>

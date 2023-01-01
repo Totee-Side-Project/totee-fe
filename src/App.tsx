@@ -24,17 +24,29 @@ import {
 import studyBanner from '@assets/png/banner/study_banner2.png';
 import './App.css';
 
-const isNotLoginRoutes = [
-  { path: '/', element: <MainPage /> },
-  { path: '/posts', element: <PostsPage /> },
-  { path: '/oauth/redirect', element: <LoginOauth /> },
-  { path: '/detail/:id', element: <NewDetailPage /> },
+export const routePaths = {
+  main: '/',
+  posts: '/posts',
+  oauth: '/oauth/redirect',
+  detail: '/detail',
+  detailId: '/detail/:id',
+  createStudy: '/createstudy',
+  edit: '/editstudy/',
+  editId: '/editstudy/:id',
+  mypage: '/mypage',
+};
+
+export const isNotLoginRoutes = [
+  { path: routePaths.main, element: <MainPage /> },
+  { path: routePaths.posts, element: <PostsPage /> },
+  { path: routePaths.oauth, element: <LoginOauth /> },
+  { path: routePaths.detailId, element: <NewDetailPage /> },
 ];
 
 export const isLoginRoutes = [
-  { path: '/setupstudy', element: <CreateStudyPage /> },
-  { path: '/mypage', element: <MyPage /> },
-  { path: '/edit/:id', element: <EditStudyPage /> },
+  { path: routePaths.createStudy, element: <CreateStudyPage /> },
+  { path: routePaths.mypage, element: <MyPage /> },
+  { path: routePaths.editId, element: <EditStudyPage /> },
 ];
 
 function App() {
@@ -63,7 +75,7 @@ function App() {
       <Header />
       <Routes>
         <Route
-          path="/setupstudy"
+          path={routePaths.createStudy}
           element={
             <img
               src={studyBanner}
@@ -73,7 +85,7 @@ function App() {
           }
         />
         <Route
-          path="/edit/:id"
+          path={routePaths.editId}
           element={
             <img
               src={studyBanner}
