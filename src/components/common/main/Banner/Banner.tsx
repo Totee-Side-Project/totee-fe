@@ -70,7 +70,7 @@ export function Banner() {
               left={
                 <SectionTitle
                   title={
-                    '스터디와 <mark>멘토 멘티</mark>를 찾는\n 가장 편안한 방법'
+                    '스터디와 <mark>멘토·멘티</mark>를 찾는\n 가장 편안한 방법'
                   }
                   sub={''}
                   description={`간단하게 내 주변의 실력있는 멘토를 찾아\n함께 배우고, 성장하며 나의 실력을 쌓아보세요.`}
