@@ -131,6 +131,7 @@ export function PostList() {
             description={
               '커리어 성장을 위한 스터디를 찾으시나요? 토티에는 이런저런 여러분야의 스터디가 모여있어요.'
             }
+            // isTotal={false}
           />
           <ul className={classes.filterList}>
             {['최신순', '댓글많은순', '좋아요순'].map(
