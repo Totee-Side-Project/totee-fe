@@ -34,9 +34,9 @@ export function StudySection() {
     pageSize: 4,
   });
 
-  const onClickWithNavigate = () => {
-    navigate('/posts');
-  };
+  // const onClickWithNavigate = () => {
+  //   navigate('/posts');
+  // };
   useEffect(() => {
     return () => {
       setFilteredPageList([]);
@@ -116,7 +116,7 @@ export function StudySection() {
             title={'커리어 성장을 위한 스터디'}
             sub={'Level Up Study'}
             description={`커리어 성장을 위한 스터디를 찾으시나요?\n토티에는 이런저런 여러분야의 스터디가 모여있어요.`}
-            onClick={onClickWithNavigate}
+            to={'/posts'}
           />
         </div>
         <SectionFilter filterList={filterList} />

@@ -47,6 +47,9 @@
 }
 
 .createStudyButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 145px;
   height: 37px;
   border: 2px solid #568a35;
@@ -77,6 +80,7 @@
   cursor: pointer;
 
   &:hover {
+    // transition: 0.1s;
     cursor: pointer;
     background-color: #568a35;
     color: #fff;

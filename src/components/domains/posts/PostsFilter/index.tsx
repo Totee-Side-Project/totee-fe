@@ -15,8 +15,9 @@ interface Props {
 
 export const PostsFilter = ({ datas, setDatas, options, element }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams();
-
+  const param = searchParams.get('filter') || 'recent';
   const onClick = (key: sortOptionNameType) => {
+    if (key === 'recent') return setSearchParams({});
     setSearchParams({ filter: key });
   };
 
@@ -26,10 +27,7 @@ export const PostsFilter = ({ datas, setDatas, options, element }: Props) => {
     <ul className={classes.filters}>
       {filterList.map(([key, value]) => (
         <li key={key} className={classes.filter} onClick={() => onClick(key)}>
-          <Circle
-            selected={searchParams.get('filter') === key}
-            options={{ outCircle: false }}
-          />
+          <Circle selected={param === key} options={{ outCircle: false }} />
           {value}
         </li>
       ))}
