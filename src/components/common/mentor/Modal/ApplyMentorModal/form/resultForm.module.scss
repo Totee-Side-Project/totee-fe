@@ -1,0 +1,60 @@
+.resultWrap {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 28px;
+  margin-bottom: 53px;
+
+  .careersWrap {
+    max-width: 300px;
+    display: flex;
+    column-gap: 34px;
+    margin: 0 auto;
+
+    .careerWithFliedWrap {
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
+      justify-content: center;
+      align-items: center;
+
+      span {
+        font-size: 16px;
+        line-height: 20px;
+        color: #427f2f;
+        text-align: center;
+      }
+
+      .roundSpan {
+        min-width: 130px;
+        min-height: 34px;
+        padding: 6px 10px;
+        text-align: center;
+        border: 1px solid #7ba364;
+        border-radius: 10px;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  .portfolioWrap {
+    width: 405px;
+
+    input {
+      width: 100%;
+      outline: none;
+      padding: 6px 0;
+      border: 1px solid #7ba364;
+      border-radius: 10px;
+      font-size: 14px;
+      line-height: 20px;
+      text-align: center;
+      color: #545454;
+      background-color: #ffffff;
+      cursor: default;
+    }
+  }
+}

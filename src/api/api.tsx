@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+import { IApplyMentor } from 'types/api';
 import {
   IGetApplicantResponse,
   IGetPostDetailResponse,
@@ -131,6 +132,11 @@ export const TeamAPI = {
     api.delete(`api/v1/team/resignation/${postId}`),
   secessionTeam: (postId: string) =>
     api.delete(`api/v1/team/secession/${postId}`),
+};
+
+export const MentorAPI = {
+  applyMentor: (payload: IApplyMentor) =>
+    api.post('/api/v1/mentor/apply', { ...payload }),
 };
 
 // window.location.host;
