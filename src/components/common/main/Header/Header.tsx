@@ -72,6 +72,8 @@ export const Header = () => {
     //구독
   }, [user, login]);
 
+  console.log(login.state);
+
   return (
     <>
       <header className="header">
@@ -102,7 +104,7 @@ export const Header = () => {
                 </Link>
               </li>
               <li>
-                {user.roleType != 'totee' && (
+                {login.state && user.roleType != 'totee' && (
                   <button
                     className="createStudyButton"
                     onClick={() => setShowApplyModal(true)}
