@@ -11,11 +11,14 @@ import { HeaderUserProfileNav } from './HeaderUserProfileNav';
 import ToteeLogo from '@assets/svg/toteeLogo.svg';
 import alarm from '@assets/svg/alarmicon.svg';
 import './header.scss';
+import ApplyMentorModal from '@components/common/mentor/Modal/ApplyMentorModal';
 
 export const Header = () => {
+  //? state
   const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
   const [isOpenOnboardModal, setIsOpenOnboardModal] = useState(false);
   const [isShowAlarm, setIsShowAlarm] = useState(false);
+  const [showApplyModal, setShowApplyModal] = useState<boolean>(false);
 
   //로그인 state 관리
   const [login, setLogin] = useRecoilState(loginState);
@@ -120,12 +123,14 @@ export const Header = () => {
                 </button>
               </li>
               <li>
-                <button
-                  className="createStudyButton"
-                  onClick={() => navigate('reading')}
-                >
-                  멘토 지원
-                </button>
+                {user.roleType != 'totee' && (
+                  <button
+                    className="createStudyButton"
+                    onClick={() => setShowApplyModal(true)}
+                  >
+                    멘토 지원
+                  </button>
+                )}
               </li>
               <li className="line" />
               <li>
@@ -144,6 +149,12 @@ export const Header = () => {
           </div>
         </div>
       </header>
+      {showApplyModal && (
+        <ApplyMentorModal
+          isShow={showApplyModal}
+          setIsShow={setShowApplyModal}
+        />
+      )}
       <SignInModal
         isOpen={isOpenLoginModal}
         setIsOpen={setIsOpenLoginModal}

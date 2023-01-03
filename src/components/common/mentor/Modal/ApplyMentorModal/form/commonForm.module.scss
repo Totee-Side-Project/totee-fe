@@ -1,0 +1,91 @@
+.commonWrap {
+  padding-bottom: 48px;
+  position: relative;
+
+  .resultMsg {
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 35px;
+    color: #4b4b4b;
+    text-align: center;
+    padding-bottom: 20px;
+  }
+
+  .userInfoWrap {
+    width: 405px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 1px solid #d8d8d8;
+    row-gap: 18px;
+    margin: 0 auto;
+    padding-bottom: 16px;
+    margin-bottom: 38px;
+
+    .nameWithEmailWrap {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+
+      .name {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 23px;
+        color: #484848;
+      }
+
+      .email {
+        font-size: 14px;
+        line-height: 20px;
+        color: #767676;
+      }
+    }
+  }
+
+  input {
+    width: 100%;
+    background: #f5f5f5;
+    border-radius: 5px;
+    border: 0;
+    padding: 5px 18px;
+    outline: none;
+  }
+
+  .btnWrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 25px;
+
+    button {
+      background: #568a35;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 24px;
+      display: flex;
+      align-items: center;
+      color: #ffffff;
+      padding: 10px 42px;
+      height: 42px;
+    }
+
+    .goBack {
+      color: #898989;
+      background: #ffffff;
+      border: 1.5px solid #898989;
+    }
+  }
+
+  .pageNumber {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+    font-size: 18px;
+    line-height: 24px;
+    text-align: center;
+    color: #737373;
+  }
+}
