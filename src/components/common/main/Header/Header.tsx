@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 
 import { UserState, loginState } from '@store/index';
@@ -7,11 +7,11 @@ import { Icon } from '@components/atoms';
 import { OnboardModal, SignInModal } from '@components/common';
 import { AlarmIcon } from '@components/common';
 import { HeaderUserProfileNav } from './HeaderUserProfileNav';
-// import logo from '@assets/png/toteelogo-kr.png';
 import ToteeLogo from '@assets/svg/toteeLogo.svg';
 import alarm from '@assets/svg/alarmicon.svg';
 import './header.scss';
 import ApplyMentorModal from '@components/common/mentor/Modal/ApplyMentorModal';
+import { routePaths } from 'App';
 
 export const Header = () => {
   //? state
@@ -32,24 +32,6 @@ export const Header = () => {
       setIsOpenLoginModal(true);
     }
   };
-
-  //로그아웃 버튼
-  // const handleLogout = () => {
-  //   Swal.fire({
-  //     position: 'top-end',
-  //     icon: 'success',
-  //     title: '로그아웃 완료!',
-  //     iconColor: '#f48484',
-  //     showConfirmButton: false,
-  //     timer: 1100,
-  //   });
-  //   localStorage.removeItem('loginData');
-  //   setLogin({
-  //     state: false,
-  //     token: '',
-  //   });
-  //   setUser({ ...defaultUserState });
-  // };
 
   useEffect(() => {
     // 가입되지 않은 유저일 경우 온보딩 모달 띄우기
@@ -115,12 +97,9 @@ export const Header = () => {
                 )}
               </li>
               <li>
-                <button
-                  className="createStudyButton"
-                  onClick={handleStudyClick}
-                >
-                  스터디 개설
-                </button>
+                <Link to={routePaths.createStudy}>
+                  <button className="createStudyButton">스터디 개설</button>
+                </Link>
               </li>
               <li>
                 {user.roleType != 'totee' && (

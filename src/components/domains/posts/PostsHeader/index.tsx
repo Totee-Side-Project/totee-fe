@@ -1,12 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 
-// import { Button } from '@components/atoms';
 import { PostsFilter } from '../PostsFilter';
 import classes from './PostsHeader.module.scss';
 
 export const PostsHeader = () => {
-  const navigate = useNavigate();
-
   return (
     <div className={classes.postsFilterContainer}>
       <div className={classes.postsFilterWrap}>

@@ -13,6 +13,7 @@ import HeartIcon from '@assets/svg/common/heart.svg';
 import SettingIcon from '@assets/svg/common/setting.svg';
 import { IResponsePostDetail } from 'types/api.types';
 import classes from './sectionTitle.module.scss';
+import { routePaths } from 'App';
 
 type SectionHeaderProps = Pick<
   IResponsePostDetail,
@@ -42,8 +43,7 @@ export const SectionTitle = (
     const { innerText } = target;
 
     if (innerText === '글 수정') {
-      navigate('/setupstudy');
-      navigate(`/edit/${props.postId}`);
+      navigate(`/editstudy/${props.postId}`);
       return;
     }
     deletePostQuery.mutateAsync().then(
