@@ -19,24 +19,15 @@ export function Modal({
   children,
 }: IModalPropsType) {
   return (
-    <>
-      {isOpen && (
-        <section
-          className={classNames(classes.modal, isOpen ? classes.open : '')}
-        >
-          <div className={classes.content}>
-            {isCloseBtn && (
-              <div
-                className={classes.closeBtn}
-                onClick={() => setIsOpen(!isOpen)}
-              >
-                <XIcon></XIcon>
-              </div>
-            )}
-            {children}
+    <section className={classNames(classes.modal, isOpen ? classes.open : '')}>
+      <div className={classes.content}>
+        {isCloseBtn && (
+          <div className={classes.closeBtn} onClick={() => setIsOpen(!isOpen)}>
+            <XIcon></XIcon>
           </div>
-        </section>
-      )}
-    </>
+        )}
+        {children}
+      </div>
+    </section>
   );
 }

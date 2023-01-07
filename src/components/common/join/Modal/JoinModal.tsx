@@ -1,13 +1,10 @@
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
-import { Button, Modal } from '@components/atoms';
-import './joinModal.scss';
-import {
-  useDeleteApplicant,
-  useUpdateApplicant,
-} from '@hooks/query/useMutateQuery';
+import { Dispatch, SetStateAction } from 'react';
 import { useRecoilValue } from 'recoil';
+
+import { Button, Modal } from '@components/atoms';
 import { UserState } from '@store/user';
 import { useApplyStudyCase } from '@hooks/useApplyStudyCase';
+import './joinModal.scss';
 
 interface IJoinModalProps {
   isOpen: boolean;
