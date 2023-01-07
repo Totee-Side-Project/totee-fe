@@ -117,9 +117,10 @@ export const useUpdateApplicant = (postId: number) => {
           text: '작성자에 의해 승인/거절 될 수 있습니다.',
           icon: 'success',
           confirmButtonText: '확인',
-          timer: 2000,
+          timer: 3000,
+        }).then(() => {
+          queryClient.invalidateQueries(queryKeys.applicant(postId));
         });
-        return queryClient.invalidateQueries(queryKeys.applicant(postId));
       },
       onError: (error) => {
         Swal.fire({
@@ -143,13 +144,15 @@ export const useDeleteApplicant = (postId: string | undefined) => {
   });
 };
 
-export const usePostTeam = (
-  postId: string,
-  // formData: IPostTeamRequestFormData,
-) => {
+export const usePostTeam = (postId: string) => {
   const queryClient = useQueryClient();
-  return useMutation((formData: IPostTeamRequestFormData) =>
-    TeamAPI.postTeam(postId, formData),
+  return useMutation(
+    (formData: IPostTeamRequestFormData) => TeamAPI.postTeam(postId, formData),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(queryKeys.applicant(postId));
+      },
+    },
   );
 };
 export const useResignateTeam = (postId: string) => {

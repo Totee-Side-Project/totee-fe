@@ -49,9 +49,21 @@ export function ViewModal({ isOpen, setIsOpen, applicant }: IViewModalProps) {
         })
         .then((response) => {
           if (response.status === 200) {
-            return alert('팀원 거부를 완료했어요.');
+            return Swal.fire({
+              title: '팀원 거부 완료',
+              text: '',
+              icon: 'success',
+              confirmButtonText: '확인',
+              timer: 2000,
+            });
           }
-          alert('팀원 거부를 실패했어요');
+          return Swal.fire({
+            title: '팀원 거부 실패',
+            text: '다시 한번 시도해주세요',
+            icon: 'error',
+            confirmButtonText: '확인',
+            timer: 2000,
+          });
         }),
     [applicant.nickname],
   );
