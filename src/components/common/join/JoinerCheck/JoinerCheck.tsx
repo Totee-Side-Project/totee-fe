@@ -93,11 +93,12 @@ function JoinerCheck() {
               </div>
             </div>
           )}
-          {userState.nickname === postData?.data.body.data.nickname && (
-            <OwnerJoinerCheck />
-          )}
-          <SignInModal isOpen={isSignInModal} setIsOpen={setIsSignInModal} />
         </div>
+        {userState.nickname === postData?.data.body.data.nickname && (
+          <OwnerJoinerCheck />
+        )}
+        <SignInModal isOpen={isSignInModal} setIsOpen={setIsSignInModal} />
+
         <JoinModal
           isOpen={isOpenJoinModal}
           setIsOpen={setIsOpenJoinModal}
