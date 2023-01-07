@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import { IApplicantDetail } from 'types/api.types';
 import { SkillIcon } from '@components/atoms/SkillIcon/SkillIcon';
 import { useGetApplicant, useGetPostByPostId } from '@hooks/query/useGetQuery';
+import { STUDY_MAX_LIMIT } from 'constants/studyLimit';
+
 import { ViewModal } from '../Modal/ViewModal';
 import './ownerJoinerCheck.scss';
 
@@ -37,7 +39,7 @@ function OwnerJoinerCheck() {
         <div className={`StatusM_Box ${isFull && 'StatusM_Full'}`}>
           <div className="StatusM_Title">스터디 참여자 수</div>
           <div className="StatusM_Count">
-            {applicantData?.data.body.data.length}명 / 10명
+            {applicantData?.data.body.data.length}명 / {STUDY_MAX_LIMIT}명
           </div>
           <div className="StatusM_Title_Line" />
           <div className={`StatusM_Contents ${isFull && 'StatusM_Full'}`}>

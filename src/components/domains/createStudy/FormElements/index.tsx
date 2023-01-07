@@ -6,6 +6,7 @@ import { SkillSelector } from '@components/common';
 import VerticalLine from '@assets/svg/recentLine.svg';
 import DownArrow from '@assets/svg/recentIcon.svg';
 import paragraphLine from '@assets/png/paragraph_line.png';
+import { STUDY_MAX_LIMIT, STUDY_MIN_LIMIT } from 'constants/studyLimit';
 
 import { data } from '../data';
 import classes from '../createStudy.module.scss';
@@ -94,8 +95,8 @@ export const DefaultFormElement = ({
             <img src={VerticalLine} className={classes.vertical_line} alt="|" />
           }
           value={value as string}
-          max={15}
-          min={1}
+          max={STUDY_MAX_LIMIT}
+          min={STUDY_MIN_LIMIT}
           onChange={onChangeByInput}
           onWheel={onWheelWithBlur}
           disabled={!disabled ? false : true}
