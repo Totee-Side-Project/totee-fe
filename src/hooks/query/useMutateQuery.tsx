@@ -10,10 +10,12 @@ import {
   TeamAPI,
   UserAPI,
 } from '@api/api';
-import { IPostTeamRequestFormData } from 'types/api.types';
+import { IPostTeamRequestFormData, IResponsePostDetail } from 'types/api.types';
 import { queryKeys } from '.';
 import { IRequestReply } from 'types/api.types';
 import Swal from 'sweetalert2';
+import axios, { Axios, AxiosError, AxiosResponse } from 'axios';
+import _ from 'lodash';
 
 export const useAddUserInfo = () => {
   const queryClient = useQueryClient();
@@ -122,14 +124,16 @@ export const useUpdateApplicant = (postId: number) => {
           queryClient.invalidateQueries(queryKeys.applicant(postId));
         });
       },
-      onError: (error) => {
-        Swal.fire({
-          title: '지원 실패',
-          text: error.response.data.msg || '지원을 실패했어요',
-          icon: 'error',
-          confirmButtonText: '확인',
-          timer: 3000,
-        });
+      onError: (error: AxiosError<{ msg: string }>) => {
+        if (axios.isAxiosError(error)) {
+          Swal.fire({
+            title: '지원 실패',
+            text: error.response?.data.msg || '지원을 실패했어요',
+            icon: 'error',
+            confirmButtonText: '확인',
+            timer: 3000,
+          });
+        }
         return queryClient.invalidateQueries(queryKeys.applicant(postId));
       },
       // useErrorBoundary: (error) => error.response?.status >= 400,
@@ -144,7 +148,7 @@ export const useDeleteApplicant = (postId: string | undefined) => {
   });
 };
 
-export const usePostTeam = (postId: string) => {
+export const usePostTeam = (postId: number) => {
   const queryClient = useQueryClient();
   return useMutation(
     (formData: IPostTeamRequestFormData) => TeamAPI.postTeam(postId, formData),
@@ -155,7 +159,7 @@ export const usePostTeam = (postId: string) => {
     },
   );
 };
-export const useResignateTeam = (postId: string) => {
+export const useResignateTeam = (postId: number) => {
   const queryClient = useQueryClient();
   return useMutation(() => TeamAPI.resignateTeam(postId));
 };

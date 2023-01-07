@@ -127,12 +127,12 @@ export const ApplicationAPI = {
 };
 
 export const TeamAPI = {
-  getTeam: (postId: string) => api.get(`api/v1/team/${postId}`),
-  postTeam: (postId: string, formData: IPostTeamRequestFormData) =>
+  getTeam: (postId: number) => api.get(`api/v1/team/${postId}`),
+  postTeam: (postId: number, formData: IPostTeamRequestFormData) =>
     api.post(`api/v1/team/${postId}`, { ...formData }),
-  resignateTeam: (postId: string) =>
+  resignateTeam: (postId: number) =>
     api.delete(`api/v1/team/resignation/${postId}`),
-  secessionTeam: (postId: string) =>
+  secessionTeam: (postId: number) =>
     api.delete(`api/v1/team/secession/${postId}`),
 };
 

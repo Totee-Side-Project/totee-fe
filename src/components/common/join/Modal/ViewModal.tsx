@@ -14,7 +14,7 @@ interface IViewModalProps {
 
 export function ViewModal({ isOpen, setIsOpen, applicant }: IViewModalProps) {
   const { id } = useParams();
-  const postTeamMutation = usePostTeam(id as string);
+  const postTeamMutation = usePostTeam(Number(id));
   const approveTeamOnClick = useCallback(() => {
     postTeamMutation
       .mutateAsync({
