@@ -114,10 +114,11 @@ export const useUpdateApplicant = (postId: number) => {
         alert('지원을 성공했어요.');
         return queryClient.invalidateQueries(queryKeys.applicant(postId));
       },
-      onError: () => {
-        alert('지원에 실패했어요.');
+      onError: (error) => {
+        alert(error.response.data.msg);
         return queryClient.invalidateQueries(queryKeys.applicant(postId));
       },
+      // useErrorBoundary: (error) => error.response?.status >= 400,
     },
   );
 };
