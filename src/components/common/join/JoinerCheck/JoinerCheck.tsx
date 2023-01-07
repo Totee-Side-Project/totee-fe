@@ -51,7 +51,7 @@ function JoinerCheck() {
             <div className="Status_Box">
               <div className="Status_Title">지원 현황</div>
               <div className="Status_Title_Line" />
-              <div className="Status_AllApplicant">전체 지원자수</div>
+              <div className="Status_AllApplicant">현재 지원자수</div>
               <div className="Status_Count">
                 {applicantData?.data.body.data.length}명
               </div>
