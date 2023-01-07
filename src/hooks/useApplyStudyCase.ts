@@ -1,9 +1,6 @@
 import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 
-import {
-  // useDeleteApplicant,
-  useUpdateApplicant,
-} from '@hooks/query/useMutateQuery';
+import { useUpdateApplicant } from '@hooks/query/useMutateQuery';
 
 export const useApplyStudyCase = (
   postId: string,
@@ -13,12 +10,18 @@ export const useApplyStudyCase = (
   const { mutateAsync: addApplicantMutateAsync } = useUpdateApplicant(
     Number(postId),
   );
+  const resetFormData = () => setFormData('');
 
   const addApplicationOnClick = () => {
     if (!formData) return alert('모든 정보를 입력해주세요');
 
     addApplicantMutateAsync(formData, {
       onSuccess: () => {
+        resetFormData();
+        setIsOpen((pre) => !pre);
+      },
+      onError: () => {
+        resetFormData();
         setIsOpen((pre) => !pre);
       },
     });
@@ -27,8 +30,6 @@ export const useApplyStudyCase = (
     const { value } = e.target;
     setFormData(value);
   };
-
-  // const applyApplicationQuery = useDeleteApplicant(postId);
 
   return {
     formData,

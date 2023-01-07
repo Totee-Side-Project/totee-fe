@@ -18,7 +18,7 @@ export function Modal({
   isCloseBtn = true,
   children,
 }: IModalPropsType) {
-  return (
+  return isOpen ? (
     <section className={classNames(classes.modal, isOpen ? classes.open : '')}>
       <div className={classes.content}>
         {isCloseBtn && (
@@ -29,5 +29,5 @@ export function Modal({
         {children}
       </div>
     </section>
-  );
+  ) : null;
 }

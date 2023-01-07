@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { Button, Modal } from '@components/atoms';

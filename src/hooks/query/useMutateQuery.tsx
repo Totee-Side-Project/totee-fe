@@ -13,6 +13,7 @@ import {
 import { IPostTeamRequestFormData } from 'types/api.types';
 import { queryKeys } from '.';
 import { IRequestReply } from 'types/api.types';
+import Swal from 'sweetalert2';
 
 export const useAddUserInfo = () => {
   const queryClient = useQueryClient();
@@ -111,11 +112,23 @@ export const useUpdateApplicant = (postId: number) => {
     (message: string) => ApplicationAPI.postApplicant(postId, message),
     {
       onSuccess: () => {
-        alert('지원을 성공했어요.');
+        Swal.fire({
+          title: '지원 성공',
+          text: '작성자에 의해 승인/거절 될 수 있습니다.',
+          icon: 'success',
+          confirmButtonText: '확인',
+          timer: 2000,
+        });
         return queryClient.invalidateQueries(queryKeys.applicant(postId));
       },
       onError: (error) => {
-        alert(error.response.data.msg);
+        Swal.fire({
+          title: '지원 실패',
+          text: error.response.data.msg || '지원을 실패했어요',
+          icon: 'error',
+          confirmButtonText: '확인',
+          timer: 3000,
+        });
         return queryClient.invalidateQueries(queryKeys.applicant(postId));
       },
       // useErrorBoundary: (error) => error.response?.status >= 400,
