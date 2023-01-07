@@ -1,12 +1,10 @@
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
-import { Button, Modal } from '@components/atoms';
-import './joinModal.scss';
-import {
-  useDeleteApplicant,
-  useUpdateApplicant,
-} from '@hooks/query/useMutateQuery';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
+
+import { Button, Modal } from '@components/atoms';
 import { UserState } from '@store/user';
+import { useApplyStudyCase } from '@hooks/useApplyStudyCase';
+import './joinModal.scss';
 
 interface IJoinModalProps {
   isOpen: boolean;
@@ -16,23 +14,8 @@ interface IJoinModalProps {
 
 export function JoinModal({ isOpen, setIsOpen, postId }: IJoinModalProps) {
   const useProfile = useRecoilValue(UserState);
-  const [formData, setFormData] = useState('');
-  const { mutateAsync: addApplicantMutateAsync } = useUpdateApplicant(
-    Number(postId),
-  );
-  const applyApplicationQuery = useDeleteApplicant(postId);
-
-  const addApplicationOnClick = () => {
-    addApplicantMutateAsync(formData, {
-      onSuccess: () => {
-        setIsOpen((pre) => !pre);
-      },
-    });
-  };
-  const onChangeByTextarea = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const { value } = e.target;
-    setFormData(value);
-  };
+  const { formData, onChangeByTextarea, addApplicationOnClick } =
+    useApplyStudyCase(postId, setIsOpen);
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -48,7 +31,7 @@ export function JoinModal({ isOpen, setIsOpen, postId }: IJoinModalProps) {
           <textarea
             maxLength={500}
             className="ApplyIntro"
-            placeholder="본인에 대한 짧은 소개입니다. 본인에 대한 짧은 소개입니다. 본인에 대한 짧은 소개입니다. 본인에 대한 짧은 소개입니다."
+            placeholder="본인에 대한 짧은 소개입니다."
             value={formData}
             onChange={onChangeByTextarea}
           />

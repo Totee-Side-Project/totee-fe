@@ -1,4 +1,7 @@
 import { useQuery } from 'react-query';
+import { useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+
 import {
   AlarmAPI,
   ApplicationAPI,
@@ -7,8 +10,8 @@ import {
   PostAPI,
   UserAPI,
 } from '@api/api';
-import { useRecoilState } from 'recoil';
 import { UserState } from '@store/user';
+import { routePaths } from 'App';
 import { queryKeys } from '.';
 
 export const useGetUserAPI = () => {
@@ -111,6 +114,7 @@ export function useGetRecommendList() {
 }
 
 export function useGetLikeofPost(postId: number) {
+  const navigate = useNavigate();
   return useQuery(
     queryKeys.likePost(postId),
     () => LikeAPI.getIsLikeInfo(postId),
@@ -122,6 +126,10 @@ export function useGetLikeofPost(postId: number) {
       enabled: true,
       // 캐시 타임
       staleTime: 10 * 600 * 1000,
+      onError: () => {
+        alert('일시적인 에러로 인해 홈으로 이동합니다!');
+        navigate(routePaths.main);
+      },
     },
   );
 }

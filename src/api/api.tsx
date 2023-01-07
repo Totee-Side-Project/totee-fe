@@ -14,9 +14,11 @@ const BASE_URL = 'https://api.totee.link/';
 export const api = axios.create({
   baseURL: BASE_URL,
   withCredentials: true,
-  validateStatus: (status) => {
-    return status < 500;
-  },
+  // validateStatus: (status) => {
+  //   // 400은 로컬에서 처리하기 위해서 해주었다.
+  //   // 그럼 이 에러는 어디서 catch 할 수 있는가?
+  //   return status < 500;
+  // },
 });
 
 api.interceptors.request.use((config: any) => {
@@ -125,12 +127,12 @@ export const ApplicationAPI = {
 };
 
 export const TeamAPI = {
-  getTeam: (postId: string) => api.get(`api/v1/team/${postId}`),
-  postTeam: (postId: string, formData: IPostTeamRequestFormData) =>
+  getTeam: (postId: number) => api.get(`api/v1/team/${postId}`),
+  postTeam: (postId: number, formData: IPostTeamRequestFormData) =>
     api.post(`api/v1/team/${postId}`, { ...formData }),
-  resignateTeam: (postId: string) =>
+  resignateTeam: (postId: number) =>
     api.delete(`api/v1/team/resignation/${postId}`),
-  secessionTeam: (postId: string) =>
+  secessionTeam: (postId: number) =>
     api.delete(`api/v1/team/secession/${postId}`),
 };
 

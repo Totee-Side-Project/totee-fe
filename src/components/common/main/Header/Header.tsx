@@ -6,12 +6,12 @@ import { UserState, loginState } from '@store/index';
 import { Icon } from '@components/atoms';
 import { OnboardModal, SignInModal } from '@components/common';
 import { AlarmIcon } from '@components/common';
-import { HeaderUserProfileNav } from './HeaderUserProfileNav';
+import ApplyMentorModal from '@components/common/mentor/Modal/ApplyMentorModal';
 import ToteeLogo from '@assets/svg/toteeLogo.svg';
 import alarm from '@assets/svg/alarmicon.svg';
-import './header.scss';
-import ApplyMentorModal from '@components/common/mentor/Modal/ApplyMentorModal';
+import { HeaderUserProfileNav } from './HeaderUserProfileNav';
 import { routePaths } from 'App';
+import './header.scss';
 
 export const Header = () => {
   //? state
@@ -25,13 +25,13 @@ export const Header = () => {
   const [user, setUser] = useRecoilState(UserState);
   let navigate = useNavigate();
 
-  const handleStudyClick = () => {
-    if (login.state) {
-      navigate('/setupstudy');
-    } else {
-      setIsOpenLoginModal(true);
-    }
-  };
+  // const handleStudyClick = () => {
+  //   if (login.state) {
+  //     navigate('/setupstudy');
+  //   } else {
+  //     setIsOpenLoginModal(true);
+  //   }
+  // };
 
   useEffect(() => {
     // 가입되지 않은 유저일 경우 온보딩 모달 띄우기
@@ -71,8 +71,6 @@ export const Header = () => {
 
     //구독
   }, [user, login]);
-
-  console.log(login.state);
 
   return (
     <>

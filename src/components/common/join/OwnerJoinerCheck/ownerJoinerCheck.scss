@@ -6,7 +6,8 @@ $FONT: 'Noto Sans KR', sans-serif;
 
 .StatusM_Box {
   width: 230px;
-  height: 270px;
+  max-height: 270px;
+  // height: 270px;
   padding: 20px;
   background: #ffffff;
   box-shadow: 0px 4px 13px rgba(0, 0, 0, 0.25);
@@ -22,7 +23,8 @@ $FONT: 'Noto Sans KR', sans-serif;
 
 .StatusM_Contents {
   overflow: hidden;
-  height: 90px;
+  max-height: 90px;
+  // height: 90px;
 }
 
 .StatusM_Full {

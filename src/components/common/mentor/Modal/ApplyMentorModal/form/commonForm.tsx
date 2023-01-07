@@ -1,11 +1,13 @@
-import { ImageWithWebp } from '@components/atoms';
-import Style from './commonForm.module.scss';
+import React from 'react';
 import { useRecoilState } from 'recoil';
+
+import { ImageWithWebp } from '@components/atoms';
 import { UserState } from '@store/user';
-import { applyForm, IApplyForm } from '@store/mentor';
-import { ICommonForm } from 'types/applyMentorModal';
+import { IApplyForm, applyForm } from '@store/mentor';
 import { MentorAPI } from '@api/api';
 import { URL_PATTERN } from '@utils/pattern';
+import { ICommonForm } from 'types/applyMentorModal';
+import Style from './commonForm.module.scss';
 
 //? image
 import IMG_UserProfile from '@assets/svg/common/userProfile.svg';

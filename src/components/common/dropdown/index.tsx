@@ -29,7 +29,7 @@ const DropDown: React.FC<IDropDown> = (props) => {
   }, [selectId]);
 
   useEffect(() => {
-    console.log(errorMsg);
+    // console.log(errorMsg);
     errorMsg && setError(errorMsg);
   }, [errorMsg]);
 
