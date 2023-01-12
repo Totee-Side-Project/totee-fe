@@ -94,6 +94,7 @@ function App() {
             />
           }
         />
+        <Route path={routePaths.mypage} />
         <Route path="*" element={<Banner />} />
       </Routes>
       <Routes>
