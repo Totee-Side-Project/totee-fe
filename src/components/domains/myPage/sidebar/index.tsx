@@ -4,19 +4,26 @@ import './index.scss';
 const SideBar = ({ setFocusedMenuComponent }: any) => {
   return (
     <aside className="sidebar">
-      {myPageMenu.map((menu) => (
-        <ol className="menu" key={menu.title}>
-          <div className="title">{menu.title}</div>
-          {menu.subMenu.map((subMenu) => (
-            <li className="subTitle" key={subMenu.title}>
-              <button
-                onClick={() => setFocusedMenuComponent(subMenu.component)}
-              >
-                {subMenu.title}
-              </button>
-            </li>
+      {myPageMenu.map(({ mainMenu, subMenus }) => (
+        <section key={mainMenu.title}>
+          <div className="mainMenu">
+            <img
+              className="mainMenuIcon"
+              src={mainMenu.iconSrc}
+              alt={`${mainMenu.title} 메뉴`}
+            />
+            <span className="mainMenuTitle">{mainMenu.title}</span>
+          </div>
+          {subMenus.map((subMenu) => (
+            <button
+              className="subMenuButton"
+              key={subMenu.title}
+              onClick={() => setFocusedMenuComponent(subMenu.component)}
+            >
+              <span className="subMenuTitle">{subMenu.title}</span>
+            </button>
           ))}
-        </ol>
+        </section>
       ))}
     </aside>
   );
