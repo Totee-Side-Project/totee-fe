@@ -38,4 +38,10 @@ const mentoringMenu = {
   ],
 };
 
+export const defaultFocusMenu = {
+  mainMenuTitle: studyMenu.mainMenu.title,
+  subMenuTitle: studyMenu.subMenus[0].title,
+  component: studyMenu.subMenus[0].component,
+};
+
 export const myPageMenu = [studyMenu, mentoringMenu];

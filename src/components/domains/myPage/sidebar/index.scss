@@ -26,19 +26,20 @@
     }
   }
 
-  .subMenuButton {
+  .subMenu {
     background-color: #FFFFFF;
+    color: #4F4F4F;
     height: 33px;
     width: 100%;
     position: relative;
+    cursor: pointer;
     &:hover {
-      background-color: #E0E0E0; 
+      background-color: #E0E0E0;
     }
     .subMenuTitle {
       position: absolute;
       left: 90px;
       top: 6px;
-      color: #4F4F4F;
       font-family: 'Noto Sans';
       font-style: normal;
       font-weight: 400;

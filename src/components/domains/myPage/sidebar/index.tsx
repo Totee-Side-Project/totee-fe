@@ -1,7 +1,7 @@
 import { myPageMenu } from '../MyPageMenu';
 import './index.scss';
 
-const SideBar = ({ setFocusedMenuComponent }: any) => {
+const SideBar = ({ focusedMenu, setFocusedMenu }: any) => {
   return (
     <aside className="sidebar">
       {myPageMenu.map(({ mainMenu, subMenus }) => (
@@ -15,13 +15,26 @@ const SideBar = ({ setFocusedMenuComponent }: any) => {
             <span className="mainMenuTitle">{mainMenu.title}</span>
           </div>
           {subMenus.map((subMenu) => (
-            <button
-              className="subMenuButton"
+            <div
+              className="subMenu"
               key={subMenu.title}
-              onClick={() => setFocusedMenuComponent(subMenu.component)}
+              onClick={() =>
+                setFocusedMenu({
+                  mainMenuTitle: mainMenu.title,
+                  subMenuTitle: subMenu.title,
+                  component: subMenu.component,
+                })
+              }
+              style={{
+                backgroundColor:
+                  mainMenu.title === focusedMenu.mainMenuTitle &&
+                  subMenu.title === focusedMenu.subMenuTitle
+                    ? '#E0E0E0'
+                    : '',
+              }}
             >
               <span className="subMenuTitle">{subMenu.title}</span>
-            </button>
+            </div>
           ))}
         </section>
       ))}
