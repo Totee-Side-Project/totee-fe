@@ -4,19 +4,19 @@ import classNames from 'classnames';
 import classes from './searchInput.module.scss';
 
 interface InputProps {
-  style?: 'default' | 'search';
   value: string;
-  label?: string;
   type: string;
   name: string;
   id: string;
   placeholder: string;
+  isPreview: boolean;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  label?: string;
+  style?: 'default' | 'search';
   img?: any;
   autoFocus?: boolean;
-  autoComplete: 'off' | 'on';
-  isPreview: boolean;
+  autoComplete?: 'off' | 'on';
   setStatus?: (e: any) => void;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   // maxlength: string | any;
 }
 
@@ -55,21 +55,9 @@ InputProps) {
     }
   }, [inputType]);
 
-  const handleFocus = useCallback(() => {
-    setInputType('focused');
-  }, [inputType]);
-
-  const handleBlur = useCallback(() => {
-    if (value.length == 0) {
-      setInputType('default');
-    } else {
-      setInputType('active');
-    }
-  }, [value, inputType]);
-
-  useEffect(() => {
-    value.length > 0 ? setInputType('focused') : setInputType('default');
-  }, [value]);
+  // useEffect(() => {
+  //   value.length > 0 ? setInputType('focused') : setInputType('default');
+  // }, [value]);
 
   return (
     <div className={classNames(classes.input_group, classes[style])}>
@@ -90,8 +78,6 @@ InputProps) {
         autoComplete={autoComplete}
         value={value}
         onChange={onChange}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
         // maxLength={maxlength}
       ></input>
       {img && <p className={classes.img}>{img}</p>}
