@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useResetRecoilState } from 'recoil';
 import { searchState } from '@store/search';
 import classes from './search.module.scss';
 import { SearchInput } from '@components/atoms';
@@ -12,6 +12,7 @@ export function Search() {
   const [isOpenPreview, setIsOpenPreview] = useState(false);
   const [searchResult, setSearchResult] = useRecoilState(searchState);
   const [previewResult, setPreviewResult] = useState<any[]>();
+  const resetSearchResult = useResetRecoilState(searchState);
   const inputRef = useRef(null as any);
 
   const { inputValue, setInputValue } = useDebounceInput('');
@@ -28,22 +29,19 @@ export function Search() {
     if (inputValue.length > 0) {
       setSearchResult({
         data: data?.data?.body.data.content,
-        keyword: inputValue as string,
+        keyword: inputValue,
       });
-    } else {
-      setSearchResult({
-        data: null,
-        keyword: null,
-      });
+      return;
     }
+    resetSearchResult();
   };
 
-  useEffect(() => {
-    if (inputValue.length === 0) {
-      setPreviewResult([]);
-      setIsOpenPreview(false);
-    }
-  }, [inputValue]);
+  // useEffect(() => {
+  //   if (inputValue.length === 0) {
+  //     setPreviewResult([]);
+  //     setIsOpenPreview(false);
+  //   }
+  // }, [inputValue]);
 
   useEffect(() => {
     if (data && data.status === 200 && data?.data?.body.data.content) {

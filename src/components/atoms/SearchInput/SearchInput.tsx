@@ -73,14 +73,15 @@ InputProps) {
       </label>
       <input
         autoFocus={autoFocus}
+        autoComplete={'off'}
         className={classNames(classes[inputType], 'border')}
         type={type}
         name={name}
         id={id}
         placeholder={placeholder}
         onChange={onChange}
-        onFocus={() => handleFocus()}
-        onBlur={() => handleBlur()}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         value={value}
         // maxLength={maxlength}
       ></input>
