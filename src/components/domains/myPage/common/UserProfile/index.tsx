@@ -1,13 +1,24 @@
 import { useGetUserAPI } from '@hooks/query/useGetQuery';
-import ReadOnlyUserProfile from './ReadOnlyUserProfile';
+import useUploadImage from '@hooks/useProfileImage';
+import { useState } from 'react';
+import UserIdentificationWrapper from './UserIdentificationWrapper';
+import UserActivityWrapper from './UserActivityWrapper';
+import UserProfileImageWrapper from './UserProfileImageWrapper';
 import './index.scss';
 
 const UserProfile = () => {
   const user = useGetUserAPI().data.data.body.data;
+  const [isEditUserProfile, setIsEditUserProfile] = useState(false);
 
   return (
     <section className="userProfile">
-      <ReadOnlyUserProfile user={user} />
+      <UserProfileImageWrapper user={user} />
+      <UserIdentificationWrapper
+        user={user}
+        isEditUserProfile={isEditUserProfile}
+        setIsEditUserProfile={setIsEditUserProfile}
+      />
+      <UserActivityWrapper user={user} isEditUserProfile={isEditUserProfile} />
     </section>
   );
 };
