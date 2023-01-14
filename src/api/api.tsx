@@ -50,7 +50,13 @@ export const PostAPI = {
     postId: number,
   ): Promise<AxiosResponse<IGetPostDetailResponse>> =>
     api.get(`/api/v1/post/${postId}`),
-  searchPostList: (title: string) => api.get(`/api/v1/post/search/${title}`),
+  searchPostList: (title: string, pageNumber = 0, pageSize = 10) =>
+    api.get(`/api/v2/post/search/${title}`, {
+      params: {
+        pageNumber,
+        pageSize,
+      },
+    }),
   statusChange: (postId: number) => api.post(`api/v1/post/status/${postId}`),
   createPost: (form: PostRequestDto) =>
     api.post('/api/v1/post', form, {
