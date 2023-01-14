@@ -3,13 +3,10 @@ import useUploadImage from '@hooks/useProfileImage';
 import { positionListKey } from '@utils/position.const';
 import ToteeBadgeIcon from '../../../../../../assets/svg/totee-badge.svg';
 import DefaultProfile from '../../../../../../assets/svg/profile-default.svg';
-import './index.scss';
 
-const UserProfile = () => {
-  const user = useGetUserAPI().data.data.body.data;
-
+const ReadOnlyUserProfile = ({ user }: any) => {
   return (
-    <section className="userProfile">
+    <>
       <div className="userProfileImageWrapper">
         {user.profileImageUrl ? (
           <img
@@ -58,8 +55,8 @@ const UserProfile = () => {
           <p className="progressCount">{user.mentoringNum}개</p>
         </div>
       </div>
-    </section>
+    </>
   );
 };
 
-export default UserProfile;
+export default ReadOnlyUserProfile;

@@ -1,13 +1,13 @@
-import FavoriteMentoringList from './components/mentoring/FavoriteMentoringList';
-import MentoringApplicantConfirmation from './components/mentoring/MentoringApplicantConfirmation';
-import OpenedMentoringAdminsitration from './components/mentoring/OpenedMentoringAdministration';
-import ParticipatingMentoring from './components/mentoring/ParticipatingMentoring';
-import FavoriteStudyList from './components/study/FavoriteStudyList';
-import OpenedStudyAdministration from './components/study/OpenedStudyAdministration';
-import ParticipatingStudy from './components/study/ParticipatingStudy';
-import StudyApplicantConfirmation from './components/study/StudyApplicantConfirmation';
 import OpenedBookIconSrc from '../../../assets/svg/book-open.svg';
 import GraduationHatIconSrc from '../../../assets/svg/graduation-hat.svg';
+import FavoriteMentoringList from './contentSection/mentoring/FavoriteMentoringList';
+import MentoringApplicantConfirmation from './contentSection/mentoring/MentoringApplicantConfirmation';
+import OpenedMentoringAdminsitration from './contentSection/mentoring/OpenedMentoringAdministration';
+import ParticipatingMentoring from './contentSection/mentoring/ParticipatingMentoring';
+import FavoriteStudyList from './contentSection/study/FavoriteStudyList';
+import OpenedStudyAdministration from './contentSection/study/OpenedStudyAdministration';
+import ParticipatingStudy from './contentSection/study/ParticipatingStudy';
+import StudyApplicantConfirmation from './contentSection/study/StudyApplicantConfirmation';
 
 const studyMenu = {
   mainMenu: { title: '스터디', iconSrc: OpenedBookIconSrc },
