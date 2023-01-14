@@ -2,6 +2,7 @@ import { useGetUserAPI } from '@hooks/query/useGetQuery';
 import useUploadImage from '@hooks/useProfileImage';
 import { positionListKey } from '@utils/position.const';
 import ToteeBadgeIcon from '../../../../../../assets/svg/totee-badge.svg';
+import DefaultProfile from '../../../../../../assets/svg/profile-default.svg';
 import './index.scss';
 
 const UserProfile = () => {
@@ -10,11 +11,19 @@ const UserProfile = () => {
   return (
     <section className="userProfile">
       <div className="userProfileImageWrapper">
-        <img
-          className="userProfileImage"
-          src={user.profileImageUrl}
-          alt="사용자 프로필 사진"
-        />
+        {user.profileImageUrl ? (
+          <img
+            className="userProfileImage"
+            src={user.profileImageUrl}
+            alt="사용자 프로필 사진"
+          />
+        ) : (
+          <img
+            className="userProfileImage"
+            src={DefaultProfile}
+            alt="기본 프로필 사진"
+          />
+        )}
       </div>
       <div className="userIdentificationWrapper">
         <div className="titleWrapper">
