@@ -126,10 +126,7 @@ export function useGetLikeofPost(postId: number) {
       enabled: true,
       // 캐시 타임
       staleTime: 10 * 600 * 1000,
-      onError: () => {
-        alert('일시적인 에러로 인해 홈으로 이동합니다!');
-        navigate(routePaths.main);
-      },
+      onError: () => {},
     },
   );
 }
