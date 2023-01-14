@@ -51,11 +51,11 @@ const UserProfile = () => {
         </div>
         <div className="progress">
           <p className="progressTitle">진행중인 스터디 갯수</p>
-          <p className="progressCount">1개 (수정 필요) </p>
+          <p className="progressCount">{user.studyNum}개</p>
         </div>
         <div className="progress">
           <p className="progressTitle">진행중인 멘토링</p>
-          <p className="progressCount">1개 (수정 필요)</p>
+          <p className="progressCount">{user.mentoringNum}개</p>
         </div>
       </div>
     </section>
