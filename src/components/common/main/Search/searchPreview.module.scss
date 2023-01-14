@@ -1,0 +1,31 @@
+.preview_wrapper {
+  position: absolute;
+  top: 50px;
+  left: 0px;
+  width: 800px;
+  height: fit-content;
+  overflow: hidden;
+
+  border: 2px solid #568a35;
+  border-top: none;
+  border-radius: 0px 0px 10px 10px;
+  background-color: #fff;
+  box-shadow: 0px 4px 5px r gba(0, 0, 0, 0.15);
+
+  .preview_list {
+    li {
+      height: 45px;
+      padding-left: 100px;
+      line-height: 45px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #777777;
+
+      &:hover {
+        cursor: pointer;
+        background: #ededed;
+        background-blend-mode: multiply;
+      }
+    }
+  }
+}

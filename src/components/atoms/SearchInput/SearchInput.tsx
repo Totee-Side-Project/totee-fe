@@ -11,6 +11,7 @@ interface InputProps {
   placeholder: string;
   isPreview: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onFocus: () => void;
   label?: string;
   style?: 'default' | 'search';
   img?: any;
@@ -44,6 +45,7 @@ export function SearchInput({
   autoComplete = 'off',
   isPreview,
   onChange,
+  onFocus,
   setStatus,
 }: // maxlength,
 InputProps) {
@@ -54,10 +56,6 @@ InputProps) {
       setStatus(inputType);
     }
   }, [inputType]);
-
-  // useEffect(() => {
-  //   value.length > 0 ? setInputType('focused') : setInputType('default');
-  // }, [value]);
 
   return (
     <div className={classNames(classes.input_group, classes[style])}>
@@ -78,6 +76,7 @@ InputProps) {
         autoComplete={autoComplete}
         value={value}
         onChange={onChange}
+        onFocus={onFocus}
         // maxLength={maxlength}
       ></input>
       {img && <p className={classes.img}>{img}</p>}
