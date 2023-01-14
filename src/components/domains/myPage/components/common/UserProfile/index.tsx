@@ -1,5 +1,7 @@
 import { useGetUserAPI } from '@hooks/query/useGetQuery';
 import useUploadImage from '@hooks/useProfileImage';
+import { positionListKey } from '@utils/position.const';
+import ToteeBadgeIcon from '../../../../../../assets/svg/totee-badge.svg';
 import './index.scss';
 
 const UserProfile = () => {
@@ -15,30 +17,36 @@ const UserProfile = () => {
         />
       </div>
       <div className="userIdentificationWrapper">
-        <p className="userNickName">{user.nickname}</p>
+        <div className="titleWrapper">
+          <p className="userNickName">{user.nickname}</p>
+          {user.roleType === 'totee' && (
+            <img
+              className="toteeBadgeIcon"
+              src={ToteeBadgeIcon}
+              alt="토티 뱃지"
+            />
+          )}
+        </div>
         <p className="userIdentification">
-          {user.roleType} | {user.position} <br />
-          olo90632951@gmail.com
+          {user.roleType} | {positionListKey[user.position as string]} <br />
+          {user.email !== 'NO_EMAIL' && user.email}
         </p>
         <button className="userProfileEditButton">프로필 수정</button>
       </div>
-      <hr />
-      <div>
-        <div className="userIntroductionWrapper">
-          <p className="userIntroductionTitle">소개</p>
-          <p className="userIntroductionContent">
-            {user.intro}본인에 대한 짧은 소개입니다.본인에 대한 짧은
-            소개입니다.본인에 대한 짧은 소개입니다.본인에 대한 짧은
-            소개입니다.본인에 대한 짧은 소개입니다.
+      <div className="userActivityWrapper">
+        <div className="introduction">
+          <p className="introductionTitle">소개</p>
+          <p className="introductionContent">
+            {user.intro ? user.intro : '소개가 없습니다.'}
           </p>
         </div>
-        <div className="progressWrapper">
+        <div className="progress">
           <p className="progressTitle">진행중인 스터디 갯수</p>
-          <p className="progressCount">1개</p>
+          <p className="progressCount">1개 (수정 필요) </p>
         </div>
-        <div className="progressWrapper">
+        <div className="progress">
           <p className="progressTitle">진행중인 멘토링</p>
-          <p className="progressCount">1개</p>
+          <p className="progressCount">1개 (수정 필요)</p>
         </div>
       </div>
     </section>
