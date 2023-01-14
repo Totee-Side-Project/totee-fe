@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import classes from './searchInput.module.scss';
 import classNames from 'classnames';
 
+import classes from './searchInput.module.scss';
+
 interface InputProps {
-  style?: string;
+  style?: 'default' | 'search';
   value: string;
   label?: string;
   type: string;
@@ -12,6 +13,8 @@ interface InputProps {
   placeholder: string;
   img?: any;
   autoFocus?: boolean;
+  autoComplete: 'off' | 'on';
+  isPreview: boolean;
   setStatus?: (e: any) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   // maxlength: string | any;
@@ -38,6 +41,8 @@ export function SearchInput({
   placeholder,
   img,
   autoFocus = true,
+  autoComplete = 'off',
+  isPreview,
   onChange,
   setStatus,
 }: // maxlength,
@@ -72,24 +77,24 @@ InputProps) {
         {label}
       </label>
       <input
-        autoFocus={autoFocus}
-        autoComplete={'off'}
-        className={classNames(classes[inputType], 'border')}
-        type={type}
-        name={name}
+        className={classNames(
+          classes[inputType],
+          isPreview && classes.preview,
+          classes.search,
+        )}
         id={id}
+        name={name}
+        type={type}
         placeholder={placeholder}
+        autoFocus={autoFocus}
+        autoComplete={autoComplete}
+        value={value}
         onChange={onChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        value={value}
         // maxLength={maxlength}
       ></input>
-      {img && (
-        <>
-          <p className={classes.img}>{img}</p>
-        </>
-      )}
+      {img && <p className={classes.img}>{img}</p>}
     </div>
   );
 }
