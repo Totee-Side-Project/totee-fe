@@ -1,0 +1,18 @@
+.recommend_container {
+  margin-bottom: 120px;
+
+  .title_container {
+    padding-left: 110px;
+  }
+
+  .slider_container {
+    width: 1320px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    margin-top: 30px;
+  }
+
+  :global(.slick-list) {
+    padding: 0 !important;
+  }
+}
