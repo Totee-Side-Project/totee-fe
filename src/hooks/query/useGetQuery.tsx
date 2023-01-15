@@ -7,12 +7,14 @@ import {
   ApplicationAPI,
   CategoryAPI,
   LikeAPI,
+  MentoringAPI,
   PostAPI,
   UserAPI,
 } from '@api/api';
 import { UserState } from '@store/user';
 import { routePaths } from 'App';
 import { queryKeys } from '.';
+import { IMentoringListRequestOptions } from '@api/requestType';
 
 export const useGetUserAPI = () => {
   const [user, setUser] = useRecoilState(UserState);
@@ -155,5 +157,11 @@ export function useGetApplicant(postId: number) {
       // 캐시 타임
       staleTime: 10 * 600 * 1000,
     },
+  );
+}
+
+export function useGetMentoringList(options: IMentoringListRequestOptions) {
+  return useQuery(queryKeys.mentoringList(options), () =>
+    MentoringAPI.getMentoringList(options),
   );
 }
