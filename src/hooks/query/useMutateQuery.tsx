@@ -163,3 +163,14 @@ export const useResignateTeam = (postId: number) => {
   const queryClient = useQueryClient();
   return useMutation(() => TeamAPI.resignateTeam(postId));
 };
+
+export const useValidateUserNickName = (userNickName: string) => {
+  return useMutation(() => UserAPI.validateNickname(userNickName), {
+    onSuccess: (res) => {
+      console.log(res);
+    },
+    onError: (err) => {
+      console.log(err.response);
+    },
+  });
+};

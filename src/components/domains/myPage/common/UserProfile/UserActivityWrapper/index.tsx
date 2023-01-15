@@ -1,18 +1,20 @@
 import './index.scss';
+import Introduction from './Introduction/indext';
 
-const UserActivityWrapper = ({ user, isEditUserProfile }: any) => {
+const UserActivityWrapper = ({
+  user,
+  isEditUserProfile,
+  introduction,
+  setIntroduction,
+}: any) => {
   return (
     <div className="userActivityWrapper">
-      <div className="introduction">
-        <p className="introductionTitle">소개</p>
-        {isEditUserProfile ? (
-          <input />
-        ) : (
-          <p className="introductionContent">
-            {user.intro ? user.intro : '소개가 없습니다.'}
-          </p>
-        )}
-      </div>
+      <Introduction
+        user={user}
+        isEditUserProfile={isEditUserProfile}
+        introduction={introduction}
+        setIntroduction={setIntroduction}
+      />
       <div className="progress">
         <p className="progressTitle">진행중인 스터디 갯수</p>
         <p className="progressCount">{user.studyNum}개</p>

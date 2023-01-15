@@ -5,9 +5,6 @@
     display: flex;
     margin-top: 60px;
   }
-  .toteeBadgeIcon {
-    margin-left: 5px;
-  }
   .userNickName {
     color: #333333;
     font-family: 'Noto Sans';
@@ -15,6 +12,22 @@
     font-weight: 700;
     font-size: 24px;
     line-height: 33px;
+  }
+  .userNickNameInput {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #E4E4E4;
+    font-size: 16px;
+    line-height: 28px;
+    margin-bottom: 10px;
+    font-family: 'Noto Sans KR';
+    width: 110px;
+    &::placeholder{
+      color: #929292;
+    }
+  }
+  .toteeBadgeIcon {
+    margin-left: 5px;
   }
   .userIdentification {
     color: #767676;
@@ -24,16 +37,5 @@
     font-size: 16px;
     line-height: 20px;
     margin-top: 2px;
-  }
-  .userProfileEditButton{
-    font-family: 'Noto Sans KR';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    border: 1px solid #898989;
-    border-radius: 20px;
-    margin-top: 19px;
-    line-height: 24px;
-    padding: 3px 20px;
   }
 }
