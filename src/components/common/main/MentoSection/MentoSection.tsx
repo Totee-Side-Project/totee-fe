@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { SectionSlider } from '@components/common';
 import { SectionTitle } from '@components/atoms';
-import RecommendMentorCard from '../../card/RecommentMentorCard/RecommendMentoringCard';
+import RecommendMentorCard from '../../card/RecommendMentoringCard/RecommendMentoringCard';
 import BestMentorCard from '../../card/BestMentorCard/BestMentorCard';
 import './recommend.scss';
 

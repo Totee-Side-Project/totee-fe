@@ -1,10 +1,10 @@
 import { HTMLAttributes } from 'react';
 import Slider from 'react-slick';
 import { SectionTitle } from '@components/atoms';
-import RecommendMentorCard from '@components/common/card/RecommentMentorCard/RecommendMentoringCard';
+import RecommendMentorCard from '@components/common/card/RecommendMentoringCard/RecommendMentoringCard';
 import NEXT_ARROW_ICON from '@assets/png/nextarrow.png';
 import PREVIOUS_ARROW_ICON from '@assets/png/prevarrow.png';
-import classes from './RecommendedMentoringPostsSection.module.scss';
+import classes from './RecommendMentoringPostsSection.module.scss';
 import { useGetMentoringList } from '@hooks/query/useGetQuery';
 
 const SECTION_TEXTS = {
@@ -47,7 +47,7 @@ function SliderNavigateIcon({
   );
 }
 
-function RecommendedMentoringPostsSection() {
+function RecommendMentoringPostsSection() {
   const { data, isLoading, isError } = useGetMentoringList({
     page: 0,
     size: 20,
@@ -100,4 +100,4 @@ function RecommendedMentoringPostsSection() {
   );
 }
 
-export default RecommendedMentoringPostsSection;
+export default RecommendMentoringPostsSection;

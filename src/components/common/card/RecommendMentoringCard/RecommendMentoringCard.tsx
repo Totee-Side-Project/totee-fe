@@ -1,6 +1,6 @@
-import { IMentoring } from '@api/responseType';
 import MentoringPostCard from '@components/common/card/MentoringPostCard/MentoringPostCard';
 import { MouseEventHandler } from 'react';
+import { IMentoring } from 'types/api.types';
 import classes from './RecommendMentoringCard.module.scss';
 
 interface RecommendMentoringCardProps {
