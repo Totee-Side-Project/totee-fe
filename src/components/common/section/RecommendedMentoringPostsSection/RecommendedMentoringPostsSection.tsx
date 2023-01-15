@@ -5,7 +5,7 @@ import RecommendMentorCard from '@components/common/card/RecommentMentorCard/Rec
 import NEXT_ARROW_ICON from '@assets/png/nextarrow.png';
 import PREVIOUS_ARROW_ICON from '@assets/png/prevarrow.png';
 import classes from './RecommendedMentoringPostsSection.module.scss';
-import { useGetMentoringList } from '@hooks/useGetQuery';
+import { useGetMentoringList } from '@hooks/query/useGetQuery';
 
 const SECTION_TEXTS = {
   subtitle: 'Level Up Mentoring',

@@ -1,15 +1,11 @@
 import axios, { AxiosResponse } from 'axios';
 import { IApplyMentor } from 'types/api';
 import {
-  IMentoringListRequestOptions,
-  IPostTeamRequestFormData,
-  PostRequestDto,
-} from './requestType';
-import {
   IGetApplicantResponse,
   IGetMentoringListResponse,
   IGetPostDetailResponse,
   IGetPostListResponse,
+  IMentoringListRequestOptions,
   IPostTeamRequestFormData,
   IRequestReply,
   PostRequestDto,

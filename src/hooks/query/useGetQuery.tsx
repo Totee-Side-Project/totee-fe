@@ -14,7 +14,7 @@ import {
 import { UserState } from '@store/user';
 import { routePaths } from 'App';
 import { queryKeys } from '.';
-import { IMentoringListRequestOptions } from '@api/requestType';
+import { IMentoringListRequestOptions } from 'types/api.types';
 
 export const useGetUserAPI = () => {
   const [user, setUser] = useRecoilState(UserState);
