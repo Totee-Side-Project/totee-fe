@@ -1,10 +1,11 @@
 import { HTMLAttributes } from 'react';
 import Slider from 'react-slick';
 import { SectionTitle } from '@components/atoms';
-import RecommendMentorCard from '@components/common/card/RecommentMentorCard/RecommendMentorCard';
+import RecommendMentorCard from '@components/common/card/RecommentMentorCard/RecommendMentoringCard';
 import NEXT_ARROW_ICON from '@assets/png/nextarrow.png';
 import PREVIOUS_ARROW_ICON from '@assets/png/prevarrow.png';
 import classes from './RecommendedMentoringPostsSection.module.scss';
+import { useGetMentoringList } from '@hooks/useGetQuery';
 
 const SECTION_TEXTS = {
   subtitle: 'Level Up Mentoring',
@@ -17,8 +18,6 @@ const SLIDER_OPTIONS = {
   slidesToShow: 5,
   speed: 500,
 };
-
-const MOCK_POSTS = [...Array(12)];
 
 interface SliderNavigateIconProps extends HTMLAttributes<HTMLDivElement> {
   navigateTo: 'previous' | 'next';
@@ -49,6 +48,29 @@ function SliderNavigateIcon({
 }
 
 function RecommendedMentoringPostsSection() {
+  const { data, isLoading, isError } = useGetMentoringList({
+    page: 0,
+    size: 20,
+  });
+
+  if (isLoading) {
+    // TODO: 로딩 UI
+    return <></>;
+  }
+
+  if (isError) {
+    // TODO: 에러 처리
+    return <></>;
+  }
+
+  if (
+    data === undefined ||
+    data.data.body.data.content.length < SLIDER_OPTIONS.slidesToShow
+  ) {
+    // TODO: 데이터 없을 경우 처리
+    return <></>;
+  }
+
   return (
     <section className={classes.recommend_container}>
       <div className={classes.title_container}>
@@ -66,8 +88,11 @@ function RecommendedMentoringPostsSection() {
           prevArrow={<SliderNavigateIcon navigateTo="previous" />}
           nextArrow={<SliderNavigateIcon navigateTo="next" />}
         >
-          {MOCK_POSTS.map((_, index) => (
-            <RecommendMentorCard key={index} onClick={() => {}} />
+          {data?.data.body.data.content.map((mentoring) => (
+            <RecommendMentorCard
+              key={mentoring.mentoringId}
+              mentoring={mentoring}
+            />
           ))}
         </Slider>
       </div>

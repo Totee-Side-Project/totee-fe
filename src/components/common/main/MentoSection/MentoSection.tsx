@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { SectionSlider } from '@components/common';
 import { SectionTitle } from '@components/atoms';
-import RecommendMentorCard from '../../card/RecommentMentorCard/RecommendMentorCard';
+import RecommendMentorCard from '../../card/RecommentMentorCard/RecommendMentoringCard';
 import BestMentorCard from '../../card/BestMentorCard/BestMentorCard';
 import './recommend.scss';
 
@@ -44,11 +44,7 @@ export const MentoSection = ({ type = 'recommend' }: Props) => {
   };
 
   const Mentorcard = ({ onClick }: { onClick: () => void }) =>
-    type === 'recommend' ? (
-      <RecommendMentorCard onClick={onClick} />
-    ) : (
-      <BestMentorCard onClick={onClick} />
-    );
+    type === 'recommend' ? null : <BestMentorCard onClick={onClick} />;
 
   const [isOpen, setIsOpen] = useState(false);
 

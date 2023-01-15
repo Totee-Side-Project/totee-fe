@@ -46,7 +46,7 @@ function MentoringPostCard({ mentoringPost, onClick }: Props) {
       <div className={classes.description}>{description}</div>
       <div className={classes.footer}>
         <div className={classes.profile}>
-          <img src="" alt="" />
+          <img src={mentor.profileImageUrl} alt={mentor.nickname} />
           <span className={classes.nickname}>{mentor.nickname}</span>
         </div>
         <div className={classes.vertical_divider} />
