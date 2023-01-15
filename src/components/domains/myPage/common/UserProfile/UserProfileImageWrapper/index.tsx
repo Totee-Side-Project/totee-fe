@@ -1,45 +1,45 @@
-import DefaultProfile from '../../../../../../assets/svg/profile-default.svg';
+import useImageFileReader from '@hooks/useImageFileReader';
+import profileCircle from '../../../../../../assets/svg/profile-circle.svg';
+import profileSquare from '../../../../../../assets/svg/profile-square.svg';
 import './index.scss';
-import useUploadImage from '@hooks/useProfileImage';
 
-const UserProfileImageWrapper = ({ user }: any) => {
-  // const {
-  //   files: profileFile,
-  //   UploadImage: UploadProfileImage,
-  //   handleInitialImage: handleInitialProfileImage,
-  //   resetFiles: resetProfileFiles,
-  // } = useUploadImage({
-  //   initialImage: user?.profileImageUrl,
-  // });
+const UserProfileImageWrapper = ({
+  user,
+  isEditProfile,
+  setImageFile,
+}: any) => {
+  const { imageUrl, previewImage } = useImageFileReader(user.profileImageUrl);
 
-  // const {
-  //   files: backgroundFile,
-  //   UploadBackgroundImage,
-  //   ImgPlaceholder,
-  //   handleInitialImage: handleInitialBackgroundImage,
-  //   resetFiles: resetBackgroundFiles,
-  // } = useUploadImage({
-  //   initialImage: user?.backgroundImageUrl,
-  // });
-
-  // console.log(user);
-
-  // //배경이미지가 뭐지?
-  // //프로필수정눌렀을 때
+  const onChange = (e: any) => {
+    const ImageFile = e.target.files[0];
+    if (!ImageFile) {
+      return;
+    }
+    setImageFile(ImageFile);
+    previewImage(ImageFile);
+  };
 
   return (
     <div className="userProfileImageWrapper">
-      {user.profileImageUrl ? (
-        <img
-          className="userProfileImage"
-          src={user.profileImageUrl}
-          alt="사용자 프로필 사진"
-        />
+      {isEditProfile ? (
+        <>
+          <img className="profileImage" src={imageUrl} />
+          <label className="profileImageEditLabel" htmlFor="file">
+            <img src={profileSquare} />
+          </label>
+          <input
+            className="profileImageEditInput"
+            type="file"
+            id="file"
+            onChange={onChange}
+            accept="image/*"
+          />
+        </>
       ) : (
         <img
-          className="userProfileImage"
-          src={DefaultProfile}
-          alt="기본 프로필 사진"
+          className="profileImage"
+          src={user.profileImageUrl ? user.profileImageUrl : profileCircle}
+          alt={user.profileImageUrl ? '사용자 프로필 사진' : '기본 프로필 사진'}
         />
       )}
     </div>
