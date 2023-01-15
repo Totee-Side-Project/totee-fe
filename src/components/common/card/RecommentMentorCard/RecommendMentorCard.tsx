@@ -10,7 +10,7 @@ export default function RecommendMentorCard({
     <div className={classes.container}>
       <MentoringPostCard
         mentoringPost={{
-          title: '',
+          title: Math.random().toString(),
           description: '',
           mentoringCycle: '',
           mentor: {

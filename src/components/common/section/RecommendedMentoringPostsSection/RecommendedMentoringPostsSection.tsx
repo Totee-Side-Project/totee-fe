@@ -1,7 +1,9 @@
+import { HTMLAttributes } from 'react';
+import Slider from 'react-slick';
 import { SectionTitle } from '@components/atoms';
 import RecommendMentorCard from '@components/common/card/RecommentMentorCard/RecommendMentorCard';
-import { useRef } from 'react';
-import Slider from 'react-slick';
+import NEXT_ARROW_ICON from '@assets/png/nextarrow.png';
+import PREVIOUS_ARROW_ICON from '@assets/png/prevarrow.png';
 import classes from './RecommendedMentoringPostsSection.module.scss';
 
 const SECTION_TEXTS = {
@@ -13,22 +15,40 @@ const SECTION_TEXTS = {
 
 const SLIDER_OPTIONS = {
   slidesToShow: 5,
-  speed: 5,
+  speed: 500,
 };
-
-const COUNT_OF_CARD_PER_PAGE = 5;
 
 const MOCK_POSTS = [...Array(12)];
 
-function RecommendedMentoringPostsSection() {
-  const currentCardIndex = useRef(0);
+interface SliderNavigateIconProps extends HTMLAttributes<HTMLDivElement> {
+  navigateTo: 'previous' | 'next';
+}
 
-  // const filtered
+function SliderNavigateIcon({
+  navigateTo,
+  className,
+  ...props
+}: SliderNavigateIconProps) {
+  const newClassName = className?.concat(` ${classes.navigate_icon_button}`);
 
-  const handlePreviousClick = () => {
-    const nextCardIndex = currentCardIndex.current - COUNT_OF_CARD_PER_PAGE;
+  const navigationTypeToIconMap: Record<typeof navigateTo, string> = {
+    next: NEXT_ARROW_ICON,
+    previous: PREVIOUS_ARROW_ICON,
   };
 
+  return (
+    <div className={newClassName} {...props}>
+      <div
+        style={{
+          backgroundImage: `url(${navigationTypeToIconMap[navigateTo]})`,
+        }}
+        className={classes.icon}
+      />
+    </div>
+  );
+}
+
+function RecommendedMentoringPostsSection() {
   return (
     <section className={classes.recommend_container}>
       <div className={classes.title_container}>
@@ -43,6 +63,8 @@ function RecommendedMentoringPostsSection() {
           infinite
           speed={SLIDER_OPTIONS.speed}
           slidesToShow={SLIDER_OPTIONS.slidesToShow}
+          prevArrow={<SliderNavigateIcon navigateTo="previous" />}
+          nextArrow={<SliderNavigateIcon navigateTo="next" />}
         >
           {MOCK_POSTS.map((_, index) => (
             <RecommendMentorCard key={index} onClick={() => {}} />
