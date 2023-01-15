@@ -3,7 +3,7 @@ import Introduction from './Introduction/indext';
 
 const UserActivityWrapper = ({
   user,
-  isEditUserProfile,
+  isEditProfile,
   introduction,
   setIntroduction,
 }: any) => {
@@ -11,7 +11,7 @@ const UserActivityWrapper = ({
     <div className="userActivityWrapper">
       <Introduction
         user={user}
-        isEditUserProfile={isEditUserProfile}
+        isEditProfile={isEditProfile}
         introduction={introduction}
         setIntroduction={setIntroduction}
       />

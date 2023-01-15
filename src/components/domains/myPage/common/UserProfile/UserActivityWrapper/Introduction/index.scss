@@ -3,11 +3,11 @@
   font-style: normal;
   font-weight: 400;
   margin-bottom: 32px;
-  .title {
+  .introductionTitle {
     color: #333333;
     font-family: 'Roboto';
   }
-  .textarea {
+  .introductionTextarea {
     color: #767676;
     font-family: 'Roboto';
     margin-top: 10px;
@@ -19,11 +19,6 @@
     outline: none;
     height: 100px;
   }
-  .text {
-    color: #767676;
-    font-family: 'Roboto';
-    margin-top: 7px;
-  }
   .introductionLength {
     color: #929292;
     font-family: 'Noto Sans KR';
@@ -33,5 +28,10 @@
     width: 99%;
     text-align: end;
     margin-top: 6px;
+  }
+  .introductionText {
+    color: #767676;
+    font-family: 'Roboto';
+    margin-top: 7px;
   }
 }

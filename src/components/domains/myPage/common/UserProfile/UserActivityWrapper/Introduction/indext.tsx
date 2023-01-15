@@ -2,17 +2,17 @@ import './index.scss';
 
 const Introduction = ({
   user,
-  isEditUserProfile,
+  isEditProfile,
   introduction,
   setIntroduction,
 }: any) => {
   return (
     <div className="introduction">
-      <p className="title">소개</p>
-      {isEditUserProfile ? (
+      <p className="introductionTitle">소개</p>
+      {isEditProfile ? (
         <>
           <textarea
-            className="textarea"
+            className="introductionTextarea"
             placeholder="소개를 입력해주세요."
             value={introduction}
             onChange={(e) => setIntroduction(e.target.value)}
@@ -21,7 +21,9 @@ const Introduction = ({
           <p className="introductionLength">{`${introduction.length} / 120`}</p>
         </>
       ) : (
-        <p className="text">{user.intro ? user.intro : '소개가 없습니다.'}</p>
+        <p className="introductionText">
+          {user.intro ? user.intro : '소개가 없습니다.'}
+        </p>
       )}
     </div>
   );
