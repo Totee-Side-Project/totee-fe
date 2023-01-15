@@ -7,6 +7,7 @@ import {
 } from './requestType';
 import {
   IGetApplicantResponse,
+  IGetMentoringListResponse,
   IGetPostDetailResponse,
   IGetPostListResponse,
   IPostTeamRequestFormData,
@@ -147,7 +148,9 @@ export const MentorAPI = {
 };
 
 export const MentoringAPI = {
-  getMentoringList: (options: IMentoringListRequestOptions) => {
+  getMentoringList: (
+    options: IMentoringListRequestOptions,
+  ): Promise<AxiosResponse<IGetMentoringListResponse>> => {
     const query = new URLSearchParams({
       ...(options.page !== undefined ? { page: options.page.toString() } : {}),
       ...(options.size !== undefined ? { size: options.size.toString() } : {}),
