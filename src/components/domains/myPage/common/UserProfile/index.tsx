@@ -1,14 +1,13 @@
-import { useGetUserAPI } from '@hooks/query/useGetQuery';
-import { useState } from 'react';
 import UserIdentificationWrapper from './UserIdentificationWrapper';
 import UserActivityWrapper from './UserActivityWrapper';
 import UserProfileImageWrapper from './UserProfileImageWrapper';
 import './index.scss';
-import { useUserProfile } from './ex';
+import { useUserProfile } from '../../../../../hooks/useUserProfile';
+import { useQuery } from 'react-query';
 
 const UserProfile = () => {
-  const { data, refetch } = useGetUserAPI();
-  const user = data.data.body.data;
+  const { data } = useQuery('user');
+  const user = data?.data?.body?.data;
 
   const {
     isEditProfile,
@@ -20,8 +19,6 @@ const UserProfile = () => {
     setIntroduction,
     updateUser,
   } = useUserProfile(user);
-
-  //console.log(user);
 
   return (
     <section className="userProfile">
@@ -36,7 +33,6 @@ const UserProfile = () => {
         setNickName={setNickName}
         isEditProfile={isEditProfile}
         setIsEditProfile={setIsEditProfile}
-        refetchUser={refetch}
         updateUser={updateUser}
       />
       <UserActivityWrapper

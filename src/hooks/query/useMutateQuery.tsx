@@ -164,13 +164,13 @@ export const useResignateTeam = (postId: number) => {
   return useMutation(() => TeamAPI.resignateTeam(postId));
 };
 
-export const useValidateUserNickName = (userNickName: string) => {
-  return useMutation(() => UserAPI.validateNickname(userNickName), {
-    onSuccess: (res) => {
-      console.log(res);
+export const useValidateNickName = () => {
+  return useMutation(
+    (userNickName: string) => UserAPI.validateNickname(userNickName),
+    {
+      onError: (err) => {
+        alert('이미 존재하는 닉네임입니다.');
+      },
     },
-    onError: (err) => {
-      console.log(err.response);
-    },
-  });
+  );
 };

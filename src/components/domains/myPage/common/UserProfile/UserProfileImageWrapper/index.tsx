@@ -11,12 +11,12 @@ const UserProfileImageWrapper = ({
   const { imageUrl, previewImage } = useImageFileReader(user.profileImageUrl);
 
   const onChange = (e: any) => {
-    const ImageFile = e.target.files[0];
-    if (!ImageFile) {
+    const imageFile = e.target.files[0];
+    if (!imageFile) {
       return;
     }
-    setImageFile(ImageFile);
-    previewImage(ImageFile);
+    setImageFile(imageFile);
+    previewImage(imageFile);
   };
 
   return (

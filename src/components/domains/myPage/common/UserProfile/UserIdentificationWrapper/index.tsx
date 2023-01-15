@@ -1,33 +1,55 @@
 import ToteeBadgeIcon from '../../../../../../assets/svg/totee-badge.svg';
 import { positionListKey } from '@utils/position.const';
-import './index.scss';
+import { useValidateNickName } from '@hooks/query/useMutateQuery';
 import ProfileEditButton from './ProfileEditButton';
-
-//최소1글자  , 아니면 버튼 disabled됨
-//여기태그 form바꾸기
-//파일이름도 form바꾸기
+import './index.scss';
+import { useEffect } from 'react';
 
 const UserIdentificationWrapper = ({
   user,
-  userNickName,
-  setUserNickName,
-  isEditUserProfile,
-  setIsEditUserProfile,
-  refetchUserInfo,
+  nickName,
+  setNickName,
+  isEditProfile,
+  setIsEditProfile,
+  updateUser,
 }: any) => {
+  const { mutate: validateNickName, isSuccess: isValidateNickName } =
+    useValidateNickName();
+
+  useEffect(() => {
+    if (!isEditProfile) {
+      return;
+    }
+    if (isValidateNickName) {
+      updateUser();
+      setIsEditProfile(false); // 업데이트 성공했을때만
+      return;
+    }
+    setIsEditProfile(true);
+  }, [isValidateNickName]);
+
+  const onSubmitUser = (e: any) => {
+    e.preventDefault();
+    if (!isEditProfile) {
+      setIsEditProfile(true);
+      return;
+    }
+    validateNickName(nickName);
+  };
+
   return (
-    <form className="userIdentificationWrapper">
+    <form className="userIdentificationWrapper" onSubmit={onSubmitUser}>
       <div className="titleWrapper">
-        {isEditUserProfile ? (
+        {isEditProfile ? (
           <input
-            className="userNickNameInput"
+            className="nickNameInput"
             placeholder="최대 5글자"
             maxLength={5}
-            value={userNickName}
-            onChange={(e) => setUserNickName(e.target.value)}
+            value={nickName}
+            onChange={(e) => setNickName(e.target.value)}
           />
         ) : (
-          <p className="userNickName">{user.nickname}</p>
+          <p className="nickName">{user.nickname}</p>
         )}
         {user.roleType === 'totee' && (
           <img
@@ -37,16 +59,11 @@ const UserIdentificationWrapper = ({
           />
         )}
       </div>
-      <p className="userIdentification">
+      <p className="identification">
         {user.roleType} | {positionListKey[user.position as string]} <br />
         {user.email !== 'NO_EMAIL' && user.email}
       </p>
-      <ProfileEditButton
-        userNickName={userNickName}
-        isEditUserProfile={isEditUserProfile}
-        setIsEditUserProfile={setIsEditUserProfile}
-        refetchUserInfo={refetchUserInfo}
-      />
+      <ProfileEditButton nickName={nickName} isEditProfile={isEditProfile} />
     </form>
   );
 };
