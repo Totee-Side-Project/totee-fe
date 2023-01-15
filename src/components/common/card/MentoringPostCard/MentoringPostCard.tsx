@@ -5,7 +5,6 @@ interface Props {
   mentoringPost: {
     title: string;
     description: string;
-    mentoringCycle: string;
     mentor: {
       career: string;
       position: string;
@@ -31,7 +30,7 @@ function SummaryLabel({ title, content }: SummaryLabelProps) {
 }
 
 function MentoringPostCard({ mentoringPost, onClick }: Props) {
-  const { title, description, mentoringCycle, mentor } = mentoringPost;
+  const { title, description, mentor } = mentoringPost;
 
   return (
     <article className={classes.container} onClick={onClick}>
@@ -49,8 +48,6 @@ function MentoringPostCard({ mentoringPost, onClick }: Props) {
           <img src={mentor.profileImageUrl} alt={mentor.nickname} />
           <span className={classes.nickname}>{mentor.nickname}</span>
         </div>
-        <div className={classes.vertical_divider} />
-        <span className={classes.mentoring_cycle}>{mentoringCycle}</span>
       </div>
     </article>
   );

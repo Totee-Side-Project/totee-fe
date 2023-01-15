@@ -19,7 +19,6 @@ function RecommendMentoringCard({
         mentoringPost={{
           title: mentoring.title,
           description: mentoring.content,
-          mentoringCycle: '',
           mentor: {
             career: mentoring.career,
             position: mentoring.field,
