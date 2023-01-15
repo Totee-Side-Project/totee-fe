@@ -1,4 +1,4 @@
-import { IMentoringListRequestOptions } from '@api/requestType';
+import { IMentoringListRequestOptions } from 'types/api.types';
 
 export const queryKeys = {
   user: ['user'],
