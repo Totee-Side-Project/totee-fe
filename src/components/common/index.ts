@@ -12,7 +12,6 @@ export * from './main/MentoSection/MentoSection';
 export * from './main/Carousel/Carousel';
 export * from './main/StudySection/StudySection';
 
-export * from './post/PostList/PostList';
 export * from './detail/CommentInput/CommentInput';
 export * from './detail/Editor/Editor';
 export * from './detail/Select/Select';

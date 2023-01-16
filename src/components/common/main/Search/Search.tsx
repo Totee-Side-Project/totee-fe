@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useRecoilState, useResetRecoilState } from 'recoil';
+import { useResetRecoilState } from 'recoil';
 
 import { searchState } from '@store/search';
 import { SearchInput } from '@components/atoms';
