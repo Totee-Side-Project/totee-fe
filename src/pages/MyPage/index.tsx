@@ -1,6 +1,6 @@
 import UserProfile from '@components/domains/myPage/common/UserProfile';
 import { defaultFocusMenu } from '@components/domains/myPage/MyPageMenu';
-import SideBar from '@components/domains/myPage/Sidebar';
+import SideBar from '@components/domains/myPage/Sidebar/Sidebar';
 import React, { useState } from 'react';
 import './index.scss';
 
