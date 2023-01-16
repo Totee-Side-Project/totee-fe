@@ -1,6 +1,6 @@
 export interface GetPostListParams {
   page: number;
-  title: string;
+  kw: string;
   size: number;
   sortOptions?: string;
 }
