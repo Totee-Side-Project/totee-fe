@@ -1,4 +1,4 @@
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, useState } from 'react';
 import Slider from 'react-slick';
 import { SectionTitle } from '@components/atoms';
 import RecommendMentorCard from '@components/common/card/RecommendMentoringCard/RecommendMentoringCard';
@@ -6,6 +6,8 @@ import NEXT_ARROW_ICON from '@assets/png/nextarrow.png';
 import PREVIOUS_ARROW_ICON from '@assets/png/prevarrow.png';
 import classes from './RecommendMentoringPostsSection.module.scss';
 import { useGetMentoringList } from '@hooks/query/useGetQuery';
+import { IMentoring } from 'types/api.types';
+import MentoringPostDetailModal from '@components/common/mentoring/MentoringPostDetailModal';
 
 const SECTION_TEXTS = {
   subtitle: 'Level Up Mentoring',
@@ -48,6 +50,9 @@ function SliderNavigateIcon({
 }
 
 function RecommendMentoringPostsSection() {
+  const [currentModalMentoringPost, setCurrentModalMentoringPost] =
+    useState<IMentoring | null>(null);
+
   const { data, isLoading, isError } = useGetMentoringList({
     page: 0,
     size: 20,
@@ -71,32 +76,52 @@ function RecommendMentoringPostsSection() {
     return <></>;
   }
 
+  const handleCloseClick = () => {
+    setCurrentModalMentoringPost(null);
+  };
+
+  const getRecommendMentorCardHandler = (mentoring: IMentoring) => {
+    return () => {
+      setCurrentModalMentoringPost(mentoring);
+    };
+  };
+
   return (
-    <section className={classes.recommend_container}>
-      <div className={classes.title_container}>
-        <SectionTitle
-          title={SECTION_TEXTS.title}
-          sub={SECTION_TEXTS.subtitle}
-          description={SECTION_TEXTS.description}
+    <>
+      {currentModalMentoringPost !== null ? (
+        <MentoringPostDetailModal
+          mentoring={currentModalMentoringPost}
+          onCloseClick={handleCloseClick}
+          onApplyClick={() => {}}
         />
-      </div>
-      <div className={classes.slider_container}>
-        <Slider
-          infinite
-          speed={SLIDER_OPTIONS.speed}
-          slidesToShow={SLIDER_OPTIONS.slidesToShow}
-          prevArrow={<SliderNavigateIcon navigateTo="previous" />}
-          nextArrow={<SliderNavigateIcon navigateTo="next" />}
-        >
-          {data?.data.body.data.content.map((mentoring) => (
-            <RecommendMentorCard
-              key={mentoring.mentoringId}
-              mentoring={mentoring}
-            />
-          ))}
-        </Slider>
-      </div>
-    </section>
+      ) : null}
+      <section className={classes.recommend_container}>
+        <div className={classes.title_container}>
+          <SectionTitle
+            title={SECTION_TEXTS.title}
+            sub={SECTION_TEXTS.subtitle}
+            description={SECTION_TEXTS.description}
+          />
+        </div>
+        <div className={classes.slider_container}>
+          <Slider
+            infinite
+            speed={SLIDER_OPTIONS.speed}
+            slidesToShow={SLIDER_OPTIONS.slidesToShow}
+            prevArrow={<SliderNavigateIcon navigateTo="previous" />}
+            nextArrow={<SliderNavigateIcon navigateTo="next" />}
+          >
+            {data?.data.body.data.content.map((mentoring) => (
+              <RecommendMentorCard
+                key={mentoring.mentoringId}
+                mentoring={mentoring}
+                onClick={getRecommendMentorCardHandler(mentoring)}
+              />
+            ))}
+          </Slider>
+        </div>
+      </section>
+    </>
   );
 }
 

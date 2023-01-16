@@ -4,7 +4,6 @@ import { MentoSection, MentorReviewSection } from '@components/common';
 import LetterBanner from '@components/common/main/Banner/LetterBanner';
 import './MainPage.scss';
 import RecommendMentoringPostsSection from '@components/common/section/RecommendMentoringPostsSection/RecommendMentoringPostsSection';
-import MentoringPostDetailModal from '@components/common/mentoring/MentoringPostDetailModal';
 
 const MainPage = () => {
   return (
@@ -27,7 +26,6 @@ const MainPage = () => {
       <section>
         <BottomBanner />
       </section>
-      <MentoringPostDetailModal />
     </div>
   );
 };
