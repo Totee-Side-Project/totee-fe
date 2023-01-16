@@ -43,6 +43,7 @@ export function Search() {
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
+    setInputValue('');
     navigate(linkToUrl(inputValue, pathname));
   };
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
