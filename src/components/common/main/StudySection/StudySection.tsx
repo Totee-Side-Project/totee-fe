@@ -6,7 +6,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import { PostAPI } from '@api/api';
 import { SectionTitle } from '@components/atoms';
 import { Carousel } from '@components/common';
-import { NewPostCard } from '@components/common/post/PostCard/PostCard';
+import { PostCard } from '@components/common/post/PostCard/PostCard';
 import { queryKeys } from '@hooks/query';
 import { useSortWithClient } from '@hooks/useSortWithClient';
 import { useInfiniteTotalPosts } from '@hooks/query/useInfiniteTotalPosts';
@@ -98,7 +98,7 @@ export function StudySection() {
             >
               {page.map((post) => (
                 <li key={post.postId}>
-                  <NewPostCard post={post} />
+                  <PostCard post={post} />
                 </li>
               ))}
             </div>
@@ -122,7 +122,7 @@ const SectionSkeleton = () => {
       >
         {[0, 1, 2, 3].map((ele) => (
           <li key={ele}>
-            <NewPostCard />
+            <PostCard />
           </li>
         ))}
       </ul>
