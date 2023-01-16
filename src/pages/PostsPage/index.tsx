@@ -18,7 +18,7 @@ export const POSTS_CATEGORY_PATHS = {
 };
 
 export const POSTS_URL_PARAMS = {
-  TITLE: 'title',
+  KEYWORD: 'KW',
   SORT: 'sort',
 };
 
