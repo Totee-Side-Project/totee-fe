@@ -1,8 +1,16 @@
 import { Dispatch, SetStateAction } from 'react';
+import classNames from 'classnames';
 
-import arrowRightSvg from '@assets/svg/common/arrowRight.svg';
 import { Icon } from '@components/atoms';
+import ARROW_CIRCLE_SVG from '@assets/svg/common/arrowCircle.svg';
+import classes from './pagination.module.scss';
 
+const DIRECTIONS = {
+  prev: 'prev',
+  next: 'next',
+} as const;
+
+type DirectionsType = keyof typeof DIRECTIONS;
 interface PaginationProps {
   currentPage: number;
   totalPageNum: number;
@@ -23,7 +31,7 @@ export const Pagination = ({
   const onClickPrevArrow = () => {
     if (slideNum <= 1) return;
     setSlideNum((pre) => pre - 1);
-    setCurrentPage((slideNum - 2) * limitPageNum);
+    setCurrentPage((slideNum - 2) * limitPageNum + (limitPageNum - 1));
   };
 
   const onClickNextArrow = () => {
@@ -33,12 +41,15 @@ export const Pagination = ({
   };
 
   const pageNumbers = Array(limitPageNum).fill(null);
+  const prevDisabled = slideNum <= 1;
+  const nextDisabled = currentPage - 1 + limitPageNum >= totalPageNum;
+  const isSelected = (btnNumber: number) => currentPage + 1 === btnNumber;
 
   return (
-    <div style={{ gap: '10px', display: 'flex' }}>
+    <div className={classes.paginationContainer}>
       <ArrowButton
-        isActive={currentPage >= 1}
-        direction={'pre'}
+        disabled={prevDisabled}
+        direction={DIRECTIONS.prev}
         onClick={onClickPrevArrow}
       />
       {pageNumbers?.map((pageNum, index) => {
@@ -50,52 +61,62 @@ export const Pagination = ({
             key={btnNumber}
             buttonNum={btnNumber}
             onClick={() => setCurrentPage(btnNumber - 1)}
-            isActive={currentPage + 1 === btnNumber}
+            isSelected={isSelected(btnNumber)}
           />
         );
       })}
       <ArrowButton
-        isActive={currentPage < totalPageNum - 1}
-        direction={'next'}
+        disabled={nextDisabled}
+        direction={DIRECTIONS.next}
         onClick={onClickNextArrow}
       />
     </div>
   );
 };
 
+interface ArrowButtonProps {
+  disabled: boolean;
+  direction: DirectionsType;
+  onClick: () => void;
+}
+
 export const ArrowButton = ({
-  isActive,
+  disabled,
   direction,
   onClick,
-}: {
-  isActive: boolean;
-  direction: 'pre' | 'next';
-  onClick: () => void;
-}) => {
-  const style = isActive ? {} : { display: 'none' };
+}: ArrowButtonProps) => {
+  const disabledClassName = disabled ? classes.disabled : '';
+  const directionClassName =
+    direction === 'next' ? classes.nextArrowButton : classes.prevArrowButton;
 
   return (
     <div
-      style={{ border: '1px solid green', borderRadius: '30px' }}
+      className={classNames([disabledClassName, directionClassName])}
       onClick={onClick}
     >
-      <Icon src={arrowRightSvg} />
+      <Icon src={ARROW_CIRCLE_SVG} />
     </div>
   );
 };
 
+interface PaginationButtonProps {
+  buttonNum: number;
+  onClick: () => void;
+  isSelected: boolean;
+}
+
 export const PaginationButton = ({
   buttonNum,
   onClick,
-  isActive,
-}: {
-  buttonNum: number;
-  onClick: () => void;
-  isActive: boolean;
-}) => {
-  const style = isActive ? { color: 'red' } : {};
+  isSelected,
+}: PaginationButtonProps) => {
+  const defaultClassName = classes.paginationNumberButton;
+  const isSelectedClassName = isSelected ? classes.selected : '';
   return (
-    <div style={style} onClick={onClick}>
+    <div
+      className={classNames([defaultClassName, isSelectedClassName])}
+      onClick={onClick}
+    >
       {buttonNum}
     </div>
   );

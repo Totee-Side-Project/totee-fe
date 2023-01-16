@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { PostCard } from '@components/common/post/PostCard/PostCard';
@@ -9,28 +9,35 @@ import classes from './postsSection.module.scss';
 
 // call API
 // Item Component UI
+const PAGE_SIZE = 10;
 
 export const PostPaginationSection = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const title = searchParams.get('title') || '';
-  const sortParam = searchParams.get(POSTS_URL_PARAMS.SORT);
+  const sortParam = searchParams.get(POSTS_URL_PARAMS.SORT) || '';
 
   const [currentPage, setCurrentPage] = useState(0);
   const [slideNum, setSlideNum] = useState(1);
 
-  const { data, isLoading, status } = useGetSearchPostList({
-    title,
-    page: currentPage,
-    size: 3,
-  });
+  const { data, isLoading, isFetching, status, refetch } = useGetSearchPostList(
+    {
+      title,
+      page: currentPage,
+      size: PAGE_SIZE,
+      sortOptions: sortParam,
+    },
+  );
 
-  // 제일처음에 로딩을 할 때
-  if (isLoading) {
+  useEffect(() => {
+    refetch();
+  }, [sortParam]);
+
+  if (isLoading || isFetching) {
     return (
       <section className={classes.postsSectionContainer}>
         <ul className={classes.postsSection}>
-          {Array(10)
-            .fill(0)
+          {Array(PAGE_SIZE)
+            .fill(null)
             .map((ele, index) => (
               <PostCard key={index} />
             ))}
@@ -62,7 +69,6 @@ export const PostPaginationSection = () => {
     );
   }
 
-  //
   // 🟠Todo: 보여줄 데이터들이 없거나 잘못된 정렬 카테고리가 선택된 경우 적절한 안내페이지르 보여줘야한다.
   return (
     <main>

@@ -1,0 +1,29 @@
+.paginationContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.paginationNumberButton {
+  font-size: 16px;
+  line-height: 24px;
+  vertical-align: top;
+  color: #999999;
+  cursor: pointer;
+}
+
+.prevArrowButton {
+}
+
+.nextArrowButton {
+  rotate: (180deg);
+}
+
+.disabled {
+  visibility: hidden;
+}
+
+.selected {
+  color: #333333;
+}

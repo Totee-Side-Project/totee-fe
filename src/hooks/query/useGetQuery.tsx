@@ -1,5 +1,4 @@
 import { useQuery } from 'react-query';
-import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 
 import {
