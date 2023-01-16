@@ -1,3 +1,5 @@
+import { IMentoringListRequestOptions } from 'types/api.types';
+
 export const queryKeys = {
   user: ['user'],
   postsAll: ['postsAll'],
@@ -9,6 +11,10 @@ export const queryKeys = {
   recommend: ['recommend'],
   likePost: (postId: number) => ['like', postId],
   alarms: ['alarms'],
+  mentoringList: (options: IMentoringListRequestOptions) => [
+    'mentoring',
+    options,
+  ],
   // 구현 전
   // team: (postId: number) => ['team', postId],
 };
