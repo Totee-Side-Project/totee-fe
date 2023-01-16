@@ -1,13 +1,14 @@
 import UserIdentificationWrapper from './UserIdentificationWrapper';
 import UserActivityWrapper from './UserActivityWrapper';
 import UserProfileImageWrapper from './UserProfileImageWrapper';
-import './index.scss';
 import { useUserProfile } from '../../../../../hooks/useUserProfile';
 import { useQuery } from 'react-query';
+import { UserType } from 'types/user.types';
+import './index.scss';
 
 const UserProfile = () => {
   const { data } = useQuery('user');
-  const user = data?.data?.body?.data;
+  const user: UserType = data?.data?.body?.data;
 
   const {
     isEditProfile,

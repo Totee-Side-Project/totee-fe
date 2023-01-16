@@ -19,8 +19,8 @@ const UserProfileImageWrapper = ({
 }: IUserProfileImageWrapperProps) => {
   const [imageUrl, setImageUrl] = useState(user.profileImageUrl);
 
-  const onChange = (e: any) => {
-    const imageFile: Blob | MediaSource | undefined = e.target.files[0];
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const imageFile: Blob | MediaSource | undefined = e.target.files?.[0];
     if (!imageFile) {
       return;
     }

@@ -1,7 +1,13 @@
-import { myPageMenu } from '../MyPageMenu';
+import { IDefaultFocusMenuType, myPageMenu } from '../MyPageMenu';
+import React from 'react';
 import './index.scss';
 
-const SideBar = ({ focusedMenu, setFocusedMenu }: any) => {
+interface ISideBarProps {
+  focusedMenu: IDefaultFocusMenuType;
+  setFocusedMenu: React.Dispatch<React.SetStateAction<IDefaultFocusMenuType>>;
+}
+
+const SideBar = ({ focusedMenu, setFocusedMenu }: ISideBarProps) => {
   return (
     <aside className="sidebar">
       {myPageMenu.map(({ mainMenu, subMenus }) => (

@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import './index.scss';
 
 const MyPage = () => {
-  const [focusedMenu, setFocusedMenu] = useState<any>(defaultFocusMenu);
+  const [focusedMenu, setFocusedMenu] = useState(defaultFocusMenu);
 
   return (
     <div className="myPage">

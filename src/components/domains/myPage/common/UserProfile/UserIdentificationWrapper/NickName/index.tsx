@@ -1,6 +1,20 @@
+import { UserType } from 'types/user.types';
+import React from 'react';
 import './index.scss';
 
-const NickName = ({ user, nickName, setNickName, isEditProfile }: any) => {
+interface INickNameProps {
+  user: UserType;
+  nickName: string;
+  setNickName: React.Dispatch<React.SetStateAction<string>>;
+  isEditProfile: boolean;
+}
+
+const NickName = ({
+  user,
+  nickName,
+  setNickName,
+  isEditProfile,
+}: INickNameProps) => {
   return (
     <>
       {isEditProfile ? (

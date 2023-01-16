@@ -1,10 +1,17 @@
+import React from 'react';
 import './index.scss';
 
-const profileEditButton = ({
+interface IProfileEditButtonProps {
+  nickName: string;
+  isEditProfile: boolean;
+  setIsEditProfile: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const ProfileEditButton = ({
   nickName,
   isEditProfile,
   setIsEditProfile,
-}: any) => {
+}: IProfileEditButtonProps) => {
   return (
     <>
       {isEditProfile ? (
@@ -35,4 +42,4 @@ const profileEditButton = ({
   );
 };
 
-export default profileEditButton;
+export default ProfileEditButton;

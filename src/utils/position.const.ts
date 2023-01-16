@@ -20,7 +20,7 @@ export const positionListKey: any = {
   OTHERS: '기타',
 };
 
-export const POSITION = [
+export const POSITION: string[] = [
   'FRONT_END',
   'BACK_END',
   'ML',

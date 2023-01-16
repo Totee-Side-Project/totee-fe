@@ -1,8 +1,20 @@
 import ToteeBadgeIcon from '../../../../../../assets/svg/totee-badge.svg';
 import ProfileEditButton from './ProfileEditButton';
 import Position from './Position';
-import './index.scss';
 import NickName from './NickName';
+import { UserType } from 'types/user.types';
+import React from 'react';
+import './index.scss';
+
+interface IUserIdentificationWrapperProps {
+  user: UserType;
+  nickName: string;
+  setNickName: React.Dispatch<React.SetStateAction<string>>;
+  setPosition: React.Dispatch<React.SetStateAction<string>>;
+  isEditProfile: boolean;
+  setIsEditProfile: React.Dispatch<React.SetStateAction<boolean>>;
+  onSubmitUser: (e: React.FormEvent<HTMLFormElement>) => void;
+}
 
 const UserIdentificationWrapper = ({
   user,
@@ -12,7 +24,7 @@ const UserIdentificationWrapper = ({
   isEditProfile,
   setIsEditProfile,
   onSubmitUser,
-}: any) => {
+}: IUserIdentificationWrapperProps) => {
   return (
     <form className="userIdentificationWrapper" onSubmit={onSubmitUser}>
       <div className="titleWrapper">

@@ -1,12 +1,21 @@
-import './index.scss';
+import { UserType } from 'types/user.types';
 import Introduction from './Introduction/indext';
+import React from 'react';
+import './index.scss';
+
+interface IUserActivityWrapperProps {
+  user: UserType;
+  isEditProfile: boolean;
+  introduction: string;
+  setIntroduction: React.Dispatch<React.SetStateAction<string>>;
+}
 
 const UserActivityWrapper = ({
   user,
   isEditProfile,
   introduction,
   setIntroduction,
-}: any) => {
+}: IUserActivityWrapperProps) => {
   return (
     <div className="userActivityWrapper">
       <Introduction

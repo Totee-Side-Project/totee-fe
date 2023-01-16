@@ -1,11 +1,20 @@
+import { UserType } from 'types/user.types';
+import React from 'react';
 import './index.scss';
+
+interface IIntroductionProps {
+  user: UserType;
+  isEditProfile: boolean;
+  introduction: string;
+  setIntroduction: React.Dispatch<React.SetStateAction<string>>;
+}
 
 const Introduction = ({
   user,
   isEditProfile,
   introduction,
   setIntroduction,
-}: any) => {
+}: IIntroductionProps) => {
   return (
     <div className="introduction">
       <p className="introductionTitle">소개</p>

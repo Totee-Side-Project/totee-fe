@@ -1,13 +1,14 @@
 import { useUpdateUser } from '@hooks/query/useMutateQuery';
 import { useValidateNickName } from '@hooks/query/useMutateQuery';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { UserType } from 'types/user.types';
 
-export const useUserProfile = (user: any) => {
+export const useUserProfile = (user: UserType) => {
   const [isEditProfile, setIsEditProfile] = useState(false);
   const [nickName, setNickName] = useState(user.nickname);
   const [introduction, setIntroduction] = useState(user.intro);
   const [position, setPosition] = useState(user.position);
-  const [imageFile, setImageFile] = useState();
+  const [imageFile, setImageFile] = useState<Blob | MediaSource | undefined>();
 
   const { mutate: updateUserInfo, isSuccess: isUpdateUser } = useUpdateUser();
   const { mutate: validateNickName, isSuccess: isValidateNickName } =
@@ -33,7 +34,7 @@ export const useUserProfile = (user: any) => {
   }, [isUpdateUser]);
 
   // 프로필 수정 작업 중 수정하기 버튼 클릭할 때
-  const onSubmitUser = (e: any) => {
+  const onSubmitUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (user.nickname !== nickName) {
       validateNickName(nickName);

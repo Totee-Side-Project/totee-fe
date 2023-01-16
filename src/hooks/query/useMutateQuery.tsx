@@ -169,7 +169,7 @@ export const useValidateNickName = () => {
   return useMutation(
     (userNickName: string) => UserAPI.validateNickname(userNickName),
     {
-      onError: (err) => {
+      onError: () => {
         alert('이미 존재하는 닉네임입니다.');
       },
     },

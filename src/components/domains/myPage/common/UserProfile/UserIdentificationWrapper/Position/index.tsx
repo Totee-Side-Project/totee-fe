@@ -1,7 +1,15 @@
 import { POSITION, positionListKey } from '@utils/position.const';
+import React from 'react';
+import { UserType } from 'types/user.types';
 import './index.scss';
 
-const Position = ({ user, isEditProfile, setPosition }: any) => {
+interface IPositionProps {
+  user: UserType;
+  isEditProfile: boolean;
+  setPosition: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const Position = ({ user, isEditProfile, setPosition }: IPositionProps) => {
   return (
     <>
       {isEditProfile ? (

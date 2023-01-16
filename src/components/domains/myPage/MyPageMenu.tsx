@@ -9,6 +9,12 @@ import OpenedStudyAdministration from './contentSection/study/OpenedStudyAdminis
 import ParticipatingStudy from './contentSection/study/ParticipatingStudy';
 import StudyApplicantConfirmation from './contentSection/study/StudyApplicantConfirmation';
 
+export interface IDefaultFocusMenuType {
+  mainMenuTitle: string;
+  subMenuTitle: string;
+  component: JSX.Element;
+}
+
 const studyMenu = {
   mainMenu: { title: '스터디', iconSrc: OpenedBookIconSrc },
   subMenus: [
@@ -38,7 +44,7 @@ const mentoringMenu = {
   ],
 };
 
-export const defaultFocusMenu = {
+export const defaultFocusMenu: IDefaultFocusMenuType = {
   mainMenuTitle: studyMenu.mainMenu.title,
   subMenuTitle: studyMenu.subMenus[0].title,
   component: studyMenu.subMenus[0].component,
