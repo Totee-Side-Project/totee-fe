@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 
 export default function useDebounceInput(value: string, delay = 200) {
-  const [inputValue, setInputValue] = useState('');
+  const [debouncedValue, setDebouncedValue] = useState(value);
 
   useEffect(() => {
     const handler = setTimeout(() => {
-      setInputValue(value);
+      setDebouncedValue(value);
     }, delay);
 
     // Cancel the timeout if value changes (also on delay change or unmount)
@@ -13,5 +13,5 @@ export default function useDebounceInput(value: string, delay = 200) {
       clearTimeout(handler);
     };
   }, [value, delay]);
-  return { inputValue, setInputValue };
+  return debouncedValue;
 }
