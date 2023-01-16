@@ -37,7 +37,7 @@ export interface IResponseOfPage {
 export interface IGetPostListResponse extends IResponseOfPage {
   body: {
     data: {
-      content: IPostType[];
+      content: IResponsePostDetail[];
       pageable: {};
       last: boolean;
       totalPages: number;

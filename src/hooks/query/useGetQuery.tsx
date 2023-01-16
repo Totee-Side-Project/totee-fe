@@ -53,15 +53,15 @@ export function useGetPostByPostId(postId: number) {
 
 export interface UseGetSearchPostListProps {
   title?: string;
-  page: number;
-  size: number;
+  page?: number;
+  size?: number;
   sortOptions?: string;
 }
 
 // FIXME: useInfiniteTotalPosts와 합쳐질 순 없는지 확인 중
 export function useGetSearchPostList({
   title = '',
-  page,
+  page = 0,
   size = 10,
   sortOptions,
 }: UseGetSearchPostListProps) {
@@ -69,7 +69,7 @@ export function useGetSearchPostList({
     queryKeys.postSearchTitle(title, page),
     () =>
       PostAPI.getPostList({
-        title,
+        kw: title,
         size,
         page,
         sortOptions,

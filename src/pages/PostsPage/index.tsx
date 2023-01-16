@@ -2,7 +2,7 @@ import { SearchSection } from '@components/common';
 // import { PostsFooter } from '@components/domains/posts/PostsFooter';
 import { PostsHeader } from '@components/domains/posts/PostsHeader';
 import { PostsInfiniteSection } from '@components/domains/posts/PostsSection/PostsInfiniteSection';
-import { SearchPosts } from '@components/domains/posts/search/SearchPosts';
+import { PostsAll } from '@components/domains/posts/PostsAll/PostsAll';
 import {
   Route,
   Routes,
@@ -25,7 +25,7 @@ export const POSTS_URL_PARAMS = {
 const PostsPage = () => {
   return (
     <Routes>
-      <Route path={POSTS_CATEGORY_PATHS.ALL} element={<SearchPosts />} />
+      <Route path={POSTS_CATEGORY_PATHS.ALL} element={<PostsAll />} />
       <Route
         path={POSTS_CATEGORY_PATHS.STUDY}
         element={

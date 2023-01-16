@@ -13,7 +13,6 @@ export const PostsHeader = () => {
             likeNum: '좋아요순',
           }}
         />
-        {/* <Button onClick={() => navigate('/setupStudy')} center="글쓰기" /> */}
       </div>
     </div>
   );

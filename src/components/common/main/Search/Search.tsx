@@ -1,85 +1,53 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useResetRecoilState } from 'recoil';
+import React, { FormEvent, useEffect, useRef, useState } from 'react';
 
-import { searchState } from '@store/search';
 import { SearchInput } from '@components/atoms';
 import { ReactComponent as SearchIcon } from '@assets/svg/search-icon.svg';
 import { useGetSearchPostList } from '@hooks/query/useGetQuery';
 import { useOutsideAlerter } from '@hooks/useOutsideAlerter';
 import useDebounceInput from '@hooks/useDebounceInput';
-
-import { SearchPreview } from './SearchPreview';
 import classes from './search.module.scss';
+import { SearchPreview } from '@components/common/main/Search/SearchPreview';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export function Search() {
   const [isOpenPreview, setIsOpenPreview] = useState(false);
-  // const [searchResult, setSearchResult] = useRecoilState(searchState);
-  const [previewResult, setPreviewResult] = useState<any[]>([]);
-  const resetSearchResult = useResetRecoilState(searchState);
+  const [previewResult, setPreviewResult] = useState<string[]>([]);
   const inputRef = useRef<HTMLDivElement>(null);
+  const [inputValue, setInputValue] = useState('');
+  const debouncedValue = useDebounceInput(inputValue);
+  useOutsideAlerter(inputRef, () => closePreview());
 
-  const { inputValue, setInputValue } = useDebounceInput('');
-  const { data } = useGetSearchPostList(inputValue);
-  const isPreviewResult = previewResult.length > 0 ? true : false;
+  const { data } = useGetSearchPostList({
+    title: debouncedValue,
+    size: 10,
+  });
+
+  useEffect(() => {
+    if (data?.content) {
+      setPreviewResult([...new Set(data?.content.map(({ title }) => title))]);
+    }
+  }, [data?.content]);
+
+  useEffect(() => {
+    if (!inputValue) return closePreview();
+    if (!previewResult.length) return closePreview();
+
+    openPreview();
+  }, [inputValue, previewResult]);
 
   const openPreview = () => setIsOpenPreview(true);
   const closePreview = () => setIsOpenPreview(false);
 
-  useOutsideAlerter(inputRef, () => closePreview());
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (inputValue.length === 0) {
-      // setPreviewResult([]);
-      closePreview();
-    }
-  }, [inputValue]);
-
-  useEffect(() => {
-    if (data?.data?.body.data.content.length) {
-      setPreviewResult([
-        ...new Set(data.data.body.data.content.map((ct: any) => ct.title)),
-      ]);
-      openPreview();
-      return;
-    }
-
-    closePreview();
-  }, [data?.data?.body.data.content]);
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
-
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    closePreview();
-    // Todo: 이 부분이 어떤 역할을 하는지 판단해서 작업
-    // if (inputValue.length > 0) {
-    //   setSearchResult({
-    //     data: data?.data?.body.data.content,
-    //     keyword: inputValue,
-    //   });
-    //   return;
-    // }
-    resetSearchResult();
+    navigate(linkToUrl(inputValue, pathname));
   };
-
-  const onClickPreview = (resultText: string) => {
-    setInputValue(resultText);
-    closePreview();
-
-    // Todo: 이 부분이 어떤 역할을 하는지 판단해서 작업
-    // Todo: navigate 해주어야 할 것 같다.
-
-    // setSearchResult({
-    //   data: data?.data?.body.data.content,
-    //   keyword: resultText,
-    // });
-  };
-
-  const onFocus = () => {
-    if (isPreviewResult) openPreview();
-  };
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setInputValue(e.target.value);
+  const onFocus = () => isOpenPreview && openPreview();
 
   return (
     <section className={classes.search_wrapper}>
@@ -98,12 +66,7 @@ export function Search() {
             onFocus={onFocus}
           />
         </form>
-        {isOpenPreview && (
-          <SearchPreview
-            previewResult={previewResult}
-            onClick={onClickPreview}
-          />
-        )}
+        {isOpenPreview && <SearchPreview previewResult={previewResult} />}
       </div>
       {/* {searchResult?.data && searchResult.keyword !== null && (
         <div className={classes.searchResult}>
@@ -116,3 +79,6 @@ export function Search() {
     </section>
   );
 }
+
+export const linkToUrl = (title: string, pathname: string) =>
+  pathname === '/' ? `posts/all?title=${title}` : `?title=${title}`;

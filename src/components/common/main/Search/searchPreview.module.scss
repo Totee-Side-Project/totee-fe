@@ -15,7 +15,6 @@
   .preview_list {
     li {
       height: 45px;
-      padding-left: 100px;
       line-height: 45px;
       font-size: 16px;
       font-weight: 500;
@@ -26,6 +25,11 @@
         background: #ededed;
         background-blend-mode: multiply;
       }
+    }
+
+    .preview_list_link {
+      display: block;
+      padding-left: 100px;
     }
   }
 }
