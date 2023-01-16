@@ -32,10 +32,14 @@ export const useUserProfile = (user: any) => {
     }
   }, [isUpdateUser]);
 
-  // 프로필 수정 작업 중 수정하기 버튼 클릭할 때, 닉네임 중복 검사
+  // 프로필 수정 작업 중 수정하기 버튼 클릭할 때
   const onSubmitUser = (e: any) => {
     e.preventDefault();
-    validateNickName(nickName);
+    if (user.nickname !== nickName) {
+      validateNickName(nickName);
+      return;
+    }
+    updateUser();
   };
 
   // 사용자 정보 업데이트 요청
