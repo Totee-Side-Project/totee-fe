@@ -1,6 +1,6 @@
 import { UserType } from 'types/user.types';
 import React from 'react';
-import './index.scss';
+import classes from '../index.module.scss';
 
 interface INickNameProps {
   user: UserType;
@@ -19,14 +19,14 @@ const NickName = ({
     <>
       {isEditProfile ? (
         <input
-          className="nickNameInput"
+          className={classes.nickNameInput}
           placeholder="최대 5글자"
           maxLength={5}
           value={nickName}
           onChange={(e) => setNickName(e.target.value)}
         />
       ) : (
-        <p className="nickName">{user.nickname}</p>
+        <p className={classes.nickName}>{user.nickname}</p>
       )}
     </>
   );

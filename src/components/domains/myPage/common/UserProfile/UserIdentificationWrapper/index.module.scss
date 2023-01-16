@@ -1,0 +1,80 @@
+.userIdentificationWrapper {
+  margin-left: 45px;
+  min-width: 13%; 
+
+  .titleWrapper {
+    display: flex;
+    margin-top: 60px;
+    .nickNameInput {
+      border: none;
+      outline: none;
+      border-bottom: 1px solid #E4E4E4;
+      font-size: 16px;
+      line-height: 28px;
+      margin-bottom: 10px;
+      font-family: 'Noto Sans KR';
+      width: 110px;
+      &::placeholder{
+        color: #929292;
+      }
+    }
+    .nickName {
+      color: #333333;
+      font-family: 'Noto Sans';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 33px;
+    }
+    .toteeBadgeIcon {
+      margin-left: 5px;
+    }
+  }
+
+  .positionDropdown {
+    cursor: pointer;
+    border: none;
+  }
+
+  .identification {
+    color: #767676;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    margin-top: 2px;
+  }
+
+  .profileEditButton {
+    button {
+      font-family: 'Noto Sans KR';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      border-radius: 20px;
+      width: 100px;
+      height: 35px;
+      margin-top: 19px;
+    }
+    .editMode {
+      display: flex;
+      .submitUserButton {
+        color: #FFFFFF;
+        background-color: #9C9C9C;
+        border: none;
+        margin-right: 10px;
+      }
+      .cancelButton {
+        color: #FFFFFF;
+        background-color: #9C9C9C;
+        border: none;
+      }
+    }
+    .editProfileButton {
+      color: #898989;
+      background-color: #FFFFFF;
+      border: 1px solid #898989;
+    }
+  }
+}

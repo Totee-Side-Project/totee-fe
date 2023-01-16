@@ -4,9 +4,9 @@ import UserProfileImageWrapper from './UserProfileImageWrapper';
 import { useUserProfile } from '@hooks/useUserProfile';
 import { useQuery } from 'react-query';
 import { UserType } from 'types/user.types';
-import './index.scss';
 import { AxiosResponse } from 'axios';
 import { queryKeys } from '@hooks/query';
+import classes from './index.module.scss';
 
 const UserProfile = () => {
   const { data } = useQuery<AxiosResponse>(queryKeys.user);
@@ -25,7 +25,7 @@ const UserProfile = () => {
   } = useUserProfile(user);
 
   return (
-    <section className="userProfile">
+    <section className={classes.userProfile}>
       <UserProfileImageWrapper
         user={user}
         isEditProfile={isEditProfile}

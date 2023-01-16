@@ -1,7 +1,7 @@
 import { POSITION, positionListKey } from '@utils/position.const';
 import React from 'react';
 import { UserType } from 'types/user.types';
-import './index.scss';
+import classes from '../index.module.scss';
 
 interface IPositionProps {
   user: UserType;
@@ -14,7 +14,7 @@ const Position = ({ user, isEditProfile, setPosition }: IPositionProps) => {
     <>
       {isEditProfile ? (
         <select
-          className="positionDropdown"
+          className={classes.positionDropdown}
           onChange={(e) => setPosition(e.target.value)}
           defaultValue={user.position === 'IOS' ? 'iOS' : user.position}
         >
@@ -25,7 +25,7 @@ const Position = ({ user, isEditProfile, setPosition }: IPositionProps) => {
           ))}
         </select>
       ) : (
-        <span className="identification">
+        <span className={classes.identification}>
           {positionListKey[user.position.toUpperCase()]}
         </span>
       )}

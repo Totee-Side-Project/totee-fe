@@ -1,6 +1,6 @@
 import { UserType } from 'types/user.types';
 import React from 'react';
-import './index.scss';
+import classes from '../index.module.scss';
 
 interface IIntroductionProps {
   user: UserType;
@@ -16,21 +16,23 @@ const Introduction = ({
   setIntroduction,
 }: IIntroductionProps) => {
   return (
-    <div className="introduction">
-      <p className="introductionTitle">소개</p>
+    <div className={classes.introduction}>
+      <p className={classes.introductionTitle}>소개</p>
       {isEditProfile ? (
         <>
           <textarea
-            className="introductionTextarea"
+            className={classes.introductionTextarea}
             placeholder="소개를 입력해주세요."
             value={introduction}
             onChange={(e) => setIntroduction(e.target.value)}
             maxLength={120}
           />
-          <p className="introductionLength">{`${introduction.length} / 120`}</p>
+          <p
+            className={classes.introductionLength}
+          >{`${introduction.length} / 120`}</p>
         </>
       ) : (
-        <p className="introductionText">
+        <p className={classes.introductionText}>
           {user.intro ? user.intro : '소개가 없습니다.'}
         </p>
       )}

@@ -2,7 +2,7 @@ import { UserType } from 'types/user.types';
 import profileCircle from '../../../../../../assets/svg/profile-circle.svg';
 import profileSquare from '../../../../../../assets/svg/profile-square.svg';
 import React, { useState } from 'react';
-import './index.scss';
+import classes from './index.module.scss';
 
 interface IUserProfileImageWrapperProps {
   user: UserType;
@@ -29,15 +29,15 @@ const UserProfileImageWrapper = ({
   };
 
   return (
-    <div className="userProfileImageWrapper">
+    <div className={classes.userProfileImageWrapper}>
       {isEditProfile ? (
         <>
-          <img className="profileImage" src={imageUrl} />
-          <label className="profileImageEditLabel" htmlFor="file">
+          <img className={classes.profileImage} src={imageUrl} />
+          <label className={classes.profileImageEditLabel} htmlFor="file">
             <img src={profileSquare} />
           </label>
           <input
-            className="profileImageEditInput"
+            className={classes.profileImageEditInput}
             type="file"
             id="file"
             onChange={onChange}
@@ -46,7 +46,7 @@ const UserProfileImageWrapper = ({
         </>
       ) : (
         <img
-          className="profileImage"
+          className={classes.profileImage}
           src={user.profileImageUrl ? user.profileImageUrl : profileCircle}
           alt={user.profileImageUrl ? '사용자 프로필 사진' : '기본 프로필 사진'}
         />

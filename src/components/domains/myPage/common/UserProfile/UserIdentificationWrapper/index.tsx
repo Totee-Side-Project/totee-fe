@@ -4,7 +4,7 @@ import Position from './Position';
 import NickName from './NickName';
 import { UserType } from 'types/user.types';
 import React from 'react';
-import './index.scss';
+import classes from './index.module.scss';
 
 interface IUserIdentificationWrapperProps {
   user: UserType;
@@ -26,8 +26,8 @@ const UserIdentificationWrapper = ({
   onSubmitUser,
 }: IUserIdentificationWrapperProps) => {
   return (
-    <form className="userIdentificationWrapper" onSubmit={onSubmitUser}>
-      <div className="titleWrapper">
+    <form className={classes.userIdentificationWrapper} onSubmit={onSubmitUser}>
+      <div className={classes.titleWrapper}>
         <NickName
           user={user}
           nickName={nickName}
@@ -36,19 +36,19 @@ const UserIdentificationWrapper = ({
         />
         {user.roleType === 'totee' && (
           <img
-            className="toteeBadgeIcon"
+            className={classes.toteeBadgeIcon}
             src={ToteeBadgeIcon}
             alt="토티 뱃지"
           />
         )}
       </div>
-      <span className="identification">{user.roleType} | </span>
+      <span className={classes.identification}>{user.roleType} | </span>
       <Position
         user={user}
         isEditProfile={isEditProfile}
         setPosition={setPosition}
       />
-      <p className="identification">
+      <p className={classes.identification}>
         {user.email !== 'NO_EMAIL' && user.email}
       </p>
       <ProfileEditButton

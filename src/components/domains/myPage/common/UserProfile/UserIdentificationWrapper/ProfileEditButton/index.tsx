@@ -1,5 +1,5 @@
 import React from 'react';
-import './index.scss';
+import classes from '../index.module.scss';
 
 interface IProfileEditButtonProps {
   nickName: string;
@@ -13,18 +13,18 @@ const ProfileEditButton = ({
   setIsEditProfile,
 }: IProfileEditButtonProps) => {
   return (
-    <>
+    <div className={classes.profileEditButton}>
       {isEditProfile ? (
-        <div className="editMode">
+        <div className={classes.editMode}>
           <button
-            className="button submitUserButton"
+            className={classes.submitUserButton}
             disabled={nickName.length < 2 || 5 < nickName.length}
             type="submit"
           >
             수정하기
           </button>
           <button
-            className="button cancelButton"
+            className={classes.cancelButton}
             onClick={() => setIsEditProfile(false)}
           >
             취소하기
@@ -32,13 +32,13 @@ const ProfileEditButton = ({
         </div>
       ) : (
         <button
-          className="button editProfileButton"
+          className={classes.editProfileButton}
           onClick={() => setIsEditProfile(true)}
         >
           프로필 수정
         </button>
       )}
-    </>
+    </div>
   );
 };
 

@@ -1,6 +1,6 @@
 import { IDefaultFocusMenuType, myPageMenu } from '../MyPageMenu';
 import React from 'react';
-import './Sidebar.scss';
+import classes from './Sidebar.module.scss';
 
 interface ISideBarProps {
   focusedMenu: IDefaultFocusMenuType;
@@ -9,20 +9,20 @@ interface ISideBarProps {
 
 const SideBar = ({ focusedMenu, setFocusedMenu }: ISideBarProps) => {
   return (
-    <aside className="sidebar">
+    <aside className={classes.sidebar}>
       {myPageMenu.map(({ mainMenu, subMenus }) => (
         <section key={mainMenu.title}>
-          <div className="mainMenu">
+          <div className={classes.mainMenu}>
             <img
-              className="mainMenuIcon"
+              className={classes.mainMenuIcon}
               src={mainMenu.iconSrc}
               alt={`${mainMenu.title} 메뉴`}
             />
-            <span className="mainMenuTitle">{mainMenu.title}</span>
+            <span className={classes.mainMenuTitle}>{mainMenu.title}</span>
           </div>
           {subMenus.map((subMenu) => (
             <div
-              className="subMenu"
+              className={classes.subMenu}
               key={subMenu.title}
               onClick={() =>
                 setFocusedMenu({
@@ -39,7 +39,7 @@ const SideBar = ({ focusedMenu, setFocusedMenu }: ISideBarProps) => {
                     : '',
               }}
             >
-              <span className="subMenuTitle">{subMenu.title}</span>
+              <span className={classes.subMenuTitle}>{subMenu.title}</span>
             </div>
           ))}
         </section>

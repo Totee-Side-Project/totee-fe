@@ -1,11 +1,13 @@
 .userProfileImageWrapper {
   margin: 52px 0 66px 85px;
   position: relative;
+
   .profileImage {
     width: 131px;
     height: 131px;
     border-radius: 50%;
   }
+
   .profileImageEditLabel {
     position: absolute;
     top: 110px;
@@ -21,6 +23,7 @@
       left: 10px;
     }
   }
+  
   .profileImageEditInput {
     position: absolute;
     width: 0;

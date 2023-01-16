@@ -1,16 +1,16 @@
 import UserProfile from '@components/domains/myPage/common/UserProfile';
 import { defaultFocusMenu } from '@components/domains/myPage/MyPageMenu';
 import SideBar from '@components/domains/myPage/Sidebar/Sidebar';
-import React, { useState } from 'react';
-import './index.scss';
+import { useState } from 'react';
+import classes from './index.module.scss';
 
 const MyPage = () => {
   const [focusedMenu, setFocusedMenu] = useState(defaultFocusMenu);
 
   return (
-    <div className="myPage">
+    <div className={classes.myPage}>
       <SideBar focusedMenu={focusedMenu} setFocusedMenu={setFocusedMenu} />
-      <section className="contentSection">
+      <section className={classes.contentSection}>
         <UserProfile />
         {focusedMenu.component}
       </section>
