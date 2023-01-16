@@ -14,14 +14,14 @@ import MessageIcon from '@assets/svg/common/message-square.svg';
 
 import classes from './PostCard.module.scss';
 
-interface NewPostCardProps {
+interface PostCardProps {
   post: IResponsePostDetail;
 }
 interface OptionalProps {
   post?: IResponsePostDetail;
 }
 
-export const NewPostCard = ({ post }: OptionalProps) => {
+export const PostCard = ({ post }: OptionalProps) => {
   const navigate = useNavigate();
   const clickHandlerURLParameter = () => {
     post && navigate(`/detail/${post.postId}`);
@@ -30,10 +30,10 @@ export const NewPostCard = ({ post }: OptionalProps) => {
   if (!post) {
     return (
       <div className={classes.post_card_container}>
-        <NewPostCardHeaderSkeleton />
-        <NewPostCardCenterSkeleton />
+        <PostCardHeaderSkeleton />
+        <PostCardCenterSkeleton />
         <div className={classes.post_info_line} />
-        <NewPostCardFooterSkeleton />
+        <PostCardFooterSkeleton />
       </div>
     );
   }
@@ -43,15 +43,15 @@ export const NewPostCard = ({ post }: OptionalProps) => {
       className={classes.post_card_container}
       onClick={clickHandlerURLParameter}
     >
-      <NewPostCardHeader post={post} />
-      <NewPostCardCenter post={post} />
+      <PostCardHeader post={post} />
+      <PostCardCenter post={post} />
       <div className={classes.post_info_line} />
-      <NewPostCardFooter post={post} />
+      <PostCardFooter post={post} />
     </div>
   );
 };
 
-const NewPostCardHeader = ({ post }: NewPostCardProps) => {
+const PostCardHeader = ({ post }: PostCardProps) => {
   return (
     <div className={classes.post_card_header}>
       <div className={classes.post_card_header_wrap}>
@@ -61,13 +61,13 @@ const NewPostCardHeader = ({ post }: NewPostCardProps) => {
           </div>
           <div>{post.nickname}</div>
         </div>
-        <NewPostCardStatusBadge post={post} />
+        <PostCardStatusBadge post={post} />
       </div>
     </div>
   );
 };
 
-const NewPostCardHeaderSkeleton = () => {
+const PostCardHeaderSkeleton = () => {
   return (
     <div className={classes.post_card_header}>
       <div className={classes.post_card_header_wrap}>
@@ -81,7 +81,7 @@ const NewPostCardHeaderSkeleton = () => {
   );
 };
 
-const NewPostCardCenter = ({ post }: NewPostCardProps) => {
+const PostCardCenter = ({ post }: PostCardProps) => {
   return (
     <div className={classes.post_card_center}>
       <div className={classes.post_card_title}>
@@ -92,12 +92,12 @@ const NewPostCardCenter = ({ post }: NewPostCardProps) => {
         dangerouslySetInnerHTML={createMarkup(post.content)}
       />
       <div className={classes.post_card_skills_wrap}>
-        <NewPostSkills post={post} />
+        <PostSkills post={post} />
       </div>
     </div>
   );
 };
-const NewPostCardCenterSkeleton = () => {
+const PostCardCenterSkeleton = () => {
   return (
     <div className={classes.post_card_center}>
       <div className={classes.post_card_title}>
@@ -113,7 +113,7 @@ const NewPostCardCenterSkeleton = () => {
   );
 };
 
-const NewPostCardFooter = ({ post }: NewPostCardProps) => {
+const PostCardFooter = ({ post }: PostCardProps) => {
   return (
     <div className={classes.post_card_footer}>
       <ul className={classes.post_card_footer_items}>
@@ -135,7 +135,7 @@ const NewPostCardFooter = ({ post }: NewPostCardProps) => {
     </div>
   );
 };
-const NewPostCardFooterSkeleton = () => {
+const PostCardFooterSkeleton = () => {
   return (
     <div className={classes.post_card_footer}>
       <ul className={classes.post_card_footer_items}></ul>
@@ -143,7 +143,7 @@ const NewPostCardFooterSkeleton = () => {
   );
 };
 
-const NewPostSkills = ({ post }: NewPostCardProps) => {
+const PostSkills = ({ post }: PostCardProps) => {
   return (
     <>
       {post.skillList.length >= 5 ? (
@@ -155,7 +155,7 @@ const NewPostSkills = ({ post }: NewPostCardProps) => {
   );
 };
 
-const NewPostCardStatusBadge = ({ post }: NewPostCardProps) => {
+const PostCardStatusBadge = ({ post }: PostCardProps) => {
   return (
     <div
       className={

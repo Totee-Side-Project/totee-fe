@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 
 import { PostAPI } from '@api/api';
-import { NewPostCard } from '@components/common/post/PostCard/PostCard';
+import { PostCard } from '@components/common/post/PostCard/PostCard';
 import { useInfiniteTotalPosts } from '@hooks/query/useInfiniteTotalPosts';
 import { queryKeys } from '@hooks/query';
 import classes from './postsSection.module.scss';
@@ -24,7 +24,7 @@ export const PostsInfiniteSection = () => {
           {Array(10)
             .fill(0)
             .map((ele, index) => (
-              <NewPostCard key={index} />
+              <PostCard key={index} />
             ))}
         </ul>
         <div className={classes.postsTriggerWrap} />
@@ -44,7 +44,7 @@ export const PostsInfiniteSection = () => {
           {query.data.pages
             .flatMap((page) => page.postData.content)
             .map((post) => (
-              <NewPostCard key={post.postId} post={post} />
+              <PostCard key={post.postId} post={post} />
             ))}
         </ul>
         <div className={classes.postsTriggerWrap}>

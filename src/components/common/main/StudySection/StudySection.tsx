@@ -19,12 +19,13 @@ import './studySection.scss';
 
 export function StudySection() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const param = searchParams.get('filter');
+  // TODO: 'sort' 를 변수에 할당하여 다른 컴포넌트에서도 가져다 쓰자
+  const sortParam = searchParams.get('sort');
 
   const { query } = useInfiniteTotalPosts({
     getPage: PostAPI.getPostList,
     queryKey: queryKeys.postsSlider,
-    filter: !param ? undefined : (param as string),
+    sortOptions: !sortParam ? undefined : (sortParam as string),
     pageSize: 16,
   });
   const { chunkData } = useSortWithClient();
@@ -36,7 +37,7 @@ export function StudySection() {
 
   useEffect(() => {
     resetPageList();
-  }, [param]);
+  }, [sortParam]);
 
   const pages = query.data?.pages.reduce(
     (acc: IResponsePostDetail[], cur) => cur.postData.content,
