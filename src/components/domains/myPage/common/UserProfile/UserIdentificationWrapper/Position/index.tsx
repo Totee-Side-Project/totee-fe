@@ -20,13 +20,13 @@ const Position = ({ user, isEditProfile, setPosition }: IPositionProps) => {
         >
           {POSITION.map((toteePosition) => (
             <option value={toteePosition} key={toteePosition}>
-              {positionListKey[toteePosition.toUpperCase() as string]}
+              {positionListKey[toteePosition.toUpperCase()]}
             </option>
           ))}
         </select>
       ) : (
         <span className="identification">
-          {positionListKey[user.position.toUpperCase() as string]}
+          {positionListKey[user.position.toUpperCase()]}
         </span>
       )}
     </>
