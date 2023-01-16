@@ -1,10 +1,14 @@
 export const queryKeys = {
   user: ['user'],
+  post: (postId: number) => ['post', postId],
   postsAll: ['postsAll'],
   postsSlider: ['postsSlider'],
-  post: (postId: number) => ['post', postId],
+  postSearchTitle: (postTitle: string, pageNum: number) => [
+    'postSearch',
+    postTitle,
+    pageNum,
+  ],
   applicant: (postId: number) => ['applicant', postId],
-  searchTitle: (postTitle: string) => ['search', postTitle],
   categories: ['categories'],
   recommend: ['recommend'],
   likePost: (postId: number) => ['like', postId],
