@@ -6,6 +6,7 @@ export const useUserProfile = (user: any) => {
   const [isEditProfile, setIsEditProfile] = useState(false);
   const [nickName, setNickName] = useState(user.nickname);
   const [introduction, setIntroduction] = useState(user.intro);
+  const [position, setPosition] = useState(user.position);
   const [imageFile, setImageFile] = useState();
 
   const { mutate: updateUserInfo, isSuccess: isUpdateUser } = useUpdateUser();
@@ -47,7 +48,7 @@ export const useUserProfile = (user: any) => {
       intro: introduction,
       keepProfileImage: imageFile ? false : true,
       nickname: nickName,
-      position: 'BACK_END',
+      position: position,
       profileImage: imageFile,
     };
     updateUserInfo(userInfo);
@@ -60,6 +61,7 @@ export const useUserProfile = (user: any) => {
     introduction,
     setImageFile,
     setIntroduction,
+    setPosition,
     onClickProfileEditButton,
   };
 };

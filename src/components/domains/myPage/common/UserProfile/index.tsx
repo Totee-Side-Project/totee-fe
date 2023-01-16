@@ -16,6 +16,7 @@ const UserProfile = () => {
     introduction,
     setImageFile,
     setIntroduction,
+    setPosition,
     onClickProfileEditButton,
   } = useUserProfile(user);
 
@@ -30,6 +31,7 @@ const UserProfile = () => {
         user={user}
         nickName={nickName}
         setNickName={setNickName}
+        setPosition={setPosition}
         isEditProfile={isEditProfile}
         onClickProfileEditButton={onClickProfileEditButton}
       />

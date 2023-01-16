@@ -1,12 +1,14 @@
 import ToteeBadgeIcon from '../../../../../../assets/svg/totee-badge.svg';
-import { positionListKey } from '@utils/position.const';
 import ProfileEditButton from './ProfileEditButton';
+import Position from './Position';
 import './index.scss';
+import NickName from './NickName';
 
 const UserIdentificationWrapper = ({
   user,
   nickName,
   setNickName,
+  setPosition,
   isEditProfile,
   onClickProfileEditButton,
 }: any) => {
@@ -16,17 +18,12 @@ const UserIdentificationWrapper = ({
       onSubmit={onClickProfileEditButton}
     >
       <div className="titleWrapper">
-        {isEditProfile ? (
-          <input
-            className="nickNameInput"
-            placeholder="최대 5글자"
-            maxLength={5}
-            value={nickName}
-            onChange={(e) => setNickName(e.target.value)}
-          />
-        ) : (
-          <p className="nickName">{user.nickname}</p>
-        )}
+        <NickName
+          user={user}
+          nickName={nickName}
+          setNickName={setNickName}
+          isEditProfile={isEditProfile}
+        />
         {user.roleType === 'totee' && (
           <img
             className="toteeBadgeIcon"
@@ -35,8 +32,13 @@ const UserIdentificationWrapper = ({
           />
         )}
       </div>
+      <span className="identification">{user.roleType} | </span>
+      <Position
+        user={user}
+        isEditProfile={isEditProfile}
+        setPosition={setPosition}
+      />
       <p className="identification">
-        {user.roleType} | {positionListKey[user.position as string]} <br />
         {user.email !== 'NO_EMAIL' && user.email}
       </p>
       <ProfileEditButton nickName={nickName} isEditProfile={isEditProfile} />
