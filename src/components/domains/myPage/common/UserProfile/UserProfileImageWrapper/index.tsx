@@ -1,22 +1,31 @@
-import useImageFileReader from '@hooks/useImageFileReader';
+import { UserType } from 'types/user.types';
 import profileCircle from '../../../../../../assets/svg/profile-circle.svg';
 import profileSquare from '../../../../../../assets/svg/profile-square.svg';
+import React, { useState } from 'react';
 import './index.scss';
+
+interface IUserProfileImageWrapperProps {
+  user: UserType;
+  isEditProfile: boolean;
+  setImageFile: React.Dispatch<
+    React.SetStateAction<Blob | MediaSource | undefined>
+  >;
+}
 
 const UserProfileImageWrapper = ({
   user,
   isEditProfile,
   setImageFile,
-}: any) => {
-  const { imageUrl, previewImage } = useImageFileReader(user.profileImageUrl);
+}: IUserProfileImageWrapperProps) => {
+  const [imageUrl, setImageUrl] = useState(user.profileImageUrl);
 
   const onChange = (e: any) => {
-    const imageFile = e.target.files[0];
+    const imageFile: Blob | MediaSource | undefined = e.target.files[0];
     if (!imageFile) {
       return;
     }
     setImageFile(imageFile);
-    previewImage(imageFile);
+    setImageUrl(URL.createObjectURL(imageFile));
   };
 
   return (
