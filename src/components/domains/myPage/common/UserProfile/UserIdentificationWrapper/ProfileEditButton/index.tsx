@@ -1,23 +1,37 @@
 import './index.scss';
 
-const profileEditButton = ({ nickName, isEditProfile }: any) => {
-  const isDisabled = () => {
-    if (!isEditProfile) {
-      return false;
-    }
-    return nickName.length < 2 || 5 < nickName.length;
-  };
-
-  const style = {
-    backgroundColor: isEditProfile ? '#9C9C9C' : '#FFFFFF',
-    color: isEditProfile ? '#FFFFFF' : '#898989',
-    border: isEditProfile && 'none',
-  };
-
+const profileEditButton = ({
+  nickName,
+  isEditProfile,
+  setIsEditProfile,
+}: any) => {
   return (
-    <button className="profileEditButton" disabled={isDisabled()} style={style}>
-      프로필 수정
-    </button>
+    <>
+      {isEditProfile ? (
+        <div className="editMode">
+          <button
+            className="button submitUserButton"
+            disabled={nickName.length < 2 || 5 < nickName.length}
+            type="submit"
+          >
+            수정하기
+          </button>
+          <button
+            className="button cancelButton"
+            onClick={() => setIsEditProfile(false)}
+          >
+            취소하기
+          </button>
+        </div>
+      ) : (
+        <button
+          className="button editProfileButton"
+          onClick={() => setIsEditProfile(true)}
+        >
+          프로필 수정
+        </button>
+      )}
+    </>
   );
 };
 

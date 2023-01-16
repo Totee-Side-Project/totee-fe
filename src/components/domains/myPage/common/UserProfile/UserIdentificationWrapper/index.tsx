@@ -10,13 +10,11 @@ const UserIdentificationWrapper = ({
   setNickName,
   setPosition,
   isEditProfile,
-  onClickProfileEditButton,
+  setIsEditProfile,
+  onSubmitUser,
 }: any) => {
   return (
-    <form
-      className="userIdentificationWrapper"
-      onSubmit={onClickProfileEditButton}
-    >
+    <form className="userIdentificationWrapper" onSubmit={onSubmitUser}>
       <div className="titleWrapper">
         <NickName
           user={user}
@@ -41,7 +39,11 @@ const UserIdentificationWrapper = ({
       <p className="identification">
         {user.email !== 'NO_EMAIL' && user.email}
       </p>
-      <ProfileEditButton nickName={nickName} isEditProfile={isEditProfile} />
+      <ProfileEditButton
+        nickName={nickName}
+        isEditProfile={isEditProfile}
+        setIsEditProfile={setIsEditProfile}
+      />
     </form>
   );
 };

@@ -32,13 +32,9 @@ export const useUserProfile = (user: any) => {
     }
   }, [isUpdateUser]);
 
-  // 프로필 수정 버튼 클릭 시
-  const onClickProfileEditButton = (e: any) => {
+  // 프로필 수정 작업 중 수정하기 버튼 클릭할 때, 닉네임 중복 검사
+  const onSubmitUser = (e: any) => {
     e.preventDefault();
-    if (!isEditProfile) {
-      setIsEditProfile(true);
-      return;
-    }
     validateNickName(nickName);
   };
 
@@ -56,12 +52,13 @@ export const useUserProfile = (user: any) => {
 
   return {
     isEditProfile,
+    setIsEditProfile,
     nickName,
     setNickName,
     introduction,
     setImageFile,
     setIntroduction,
     setPosition,
-    onClickProfileEditButton,
+    onSubmitUser,
   };
 };
