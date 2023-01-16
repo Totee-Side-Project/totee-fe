@@ -17,6 +17,11 @@ export const POSTS_CATEGORY_PATHS = {
   MENTO: 'mento',
 };
 
+export const POSTS_URL_PARAMS = {
+  TITLE: 'title',
+  SORT: 'sort',
+};
+
 const PostsPage = () => {
   return (
     <Routes>
