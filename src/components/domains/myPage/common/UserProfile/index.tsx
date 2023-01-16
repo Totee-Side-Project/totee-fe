@@ -5,9 +5,10 @@ import { useUserProfile } from '../../../../../hooks/useUserProfile';
 import { useQuery } from 'react-query';
 import { UserType } from 'types/user.types';
 import './index.scss';
+import { AxiosResponse } from 'axios';
 
 const UserProfile = () => {
-  const { data } = useQuery('user');
+  const { data } = useQuery<AxiosResponse>('user');
   const user: UserType = data?.data?.body?.data;
 
   const {
