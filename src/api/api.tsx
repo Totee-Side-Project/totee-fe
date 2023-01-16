@@ -41,14 +41,14 @@ export const PostAPI = {
     page = 0,
     title = '',
     size = 5,
-    filter,
+    sortOptions,
   }: GetPostListParams): Promise<AxiosResponse<IGetPostListResponse>> => {
-    if (!filter)
+    if (!sortOptions)
       return api.get(
         `/api/v1/post/list?title=${title}&page=${page}&size=${size}`,
       );
     return api.get(
-      `/api/v1/post/list?${title}&page=${page}&size=${size}&sort=${filter},desc`,
+      `/api/v1/post/list?${title}&page=${page}&size=${size}&sort=${sortOptions},desc`,
     );
   },
   getPostByPostId: (
