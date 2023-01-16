@@ -9,7 +9,7 @@ import { GetPostListParams } from '@api/api.types';
 // import GetPostListParams from
 export type FetchPageFuntionType = ({
   page,
-  title,
+  kw,
   size,
   sortOptions,
 }: GetPostListParams) => Promise<AxiosResponse<IResponseOfPage>>;
@@ -19,12 +19,12 @@ interface Props {
   queryKey: string[];
   pageSize?: number; // 몇개씩 불러올 것인지
   sortOptions?: string;
-  title?: string;
+  kw?: string;
 }
 
 export const useInfiniteTotalPosts = ({
   getPage,
-  title = '',
+  kw = '',
   queryKey,
   pageSize = 4,
   sortOptions,
@@ -32,7 +32,7 @@ export const useInfiniteTotalPosts = ({
   const getPageInfo = async ({ pageParam = 0 }) => {
     const postData = await getPage({
       page: pageParam,
-      title,
+      kw,
       size: pageSize,
       sortOptions,
     }).then((response) => response.data.body.data);
