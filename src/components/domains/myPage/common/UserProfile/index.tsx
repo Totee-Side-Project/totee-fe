@@ -1,7 +1,7 @@
 import UserIdentificationWrapper from './UserIdentificationWrapper';
 import UserActivityWrapper from './UserActivityWrapper';
 import UserProfileImageWrapper from './UserProfileImageWrapper';
-import { useUserProfile } from '../../../../../hooks/useUserProfile';
+import { useUserProfile } from '@hooks/useUserProfile';
 import { useQuery } from 'react-query';
 import { UserType } from 'types/user.types';
 import './index.scss';
