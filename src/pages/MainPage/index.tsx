@@ -3,6 +3,7 @@ import BottomBanner from '@components/common/main/Banner/BottomBanner';
 import { MentoSection, MentorReviewSection } from '@components/common';
 import LetterBanner from '@components/common/main/Banner/LetterBanner';
 import './MainPage.scss';
+import RecommendMentoringPostsSection from '@components/common/section/RecommendMentoringPostsSection/RecommendMentoringPostsSection';
 
 const MainPage = () => {
   return (
@@ -13,7 +14,7 @@ const MainPage = () => {
         <StudySection />
       </section>
       <section className="mento_recommend body_section">
-        <MentoSection type="recommend" />
+        <RecommendMentoringPostsSection />
       </section>
       <MentorReviewSection />
       <section className="best_mento body_section">

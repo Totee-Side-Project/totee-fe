@@ -1,13 +1,11 @@
-import { JoinModal } from '@components/common/join/Modal/JoinModal';
 import MentorPostViewModal from '@components/common/mentor/Modal/MentorPostViewModal';
 import { useGetRecommendList } from '@hooks/query/useGetQuery';
 import { UserState } from '@store/user';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { SectionSlider } from '@components/common';
 import { SectionTitle } from '@components/atoms';
-import RecommendMentorCard from '../../card/RecommentMentorCard/RecommendMentorCard';
-import BestMentorCard from '../../card/BestMentorCard/BestMentorCard';
+import BestMentorCard from '@components/common/card/BestMentorCard/BestMentorCard';
 import './recommend.scss';
 
 interface Props {
@@ -44,11 +42,7 @@ export const MentoSection = ({ type = 'recommend' }: Props) => {
   };
 
   const Mentorcard = ({ onClick }: { onClick: () => void }) =>
-    type === 'recommend' ? (
-      <RecommendMentorCard onClick={onClick} />
-    ) : (
-      <BestMentorCard onClick={onClick} />
-    );
+    type === 'recommend' ? null : <BestMentorCard onClick={onClick} />;
 
   const [isOpen, setIsOpen] = useState(false);
 
