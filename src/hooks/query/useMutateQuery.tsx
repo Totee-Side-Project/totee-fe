@@ -87,6 +87,7 @@ export const useUpdateUser = () => {
   const queryClient = useQueryClient();
   return useMutation((form: any) => UserAPI.updateUserInfo(form), {
     onSuccess: () => queryClient.invalidateQueries(queryKeys.user),
+    onError: () => alert('사용자 정보 수정을 실패했습니다.'),
   });
 };
 

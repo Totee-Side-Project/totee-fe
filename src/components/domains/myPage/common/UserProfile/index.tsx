@@ -11,13 +11,12 @@ const UserProfile = () => {
 
   const {
     isEditProfile,
-    setIsEditProfile,
     nickName,
     setNickName,
     introduction,
     setImageFile,
     setIntroduction,
-    updateUser,
+    onClickProfileEditButton,
   } = useUserProfile(user);
 
   return (
@@ -32,8 +31,7 @@ const UserProfile = () => {
         nickName={nickName}
         setNickName={setNickName}
         isEditProfile={isEditProfile}
-        setIsEditProfile={setIsEditProfile}
-        updateUser={updateUser}
+        onClickProfileEditButton={onClickProfileEditButton}
       />
       <UserActivityWrapper
         user={user}

@@ -1,44 +1,20 @@
 import ToteeBadgeIcon from '../../../../../../assets/svg/totee-badge.svg';
 import { positionListKey } from '@utils/position.const';
-import { useValidateNickName } from '@hooks/query/useMutateQuery';
 import ProfileEditButton from './ProfileEditButton';
 import './index.scss';
-import { useEffect } from 'react';
 
 const UserIdentificationWrapper = ({
   user,
   nickName,
   setNickName,
   isEditProfile,
-  setIsEditProfile,
-  updateUser,
+  onClickProfileEditButton,
 }: any) => {
-  const { mutate: validateNickName, isSuccess: isValidateNickName } =
-    useValidateNickName();
-
-  useEffect(() => {
-    if (!isEditProfile) {
-      return;
-    }
-    if (isValidateNickName) {
-      updateUser();
-      setIsEditProfile(false); // 업데이트 성공했을때만
-      return;
-    }
-    setIsEditProfile(true);
-  }, [isValidateNickName]);
-
-  const onSubmitUser = (e: any) => {
-    e.preventDefault();
-    if (!isEditProfile) {
-      setIsEditProfile(true);
-      return;
-    }
-    validateNickName(nickName);
-  };
-
   return (
-    <form className="userIdentificationWrapper" onSubmit={onSubmitUser}>
+    <form
+      className="userIdentificationWrapper"
+      onSubmit={onClickProfileEditButton}
+    >
       <div className="titleWrapper">
         {isEditProfile ? (
           <input
