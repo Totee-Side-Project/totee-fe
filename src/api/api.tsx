@@ -8,6 +8,7 @@ import {
   IRequestReply,
   PostRequestDto,
 } from 'types/api.types';
+import { GetPostListParams } from './api.types';
 
 const BASE_URL = 'https://api.totee.link/';
 
@@ -36,27 +37,24 @@ api.interceptors.request.use((config: any) => {
 // https://api.totee.link/swagger-ui.html#/
 
 export const PostAPI = {
-  getPostList: (
+  getPostList: ({
     page = 0,
+    title = '',
     size = 5,
-    filter?: string,
-  ): Promise<AxiosResponse<IGetPostListResponse>> => {
-    if (!filter) return api.get(`/api/v1/post/list?page=${page}&size=${size}`);
+    filter,
+  }: GetPostListParams): Promise<AxiosResponse<IGetPostListResponse>> => {
+    if (!filter)
+      return api.get(
+        `/api/v1/post/list?title=${title}&page=${page}&size=${size}`,
+      );
     return api.get(
-      `/api/v1/post/list?page=${page}&size=${size}&sort=${filter},desc`,
+      `/api/v1/post/list?${title}&page=${page}&size=${size}&sort=${filter},desc`,
     );
   },
   getPostByPostId: (
     postId: number,
   ): Promise<AxiosResponse<IGetPostDetailResponse>> =>
     api.get(`/api/v1/post/${postId}`),
-  searchPostList: (title: string, pageNumber = 0, pageSize = 10) =>
-    api.get(`/api/v2/post/search/${title}`, {
-      params: {
-        pageNumber,
-        pageSize,
-      },
-    }),
   statusChange: (postId: number) => api.post(`api/v1/post/status/${postId}`),
   createPost: (form: PostRequestDto) =>
     api.post('/api/v1/post', form, {
