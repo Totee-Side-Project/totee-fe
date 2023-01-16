@@ -11,7 +11,6 @@ import {
   UserAPI,
 } from '@api/api';
 import { UserState } from '@store/user';
-import { routePaths } from 'App';
 import { queryKeys } from '.';
 
 export const useGetUserAPI = () => {
@@ -37,22 +36,6 @@ export const useGetUserAPI = () => {
   );
 };
 
-export function useGetPostListAPI() {
-  return useQuery(
-    queryKeys.postsAll,
-    () => PostAPI.getPostList().catch((err) => err),
-    {
-      // 브라우저 focus 됐을 때 재시작?
-      retry: false,
-      refetchOnWindowFocus: true,
-      // 자동으로 가져오는 옵션
-      enabled: true,
-      // 캐시 타임
-      staleTime: 10 * 600 * 1000,
-    },
-  );
-}
-
 export function useGetPostByPostId(postId: number) {
   return useQuery(
     queryKeys.post(postId),
@@ -69,10 +52,29 @@ export function useGetPostByPostId(postId: number) {
   );
 }
 
-export function useGetSearchPostList(title: string) {
+export interface UseGetSearchPostListProps {
+  title?: string;
+  page: number;
+  size: number;
+  sortOptions?: string;
+}
+
+// FIXME: useInfiniteTotalPosts와 합쳐질 순 없는지 확인 중
+export function useGetSearchPostList({
+  title = '',
+  page,
+  size = 10,
+  sortOptions,
+}: UseGetSearchPostListProps) {
   return useQuery(
-    queryKeys.searchTitle(title),
-    () => title.length > 0 && PostAPI.searchPostList(title).catch((err) => err),
+    queryKeys.postSearchTitle(title, page),
+    () =>
+      PostAPI.getPostList({
+        title,
+        size,
+        page,
+        sortOptions,
+      }).then((response) => response.data.body.data),
     {
       // 브라우저 focus 됐을 때 재시작?
       retry: false,
@@ -114,7 +116,6 @@ export function useGetRecommendList() {
 }
 
 export function useGetLikeofPost(postId: number) {
-  const navigate = useNavigate();
   return useQuery(
     queryKeys.likePost(postId),
     () => LikeAPI.getIsLikeInfo(postId),

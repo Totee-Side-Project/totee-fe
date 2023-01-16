@@ -1,10 +1,4 @@
-import {
-  Dispatch,
-  FunctionComponent,
-  ReactElement,
-  ReactNode,
-  SetStateAction,
-} from 'react';
+import { Dispatch, FunctionComponent, ReactNode, SetStateAction } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { Circle } from '@components/atoms';
@@ -21,17 +15,17 @@ interface Props {
 
 export const PostsFilter = ({ datas, setDatas, options, Element }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const param = searchParams.get('filter') || 'recent';
+  const param = searchParams.get('sort') || 'recent';
   const onClick = (key: sortOptionNameType) => {
     if (key === 'recent') return setSearchParams({});
-    setSearchParams({ filter: key });
+    setSearchParams({ sort: key });
   };
 
-  const filterList = Object.entries(options) as [sortOptionNameType, string][];
+  const sortedList = Object.entries(options) as [sortOptionNameType, string][];
 
   return (
     <ul className={classes.filters}>
-      {filterList.map(([key, value]) => (
+      {sortedList.map(([key, value]) => (
         <li key={key} className={classes.filter} onClick={() => onClick(key)}>
           {Element ? (
             <Element center={value} isSelected={param === key} />

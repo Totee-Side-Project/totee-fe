@@ -1,3 +1,5 @@
-export const PostsFooter = () => {
-  return null;
+import { ReactNode } from 'react';
+
+export const PostsFooter = ({ children }: { children: ReactNode }) => {
+  return <>{children}</>;
 };

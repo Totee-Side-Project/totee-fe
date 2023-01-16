@@ -14,7 +14,7 @@ export const PostsInfiniteSection = () => {
     getPage: PostAPI.getPostList,
     queryKey: queryKeys.postsAll,
     pageSize: 15,
-    filter: !sortParam ? undefined : (sortParam as string),
+    sortOptions: !sortParam ? undefined : (sortParam as string),
   });
 
   if (query.isLoading) {

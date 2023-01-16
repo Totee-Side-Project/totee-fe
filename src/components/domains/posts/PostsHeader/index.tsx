@@ -1,5 +1,3 @@
-// import { useNavigate } from 'react-router-dom';
-
 import { PostsFilter } from '../PostsFilter';
 import classes from './PostsHeader.module.scss';
 
