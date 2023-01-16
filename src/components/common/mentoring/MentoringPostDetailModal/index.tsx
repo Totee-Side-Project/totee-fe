@@ -4,29 +4,30 @@ import { MouseEventHandler } from 'react';
 import { IMentoring } from 'types/api.types';
 
 interface MentoringPostDetailModalProps {
-  isOpen: boolean;
-  onCloseClick: MouseEventHandler;
-  onApplyClick: MouseEventHandler;
+  onCloseClick(): void;
+  onApplyClick(): void;
   mentoring: IMentoring;
 }
 
 function MentoringPostDetailModal({
-  isOpen,
   mentoring,
   onCloseClick,
   onApplyClick,
 }: MentoringPostDetailModalProps) {
-  if (!isOpen) {
-    return null;
-  }
-
   const { title, content, cost, career, profileImageUrl, nickname, field } =
     mentoring;
 
   const formattedCost = Intl.NumberFormat('ko-KR').format(cost);
 
+  const onOverlayClick: MouseEventHandler = (e) => {
+    if (e.target === e.currentTarget) {
+      e.stopPropagation();
+      onCloseClick();
+    }
+  };
+
   return (
-    <div className={classes.overlay}>
+    <div className={classes.overlay} onClick={onOverlayClick}>
       <div className={classes.modal}>
         <div className={classes.header}>
           <h2>멘토링 소개</h2>
