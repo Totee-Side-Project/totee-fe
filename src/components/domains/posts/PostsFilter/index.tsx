@@ -17,11 +17,16 @@ export const PostsFilter = ({ options, Element }: Props) => {
   const titleParam = searchParams.get(POSTS_URL_PARAMS.KEYWORD) || null;
   const onClick = (sortValue: sortOptionNameType) => {
     const newSearchParams = titleParam
-      ? { qw: titleParam, sort: sortValue }
-      : { sort: sortValue };
+      ? {
+          [POSTS_URL_PARAMS.KEYWORD]: titleParam,
+          [POSTS_URL_PARAMS.SORT]: sortValue,
+        }
+      : { [POSTS_URL_PARAMS.SORT]: sortValue };
 
     if (sortValue === 'recent')
-      return setSearchParams(titleParam ? { qw: titleParam } : {});
+      return setSearchParams(
+        titleParam ? { [POSTS_URL_PARAMS.KEYWORD]: titleParam } : {},
+      );
 
     setSearchParams(newSearchParams as {});
   };

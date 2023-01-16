@@ -1,4 +1,5 @@
 import React, { FormEvent, useEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { SearchInput } from '@components/atoms';
 import { ReactComponent as SearchIcon } from '@assets/svg/search-icon.svg';
@@ -7,7 +8,7 @@ import { useOutsideAlerter } from '@hooks/useOutsideAlerter';
 import useDebounceInput from '@hooks/useDebounceInput';
 import classes from './search.module.scss';
 import { SearchPreview } from '@components/common/main/Search/SearchPreview';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { POSTS_URL_PARAMS } from 'pages/PostsPage';
 
 export function Search() {
   const [isOpenPreview, setIsOpenPreview] = useState(false);
@@ -81,5 +82,7 @@ export function Search() {
   );
 }
 
-export const linkToUrl = (title: string, pathname: string) =>
-  pathname === '/' ? `posts/all?title=${title}` : `?title=${title}`;
+export const linkToUrl = (keyword: string, pathname: string) =>
+  pathname === '/'
+    ? `posts/all?${POSTS_URL_PARAMS.KEYWORD}=${keyword}`
+    : `?${POSTS_URL_PARAMS.KEYWORD}=${keyword}`;
