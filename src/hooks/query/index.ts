@@ -1,14 +1,21 @@
-import { IMentoringListRequestOptions } from 'types/api.types';
+import {
+  IMentoringListRequestOptions,
+  IPostSliderOptions,
+  IPostsInfiniteScrollOptions,
+  IPostsPaginationoptions,
+} from 'types/api.types';
 
 export const queryKeys = {
   user: ['user'],
   post: (postId: number) => ['post', postId],
-  postsAll: ['postsAll'],
-  postsSlider: ['postsSlider'],
-  postSearchTitle: (postTitle: string, pageNum: number) => [
+  postsInfiniteScroll: (options: IPostsInfiniteScrollOptions) => [
+    'postsInfiniteScroll',
+    options,
+  ],
+  postsSlider: (options: IPostSliderOptions) => ['postsSlider', options],
+  postSearchTitle: (options: IPostsPaginationoptions) => [
     'postSearch',
-    postTitle,
-    pageNum,
+    options,
   ],
   applicant: (postId: number) => ['applicant', postId],
   categories: ['categories'],

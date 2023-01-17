@@ -175,6 +175,15 @@ export interface IMentoring {
   profileImageUrl: string;
 }
 
+export interface IPostSliderOptions {
+  sortOption: string;
+}
+export interface IPostsInfiniteScrollOptions extends IPostSliderOptions {
+  keyword: string;
+}
+export interface IPostsPaginationoptions extends IPostsInfiniteScrollOptions {
+  pageNum: number;
+}
 // export interface CommentType {
 //   nickname: string;
 //   commentId: number;

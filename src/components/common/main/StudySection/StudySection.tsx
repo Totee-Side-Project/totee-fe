@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-import { useQueryClient } from 'react-query';
 import { useSearchParams } from 'react-router-dom';
 import 'react-loading-skeleton/dist/skeleton.css';
 
@@ -13,37 +11,28 @@ import { useInfiniteTotalPosts } from '@hooks/query/useInfiniteTotalPosts';
 import { PostsFilter } from '@components/domains/posts/PostsFilter';
 import { SortButton } from '@components/atoms/Button/SortButton/SortButton';
 import { IResponsePostDetail } from 'types/api.types';
-import classes from './studySection.module.scss';
 import { POSTS_CATEGORY_PATHS, POSTS_URL_PARAMS } from 'pages/PostsPage';
+import classes from './studySection.module.scss';
 import './studySection.scss';
 
 export function StudySection() {
   const [searchParams, setSearchParams] = useSearchParams();
-  // TODO: 'sort' 를 변수에 할당하여 다른 컴포넌트에서도 가져다 쓰자
   const sortParam = searchParams.get(POSTS_URL_PARAMS.SORT) || '';
 
   const { query } = useInfiniteTotalPosts({
     getPage: PostAPI.getPostList,
-    queryKey: queryKeys.postsSlider,
+    queryKey: queryKeys.postsSlider({ sortOption: sortParam }),
     sortOption: sortParam,
     size: 16,
   });
   const { chunkData } = useSortWithClient();
-  const queryClient = useQueryClient();
-
-  const resetPageList = () => {
-    queryClient.invalidateQueries(queryKeys.postsSlider);
-  };
-
-  useEffect(() => {
-    resetPageList();
-  }, [sortParam]);
 
   const pages = query.data?.pages.reduce(
     (acc: IResponsePostDetail[], cur) => cur.postData.content,
     [],
   );
   const renderPages = chunkData(pages || [], 4);
+
   return (
     <>
       <div className={classes.section_header}>

@@ -7,34 +7,31 @@ import { useIntersectionObserver } from './useIntersectionObserver';
 import { GetPostListParams } from '@api/api.types';
 
 // import GetPostListParams from
-export type FetchPageFuntionType = ({
-  page,
-  kw,
-  size,
-  sortOptions,
-}: GetPostListParams) => Promise<AxiosResponse<IResponseOfPage>>;
+export type FetchPageFuntionType = (
+  option: GetPostListParams,
+) => Promise<AxiosResponse<IResponseOfPage>>;
 
 interface Props {
   getPage: FetchPageFuntionType;
-  queryKey: string[];
-  pageSize?: number; // 몇개씩 불러올 것인지
-  sortOptions?: string;
-  kw?: string;
+  queryKey: unknown[];
+  size: number; // 몇개씩 불러올 것인지
+  sortOption: string;
+  keyword?: string;
 }
 
 export const useInfiniteTotalPosts = ({
   getPage,
-  kw = '',
+  keyword = '',
   queryKey,
-  pageSize = 4,
-  sortOptions,
+  size,
+  sortOption,
 }: Props) => {
   const getPageInfo = async ({ pageParam = 0 }) => {
     const postData = await getPage({
       page: pageParam,
-      kw,
-      size: pageSize,
-      sortOptions,
+      keyword,
+      size,
+      sortOption,
     }).then((response) => response.data.body.data);
 
     const nextPageParam = !postData.last ? pageParam + 1 : undefined;
@@ -52,9 +49,9 @@ export const useInfiniteTotalPosts = ({
     refetchOnWindowFocus: false,
   });
 
-  useEffect(() => {
-    postsQuery.refetch();
-  }, [sortOptions]);
+  // useEffect(() => {
+  //   postsQuery.refetch();
+  // }, [sortOption]);
 
   const TriggerComponent = () => {
     const { ref, observer } = useIntersectionObserver(
