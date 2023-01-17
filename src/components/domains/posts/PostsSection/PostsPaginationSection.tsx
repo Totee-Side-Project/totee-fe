@@ -13,7 +13,7 @@ const PAGE_SIZE = 10;
 
 export const PostPaginationSection = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const title = searchParams.get('title') || '';
+  const keywordParam = searchParams.get(POSTS_URL_PARAMS.KEYWORD) || '';
   const sortParam = searchParams.get(POSTS_URL_PARAMS.SORT) || '';
 
   const [currentPage, setCurrentPage] = useState(0);
@@ -21,10 +21,10 @@ export const PostPaginationSection = () => {
 
   const { data, isLoading, isFetching, status, refetch } = useGetSearchPostList(
     {
-      title,
+      keyword: keywordParam,
       page: currentPage,
       size: PAGE_SIZE,
-      sortOptions: sortParam,
+      sortOption: sortParam,
     },
   );
 
@@ -32,7 +32,7 @@ export const PostPaginationSection = () => {
     refetch();
   }, [sortParam]);
 
-  if (isLoading || isFetching) {
+  if (isLoading) {
     return (
       <section className={classes.postsSectionContainer}>
         <ul className={classes.postsSection}>
