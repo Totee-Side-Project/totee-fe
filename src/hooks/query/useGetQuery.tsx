@@ -54,34 +54,37 @@ export function useGetPostByPostId(postId: number) {
 }
 
 export interface UseGetSearchPostListProps {
-  title?: string;
+  keyword: string;
   page?: number;
-  size?: number;
-  sortOptions?: string;
+  size: number;
+  sortOption: string;
 }
 
-// FIXME: useInfiniteTotalPosts와 합쳐질 순 없는지 확인 중
 export function useGetSearchPostList({
-  title = '',
+  keyword,
   page = 0,
-  size = 10,
-  sortOptions,
+  size,
+  sortOption,
 }: UseGetSearchPostListProps) {
   return useQuery(
-    queryKeys.postSearchTitle(title, page),
+    queryKeys.postSearchTitle({
+      keyword,
+      pageNum: page,
+      sortOption,
+    }),
     () =>
       PostAPI.getPostList({
-        kw: title,
+        keyword,
         size,
         page,
-        sortOptions,
+        sortOption,
       }).then((response) => response.data.body.data),
     {
       // 브라우저 focus 됐을 때 재시작?
       retry: false,
       refetchOnWindowFocus: false,
       // 자동으로 가져오는 옵션
-      enabled: true,
+      enabled: !!keyword,
       // 캐시 타임
       staleTime: 10 * 600 * 1000,
     },
