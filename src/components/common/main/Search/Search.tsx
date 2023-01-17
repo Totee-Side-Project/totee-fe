@@ -6,9 +6,8 @@ import { ReactComponent as SearchIcon } from '@assets/svg/search-icon.svg';
 import { useGetSearchPostList } from '@hooks/query/useGetQuery';
 import { useOutsideAlerter } from '@hooks/useOutsideAlerter';
 import useDebounceInput from '@hooks/useDebounceInput';
-import classes from './search.module.scss';
-import { SearchPreview } from '@components/common/main/Search/SearchPreview';
 import { POSTS_URL_PARAMS } from 'pages/PostsPage';
+import classes from './search.module.scss';
 
 export function Search() {
   const [isOpenPreview, setIsOpenPreview] = useState(false);
@@ -19,8 +18,9 @@ export function Search() {
   useOutsideAlerter(inputRef, () => closePreview());
 
   const { data } = useGetSearchPostList({
-    title: debouncedValue,
+    keyword: debouncedValue,
     size: 10,
+    sortOption: '',
   });
 
   useEffect(() => {
@@ -68,7 +68,14 @@ export function Search() {
             onFocus={onFocus}
           />
         </form>
-        {isOpenPreview && <SearchPreview previewResult={previewResult} />}
+        {/* 
+          TODO: 추천검색어 기능을 정확히 지원할 때 기능추가 후 렌더링해주어야함
+        {isOpenPreview && (
+          <SearchPreview
+            closePreview={closePreview}
+            previewResult={previewResult}
+          />
+        )} */}
       </div>
       {/* {searchResult?.data && searchResult.keyword !== null && (
         <div className={classes.searchResult}>

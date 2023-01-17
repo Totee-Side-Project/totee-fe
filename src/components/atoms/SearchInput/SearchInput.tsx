@@ -65,7 +65,8 @@ InputProps) {
       <input
         className={classNames(
           classes[inputType],
-          isPreview && classes.preview,
+          // TODO: 추천검색어 기능을 추가할 시 주석제거
+          // isPreview && classes.preview,
           classes.search,
         )}
         id={id}

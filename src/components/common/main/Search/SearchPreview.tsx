@@ -5,16 +5,21 @@ import classes from './searchPreview.module.scss';
 
 interface Props {
   previewResult: string[];
+  closePreview: () => void;
 }
 
-export const SearchPreview = ({ previewResult }: Props) => {
+export const SearchPreview = ({ previewResult, closePreview }: Props) => {
   const { pathname } = useLocation();
   if (previewResult?.length) {
     return (
       <div className={classes.preview_wrapper}>
         <ul className={classes.preview_list}>
           {previewResult?.map((title, index) => (
-            <li key={`search_${index}`} className={classes.preview_item}>
+            <li
+              key={`search_${index}`}
+              onClick={closePreview}
+              className={classes.preview_item}
+            >
               <Link
                 className={classes.preview_list_link}
                 to={linkToUrl(title, pathname)}
