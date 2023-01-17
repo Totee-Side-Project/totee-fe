@@ -41,14 +41,16 @@ api.interceptors.request.use((config: any) => {
 export const PostAPI = {
   getPostList: ({
     page = 0,
-    kw = '',
+    keyword = '',
     size = 5,
-    sortOptions,
+    sortOption,
   }: GetPostListParams): Promise<AxiosResponse<IGetPostListResponse>> => {
-    if (!sortOptions)
-      return api.get(`/api/v1/post/list?kw=${kw}&page=${page}&size=${size}`);
+    if (!sortOption)
+      return api.get(
+        `/api/v1/post/list?kw=${keyword}&page=${page}&size=${size}`,
+      );
     return api.get(
-      `/api/v1/post/list?kw=${kw}&page=${page}&size=${size}&sort=${sortOptions},desc`,
+      `/api/v1/post/list?kw=${keyword}&page=${page}&size=${size}&sort=${sortOption},desc`,
     );
   },
   getPostByPostId: (
