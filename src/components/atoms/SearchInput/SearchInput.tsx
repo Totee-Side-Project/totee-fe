@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import classes from './searchInput.module.scss';
 
-interface InputProps {
+interface IInputProps {
   value: string;
   type: string;
   name: string;
@@ -48,7 +48,7 @@ export function SearchInput({
   onFocus,
   setStatus,
 }: // maxlength,
-InputProps) {
+IInputProps) {
   const [inputType, setInputType] = useState('default');
 
   useEffect(() => {
