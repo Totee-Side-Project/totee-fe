@@ -87,6 +87,7 @@ export const useUpdateUser = () => {
   const queryClient = useQueryClient();
   return useMutation((form: any) => UserAPI.updateUserInfo(form), {
     onSuccess: () => queryClient.invalidateQueries(queryKeys.user),
+    onError: () => alert('사용자 정보 수정을 실패했습니다.'),
   });
 };
 
@@ -162,4 +163,15 @@ export const usePostTeam = (postId: number) => {
 export const useResignateTeam = (postId: number) => {
   const queryClient = useQueryClient();
   return useMutation(() => TeamAPI.resignateTeam(postId));
+};
+
+export const useValidateNickName = () => {
+  return useMutation(
+    (userNickName: string) => UserAPI.validateNickname(userNickName),
+    {
+      onError: () => {
+        alert('이미 존재하는 닉네임입니다.');
+      },
+    },
+  );
 };
