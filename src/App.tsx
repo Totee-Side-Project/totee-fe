@@ -1,4 +1,9 @@
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import {
+  Route,
+  BrowserRouter as Router,
+  Routes,
+  useLocation,
+} from 'react-router-dom';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 
@@ -53,6 +58,7 @@ function App() {
   const [login, setLogin] = useRecoilState(loginState);
   const [user, setUser] = useRecoilState(UserState);
   const { data, status } = useGetUserAPI();
+  const { pathname } = useLocation();
 
   // localStorage에서 loginData를 get한다.
   let loginLocalStorage: any = localStorage.getItem('loginData');
@@ -94,7 +100,10 @@ function App() {
             />
           }
         />
-        <Route path="*" element={<Banner />} />
+        <Route path={routePaths.mypage} />
+        {pathname !== routePaths.mypage && (
+          <Route path="*" element={<Banner />} />
+        )}
       </Routes>
       <Routes>
         {isNotLoginRoutes.map(({ path, element }) => (
@@ -107,7 +116,7 @@ function App() {
         <Route path="*" element={<NotMatchPage status={status} />} />
       </Routes>
       <ScrollTopButton />
-      <Footer />
+      {pathname !== routePaths.mypage && <Footer />}
     </>
   );
 }

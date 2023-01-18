@@ -19,3 +19,14 @@ export const positionListKey: any = {
   DESIGN: '디자인',
   OTHERS: '기타',
 };
+
+export const POSITION: string[] = [
+  'FRONT_END',
+  'BACK_END',
+  'ML',
+  'GAME',
+  'ANDROID',
+  'iOS',
+  'DESIGN',
+  'OTHERS',
+];
