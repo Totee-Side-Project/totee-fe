@@ -1,4 +1,4 @@
-import { POSITION, positionListKey } from '@utils/position.const';
+import { POSITION_LIST, POSITION_LIST_KEY } from 'constants/position.';
 import React from 'react';
 import { UserType } from 'types/user.types';
 import classes from '../index.module.scss';
@@ -16,17 +16,17 @@ const Position = ({ user, isEditProfile, setPosition }: IPositionProps) => {
         <select
           className={classes.positionDropdown}
           onChange={(e) => setPosition(e.target.value)}
-          defaultValue={user.position === 'IOS' ? 'iOS' : user.position}
+          defaultValue={user.position}
         >
-          {POSITION.map((toteePosition) => (
-            <option value={toteePosition} key={toteePosition}>
-              {positionListKey[toteePosition.toUpperCase()]}
+          {Object.keys(POSITION_LIST).map((toteePosition) => (
+            <option value={POSITION_LIST[toteePosition]} key={toteePosition}>
+              {toteePosition}
             </option>
           ))}
         </select>
       ) : (
         <span className={classes.identification}>
-          {positionListKey[user.position.toUpperCase()]}
+          {POSITION_LIST_KEY[user.position]}
         </span>
       )}
     </>
