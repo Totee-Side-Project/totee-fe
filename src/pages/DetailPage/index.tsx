@@ -26,7 +26,7 @@ interface IchildrenReactNode {
 
 const DetailPage = () => {
   const { id } = useParams();
-  const { data: postData, status, refetch } = useGetPostByPostId(Number(id));
+  const { data: postData, status } = useGetPostByPostId(Number(id));
 
   // Render Loading Component
   if (status === 'loading')

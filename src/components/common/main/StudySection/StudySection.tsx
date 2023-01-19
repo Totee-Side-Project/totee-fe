@@ -1,4 +1,3 @@
-import { useSearchParams } from 'react-router-dom';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 import { PostAPI } from '@api/api';
@@ -10,20 +9,21 @@ import { useSortWithClient } from '@hooks/useSortWithClient';
 import { useInfiniteTotalPosts } from '@hooks/query/useInfiniteTotalPosts';
 import { PostsFilter } from '@components/domains/posts/PostsFilter';
 import { SortButton } from '@components/atoms/Button/SortButton/SortButton';
+import { useGetPostsSearchParams } from '@hooks/usePostsSearchParams';
 import { IResponsePostDetail } from 'types/api.types';
-import { POSTS_CATEGORY_PATHS, POSTS_URL_PARAMS } from 'pages/PostsPage';
+import { POSTS_CATEGORY_PATHS } from 'pages/PostsPage';
 import classes from './studySection.module.scss';
 import './studySection.scss';
 
 export function StudySection() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const sortParam = searchParams.get(POSTS_URL_PARAMS.SORT) || '';
+  const { sortParam } = useGetPostsSearchParams();
 
   const { query } = useInfiniteTotalPosts({
     getPage: PostAPI.getPostList,
-    queryKey: queryKeys.postsSlider({ sortOption: sortParam }),
-    sortOption: sortParam,
+    queryKey: queryKeys.postsSlider({ sort: sortParam }),
+    sort: sortParam,
     size: 16,
+    keyword: '',
   });
   const { chunkData } = useSortWithClient();
 
@@ -99,16 +99,16 @@ export function StudySection() {
 }
 
 const SectionSkeleton = () => {
+  const style = {
+    display: 'flex',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+  };
+
   return (
     <div className={classes.section_body}>
-      <ul
-        style={{
-          display: 'flex',
-          height: '100%',
-          alignItems: 'center',
-          justifyContent: 'space-around',
-        }}
-      >
+      <ul style={style}>
         {[0, 1, 2, 3].map((ele) => (
           <li key={ele}>
             <PostCard />

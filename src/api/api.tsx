@@ -10,7 +10,7 @@ import {
   IRequestReply,
   PostRequestDto,
 } from 'types/api.types';
-import { GetPostListParams } from './api.types';
+import { IGetPostListParams } from './api.types';
 
 const BASE_URL = 'https://api.totee.link/';
 
@@ -43,14 +43,14 @@ export const PostAPI = {
     page = 0,
     keyword = '',
     size = 5,
-    sortOption,
-  }: GetPostListParams): Promise<AxiosResponse<IGetPostListResponse>> => {
-    if (!sortOption)
+    sort,
+  }: IGetPostListParams): Promise<AxiosResponse<IGetPostListResponse>> => {
+    if (!sort)
       return api.get(
         `/api/v1/post/list?kw=${keyword}&page=${page}&size=${size}`,
       );
     return api.get(
-      `/api/v1/post/list?kw=${keyword}&page=${page}&size=${size}&sort=${sortOption},desc`,
+      `/api/v1/post/list?kw=${keyword}&page=${page}&size=${size}&sort=${sort},desc`,
     );
   },
   getPostByPostId: (

@@ -1,18 +1,15 @@
-import { ReactElement, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useState } from 'react';
 
 import { PostCard } from '@components/common/post/PostCard/PostCard';
 import { Pagination } from '@components/common/pagination/Pagination';
 import { useGetSearchPostList } from '@hooks/query/useGetQuery';
-import { POSTS_URL_PARAMS } from 'pages/PostsPage';
 import classes from './postsSection.module.scss';
+import { useGetPostsSearchParams } from '@hooks/usePostsSearchParams';
 
 const PAGE_SIZE = 10;
 
 export const PostPaginationSection = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const keywordParam = searchParams.get(POSTS_URL_PARAMS.KEYWORD) || '';
-  const sortParam = searchParams.get(POSTS_URL_PARAMS.SORT) || '';
+  const { keywordParam, sortParam } = useGetPostsSearchParams();
 
   const [currentPage, setCurrentPage] = useState(0);
   const [slideNum, setSlideNum] = useState(1);
@@ -21,7 +18,7 @@ export const PostPaginationSection = () => {
     keyword: keywordParam,
     page: currentPage,
     size: PAGE_SIZE,
-    sortOption: sortParam,
+    sort: sortParam,
   });
 
   if (isLoading) {

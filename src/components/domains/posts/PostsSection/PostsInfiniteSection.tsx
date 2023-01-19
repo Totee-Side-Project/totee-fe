@@ -1,26 +1,23 @@
-import { useSearchParams } from 'react-router-dom';
-
-import { PostAPI } from '@api/api';
-import { PostCard } from '@components/common/post/PostCard/PostCard';
 import { useInfiniteTotalPosts } from '@hooks/query/useInfiniteTotalPosts';
 import { queryKeys } from '@hooks/query';
-import { POSTS_URL_PARAMS } from 'pages/PostsPage';
+import { useGetPostsSearchParams } from '@hooks/usePostsSearchParams';
+import { PostCard } from '@components/common/post/PostCard/PostCard';
+import { PostAPI } from '@api/api';
+
 import classes from './postsSection.module.scss';
 
 export const PostsInfiniteSection = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const sortParam = searchParams.get(POSTS_URL_PARAMS.SORT) || '';
-  const keywordParam = searchParams.get(POSTS_URL_PARAMS.KEYWORD) || '';
+  const { sortParam, keywordParam, pageParam } = useGetPostsSearchParams();
 
   const { query, TriggerComponent } = useInfiniteTotalPosts({
     keyword: keywordParam,
     getPage: PostAPI.getPostList,
     queryKey: queryKeys.postsInfiniteScroll({
       keyword: keywordParam,
-      sortOption: sortParam,
+      sort: sortParam,
     }),
     size: 15,
-    sortOption: sortParam,
+    sort: sortParam,
   });
 
   if (query.isLoading) {

@@ -13,6 +13,7 @@ import {
 import { UserState } from '@store/user';
 import { queryKeys } from '.';
 import { IMentoringListRequestOptions } from 'types/api.types';
+import { IGetPostListParams } from '@api/api.types';
 
 export const useGetUserAPI = () => {
   const [user, setUser] = useRecoilState(UserState);
@@ -53,31 +54,24 @@ export function useGetPostByPostId(postId: number) {
   );
 }
 
-export interface UseGetSearchPostListProps {
-  keyword: string;
-  page?: number;
-  size: number;
-  sortOption: string;
-}
-
 export function useGetSearchPostList({
   keyword,
-  page = 0,
   size,
-  sortOption,
-}: UseGetSearchPostListProps) {
+  page,
+  sort,
+}: IGetPostListParams) {
   return useQuery(
     queryKeys.postSearchTitle({
       keyword,
       pageNum: page,
-      sortOption,
+      sort,
     }),
     () =>
       PostAPI.getPostList({
         keyword,
         size,
         page,
-        sortOption,
+        sort,
       }).then((response) => response.data.body.data),
     {
       // 브라우저 focus 됐을 때 재시작?
@@ -131,7 +125,7 @@ export function useGetLikeofPost(postId: number) {
       enabled: true,
       // 캐시 타임
       staleTime: 10 * 600 * 1000,
-      onError: () => {},
+      // onError: () => {},
     },
   );
 }

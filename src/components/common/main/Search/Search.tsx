@@ -1,8 +1,8 @@
 import { SearchInput } from '@components/atoms';
 import { ReactComponent as SearchIcon } from '@assets/svg/search-icon.svg';
-import { POSTS_URL_PARAMS } from 'pages/PostsPage';
 import classes from './search.module.scss';
 import { useSearch } from '@hooks/useSearch';
+import { POSTS_URL_PARAMS } from '@hooks/usePostsSearchParams';
 
 export function Search() {
   const {
@@ -40,16 +40,6 @@ export function Search() {
           />
         )} */}
       </div>
-      {/* 
-        TODO: 검색결과 갯수를 알려주는 UI 작업
-      {searchResult?.data && searchResult.keyword !== null && (
-        <div className={classes.searchResult}>
-          <div>
-            &quot; {searchResult.keyword} &quot; 에 대한 검색 결과{' '}
-            <span>{searchResult.data.length}</span> 개
-          </div>
-        </div>
-      )} */}
     </section>
   );
 }

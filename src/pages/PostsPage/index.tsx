@@ -1,13 +1,8 @@
 import { SearchSection } from '@components/common';
-// import { PostsFooter } from '@components/domains/posts/PostsFooter';
 import { PostsHeader } from '@components/domains/posts/PostsHeader';
 import { PostsInfiniteSection } from '@components/domains/posts/PostsSection/PostsInfiniteSection';
 import { PostsAll } from '@components/domains/posts/PostsAll/PostsAll';
-import {
-  Route,
-  Routes,
-  //  useParams
-} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './PostsPage.scss';
 
 export const POSTS_CATEGORY_PATHS = {
@@ -15,11 +10,6 @@ export const POSTS_CATEGORY_PATHS = {
   ALL: 'all',
   STUDY: 'study',
   MENTO: 'mento',
-};
-
-export const POSTS_URL_PARAMS = {
-  KEYWORD: 'kw',
-  SORT: 'sort',
 };
 
 const PostsPage = () => {

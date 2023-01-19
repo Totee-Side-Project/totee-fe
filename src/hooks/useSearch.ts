@@ -18,7 +18,8 @@ export const useSearch = () => {
   const { data } = useGetSearchPostList({
     keyword: debouncedValue,
     size: 10,
-    sortOption: '',
+    sort: '',
+    page: 0,
   });
 
   useEffect(() => {
