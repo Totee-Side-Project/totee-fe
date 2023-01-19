@@ -1,55 +1,18 @@
-import React, { FormEvent, useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-
 import { SearchInput } from '@components/atoms';
 import { ReactComponent as SearchIcon } from '@assets/svg/search-icon.svg';
-import { useGetSearchPostList } from '@hooks/query/useGetQuery';
-import { useOutsideAlerter } from '@hooks/useOutsideAlerter';
-import useDebounceInput from '@hooks/useDebounceInput';
 import { POSTS_URL_PARAMS } from 'pages/PostsPage';
 import classes from './search.module.scss';
+import { useSearch } from '@hooks/useSearch';
 
 export function Search() {
-  const [isOpenPreview, setIsOpenPreview] = useState(false);
-  const [previewResult, setPreviewResult] = useState<string[]>([]);
-  const searchFormWrapRef = useRef<HTMLDivElement>(null);
-  const [inputValue, setInputValue] = useState('');
-  const debouncedValue = useDebounceInput(inputValue);
-  useOutsideAlerter(searchFormWrapRef, () => closePreview());
-
-  const { data } = useGetSearchPostList({
-    keyword: debouncedValue,
-    size: 10,
-    sortOption: '',
-  });
-
-  useEffect(() => {
-    if (data?.content) {
-      setPreviewResult([...new Set(data?.content.map(({ title }) => title))]);
-    }
-  }, [data?.content]);
-
-  useEffect(() => {
-    if (!inputValue) return closePreview();
-    if (!previewResult.length) return closePreview();
-
-    openPreview();
-  }, [inputValue, previewResult]);
-
-  const openPreview = () => setIsOpenPreview(true);
-  const closePreview = () => setIsOpenPreview(false);
-
-  const { pathname } = useLocation();
-  const navigate = useNavigate();
-
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    setInputValue('');
-    navigate(linkToUrl(inputValue, pathname));
-  };
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setInputValue(e.target.value);
-  const onFocus = () => isOpenPreview && openPreview();
+  const {
+    searchFormWrapRef,
+    onSubmit,
+    inputValue,
+    isOpenPreview,
+    onChange,
+    onFocus,
+  } = useSearch();
 
   return (
     <section className={classes.search_wrapper}>

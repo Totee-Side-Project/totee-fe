@@ -3,7 +3,6 @@ export * from './onboard/OnboardModal/OnboardModal';
 
 export * from './main/Banner/Banner';
 export * from './main/Search/Search';
-export * from './main/Categories/Categories';
 export * from './main/ToggleIcon/ToggleIcon';
 export * from './main/AlarmIcon/AlarmIcon';
 export * from './main/Footer/Footer';

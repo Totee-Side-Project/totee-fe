@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ReactElement, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { PostCard } from '@components/common/post/PostCard/PostCard';
@@ -7,8 +7,6 @@ import { useGetSearchPostList } from '@hooks/query/useGetQuery';
 import { POSTS_URL_PARAMS } from 'pages/PostsPage';
 import classes from './postsSection.module.scss';
 
-// call API
-// Item Component UI
 const PAGE_SIZE = 10;
 
 export const PostPaginationSection = () => {
@@ -19,28 +17,21 @@ export const PostPaginationSection = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [slideNum, setSlideNum] = useState(1);
 
-  const { data, isLoading, isFetching, status, refetch } = useGetSearchPostList(
-    {
-      keyword: keywordParam,
-      page: currentPage,
-      size: PAGE_SIZE,
-      sortOption: sortParam,
-    },
-  );
-
-  useEffect(() => {
-    refetch();
-  }, [sortParam]);
+  const { data, isLoading, status } = useGetSearchPostList({
+    keyword: keywordParam,
+    page: currentPage,
+    size: PAGE_SIZE,
+    sortOption: sortParam,
+  });
 
   if (isLoading) {
+    const loadingList = [...Array(PAGE_SIZE)];
     return (
       <section className={classes.postsSectionContainer}>
         <ul className={classes.postsSection}>
-          {Array(PAGE_SIZE)
-            .fill(null)
-            .map((ele, index) => (
-              <PostCard key={index} />
-            ))}
+          {loadingList.map((ele, index) => (
+            <PostCard key={index} />
+          ))}
         </ul>
         <div className={classes.postsTriggerWrap}></div>
       </section>
