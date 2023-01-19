@@ -1,34 +1,40 @@
 import { FunctionComponent, ReactNode } from 'react';
-import { useSearchParams } from 'react-router-dom';
 
 import { Circle } from '@components/atoms';
 import { ISortOptions, sortOptionNameType } from 'types/sort.types';
-import { POSTS_URL_PARAMS } from 'pages/PostsPage';
 import classes from './postsFilter.module.scss';
+import {
+  POSTS_URL_PARAMS,
+  useGetPostsSearchParams,
+} from '@hooks/usePostsSearchParams';
 
 interface Props {
   options: ISortOptions;
   Element?: FunctionComponent<{ center?: ReactNode; isSelected?: boolean }>;
 }
 
+const RECENT = 'recent';
+
 export const PostsFilter = ({ options, Element }: Props) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const param = searchParams.get(POSTS_URL_PARAMS.SORT) || 'recent';
-  const titleParam = searchParams.get(POSTS_URL_PARAMS.KEYWORD) || null;
+  const { keywordParam, sortParam, setSearchParams } =
+    useGetPostsSearchParams();
+  const postsSortParam = sortParam || RECENT;
+
   const onClick = (sortValue: sortOptionNameType) => {
-    const newSearchParams = titleParam
+    const newSearchParams = keywordParam
       ? {
-          [POSTS_URL_PARAMS.KEYWORD]: titleParam,
+          [POSTS_URL_PARAMS.KEYWORD]: keywordParam,
           [POSTS_URL_PARAMS.SORT]: sortValue,
         }
       : { [POSTS_URL_PARAMS.SORT]: sortValue };
 
-    if (sortValue === 'recent')
+    if (sortValue === RECENT) {
       return setSearchParams(
-        titleParam ? { [POSTS_URL_PARAMS.KEYWORD]: titleParam } : {},
+        keywordParam ? { [POSTS_URL_PARAMS.KEYWORD]: keywordParam } : {},
       );
+    }
 
-    setSearchParams(newSearchParams as {});
+    setSearchParams(newSearchParams);
   };
 
   const sortedList = Object.entries(options) as [sortOptionNameType, string][];
@@ -38,10 +44,13 @@ export const PostsFilter = ({ options, Element }: Props) => {
       {sortedList.map(([key, value]) => (
         <li key={key} className={classes.filter} onClick={() => onClick(key)}>
           {Element ? (
-            <Element center={value} isSelected={param === key} />
+            <Element center={value} isSelected={postsSortParam === key} />
           ) : (
             <>
-              <Circle selected={param === key} options={{ outCircle: false }} />
+              <Circle
+                selected={postsSortParam === key}
+                options={{ outCircle: false }}
+              />
               {value}
             </>
           )}
