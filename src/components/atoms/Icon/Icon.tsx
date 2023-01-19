@@ -1,8 +1,12 @@
+import classNames from 'classnames';
 import type { ImgHTMLAttributes } from 'react';
 import classes from './icon.module.scss';
 
-interface Props extends ImgHTMLAttributes<HTMLImageElement> {}
+interface Props extends ImgHTMLAttributes<HTMLImageElement> {
+  className?: string;
+}
 
 export const Icon = (props: Props) => {
-  return <img className={classes.icon} {...props} />;
+  const newClassName = classNames([classes.icon, props.className]);
+  return <img className={newClassName} {...props} />;
 };

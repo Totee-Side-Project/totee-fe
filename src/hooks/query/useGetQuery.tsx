@@ -1,5 +1,4 @@
 import { useQuery } from 'react-query';
-import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 
 import {
@@ -12,7 +11,6 @@ import {
   UserAPI,
 } from '@api/api';
 import { UserState } from '@store/user';
-import { routePaths } from 'App';
 import { queryKeys } from '.';
 import { IMentoringListRequestOptions } from 'types/api.types';
 
@@ -39,22 +37,6 @@ export const useGetUserAPI = () => {
   );
 };
 
-export function useGetPostListAPI() {
-  return useQuery(
-    queryKeys.postsAll,
-    () => PostAPI.getPostList().catch((err) => err),
-    {
-      // 브라우저 focus 됐을 때 재시작?
-      retry: false,
-      refetchOnWindowFocus: true,
-      // 자동으로 가져오는 옵션
-      enabled: true,
-      // 캐시 타임
-      staleTime: 10 * 600 * 1000,
-    },
-  );
-}
-
 export function useGetPostByPostId(postId: number) {
   return useQuery(
     queryKeys.post(postId),
@@ -71,16 +53,38 @@ export function useGetPostByPostId(postId: number) {
   );
 }
 
-export function useGetSearchPostList(title: string) {
+export interface UseGetSearchPostListProps {
+  keyword: string;
+  page?: number;
+  size: number;
+  sortOption: string;
+}
+
+export function useGetSearchPostList({
+  keyword,
+  page = 0,
+  size,
+  sortOption,
+}: UseGetSearchPostListProps) {
   return useQuery(
-    queryKeys.searchTitle(title),
-    () => title.length > 0 && PostAPI.searchPostList(title).catch((err) => err),
+    queryKeys.postSearchTitle({
+      keyword,
+      pageNum: page,
+      sortOption,
+    }),
+    () =>
+      PostAPI.getPostList({
+        keyword,
+        size,
+        page,
+        sortOption,
+      }).then((response) => response.data.body.data),
     {
       // 브라우저 focus 됐을 때 재시작?
       retry: false,
       refetchOnWindowFocus: false,
       // 자동으로 가져오는 옵션
-      enabled: true,
+      enabled: !!keyword,
       // 캐시 타임
       staleTime: 10 * 600 * 1000,
     },
@@ -116,7 +120,6 @@ export function useGetRecommendList() {
 }
 
 export function useGetLikeofPost(postId: number) {
-  const navigate = useNavigate();
   return useQuery(
     queryKeys.likePost(postId),
     () => LikeAPI.getIsLikeInfo(postId),
@@ -128,10 +131,7 @@ export function useGetLikeofPost(postId: number) {
       enabled: true,
       // 캐시 타임
       staleTime: 10 * 600 * 1000,
-      onError: () => {
-        alert('일시적인 에러로 인해 홈으로 이동합니다!');
-        navigate(routePaths.main);
-      },
+      onError: () => {},
     },
   );
 }

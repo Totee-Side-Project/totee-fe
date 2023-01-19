@@ -31,7 +31,7 @@ import './App.css';
 
 export const routePaths = {
   main: '/',
-  posts: '/posts',
+  posts: '/posts/*',
   oauth: '/oauth/redirect',
   detail: '/detail',
   detailId: '/detail/:id',

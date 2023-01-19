@@ -1,19 +1,23 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import classes from './searchInput.module.scss';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 
-interface InputProps {
-  style?: string;
+import classes from './searchInput.module.scss';
+
+interface IInputProps {
   value: string;
-  label?: string;
   type: string;
   name: string;
   id: string;
   placeholder: string;
+  isPreview: boolean;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onFocus: () => void;
+  label?: string;
+  style?: 'default' | 'search';
   img?: any;
   autoFocus?: boolean;
+  autoComplete?: 'off' | 'on';
   setStatus?: (e: any) => void;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   // maxlength: string | any;
 }
 
@@ -38,10 +42,13 @@ export function SearchInput({
   placeholder,
   img,
   autoFocus = true,
+  autoComplete = 'off',
+  isPreview,
   onChange,
+  onFocus,
   setStatus,
 }: // maxlength,
-InputProps) {
+IInputProps) {
   const [inputType, setInputType] = useState('default');
 
   useEffect(() => {
@@ -50,45 +57,30 @@ InputProps) {
     }
   }, [inputType]);
 
-  const handleFocus = useCallback(() => {
-    setInputType('focused');
-  }, [inputType]);
-
-  const handleBlur = useCallback(() => {
-    if (value.length == 0) {
-      setInputType('default');
-    } else {
-      setInputType('active');
-    }
-  }, [value, inputType]);
-
-  useEffect(() => {
-    value.length > 0 ? setInputType('focused') : setInputType('default');
-  }, [value]);
-
   return (
     <div className={classNames(classes.input_group, classes[style])}>
       <label className={classes.label} htmlFor={name}>
         {label}
       </label>
       <input
-        autoFocus={autoFocus}
-        className={classNames(classes[inputType], 'border')}
-        type={type}
-        name={name}
+        className={classNames(
+          classes[inputType],
+          // TODO: 추천검색어 기능을 추가할 시 주석제거
+          // isPreview && classes.preview,
+          classes.search,
+        )}
         id={id}
+        name={name}
+        type={type}
         placeholder={placeholder}
-        onChange={onChange}
-        onFocus={() => handleFocus()}
-        onBlur={() => handleBlur()}
+        autoFocus={autoFocus}
+        autoComplete={autoComplete}
         value={value}
+        onChange={onChange}
+        onFocus={onFocus}
         // maxLength={maxlength}
       ></input>
-      {img && (
-        <>
-          <p className={classes.img}>{img}</p>
-        </>
-      )}
+      {img && <p className={classes.img}>{img}</p>}
     </div>
   );
 }

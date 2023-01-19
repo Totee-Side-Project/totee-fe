@@ -37,7 +37,7 @@ export interface IResponseOfPage {
 export interface IGetPostListResponse extends IResponseOfPage {
   body: {
     data: {
-      content: IPostType[];
+      content: IResponsePostDetail[];
       pageable: {};
       last: boolean;
       totalPages: number;
@@ -175,6 +175,15 @@ export interface IMentoring {
   profileImageUrl: string;
 }
 
+export interface IPostSliderOptions {
+  sortOption: string;
+}
+export interface IPostsInfiniteScrollOptions extends IPostSliderOptions {
+  keyword: string;
+}
+export interface IPostsPaginationoptions extends IPostsInfiniteScrollOptions {
+  pageNum: number;
+}
 // export interface CommentType {
 //   nickname: string;
 //   commentId: number;

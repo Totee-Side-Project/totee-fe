@@ -1,15 +1,17 @@
 .postsSectionContainer {
   padding: 0 8%;
+}
 
-  .postsSection {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    padding: 0 20px;
-    gap: 20px;
-  }
+.postsSection {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 0 20px;
+  gap: 20px;
+  text-align: center;
+}
 
-  .postsTriggerWrap {
-    padding: 10vh 0;
-  }
+.postsTriggerWrap {
+  padding: 10vh 0;
+  text-align: center;
 }

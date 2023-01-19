@@ -1,23 +1,28 @@
 import { useSearchParams } from 'react-router-dom';
 
 import { PostAPI } from '@api/api';
-import { NewPostCard } from '@components/common/post/PostCard/PostCard';
+import { PostCard } from '@components/common/post/PostCard/PostCard';
 import { useInfiniteTotalPosts } from '@hooks/query/useInfiniteTotalPosts';
 import { queryKeys } from '@hooks/query';
+import { POSTS_URL_PARAMS } from 'pages/PostsPage';
 import classes from './postsSection.module.scss';
 
-export const PostsSection = () => {
+export const PostsInfiniteSection = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const param = searchParams.get('filter');
+  const sortParam = searchParams.get(POSTS_URL_PARAMS.SORT) || '';
+  const keywordParam = searchParams.get(POSTS_URL_PARAMS.KEYWORD) || '';
 
   const { query, TriggerComponent } = useInfiniteTotalPosts({
+    keyword: keywordParam,
     getPage: PostAPI.getPostList,
-    pageSize: 15,
-    filter: !param ? undefined : (param as string),
-    queryKey: queryKeys.postsAll,
+    queryKey: queryKeys.postsInfiniteScroll({
+      keyword: keywordParam,
+      sortOption: sortParam,
+    }),
+    size: 15,
+    sortOption: sortParam,
   });
 
-  // 제일처음에 로딩을 할 때
   if (query.isLoading) {
     return (
       <section className={classes.postsSectionContainer}>
@@ -25,7 +30,7 @@ export const PostsSection = () => {
           {Array(10)
             .fill(0)
             .map((ele, index) => (
-              <NewPostCard key={index} />
+              <PostCard key={index} />
             ))}
         </ul>
         <div className={classes.postsTriggerWrap} />
@@ -33,14 +38,22 @@ export const PostsSection = () => {
     );
   }
 
-  if (query.status === 'success' && query.data.pages.length) {
+  if (query.isError) {
+    // TODO: Error시 UI
+    return null;
+  }
+
+  if (
+    query.status === 'success' &&
+    query.data?.pages[0].postData.content.length
+  ) {
     return (
       <section className={classes.postsSectionContainer}>
         <ul className={classes.postsSection}>
           {query.data.pages
             .flatMap((page) => page.postData.content)
             .map((post) => (
-              <NewPostCard key={post.postId} post={post} />
+              <PostCard key={post.postId} post={post} />
             ))}
         </ul>
         <div className={classes.postsTriggerWrap}>
@@ -50,8 +63,7 @@ export const PostsSection = () => {
     );
   }
 
-  //
-  // 🟠Todo: 보여줄 데이터들이 없거나 잘못된 정렬 카테고리가 선택된 경우 적절한 안내페이지르 보여줘야한다.
+  // Todo: 보여줄 데이터들이 없거나 잘못된 정렬 카테고리가 선택된 경우 적절한 안내페이지르 보여줘야한다.
   return (
     <main>
       <div>

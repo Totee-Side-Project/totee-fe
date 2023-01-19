@@ -1,37 +1,41 @@
-import {
-  Dispatch,
-  FunctionComponent,
-  ReactElement,
-  ReactNode,
-  SetStateAction,
-} from 'react';
+import { FunctionComponent, ReactNode } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { Circle } from '@components/atoms';
-import { IResponsePostDetail } from 'types/api.types';
-import classes from './postsFilter.module.scss';
 import { ISortOptions, sortOptionNameType } from 'types/sort.types';
+import { POSTS_URL_PARAMS } from 'pages/PostsPage';
+import classes from './postsFilter.module.scss';
 
 interface Props {
-  datas?: IResponsePostDetail[];
-  setDatas?: Dispatch<SetStateAction<any>>;
   options: ISortOptions;
   Element?: FunctionComponent<{ center?: ReactNode; isSelected?: boolean }>;
 }
 
-export const PostsFilter = ({ datas, setDatas, options, Element }: Props) => {
+export const PostsFilter = ({ options, Element }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const param = searchParams.get('filter') || 'recent';
-  const onClick = (key: sortOptionNameType) => {
-    if (key === 'recent') return setSearchParams({});
-    setSearchParams({ filter: key });
+  const param = searchParams.get(POSTS_URL_PARAMS.SORT) || 'recent';
+  const titleParam = searchParams.get(POSTS_URL_PARAMS.KEYWORD) || null;
+  const onClick = (sortValue: sortOptionNameType) => {
+    const newSearchParams = titleParam
+      ? {
+          [POSTS_URL_PARAMS.KEYWORD]: titleParam,
+          [POSTS_URL_PARAMS.SORT]: sortValue,
+        }
+      : { [POSTS_URL_PARAMS.SORT]: sortValue };
+
+    if (sortValue === 'recent')
+      return setSearchParams(
+        titleParam ? { [POSTS_URL_PARAMS.KEYWORD]: titleParam } : {},
+      );
+
+    setSearchParams(newSearchParams as {});
   };
 
-  const filterList = Object.entries(options) as [sortOptionNameType, string][];
+  const sortedList = Object.entries(options) as [sortOptionNameType, string][];
 
   return (
     <ul className={classes.filters}>
-      {filterList.map(([key, value]) => (
+      {sortedList.map(([key, value]) => (
         <li key={key} className={classes.filter} onClick={() => onClick(key)}>
           {Element ? (
             <Element center={value} isSelected={param === key} />
