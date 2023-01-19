@@ -1,7 +1,7 @@
 import { SearchSection } from '@components/common';
+import { PostsAll } from '@components/domains/posts/PostsAll';
 import { PostsHeader } from '@components/domains/posts/PostsHeader';
 import { PostsInfiniteSection } from '@components/domains/posts/PostsSection/PostsInfiniteSection';
-import { PostsAll } from '@components/domains/posts/PostsAll/PostsAll';
 import { Route, Routes } from 'react-router-dom';
 import './PostsPage.scss';
 

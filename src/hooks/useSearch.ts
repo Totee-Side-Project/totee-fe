@@ -1,6 +1,6 @@
 // 어떤 걸 search 할 것인가
 
-import { linkToUrl } from '@components/common';
+import { linkToUrl } from '@components/atoms/Search';
 import { useGetSearchPostList } from '@hooks/query/useGetQuery';
 import useDebounceInput from '@hooks/useDebounceInput';
 import { useOutsideAlerter } from '@hooks/useOutsideAlerter';

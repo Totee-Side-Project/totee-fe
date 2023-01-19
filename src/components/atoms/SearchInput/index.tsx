@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import classNames from 'classnames';
 
-import classes from './searchInput.module.scss';
+import classes from './index.module.scss';
 
 interface IInputProps {
   value: string;
@@ -14,7 +14,7 @@ interface IInputProps {
   onFocus: () => void;
   label?: string;
   style?: 'default' | 'search';
-  img?: any;
+  img?: ReactNode;
   autoFocus?: boolean;
   autoComplete?: 'off' | 'on';
   setStatus?: (e: any) => void;
@@ -43,7 +43,7 @@ export function SearchInput({
   img,
   autoFocus = true,
   autoComplete = 'off',
-  isPreview,
+  // isPreview,
   onChange,
   onFocus,
   setStatus,
