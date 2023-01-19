@@ -5,7 +5,7 @@ import { PostAPI } from '@api/api';
 import { SectionTitle } from '@components/atoms';
 import { Carousel } from '@components/common';
 import { PostCard } from '@components/common/post/PostCard/PostCard';
-import { queryKeys } from '@hooks/query';
+import { queryKeys } from '@hooks/query/queryKeys';
 import { useSortWithClient } from '@hooks/useSortWithClient';
 import { useInfiniteTotalPosts } from '@hooks/query/useInfiniteTotalPosts';
 import { PostsFilter } from '@components/domains/posts/PostsFilter';

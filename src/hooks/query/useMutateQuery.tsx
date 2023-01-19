@@ -11,7 +11,7 @@ import {
   UserAPI,
 } from '@api/api';
 import { IPostTeamRequestFormData, IResponsePostDetail } from 'types/api.types';
-import { queryKeys } from '.';
+import { queryKeys } from './queryKeys';
 import { IRequestReply } from 'types/api.types';
 import Swal from 'sweetalert2';
 import axios, { Axios, AxiosError, AxiosResponse } from 'axios';

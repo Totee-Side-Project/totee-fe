@@ -5,7 +5,7 @@ import { useUserProfile } from '@hooks/useUserProfile';
 import { useQuery } from 'react-query';
 import { UserType } from 'types/user.types';
 import { AxiosResponse } from 'axios';
-import { queryKeys } from '@hooks/query';
+import { queryKeys } from '@hooks/query/queryKeys';
 import classes from './index.module.scss';
 
 const UserProfile = () => {

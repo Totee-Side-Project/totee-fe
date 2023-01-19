@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { PostAPI } from '@api/api';
 import { PostCard } from '@components/common/post/PostCard/PostCard';
 import { useInfiniteTotalPosts } from '@hooks/query/useInfiniteTotalPosts';
-import { queryKeys } from '@hooks/query';
+import { queryKeys } from '@hooks/query/queryKeys';
 import { POSTS_URL_PARAMS } from 'pages/PostsPage';
 import classes from './postsSection.module.scss';
 
