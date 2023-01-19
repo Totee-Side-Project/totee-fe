@@ -12,10 +12,10 @@ import classes from './search.module.scss';
 export function Search() {
   const [isOpenPreview, setIsOpenPreview] = useState(false);
   const [previewResult, setPreviewResult] = useState<string[]>([]);
-  const inputRef = useRef<HTMLDivElement>(null);
+  const searchFormWrapRef = useRef<HTMLDivElement>(null);
   const [inputValue, setInputValue] = useState('');
   const debouncedValue = useDebounceInput(inputValue);
-  useOutsideAlerter(inputRef, () => closePreview());
+  useOutsideAlerter(searchFormWrapRef, () => closePreview());
 
   const { data } = useGetSearchPostList({
     keyword: debouncedValue,
@@ -53,7 +53,7 @@ export function Search() {
 
   return (
     <section className={classes.search_wrapper}>
-      <div className={classes.input_wrapper} ref={inputRef}>
+      <div className={classes.input_wrapper} ref={searchFormWrapRef}>
         <form onSubmit={onSubmit}>
           <SearchInput
             style="search"
@@ -77,7 +77,9 @@ export function Search() {
           />
         )} */}
       </div>
-      {/* {searchResult?.data && searchResult.keyword !== null && (
+      {/* 
+        TODO: 검색결과 갯수를 알려주는 UI 작업
+      {searchResult?.data && searchResult.keyword !== null && (
         <div className={classes.searchResult}>
           <div>
             &quot; {searchResult.keyword} &quot; 에 대한 검색 결과{' '}
