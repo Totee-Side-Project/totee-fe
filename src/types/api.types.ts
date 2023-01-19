@@ -38,11 +38,11 @@ export interface IGetPostListResponse extends IResponseOfPage {
   body: {
     data: {
       content: IResponsePostDetail[];
-      pageable: {};
+      pageable: object;
       last: boolean;
       totalPages: number;
       totalElements: number;
-      sort: {};
+      sort: object;
       first: boolean;
       number: number;
       numberOfElements: number;
@@ -136,8 +136,8 @@ export interface AlarmType {
 
 // response search data
 export interface ISearchType {
-  data: IPostType[] | null;
-  keyword: string | null;
+  data: IPostType[];
+  keyword: string;
 }
 
 /*  request payload  */
@@ -176,7 +176,7 @@ export interface IMentoring {
 }
 
 export interface IPostSliderOptions {
-  sortOption: string;
+  sort: string;
 }
 export interface IPostsInfiniteScrollOptions extends IPostSliderOptions {
   keyword: string;
@@ -184,42 +184,3 @@ export interface IPostsInfiniteScrollOptions extends IPostSliderOptions {
 export interface IPostsPaginationoptions extends IPostsInfiniteScrollOptions {
   pageNum: number;
 }
-// export interface CommentType {
-//   nickname: string;
-//   commentId: number;
-//   content: string;
-//   replyList?: CommentType[];
-//   created_at: string;
-//   replyId?: number;
-//   profileImageUrl?: string;
-// }
-
-// export interface ICommentPropsType {
-//   postId: number;
-//   comment: CommentType;
-//   commentId?: number;
-// }
-
-// import { CommentType } from './comment.types';
-
-// export interface IPostDetailType {
-//   author: string;
-//   authorPosition: string;
-//   categoryName: string;
-//   commentDTOList: CommentType[];
-//   commentNum: number;
-//   contactLink: string;
-//   contactMethod: string;
-//   content: string;
-//   createdAt: string;
-//   imageUrl: string;
-//   likeNum: number;
-//   onlineOrOffline: string;
-//   period: string;
-//   positionList: string[];
-//   postId: number;
-//   recruitNum: string;
-//   status: string;
-//   title: string;
-//   view: number;
-// }
