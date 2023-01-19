@@ -1,8 +1,8 @@
 import { SearchInput } from '@components/atoms';
 import { ReactComponent as SearchIcon } from '@assets/svg/search-icon.svg';
-import classes from './search.module.scss';
 import { useSearch } from '@hooks/useSearch';
 import { POSTS_URL_PARAMS } from '@hooks/usePostsSearchParams';
+import classes from './index.module.scss';
 
 export function Search() {
   const {

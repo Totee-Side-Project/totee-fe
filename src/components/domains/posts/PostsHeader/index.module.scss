@@ -1,12 +1,9 @@
-.postsFilterContainer {
-  width: 100%;
-
+.postsHeaderContainer {
   position: sticky;
   top: 70px;
   z-index: 5;
-  padding: 0 10%;
   margin-bottom: 15px;
-  // border-bottom: 1px solid gray;
+  padding: 0 15px;
   background-color: white;
 
   .postsFilterWrap {
@@ -14,6 +11,5 @@
     justify-content: flex-end;
     align-items: center;
     height: 100px;
-    gap: 10px;
   }
 }

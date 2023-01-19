@@ -1,9 +1,9 @@
 import { PostsFilter } from '../PostsFilter';
-import classes from './PostsHeader.module.scss';
+import classes from './index.module.scss';
 
 export const PostsHeader = () => {
   return (
-    <div className={classes.postsFilterContainer}>
+    <div className={classes.postsHeaderContainer}>
       <div className={classes.postsFilterWrap}>
         <PostsFilter
           options={{
