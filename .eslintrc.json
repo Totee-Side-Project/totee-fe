@@ -4,18 +4,19 @@
     "es6": true,
     "node": true
   },
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["react", "@typescript-eslint", "prettier"],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
+  "plugins": ["react", "@typescript-eslint", "prettier"],
   "settings": {
     "react": {
       "version": "detect"
     }
   },
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -23,15 +24,17 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-
   "rules": {
-    "sort-imports": ["error", {
-      "ignoreCase": false,
-      "ignoreDeclarationSort": true,
-      "ignoreMemberSort": false,
-      "memberSyntaxSortOrder": ["all", "single", "multiple", "none"],
-      "allowSeparatedGroups": false
-    }],
+    "sort-imports": [
+      "error",
+      {
+        "ignoreCase": false,
+        "ignoreDeclarationSort": true,
+        "ignoreMemberSort": false,
+        "memberSyntaxSortOrder": ["all", "single", "multiple", "none"],
+        "allowSeparatedGroups": false
+      }
+    ],
     "react/react-in-jsx-scope": 0,
     "react/prefer-stateless-function": 0,
     "react/jsx-filename-extension": 0,
@@ -39,7 +42,6 @@
     "no-nested-ternary": 0,
     "react/display-name": "off",
     "no-console": "error",
-    "no-unused-vars": "warn",
     "un-useless-escape": "off",
     "quotes": [2, "single", { "allowTemplateLiterals": true }]
   }
