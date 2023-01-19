@@ -17,15 +17,12 @@ import { IMentoringListRequestOptions } from 'types/api.types';
 export const useGetUserAPI = () => {
   const [user, setUser] = useRecoilState(UserState);
 
-  return useQuery(queryKeys.user, () => UserAPI.getUserInfo(), {
+  return useQuery(queryKeys.user, UserAPI.getUserInfo, {
     refetchOnWindowFocus: false,
     onSuccess: (res) => {
       if (res?.data?.body.data) {
         setUser(res.data.body.data);
       }
-    },
-    onError: () => {
-      console.log('에러');
     },
   });
 };
@@ -70,17 +67,14 @@ export function useGetSearchPostList({
 }
 
 export function useGetCategoryList() {
-  return useQuery(
-    queryKeys.categories,
-    () => CategoryAPI.getCategoryList().catch((err) => err),
-    {
-      refetchOnWindowFocus: false,
-    },
-  );
+  return useQuery(queryKeys.categories, CategoryAPI.getCategoryList, {
+    refetchOnWindowFocus: false,
+    onError: (err) => err,
+  });
 }
 
 export function useGetRecommendList() {
-  return useQuery(queryKeys.recommend, () => PostAPI.recommendPostList(), {
+  return useQuery(queryKeys.recommend, PostAPI.recommendPostList, {
     refetchOnWindowFocus: false,
   });
 }
@@ -96,7 +90,7 @@ export function useGetLikeofPost(postId: number) {
 }
 
 export function useGetAlarm() {
-  return useQuery(queryKeys.alarms, () => AlarmAPI.getAlarm(), {
+  return useQuery(queryKeys.alarms, AlarmAPI.getAlarm, {
     staleTime: 0,
   });
 }
