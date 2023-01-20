@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import { IApplyMentor } from 'types/api';
 import {
   IGetApplicantResponse,
@@ -11,32 +11,7 @@ import {
   PostRequestDto,
 } from 'types/api.types';
 import { GetPostListParams } from './api.types';
-
-const BASE_URL = 'https://api.totee.link/';
-
-export const api = axios.create({
-  baseURL: BASE_URL,
-  withCredentials: true,
-  // validateStatus: (status) => {
-  //   // 400은 로컬에서 처리하기 위해서 해주었다.
-  //   // 그럼 이 에러는 어디서 catch 할 수 있는가?
-  //   return status < 500;
-  // },
-});
-
-api.interceptors.request.use((config: any) => {
-  if (!localStorage.getItem('loginData')) return config;
-  const { token } = JSON.parse(localStorage.getItem('loginData') as string);
-  if (!token) {
-    config.headers!.common['Authorization'] = null;
-    return config;
-  } else {
-    config.headers!.common['Authorization'] = `Bearer ${token}`;
-    return config;
-  }
-});
-// swagger 링크
-// https://api.totee.link/swagger-ui.html#/
+import { BASE_URL, api } from './instance';
 
 export const PostAPI = {
   getPostList: ({
