@@ -4,7 +4,7 @@ import { AxiosResponse } from 'axios';
 
 import { IResponseOfPage } from 'types/api.types';
 import { useIntersectionObserver } from './useIntersectionObserver';
-import { GetPostListParams } from '@api/api.types';
+import { GetPostListParams } from '@api/types/api.types';
 
 // import GetPostListParams from
 export type FetchPageFuntionType = (

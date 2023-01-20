@@ -3,8 +3,8 @@ import { useRef } from 'react';
 import { Button, Modal } from '@components/atoms';
 import { ReactComponent as KakakoIcon } from '@assets/svg/kakao-logo.svg';
 import { ReactComponent as GoogleIcon } from '@assets/svg/google-logo.svg';
-import { GOOGLE_AUTH_URL, KAKAO_AUTH_URL } from '@api/api';
 import classes from './onboardmodal.module.scss';
+import { GOOGLE_AUTH_URL, KAKAO_AUTH_URL } from '@api/apis/auth';
 
 interface ISignInModalProps {
   isOpen: boolean;

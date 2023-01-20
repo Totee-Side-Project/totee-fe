@@ -1,7 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-import { PostAPI } from '@api/api';
 import { SectionTitle } from '@components/atoms';
 import { Carousel } from '@components/common';
 import { PostCard } from '@components/common/post/PostCard/PostCard';
@@ -14,6 +13,7 @@ import { IResponsePostDetail } from 'types/api.types';
 import { POSTS_CATEGORY_PATHS, POSTS_URL_PARAMS } from 'pages/PostsPage';
 import classes from './studySection.module.scss';
 import './studySection.scss';
+import { PostAPI } from '@api/apis/post';
 
 export function StudySection() {
   const [searchParams, setSearchParams] = useSearchParams();

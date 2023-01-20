@@ -4,7 +4,6 @@ import { useRecoilState } from 'recoil';
 import { ImageWithWebp } from '@components/atoms';
 import { UserState } from '@store/user';
 import { IApplyForm, applyForm } from '@store/mentor';
-import { MentorAPI } from '@api/api';
 import { URL_PATTERN } from '@utils/pattern';
 import { ICommonForm } from 'types/applyMentorModal';
 import Style from './commonForm.module.scss';
@@ -12,6 +11,7 @@ import Style from './commonForm.module.scss';
 //? image
 import IMG_UserProfile from '@assets/svg/common/userProfile.svg';
 import IMG_Cancel from '@assets/svg/common/cancel.svg';
+import { MentorAPI } from '@api/apis/mentor';
 
 const CommonForm: React.FC<ICommonForm> = (props) => {
   const { setIsShow, children } = props;

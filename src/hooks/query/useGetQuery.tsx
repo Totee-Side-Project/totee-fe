@@ -1,18 +1,15 @@
 import { useQuery } from 'react-query';
 import { useRecoilState } from 'recoil';
-
-import {
-  AlarmAPI,
-  ApplicationAPI,
-  CategoryAPI,
-  LikeAPI,
-  MentoringAPI,
-  PostAPI,
-  UserAPI,
-} from '@api/api';
 import { UserState } from '@store/user';
 import { queryKeys } from './queryKeys';
 import { IMentoringListRequestOptions } from 'types/api.types';
+import { UserAPI } from '@api/apis/user';
+import { PostAPI } from '@api/apis/post';
+import { CategoryAPI } from '@api/apis/category';
+import { LikeAPI } from '@api/apis/like';
+import { ApplicationAPI } from '@api/apis/application';
+import { MentoringAPI } from '@api/apis/mentoring';
+import { AlarmAPI } from '@api/apis/alarm';
 
 export const useGetUserAPI = () => {
   const [user, setUser] = useRecoilState(UserState);

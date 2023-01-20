@@ -1,21 +1,18 @@
 import { useMutation, useQueryClient } from 'react-query';
-
-import {
-  AlarmAPI,
-  ApplicationAPI,
-  CommentAPI,
-  LikeAPI,
-  PostAPI,
-  ReplyAPI,
-  TeamAPI,
-  UserAPI,
-} from '@api/api';
-import { IPostTeamRequestFormData, IResponsePostDetail } from 'types/api.types';
+import { IPostTeamRequestFormData } from 'types/api.types';
 import { queryKeys } from './queryKeys';
 import { IRequestReply } from 'types/api.types';
 import Swal from 'sweetalert2';
-import axios, { Axios, AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError } from 'axios';
 import _ from 'lodash';
+import { UserAPI } from '@api/apis/user';
+import { CommentAPI } from '@api/apis/comment';
+import { ReplyAPI } from '@api/apis/reply';
+import { PostAPI } from '@api/apis/post';
+import { LikeAPI } from '@api/apis/like';
+import { AlarmAPI } from '@api/apis/alarm';
+import { ApplicationAPI } from '@api/apis/application';
+import { TeamAPI } from '@api/apis/team';
 
 export const useAddUserInfo = () => {
   const queryClient = useQueryClient();

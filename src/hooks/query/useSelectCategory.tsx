@@ -1,5 +1,5 @@
+import { SelectAPI } from '@api/apis/select';
 import { useMutation } from 'react-query';
-import { SelectAPI } from '@api/api';
 import { useQueryClient } from 'react-query';
 
 export const useSelectCategory = () => {
