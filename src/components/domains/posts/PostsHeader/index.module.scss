@@ -2,7 +2,6 @@
   position: sticky;
   top: 70px;
   z-index: 5;
-  margin-bottom: 15px;
   padding: 0 15px;
   background-color: white;
 
@@ -10,6 +9,6 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    height: 100px;
+    padding: 25px 0;
   }
 }

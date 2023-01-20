@@ -1,8 +1,9 @@
-import { SearchSection } from '@components/common';
-import { PostsAll } from '@components/domains/posts/PostsAll';
-import { PostsHeader } from '@components/domains/posts/PostsHeader';
-import { PostsInfiniteSection } from '@components/domains/posts/PostsSection/PostsInfiniteSection';
 import { Route, Routes } from 'react-router-dom';
+
+import { PostsContainer } from '@components/domains/posts/PostsContainer';
+import { PostsInfiniteSection } from '@components/domains/posts/PostsSection/PostsInfiniteSection';
+import { PostPaginationSection } from '@components/domains/posts/PostsSection/PostsPaginationSection';
+import { SearchSection } from '@components/atoms';
 import './PostsPage.scss';
 
 export const POSTS_CATEGORY_PATHS = {
@@ -12,39 +13,60 @@ export const POSTS_CATEGORY_PATHS = {
   MENTO: 'mento',
 };
 
+export const POSTS_CATEGORY_NAMES = {
+  STUDY: '스터디',
+  MENTORING: '멘토링',
+  MENTO: '멘토',
+};
+
 const PostsPage = () => {
   return (
     <Routes>
-      <Route path={POSTS_CATEGORY_PATHS.ALL} element={<PostsAll />} />
+      <Route
+        path={POSTS_CATEGORY_PATHS.ALL}
+        element={
+          <>
+            <SearchSection resultGuidText={'on'} />
+            <PostsContainer>
+              <PostPaginationSection
+                categoryTitle={POSTS_CATEGORY_NAMES.STUDY}
+              />
+            </PostsContainer>
+            <PostsContainer>
+              <PostPaginationSection
+                categoryTitle={POSTS_CATEGORY_NAMES.MENTORING}
+              />
+            </PostsContainer>
+            <PostsContainer>
+              <PostPaginationSection
+                categoryTitle={POSTS_CATEGORY_NAMES.MENTO}
+              />
+            </PostsContainer>
+          </>
+        }
+      />
       <Route
         path={POSTS_CATEGORY_PATHS.STUDY}
         element={
-          <div>
+          <>
             <SearchSection />
-            <main>
-              <PostsHeader />
+            <PostsContainer>
               <PostsInfiniteSection />
-            </main>
-          </div>
+            </PostsContainer>
+          </>
         }
       />
-
-      {/* 
-      // TODO: 멘토링 카드 전체보기(무한스크롤) 구현해주어야 함
-      // 스터디에서 apiCall, CardComponent 만 다르게 props로 넘겨서 쓸 수 있을 것 같음
-
       <Route
         path={POSTS_CATEGORY_PATHS.MENTO}
         element={
-          <div>
+          <>
             <SearchSection />
-            <main>   
-              <PostsHeader />
+            <PostsContainer>
               <PostsInfiniteSection />
-            </main>
-          </div>
+            </PostsContainer>
+          </>
         }
-      /> */}
+      />
     </Routes>
   );
 };

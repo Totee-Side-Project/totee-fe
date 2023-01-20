@@ -8,7 +8,11 @@ import { useGetPostsSearchParams } from '@hooks/usePostsSearchParams';
 
 const PAGE_SIZE = 10;
 
-export const PostPaginationSection = () => {
+interface IProps {
+  categoryTitle: string;
+}
+
+export const PostPaginationSection = ({ categoryTitle }: IProps) => {
   const { keywordParam, sortParam } = useGetPostsSearchParams();
 
   const [currentPage, setCurrentPage] = useState(0);
@@ -37,23 +41,26 @@ export const PostPaginationSection = () => {
 
   if (status === 'success' && data.content.length) {
     return (
-      <section className={classes.postsSectionContainer}>
-        <ul className={classes.postsSection}>
-          {data.content.map((post) => (
-            <PostCard key={post.postId} post={post} />
-          ))}
-        </ul>
-        <div className={classes.postsTriggerWrap}>
-          <Pagination
-            currentPage={currentPage}
-            totalPageNum={data.totalPages}
-            limitPageNum={4}
-            setCurrentPage={setCurrentPage}
-            slideNum={slideNum}
-            setSlideNum={setSlideNum}
-          />
-        </div>
-      </section>
+      <>
+        <div className={classes.postsCategoryTitle}>{categoryTitle}</div>
+        <section className={classes.postsSectionContainer}>
+          <ul className={classes.postsSection}>
+            {data.content.map((post) => (
+              <PostCard key={post.postId} post={post} />
+            ))}
+          </ul>
+          <div className={classes.postsTriggerWrap}>
+            <Pagination
+              currentPage={currentPage}
+              totalPageNum={data.totalPages}
+              limitPageNum={4}
+              setCurrentPage={setCurrentPage}
+              slideNum={slideNum}
+              setSlideNum={setSlideNum}
+            />
+          </div>
+        </section>
+      </>
     );
   }
 

@@ -5,6 +5,9 @@ import { PostCard } from '@components/common/post/PostCard/PostCard';
 import { PostAPI } from '@api/api';
 
 import classes from './postsSection.module.scss';
+import { SearchResultGuideText } from '@components/atoms';
+
+const PAGE_SIZE = 10;
 
 export const PostsInfiniteSection = () => {
   const { sortParam, keywordParam, pageParam } = useGetPostsSearchParams();
@@ -21,14 +24,13 @@ export const PostsInfiniteSection = () => {
   });
 
   if (query.isLoading) {
+    const loadingList = [...Array(PAGE_SIZE)];
     return (
       <section className={classes.postsSectionContainer}>
         <ul className={classes.postsSection}>
-          {Array(10)
-            .fill(0)
-            .map((ele, index) => (
-              <PostCard key={index} />
-            ))}
+          {loadingList.map((ele, index) => (
+            <PostCard key={index} />
+          ))}
         </ul>
         <div className={classes.postsTriggerWrap} />
       </section>
@@ -45,18 +47,22 @@ export const PostsInfiniteSection = () => {
     query.data?.pages[0].postData.content.length
   ) {
     return (
-      <section className={classes.postsSectionContainer}>
-        <ul className={classes.postsSection}>
-          {query.data.pages
-            .flatMap((page) => page.postData.content)
-            .map((post) => (
-              <PostCard key={post.postId} post={post} />
-            ))}
-        </ul>
-        <div className={classes.postsTriggerWrap}>
-          <TriggerComponent />
-        </div>
-      </section>
+      <>
+        <SearchResultGuideText className={classes.postsCategoryTitle} />;
+        {/* <div className={classes.postsCategoryTitle}>스터디에 대한 검색결과</div> */}
+        <section className={classes.postsSectionContainer}>
+          <ul className={classes.postsSection}>
+            {query.data.pages
+              .flatMap((page) => page.postData.content)
+              .map((post) => (
+                <PostCard key={post.postId} post={post} />
+              ))}
+          </ul>
+          <div className={classes.postsTriggerWrap}>
+            <TriggerComponent />
+          </div>
+        </section>
+      </>
     );
   }
 
