@@ -1,4 +1,3 @@
-export * from './Counter';
 export * from './Circle/Circle';
 export * from './Label/Label';
 export * from './Image/ImageWithWebp';
