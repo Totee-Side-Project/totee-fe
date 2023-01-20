@@ -48,8 +48,7 @@ export const PostsInfiniteSection = () => {
   ) {
     return (
       <>
-        <SearchResultGuideText className={classes.postsCategoryTitle} />;
-        {/* <div className={classes.postsCategoryTitle}>스터디에 대한 검색결과</div> */}
+        <SearchResultGuideText className={classes.postsCategoryTitle} />
         <section className={classes.postsSectionContainer}>
           <ul className={classes.postsSection}>
             {query.data.pages
