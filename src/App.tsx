@@ -20,6 +20,7 @@ import { ScrollTopButton } from '@components/atoms';
 import { Banner, Footer, Header } from '@components/common';
 import LoginOauth from '@components/common/login/LoginOauth';
 import { useGetUserAPI } from '@hooks/query/useGetQuery';
+import useScrollToTop from '@hooks/useScrollToTop';
 import {
   UserState,
   defaultLoginState,
@@ -59,6 +60,7 @@ function App() {
   const [user, setUser] = useRecoilState(UserState);
   const { data, status } = useGetUserAPI();
   const { pathname } = useLocation();
+  useScrollToTop();
 
   // localStorage에서 loginData를 get한다.
   let loginLocalStorage: any = localStorage.getItem('loginData');

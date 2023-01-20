@@ -10,7 +10,6 @@ import { ThemeProvider } from '@emotion/react';
 
 import globalStyle from '@styles/globalStyle';
 import { theme } from '@styles/theme';
-import ScrollToTop from '@components/atoms/ScrollToTop';
 import App from './App';
 import './index.css';
 
@@ -32,7 +31,6 @@ ReactDOM.render(
         <RecoilRoot>
           <ThemeProvider theme={theme}>
             <Global styles={globalStyle} />
-            <ScrollToTop />
             <App />
           </ThemeProvider>
         </RecoilRoot>
