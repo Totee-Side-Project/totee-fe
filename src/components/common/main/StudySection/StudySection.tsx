@@ -4,26 +4,27 @@ import { PostAPI } from '@api/api';
 import { SectionTitle } from '@components/atoms';
 import { Carousel } from '@components/common';
 import { PostCard } from '@components/common/post/PostCard/PostCard';
-import { queryKeys } from '@hooks/query';
-import { useSortWithClient } from '@hooks/useSortWithClient';
-import { useInfiniteTotalPosts } from '@hooks/query/useInfiniteTotalPosts';
 import { PostsFilter } from '@components/domains/posts/PostsFilter';
 import { SortButton } from '@components/atoms/Button/SortButton/SortButton';
-import { useGetPostsSearchParams } from '@hooks/usePostsSearchParams';
+import { queryKeys } from '@hooks/query';
+import { useSortWithClient } from '@hooks/useSortWithClient';
+import { useInfiniteTotalPosts } from '@hooks/query/useInfiniteWithDraw';
+import { useGetPostsParams } from '@hooks/useGetPostsParams';
 import { IResponsePostDetail } from 'types/api.types';
 import { POSTS_CATEGORY_PATHS } from 'pages/PostsPage';
 import classes from './studySection.module.scss';
 import './studySection.scss';
 
+const LOADING_PAGE_SIZE = 4;
+const PAGE_SIZE = 16;
+
 export function StudySection() {
-  const { sortParam } = useGetPostsSearchParams();
+  const { params, sortParam } = useGetPostsParams({ size: PAGE_SIZE });
 
   const { query } = useInfiniteTotalPosts({
     getPage: PostAPI.getPostList,
-    queryKey: queryKeys.postsSlider({ sort: sortParam }),
-    sort: sortParam,
-    size: 16,
-    keyword: '',
+    queryKey: queryKeys.postsSlider({ sort: [sortParam] }),
+    params,
   });
   const { chunkData } = useSortWithClient();
 
@@ -109,7 +110,7 @@ const SectionSkeleton = () => {
   return (
     <div className={classes.section_body}>
       <ul style={style}>
-        {[0, 1, 2, 3].map((ele) => (
+        {[...Array(LOADING_PAGE_SIZE)].map((ele) => (
           <li key={ele}>
             <PostCard />
           </li>

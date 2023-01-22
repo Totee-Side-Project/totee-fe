@@ -156,6 +156,11 @@ export interface IMentoringListRequestOptions {
   sort?: string[];
 }
 
+export interface IMentoringSearchListRequestOptions
+  extends IMentoringListRequestOptions {
+  keyword?: string;
+}
+
 export interface IGetMentoringListResponse {
   body: {
     data: {
@@ -176,7 +181,7 @@ export interface IMentoring {
 }
 
 export interface IPostSliderOptions {
-  sort: string;
+  sort?: string[];
 }
 export interface IPostsInfiniteScrollOptions extends IPostSliderOptions {
   keyword: string;

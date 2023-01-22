@@ -41,9 +41,9 @@ api.interceptors.request.use((config: any) => {
 
 export const PostAPI = {
   getPostList: ({
-    page = 0,
+    page,
     keyword,
-    size = 5,
+    size,
     sort,
   }: IGetPostListParams): Promise<AxiosResponse<IGetPostListResponse>> => {
     return api.get(`/api/v1/post/list`, {

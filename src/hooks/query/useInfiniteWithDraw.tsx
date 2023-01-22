@@ -10,30 +10,21 @@ export type FetchPageFuntionType = (
   option: IGetPostListParams,
 ) => Promise<AxiosResponse<IResponseOfPage>>;
 
-interface Props extends Omit<IGetPostListParams, 'page'> {
+interface Props {
   getPage: FetchPageFuntionType;
   queryKey: unknown[];
+  params: Omit<IGetPostListParams, 'page'>;
 }
 
-export const useInfiniteTotalPosts = ({
-  getPage,
-  keyword,
-  queryKey,
-  size,
-  sort,
-}: Props) => {
+export const useInfiniteTotalPosts = ({ getPage, queryKey, params }: Props) => {
   const getPageInfo = async ({ pageParam = 0 }) => {
     const postData = await getPage({
+      ...params,
       page: pageParam,
-      keyword,
-      size,
-      sort,
     }).then((response) => response.data.body.data);
 
-    const nextPageParam = !postData.last ? pageParam + 1 : undefined;
     return {
       postData,
-      nextPageParam,
       isLast: postData.last,
     };
   };
@@ -41,7 +32,12 @@ export const useInfiniteTotalPosts = ({
   const postsQuery = useInfiniteQuery({
     queryKey,
     queryFn: getPageInfo,
-    getNextPageParam: (lastPage, pages) => lastPage.nextPageParam,
+    getNextPageParam: (lastPage, pages) => {
+      const nextPageParam = !lastPage.postData.last
+        ? pages.length + 1
+        : undefined;
+      return nextPageParam;
+    },
     refetchOnWindowFocus: false,
   });
 

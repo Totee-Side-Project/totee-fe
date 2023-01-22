@@ -12,7 +12,10 @@ import {
 } from '@api/api';
 import { UserState } from '@store/user';
 import { queryKeys } from '.';
-import { IMentoringListRequestOptions } from 'types/api.types';
+import {
+  IMentoringListRequestOptions,
+  IMentoringSearchListRequestOptions,
+} from 'types/api.types';
 import { IGetPostListParams } from '@api/api.types';
 
 export const useGetUserAPI = () => {
@@ -157,5 +160,13 @@ export function useGetApplicant(postId: number) {
 export function useGetMentoringList(options: IMentoringListRequestOptions) {
   return useQuery(queryKeys.mentoringList(options), () =>
     MentoringAPI.getMentoringList(options),
+  );
+}
+
+export function useGetSearchMentoringList(
+  options: IMentoringSearchListRequestOptions,
+) {
+  return useQuery(queryKeys.mentoringSearchList(options), () =>
+    MentoringAPI.searchMentoringList(options),
   );
 }

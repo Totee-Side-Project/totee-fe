@@ -1,32 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { PostCard } from '@components/common/post/PostCard/PostCard';
 import { Pagination } from '@components/common/pagination/Pagination';
 import { useGetSearchPostList } from '@hooks/query/useGetQuery';
+import { useGetPostsParams } from '@hooks/useGetPostsParams';
+import { SEARCH_PAGE_SIZE } from '@hooks/useSearch';
 import classes from './postsSection.module.scss';
-import { useGetPostsSearchParams } from '@hooks/usePostsSearchParams';
-
-const PAGE_SIZE = 10;
 
 interface IProps {
   categoryTitle: string;
 }
 
 export const PostPaginationSection = ({ categoryTitle }: IProps) => {
-  const { keywordParam, sortParam } = useGetPostsSearchParams();
-
   const [currentPage, setCurrentPage] = useState(0);
   const [slideNum, setSlideNum] = useState(1);
-
-  const { data, isLoading, status } = useGetSearchPostList({
-    keyword: keywordParam,
+  const { params } = useGetPostsParams({
+    size: SEARCH_PAGE_SIZE,
     page: currentPage,
-    size: PAGE_SIZE,
-    sort: sortParam,
   });
 
+  const { data, isLoading, status } = useGetSearchPostList(params);
+
   if (isLoading) {
-    const loadingList = [...Array(PAGE_SIZE)];
+    const loadingList = [...Array(SEARCH_PAGE_SIZE)];
     return (
       <section className={classes.postsSectionContainer}>
         <ul className={classes.postsSection}>

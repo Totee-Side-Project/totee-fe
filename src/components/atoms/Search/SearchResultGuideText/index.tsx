@@ -1,18 +1,19 @@
 import { useGetSearchPostList } from '@hooks/query/useGetQuery';
-import { useGetPostsSearchParams } from '@hooks/usePostsSearchParams';
+import { useGetPostsParams } from '@hooks/useGetPostsParams';
+import { SEARCH_PAGE_SIZE } from '@hooks/useSearch';
 import classNames from 'classnames';
 import classes from './index.module.scss';
 
 interface IProps {
   className?: string;
 }
+
 export const SearchResultGuideText = ({ className }: IProps) => {
-  const { keywordParam, pageParam, sortParam } = useGetPostsSearchParams();
-  const { data } = useGetSearchPostList({
-    keyword: keywordParam,
-    page: pageParam,
-    sort: sortParam,
+  const { params, keywordParam } = useGetPostsParams({
+    size: SEARCH_PAGE_SIZE,
   });
+
+  const { data } = useGetSearchPostList(params);
   const combinedClassName = classNames(classes.resultGuideText, className);
 
   if (data?.content.length) {

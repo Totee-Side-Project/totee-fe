@@ -4,6 +4,10 @@ import { PostsContainer } from '@components/domains/posts/PostsContainer';
 import { PostsInfiniteSection } from '@components/domains/posts/PostsSection/PostsInfiniteSection';
 import { PostPaginationSection } from '@components/domains/posts/PostsSection/PostsPaginationSection';
 import { SearchSection } from '@components/atoms';
+// import { queryKeys } from '@hooks/query';
+// import { MentoringAPI, PostAPI } from '@api/api';
+// import { PostCard } from '@components/common/post/PostCard/PostCard';
+// import MentoringPostCard from '@components/common/card/MentoringPostCard/MentoringPostCard';
 import './PostsPage.scss';
 
 export const POSTS_CATEGORY_PATHS = {
@@ -32,7 +36,7 @@ const PostsPage = () => {
                 categoryTitle={POSTS_CATEGORY_NAMES.STUDY}
               />
             </PostsContainer>
-            <PostsContainer>
+            {/* <PostsContainer>
               <PostPaginationSection
                 categoryTitle={POSTS_CATEGORY_NAMES.MENTORING}
               />
@@ -41,7 +45,7 @@ const PostsPage = () => {
               <PostPaginationSection
                 categoryTitle={POSTS_CATEGORY_NAMES.MENTO}
               />
-            </PostsContainer>
+            </PostsContainer> */}
           </>
         }
       />
@@ -62,7 +66,11 @@ const PostsPage = () => {
           <>
             <SearchSection />
             <PostsContainer>
-              <PostsInfiniteSection />
+              <PostsInfiniteSection
+              // queryKey={queryKeys.mentoringSearchList}
+              // getApi={MentoringAPI.searchMentoringList}
+              // Element={MentoringPostCard}
+              />
             </PostsContainer>
           </>
         }

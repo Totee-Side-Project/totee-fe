@@ -1,30 +1,25 @@
-import { useInfiniteTotalPosts } from '@hooks/query/useInfiniteTotalPosts';
-import { queryKeys } from '@hooks/query';
-import { useGetPostsSearchParams } from '@hooks/usePostsSearchParams';
-import { PostCard } from '@components/common/post/PostCard/PostCard';
 import { PostAPI } from '@api/api';
-
-import classes from './postsSection.module.scss';
+import { useInfiniteTotalPosts } from '@hooks/query/useInfiniteWithDraw';
+import { queryKeys } from '@hooks/query';
+import { useGetPostsParams } from '@hooks/useGetPostsParams';
+import { PostCard } from '@components/common/post/PostCard/PostCard';
 import { SearchResultGuideText } from '@components/atoms';
+import classes from './postsSection.module.scss';
 
-const PAGE_SIZE = 10;
+const LOADING_PAGE_SIZE = 10;
+const PAGE_SIZE = 20;
 
 export const PostsInfiniteSection = () => {
-  const { sortParam, keywordParam, pageParam } = useGetPostsSearchParams();
+  const { params } = useGetPostsParams({ size: PAGE_SIZE });
 
   const { query, TriggerComponent } = useInfiniteTotalPosts({
-    keyword: keywordParam,
     getPage: PostAPI.getPostList,
-    queryKey: queryKeys.postsInfiniteScroll({
-      keyword: keywordParam,
-      sort: sortParam,
-    }),
-    size: 15,
-    sort: sortParam,
+    queryKey: queryKeys.postsInfiniteScroll(params),
+    params,
   });
 
   if (query.isLoading) {
-    const loadingList = [...Array(PAGE_SIZE)];
+    const loadingList = [...Array(LOADING_PAGE_SIZE)];
     return (
       <section className={classes.postsSectionContainer}>
         <ul className={classes.postsSection}>

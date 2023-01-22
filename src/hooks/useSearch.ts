@@ -7,6 +7,8 @@ import { useOutsideAlerter } from '@hooks/useOutsideAlerter';
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+export const SEARCH_PAGE_SIZE = 1;
+
 export const useSearch = () => {
   const [isOpenPreview, setIsOpenPreview] = useState(false);
   const [previewResult, setPreviewResult] = useState<string[]>([]);
@@ -17,8 +19,8 @@ export const useSearch = () => {
 
   const { data } = useGetSearchPostList({
     keyword: debouncedValue,
-    size: 10,
-    sort: '',
+    size: SEARCH_PAGE_SIZE,
+    sort: ['desc'],
     page: 0,
   });
 

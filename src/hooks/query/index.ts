@@ -1,5 +1,6 @@
 import {
   IMentoringListRequestOptions,
+  IMentoringSearchListRequestOptions,
   IPostSliderOptions,
   IPostsInfiniteScrollOptions,
   IPostsPaginationoptions,
@@ -24,6 +25,10 @@ export const queryKeys = {
   alarms: ['alarms'],
   mentoringList: (options: IMentoringListRequestOptions) => [
     'mentoring',
+    options,
+  ],
+  mentoringSearchList: (options: IMentoringSearchListRequestOptions) => [
+    'searchMentoring',
     options,
   ],
   // 구현 전
