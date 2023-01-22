@@ -6,6 +6,7 @@ import {
   IGetPostDetailResponse,
   IGetPostListResponse,
   IMentoringListRequestOptions,
+  IMentoringSearchListRequestOptions,
   IPostTeamRequestFormData,
   IRequestReply,
   PostRequestDto,
@@ -41,17 +42,13 @@ api.interceptors.request.use((config: any) => {
 export const PostAPI = {
   getPostList: ({
     page = 0,
-    keyword = '',
+    keyword,
     size = 5,
     sort,
   }: IGetPostListParams): Promise<AxiosResponse<IGetPostListResponse>> => {
-    if (!sort)
-      return api.get(
-        `/api/v1/post/list?kw=${keyword}&page=${page}&size=${size}`,
-      );
-    return api.get(
-      `/api/v1/post/list?kw=${keyword}&page=${page}&size=${size}&sort=${sort},desc`,
-    );
+    return api.get(`/api/v1/post/list`, {
+      params: { kw: keyword, page, size, sort: sort?.toString() },
+    });
   },
   getPostByPostId: (
     postId: number,
@@ -158,6 +155,18 @@ export const MentoringAPI = {
     });
 
     return api.get(`api/v1/mentoring/list?${query.toString()}`);
+  },
+  searchMentoringList: ({
+    keyword,
+    page,
+    size,
+    sort,
+  }: IMentoringSearchListRequestOptions): Promise<
+    AxiosResponse<IGetMentoringListResponse>
+  > => {
+    return api.get(`api/v1/mentoring/list`, {
+      params: { kw: keyword, page, size, sort: sort?.toString() },
+    });
   },
 };
 
