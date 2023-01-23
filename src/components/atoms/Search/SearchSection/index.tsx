@@ -11,6 +11,7 @@ export const SearchSection = ({ resultGuidText = 'off' }: IProps) => {
     classes.searchSection,
     resultGuidText === 'off' && classes.offMode,
   ]);
+
   return (
     <section className={searchSectionClassName}>
       <Search />
