@@ -11,7 +11,8 @@ import {
 import useDebounceInput from '@hooks/useDebounceInput';
 import { useOutsideAlerter } from '@hooks/useOutsideAlerter';
 
-export const SEARCH_PAGE_SIZE = 1;
+export const SEARCH_PAGE_SIZE = 5;
+const DESC = 'desc';
 
 export const useSearch = () => {
   const [isOpenPreview, setIsOpenPreview] = useState(false);
@@ -27,14 +28,14 @@ export const useSearch = () => {
   const { data: searchPostList } = useGetSearchPostList({
     keyword: debouncedValue,
     size: SEARCH_PAGE_SIZE,
-    sort: ['desc'],
+    sort: [DESC],
     page: 0,
   });
 
   const { data: searchMentoringList } = useGetSearchMentoringList({
     keyword: debouncedValue,
     size: SEARCH_PAGE_SIZE,
-    sort: ['desc'],
+    sort: [DESC],
     page: 0,
   });
 
