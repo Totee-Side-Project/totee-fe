@@ -1,23 +1,37 @@
 // 어떤 걸 search 할 것인가
 
-import { linkToUrl } from '@components/atoms/Search';
-import { useGetSearchPostList } from '@hooks/query/useGetQuery';
-import useDebounceInput from '@hooks/useDebounceInput';
-import { useOutsideAlerter } from '@hooks/useOutsideAlerter';
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+
+import { linkToUrl } from '@components/atoms/Search';
+import {
+  useGetSearchMentoringList,
+  useGetSearchPostList,
+} from '@hooks/query/useGetQuery';
+import useDebounceInput from '@hooks/useDebounceInput';
+import { useOutsideAlerter } from '@hooks/useOutsideAlerter';
 
 export const SEARCH_PAGE_SIZE = 1;
 
 export const useSearch = () => {
   const [isOpenPreview, setIsOpenPreview] = useState(false);
-  const [previewResult, setPreviewResult] = useState<string[]>([]);
+  const [postsPreviewResult, setPostsPreviewResult] = useState<string[]>([]);
+  const [mentoringPreviewResult, setMentoringPreviewResult] = useState<
+    string[]
+  >([]);
   const searchFormWrapRef = useRef<HTMLDivElement>(null);
   const [inputValue, setInputValue] = useState('');
   const debouncedValue = useDebounceInput(inputValue);
   useOutsideAlerter(searchFormWrapRef, () => closePreview());
 
-  const { data } = useGetSearchPostList({
+  const { data: searchPostList } = useGetSearchPostList({
+    keyword: debouncedValue,
+    size: SEARCH_PAGE_SIZE,
+    sort: ['desc'],
+    page: 0,
+  });
+
+  const { data: searchMentoringList } = useGetSearchMentoringList({
     keyword: debouncedValue,
     size: SEARCH_PAGE_SIZE,
     sort: ['desc'],
@@ -25,17 +39,27 @@ export const useSearch = () => {
   });
 
   useEffect(() => {
-    if (data?.content) {
-      setPreviewResult([...new Set(data?.content.map(({ title }) => title))]);
+    if (searchPostList?.content) {
+      setPostsPreviewResult([
+        ...new Set(searchPostList?.content.map(({ title }) => title)),
+      ]);
     }
-  }, [data?.content]);
+  }, [searchPostList?.content]);
+
+  useEffect(() => {
+    if (searchMentoringList?.content) {
+      setMentoringPreviewResult([
+        ...new Set(searchMentoringList?.content.map(({ title }) => title)),
+      ]);
+    }
+  }, [searchMentoringList?.content]);
 
   useEffect(() => {
     if (!inputValue) return closePreview();
-    if (!previewResult.length) return closePreview();
+    if (!postsPreviewResult.length) return closePreview();
 
     openPreview();
-  }, [inputValue, previewResult]);
+  }, [inputValue, postsPreviewResult]);
 
   const openPreview = () => setIsOpenPreview(true);
   const closePreview = () => setIsOpenPreview(false);
@@ -47,6 +71,7 @@ export const useSearch = () => {
     e.preventDefault();
     setInputValue('');
     navigate(linkToUrl(inputValue, pathname));
+    // TODO: page Params를 0으로 초기화해줘야한다.
   };
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setInputValue(e.target.value);

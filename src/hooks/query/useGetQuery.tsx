@@ -167,6 +167,8 @@ export function useGetSearchMentoringList(
   options: IMentoringSearchListRequestOptions,
 ) {
   return useQuery(queryKeys.mentoringSearchList(options), () =>
-    MentoringAPI.searchMentoringList(options),
+    MentoringAPI.searchMentoringList(options).then(
+      (response) => response.data.body.data,
+    ),
   );
 }
