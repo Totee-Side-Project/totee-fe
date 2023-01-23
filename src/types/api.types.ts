@@ -22,34 +22,31 @@ export interface IGetApplicantResponse {
   };
 }
 // response page body
-export interface IResponseOfPage {
+export interface IResponseOfPage<T> {
   header: {
     code: number;
     message: string;
   };
   body: {
-    data: {
-      content: any;
-      last: boolean;
-    };
+    data: IGetPostListResponse<T>;
   };
 }
-export interface IGetPostListResponse extends IResponseOfPage {
-  body: {
-    data: {
-      content: IResponsePostDetail[];
-      pageable: object;
-      last: boolean;
-      totalPages: number;
-      totalElements: number;
-      sort: object;
-      first: boolean;
-      number: number;
-      numberOfElements: number;
-      size: number;
-      empty: boolean;
-    };
-  };
+
+export type PostsResponseData = IResponseOfPage<IResponsePostDetail>;
+export type MentoringResponseData = IResponseOfPage<IMentoring>;
+
+interface IGetPostListResponse<T> {
+  content: T[];
+  pageable: object;
+  last: boolean;
+  totalPages: number;
+  totalElements: number;
+  sort: object;
+  first: boolean;
+  number: number;
+  numberOfElements: number;
+  size: number;
+  empty: boolean;
 }
 
 // response post type
@@ -184,8 +181,8 @@ export interface IPostSliderOptions {
   sort?: string[];
 }
 export interface IPostsInfiniteScrollOptions extends IPostSliderOptions {
-  keyword: string;
+  keyword?: string;
 }
 export interface IPostsPaginationoptions extends IPostsInfiniteScrollOptions {
-  pageNum: number;
+  pageNum?: number;
 }

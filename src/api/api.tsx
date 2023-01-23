@@ -4,12 +4,13 @@ import {
   IGetApplicantResponse,
   IGetMentoringListResponse,
   IGetPostDetailResponse,
-  IGetPostListResponse,
   IMentoringListRequestOptions,
   IMentoringSearchListRequestOptions,
   IPostTeamRequestFormData,
   IRequestReply,
+  MentoringResponseData,
   PostRequestDto,
+  PostsResponseData,
 } from 'types/api.types';
 import { IGetPostListParams } from './api.types';
 
@@ -45,7 +46,7 @@ export const PostAPI = {
     keyword,
     size,
     sort,
-  }: IGetPostListParams): Promise<AxiosResponse<IGetPostListResponse>> => {
+  }: IGetPostListParams): Promise<AxiosResponse<PostsResponseData>> => {
     return api.get(`/api/v1/post/list`, {
       params: { kw: keyword, page, size, sort: sort?.toString() },
     });
@@ -162,7 +163,7 @@ export const MentoringAPI = {
     size,
     sort,
   }: IMentoringSearchListRequestOptions): Promise<
-    AxiosResponse<IGetMentoringListResponse>
+    AxiosResponse<MentoringResponseData>
   > => {
     return api.get(`api/v1/mentoring/list`, {
       params: { kw: keyword, page, size, sort: sort?.toString() },
