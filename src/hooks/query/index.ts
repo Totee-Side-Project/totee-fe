@@ -26,6 +26,7 @@ export const queryKeys = {
     'mentoring',
     options,
   ],
+  myStudyPost: ['myStudyPost'],
   // 구현 전
   // team: (postId: number) => ['team', postId],
 };

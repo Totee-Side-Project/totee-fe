@@ -19,9 +19,13 @@ interface PostCardProps {
 }
 interface OptionalProps {
   post?: IResponsePostDetail;
+  styles?: {
+    width: string;
+    height: string;
+  };
 }
 
-export const PostCard = ({ post }: OptionalProps) => {
+export const PostCard = ({ post, styles }: OptionalProps) => {
   const navigate = useNavigate();
   const clickHandlerURLParameter = () => {
     post && navigate(`/detail/${post.postId}`);
@@ -29,7 +33,7 @@ export const PostCard = ({ post }: OptionalProps) => {
 
   if (!post) {
     return (
-      <div className={classes.post_card_container}>
+      <div className={classes.post_card_container} style={styles}>
         <PostCardHeaderSkeleton />
         <PostCardCenterSkeleton />
         <div className={classes.post_info_line} />
@@ -42,6 +46,7 @@ export const PostCard = ({ post }: OptionalProps) => {
     <div
       className={classes.post_card_container}
       onClick={clickHandlerURLParameter}
+      style={styles}
     >
       <PostCardHeader post={post} />
       <PostCardCenter post={post} />

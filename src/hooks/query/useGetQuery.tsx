@@ -165,3 +165,7 @@ export function useGetMentoringList(options: IMentoringListRequestOptions) {
     MentoringAPI.getMentoringList(options),
   );
 }
+
+export function useGetMyStudyPost() {
+  return useQuery(queryKeys.myStudyPost, PostAPI.myStudyPost);
+}

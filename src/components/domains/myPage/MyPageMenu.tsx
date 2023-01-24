@@ -1,13 +1,13 @@
 import OpenedBookIconSrc from '../../../assets/svg/book-open.svg';
 import GraduationHatIconSrc from '../../../assets/svg/graduation-hat.svg';
-import FavoriteMentoringList from './contentSection/mentoring/FavoriteMentoringList';
-import MentoringApplicantConfirmation from './contentSection/mentoring/MentoringApplicantConfirmation';
-import OpenedMentoringAdminsitration from './contentSection/mentoring/OpenedMentoringAdministration';
-import ParticipatingMentoring from './contentSection/mentoring/ParticipatingMentoring';
-import FavoriteStudyList from './contentSection/study/FavoriteStudyList';
-import OpenedStudyAdministration from './contentSection/study/OpenedStudyAdministration';
-import ParticipatingStudy from './contentSection/study/ParticipatingStudy';
-import StudyApplicantConfirmation from './contentSection/study/StudyApplicantConfirmation';
+import FavoriteMentoringList from './contentSection/mentoring/favoriteMentoringList';
+import MentoringApplicantConfirmation from './contentSection/mentoring/mentoringApplicantConfirmation';
+import OpenedMentoringAdminsitration from './contentSection/mentoring/openedMentoringAdministration';
+import ParticipatingMentoring from './contentSection/mentoring/participatingMentoring';
+import FavoriteStudyList from './contentSection/study/favoriteStudyList';
+import OpenedStudyAdministration from './contentSection/study/openedStudyAdministration';
+import ParticipatingStudy from './contentSection/study/participatingStudy';
+import StudyApplicantConfirmation from './contentSection/study/studyApplicantConfirmation';
 
 export interface IDefaultFocusMenuType {
   mainMenuTitle: string;

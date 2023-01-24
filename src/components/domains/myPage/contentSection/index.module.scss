@@ -1,0 +1,27 @@
+.contentSection {
+  width: 100%;
+  padding: 0 50px;
+
+  .focusedMenuSection {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 51px;
+    height: 1414px;
+
+    .title {
+      font-family: 'Noto Sans KR';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 35px;
+      color: #484848;
+      margin-bottom: 32px;
+    }
+    
+    .postCard {
+      display: flex;
+      justify-content: space-around;
+    }
+  }
+}

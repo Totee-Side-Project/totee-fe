@@ -1,6 +1,6 @@
-import UserProfile from '@components/domains/myPage/common/UserProfile';
+import ContentSection from '@components/domains/myPage/contentSection';
+import SideBar from '@components/domains/myPage/sidebar';
 import { defaultFocusMenu } from '@components/domains/myPage/MyPageMenu';
-import SideBar from '@components/domains/myPage/Sidebar/Sidebar';
 import { useState } from 'react';
 import classes from './index.module.scss';
 
@@ -10,10 +10,7 @@ const MyPage = () => {
   return (
     <div className={classes.myPage}>
       <SideBar focusedMenu={focusedMenu} setFocusedMenu={setFocusedMenu} />
-      <section className={classes.contentSection}>
-        <UserProfile />
-        {focusedMenu.component}
-      </section>
+      <ContentSection focusedMenu={focusedMenu} />
     </div>
   );
 };

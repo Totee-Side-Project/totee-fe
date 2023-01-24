@@ -72,7 +72,8 @@ export const PostAPI = {
     }),
   deletePost: (postId: number) => api.delete(`/api/v1/post/${postId}`),
   recommendPostList: () => api.get(`/api/v1/post/recommend`),
-  myPost: () => api.get(`/api/v1/post/mypost`),
+  myStudyPost: () =>
+    api.get(`/api/v1/post/mypost`).then((res) => res.data.body.data),
 };
 
 export const CommentAPI = {
