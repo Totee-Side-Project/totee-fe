@@ -74,6 +74,8 @@ export const PostAPI = {
   recommendPostList: () => api.get(`/api/v1/post/recommend`),
   myStudyPost: () =>
     api.get(`/api/v1/post/mypost`).then((res) => res.data.body.data),
+  participatingStudyPost: () =>
+    api.get(`/api/v1/post/mystudy`).then((res) => res.data.body.data),
 };
 
 export const CommentAPI = {

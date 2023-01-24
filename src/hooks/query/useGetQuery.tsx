@@ -169,3 +169,10 @@ export function useGetMentoringList(options: IMentoringListRequestOptions) {
 export function useGetMyStudyPost() {
   return useQuery(queryKeys.myStudyPost, PostAPI.myStudyPost);
 }
+
+export function useGetParticipatingStudyPost() {
+  return useQuery(
+    queryKeys.participatingStudyPost,
+    PostAPI.participatingStudyPost,
+  );
+}

@@ -27,6 +27,7 @@ export const queryKeys = {
     options,
   ],
   myStudyPost: ['myStudyPost'],
+  participatingStudyPost: ['participatingStudyPost'],
   // 구현 전
   // team: (postId: number) => ['team', postId],
 };
