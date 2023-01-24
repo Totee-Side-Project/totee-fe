@@ -2,7 +2,6 @@ import axios, { AxiosResponse } from 'axios';
 import { IApplyMentor } from 'types/api';
 import {
   IGetApplicantResponse,
-  IGetMentoringListResponse,
   IGetPostDetailResponse,
   IMentoringListRequestOptions,
   IMentoringSearchListRequestOptions,
@@ -148,7 +147,7 @@ export const MentorAPI = {
 export const MentoringAPI = {
   getMentoringList: (
     options: IMentoringListRequestOptions,
-  ): Promise<AxiosResponse<IGetMentoringListResponse>> => {
+  ): Promise<AxiosResponse<MentoringResponseData>> => {
     const query = new URLSearchParams({
       ...(options.page !== undefined ? { page: options.page.toString() } : {}),
       ...(options.size !== undefined ? { size: options.size.toString() } : {}),
