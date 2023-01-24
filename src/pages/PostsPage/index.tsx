@@ -1,18 +1,20 @@
 import { Route, Routes } from 'react-router-dom';
 
-import { PostsContainer } from '@components/domains/posts/PostsContainer';
-import { PostsInfiniteSection } from '@components/domains/posts/PostsSection/PostsInfiniteSection';
-import { PostPaginationSection } from '@components/domains/posts/PostsSection/PostsPaginationSection';
-import { SearchSection } from '@components/atoms';
-import { PostCard } from '@components/common/post/PostCard/PostCard';
-import MentoringPostCard from '@components/common/card/MentoringPostCard/MentoringPostCard';
 import {
   useGetSearchMentoringList,
   useGetSearchPostList,
 } from '@hooks/query/useGetQuery';
 import { useGetPostsParams } from '@hooks/useGetPostsParams';
 import { SEARCH_PAGE_SIZE } from '@hooks/useSearch';
+import { queryKeys } from '@hooks/query';
+import { PostsContainer } from '@components/domains/posts/PostsContainer';
+import { PostsInfiniteSection } from '@components/domains/posts/PostsSection/PostsInfiniteSection';
+import { PostPaginationSection } from '@components/domains/posts/PostsSection/PostsPaginationSection';
+import { SearchSection } from '@components/atoms';
+import { PostCard } from '@components/common/post/PostCard/PostCard';
+import MentoringPostCard from '@components/common/card/MentoringPostCard/MentoringPostCard';
 import { IMentoringSortOptions, IPostsSortOptions } from 'types/sort.types';
+import { MentoringAPI, PostAPI } from '@api/api';
 import './PostsPage.scss';
 
 export const POSTS_CATEGORY_PATHS = {
@@ -20,7 +22,9 @@ export const POSTS_CATEGORY_PATHS = {
   ALL: 'all',
   STUDY: 'study',
   MENTORING: 'mentoring',
-};
+  TOTAL_STUDY: 'posts/study',
+  TOTAL_MENTORING: 'posts/mentoring',
+} as const;
 
 export const POSTS_CATEGORY_NAMES = {
   STUDY: '스터디',
@@ -33,12 +37,12 @@ const postsSortOptions: IPostsSortOptions = {
   commentNum: '댓글순',
   view: '조회순',
   likeNum: '좋아요순',
-};
+} as const;
 
 const mentoringSortOptions: IMentoringSortOptions = {
   recent: '최신순',
   likeNum: '좋아요순',
-};
+} as const;
 
 type ValueOf<T> = T[keyof T];
 export type PostsCategoryNames = ValueOf<typeof POSTS_CATEGORY_NAMES>;
@@ -46,7 +50,7 @@ export type PostsCategoryNames = ValueOf<typeof POSTS_CATEGORY_NAMES>;
 const PostsPage = () => {
   const { params } = useGetPostsParams({
     size: SEARCH_PAGE_SIZE,
-    // TODO : url searchParams를 이용해야한다.
+    // TODO : page를 url searchParams를 이용해야한다.
     page: 0,
   });
 
@@ -107,7 +111,10 @@ const PostsPage = () => {
           <>
             <SearchSection />
             <PostsContainer options={postsSortOptions}>
-              <PostsInfiniteSection />
+              <PostsInfiniteSection
+                fetchPageFunction={PostAPI.getPostList}
+                getQueryKeyFuntion={queryKeys.postsInfiniteScroll}
+              />
             </PostsContainer>
           </>
         }
@@ -118,7 +125,10 @@ const PostsPage = () => {
           <>
             <SearchSection />
             <PostsContainer options={mentoringSortOptions}>
-              <PostsInfiniteSection />
+              <PostsInfiniteSection
+                fetchPageFunction={MentoringAPI.getMentoringList}
+                getQueryKeyFuntion={queryKeys.mentoringList}
+              />
             </PostsContainer>
           </>
         }

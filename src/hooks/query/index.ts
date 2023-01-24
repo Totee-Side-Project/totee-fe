@@ -9,13 +9,21 @@ import {
 export const queryKeys = {
   user: ['user'],
   post: (postId: number) => ['post', postId],
+  postsSlider: (options: IPostSliderOptions) => ['postsSlider', options],
   postsInfiniteScroll: (options: IPostsInfiniteScrollOptions) => [
     'postsInfiniteScroll',
     options,
   ],
-  postsSlider: (options: IPostSliderOptions) => ['postsSlider', options],
+  mentoringInfiniteScroll: (options: IPostsInfiniteScrollOptions) => [
+    'mentoringInfiniteScroll',
+    options,
+  ],
   postSearchTitle: (options: IPostsPaginationoptions) => [
     'postSearch',
+    options,
+  ],
+  mentoringSearchList: (options: IMentoringSearchListRequestOptions) => [
+    'mentoringSearch',
     options,
   ],
   applicant: (postId: number) => ['applicant', postId],
@@ -27,10 +35,7 @@ export const queryKeys = {
     'mentoring',
     options,
   ],
-  mentoringSearchList: (options: IMentoringSearchListRequestOptions) => [
-    'searchMentoring',
-    options,
-  ],
+
   // 구현 전
   // team: (postId: number) => ['team', postId],
 };
