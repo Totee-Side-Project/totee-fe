@@ -1,7 +1,11 @@
 import { FunctionComponent, ReactNode } from 'react';
 
 import { Circle } from '@components/atoms';
-import { ISortOptions, sortOptionNameType } from 'types/sort.types';
+import {
+  IMentoringSortOptions,
+  IPostsSortOptions,
+  PostsSortOptionNameType,
+} from 'types/sort.types';
 import classes from './postsFilter.module.scss';
 import {
   POSTS_URL_PARAMS,
@@ -9,7 +13,7 @@ import {
 } from '@hooks/usePostsSearchParams';
 
 interface Props {
-  options: ISortOptions;
+  options: IPostsSortOptions | IMentoringSortOptions;
   Element?: FunctionComponent<{ center?: ReactNode; isSelected?: boolean }>;
 }
 
@@ -20,7 +24,7 @@ export const PostsFilter = ({ options, Element }: Props) => {
     useGetPostsSearchParams();
   const postsSortParam = sortParam || RECENT;
 
-  const onClick = (sortValue: sortOptionNameType) => {
+  const onClick = (sortValue: PostsSortOptionNameType) => {
     const newSearchParams = keywordParam
       ? {
           [POSTS_URL_PARAMS.KEYWORD]: keywordParam,
@@ -37,7 +41,10 @@ export const PostsFilter = ({ options, Element }: Props) => {
     setSearchParams(newSearchParams);
   };
 
-  const sortedList = Object.entries(options) as [sortOptionNameType, string][];
+  const sortedList = Object.entries(options) as [
+    PostsSortOptionNameType,
+    string,
+  ][];
 
   return (
     <ul className={classes.filters}>

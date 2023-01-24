@@ -35,7 +35,7 @@ export interface IResponseOfPage<T> {
 export type PostsResponseData = IResponseOfPage<IResponsePostDetail>;
 export type MentoringResponseData = IResponseOfPage<IMentoring>;
 
-interface IGetPostListResponse<T> {
+export interface IGetPostListResponse<T> {
   content: T[];
   pageable: object;
   last: boolean;
