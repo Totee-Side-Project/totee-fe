@@ -61,8 +61,6 @@ export const PostsInfiniteSection = ({
         <section className={classes.postsSectionContainer}>
           <ul className={classes.postsSection}>
             {datas.map((data) => {
-              // TODO: if문을 사용하지 않고 외부로부터 response.data를 통해 렌더링되는 UI Component를 Props로 받아서 <Element data={data} />
-              // 이렇게만 넘겨줄 수 있도록 구현하고 싶은데 쉽지 않네요..
               const mentoring = data as IMentoring;
               if (mentoring.mentoringId) {
                 const mentoring = data as IMentoring;

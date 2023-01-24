@@ -126,8 +126,8 @@ const PostsPage = () => {
             <SearchSection />
             <PostsContainer options={mentoringSortOptions}>
               <PostsInfiniteSection
-                fetchPageFunction={MentoringAPI.getMentoringList}
-                getQueryKeyFuntion={queryKeys.mentoringList}
+                fetchPageFunction={MentoringAPI.searchMentoringList}
+                getQueryKeyFuntion={queryKeys.mentoringInfiniteScroll}
               />
             </PostsContainer>
           </>

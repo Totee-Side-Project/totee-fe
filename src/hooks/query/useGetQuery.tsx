@@ -4,7 +4,6 @@ import { useRecoilState } from 'recoil';
 import {
   AlarmAPI,
   ApplicationAPI,
-  CategoryAPI,
   LikeAPI,
   MentoringAPI,
   PostAPI,
@@ -49,53 +48,6 @@ export function useGetPostByPostId(postId: number) {
       // 브라우저 focus 됐을 때 재시작?
       retry: false,
       refetchOnWindowFocus: true,
-      // 자동으로 가져오는 옵션
-      enabled: true,
-      // 캐시 타임
-      staleTime: 10 * 600 * 1000,
-    },
-  );
-}
-
-export function useGetSearchPostList({
-  keyword,
-  size,
-  page,
-  sort,
-}: IGetPostListParams) {
-  return useQuery(
-    queryKeys.postSearchTitle({
-      keyword,
-      pageNum: page,
-      sort,
-    }),
-    () =>
-      PostAPI.getPostList({
-        keyword,
-        size,
-        page,
-        sort,
-      }).then((response) => response.data.body.data),
-    {
-      // 브라우저 focus 됐을 때 재시작?
-      retry: false,
-      refetchOnWindowFocus: false,
-      // 자동으로 가져오는 옵션
-      enabled: !!keyword,
-      // 캐시 타임
-      staleTime: 10 * 600 * 1000,
-    },
-  );
-}
-
-export function useGetCategoryList() {
-  return useQuery(
-    queryKeys.categories,
-    () => CategoryAPI.getCategoryList().catch((err) => err),
-    {
-      // 브라우저 focus 됐을 때 재시작?
-      retry: false,
-      refetchOnWindowFocus: false,
       // 자동으로 가져오는 옵션
       enabled: true,
       // 캐시 타임
@@ -160,6 +112,37 @@ export function useGetApplicant(postId: number) {
 export function useGetMentoringList(options: IMentoringListRequestOptions) {
   return useQuery(queryKeys.mentoringList(options), () =>
     MentoringAPI.getMentoringList(options),
+  );
+}
+
+export function useGetSearchPostList({
+  keyword,
+  size,
+  page,
+  sort,
+}: IGetPostListParams) {
+  return useQuery(
+    queryKeys.postSearchTitle({
+      keyword,
+      pageNum: page,
+      sort,
+    }),
+    () =>
+      PostAPI.getPostList({
+        keyword,
+        size,
+        page,
+        sort,
+      }).then((response) => response.data.body.data),
+    {
+      // 브라우저 focus 됐을 때 재시작?
+      retry: false,
+      refetchOnWindowFocus: false,
+      // 자동으로 가져오는 옵션
+      enabled: !!keyword,
+      // 캐시 타임
+      staleTime: 10 * 600 * 1000,
+    },
   );
 }
 
