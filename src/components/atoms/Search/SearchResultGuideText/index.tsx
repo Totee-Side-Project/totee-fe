@@ -24,7 +24,7 @@ export const SearchResultGuideText = ({ className }: IProps) => {
   const { data: searchPostData } = useGetSearchPostList(params);
   const { data: searchMentoringData } = useGetSearchMentoringList(params);
 
-  const totalElements = {
+  const totalElementsCount = {
     study: searchPostData?.totalElements || 0,
     mentoring: searchMentoringData?.totalElements || 0,
   } as { [key: string]: number };
@@ -34,8 +34,8 @@ export const SearchResultGuideText = ({ className }: IProps) => {
   if (keywordParam) {
     const totalElementCount =
       categoryParams === POSTS_CATEGORY_PATHS.ALL
-        ? totalElements.study + totalElements.mentoring
-        : totalElements[categoryParams];
+        ? totalElementsCount.study + totalElementsCount.mentoring
+        : totalElementsCount[categoryParams];
     return (
       <div className={classes.resultGuideTextContainer}>
         <div className={combinedClassName}>
