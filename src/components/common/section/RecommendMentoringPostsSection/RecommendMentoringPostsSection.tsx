@@ -8,6 +8,7 @@ import classes from './RecommendMentoringPostsSection.module.scss';
 import { useGetMentoringList } from '@hooks/query/useGetQuery';
 import { IMentoring } from 'types/api.types';
 import MentoringPostDetailModal from '@components/common/mentoring/MentoringPostDetailModal';
+import { POSTS_CATEGORY_PATHS } from 'pages/PostsPage';
 
 const SECTION_TEXTS = {
   subtitle: 'Level Up Mentoring',
@@ -101,6 +102,7 @@ function RecommendMentoringPostsSection() {
             title={SECTION_TEXTS.title}
             sub={SECTION_TEXTS.subtitle}
             description={SECTION_TEXTS.description}
+            to={POSTS_CATEGORY_PATHS.TOTAL_MENTORING}
           />
         </div>
         <div className={classes.slider_container}>
