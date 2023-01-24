@@ -16,6 +16,10 @@ const StudyPostCard = ({ data }: any) => {
     );
   }, [data]);
 
+  if (!data?.totalElements) {
+    return <>정보 없음</>;
+  }
+
   return (
     <>
       <div className={classes.postCard}>

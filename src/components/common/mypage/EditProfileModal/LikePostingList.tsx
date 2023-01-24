@@ -19,7 +19,7 @@ function LikePostingList() {
   const [deleteModalState, setDeleteModalState] = useState(false);
 
   const getLikeList = async () => {
-    await LikeAPI.LikeList().then((res) => setLikePost(res.data.body.data));
+    await LikeAPI.LikeList().then((res) => setLikePost(res));
   };
 
   const pageNumberList: any = [];

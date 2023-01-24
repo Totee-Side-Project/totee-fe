@@ -176,3 +176,7 @@ export function useGetParticipatingStudyPost() {
     PostAPI.participatingStudyPost,
   );
 }
+
+export function useGetPostLikeList() {
+  return useQuery(queryKeys.postLikeList, LikeAPI.LikeList);
+}

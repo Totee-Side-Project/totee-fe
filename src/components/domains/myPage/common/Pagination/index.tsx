@@ -22,7 +22,7 @@ const Pagination = ({
       >
         &lt;
       </button>
-      {pages.slice((slideNum - 1) * 10, slideNum * 10).map((page) => (
+      {pages?.slice((slideNum - 1) * 10, slideNum * 10).map((page) => (
         <button
           key={page}
           onClick={() => setCurrentPage(page)}
@@ -32,7 +32,7 @@ const Pagination = ({
         </button>
       ))}
       <button
-        disabled={slideNum === Math.ceil(pages.length / 10)}
+        disabled={slideNum === Math.ceil(pages?.length / 10)}
         onClick={() => setSlideNum(slideNum + 1)}
       >
         &gt;
