@@ -4,12 +4,10 @@ import { SearchSection } from '@components/atoms';
 import MentoringPostCard from '@components/common/card/MentoringPostCard/MentoringPostCard';
 import { PostsContainer } from '@components/domains/posts/PostsContainer';
 import {
-  fetchFunctions,
-  fetchQueryKeys,
-} from '@components/domains/posts/PostsSection';
-import {
   INFINITE_PAGE_SIZE,
   PostsInfiniteSection,
+  fetchFunctions,
+  fetchQueryKeys,
 } from '@components/domains/posts/PostsSection/PostsInfiniteSection';
 import MentoringPostDetailModal from '@components/common/mentoring/MentoringPostDetailModal';
 import { useInfiniteTotalPosts } from '@hooks/query/useInfiniteWithDraw';
