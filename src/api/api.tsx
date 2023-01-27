@@ -137,7 +137,8 @@ export const ApplicationAPI = {
 };
 
 export const TeamAPI = {
-  getTeam: (postId: number) => api.get(`api/v1/team/${postId}`),
+  getTeam: (postId?: number) =>
+    api.get(`api/v1/team/${postId}`).then((res) => res.data.body.data),
   postTeam: (postId: number, formData: IPostTeamRequestFormData) =>
     api.post(`api/v1/team/${postId}`, { ...formData }),
   resignateTeam: (postId: number) =>

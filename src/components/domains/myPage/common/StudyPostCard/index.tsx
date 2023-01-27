@@ -3,38 +3,30 @@ import { useEffect, useState } from 'react';
 import Pagination from '../Pagination';
 import classes from './index.module.scss';
 
-const StudyPostCard = ({ data }: any) => {
+interface IStudyPostCardProps {
+  posts: any;
+  setCurrentPostId: React.Dispatch<React.SetStateAction<number | undefined>>;
+}
+
+const StudyPostCard = ({ posts, setCurrentPostId }: IStudyPostCardProps) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [pages, setPages] = useState<number[]>([]);
-
-  useEffect(() => {
-    setPages(
-      Array.from(
-        { length: Math.ceil(data?.totalElements / 4) },
-        (_, index) => index + 1,
-      ),
-    );
-  }, [data]);
-
-  if (!data?.totalElements) {
-    return <>정보 없음</>;
-  }
 
   return (
     <>
       <div className={classes.postCard}>
-        {data?.content
+        {posts?.content
           .slice((currentPage - 1) * 4, (currentPage - 1) * 4 + 4)
           .map((post) => (
             <PostCard
               post={post}
               styles={{ width: '230px', height: '250px' }}
               key={post.postId}
+              setCurrentPostId={setCurrentPostId}
             />
           ))}
       </div>
       <Pagination
-        pages={pages}
+        posts={posts}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       />

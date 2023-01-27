@@ -1,18 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import classes from './index.module.scss';
 
 interface IPaginationProps {
-  pages: number[];
+  posts: any;
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const Pagination = ({
-  pages,
+  posts,
   currentPage,
   setCurrentPage,
 }: IPaginationProps) => {
   const [slideNum, setSlideNum] = useState(1);
+  const [pages, setPages] = useState<number[]>([]);
+
+  useEffect(() => {
+    setPages(
+      Array.from(
+        { length: Math.ceil(posts.totalElements / 4) },
+        (_, index) => index + 1,
+      ),
+    );
+  }, [posts]);
 
   return (
     <div className={classes.pagination}>

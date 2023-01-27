@@ -8,6 +8,7 @@ import {
   LikeAPI,
   MentoringAPI,
   PostAPI,
+  TeamAPI,
   UserAPI,
 } from '@api/api';
 import { UserState } from '@store/user';
@@ -179,4 +180,10 @@ export function useGetParticipatingStudyPost() {
 
 export function useGetPostLikeList() {
   return useQuery(queryKeys.postLikeList, LikeAPI.LikeList);
+}
+
+export function useGetStudyMembers(postId?: number) {
+  return useQuery(queryKeys.studyMembers(postId), () =>
+    TeamAPI.getTeam(postId),
+  );
 }

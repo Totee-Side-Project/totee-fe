@@ -1,5 +1,5 @@
 import Skeleton from 'react-loading-skeleton';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
   OverLimitIcons,
@@ -23,13 +23,12 @@ interface OptionalProps {
     width: string;
     height: string;
   };
+  setCurrentPostId?: React.Dispatch<React.SetStateAction<number | undefined>>;
 }
 
-export const PostCard = ({ post, styles }: OptionalProps) => {
+export const PostCard = ({ post, styles, setCurrentPostId }: OptionalProps) => {
   const navigate = useNavigate();
-  const clickHandlerURLParameter = () => {
-    post && navigate(`/detail/${post.postId}`);
-  };
+  const { pathname } = useLocation();
 
   if (!post) {
     return (
@@ -42,10 +41,18 @@ export const PostCard = ({ post, styles }: OptionalProps) => {
     );
   }
 
+  const clickHandler = () => {
+    if (pathname === '/mypage') {
+      setCurrentPostId && setCurrentPostId(post.postId);
+      return;
+    }
+    navigate(`/detail/${post.postId}`);
+  };
+
   return (
     <div
       className={classes.post_card_container}
-      onClick={clickHandlerURLParameter}
+      onClick={clickHandler}
       style={styles}
     >
       <PostCardHeader post={post} />
