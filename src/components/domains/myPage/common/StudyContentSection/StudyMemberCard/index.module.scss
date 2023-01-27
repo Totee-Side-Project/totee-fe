@@ -1,0 +1,59 @@
+.studyMemberCards {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+
+.studyMemberCard {
+  width: 190px;
+  height: 230px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  text-align: center;
+  margin: 15px 29px;
+
+  .profileImg {
+    width: 65px;
+    height: 65px;
+    margin: 14px 0 7px 0;
+    border: 0.7px solid rgba(23, 23, 23, 0.5);
+    border-radius: 5px;
+  }
+
+  .nickname {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 25px;
+    color: #1B1C1D;
+  }
+
+  .emailPosition{
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 350;
+    font-size: 14px;
+    line-height: 20px;
+    color: #686868;
+  }
+
+  hr {
+    color: #E9E9E9;
+    width: 160px;
+    margin: 15px auto;
+  }
+
+  .detailButton {
+    color: #1B1C1D;
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px;
+    margin: 0 auto;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 20px;
+    padding: 4px 7px
+  }
+}

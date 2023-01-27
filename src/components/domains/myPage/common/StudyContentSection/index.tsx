@@ -1,6 +1,8 @@
 import { useUserActivity } from '@hooks/useUserActivity';
+import { UseQueryResult } from 'react-query';
 import classes from '../../contentSection/index.module.scss';
-import StudyPostCard from '../StudyPostCard';
+import StudyMemberCard from './StudyMemberCard';
+import StudyPostCard from './StudyPostCard';
 
 interface IStudyContentSectionProps {
   postSectionTitle: string;
@@ -30,6 +32,7 @@ const StudyContentSection = ({
       <StudyPostCard posts={posts} setCurrentPostId={setCurrentPostId} />
       <div className={classes.horizontal} />
       <p className={classes.title}>{memberSectionTitle}</p>
+      <StudyMemberCard members={members} />
     </>
   );
 };

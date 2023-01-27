@@ -3,12 +3,14 @@ import classes from './index.module.scss';
 
 interface IPaginationProps {
   posts: any;
+  postsLength: number;
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const Pagination = ({
   posts,
+  postsLength,
   currentPage,
   setCurrentPage,
 }: IPaginationProps) => {
@@ -18,11 +20,15 @@ const Pagination = ({
   useEffect(() => {
     setPages(
       Array.from(
-        { length: Math.ceil(posts.totalElements / 4) },
+        { length: Math.ceil(postsLength / 4) },
         (_, index) => index + 1,
       ),
     );
   }, [posts]);
+
+  if (!posts || posts?.length === 0) {
+    return <></>;
+  }
 
   return (
     <div className={classes.pagination}>

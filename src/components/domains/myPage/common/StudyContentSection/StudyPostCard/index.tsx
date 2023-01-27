@@ -1,6 +1,6 @@
 import { PostCard } from '@components/common/post/PostCard/PostCard';
-import { useEffect, useState } from 'react';
-import Pagination from '../Pagination';
+import { useState } from 'react';
+import Pagination from '../../Pagination';
 import classes from './index.module.scss';
 
 interface IStudyPostCardProps {
@@ -27,6 +27,7 @@ const StudyPostCard = ({ posts, setCurrentPostId }: IStudyPostCardProps) => {
       </div>
       <Pagination
         posts={posts}
+        postsLength={posts.totalElements}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       />

@@ -31,7 +31,7 @@ function OwnerJoinerCheck() {
   };
 
   if (applicantDataStatus === 'success') {
-    const applicant = applicantData?.data.body.data;
+    const applicant = applicantData;
 
     return (
       <>
