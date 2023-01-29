@@ -2,12 +2,10 @@ import { SearchSection } from '@components/atoms';
 import { PostCard } from '@components/common/post/PostCard/PostCard';
 import { PostsContainer } from '@components/domains/posts/PostsContainer';
 import {
-  fetchFunctions,
-  fetchQueryKeys,
-} from '@components/domains/posts/PostsSection';
-import {
   INFINITE_PAGE_SIZE,
   PostsInfiniteSection,
+  fetchFunctions,
+  fetchQueryKeys,
 } from '@components/domains/posts/PostsSection/PostsInfiniteSection';
 import { useInfiniteTotalPosts } from '@hooks/query/useInfiniteWithDraw';
 import { useGetPostsParams } from '@hooks/useGetPostsParams';
