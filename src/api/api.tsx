@@ -165,7 +165,8 @@ export const MentoringAPI = {
 // 로그인 리다이렉트 uri - 우선 local에서 테스트할 수 있게 작업함
 // ? `${window.location.host}/oauth/redirect`
 
-const TEST_REDIRECT = 'https://deploy-preview-150--totee-fe-omega.netlify.app/';
+const TEST_REDIRECT =
+  'https://deploy-preview-150--totee-fe-omega.netlify.app/oauth/redirect';
 export const OAUTH2_REDIRECT_URI =
   process.env.NODE_ENV === 'production'
     ? TEST_REDIRECT
