@@ -12,7 +12,7 @@ import {
 } from 'types/api.types';
 import { GetPostListParams } from './api.types';
 
-const BASE_URL = 'https://api.totee.link/';
+const BASE_URL = 'https://api.totee.store/';
 
 export const api = axios.create({
   baseURL: BASE_URL,
