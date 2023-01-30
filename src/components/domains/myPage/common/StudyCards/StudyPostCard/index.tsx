@@ -27,7 +27,6 @@ const StudyPostCard = ({ posts, setCurrentPostId }: IStudyPostCardProps) => {
           ))}
       </div>
       <Pagination
-        posts={posts}
         postsLength={posts.totalElements}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}

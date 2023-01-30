@@ -1,17 +1,13 @@
 import { useEffect, useState } from 'react';
-import { IMemberType } from 'types/member.types';
-import { IPostsType } from 'types/posts.types';
 import classes from './index.module.scss';
 
 interface IPaginationProps {
-  posts: IPostsType | IMemberType[];
   postsLength: number;
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const Pagination = ({
-  posts,
   postsLength,
   currentPage,
   setCurrentPage,
@@ -26,9 +22,9 @@ const Pagination = ({
         (_, index) => index + 1,
       ),
     );
-  }, [posts]);
+  }, [postsLength]);
 
-  if (!posts) {
+  if (postsLength === 0) {
     return <></>;
   }
 

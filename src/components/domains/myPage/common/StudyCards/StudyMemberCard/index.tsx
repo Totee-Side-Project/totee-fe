@@ -46,7 +46,6 @@ const StudyMemberCard = ({
           ))}
       </div>
       <Pagination
-        posts={members}
         postsLength={members.length}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
