@@ -14,7 +14,7 @@ interface Props {
 // single mode만 지원하는 상태
 // 다수모드에서는?
 // isCheckedId type이 array가 되면 될 것 같다.
-export const Checkbox = ({
+export const RadioButton = ({
   top,
   isChecked,
   options,
