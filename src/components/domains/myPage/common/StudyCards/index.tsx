@@ -1,14 +1,16 @@
+import { IMemberType } from 'types/member.types';
+import { IPostsType } from 'types/posts.types';
 import classes from './index.module.scss';
 import StudyMemberCard from './StudyMemberCard';
 import StudyPostCard from './StudyPostCard';
 
 interface IStudyCardsProps {
   postSectionTitle: string;
-  posts: any;
+  posts: IPostsType;
   memberSectionTitle?: string;
-  members?: any;
+  members?: IMemberType[];
   setCurrentPostId?: React.Dispatch<React.SetStateAction<number>>;
-  onClickMemberCard?: any;
+  onClickMemberCard?: (member: IMemberType) => void;
 }
 
 const StudyCards = ({

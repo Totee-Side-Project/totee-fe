@@ -1,12 +1,13 @@
+import { IMemberType } from 'types/member.types';
 import profileCircle from '../../../../../assets/svg/profile-circle.svg';
 import classes from './index.module.scss';
 
 interface IDetailedMemberModalProps {
   title: string;
   subTitle: string;
-  member: any;
-  isOpenedModal: any;
-  setIsOpenedModal: any;
+  member?: IMemberType;
+  isOpenedModal: boolean;
+  setIsOpenedModal: React.Dispatch<React.SetStateAction<boolean>>;
   children?: any;
 }
 

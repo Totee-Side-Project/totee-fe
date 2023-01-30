@@ -2,10 +2,11 @@ import { useState } from 'react';
 import Pagination from '../../Pagination';
 import classes from './index.module.scss';
 import profileCircle from '../../../../../../assets/svg/profile-circle.svg';
+import { IMemberType } from 'types/member.types';
 
 interface IStudyMemberCardProps {
-  members?: any;
-  onClickMemberCard: any;
+  members?: IMemberType[];
+  onClickMemberCard?: any;
 }
 
 const StudyMemberCard = ({

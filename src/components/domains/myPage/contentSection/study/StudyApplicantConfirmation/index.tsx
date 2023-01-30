@@ -24,7 +24,7 @@ const StudyApplicantConfirmation = () => {
   const onClickAcceptButton = (isAccept: boolean) => {
     acceptStudyApplicant({
       accept: isAccept,
-      nickname: currentMember?.nickname,
+      nickname: currentMember ? currentMember.nickname : '',
     });
   };
 

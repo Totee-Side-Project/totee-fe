@@ -27,7 +27,10 @@ const OpenedStudyAdministration = () => {
   const {
     mutate: resignateStudyTeam,
     isSuccess: isSuccessStudyTeamResignation,
-  } = useResignateTeam(currentPostId, currentMember?.nickname);
+  } = useResignateTeam(
+    currentPostId,
+    currentMember ? currentMember.nickname : '',
+  );
 
   useEffect(() => {
     setIsOpenedModal(false);

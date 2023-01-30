@@ -1,10 +1,11 @@
 import { PostCard } from '@components/common/post/PostCard/PostCard';
 import { useState } from 'react';
+import { IPostsType } from 'types/posts.types';
 import Pagination from '../../Pagination';
 import classes from './index.module.scss';
 
 interface IStudyPostCardProps {
-  posts: any;
+  posts: IPostsType;
   setCurrentPostId?: React.Dispatch<React.SetStateAction<number>>;
 }
 
