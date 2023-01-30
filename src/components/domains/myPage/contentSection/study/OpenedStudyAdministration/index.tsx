@@ -53,7 +53,7 @@ const OpenedStudyAdministration = () => {
         {user.nickname !== currentMember?.nickname && (
           <button
             className={classes.resignateButton}
-            onClick={() => resignateStudyTeam}
+            onClick={() => resignateStudyTeam()}
           >
             추방하기
           </button>

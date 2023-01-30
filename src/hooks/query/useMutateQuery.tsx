@@ -174,8 +174,8 @@ export const useResignateTeam = (postId: number, nickname: string) => {
   return useMutation(() => TeamAPI.resignateTeam(postId, nickname), {
     onSuccess: () => {
       Swal.fire({
-        title: '지원 성공',
-        text: '추방 성공',
+        title: '추방 성공',
+        text: '멤버를 추방하였습니다.',
         icon: 'success',
         confirmButtonText: '확인',
         timer: 3000,
