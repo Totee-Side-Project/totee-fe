@@ -4,8 +4,7 @@ import { IMentoring } from 'types/api.types';
 import classes from './index.module.scss';
 import DropDown from '@components/common/dropdown';
 import Checkbox from '@components/atoms/Checkbox';
-import { useEffect } from 'react';
-import { Button } from '@components/atoms';
+import { Input } from '@components/atoms';
 
 interface ApplyMentoringModalProps {
   onCloseClick(): void;
@@ -44,6 +43,10 @@ function ApplyMentoringModal({
   onApplyClick,
 }: ApplyMentoringModalProps) {
   const [step, setStep] = useState<typeof STEPS[number]>('PREFERRED_TIME');
+  const [preferredStartAt, setPreferredStartAt] = useState<string | null>(null);
+  const [preferredEndAt, setPreferredEndAt] = useState<string | null>(null);
+  const [contact, setContact] = useState('');
+  const [intro, setIntro] = useState('');
   const [preferredDays, setPreferredDays] = useState<Set<typeof DAYS[number]>>(
     new Set(),
   );
@@ -53,6 +56,18 @@ function ApplyMentoringModal({
       e.stopPropagation();
       onCloseClick();
     }
+  };
+
+  const handleNextStepClick = () => {
+    setStep('SELF_INTRO');
+  };
+
+  const handlePreviousStepClick = () => {
+    setStep('PREFERRED_TIME');
+  };
+
+  const handleSubmit = () => {
+    // TODO:
   };
 
   const getPreferredDaysHandler =
@@ -88,10 +103,12 @@ function ApplyMentoringModal({
             </p>
             <div className={classes.dropdown_wrapper}>
               <DropDown
+                onChange={setPreferredStartAt}
                 items={TIMETABLES}
                 placeholder="시작 시각을 설정해 주세요."
               />
               <DropDown
+                onChange={setPreferredEndAt}
                 items={TIMETABLES}
                 placeholder="종료 시각을 설정해 주세요."
               />
@@ -109,10 +126,35 @@ function ApplyMentoringModal({
                 />
               ))}
             </div>
-            <button>다음으로</button>
+            <button onClick={handleNextStepClick}>다음으로</button>
           </div>
         ) : step === 'SELF_INTRO' ? (
-          <></>
+          <div className={classes.self_intro_container}>
+            <p className={classes.section_title}>멘토링 받을 연락처</p>
+            <input
+              value={contact}
+              onChange={(e) => setContact(e.target.value)}
+              placeholder="(오픈카톡, 아이디, 전화번호)"
+            />
+            <p className={classes.section_title}>멘토링 받을 연락처</p>
+            <textarea
+              value={intro}
+              onChange={(e) => setIntro(e.target.value)}
+              placeholder="경력 또는 자신이 할수 있는 기술 스택 등 멘토가 알면 좋을 것 같은 사항들을 짧게 기재해주세요. (선택사항)"
+            />
+            <span className={classes.intro_content_limit}>
+              {intro.length}자 / 100자
+            </span>
+            <div className={classes.button_wrapper}>
+              <button
+                className={classes.bounding_button}
+                onClick={handlePreviousStepClick}
+              >
+                이전으로
+              </button>
+              <button onClick={handleSubmit}>제출하기</button>
+            </div>
+          </div>
         ) : null}
         <span className={classes.steps}>
           {STEPS.indexOf(step) + 1} / {STEPS.length}

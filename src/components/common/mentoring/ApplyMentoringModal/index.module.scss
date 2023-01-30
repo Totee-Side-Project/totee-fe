@@ -69,7 +69,7 @@
   }
 
   button {
-    width: 200px;
+    width: 210px;
     height: 50px;
     font-size: 16px;
     font-weight: 700;
@@ -86,16 +86,16 @@
     color: #737373;
     margin-top: 16px;
   }
-}
-
-.preferred_time_container {
-  width: 300px;
-  text-align: center;
 
   .section_title {
     text-align: center;
     margin-bottom: 24px;
   }
+}
+
+.preferred_time_container {
+  width: 300px;
+  text-align: center;
 
   .dropdown_wrapper {
     margin-bottom: 36px;
@@ -109,5 +109,50 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+}
+
+.self_intro_container {
+  width: 460px;
+
+  textarea,
+  input {
+    font-size: 14px;
+    width: 100%;
+    background-color: #f0f0f0;
+    color: #767676;
+    border: none;
+    outline: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    resize: none;
+  }
+
+  input {
+    margin-bottom: 32px;
+  }
+
+  textarea {
+    height: 100px;
+  }
+
+  .intro_content_limit {
+    width: 100%;
+    display: inline-block;
+    text-align: right;
+    color: #878787;
+    font-size: 12px;
+  }
+
+  .button_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .bounding_button {
+    border: 1px solid #898989;
+    background-color: transparent;
+    color: #898989;
   }
 }
