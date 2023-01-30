@@ -1,14 +1,10 @@
 import { FunctionComponent, ReactNode } from 'react';
 
 import { Circle } from '@components/atoms';
-import {
-  IMentoringSortOptions,
-  IPostsSortOptions,
-  PostsSortOptionNameType,
-} from 'types/sort.types';
+import { IMentoringSortOptions, IPostsSortOptions } from 'types/sort.types';
 import { CategoryTypes } from '@components/domains/posts/PostsContainer';
-import classes from './postsFilter.module.scss';
 import { useChangeSortParams } from '@hooks/useChangeSortParams';
+import classes from './postsFilter.module.scss';
 
 interface Props {
   options: IPostsSortOptions | IMentoringSortOptions;
@@ -21,30 +17,30 @@ export const PostsFilter = ({ options, category, Element }: Props) => {
     postsSortParam,
     handleSearchParamsWithCategory,
     handleSearchParamsWithNotCategory,
-  } = useChangeSortParams();
+  } = useChangeSortParams(category);
   const sortedList = Object.entries(options) as [
-    PostsSortOptionNameType,
+    keyof IPostsSortOptions | keyof IMentoringSortOptions,
     string,
   ][];
 
   return (
     <ul className={classes.filters}>
-      {sortedList.map(([key, value]) => (
+      {sortedList.map(([sort, value]) => (
         <li
-          key={key}
+          key={sort}
           className={classes.filter}
           onClick={() =>
             category
-              ? handleSearchParamsWithCategory(key, category)
-              : handleSearchParamsWithNotCategory(key)
+              ? handleSearchParamsWithCategory(sort, category)
+              : handleSearchParamsWithNotCategory(sort)
           }
         >
           {Element ? (
-            <Element center={value} isSelected={postsSortParam === key} />
+            <Element center={value} isSelected={postsSortParam === sort} />
           ) : (
             <>
               <Circle
-                selected={postsSortParam === key}
+                selected={postsSortParam === sort}
                 options={{ outCircle: false }}
               />
               {value}

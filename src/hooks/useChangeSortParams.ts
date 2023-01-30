@@ -7,10 +7,17 @@ import { PostsSortOptionNameType } from 'types/sort.types';
 
 const RECENT = 'recent';
 
-export const useChangeSortParams = () => {
-  const { keywordParam, sortParam, setSearchParams, allSearchParamsEntries } =
-    useGetPostsSearchParams();
-  const postsSortParam = sortParam || RECENT;
+export const useChangeSortParams = (category?: CategoryTypes) => {
+  const {
+    keywordParam,
+    sortParam,
+    setSearchParams,
+    allParams,
+    allSearchParamsEntries,
+  } = useGetPostsSearchParams();
+  const postsSortParam = category
+    ? allParams[category].sort || RECENT
+    : sortParam || RECENT;
 
   const handleSearchParamsWithCategory = (
     sortValue: PostsSortOptionNameType,
@@ -61,6 +68,7 @@ export const useChangeSortParams = () => {
   };
 
   return {
+    allParams,
     postsSortParam,
     handleSearchParamsWithCategory,
     handleSearchParamsWithNotCategory,
