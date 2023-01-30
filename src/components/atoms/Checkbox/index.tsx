@@ -14,7 +14,6 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
   return (
     <div className={classes.container}>
       <label>
-        {label}
         <input
           type="checkbox"
           onChange={onChange}
@@ -25,8 +24,9 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
         <Circle
           selected={isChecked}
           backgroundColor="#7BA364"
-          style={{ marginRight: 0, marginTop: '12px' }}
+          style={{ marginRight: 0, marginBottom: '12px' }}
         />
+        {label}
       </label>
     </div>
   );
