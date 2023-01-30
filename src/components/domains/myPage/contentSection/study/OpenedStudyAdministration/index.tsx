@@ -1,5 +1,5 @@
 import DetailedMemberModal from '@components/domains/myPage/common/DetailedMemberModal';
-import StudyCards from '@components/domains/myPage/common/StudyCards';
+import Cards from '@components/domains/myPage/common/Cards';
 import { queryKeys } from '@hooks/query';
 import {
   useGetMyStudyPost,
@@ -36,7 +36,7 @@ const OpenedStudyAdministration = () => {
 
   return (
     <>
-      <StudyCards
+      <Cards
         postSectionTitle="내가 개설한 스터디"
         posts={posts}
         memberSectionTitle="현재 스터디 멤버"

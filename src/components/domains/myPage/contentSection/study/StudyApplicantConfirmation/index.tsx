@@ -1,11 +1,12 @@
 import DetailedMemberModal from '@components/domains/myPage/common/DetailedMemberModal';
-import StudyCards from '@components/domains/myPage/common/StudyCards';
+
 import { useGetApplicant, useGetMyStudyPost } from '@hooks/query/useGetQuery';
 import { usePostTeam } from '@hooks/query/useMutateQuery';
 import { useMemberModal } from '@hooks/useMemberModal';
 import { useGetUserActivity } from '@hooks/useGetUserActivity';
 import { useEffect } from 'react';
 import classes from '../../../common/DetailedMemberModal/index.module.scss';
+import Cards from '@components/domains/myPage/common/Cards';
 
 const StudyApplicantConfirmation = () => {
   const { posts, members, currentPostId, setCurrentPostId } =
@@ -32,7 +33,7 @@ const StudyApplicantConfirmation = () => {
 
   return (
     <>
-      <StudyCards
+      <Cards
         postSectionTitle="내가 개설한 스터디의 지원자 확인"
         posts={posts}
         memberSectionTitle="스터디 지원자 목록"

@@ -4,15 +4,12 @@ import classes from './index.module.scss';
 import profileCircle from '../../../../../../assets/svg/profile-circle.svg';
 import { IMemberType } from 'types/member.types';
 
-interface IStudyMemberCardProps {
+interface IMemberCardProps {
   members?: IMemberType[];
   onClickMemberCard?: any;
 }
 
-const StudyMemberCard = ({
-  members,
-  onClickMemberCard,
-}: IStudyMemberCardProps) => {
+const MemberCard = ({ members, onClickMemberCard }: IMemberCardProps) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   if (!members || members?.length === 0) {
@@ -21,12 +18,12 @@ const StudyMemberCard = ({
 
   return (
     <>
-      <div className={classes.studyMemberCards}>
+      <div className={classes.memberCards}>
         {members
           .slice((currentPage - 1) * 4, (currentPage - 1) * 4 + 4)
           .map((member) => (
             <div
-              className={classes.studyMemberCard}
+              className={classes.memberCard}
               key={member.email}
               onClick={() => onClickMemberCard(member)}
             >
@@ -54,4 +51,4 @@ const StudyMemberCard = ({
   );
 };
 
-export default StudyMemberCard;
+export default MemberCard;

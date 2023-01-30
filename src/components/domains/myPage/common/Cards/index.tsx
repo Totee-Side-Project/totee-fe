@@ -1,10 +1,10 @@
 import { IMemberType } from 'types/member.types';
 import { IPostsType } from 'types/posts.types';
 import classes from './index.module.scss';
-import StudyMemberCard from './StudyMemberCard';
+import MemberCard from './MemberCard';
 import StudyPostCard from './StudyPostCard';
 
-interface IStudyCardsProps {
+interface ICardsProps {
   postSectionTitle: string;
   posts: IPostsType;
   memberSectionTitle?: string;
@@ -13,26 +13,23 @@ interface IStudyCardsProps {
   onClickMemberCard?: (member: IMemberType) => void;
 }
 
-const StudyCards = ({
+const Cards = ({
   postSectionTitle,
   posts,
   memberSectionTitle,
   members,
   setCurrentPostId,
   onClickMemberCard,
-}: IStudyCardsProps) => {
+}: ICardsProps) => {
   return (
     <>
       <p className={classes.title}>{postSectionTitle}</p>
       <StudyPostCard posts={posts} setCurrentPostId={setCurrentPostId} />
       <div className={classes.horizontal} />
       <p className={classes.title}>{memberSectionTitle}</p>
-      <StudyMemberCard
-        members={members}
-        onClickMemberCard={onClickMemberCard}
-      />
+      <MemberCard members={members} onClickMemberCard={onClickMemberCard} />
     </>
   );
 };
 
-export default StudyCards;
+export default Cards;
