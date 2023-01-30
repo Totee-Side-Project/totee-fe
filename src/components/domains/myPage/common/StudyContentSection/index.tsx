@@ -1,27 +1,24 @@
-import { useUserActivity } from '@hooks/useUserActivity';
-import { UseQueryResult } from 'react-query';
 import classes from '../../contentSection/index.module.scss';
 import StudyMemberCard from './StudyMemberCard';
 import StudyPostCard from './StudyPostCard';
 
 interface IStudyContentSectionProps {
   postSectionTitle: string;
-  useGetPosts: any;
+  posts: any;
   memberSectionTitle?: string;
-  useGetMembers?: any;
+  members?: any;
+  setCurrentPostId?: React.Dispatch<React.SetStateAction<number>>;
+  onClickMemberCard?: any;
 }
 
 const StudyContentSection = ({
   postSectionTitle,
-  useGetPosts,
+  posts,
   memberSectionTitle,
-  useGetMembers,
+  members,
+  setCurrentPostId,
+  onClickMemberCard,
 }: IStudyContentSectionProps) => {
-  const { posts, members, setCurrentPostId } = useUserActivity(
-    useGetPosts,
-    useGetMembers,
-  );
-
   if (!posts) {
     return <>정보 없음</>;
   }
@@ -32,7 +29,10 @@ const StudyContentSection = ({
       <StudyPostCard posts={posts} setCurrentPostId={setCurrentPostId} />
       <div className={classes.horizontal} />
       <p className={classes.title}>{memberSectionTitle}</p>
-      <StudyMemberCard members={members} />
+      <StudyMemberCard
+        members={members}
+        onClickMemberCard={onClickMemberCard}
+      />
     </>
   );
 };

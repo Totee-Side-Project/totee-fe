@@ -155,14 +155,34 @@ export const usePostTeam = (postId: number) => {
     (formData: IPostTeamRequestFormData) => TeamAPI.postTeam(postId, formData),
     {
       onSuccess: () => {
+        Swal.fire({
+          title: '성공',
+          text: '성공적으로 처리되었습니다.',
+          icon: 'success',
+          confirmButtonText: '확인',
+          timer: 3000,
+        });
         queryClient.invalidateQueries(queryKeys.applicant(postId));
+        queryClient.invalidateQueries(queryKeys.studyMembers(postId));
       },
     },
   );
 };
-export const useResignateTeam = (postId: number) => {
+
+export const useResignateTeam = (postId: number, nickname: string) => {
   const queryClient = useQueryClient();
-  return useMutation(() => TeamAPI.resignateTeam(postId));
+  return useMutation(() => TeamAPI.resignateTeam(postId, nickname), {
+    onSuccess: () => {
+      Swal.fire({
+        title: '지원 성공',
+        text: '추방 성공',
+        icon: 'success',
+        confirmButtonText: '확인',
+        timer: 3000,
+      });
+      queryClient.invalidateQueries(queryKeys.studyMembers(postId));
+    },
+  });
 };
 
 export const useValidateNickName = () => {

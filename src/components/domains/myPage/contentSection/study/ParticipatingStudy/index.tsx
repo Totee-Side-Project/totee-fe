@@ -1,3 +1,4 @@
+import DetailedMemberModal from '@components/domains/myPage/common/DetailedMemberModal';
 import StudyContentSection from '@components/domains/myPage/common/StudyContentSection';
 import {
   useGetParticipatingStudyPost,
@@ -7,7 +8,7 @@ import { useMemberModal } from '@hooks/useMemberModal';
 import { useUserActivity } from '@hooks/useUserActivity';
 
 const ParticipatingStudy = () => {
-  const { posts, members, currentPostId, setCurrentPostId } = useUserActivity(
+  const { posts, members, setCurrentPostId } = useUserActivity(
     useGetParticipatingStudyPost,
     useGetStudyMembers,
   );
@@ -15,24 +16,24 @@ const ParticipatingStudy = () => {
   const { isOpenedModal, setIsOpenedModal, currentMember, onClickMemberCard } =
     useMemberModal();
 
-  const onClickResignationButton = () => {
-    //console.log(currentPostId);
-    //console.log(currentMember);
-    return;
-  };
-
   return (
-    <StudyContentSection
-      postSectionTitle="참여 중인 스터디"
-      posts={posts}
-      memberSectionTitle="현재 스터디 멤버"
-      members={members}
-      setCurrentPostId={setCurrentPostId}
-      isOpenedModal={isOpenedModal}
-      setIsOpenedModal={setIsOpenedModal}
-      currentMember={currentMember}
-      onClickMemberCard={onClickMemberCard}
-    />
+    <>
+      <StudyContentSection
+        postSectionTitle="참여 중인 스터디"
+        posts={posts}
+        memberSectionTitle="현재 스터디 멤버"
+        members={members}
+        setCurrentPostId={setCurrentPostId}
+        onClickMemberCard={onClickMemberCard}
+      />
+      <DetailedMemberModal
+        title="스터디 멤버"
+        subTitle="스터디 멤버와 자기 소개입니다."
+        member={currentMember}
+        isOpenedModal={isOpenedModal}
+        setIsOpenedModal={setIsOpenedModal}
+      />
+    </>
   );
 };
 

@@ -74,10 +74,49 @@
     background: #F4F4F4;
     border-radius: 12px;
     width: 90%;
-    margin: 21px auto 50px;
+    margin: 21px auto;
     padding: 30px 20px;
     word-wrap: break-word;
     height: 150px;
     overflow: auto;
+  }
+
+  .resignateButton {
+    background-color: #568A35;
+    border-radius: 10px;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    width: 40%;
+    height: 50px;
+  }
+
+  .applicantConfirmationButton {
+    display: flex;
+    justify-content: space-around;
+
+    .acceptButton {
+      background-color: #568A35;
+      border-radius: 10px;
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 24px;
+      width: 35%;
+      height: 50px;
+    }
+  
+    .rejectButton {
+      background: #FFFFFF;
+      border-radius: 10px; 
+      color: #898989; 
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 24px;
+      width: 35%;
+      height: 50px;
+      border: 1.5px solid #898989;
+    }
   }
 }
