@@ -5,7 +5,7 @@ import classes from './index.module.scss';
 
 interface IStudyPostCardProps {
   posts: any;
-  setCurrentPostId: React.Dispatch<React.SetStateAction<number | undefined>>;
+  setCurrentPostId?: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const StudyPostCard = ({ posts, setCurrentPostId }: IStudyPostCardProps) => {

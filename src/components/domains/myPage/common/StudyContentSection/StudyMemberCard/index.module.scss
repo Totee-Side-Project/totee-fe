@@ -3,7 +3,6 @@
   flex-flow: row wrap;
 }
 
-
 .studyMemberCard {
   width: 190px;
   height: 230px;
@@ -11,6 +10,7 @@
   border-radius: 10px;
   text-align: center;
   margin: 15px 29px;
+  cursor: pointer;
 
   .profileImg {
     width: 65px;

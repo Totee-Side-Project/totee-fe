@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
 export const useUserActivity = (useGetPosts, useGetMembers) => {
-  const [currentPostId, setCurrentPostId] = useState<number | undefined>();
-  const { data: posts } = useGetPosts();
+  const [currentPostId, setCurrentPostId] = useState(-1);
 
   return {
+    currentPostId,
     setCurrentPostId,
-    posts,
-    members: useGetMembers ? useGetMembers(currentPostId).data : '',
+    posts: useGetPosts().data,
+    members: useGetMembers(currentPostId).data,
   };
 };

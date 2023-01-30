@@ -23,7 +23,7 @@ interface OptionalProps {
     width: string;
     height: string;
   };
-  setCurrentPostId?: React.Dispatch<React.SetStateAction<number | undefined>>;
+  setCurrentPostId?: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const PostCard = ({ post, styles, setCurrentPostId }: OptionalProps) => {
