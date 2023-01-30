@@ -12,7 +12,7 @@ import {
 } from 'types/api.types';
 import { GetPostListParams } from './api.types';
 
-const BASE_URL = 'https://api.totee.link/';
+const BASE_URL = 'https://api.totee.store/';
 
 export const api = axios.create({
   baseURL: BASE_URL,
@@ -35,8 +35,9 @@ api.interceptors.request.use((config: any) => {
     return config;
   }
 });
+
 // swagger 링크
-// https://api.totee.link/swagger-ui.html#/
+// https://api.totee.store/swagger-ui.html#/
 
 export const PostAPI = {
   getPostList: ({
@@ -141,8 +142,10 @@ export const TeamAPI = {
     api.get(`api/v1/team/${postId}`).then((res) => res.data.body.data),
   postTeam: (postId: number, formData: IPostTeamRequestFormData) =>
     api.post(`api/v1/team/${postId}`, { ...formData }),
-  resignateTeam: (postId: number) =>
-    api.delete(`api/v1/team/resignation/${postId}`),
+  resignateTeam: (postId: number, nickname: string) =>
+    api.delete(`api/v1/team/resignation/${postId}`, {
+      data: { nickname: nickname },
+    }),
   secessionTeam: (postId: number) =>
     api.delete(`api/v1/team/secession/${postId}`),
 };
