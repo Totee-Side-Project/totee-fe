@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { SearchSection } from '@components/atoms';
 import MentoringPostCard from '@components/common/card/MentoringPostCard/MentoringPostCard';
 import MentoringPostDetailModal from '@components/common/mentoring/MentoringPostDetailModal';
@@ -11,7 +13,6 @@ import {
 import { useGetPostsParams } from '@hooks/useGetPostsParams';
 import { SEARCH_PAGE_SIZE } from '@hooks/useSearch';
 import { POSTS_CATEGORY_NAMES } from 'pages/PostsPage';
-import { useState } from 'react';
 import { IMentoring } from 'types/api.types';
 import { IMentoringSortOptions, IPostsSortOptions } from 'types/sort.types';
 
@@ -28,13 +29,16 @@ const mentoringSortOptions: IMentoringSortOptions = {
 } as const;
 
 export const PostsAll = () => {
-  const { params } = useGetPostsParams({
+  const { allCategoryParams } = useGetPostsParams({
     size: SEARCH_PAGE_SIZE,
+
     // TODO : page를 url searchParams를 이용해야한다.
     page: 0,
   });
-  const GetSearchPostListQuery = useGetSearchPostList(params);
-  const GetSearchMentoringListQuery = useGetSearchMentoringList(params);
+  const GetSearchPostListQuery = useGetSearchPostList(allCategoryParams.study);
+  const GetSearchMentoringListQuery = useGetSearchMentoringList(
+    allCategoryParams.mentoring,
+  );
 
   const studyPostDatas = GetSearchPostListQuery.data?.content;
   const mentoringPostDatas = GetSearchMentoringListQuery.data?.content;
