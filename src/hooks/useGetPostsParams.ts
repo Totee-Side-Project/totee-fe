@@ -15,7 +15,7 @@ export const useGetPostsParams = ({ size, page = 0 }: IProps) => {
       keyword: keywordParam,
       size,
       sort: !allParams.study.sort ? [DESC] : [allParams.study.sort, DESC],
-      page,
+      page: allParams.study.page - 1,
     },
     mentoring: {
       keyword: keywordParam,
@@ -23,7 +23,7 @@ export const useGetPostsParams = ({ size, page = 0 }: IProps) => {
       sort: !allParams.mentoring.sort
         ? [DESC]
         : [allParams.mentoring.sort, DESC],
-      page,
+      page: allParams.mentoring.page - 1,
     },
   };
   const params = {

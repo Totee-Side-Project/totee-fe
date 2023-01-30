@@ -5,8 +5,13 @@ import { Pagination } from '@components/common/pagination/Pagination';
 import { SEARCH_PAGE_SIZE } from '@hooks/useSearch';
 import { PostsCategoryNames } from 'pages/PostsPage';
 import classes from './postsSection.module.scss';
+import { CategoryTypes } from '@components/domains/posts/PostsContainer';
+import { useGetPostsSearchParams } from '@hooks/usePostsSearchParams';
+import { useEffect } from 'react';
+import { useChangeSortParams } from '@hooks/useChangeSortParams';
 
 interface IProps {
+  category: CategoryTypes;
   categoryTitle: PostsCategoryNames;
   children: ReactNode;
   totalPages: number | undefined;
@@ -15,13 +20,25 @@ interface IProps {
 
 // data를 props로 받자.
 export const PostPaginationSection = ({
+  category,
   categoryTitle,
   children,
   totalPages,
   isLoading,
 }: IProps) => {
+  const { changeCategoryPageParam } = useChangeSortParams(category);
+  const { allParams } = useGetPostsSearchParams();
+
   const [currentPage, setCurrentPage] = useState(0);
   const [slideNum, setSlideNum] = useState(1);
+
+  useEffect(() => {
+    changeCategoryPageParam(category, currentPage + 1);
+  }, [currentPage]);
+
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [allParams.mentoring.sort, allParams.study.sort]);
 
   if (isLoading) {
     const loadingList = [...Array(SEARCH_PAGE_SIZE)];

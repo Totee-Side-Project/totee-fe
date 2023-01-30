@@ -184,5 +184,6 @@ export interface IPostsInfiniteScrollOptions extends IPostSliderOptions {
   keyword?: string;
 }
 export interface IPostsPaginationoptions extends IPostsInfiniteScrollOptions {
+  size?: number;
   pageNum?: number;
 }

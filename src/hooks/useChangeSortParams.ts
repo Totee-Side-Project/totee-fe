@@ -67,10 +67,23 @@ export const useChangeSortParams = (category?: CategoryTypes) => {
     setSearchParams(newSearchParam);
   };
 
+  const changeCategoryPageParam = (
+    category: CategoryTypes,
+    pageNum: number,
+  ) => {
+    const categoryPageParamKey = `${category}${POSTS_URL_PARAMS.CAMEL_PAGE}`;
+    const categoryPageParamObject = {
+      [categoryPageParamKey]: pageNum.toString(),
+    };
+
+    setSearchParams({ ...allSearchParamsEntries, ...categoryPageParamObject });
+  };
+
   return {
     allParams,
     postsSortParam,
     handleSearchParamsWithCategory,
     handleSearchParamsWithNotCategory,
+    changeCategoryPageParam,
   };
 };

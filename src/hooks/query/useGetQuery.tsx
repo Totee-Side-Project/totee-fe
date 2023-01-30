@@ -124,6 +124,7 @@ export function useGetSearchPostList({
   return useQuery(
     queryKeys.postSearchTitle({
       keyword,
+      size,
       pageNum: page,
       sort,
     }),
@@ -141,7 +142,7 @@ export function useGetSearchPostList({
       // 자동으로 가져오는 옵션
       enabled: !!keyword,
       // 캐시 타임
-      staleTime: 10 * 600 * 1000,
+      // staleTime: 10 * 600 * 1000,
     },
   );
 }

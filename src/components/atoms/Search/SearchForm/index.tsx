@@ -44,7 +44,12 @@ export function Search() {
   );
 }
 
+const CATEGORY_LIST = ['study', 'mentoring'] as const;
+const CategoryPageParams = CATEGORY_LIST.map((category) => `${category}Page=1`);
+
 export const linkToUrl = (keyword: string, pathname: string) =>
   pathname === '/'
-    ? `posts/all?${POSTS_URL_PARAMS.KEYWORD}=${keyword}`
-    : `?${POSTS_URL_PARAMS.KEYWORD}=${keyword}`;
+    ? `posts/all?${
+        POSTS_URL_PARAMS.KEYWORD
+      }=${keyword}&${CategoryPageParams.join('&')}`
+    : `?${POSTS_URL_PARAMS.KEYWORD}=${keyword}&${CategoryPageParams.join('&')}`;

@@ -11,10 +11,10 @@ import {
   useGetSearchPostList,
 } from '@hooks/query/useGetQuery';
 import { useGetPostsParams } from '@hooks/useGetPostsParams';
-import { SEARCH_PAGE_SIZE } from '@hooks/useSearch';
 import { POSTS_CATEGORY_NAMES } from 'pages/PostsPage';
 import { IMentoring } from 'types/api.types';
 import { IMentoringSortOptions, IPostsSortOptions } from 'types/sort.types';
+import { SEARCH_PAGE_SIZE } from '@hooks/useSearch';
 
 const postsSortOptions: IPostsSortOptions = {
   recent: '최신순',
@@ -31,9 +31,6 @@ const mentoringSortOptions: IMentoringSortOptions = {
 export const PostsAll = () => {
   const { allCategoryParams } = useGetPostsParams({
     size: SEARCH_PAGE_SIZE,
-
-    // TODO : page를 url searchParams를 이용해야한다.
-    page: 0,
   });
   const GetSearchPostListQuery = useGetSearchPostList(allCategoryParams.study);
   const GetSearchMentoringListQuery = useGetSearchMentoringList(
@@ -69,6 +66,7 @@ export const PostsAll = () => {
       <SearchSection resultGuidText={'on'} />
       <PostsContainer category={'study'} options={postsSortOptions}>
         <PostPaginationSection
+          category={'study'}
           categoryTitle={POSTS_CATEGORY_NAMES.STUDY}
           totalPages={GetSearchPostListQuery.data?.totalPages}
           isLoading={GetSearchPostListQuery.isLoading}
@@ -82,6 +80,7 @@ export const PostsAll = () => {
       </PostsContainer>
       <PostsContainer category={'mentoring'} options={mentoringSortOptions}>
         <PostPaginationSection
+          category={'mentoring'}
           categoryTitle={POSTS_CATEGORY_NAMES.MENTORING}
           totalPages={GetSearchMentoringListQuery.data?.totalPages}
           isLoading={GetSearchMentoringListQuery.isLoading}
