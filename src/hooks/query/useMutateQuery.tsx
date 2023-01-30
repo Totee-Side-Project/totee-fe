@@ -165,6 +165,15 @@ export const usePostTeam = (postId: number) => {
         queryClient.invalidateQueries(queryKeys.applicant(postId));
         queryClient.invalidateQueries(queryKeys.studyMembers(postId));
       },
+      onError: () => {
+        Swal.fire({
+          title: '실패',
+          text: '실패하였습니다.',
+          icon: 'error',
+          confirmButtonText: '확인',
+          timer: 3000,
+        });
+      },
     },
   );
 };
@@ -174,13 +183,22 @@ export const useResignateTeam = (postId: number, nickname: string) => {
   return useMutation(() => TeamAPI.resignateTeam(postId, nickname), {
     onSuccess: () => {
       Swal.fire({
-        title: '추방 성공',
+        title: '성공',
         text: '멤버를 추방하였습니다.',
         icon: 'success',
         confirmButtonText: '확인',
         timer: 3000,
       });
       queryClient.invalidateQueries(queryKeys.studyMembers(postId));
+    },
+    onError: () => {
+      Swal.fire({
+        title: '실패',
+        text: '멤버를 추방하는데 실패하였습니다.',
+        icon: 'error',
+        confirmButtonText: '확인',
+        timer: 3000,
+      });
     },
   });
 };
@@ -190,7 +208,13 @@ export const useValidateNickName = () => {
     (userNickName: string) => UserAPI.validateNickname(userNickName),
     {
       onError: () => {
-        alert('이미 존재하는 닉네임입니다.');
+        Swal.fire({
+          title: '실패',
+          text: '이미 존재하는 닉네임입니다.',
+          icon: 'error',
+          confirmButtonText: '확인',
+          timer: 3000,
+        });
       },
     },
   );

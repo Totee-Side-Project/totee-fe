@@ -1,5 +1,5 @@
 import DetailedMemberModal from '@components/domains/myPage/common/DetailedMemberModal';
-import StudyContentSection from '@components/domains/myPage/common/StudyContentSection';
+import StudyCards from '@components/domains/myPage/common/StudyCards';
 import { useGetApplicant, useGetMyStudyPost } from '@hooks/query/useGetQuery';
 import { usePostTeam } from '@hooks/query/useMutateQuery';
 import { useMemberModal } from '@hooks/useMemberModal';
@@ -34,7 +34,7 @@ const StudyApplicantConfirmation = () => {
 
   return (
     <>
-      <StudyContentSection
+      <StudyCards
         postSectionTitle="내가 개설한 스터디의 지원자 확인"
         posts={posts}
         memberSectionTitle="스터디 지원자 목록"

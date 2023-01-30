@@ -1,8 +1,8 @@
-import classes from '../../contentSection/index.module.scss';
+import classes from './index.module.scss';
 import StudyMemberCard from './StudyMemberCard';
 import StudyPostCard from './StudyPostCard';
 
-interface IStudyContentSectionProps {
+interface IStudyCardsProps {
   postSectionTitle: string;
   posts: any;
   memberSectionTitle?: string;
@@ -11,14 +11,14 @@ interface IStudyContentSectionProps {
   onClickMemberCard?: any;
 }
 
-const StudyContentSection = ({
+const StudyCards = ({
   postSectionTitle,
   posts,
   memberSectionTitle,
   members,
   setCurrentPostId,
   onClickMemberCard,
-}: IStudyContentSectionProps) => {
+}: IStudyCardsProps) => {
   if (!posts) {
     return <>정보 없음</>;
   }
@@ -37,4 +37,4 @@ const StudyContentSection = ({
   );
 };
 
-export default StudyContentSection;
+export default StudyCards;
