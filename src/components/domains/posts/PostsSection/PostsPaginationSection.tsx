@@ -57,14 +57,15 @@ export const PostPaginationSection = ({
   // 🟠Todo: 보여줄 데이터들이 없거나 잘못된 정렬 카테고리가 선택된 경우 적절한 안내페이지르 보여줘야한다.
   if (!children) {
     return (
-      <main>
+      <>
+        <div className={classes.postsCategoryTitle}>{categoryTitle}</div>
         <div>
           <ul className={classes.postsSection}>
             <h2>일치하는 게시물이 없어요</h2>
           </ul>
         </div>
         <div className={classes.postsTriggerWrap}></div>
-      </main>
+      </>
     );
   }
   // }
