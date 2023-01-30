@@ -63,7 +63,7 @@ export const PostsAll = () => {
         />
       ) : null}
       <SearchSection resultGuidText={'on'} />
-      <PostsContainer options={postsSortOptions}>
+      <PostsContainer category={'study'} options={postsSortOptions}>
         <PostPaginationSection
           categoryTitle={POSTS_CATEGORY_NAMES.STUDY}
           totalPages={GetSearchPostListQuery.data?.totalPages}
@@ -76,7 +76,7 @@ export const PostsAll = () => {
             : null}
         </PostPaginationSection>
       </PostsContainer>
-      <PostsContainer options={mentoringSortOptions}>
+      <PostsContainer category={'mentoring'} options={mentoringSortOptions}>
         <PostPaginationSection
           categoryTitle={POSTS_CATEGORY_NAMES.MENTORING}
           totalPages={GetSearchMentoringListQuery.data?.totalPages}

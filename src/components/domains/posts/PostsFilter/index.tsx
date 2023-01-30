@@ -6,41 +6,22 @@ import {
   IPostsSortOptions,
   PostsSortOptionNameType,
 } from 'types/sort.types';
+import { CategoryTypes } from '@components/domains/posts/PostsContainer';
 import classes from './postsFilter.module.scss';
-import {
-  POSTS_URL_PARAMS,
-  useGetPostsSearchParams,
-} from '@hooks/usePostsSearchParams';
+import { useChangeSortParams } from '@hooks/useChangeSortParams';
 
 interface Props {
   options: IPostsSortOptions | IMentoringSortOptions;
+  category?: CategoryTypes;
   Element?: FunctionComponent<{ center?: ReactNode; isSelected?: boolean }>;
 }
 
-const RECENT = 'recent';
-
-export const PostsFilter = ({ options, Element }: Props) => {
-  const { keywordParam, sortParam, setSearchParams } =
-    useGetPostsSearchParams();
-  const postsSortParam = sortParam || RECENT;
-
-  const onClick = (sortValue: PostsSortOptionNameType) => {
-    const newSearchParams = keywordParam
-      ? {
-          [POSTS_URL_PARAMS.KEYWORD]: keywordParam,
-          [POSTS_URL_PARAMS.SORT]: sortValue,
-        }
-      : { [POSTS_URL_PARAMS.SORT]: sortValue };
-
-    if (sortValue === RECENT) {
-      return setSearchParams(
-        keywordParam ? { [POSTS_URL_PARAMS.KEYWORD]: keywordParam } : {},
-      );
-    }
-
-    setSearchParams(newSearchParams);
-  };
-
+export const PostsFilter = ({ options, category, Element }: Props) => {
+  const {
+    postsSortParam,
+    handleSearchParamsWithCategory,
+    handleSearchParamsWithNotCategory,
+  } = useChangeSortParams();
   const sortedList = Object.entries(options) as [
     PostsSortOptionNameType,
     string,
@@ -49,7 +30,15 @@ export const PostsFilter = ({ options, Element }: Props) => {
   return (
     <ul className={classes.filters}>
       {sortedList.map(([key, value]) => (
-        <li key={key} className={classes.filter} onClick={() => onClick(key)}>
+        <li
+          key={key}
+          className={classes.filter}
+          onClick={() =>
+            category
+              ? handleSearchParamsWithCategory(key, category)
+              : handleSearchParamsWithNotCategory(key)
+          }
+        >
           {Element ? (
             <Element center={value} isSelected={postsSortParam === key} />
           ) : (

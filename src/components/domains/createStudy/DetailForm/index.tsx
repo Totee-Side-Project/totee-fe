@@ -6,16 +6,14 @@ import { Line } from '@components/atoms/Line/Line';
 import { Editor } from '@components/common';
 import { Input } from '@components/atoms';
 
-import { SubmitButton } from '../Buttons';
+import { SubmitButton } from '../Button';
 import { Idata } from '../data';
 import classes from '../createStudy.module.scss';
 
 interface DetailFormProps {
   form: PostRequestDto;
   data: Idata;
-  // eslint-disable-next-line no-unused-vars
   onChangeByInput: (e: ChangeEvent<HTMLInputElement>, key: any) => void;
-  // eslint-disable-next-line no-unused-vars
   onChangeByEditor: (content: any) => void;
 }
 export const DetailForm = ({

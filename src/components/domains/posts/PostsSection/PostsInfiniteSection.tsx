@@ -6,6 +6,7 @@ import { PostCard } from '@components/common/post/PostCard/PostCard';
 import { SearchResultGuideText } from '@components/atoms';
 import { MentoringAPI, PostAPI } from '@api/api';
 import { queryKeys } from '@hooks/query';
+import { CategoryTypes } from '@components/domains/posts/PostsContainer';
 import classes from './postsSection.module.scss';
 
 export const INFINITE_LOADING_PAGE_SIZE = 10;
@@ -13,7 +14,7 @@ export const INFINITE_PAGE_SIZE = 20;
 
 interface IProps {
   children?: ReactNode;
-  category: 'study' | 'mentoring';
+  category: CategoryTypes;
 }
 
 export const fetchFunctions = {
