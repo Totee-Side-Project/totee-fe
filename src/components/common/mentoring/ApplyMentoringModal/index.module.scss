@@ -1,0 +1,113 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    margin-bottom: 18px;
+  }
+
+  .nickname {
+    font-size: 18px;
+    color: #484848;
+    font-weight: 500;
+  }
+
+  .email {
+    font-size: 14px;
+    color: #767676;
+  }
+}
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba($color: #000000, $alpha: 0.5);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  width: 600px;
+  height: 700px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  position: absolute;
+  border-radius: 15px;
+  padding: 40px 60px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .close_icon {
+    width: 25px;
+    height: 25px;
+    color: #667080;
+    cursor: pointer;
+    position: absolute;
+    right: 60px;
+    top: 20px;
+  }
+
+  .divider {
+    width: 400px;
+    height: 1px;
+    background-color: #dbdbdb;
+    margin-top: 16px;
+    margin-bottom: 36px;
+  }
+
+  button {
+    width: 200px;
+    height: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: #568a35;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    border-radius: 10px;
+    margin-top: 52px;
+  }
+
+  .steps {
+    font-size: 20px;
+    color: #737373;
+    margin-top: 16px;
+  }
+}
+
+.preferred_time_container {
+  width: 300px;
+  text-align: center;
+
+  .section_title {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .dropdown_wrapper {
+    margin-bottom: 36px;
+
+    & > * + * {
+      margin-top: 18px;
+    }
+  }
+
+  .checkbox_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
