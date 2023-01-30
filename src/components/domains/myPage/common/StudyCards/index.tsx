@@ -21,10 +21,6 @@ const StudyCards = ({
   setCurrentPostId,
   onClickMemberCard,
 }: IStudyCardsProps) => {
-  if (!posts) {
-    return <>정보 없음</>;
-  }
-
   return (
     <>
       <p className={classes.title}>{postSectionTitle}</p>

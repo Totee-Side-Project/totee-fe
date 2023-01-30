@@ -12,10 +12,14 @@ interface IStudyPostCardProps {
 const StudyPostCard = ({ posts, setCurrentPostId }: IStudyPostCardProps) => {
   const [currentPage, setCurrentPage] = useState(1);
 
+  if (!posts || posts?.content.length === 0) {
+    return <></>;
+  }
+
   return (
     <>
       <div className={classes.postCard}>
-        {posts?.content
+        {posts.content
           .slice((currentPage - 1) * 4, (currentPage - 1) * 4 + 4)
           .map((post) => (
             <PostCard
