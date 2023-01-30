@@ -3,15 +3,13 @@ import StudyCards from '@components/domains/myPage/common/StudyCards';
 import { useGetApplicant, useGetMyStudyPost } from '@hooks/query/useGetQuery';
 import { usePostTeam } from '@hooks/query/useMutateQuery';
 import { useMemberModal } from '@hooks/useMemberModal';
-import { useUserActivity } from '@hooks/useUserActivity';
+import { useGetUserActivity } from '@hooks/useGetUserActivity';
 import { useEffect } from 'react';
 import classes from '../../../common/DetailedMemberModal/index.module.scss';
 
 const StudyApplicantConfirmation = () => {
-  const { posts, members, currentPostId, setCurrentPostId } = useUserActivity(
-    useGetMyStudyPost,
-    useGetApplicant,
-  );
+  const { posts, members, currentPostId, setCurrentPostId } =
+    useGetUserActivity(useGetMyStudyPost, useGetApplicant);
 
   const { isOpenedModal, setIsOpenedModal, currentMember, onClickMemberCard } =
     useMemberModal();

@@ -5,10 +5,10 @@ import {
   useGetStudyMembers,
 } from '@hooks/query/useGetQuery';
 import { useMemberModal } from '@hooks/useMemberModal';
-import { useUserActivity } from '@hooks/useUserActivity';
+import { useGetUserActivity } from '@hooks/useGetUserActivity';
 
 const ParticipatingStudy = () => {
-  const { posts, members, setCurrentPostId } = useUserActivity(
+  const { posts, members, setCurrentPostId } = useGetUserActivity(
     useGetParticipatingStudyPost,
     useGetStudyMembers,
   );

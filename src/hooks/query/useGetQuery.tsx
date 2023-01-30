@@ -146,7 +146,7 @@ export function useGetAlarm() {
   });
 }
 
-export function useGetApplicant(postId: number) {
+export function useGetApplicant(postId: number, options?: any) {
   return useQuery(
     queryKeys.applicant(postId),
     () => ApplicationAPI.getApplicant(postId),
@@ -157,6 +157,7 @@ export function useGetApplicant(postId: number) {
       enabled: true,
       // 캐시 타임
       staleTime: 10 * 600 * 1000,
+      ...options,
     },
   );
 }
@@ -182,8 +183,10 @@ export function useGetPostLikeList() {
   return useQuery(queryKeys.postLikeList, LikeAPI.LikeList);
 }
 
-export function useGetStudyMembers(postId?: number) {
-  return useQuery(queryKeys.studyMembers(postId), () =>
-    TeamAPI.getTeam(postId),
+export function useGetStudyMembers(postId?: number, options?: any) {
+  return useQuery(
+    queryKeys.studyMembers(postId),
+    () => TeamAPI.getTeam(postId),
+    { ...options },
   );
 }

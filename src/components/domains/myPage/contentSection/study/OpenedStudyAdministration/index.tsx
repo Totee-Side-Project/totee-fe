@@ -7,7 +7,7 @@ import {
 } from '@hooks/query/useGetQuery';
 import { useResignateTeam } from '@hooks/query/useMutateQuery';
 import { useMemberModal } from '@hooks/useMemberModal';
-import { useUserActivity } from '@hooks/useUserActivity';
+import { useGetUserActivity } from '@hooks/useGetUserActivity';
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import classes from '../../../common/DetailedMemberModal/index.module.scss';
@@ -16,10 +16,8 @@ const OpenedStudyAdministration = () => {
   const { data } = useQuery(queryKeys.user);
   const user = data?.data.body.data;
 
-  const { posts, members, currentPostId, setCurrentPostId } = useUserActivity(
-    useGetMyStudyPost,
-    useGetStudyMembers,
-  );
+  const { posts, members, currentPostId, setCurrentPostId } =
+    useGetUserActivity(useGetMyStudyPost, useGetStudyMembers);
 
   const { isOpenedModal, setIsOpenedModal, currentMember, onClickMemberCard } =
     useMemberModal();
