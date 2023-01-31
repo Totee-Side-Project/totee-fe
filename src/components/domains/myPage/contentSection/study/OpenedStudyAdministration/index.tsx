@@ -38,7 +38,7 @@ const OpenedStudyAdministration = () => {
     <>
       <Cards
         postSectionTitle="내가 개설한 스터디"
-        studyPosts={studyPosts}
+        studyPosts={posts}
         memberSectionTitle="현재 스터디 멤버"
         members={members}
         setCurrentPostId={setCurrentPostId}
