@@ -4,15 +4,15 @@ import { IStudyPostsType } from 'types/posts.types';
 import Pagination from '../../Pagination';
 import classes from './index.module.scss';
 
-interface IStudyPostCardProps {
+interface IStudyPostCardsSectionProps {
   studyPosts?: IStudyPostsType;
   setCurrentPostId?: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const StudyPostCard = ({
+const StudyPostCardsSection = ({
   studyPosts,
   setCurrentPostId,
-}: IStudyPostCardProps) => {
+}: IStudyPostCardsSectionProps) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   if (!studyPosts || studyPosts?.content.length === 0) {
@@ -42,4 +42,4 @@ const StudyPostCard = ({
   );
 };
 
-export default StudyPostCard;
+export default StudyPostCardsSection;

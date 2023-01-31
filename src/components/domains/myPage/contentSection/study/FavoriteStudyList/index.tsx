@@ -1,11 +1,11 @@
-import Cards from '@components/domains/myPage/common/Cards';
+import CardsSection from '@components/domains/myPage/common/CardsSection';
 import { useGetPostLikeList } from '@hooks/query/useGetQuery';
 
 const FavoriteStudyList = () => {
   const { data: posts } = useGetPostLikeList();
 
   return (
-    <Cards
+    <CardsSection
       postSectionTitle="내가 관심목록에 추가한 스터디"
       studyPosts={posts}
     />

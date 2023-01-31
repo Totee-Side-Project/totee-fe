@@ -6,7 +6,7 @@ import { useMemberModal } from '@hooks/useMemberModal';
 import { useGetUserActivity } from '@hooks/useGetUserActivity';
 import { useEffect } from 'react';
 import classes from '../../../common/DetailedMemberModal/index.module.scss';
-import Cards from '@components/domains/myPage/common/Cards';
+import CardsSection from '@components/domains/myPage/common/CardsSection';
 
 const StudyApplicantConfirmation = () => {
   const { posts, members, currentPostId, setCurrentPostId } =
@@ -33,7 +33,7 @@ const StudyApplicantConfirmation = () => {
 
   return (
     <>
-      <Cards
+      <CardsSection
         postSectionTitle="내가 개설한 스터디의 지원자 확인"
         studyPosts={posts}
         memberSectionTitle="스터디 지원자 목록"

@@ -4,12 +4,15 @@ import classes from './index.module.scss';
 import profileCircle from '../../../../../../assets/svg/profile-circle.svg';
 import { IMemberType } from 'types/member.types';
 
-interface IMemberCardProps {
+interface IMemberCardsSectionProps {
   members?: IMemberType[];
   onClickMemberCard?: any;
 }
 
-const MemberCard = ({ members, onClickMemberCard }: IMemberCardProps) => {
+const MemberCardsSection = ({
+  members,
+  onClickMemberCard,
+}: IMemberCardsSectionProps) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   if (!members || members?.length === 0) {
@@ -51,4 +54,4 @@ const MemberCard = ({ members, onClickMemberCard }: IMemberCardProps) => {
   );
 };
 
-export default MemberCard;
+export default MemberCardsSection;

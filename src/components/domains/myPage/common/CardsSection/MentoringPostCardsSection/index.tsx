@@ -4,15 +4,15 @@ import classes from './index.module.scss';
 import profileCircle from '../../../../../../assets/svg/profile-circle.svg';
 import { IMentoringPostsType } from 'types/posts.types';
 
-interface IMentoringPostCardProps {
+interface IMentoringPostCardsSectionProps {
   mentoringPosts?: IMentoringPostsType;
   setCurrentPostId?: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const MentoringPostCard = ({
+const MentoringPostCardsSection = ({
   mentoringPosts,
   setCurrentPostId,
-}: IMentoringPostCardProps) => {
+}: IMentoringPostCardsSectionProps) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   if (!mentoringPosts || mentoringPosts?.content.length === 0) {
@@ -69,4 +69,4 @@ const MentoringPostCard = ({
   );
 };
 
-export default MentoringPostCard;
+export default MentoringPostCardsSection;

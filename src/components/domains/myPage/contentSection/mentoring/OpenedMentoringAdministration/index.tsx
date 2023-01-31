@@ -1,11 +1,10 @@
-import Cards from '@components/domains/myPage/common/Cards';
+import CardsSection from '@components/domains/myPage/common/CardsSection';
 import {
   useGetMentoringMembers,
   useGetMyMentoringPosts,
 } from '@hooks/query/useGetQuery';
 import { useGetUserActivity } from '@hooks/useGetUserActivity';
 import { useMemberModal } from '@hooks/useMemberModal';
-import classes from '../../index.module.scss';
 
 const OpenedMentoringAdminsitration = () => {
   const { posts, members, currentPostId, setCurrentPostId } =
@@ -16,7 +15,7 @@ const OpenedMentoringAdminsitration = () => {
 
   return (
     <>
-      <Cards
+      <CardsSection
         postSectionTitle="내가 개설한 멘토링"
         mentoringPosts={posts}
         memberSectionTitle="나의 멘티 목록"

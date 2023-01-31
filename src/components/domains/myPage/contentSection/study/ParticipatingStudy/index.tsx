@@ -1,5 +1,5 @@
 import DetailedMemberModal from '@components/domains/myPage/common/DetailedMemberModal';
-import Cards from '@components/domains/myPage/common/Cards';
+import CardsSection from '@components/domains/myPage/common/CardsSection';
 import {
   useGetParticipatingStudyPost,
   useGetStudyMembers,
@@ -18,7 +18,7 @@ const ParticipatingStudy = () => {
 
   return (
     <>
-      <Cards
+      <CardsSection
         postSectionTitle="참여 중인 스터디"
         studyPosts={posts}
         memberSectionTitle="현재 스터디 멤버"

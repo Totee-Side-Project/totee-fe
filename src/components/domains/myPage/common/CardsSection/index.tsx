@@ -1,11 +1,11 @@
 import { IMemberType } from 'types/member.types';
 import { IMentoringPostsType, IStudyPostsType } from 'types/posts.types';
 import classes from './index.module.scss';
-import MemberCard from './MemberCard';
-import MentoringPostCard from './MentoringPostCard';
-import StudyPostCard from './StudyPostCard';
+import MemberCardsSection from './MemberCardsSection';
+import MentoringPostCardsSection from './MentoringPostCardsSection';
+import StudyPostCardsSection from './StudyPostCardsSection';
 
-interface ICardsProps {
+interface ICardsSectionProps {
   postSectionTitle: string;
   studyPosts?: IStudyPostsType;
   mentoringPosts?: IMentoringPostsType;
@@ -15,7 +15,7 @@ interface ICardsProps {
   onClickMemberCard?: (member: IMemberType) => void;
 }
 
-const Cards = ({
+const CardsSection = ({
   postSectionTitle,
   studyPosts,
   mentoringPosts,
@@ -23,27 +23,30 @@ const Cards = ({
   members,
   setCurrentPostId,
   onClickMemberCard,
-}: ICardsProps) => {
+}: ICardsSectionProps) => {
   return (
     <>
       <p className={classes.title}>{postSectionTitle}</p>
       {studyPosts && (
-        <StudyPostCard
+        <StudyPostCardsSection
           studyPosts={studyPosts}
           setCurrentPostId={setCurrentPostId}
         />
       )}
       {mentoringPosts && (
-        <MentoringPostCard
+        <MentoringPostCardsSection
           mentoringPosts={mentoringPosts}
           setCurrentPostId={setCurrentPostId}
         />
       )}
       <div className={classes.horizontal} />
       <p className={classes.title}>{memberSectionTitle}</p>
-      <MemberCard members={members} onClickMemberCard={onClickMemberCard} />
+      <MemberCardsSection
+        members={members}
+        onClickMemberCard={onClickMemberCard}
+      />
     </>
   );
 };
 
-export default Cards;
+export default CardsSection;
