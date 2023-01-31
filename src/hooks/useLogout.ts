@@ -3,7 +3,6 @@ import { UserState } from '@store/user';
 import { useNavigate } from 'react-router-dom';
 import { Resetter, useResetRecoilState } from 'recoil';
 import Swal from 'sweetalert2';
-import { useRemoveLocalStorageItem } from './useLocalStorage';
 
 export const useLogout = (url: string = '/') => {
   const resetUser = useResetRecoilState(UserState);
@@ -12,7 +11,7 @@ export const useLogout = (url: string = '/') => {
 
   const handleLogout = () => {
     fireLogoutSwal();
-    useRemoveLocalStorageItem('loginData');
+    localStorage.removeItem('loginData');
     resetRecoilStates([resetUser, resetLogin]);
     navigate(url);
   };
