@@ -8,14 +8,11 @@ import {
   LikeAPI,
   MentoringAPI,
   PostAPI,
-  TeamAPI,
   UserAPI,
 } from '@api/api';
 import { UserState } from '@store/user';
 import { queryKeys } from '.';
 import { IMentoringListRequestOptions } from 'types/api.types';
-import { IStudyPostsType } from 'types/posts.types';
-import { IMemberType } from 'types/member.types';
 
 export const useGetUserAPI = () => {
   const [user, setUser] = useRecoilState(UserState);
@@ -148,51 +145,23 @@ export function useGetAlarm() {
   });
 }
 
-export function useGetApplicant(postId: number, options?: any) {
-  return useQuery<IMemberType[]>(
+export function useGetApplicant(postId: number) {
+  return useQuery(
     queryKeys.applicant(postId),
     () => ApplicationAPI.getApplicant(postId),
-    { ...options },
+    {
+      retry: false,
+      refetchOnWindowFocus: true,
+      // 자동으로 가져오는 옵션
+      enabled: true,
+      // 캐시 타임
+      staleTime: 10 * 600 * 1000,
+    },
   );
 }
 
 export function useGetMentoringList(options: IMentoringListRequestOptions) {
   return useQuery(queryKeys.mentoringList(options), () =>
     MentoringAPI.getMentoringList(options),
-  );
-}
-
-export function useGetMyStudyPost() {
-  return useQuery<IStudyPostsType>(queryKeys.myStudyPost, PostAPI.myStudyPost);
-}
-
-export function useGetParticipatingStudyPost() {
-  return useQuery<IStudyPostsType>(
-    queryKeys.participatingStudyPost,
-    PostAPI.participatingStudyPost,
-  );
-}
-
-export function useGetPostLikeList() {
-  return useQuery<IStudyPostsType>(queryKeys.postLikeList, LikeAPI.LikeList);
-}
-
-export function useGetStudyMembers(postId: number, options?: any) {
-  return useQuery<IMemberType[]>(
-    queryKeys.studyMembers(postId),
-    () => TeamAPI.getTeam(postId),
-    { ...options },
-  );
-}
-
-export function useGetMyMentoringPosts() {
-  return useQuery(queryKeys.myMentoringPosts, MentoringAPI.getMyMentoringPosts);
-}
-
-export function useGetMentoringMembers(mentoringId: number, options?: any) {
-  return useQuery(
-    queryKeys.mentoringMembers(mentoringId),
-    () => TeamAPI.getMentoringTeam(mentoringId),
-    { ...options },
   );
 }

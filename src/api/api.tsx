@@ -12,7 +12,7 @@ import {
 } from 'types/api.types';
 import { GetPostListParams } from './api.types';
 
-const BASE_URL = 'https://api.totee.store/';
+const BASE_URL = 'https://api.totee.link/';
 
 export const api = axios.create({
   baseURL: BASE_URL,
@@ -35,9 +35,8 @@ api.interceptors.request.use((config: any) => {
     return config;
   }
 });
-
 // swagger 링크
-// https://api.totee.store/swagger-ui.html#/
+// https://api.totee.link/swagger-ui.html#/
 
 export const PostAPI = {
   getPostList: ({
@@ -73,10 +72,7 @@ export const PostAPI = {
     }),
   deletePost: (postId: number) => api.delete(`/api/v1/post/${postId}`),
   recommendPostList: () => api.get(`/api/v1/post/recommend`),
-  myStudyPost: () =>
-    api.get(`/api/v1/post/mypost`).then((res) => res.data.body.data),
-  participatingStudyPost: () =>
-    api.get(`/api/v1/post/mystudy`).then((res) => res.data.body.data),
+  myPost: () => api.get(`/api/v1/post/mypost`),
 };
 
 export const CommentAPI = {
@@ -119,8 +115,7 @@ export const UserAPI = {
 export const LikeAPI = {
   getIsLikeInfo: (postId: any) => api.get(`/api/v1/post/isLike/${postId}`),
   postLike: (postId: any) => api.post(`/api/v1/post/like/${postId}`),
-  LikeList: () =>
-    api.get(`/api/v1/post/like`).then((res) => res.data.body.data),
+  LikeList: () => api.get(`/api/v1/post/like`),
 };
 
 export const AlarmAPI = {
@@ -130,24 +125,19 @@ export const AlarmAPI = {
 };
 
 export const ApplicationAPI = {
-  getApplicant: (postId: any) =>
-    api.get(`/api/v1/applicant/${postId}`).then((res) => res.data.body.data),
+  getApplicant: (postId: any): Promise<AxiosResponse<IGetApplicantResponse>> =>
+    api.get(`/api/v1/applicant/${postId}`),
   postApplicant: (postId: any, message: string) =>
     api.post(`/api/v1/applicant/${postId}`, { message }),
   deleteApplicant: (postId: any) => api.delete(`/api/v1/applicant/${postId}`),
 };
 
 export const TeamAPI = {
-  getTeam: (postId?: number) =>
-    api.get(`api/v1/team/${postId}`).then((res) => res.data.body.data),
-  getMentoringTeam: (mentoringId?: number) =>
-    api.get(`api/v2/team/${mentoringId}`).then((res) => res.data.body.data),
+  getTeam: (postId: number) => api.get(`api/v1/team/${postId}`),
   postTeam: (postId: number, formData: IPostTeamRequestFormData) =>
     api.post(`api/v1/team/${postId}`, { ...formData }),
-  resignateTeam: (postId: number, nickname: string) =>
-    api.delete(`api/v1/team/resignation/${postId}`, {
-      data: { nickname: nickname },
-    }),
+  resignateTeam: (postId: number) =>
+    api.delete(`api/v1/team/resignation/${postId}`),
   secessionTeam: (postId: number) =>
     api.delete(`api/v1/team/secession/${postId}`),
 };
@@ -169,8 +159,6 @@ export const MentoringAPI = {
 
     return api.get(`api/v1/mentoring/list?${query.toString()}`);
   },
-  getMyMentoringPosts: () =>
-    api.get('/api/v1/mentoring/mypost').then((res) => res.data.body.data),
 };
 
 // window.location.host;

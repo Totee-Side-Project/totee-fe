@@ -53,16 +53,22 @@ function JoinerCheck() {
                 <div className="Status_Title">지원 현황</div>
                 <div className="Status_Title_Line" />
                 <div className="Status_AllApplicant">현재 지원자수</div>
-                <div className="Status_Count">{applicantData?.length}명</div>
+                <div className="Status_Count">
+                  {applicantData?.data.body.data.length}명
+                </div>
                 <div>
-                  {applicantData?.length >= 4 ? (
+                  {applicantData?.data.body.data.length >= 4 ? (
                     <OverLimitIcons
-                      list={applicantData?.map(({ profileImg }) => profileImg)}
+                      list={applicantData?.data.body.data.map(
+                        ({ profileImg }) => profileImg,
+                      )}
                       limit={4}
                     />
                   ) : (
                     <UnOverLimitIcons
-                      list={applicantData?.map(({ profileImg }) => profileImg)}
+                      list={applicantData?.data.body.data.map(
+                        ({ profileImg }) => profileImg,
+                      )}
                     />
                   )}
                 </div>

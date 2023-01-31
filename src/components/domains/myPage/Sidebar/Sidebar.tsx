@@ -1,6 +1,6 @@
-import { IDefaultFocusMenuType, myPageMenu } from '../../myPageMenu';
+import { IDefaultFocusMenuType, myPageMenu } from '../MyPageMenu';
 import React from 'react';
-import classes from './index.module.scss';
+import classes from './Sidebar.module.scss';
 
 interface ISideBarProps {
   focusedMenu: IDefaultFocusMenuType;

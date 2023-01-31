@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+.edit_myPageWrapper {
+  //text-align: center;
+  //margin: 0 auto 100px auto;
+}
+
+.edit_myPageBackground {
+  height: 250px;
+  width: 100%;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    #d9d9d9;
+  background-blend-mode: multiply, normal;
+  position: relative;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.edit_myPageProfileWrapper {
+}
+
+.edit_myImgWrapper {
+}
+.edit_myChangeImg {
+  cursor: pointer;
+  margin: 60px 20px auto 44%;
+}
+.edit_myRemoveImg {
+  cursor: pointer;
+  margin: auto auto auto auto;
+}
+
+.edit_myProfileImg {
+  border-radius: 50%;
+  width: 170px;
+  height: 170px;
+  //margin-top: 20px;
+  //margin-left: 315px;
+  display: block;
+  margin: 50px auto;
+}
+.edit_myNicknameWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 80px 0px 20px 0px;
+}
+.edit_myNickName {
+  width: fit-content;
+  margin: 0 auto;
+  font-weight: 700;
+  font-size: 36px;
+  color: #484848;
+  text-align: center;
+  border: none;
+  border-bottom: 1.5px solid #c2c2c2;
+  outline: none;
+}
+.edit_myInfo {
+  margin-bottom: 5px;
+  text-align: center;
+  font-weight: 400;
+  font-size: 16px;
+  color: #767676;
+}
+.edit_myIntro {
+  width: 800px;
+  height: 130px;
+  text-align: center;
+  padding: 30px 10px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #767676;
+  margin: 25px 70px 0 70px;
+  resize: none;
+  background: #f9f9f9;
+  border: 1.5px solid #e4e4e4;
+  border-radius: 10px;
+  &:focus {
+    outline: none !important;
+    border: 2px solid #7ba364 !important;
+  }
+}
+
+.edit_myPositionWrapper {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  text-align: center;
+}
+.edit_myPosition {
+  display: inline-block;
+  margin: 40px 20px auto auto;
+  font-weight: 700;
+  font-size: 15px;
+  width: fit-content;
+  padding: 10px;
+  height: 35px;
+  color: #ffffff;
+  background: #000000;
+  border-radius: 5px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.edit_myEditPositionBtn {
+  display: inline-block;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  text-align: center;
+  color: #54b1e6;
+  cursor: pointer;
+}
+
+.edit_myBtnWrapper {
+  position: relative;
+  height: 50px;
+  margin-top: 20px;
+  margin-bottom: 90px;
+  font-weight: 500;
+  font-size: 16px;
+  display: flex;
+  //align-items: center;
+  color: #ffffff;
+}
+.edit_myEditBtn {
+  width: 210px;
+  height: 50px;
+  background: #568a35;
+  border-radius: 10px;
+  padding: 15px;
+  cursor: pointer;
+  margin: 40px 10px auto auto;
+  font-family: 'Noto Sans KR', sans-serif;
+  text-align: center;
+}
+.edit_myCancelBtn {
+  width: 210px;
+  height: 50px;
+  background: #ffffff;
+  border: 1.5px solid #898989;
+  border-radius: 10px;
+  color: #898989;
+  padding: 15px;
+  cursor: pointer;
+  margin: 40px auto auto 10px;
+  font-family: 'Noto Sans KR', sans-serif;
+  text-align: center;
+}
+
+//포지션 변경 모달 스타일
+.edit_Position_Wrapper {
+  padding: 60px 110px 40px 110px;
+}
+
+.edit_Position_title {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 35px;
+  line-height: 45px;
+  text-align: center;
+  color: #343434;
+  margin: 10px 10px;
+}
+
+.edit_Position_subTitle {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+  color: #4c4c4c;
+  margin: 20px 0;
+}
+
+.edit_Position_label {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  text-align: center;
+  color: #ffffff;
+  background: #7ba364;
+  border-radius: 10px;
+  width: 100px;
+  height: 40px;
+  padding: 8px;
+  margin: 50px 0 10px 0px;
+}
+
+.edit_Position_select {
+  margin-left: -30px;
+}

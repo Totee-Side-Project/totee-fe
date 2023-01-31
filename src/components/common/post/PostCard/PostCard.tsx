@@ -1,5 +1,5 @@
 import Skeleton from 'react-loading-skeleton';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import {
   OverLimitIcons,
@@ -19,20 +19,17 @@ interface PostCardProps {
 }
 interface OptionalProps {
   post?: IResponsePostDetail;
-  styles?: {
-    width: string;
-    height: string;
-  };
-  setCurrentPostId?: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export const PostCard = ({ post, styles, setCurrentPostId }: OptionalProps) => {
+export const PostCard = ({ post }: OptionalProps) => {
   const navigate = useNavigate();
-  const { pathname } = useLocation();
+  const clickHandlerURLParameter = () => {
+    post && navigate(`/detail/${post.postId}`);
+  };
 
   if (!post) {
     return (
-      <div className={classes.post_card_container} style={styles}>
+      <div className={classes.post_card_container}>
         <PostCardHeaderSkeleton />
         <PostCardCenterSkeleton />
         <div className={classes.post_info_line} />
@@ -41,19 +38,10 @@ export const PostCard = ({ post, styles, setCurrentPostId }: OptionalProps) => {
     );
   }
 
-  const clickHandler = () => {
-    if (pathname === '/mypage') {
-      setCurrentPostId && setCurrentPostId(post.postId);
-      return;
-    }
-    navigate(`/detail/${post.postId}`);
-  };
-
   return (
     <div
       className={classes.post_card_container}
-      onClick={clickHandler}
-      style={styles}
+      onClick={clickHandlerURLParameter}
     >
       <PostCardHeader post={post} />
       <PostCardCenter post={post} />
