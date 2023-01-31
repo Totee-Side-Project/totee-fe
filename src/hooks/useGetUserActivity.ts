@@ -1,6 +1,13 @@
 import { useEffect, useState } from 'react';
+import { UseQueryResult } from 'react-query';
 
-export const useGetUserActivity = (useGetPosts: any, useGetMembers: any) => {
+export const useGetUserActivity = <T, U>(
+  useGetPosts: () => UseQueryResult<T, unknown>,
+  useGetMembers: (
+    postId: number,
+    options?: { enabled: boolean },
+  ) => UseQueryResult<U, unknown>,
+) => {
   const { data: posts } = useGetPosts();
   const [currentPostId, setCurrentPostId] = useState(-1);
   const { data: members, refetch: getMembers } = useGetMembers(currentPostId, {

@@ -14,6 +14,8 @@ import {
 import { UserState } from '@store/user';
 import { queryKeys } from '.';
 import { IMentoringListRequestOptions } from 'types/api.types';
+import { IStudyPostsType } from 'types/posts.types';
+import { IMemberType } from 'types/member.types';
 
 export const useGetUserAPI = () => {
   const [user, setUser] = useRecoilState(UserState);
@@ -147,18 +149,10 @@ export function useGetAlarm() {
 }
 
 export function useGetApplicant(postId: number, options?: any) {
-  return useQuery(
+  return useQuery<IMemberType[]>(
     queryKeys.applicant(postId),
     () => ApplicationAPI.getApplicant(postId),
-    {
-      retry: false,
-      refetchOnWindowFocus: true,
-      // 자동으로 가져오는 옵션
-      enabled: true,
-      // 캐시 타임
-      staleTime: 10 * 600 * 1000,
-      ...options,
-    },
+    { ...options },
   );
 }
 
@@ -169,22 +163,22 @@ export function useGetMentoringList(options: IMentoringListRequestOptions) {
 }
 
 export function useGetMyStudyPost() {
-  return useQuery(queryKeys.myStudyPost, PostAPI.myStudyPost);
+  return useQuery<IStudyPostsType>(queryKeys.myStudyPost, PostAPI.myStudyPost);
 }
 
 export function useGetParticipatingStudyPost() {
-  return useQuery(
+  return useQuery<IStudyPostsType>(
     queryKeys.participatingStudyPost,
     PostAPI.participatingStudyPost,
   );
 }
 
 export function useGetPostLikeList() {
-  return useQuery(queryKeys.postLikeList, LikeAPI.LikeList);
+  return useQuery<IStudyPostsType>(queryKeys.postLikeList, LikeAPI.LikeList);
 }
 
-export function useGetStudyMembers(postId?: number, options?: any) {
-  return useQuery(
+export function useGetStudyMembers(postId: number, options?: any) {
+  return useQuery<IMemberType[]>(
     queryKeys.studyMembers(postId),
     () => TeamAPI.getTeam(postId),
     { ...options },
