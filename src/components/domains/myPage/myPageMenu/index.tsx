@@ -1,6 +1,5 @@
-import OpenedBookIconSrc from '../../../assets/svg/book-open.svg';
-import GraduationHatIconSrc from '../../../assets/svg/graduation-hat.svg';
-import FavoriteMentoringList from '@components/domains/myPage/contentSection/mentoring/favoriteMentoringList';
+import OpenedBookIconSrc from '../../../../assets/svg/book-open.svg';
+import GraduationHatIconSrc from '../../../../assets/svg/graduation-hat.svg';
 import OpenedStudyAdministration from '../contentSection/study/openedStudyAdministration';
 import StudyApplicantConfirmation from '../contentSection/study/studyApplicantConfirmation';
 import ParticipatingStudy from '../contentSection/study/participatingStudy';
@@ -8,6 +7,7 @@ import FavoriteStudyList from '../contentSection/study/favoriteStudyList';
 import OpenedMentoringAdminsitration from '../contentSection/mentoring/openedMentoringAdministration';
 import MentoringApplicantConfirmation from '../contentSection/mentoring/mentoringApplicantConfirmation';
 import ParticipatingMentoring from '../contentSection/mentoring/participatingMentoring';
+import FavoriteMentoringList from '../contentSection/mentoring/favoriteMentoringList';
 
 export interface IDefaultFocusMenuType {
   mainMenuTitle: string;

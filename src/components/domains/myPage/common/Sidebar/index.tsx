@@ -1,4 +1,4 @@
-import { IDefaultFocusMenuType, myPageMenu } from '../myPageMenu';
+import { IDefaultFocusMenuType, myPageMenu } from '../../myPageMenu';
 import React from 'react';
 import classes from './index.module.scss';
 
