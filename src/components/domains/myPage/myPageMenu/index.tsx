@@ -1,13 +1,13 @@
-import OpenedBookIconSrc from '../../../assets/svg/book-open.svg';
-import GraduationHatIconSrc from '../../../assets/svg/graduation-hat.svg';
-import FavoriteMentoringList from './contentSection/mentoring/FavoriteMentoringList';
-import MentoringApplicantConfirmation from './contentSection/mentoring/MentoringApplicantConfirmation';
-import OpenedMentoringAdminsitration from './contentSection/mentoring/OpenedMentoringAdministration';
-import ParticipatingMentoring from './contentSection/mentoring/ParticipatingMentoring';
-import FavoriteStudyList from './contentSection/study/FavoriteStudyList';
-import OpenedStudyAdministration from './contentSection/study/OpenedStudyAdministration';
-import ParticipatingStudy from './contentSection/study/ParticipatingStudy';
-import StudyApplicantConfirmation from './contentSection/study/StudyApplicantConfirmation';
+import OpenedBookIconSrc from '../../../../assets/svg/book-open.svg';
+import GraduationHatIconSrc from '../../../../assets/svg/graduation-hat.svg';
+import OpenedStudyAdministration from '../contentSection/study/OpenedStudyAdministration';
+import StudyApplicantConfirmation from '../contentSection/study/StudyApplicantConfirmation';
+import ParticipatingStudy from '../contentSection/study/ParticipatingStudy';
+import FavoriteStudyList from '../contentSection/study/FavoriteStudyList';
+import OpenedMentoringAdminsitration from '../contentSection/mentoring/OpenedMentoringAdministration';
+import MentoringApplicantConfirmation from '../contentSection/mentoring/MentoringApplicantConfirmation';
+import ParticipatingMentoring from '../contentSection/mentoring/ParticipatingMentoring';
+import FavoriteMentoringList from '../contentSection/mentoring/FavoriteMentoringList';
 
 export interface IDefaultFocusMenuType {
   mainMenuTitle: string;

@@ -5,7 +5,7 @@ import { useInfiniteTotalPosts } from '@hooks/query/useInfiniteTotalPosts';
 import { queryKeys } from '@hooks/query/queryKeys';
 import { POSTS_URL_PARAMS } from 'pages/PostsPage';
 import classes from './postsSection.module.scss';
-import { PostAPI } from '@api/apis/post';
+import { PostAPI } from '@api/post';
 
 export const PostsInfiniteSection = () => {
   const [searchParams, setSearchParams] = useSearchParams();

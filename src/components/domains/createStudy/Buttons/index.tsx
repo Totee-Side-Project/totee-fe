@@ -5,7 +5,7 @@ import { PostRequestDto } from 'types/api.types';
 import { useCustomNavigate } from '@hooks/useCustomNavigate';
 import { useAddPost, useUpdatePost } from '@hooks/query/usePostQuery';
 import { validateFormData } from '@utils/validateData';
-import { PostAPI } from '@api/apis/post';
+import { PostAPI } from '@api/post';
 
 interface SubmitButtonProps {
   className: string;

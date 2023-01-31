@@ -6,7 +6,7 @@ import { Button, Input } from '@components/atoms';
 import { UserState } from '@store/index';
 import { IModalPropsType } from 'types/modal.types';
 import classes from './onboardmodal.module.scss';
-import { UserAPI } from '@api/apis/user';
+import { UserAPI } from '@api/user';
 
 export default function AddProfileModal({
   step,

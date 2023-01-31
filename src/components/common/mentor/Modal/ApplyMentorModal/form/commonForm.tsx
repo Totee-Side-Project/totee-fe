@@ -11,7 +11,7 @@ import Style from './commonForm.module.scss';
 //? image
 import IMG_UserProfile from '@assets/svg/common/userProfile.svg';
 import IMG_Cancel from '@assets/svg/common/cancel.svg';
-import { MentorAPI } from '@api/apis/mentor';
+import { MentorAPI } from '@api/mentor';
 
 const CommonForm: React.FC<ICommonForm> = (props) => {
   const { setIsShow, children } = props;

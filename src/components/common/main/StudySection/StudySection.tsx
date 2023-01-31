@@ -13,7 +13,7 @@ import { IResponsePostDetail } from 'types/api.types';
 import { POSTS_CATEGORY_PATHS, POSTS_URL_PARAMS } from 'pages/PostsPage';
 import classes from './studySection.module.scss';
 import './studySection.scss';
-import { PostAPI } from '@api/apis/post';
+import { PostAPI } from '@api/post';
 
 export function StudySection() {
   const [searchParams, setSearchParams] = useSearchParams();

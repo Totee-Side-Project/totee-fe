@@ -1,4 +1,4 @@
-import { SelectAPI } from '@api/apis/select';
+import { SelectAPI } from '@api/select';
 import { useMutation } from 'react-query';
 import { useQueryClient } from 'react-query';
 

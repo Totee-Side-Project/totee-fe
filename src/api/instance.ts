@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// swagger 링크 https://api.totee.link/swagger-ui.html#/
-export const BASE_URL = 'https://api.totee.link/';
+// swagger 링크 https://api.totee.store/swagger-ui.html#/
+export const BASE_URL = 'https://api.totee.store/';
 
 export const api = axios.create({
   baseURL: BASE_URL,

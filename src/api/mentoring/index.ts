@@ -17,4 +17,6 @@ export const MentoringAPI = {
 
     return api.get(`api/v1/mentoring/list?${query.toString()}`);
   },
+  getMyMentoringPosts: () =>
+    api.get('/api/v1/mentoring/mypost').then((res) => res.data.body.data),
 };

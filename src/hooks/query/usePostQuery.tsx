@@ -1,4 +1,4 @@
-import { PostAPI } from '@api/apis/post';
+import { PostAPI } from '@api/post';
 import { useMutation } from 'react-query';
 import { useQueryClient } from 'react-query';
 import { queryKeys } from './queryKeys';

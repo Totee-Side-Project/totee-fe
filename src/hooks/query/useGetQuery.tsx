@@ -1,15 +1,18 @@
+import { AlarmAPI } from '@api/alarm';
+import { ApplicationAPI } from '@api/application';
+import { CategoryAPI } from '@api/category';
+import { LikeAPI } from '@api/like';
+import { MentoringAPI } from '@api/mentoring';
+import { PostAPI } from '@api/post';
+import { TeamAPI } from '@api/team';
+import { UserAPI } from '@api/user';
+import { UserState } from '@store/user';
 import { useQuery } from 'react-query';
 import { useRecoilState } from 'recoil';
-import { UserState } from '@store/user';
-import { queryKeys } from './queryKeys';
 import { IMentoringListRequestOptions } from 'types/api.types';
-import { UserAPI } from '@api/apis/user';
-import { PostAPI } from '@api/apis/post';
-import { CategoryAPI } from '@api/apis/category';
-import { LikeAPI } from '@api/apis/like';
-import { ApplicationAPI } from '@api/apis/application';
-import { MentoringAPI } from '@api/apis/mentoring';
-import { AlarmAPI } from '@api/apis/alarm';
+import { IMemberType } from 'types/member.types';
+import { IStudyPostsType } from 'types/posts.types';
+import { queryKeys } from './queryKeys';
 
 export const useGetUserAPI = () => {
   const [user, setUser] = useRecoilState(UserState);
@@ -93,13 +96,50 @@ export function useGetAlarm() {
 }
 
 export function useGetApplicant(postId: number) {
-  return useQuery(queryKeys.applicant(postId), () =>
-    ApplicationAPI.getApplicant(postId),
+  return useQuery<IMemberType[]>(
+    queryKeys.applicant(postId),
+    () => ApplicationAPI.getApplicant(postId),
+    { enabled: !!postId },
   );
 }
 
 export function useGetMentoringList(options: IMentoringListRequestOptions) {
   return useQuery(queryKeys.mentoringList(options), () =>
     MentoringAPI.getMentoringList(options),
+  );
+}
+
+export function useGetMyStudyPost() {
+  return useQuery<IStudyPostsType>(queryKeys.myStudyPost, PostAPI.myStudyPost);
+}
+
+export function useGetParticipatingStudyPost() {
+  return useQuery<IStudyPostsType>(
+    queryKeys.participatingStudyPost,
+    PostAPI.participatingStudyPost,
+  );
+}
+
+export function useGetPostLikeList() {
+  return useQuery<IStudyPostsType>(queryKeys.postLikeList, LikeAPI.LikeList);
+}
+
+export function useGetStudyMembers(postId: number) {
+  return useQuery<IMemberType[]>(
+    queryKeys.studyMembers(postId),
+    () => TeamAPI.getTeam(postId),
+    { enabled: !!postId },
+  );
+}
+
+export function useGetMyMentoringPosts() {
+  return useQuery(queryKeys.myMentoringPosts, MentoringAPI.getMyMentoringPosts);
+}
+
+export function useGetMentoringMembers(mentoringId: number) {
+  return useQuery(
+    queryKeys.mentoringMembers(mentoringId),
+    () => TeamAPI.getMentoringTeam(mentoringId),
+    { enabled: !!mentoringId },
   );
 }

@@ -1,4 +1,3 @@
-import { GetPostListParams } from '@api/types/api.types';
 import { api } from '@api/instance';
 import { AxiosResponse } from 'axios';
 import {
@@ -6,6 +5,7 @@ import {
   IGetPostListResponse,
   PostRequestDto,
 } from 'types/api.types';
+import { GetPostListParams } from './types';
 
 export const PostAPI = {
   getPostList: ({
@@ -41,5 +41,8 @@ export const PostAPI = {
     }),
   deletePost: (postId: number) => api.delete(`/api/v1/post/${postId}`),
   recommendPostList: () => api.get(`/api/v1/post/recommend`),
-  myPost: () => api.get(`/api/v1/post/mypost`),
+  myStudyPost: () =>
+    api.get(`/api/v1/post/mypost`).then((res) => res.data.body.data),
+  participatingStudyPost: () =>
+    api.get(`/api/v1/post/mystudy`).then((res) => res.data.body.data),
 };
