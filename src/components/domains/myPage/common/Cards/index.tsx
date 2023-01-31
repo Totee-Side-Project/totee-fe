@@ -11,7 +11,7 @@ interface ICardsProps {
   posts: IPostsType;
   memberSectionTitle?: string;
   members?: IMemberType[];
-  setCurrentPostId: React.Dispatch<React.SetStateAction<number>>;
+  setCurrentPostId?: React.Dispatch<React.SetStateAction<number>>;
   onClickMemberCard?: (member: IMemberType) => void;
 }
 

@@ -5,7 +5,7 @@ import profileCircle from '../../../../../../assets/svg/profile-circle.svg';
 
 interface IMentoringPostCardProps {
   posts: any;
-  setCurrentPostId: React.Dispatch<React.SetStateAction<number>>;
+  setCurrentPostId?: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const MentoringPostCard = ({
@@ -27,7 +27,9 @@ const MentoringPostCard = ({
             <div
               className={classes.mentoringPostCard}
               key={post.mentoringId}
-              onClick={() => setCurrentPostId(post.mentoringId)}
+              onClick={() =>
+                setCurrentPostId && setCurrentPostId(post.mentoringId)
+              }
             >
               <p className={classes.title}>{post.title}</p>
               <p className={classes.field}>
