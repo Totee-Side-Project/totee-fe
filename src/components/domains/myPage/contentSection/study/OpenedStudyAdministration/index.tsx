@@ -37,6 +37,7 @@ const OpenedStudyAdministration = () => {
   return (
     <>
       <Cards
+        menu="스터디"
         postSectionTitle="내가 개설한 스터디"
         posts={posts}
         memberSectionTitle="현재 스터디 멤버"

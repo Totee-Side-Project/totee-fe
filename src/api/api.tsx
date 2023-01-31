@@ -140,6 +140,8 @@ export const ApplicationAPI = {
 export const TeamAPI = {
   getTeam: (postId?: number) =>
     api.get(`api/v1/team/${postId}`).then((res) => res.data.body.data),
+  getMentoringTeam: (mentoringId?: number) =>
+    api.get(`api/v2/team/${mentoringId}`).then((res) => res.data.body.data),
   postTeam: (postId: number, formData: IPostTeamRequestFormData) =>
     api.post(`api/v1/team/${postId}`, { ...formData }),
   resignateTeam: (postId: number, nickname: string) =>
@@ -167,6 +169,8 @@ export const MentoringAPI = {
 
     return api.get(`api/v1/mentoring/list?${query.toString()}`);
   },
+  getMyMentoringPosts: () =>
+    api.get('/api/v1/mentoring/mypost').then((res) => res.data.body.data),
 };
 
 // window.location.host;

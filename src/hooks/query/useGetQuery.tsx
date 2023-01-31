@@ -190,3 +190,15 @@ export function useGetStudyMembers(postId?: number, options?: any) {
     { ...options },
   );
 }
+
+export function useGetMyMentoringPosts() {
+  return useQuery(queryKeys.myMentoringPosts, MentoringAPI.getMyMentoringPosts);
+}
+
+export function useGetMentoringMembers(mentoringId: number, options?: any) {
+  return useQuery(
+    queryKeys.mentoringMembers(mentoringId),
+    () => TeamAPI.getMentoringTeam(mentoringId),
+    { ...options },
+  );
+}

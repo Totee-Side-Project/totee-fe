@@ -30,6 +30,8 @@ export const queryKeys = {
   participatingStudyPost: ['participatingStudyPost'],
   postLikeList: ['postLikeList'],
   studyMembers: (postId?: number) => ['studyMembers', postId],
+  myMentoringPosts: ['myMentoringPosts'],
+  mentoringMembers: (mentoringId?: number) => ['mentoringMembers', mentoringId],
   // 구현 전
   // team: (postId: number) => ['team', postId],
 };

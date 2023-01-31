@@ -34,6 +34,7 @@ const StudyApplicantConfirmation = () => {
   return (
     <>
       <Cards
+        menu="스터디"
         postSectionTitle="내가 개설한 스터디의 지원자 확인"
         posts={posts}
         memberSectionTitle="스터디 지원자 목록"
