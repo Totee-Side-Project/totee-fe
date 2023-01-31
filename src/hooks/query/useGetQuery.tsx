@@ -69,7 +69,6 @@ export function useGetSearchPostList({
 export function useGetCategoryList() {
   return useQuery(queryKeys.categories, CategoryAPI.getCategoryList, {
     refetchOnWindowFocus: false,
-    onError: (err) => err,
   });
 }
 
