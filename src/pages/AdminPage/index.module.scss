@@ -1,0 +1,18 @@
+.adminPage {
+  display: flex;
+  background-color: #f9f9f9;
+  margin-top: 70px;
+
+  .contentSection {
+    width: 100%;
+    padding: 0 50px;
+  }
+}
+
+.tableContainer {
+  flex-basis: 1250px;
+  height: 850px;
+  padding: 30px;
+  border: 1px solid #cccccc;
+  margin-top: 140px;
+}
