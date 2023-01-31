@@ -1,6 +1,6 @@
 import OpenedBookIconSrc from '../../../assets/svg/book-open.svg';
 import GraduationHatIconSrc from '../../../assets/svg/graduation-hat.svg';
-import FavoriteMentoringList from './contentSection/mentoring/favoriteMentoringList';
+import FavoriteMentoringList from './contentSection/mentoring/favoriteMentoringList/index';
 import MentoringApplicantConfirmation from './contentSection/mentoring/mentoringApplicantConfirmation';
 import OpenedMentoringAdminsitration from './contentSection/mentoring/openedMentoringAdministration';
 import ParticipatingMentoring from './contentSection/mentoring/participatingMentoring';
