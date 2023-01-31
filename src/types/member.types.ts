@@ -1,7 +1,7 @@
 export interface IMemberType {
   applicationDate: string;
   email: string;
-  message: null | string;
+  message: string;
   nickname: string;
   position: string;
   profileImg: string;
