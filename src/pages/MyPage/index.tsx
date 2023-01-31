@@ -1,6 +1,6 @@
 import ContentSection from '@components/domains/myPage/contentSection';
 import SideBar from '@components/domains/myPage/sidebar';
-import { defaultFocusMenu } from '@components/domains/myPage/MyPageMenu';
+import { defaultFocusMenu } from '@components/domains/myPage/myPageMenu';
 import { useState } from 'react';
 import classes from './index.module.scss';
 

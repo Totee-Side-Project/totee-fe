@@ -1,5 +1,5 @@
 import UserProfile from '../common/UserProfile';
-import { IDefaultFocusMenuType } from '../MyPageMenu';
+import { IDefaultFocusMenuType } from '../myPageMenu';
 import classes from './index.module.scss';
 
 interface IContentSectionProps {
