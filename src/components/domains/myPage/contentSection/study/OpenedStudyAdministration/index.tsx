@@ -13,7 +13,7 @@ import { useQuery } from 'react-query';
 import classes from '../../../common/DetailedMemberModal/index.module.scss';
 
 const OpenedStudyAdministration = () => {
-  const { data } = useQuery(queryKeys.user);
+  const { data }: any = useQuery(queryKeys.user);
   const user = data?.data.body.data;
 
   const { posts, members, currentPostId, setCurrentPostId } =
