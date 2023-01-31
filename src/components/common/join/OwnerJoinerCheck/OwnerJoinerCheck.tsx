@@ -43,7 +43,7 @@ function OwnerJoinerCheck() {
             </div>
             <div className="StatusM_Title_Line" />
             <div className={`StatusM_Contents ${isFull && 'StatusM_Full'}`}>
-              {applicant.map((applicant) => (
+              {applicant.map((applicant: IApplicantDetail) => (
                 <div
                   className="StatusM_NameBox"
                   key={applicant.nickname}
