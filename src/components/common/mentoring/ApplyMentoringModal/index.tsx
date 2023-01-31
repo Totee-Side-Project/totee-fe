@@ -1,15 +1,25 @@
 import { ChangeEvent, MouseEventHandler, useState } from 'react';
 import { ReactComponent as XIcon } from '@assets/svg/xicon.svg';
-import { IMentoring } from 'types/api.types';
 import classes from './index.module.scss';
 import DropDown from '@components/common/dropdown';
 import Checkbox from '@components/atoms/Checkbox';
-import { Input } from '@components/atoms';
+
+export interface ApplyMentoringPayloads {
+  comment: string;
+  contact: string;
+  endTime: string;
+  startTime: string;
+  week: string;
+}
 
 interface ApplyMentoringModalProps {
   onCloseClick(): void;
-  onApplyClick(): void;
-  mentoring: IMentoring;
+  onApplyClick(payload: ApplyMentoringPayloads): void;
+  profile: {
+    nickname: string;
+    email: string;
+    profileImage: string;
+  };
 }
 
 const STEPS = ['PREFERRED_TIME', 'SELF_INTRO'] as const;
@@ -41,6 +51,7 @@ function Profile({ nickname, email, image }: ProfileProps) {
 function ApplyMentoringModal({
   onCloseClick,
   onApplyClick,
+  profile,
 }: ApplyMentoringModalProps) {
   const [step, setStep] = useState<typeof STEPS[number]>('PREFERRED_TIME');
   const [preferredStartAt, setPreferredStartAt] = useState<string | null>(null);
@@ -67,7 +78,13 @@ function ApplyMentoringModal({
   };
 
   const handleSubmit = () => {
-    // TODO:
+    onApplyClick({
+      comment: intro,
+      contact,
+      startTime: preferredStartAt ?? '',
+      endTime: preferredEndAt ?? '',
+      week: [...preferredDays.values()].join(', '),
+    });
   };
 
   const getPreferredDaysHandler =
@@ -89,9 +106,9 @@ function ApplyMentoringModal({
       <div className={classes.modal}>
         <XIcon className={classes.close_icon} onClick={onCloseClick} />
         <Profile
-          image="https://cdn.pixabay.com/index/2023/01/16/17-14-16-8_1440x550.jpg"
-          nickname="최진우"
-          email="dev@gmail.com"
+          image={profile.profileImage}
+          nickname={profile.nickname}
+          email={profile.email}
         />
 
         <div className={classes.divider} />
@@ -105,11 +122,13 @@ function ApplyMentoringModal({
               <DropDown
                 onChange={setPreferredStartAt}
                 items={TIMETABLES}
+                defValue={preferredStartAt ?? undefined}
                 placeholder="시작 시각을 설정해 주세요."
               />
               <DropDown
                 onChange={setPreferredEndAt}
                 items={TIMETABLES}
+                defValue={preferredEndAt ?? undefined}
                 placeholder="종료 시각을 설정해 주세요."
               />
             </div>
@@ -136,7 +155,9 @@ function ApplyMentoringModal({
               onChange={(e) => setContact(e.target.value)}
               placeholder="(오픈카톡, 아이디, 전화번호)"
             />
-            <p className={classes.section_title}>멘토링 받을 연락처</p>
+            <p className={classes.section_title}>
+              기타 자기 소개 코멘트를 달아 주세요.
+            </p>
             <textarea
               value={intro}
               onChange={(e) => setIntro(e.target.value)}
