@@ -5,6 +5,7 @@ import {
   IGetMentoringListResponse,
   IGetPostDetailResponse,
   IGetPostListResponse,
+  IMentoListRequestOptions,
   IMentoringListRequestOptions,
   IPostTeamRequestFormData,
   IRequestReply,
@@ -12,7 +13,7 @@ import {
 } from 'types/api.types';
 import { GetPostListParams } from './api.types';
 
-const BASE_URL = 'https://api.totee.link/';
+const BASE_URL = 'https://api.totee.store/';
 
 export const api = axios.create({
   baseURL: BASE_URL,
@@ -145,6 +146,8 @@ export const TeamAPI = {
 export const MentorAPI = {
   applyMentor: (payload: IApplyMentor) =>
     api.post('/api/v1/mentor/apply', { ...payload }),
+  getMentorList: ({ kind, page, size }: IMentoListRequestOptions) =>
+    api.get(`/api/v1/mentor/list/${kind}`, { params: { page, size } }),
 };
 
 export const MentoringAPI = {
