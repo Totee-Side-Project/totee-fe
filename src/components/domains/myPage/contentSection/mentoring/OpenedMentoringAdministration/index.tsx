@@ -11,9 +11,6 @@ const OpenedMentoringAdminsitration = () => {
   const { posts, members, currentPostId, setCurrentPostId } =
     useGetUserActivity(useGetMyMentoringPosts, useGetMentoringMembers);
 
-  console.log(currentPostId);
-  console.log(members);
-
   const { isOpenedModal, setIsOpenedModal, currentMember, onClickMemberCard } =
     useMemberModal();
 
