@@ -1,0 +1,143 @@
+.modalContent {
+  padding: 0 0 !important;
+}
+
+.mentoApplyAcceptModal {
+  width: 465px;
+  height: 673px;
+  text-align: center;
+  padding: 65px 30px 22px 30px;
+
+  .mentoProfile {
+    border-bottom: 1px solid #d8d8d8;
+    padding-bottom: 24px;
+
+    .profileImage {
+      min-width: 95px;
+      max-width: 95px;
+      min-height: 95px;
+      margin-bottom: 18px;
+      border: 1px solid #9a9a9a;
+      border-radius: 100%;
+      object-fit: contain;
+    }
+    .nickName {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 25px;
+      color: #484848;
+    }
+
+    .email {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #767676;
+    }
+
+    .contact {
+      margin-top: 18px;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #767676;
+      background-color: #f0f0f0;
+    }
+  }
+
+  .mentoCareerProfile {
+    margin: 14px 0;
+
+    .mentoCarrerProfleTop {
+      display: flex;
+      justify-content: center;
+      gap: 34px;
+
+      .fieldWrap {
+        width: 132px;
+        .field {
+          padding: 7px 2px;
+          border: 1px solid #7ba364;
+          border-radius: 10px;
+          color: #427f2f;
+        }
+      }
+
+      .careerWrap {
+        width: 132px;
+        .career {
+          padding: 7px 2px;
+          border: 1px solid #7ba364;
+          border-radius: 10px;
+          color: #427f2f;
+        }
+      }
+    }
+
+    .mentoCarrerProfleBottom {
+      margin: 12px 0;
+
+      .portfolioWrap {
+        width: 320px;
+        margin: 0 auto;
+        .label {
+          font-size: 16px;
+          font-weight: 700;
+          color: #427f2f;
+        }
+        .portfolio {
+          padding: 7px 2px;
+          border: 1px solid #7ba364;
+          border-radius: 10px;
+          color: #545454;
+        }
+      }
+    }
+  }
+
+  .comment {
+    height: 158px;
+    padding: 23px 20px;
+    border-radius: 12px;
+    background-color: #f4f4f4;
+  }
+
+  .buttonWrap {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+    .rejectButton {
+      width: 150px;
+      height: 40px;
+      border: 1px solid #898989;
+      border-radius: 10px;
+
+      font-size: 16px;
+      font-weight: 400;
+
+      background-color: #ffffff;
+      color: #898989;
+    }
+
+    .acceptButton {
+      width: 150px;
+      height: 40px;
+      border-radius: 10px;
+
+      font-size: 16px;
+      font-weight: 400;
+
+      background-color: #568a35;
+      color: #ffffff;
+    }
+  }
+}
+
+.label {
+  font-size: 16px;
+  font-weight: 700;
+  color: #427f2f;
+  margin-bottom: 5px;
+}
