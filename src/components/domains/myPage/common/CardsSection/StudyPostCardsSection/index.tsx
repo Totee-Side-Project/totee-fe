@@ -1,6 +1,6 @@
+import { IStudyPostsType } from '@api/post/types';
 import { PostCard } from '@components/common/post/PostCard/PostCard';
 import { useState } from 'react';
-import { IStudyPostsType } from 'types/posts.types';
 import Pagination from '../../Pagination';
 import classes from './index.module.scss';
 

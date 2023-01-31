@@ -1,9 +1,9 @@
-import { UserType } from 'types/user.types';
+import { IUserType } from '@api/user/types';
 import React from 'react';
 import classes from '../index.module.scss';
 
 interface INickNameProps {
-  user: UserType;
+  user: IUserType;
   nickName: string;
   setNickName: React.Dispatch<React.SetStateAction<string>>;
   isEditProfile: boolean;

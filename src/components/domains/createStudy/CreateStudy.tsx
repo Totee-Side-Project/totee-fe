@@ -1,13 +1,11 @@
 import { ChangeEvent, MouseEvent } from 'react';
 import { useReducer } from 'react';
-
-import { PostRequestDto } from 'types/api.types';
-
 import { defaultForm, reducerOfStudyPost } from './reducerOfStudyPost';
 import { data } from './data';
 import { DefaultForm } from './DefaultForm';
 import { DetailForm } from './DetailForm';
 import classes from './createStudy.module.scss';
+import { PostRequestDto } from '@api/post/types';
 
 export const CreateStudy = ({
   initialData,

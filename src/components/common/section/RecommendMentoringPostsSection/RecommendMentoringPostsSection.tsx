@@ -6,8 +6,8 @@ import NEXT_ARROW_ICON from '@assets/png/nextarrow.png';
 import PREVIOUS_ARROW_ICON from '@assets/png/prevarrow.png';
 import classes from './RecommendMentoringPostsSection.module.scss';
 import { useGetMentoringList } from '@hooks/query/useGetQuery';
-import { IMentoring } from 'types/api.types';
 import MentoringPostDetailModal from '@components/common/mentoring/MentoringPostDetailModal';
+import { IMentoring } from '@api/mentoring/types';
 
 const SECTION_TEXTS = {
   subtitle: 'Level Up Mentoring',

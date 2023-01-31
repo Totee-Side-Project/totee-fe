@@ -3,15 +3,15 @@ import { ApplicationAPI } from '@api/application';
 import { CategoryAPI } from '@api/category';
 import { LikeAPI } from '@api/like';
 import { MentoringAPI } from '@api/mentoring';
+import { IMentoringListRequestOptions } from '@api/mentoring/types';
 import { PostAPI } from '@api/post';
+import { IStudyPostsType } from '@api/post/types';
 import { TeamAPI } from '@api/team';
+import { IMemberType } from '@api/team/types';
 import { UserAPI } from '@api/user';
 import { UserState } from '@store/user';
 import { useQuery } from 'react-query';
 import { useRecoilState } from 'recoil';
-import { IMentoringListRequestOptions } from 'types/api.types';
-import { IMemberType } from 'types/member.types';
-import { IStudyPostsType } from 'types/posts.types';
 import { queryKeys } from './queryKeys';
 
 export const useGetUserAPI = () => {

@@ -1,6 +1,5 @@
+import { IPostCommentDto } from '@api/comment/types';
 import { Button } from '@components/atoms';
-import { IPostCommentDto } from 'types/api.types';
-
 import {
   useAddComment,
   useAddReply,

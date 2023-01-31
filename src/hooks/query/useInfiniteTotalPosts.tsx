@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { AxiosResponse } from 'axios';
-import { IResponseOfPage } from 'types/api.types';
 import { useIntersectionObserver } from './useIntersectionObserver';
-import { GetPostListParams } from '@api/post/types';
+import { GetPostListParams, IResponseOfPage } from '@api/post/types';
 
 // import GetPostListParams from
 export type FetchPageFuntionType = (

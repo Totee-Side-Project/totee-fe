@@ -1,5 +1,5 @@
 import { api } from '@api/instance';
-import { IPostTeamRequestFormData } from 'types/api.types';
+import { IPostTeamRequestFormData } from '@api/post/types';
 
 export const TeamAPI = {
   getTeam: (postId?: number) =>

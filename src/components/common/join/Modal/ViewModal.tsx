@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
 import { Button, Modal } from '@components/atoms';
-import { IApplicantDetail } from 'types/api.types';
 import { usePostTeam } from '@hooks/query/useMutateQuery';
 import { useParams } from 'react-router-dom';
 import './joinerViewModal.scss';
 import Swal from 'sweetalert2';
+import { IApplicantDetail } from '@api/application/types';
 
 interface IViewModalProps {
   isOpen: boolean;

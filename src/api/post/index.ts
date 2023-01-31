@@ -1,11 +1,12 @@
 import { api } from '@api/instance';
 import { AxiosResponse } from 'axios';
+
 import {
+  GetPostListParams,
   IGetPostDetailResponse,
   IGetPostListResponse,
   PostRequestDto,
-} from 'types/api.types';
-import { GetPostListParams } from './types';
+} from './types';
 
 export const PostAPI = {
   getPostList: ({

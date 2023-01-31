@@ -1,10 +1,10 @@
+import { IUserType } from '@api/user/types';
 import { POSITION_LIST, POSITION_LIST_KEY } from 'constants/position.';
 import React from 'react';
-import { UserType } from 'types/user.types';
 import classes from '../index.module.scss';
 
 interface IPositionProps {
-  user: UserType;
+  user: IUserType;
   isEditProfile: boolean;
   setPosition: React.Dispatch<React.SetStateAction<string>>;
 }

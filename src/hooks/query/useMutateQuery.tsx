@@ -1,7 +1,6 @@
 import { useMutation, useQueryClient } from 'react-query';
-import { IPostTeamRequestFormData } from 'types/api.types';
+
 import { queryKeys } from './queryKeys';
-import { IRequestReply } from 'types/api.types';
 import Swal from 'sweetalert2';
 import axios, { AxiosError } from 'axios';
 import _ from 'lodash';
@@ -13,6 +12,8 @@ import { LikeAPI } from '@api/like';
 import { AlarmAPI } from '@api/alarm';
 import { ApplicationAPI } from '@api/application';
 import { TeamAPI } from '@api/team';
+import { IRequestReply } from '@api/reply/types';
+import { IPostTeamRequestFormData } from '@api/post/types';
 
 export const useAddUserInfo = () => {
   const queryClient = useQueryClient();

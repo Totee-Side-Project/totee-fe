@@ -1,10 +1,10 @@
-import { UserType } from 'types/user.types';
 import Introduction from './Introduction/indext';
 import React from 'react';
 import classes from './index.module.scss';
+import { IUserType } from '@api/user/types';
 
 interface IUserActivityWrapperProps {
-  user: UserType;
+  user: IUserType;
   isEditProfile: boolean;
   introduction: string;
   setIntroduction: React.Dispatch<React.SetStateAction<string>>;

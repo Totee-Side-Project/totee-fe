@@ -1,4 +1,4 @@
-import { PostRequestDto } from 'types/api.types';
+import { PostRequestDto } from '@api/post/types';
 
 export const defaultForm: PostRequestDto = {
   title: '', // 제목

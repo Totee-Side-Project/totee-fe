@@ -1,7 +1,7 @@
 import classes from './index.module.scss';
 import { ReactComponent as XIcon } from '@assets/svg/xicon.svg';
 import { MouseEventHandler } from 'react';
-import { IMentoring } from 'types/api.types';
+import { IMentoring } from '@api/mentoring/types';
 
 interface MentoringPostDetailModalProps {
   onCloseClick(): void;

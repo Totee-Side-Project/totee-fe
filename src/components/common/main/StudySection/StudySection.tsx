@@ -9,11 +9,11 @@ import { useSortWithClient } from '@hooks/useSortWithClient';
 import { useInfiniteTotalPosts } from '@hooks/query/useInfiniteTotalPosts';
 import { PostsFilter } from '@components/domains/posts/PostsFilter';
 import { SortButton } from '@components/atoms/Button/SortButton/SortButton';
-import { IResponsePostDetail } from 'types/api.types';
 import { POSTS_CATEGORY_PATHS, POSTS_URL_PARAMS } from 'pages/PostsPage';
 import classes from './studySection.module.scss';
 import './studySection.scss';
 import { PostAPI } from '@api/post';
+import { IResponsePostDetail } from '@api/post/types';
 
 export function StudySection() {
   const [searchParams, setSearchParams] = useSearchParams();

@@ -3,7 +3,7 @@ import { AxiosResponse } from 'axios';
 import {
   IGetMentoringListResponse,
   IMentoringListRequestOptions,
-} from 'types/api.types';
+} from './types';
 
 export const MentoringAPI = {
   getMentoringList: (

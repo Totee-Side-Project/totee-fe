@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useState } from 'react';
 
 import { Button } from '@components/atoms';
 import { replaceLineBreakTagIntoString } from '@utils/replaceLineBreakStringIntoTag';
-import { IPostCommentDto, IReplyDto } from 'types/api.types';
+
 import {
   SubmitCommentButton,
   SubmitModifyButton,
@@ -10,6 +10,7 @@ import {
 } from '../CommentButtons/CommentButtons';
 
 import classes from './commentSection.module.scss';
+import { IPostCommentDto, IReplyDto } from '@api/comment/types';
 
 export const CommentSubmitArea = ({
   postId,

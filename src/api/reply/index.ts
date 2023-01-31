@@ -1,5 +1,5 @@
 import { api } from '@api/instance';
-import { IRequestReply } from 'types/api.types';
+import { IRequestReply } from './types';
 
 export const ReplyAPI = {
   createReply: (form: IRequestReply) => api.post('/api/v1/reply', form),

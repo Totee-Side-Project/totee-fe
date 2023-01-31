@@ -1,5 +1,5 @@
+import { IMemberType } from '@api/team/types';
 import { useState } from 'react';
-import { IMemberType } from 'types/member.types';
 
 export const useMemberModal = () => {
   const [isOpenedModal, setIsOpenedModal] = useState(false);
