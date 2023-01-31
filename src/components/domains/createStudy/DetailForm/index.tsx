@@ -1,14 +1,12 @@
 import { ChangeEvent } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-
-import { PostRequestDto } from 'types/api.types';
 import { Line } from '@components/atoms/Line/Line';
 import { Editor } from '@components/common';
 import { Input } from '@components/atoms';
-
 import { SubmitButton } from '../Buttons';
 import { Idata } from '../data';
 import classes from '../createStudy.module.scss';
+import { PostRequestDto } from '@api/post/types';
 
 interface DetailFormProps {
   form: PostRequestDto;

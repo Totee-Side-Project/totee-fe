@@ -2,6 +2,7 @@ import { useRecoilState } from 'recoil';
 import { loginState } from '@store/login';
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useSetLocalStroageItem } from '@hooks/useLocalStorage';
 
 function LoginOauth() {
   const [login, setLogin] = useRecoilState(loginState);
@@ -9,10 +10,7 @@ function LoginOauth() {
   const token = new URL(window.location.href).searchParams.get('token');
 
   // token localstorage 저장
-  let obj: any = { state: true, token: token };
-  obj = JSON.stringify(obj);
-
-  localStorage.setItem('loginData', obj);
+  useSetLocalStroageItem('loginData', { state: true, token: token });
 
   // login token 담길시 새로고침
   // 0min: 새로 고침이 아니라 url만 변경해 주는 것

@@ -1,6 +1,5 @@
 import DetailedMemberModal from '@components/domains/myPage/common/DetailedMemberModal';
 import CardsSection from '@components/domains/myPage/common/CardsSection';
-import { queryKeys } from '@hooks/query';
 import {
   useGetMyStudyPost,
   useGetStudyMembers,
@@ -11,6 +10,7 @@ import { useGetUserActivity } from '@hooks/useGetUserActivity';
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import classes from '../../../common/DetailedMemberModal/index.module.scss';
+import { queryKeys } from '@hooks/query/queryKeys';
 
 const OpenedStudyAdministration = () => {
   const { data }: any = useQuery(queryKeys.user);

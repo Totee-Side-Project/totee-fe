@@ -1,21 +1,19 @@
 import { useMutation, useQueryClient } from 'react-query';
 
-import {
-  AlarmAPI,
-  ApplicationAPI,
-  CommentAPI,
-  LikeAPI,
-  PostAPI,
-  ReplyAPI,
-  TeamAPI,
-  UserAPI,
-} from '@api/api';
-import { IPostTeamRequestFormData, IResponsePostDetail } from 'types/api.types';
-import { queryKeys } from '.';
-import { IRequestReply } from 'types/api.types';
+import { queryKeys } from './queryKeys';
 import Swal from 'sweetalert2';
-import axios, { Axios, AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError } from 'axios';
 import _ from 'lodash';
+import { UserAPI } from '@api/user';
+import { CommentAPI } from '@api/comment';
+import { ReplyAPI } from '@api/reply';
+import { PostAPI } from '@api/post';
+import { LikeAPI } from '@api/like';
+import { AlarmAPI } from '@api/alarm';
+import { ApplicationAPI } from '@api/application';
+import { TeamAPI } from '@api/team';
+import { IRequestReply } from '@api/reply/types';
+import { IPostTeamRequestFormData } from '@api/post/types';
 
 export const useAddUserInfo = () => {
   const queryClient = useQueryClient();
@@ -144,9 +142,7 @@ export const useUpdateApplicant = (postId: number) => {
 
 export const useDeleteApplicant = (postId: string | undefined) => {
   const queryClient = useQueryClient();
-  return useMutation(() => ApplicationAPI.deleteApplicant(postId), {
-    onSuccess: () => {},
-  });
+  return useMutation(() => ApplicationAPI.deleteApplicant(postId));
 };
 
 export const usePostTeam = (postId: number) => {

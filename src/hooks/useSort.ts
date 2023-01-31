@@ -1,5 +1,5 @@
+import { IResponsePostDetail } from '@api/post/types';
 import { useState } from 'react';
-import { IResponsePostDetail } from 'types/api.types';
 
 type useSortPropsType = IResponsePostDetail[];
 

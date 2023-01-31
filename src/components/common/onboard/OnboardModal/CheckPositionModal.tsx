@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { Button } from '@components/atoms';
 import { IModalPropsType } from 'types/modal.types';
 import classes from './onboardmodal.module.scss';
+import { POSITION_LIST } from 'constants/position.';
 
 export default function CheckPositionModal({
   step,
@@ -14,17 +15,6 @@ export default function CheckPositionModal({
   onClickConfimButton,
 }: IModalPropsType) {
   const [selectedPosition, setSelectedPosition] = useState('');
-
-  const positionList: any = {
-    프론트엔드: 'FRONT_END',
-    백엔드: 'BACK_END',
-    ML: 'ML',
-    게임: 'GAME',
-    안드로이드: 'ANDROID',
-    IOS: ' IOS',
-    디자인: 'DESIGN',
-    기타: 'OTHERS',
-  };
 
   useEffect(() => {
     setValues({
@@ -41,16 +31,16 @@ export default function CheckPositionModal({
       <h2>희망하시거나 현재 속해있는 포지션을 선택해주세요.</h2>
       <div className={classes.body2}>
         <div className={classes.grid}>
-          {Object.keys(positionList).map((position: string, _) => (
+          {Object.keys(POSITION_LIST).map((position: string, _) => (
             <div
               className={classNames(
                 classes.tag,
-                positionList[position] === selectedPosition
+                POSITION_LIST[position] === selectedPosition
                   ? classes.selected
                   : '',
               )}
               key={`position-${position}`}
-              onClick={() => setSelectedPosition(positionList[position])}
+              onClick={() => setSelectedPosition(POSITION_LIST[position])}
             >
               {position}
             </div>

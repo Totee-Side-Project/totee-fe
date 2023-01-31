@@ -11,9 +11,9 @@ import { Icon, Select } from '@components/atoms';
 import FullHeartIcon from '@assets/svg/common/full_heart.svg';
 import HeartIcon from '@assets/svg/common/heart.svg';
 import SettingIcon from '@assets/svg/common/setting.svg';
-import { IResponsePostDetail } from 'types/api.types';
 import classes from './sectionTitle.module.scss';
 import { routePaths } from 'App';
+import { IResponsePostDetail } from '@api/post/types';
 
 type SectionHeaderProps = Pick<
   IResponsePostDetail,

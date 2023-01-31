@@ -1,5 +1,5 @@
-import { IMemberType } from 'types/member.types';
-import { IMentoringPostsType, IStudyPostsType } from 'types/posts.types';
+import { IMentoringPostsType, IStudyPostsType } from '@api/post/types';
+import { IMemberType } from '@api/team/types';
 import classes from './index.module.scss';
 import MemberCardsSection from './MemberCardsSection';
 import MentoringPostCardsSection from './MentoringPostCardsSection';

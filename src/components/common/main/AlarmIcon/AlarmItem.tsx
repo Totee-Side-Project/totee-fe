@@ -1,9 +1,9 @@
 import React from 'react';
 import classes from './alarmIcon.module.scss';
 import { useNavigate } from 'react-router-dom';
-import { AlarmType } from 'types/api.types';
 import { handleTime } from '@utils/handleTime';
 import { useUpdateAlarm } from '@hooks/query/useMutateQuery';
+import { AlarmType } from '@api/alarm/types';
 
 interface Props {
   alarm: AlarmType;

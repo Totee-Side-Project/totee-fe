@@ -1,14 +1,12 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-
-import { IApplicantDetail } from 'types/api.types';
 import { SkillIcon } from '@components/atoms/SkillIcon/SkillIcon';
-import { useGetApplicant, useGetPostByPostId } from '@hooks/query/useGetQuery';
+import { useGetApplicant } from '@hooks/query/useGetQuery';
 import { STUDY_MAX_LIMIT } from 'constants/studyLimit';
 
 import { ViewModal } from '../Modal/ViewModal';
 import './ownerJoinerCheck.scss';
-import { IMemberType } from 'types/member.types';
+import { IMemberType } from '@api/team/types';
 
 const VIEW_LIMIT_APPLICANT = 4;
 

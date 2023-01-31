@@ -1,4 +1,4 @@
-import { IResponsePostDetail } from 'types/api.types';
+import { IResponsePostDetail } from '@api/post/types';
 import { sortOptionNameType } from 'types/sort.types';
 
 export const useSortWithClient = () => {

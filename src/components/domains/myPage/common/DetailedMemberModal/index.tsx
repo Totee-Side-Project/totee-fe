@@ -1,4 +1,4 @@
-import { IMemberType } from 'types/member.types';
+import { IMemberType } from '@api/team/types';
 import profileCircle from '../../../../../assets/svg/profile-circle.svg';
 import classes from './index.module.scss';
 

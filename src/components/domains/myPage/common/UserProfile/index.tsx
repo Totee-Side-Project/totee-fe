@@ -3,14 +3,14 @@ import UserActivityWrapper from './UserActivityWrapper';
 import UserProfileImageWrapper from './UserProfileImageWrapper';
 import { useUserProfile } from '@hooks/useUserProfile';
 import { useQuery } from 'react-query';
-import { UserType } from 'types/user.types';
 import { AxiosResponse } from 'axios';
-import { queryKeys } from '@hooks/query';
+import { queryKeys } from '@hooks/query/queryKeys';
 import classes from './index.module.scss';
+import { IUserType } from '@api/user/types';
 
 const UserProfile = () => {
   const { data } = useQuery<AxiosResponse>(queryKeys.user);
-  const user: UserType = data?.data?.body?.data;
+  const user: IUserType = data?.data?.body?.data;
 
   const {
     isEditProfile,

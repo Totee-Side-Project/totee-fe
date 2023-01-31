@@ -1,11 +1,11 @@
-import { UserType } from 'types/user.types';
 import profileCircle from '../../../../../../assets/svg/profile-circle.svg';
 import profileSquare from '../../../../../../assets/svg/profile-square.svg';
 import React, { useState } from 'react';
 import classes from './index.module.scss';
+import { IUserType } from '@api/user/types';
 
 interface IUserProfileImageWrapperProps {
-  user: UserType;
+  user: IUserType;
   isEditProfile: boolean;
   setImageFile: React.Dispatch<
     React.SetStateAction<Blob | MediaSource | undefined>

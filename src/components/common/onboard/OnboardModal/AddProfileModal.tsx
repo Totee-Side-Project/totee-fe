@@ -3,10 +3,10 @@ import { useRecoilState } from 'recoil';
 import classNames from 'classnames';
 
 import { Button, Input } from '@components/atoms';
-import { UserAPI } from '@api/api';
 import { UserState } from '@store/index';
 import { IModalPropsType } from 'types/modal.types';
 import classes from './onboardmodal.module.scss';
+import { UserAPI } from '@api/user';
 
 export default function AddProfileModal({
   step,

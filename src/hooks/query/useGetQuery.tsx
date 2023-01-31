@@ -1,58 +1,35 @@
+import { AlarmAPI } from '@api/alarm';
+import { ApplicationAPI } from '@api/application';
+import { CategoryAPI } from '@api/category';
+import { LikeAPI } from '@api/like';
+import { MentoringAPI } from '@api/mentoring';
+import { IMentoringListRequestOptions } from '@api/mentoring/types';
+import { PostAPI } from '@api/post';
+import { IStudyPostsType } from '@api/post/types';
+import { TeamAPI } from '@api/team';
+import { IMemberType } from '@api/team/types';
+import { UserAPI } from '@api/user';
+import { UserState } from '@store/user';
 import { useQuery } from 'react-query';
 import { useRecoilState } from 'recoil';
-
-import {
-  AlarmAPI,
-  ApplicationAPI,
-  CategoryAPI,
-  LikeAPI,
-  MentoringAPI,
-  PostAPI,
-  TeamAPI,
-  UserAPI,
-} from '@api/api';
-import { UserState } from '@store/user';
-import { queryKeys } from '.';
-import { IMentoringListRequestOptions } from 'types/api.types';
-import { IStudyPostsType } from 'types/posts.types';
-import { IMemberType } from 'types/member.types';
+import { queryKeys } from './queryKeys';
 
 export const useGetUserAPI = () => {
   const [user, setUser] = useRecoilState(UserState);
 
-  return useQuery(
-    queryKeys.user,
-    () => UserAPI.getUserInfo().catch((err) => err),
-    {
-      // 브라우저 focus 됐을 때 재시작?
-      retry: false,
-      refetchOnWindowFocus: false,
-      // 자동으로 가져오는 옵션
-      enabled: true,
-      // 캐시 타임
-      staleTime: 10 * 600 * 1000,
-      onSuccess: (res) => {
-        if (res?.data?.body.data) {
-          setUser(res.data.body.data);
-        }
-      },
+  return useQuery(queryKeys.user, UserAPI.getUserInfo, {
+    refetchOnWindowFocus: false,
+    onSuccess: (res) => {
+      if (res?.data?.body.data) {
+        setUser(res.data.body.data);
+      }
     },
-  );
+  });
 };
 
 export function useGetPostByPostId(postId: number) {
-  return useQuery(
-    queryKeys.post(postId),
-    () => PostAPI.getPostByPostId(postId),
-    {
-      // 브라우저 focus 됐을 때 재시작?
-      retry: false,
-      refetchOnWindowFocus: true,
-      // 자동으로 가져오는 옵션
-      enabled: true,
-      // 캐시 타임
-      staleTime: 10 * 600 * 1000,
-    },
+  return useQuery(queryKeys.post(postId), () =>
+    PostAPI.getPostByPostId(postId),
   );
 }
 
@@ -83,42 +60,21 @@ export function useGetSearchPostList({
         sortOption,
       }).then((response) => response.data.body.data),
     {
-      // 브라우저 focus 됐을 때 재시작?
-      retry: false,
       refetchOnWindowFocus: false,
-      // 자동으로 가져오는 옵션
       enabled: !!keyword,
-      // 캐시 타임
-      staleTime: 10 * 600 * 1000,
     },
   );
 }
 
 export function useGetCategoryList() {
-  return useQuery(
-    queryKeys.categories,
-    () => CategoryAPI.getCategoryList().catch((err) => err),
-    {
-      // 브라우저 focus 됐을 때 재시작?
-      retry: false,
-      refetchOnWindowFocus: false,
-      // 자동으로 가져오는 옵션
-      enabled: true,
-      // 캐시 타임
-      staleTime: 10 * 600 * 1000,
-    },
-  );
+  return useQuery(queryKeys.categories, CategoryAPI.getCategoryList, {
+    refetchOnWindowFocus: false,
+  });
 }
 
 export function useGetRecommendList() {
-  return useQuery(queryKeys.recommend, () => PostAPI.recommendPostList(), {
-    // 브라우저 focus 됐을 때 재시작?
-    retry: false,
+  return useQuery(queryKeys.recommend, PostAPI.recommendPostList, {
     refetchOnWindowFocus: false,
-    // 자동으로 가져오는 옵션
-    enabled: true,
-    // 캐시 타임
-    staleTime: 10 * 600 * 1000,
   });
 }
 
@@ -127,23 +83,13 @@ export function useGetLikeofPost(postId: number) {
     queryKeys.likePost(postId),
     () => LikeAPI.getIsLikeInfo(postId),
     {
-      // 브라우저 focus 됐을 때 재시작?
-      retry: false,
       refetchOnWindowFocus: false,
-      // 자동으로 가져오는 옵션
-      enabled: true,
-      // 캐시 타임
-      staleTime: 10 * 600 * 1000,
-      onError: () => {},
     },
   );
 }
 
 export function useGetAlarm() {
-  return useQuery(queryKeys.alarms, () => AlarmAPI.getAlarm(), {
-    retry: false,
-    refetchOnWindowFocus: true,
-    enabled: true,
+  return useQuery(queryKeys.alarms, AlarmAPI.getAlarm, {
     staleTime: 0,
   });
 }

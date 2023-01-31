@@ -1,9 +1,9 @@
+import { IMentoringListRequestOptions } from '@api/mentoring/types';
 import {
-  IMentoringListRequestOptions,
   IPostSliderOptions,
   IPostsInfiniteScrollOptions,
   IPostsPaginationoptions,
-} from 'types/api.types';
+} from '@api/post/types';
 
 export const queryKeys = {
   user: ['user'],

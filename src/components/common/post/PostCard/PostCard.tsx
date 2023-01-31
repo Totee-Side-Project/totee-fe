@@ -1,18 +1,16 @@
 import Skeleton from 'react-loading-skeleton';
 import { useLocation, useNavigate } from 'react-router-dom';
-
 import {
   OverLimitIcons,
   UnOverLimitIcons,
 } from '@components/atoms/SkillIcon/SkillIcons';
 import { Icon } from '@components/atoms';
-import type { IResponsePostDetail } from 'types/api.types';
 import { createMarkup } from '@utils/createMarkup';
 import HeartIcon from '@assets/svg/common/heart.svg';
 import EyeIcon from '@assets/svg/common/eye.svg';
 import MessageIcon from '@assets/svg/common/message-square.svg';
-
 import classes from './PostCard.module.scss';
+import { IResponsePostDetail } from '@api/post/types';
 
 interface PostCardProps {
   post: IResponsePostDetail;
