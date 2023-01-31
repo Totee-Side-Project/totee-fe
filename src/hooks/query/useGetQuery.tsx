@@ -148,11 +148,11 @@ export function useGetAlarm() {
   });
 }
 
-export function useGetApplicant(postId: number, options?: any) {
+export function useGetApplicant(postId: number) {
   return useQuery<IMemberType[]>(
     queryKeys.applicant(postId),
     () => ApplicationAPI.getApplicant(postId),
-    { ...options },
+    { enabled: !!postId },
   );
 }
 
@@ -177,11 +177,11 @@ export function useGetPostLikeList() {
   return useQuery<IStudyPostsType>(queryKeys.postLikeList, LikeAPI.LikeList);
 }
 
-export function useGetStudyMembers(postId: number, options?: any) {
+export function useGetStudyMembers(postId: number) {
   return useQuery<IMemberType[]>(
     queryKeys.studyMembers(postId),
     () => TeamAPI.getTeam(postId),
-    { ...options },
+    { enabled: !!postId },
   );
 }
 
@@ -189,10 +189,10 @@ export function useGetMyMentoringPosts() {
   return useQuery(queryKeys.myMentoringPosts, MentoringAPI.getMyMentoringPosts);
 }
 
-export function useGetMentoringMembers(mentoringId: number, options?: any) {
+export function useGetMentoringMembers(mentoringId: number) {
   return useQuery(
     queryKeys.mentoringMembers(mentoringId),
     () => TeamAPI.getMentoringTeam(mentoringId),
-    { ...options },
+    { enabled: !!mentoringId },
   );
 }
