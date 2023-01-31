@@ -156,6 +156,12 @@ export interface IMentoringListRequestOptions {
   sort?: string[];
 }
 
+export interface IMentoListRequestOptions {
+  kind?: 'all' | 'n' | 'y';
+  page?: number;
+  size?: number;
+}
+
 export interface IGetMentoringListResponse {
   body: {
     data: {
@@ -173,6 +179,17 @@ export interface IMentoring {
   career: string;
   nickname: string;
   profileImageUrl: string;
+}
+
+export interface IMento {
+  nickname: string;
+  email: string;
+  field: string;
+  career: string;
+  contact: string;
+  portfolioUrl: string;
+  comment: string;
+  approval: string;
 }
 
 export interface IPostSliderOptions {

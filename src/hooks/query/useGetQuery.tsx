@@ -6,13 +6,18 @@ import {
   ApplicationAPI,
   CategoryAPI,
   LikeAPI,
+  MentorAPI,
   MentoringAPI,
   PostAPI,
   UserAPI,
 } from '@api/api';
+
 import { UserState } from '@store/user';
 import { queryKeys } from '.';
-import { IMentoringListRequestOptions } from 'types/api.types';
+import {
+  IMentoListRequestOptions,
+  IMentoringListRequestOptions,
+} from 'types/api.types';
 
 export const useGetUserAPI = () => {
   const [user, setUser] = useRecoilState(UserState);
@@ -163,5 +168,13 @@ export function useGetApplicant(postId: number) {
 export function useGetMentoringList(options: IMentoringListRequestOptions) {
   return useQuery(queryKeys.mentoringList(options), () =>
     MentoringAPI.getMentoringList(options),
+  );
+}
+
+export function useGetMentoList(options: IMentoListRequestOptions) {
+  return useQuery(queryKeys.mentoList, () =>
+    MentorAPI.getMentorList(options).then(
+      (response) => response.data.body.data,
+    ),
   );
 }

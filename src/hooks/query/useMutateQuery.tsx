@@ -5,6 +5,7 @@ import {
   ApplicationAPI,
   CommentAPI,
   LikeAPI,
+  MentorAPI,
   PostAPI,
   ReplyAPI,
   TeamAPI,
@@ -16,6 +17,7 @@ import { IRequestReply } from 'types/api.types';
 import Swal from 'sweetalert2';
 import axios, { Axios, AxiosError, AxiosResponse } from 'axios';
 import _ from 'lodash';
+import { AdminMentorRequestForm, adminAPI } from '@api/admin';
 
 export const useAddUserInfo = () => {
   const queryClient = useQueryClient();
@@ -174,4 +176,8 @@ export const useValidateNickName = () => {
       },
     },
   );
+};
+
+export const useAcceptApplyMento = () => {
+  return useMutation((form: AdminMentorRequestForm) => adminAPI.mentor(form));
 };

@@ -26,6 +26,5 @@ export const queryKeys = {
     'mentoring',
     options,
   ],
-  // 구현 전
-  // team: (postId: number) => ['team', postId],
+  mentoList: 'mentoList',
 };

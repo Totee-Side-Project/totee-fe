@@ -28,6 +28,7 @@ import {
 } from '@store/index';
 import studyBanner from '@assets/png/banner/study_banner2.png';
 import './App.css';
+import AdminPage from 'pages/AdminPage';
 
 export const routePaths = {
   main: '/',
@@ -39,6 +40,7 @@ export const routePaths = {
   edit: '/editstudy/',
   editId: '/editstudy/:id',
   mypage: '/mypage',
+  admin: '/admin',
 };
 
 export const isNotLoginRoutes = [
@@ -52,6 +54,7 @@ export const isLoginRoutes = [
   { path: routePaths.createStudy, element: <CreateStudyPage /> },
   { path: routePaths.mypage, element: <MyPage /> },
   { path: routePaths.editId, element: <EditStudyPage /> },
+  { path: routePaths.admin, element: <AdminPage /> },
 ];
 
 function App() {
