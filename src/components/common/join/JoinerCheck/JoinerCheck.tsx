@@ -57,16 +57,12 @@ function JoinerCheck() {
                 <div>
                   {applicantData?.length >= 4 ? (
                     <OverLimitIcons
-                      list={applicantData?.map(
-                        ({ profileImg }: string) => profileImg,
-                      )}
+                      list={applicantData?.map(({ profileImg }) => profileImg)}
                       limit={4}
                     />
                   ) : (
                     <UnOverLimitIcons
-                      list={applicantData?.map(
-                        ({ profileImg }: string) => profileImg,
-                      )}
+                      list={applicantData?.map(({ profileImg }) => profileImg)}
                     />
                   )}
                 </div>
