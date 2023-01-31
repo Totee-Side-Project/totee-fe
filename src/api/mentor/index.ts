@@ -1,5 +1,5 @@
 import { api } from '@api/instance';
-import { IApplyMentor } from 'types/api';
+import { IApplyMentor } from './types';
 
 export const MentorAPI = {
   applyMentor: (payload: IApplyMentor) =>
