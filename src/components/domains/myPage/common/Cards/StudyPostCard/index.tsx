@@ -1,25 +1,28 @@
 import { PostCard } from '@components/common/post/PostCard/PostCard';
 import { useState } from 'react';
-import { IPostsType } from 'types/posts.types';
+import { IStudyPostsType } from 'types/posts.types';
 import Pagination from '../../Pagination';
 import classes from './index.module.scss';
 
 interface IStudyPostCardProps {
-  posts: IPostsType;
+  studyPosts?: IStudyPostsType;
   setCurrentPostId?: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const StudyPostCard = ({ posts, setCurrentPostId }: IStudyPostCardProps) => {
+const StudyPostCard = ({
+  studyPosts,
+  setCurrentPostId,
+}: IStudyPostCardProps) => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  if (!posts || posts?.content.length === 0) {
+  if (!studyPosts || studyPosts?.content.length === 0) {
     return <></>;
   }
 
   return (
     <>
       <div className={classes.postCard}>
-        {posts.content
+        {studyPosts.content
           .slice((currentPage - 1) * 4, (currentPage - 1) * 4 + 4)
           .map((post) => (
             <PostCard
@@ -31,7 +34,7 @@ const StudyPostCard = ({ posts, setCurrentPostId }: IStudyPostCardProps) => {
           ))}
       </div>
       <Pagination
-        postsLength={posts.totalElements}
+        postsLength={studyPosts.totalElements}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       />

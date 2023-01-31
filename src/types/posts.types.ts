@@ -1,6 +1,6 @@
 import { IResponsePostDetail } from './api.types';
 
-export interface IPostsType {
+export interface IStudyPostsType {
   content: IResponsePostDetail[];
   empty: boolean;
   first: boolean;
@@ -22,4 +22,19 @@ export interface IPostsType {
   };
   totalElements: number;
   totalPages: number;
+}
+
+export interface IMentoringPostType {
+  mentoringId: number;
+  title: string;
+  field: string;
+  career: string;
+  content: string;
+  profileImageUrl: string;
+  nickname: string;
+}
+
+export interface IMentoringPostsType {
+  content: IMentoringPostType[];
+  totalElements: number;
 }

@@ -2,26 +2,27 @@ import { useState } from 'react';
 import Pagination from '../../Pagination';
 import classes from './index.module.scss';
 import profileCircle from '../../../../../../assets/svg/profile-circle.svg';
+import { IMentoringPostsType } from 'types/posts.types';
 
 interface IMentoringPostCardProps {
-  posts: any;
+  mentoringPosts?: IMentoringPostsType;
   setCurrentPostId?: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const MentoringPostCard = ({
-  posts,
+  mentoringPosts,
   setCurrentPostId,
 }: IMentoringPostCardProps) => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  if (!posts || posts?.content.length === 0) {
+  if (!mentoringPosts || mentoringPosts?.content.length === 0) {
     return <></>;
   }
 
   return (
     <>
       <div className={classes.mentoringPostCards}>
-        {posts.content
+        {mentoringPosts.content
           .slice((currentPage - 1) * 4, (currentPage - 1) * 4 + 4)
           .map((post) => (
             <div
@@ -60,7 +61,7 @@ const MentoringPostCard = ({
           ))}
       </div>
       <Pagination
-        postsLength={posts.totalElements}
+        postsLength={mentoringPosts.totalElements}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       />

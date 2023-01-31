@@ -1,14 +1,14 @@
 import { IMemberType } from 'types/member.types';
-import { IPostsType } from 'types/posts.types';
+import { IMentoringPostsType, IStudyPostsType } from 'types/posts.types';
 import classes from './index.module.scss';
 import MemberCard from './MemberCard';
 import MentoringPostCard from './MentoringPostCard';
 import StudyPostCard from './StudyPostCard';
 
 interface ICardsProps {
-  menu: '스터디' | '멘토링';
   postSectionTitle: string;
-  posts: IPostsType;
+  studyPosts?: IStudyPostsType;
+  mentoringPosts?: IMentoringPostsType;
   memberSectionTitle?: string;
   members?: IMemberType[];
   setCurrentPostId?: React.Dispatch<React.SetStateAction<number>>;
@@ -16,9 +16,9 @@ interface ICardsProps {
 }
 
 const Cards = ({
-  menu,
   postSectionTitle,
-  posts,
+  studyPosts,
+  mentoringPosts,
   memberSectionTitle,
   members,
   setCurrentPostId,
@@ -27,11 +27,17 @@ const Cards = ({
   return (
     <>
       <p className={classes.title}>{postSectionTitle}</p>
-      {menu === '스터디' && (
-        <StudyPostCard posts={posts} setCurrentPostId={setCurrentPostId} />
+      {studyPosts && (
+        <StudyPostCard
+          studyPosts={studyPosts}
+          setCurrentPostId={setCurrentPostId}
+        />
       )}
-      {menu === '멘토링' && (
-        <MentoringPostCard posts={posts} setCurrentPostId={setCurrentPostId} />
+      {mentoringPosts && (
+        <MentoringPostCard
+          mentoringPosts={mentoringPosts}
+          setCurrentPostId={setCurrentPostId}
+        />
       )}
       <div className={classes.horizontal} />
       <p className={classes.title}>{memberSectionTitle}</p>

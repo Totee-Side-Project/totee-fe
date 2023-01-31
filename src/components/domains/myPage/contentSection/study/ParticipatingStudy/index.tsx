@@ -19,9 +19,8 @@ const ParticipatingStudy = () => {
   return (
     <>
       <Cards
-        menu="스터디"
         postSectionTitle="참여 중인 스터디"
-        posts={posts}
+        studyPosts={posts}
         memberSectionTitle="현재 스터디 멤버"
         members={members}
         setCurrentPostId={setCurrentPostId}

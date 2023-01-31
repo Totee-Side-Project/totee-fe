@@ -20,9 +20,8 @@ const OpenedMentoringAdminsitration = () => {
   return (
     <>
       <Cards
-        menu="멘토링"
         postSectionTitle="내가 개설한 멘토링"
-        posts={posts}
+        mentoringPosts={posts}
         memberSectionTitle="나의 멘티 목록"
         members={members}
         setCurrentPostId={setCurrentPostId}
