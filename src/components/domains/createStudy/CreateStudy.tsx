@@ -5,12 +5,12 @@ import { data } from './data';
 import { DefaultForm } from './DefaultForm';
 import { DetailForm } from './DetailForm';
 import classes from './createStudy.module.scss';
-import { PostRequestDto } from '@api/post/types';
+import { IPostRequestDto } from '@api/post/types';
 
 export const CreateStudy = ({
   initialData,
 }: {
-  initialData?: PostRequestDto;
+  initialData?: IPostRequestDto;
 }) => {
   const [form, dispatch] = useReducer(
     reducerOfStudyPost,

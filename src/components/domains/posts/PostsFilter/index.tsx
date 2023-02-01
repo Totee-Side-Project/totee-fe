@@ -1,47 +1,48 @@
 import { FunctionComponent, ReactNode } from 'react';
-import { useSearchParams } from 'react-router-dom';
 
 import { Circle } from '@components/atoms';
-import { ISortOptions, sortOptionNameType } from 'types/sort.types';
-import { POSTS_URL_PARAMS } from 'pages/PostsPage';
+import { IMentoringSortOptions, IPostsSortOptions } from 'types/sort.types';
+import { CategoryTypes } from '@components/domains/posts/PostsContainer';
+import { useChangeSortParams } from '@hooks/useChangeSortParams';
 import classes from './postsFilter.module.scss';
 
 interface Props {
-  options: ISortOptions;
+  options: IPostsSortOptions | IMentoringSortOptions;
+  category?: CategoryTypes;
   Element?: FunctionComponent<{ center?: ReactNode; isSelected?: boolean }>;
 }
 
-export const PostsFilter = ({ options, Element }: Props) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const param = searchParams.get(POSTS_URL_PARAMS.SORT) || 'recent';
-  const titleParam = searchParams.get(POSTS_URL_PARAMS.KEYWORD) || null;
-  const onClick = (sortValue: sortOptionNameType) => {
-    const newSearchParams = titleParam
-      ? {
-          [POSTS_URL_PARAMS.KEYWORD]: titleParam,
-          [POSTS_URL_PARAMS.SORT]: sortValue,
-        }
-      : { [POSTS_URL_PARAMS.SORT]: sortValue };
-
-    if (sortValue === 'recent')
-      return setSearchParams(
-        titleParam ? { [POSTS_URL_PARAMS.KEYWORD]: titleParam } : {},
-      );
-
-    setSearchParams(newSearchParams as {});
-  };
-
-  const sortedList = Object.entries(options) as [sortOptionNameType, string][];
+export const PostsFilter = ({ options, category, Element }: Props) => {
+  const {
+    postsSortParam,
+    handleSearchParamsWithCategory,
+    handleSearchParamsWithNotCategory,
+  } = useChangeSortParams(category);
+  const sortedList = Object.entries(options) as [
+    keyof IPostsSortOptions | keyof IMentoringSortOptions,
+    string,
+  ][];
 
   return (
     <ul className={classes.filters}>
-      {sortedList.map(([key, value]) => (
-        <li key={key} className={classes.filter} onClick={() => onClick(key)}>
+      {sortedList.map(([sort, value]) => (
+        <li
+          key={sort}
+          className={classes.filter}
+          onClick={() =>
+            category
+              ? handleSearchParamsWithCategory(sort, category)
+              : handleSearchParamsWithNotCategory(sort)
+          }
+        >
           {Element ? (
-            <Element center={value} isSelected={param === key} />
+            <Element center={value} isSelected={postsSortParam === sort} />
           ) : (
             <>
-              <Circle selected={param === key} options={{ outCircle: false }} />
+              <Circle
+                selected={postsSortParam === sort}
+                options={{ outCircle: false }}
+              />
               {value}
             </>
           )}

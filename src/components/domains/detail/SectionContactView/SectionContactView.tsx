@@ -1,12 +1,7 @@
-import { IResponsePostDetail } from '@api/post/types';
+import { IPost } from '@api/post/types';
 import classes from './sectionContactView.module.scss';
 
-export const SectionContactView = ({
-  postData,
-}: {
-  // eslint-disable-next-line no-undef
-  postData: IResponsePostDetail;
-}) => {
+export const SectionContactView = ({ postData }: { postData: IPost }) => {
   return (
     <div className={classes.contact_view_wrap}>
       <p>

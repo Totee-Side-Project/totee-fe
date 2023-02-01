@@ -1,37 +1,38 @@
-import { useSearchParams } from 'react-router-dom';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 import { SectionTitle } from '@components/atoms';
 import { Carousel } from '@components/common';
 import { PostCard } from '@components/common/post/PostCard/PostCard';
-import { queryKeys } from '@hooks/query/queryKeys';
-import { useSortWithClient } from '@hooks/useSortWithClient';
-import { useInfiniteTotalPosts } from '@hooks/query/useInfiniteTotalPosts';
 import { PostsFilter } from '@components/domains/posts/PostsFilter';
 import { SortButton } from '@components/atoms/Button/SortButton/SortButton';
-import { POSTS_CATEGORY_PATHS, POSTS_URL_PARAMS } from 'pages/PostsPage';
+import { useSortWithClient } from '@hooks/useSortWithClient';
+import { useInfiniteTotalPosts } from '@hooks/query/useInfiniteWithDraw';
+import { useGetPostsParams } from '@hooks/useGetPostsParams';
+import { queryKeys } from '@hooks/query/queryKeys';
+import { PostAPI } from '@api/post';
+import type { IPost } from '@api/post/types';
+import { POSTS_CATEGORY_PATHS } from 'pages/PostsPage';
 import classes from './studySection.module.scss';
 import './studySection.scss';
-import { PostAPI } from '@api/post';
-import { IResponsePostDetail } from '@api/post/types';
+
+const LOADING_PAGE_SIZE = 4;
+const PAGE_SIZE = 16;
 
 export function StudySection() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const sortParam = searchParams.get(POSTS_URL_PARAMS.SORT) || '';
+  const { params, sortParam } = useGetPostsParams({ size: PAGE_SIZE });
 
   const { query } = useInfiniteTotalPosts({
     getPage: PostAPI.getPostList,
-    queryKey: queryKeys.postsSlider({ sortOption: sortParam }),
-    sortOption: sortParam,
-    size: 16,
+    queryKey: queryKeys.postsSlider({ sort: [sortParam] }),
+    params,
   });
   const { chunkData } = useSortWithClient();
 
   const pages = query.data?.pages.reduce(
-    (acc: IResponsePostDetail[], cur) => cur.postData.content,
-    [],
+    (acc, cur) => cur.postData.content as IPost[],
+    [] as IPost[],
   );
-  const renderPages = chunkData(pages || [], 4);
+  const renderPages = chunkData<IPost>(pages || [], 4);
 
   return (
     <>
@@ -41,7 +42,7 @@ export function StudySection() {
             title={'커리어 성장을 위한 <mark>스터디</mark>'}
             sub={'Level Up Study'}
             description={`커리어 성장을 위한 스터디를 찾으시나요?\n토티에는 이런저런 여러분야의 스터디가 모여있어요.`}
-            to={POSTS_CATEGORY_PATHS.BASE + POSTS_CATEGORY_PATHS.STUDY}
+            to={POSTS_CATEGORY_PATHS.TOTAL_STUDY}
           />
         </div>
         <div className={classes.filter_wrap}>
@@ -99,17 +100,17 @@ export function StudySection() {
 }
 
 const SectionSkeleton = () => {
+  const style = {
+    display: 'flex',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+  };
+
   return (
     <div className={classes.section_body}>
-      <ul
-        style={{
-          display: 'flex',
-          height: '100%',
-          alignItems: 'center',
-          justifyContent: 'space-around',
-        }}
-      >
-        {[0, 1, 2, 3].map((ele) => (
+      <ul style={style}>
+        {[...Array(LOADING_PAGE_SIZE)].map((ele) => (
           <li key={ele}>
             <PostCard />
           </li>

@@ -2,8 +2,6 @@ export * from './onboard/OnboardModal/SignInModal';
 export * from './onboard/OnboardModal/OnboardModal';
 
 export * from './main/Banner/Banner';
-export * from './main/Search/Search';
-export * from './main/Categories/Categories';
 export * from './main/ToggleIcon/ToggleIcon';
 export * from './main/AlarmIcon/AlarmIcon';
 export * from './main/Footer/Footer';
@@ -18,6 +16,5 @@ export * from './detail/Select/Select';
 export * from './selector/SkillSelector';
 
 export * from './section/MentorReviewSection/MentorReviewSection';
-export * from './section/SearchSection';
 
 export * from './main/SectionSlider/SectionSlider';

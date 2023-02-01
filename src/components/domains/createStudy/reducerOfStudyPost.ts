@@ -1,6 +1,6 @@
-import { PostRequestDto } from '@api/post/types';
+import { IPostRequestDto } from '@api/post/types';
 
-export const defaultForm: PostRequestDto = {
+export const defaultForm: IPostRequestDto = {
   title: '', // 제목
   content: '', // 내용,
   contactLink: '', // 연락 링크,
@@ -17,7 +17,7 @@ export const reducerOfStudyPost = (
   state = defaultForm,
   action: {
     payload: any;
-    type: keyof PostRequestDto;
+    type: keyof IPostRequestDto;
   },
 ) => {
   const { payload, type } = action;

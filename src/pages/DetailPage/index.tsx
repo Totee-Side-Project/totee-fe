@@ -16,9 +16,9 @@ import JoinerCheck from '@components/common/join/JoinerCheck/JoinerCheck';
 import { useGetPostByPostId } from '@hooks/query/useGetQuery';
 import { useCustomNavigate } from '@hooks/useCustomNavigate';
 import LeftArrowHasBorderIcon from '@assets/svg/common/left_arrow_has_border.svg';
+import { IPost } from '@api/post/types';
 
 import classes from './DetailPage.module.scss';
-import { IResponsePostDetail } from '@api/post/types';
 
 interface IchildrenReactNode {
   children: ReactNode;
@@ -26,7 +26,7 @@ interface IchildrenReactNode {
 
 const DetailPage = () => {
   const { id } = useParams();
-  const { data: postData, status, refetch } = useGetPostByPostId(Number(id));
+  const { data: postData, status } = useGetPostByPostId(Number(id));
 
   // Render Loading Component
   if (status === 'loading')
@@ -54,7 +54,7 @@ const DetailPage = () => {
     );
 
   if (status === 'success') {
-    const responseData: IResponsePostDetail = postData?.data.body.data;
+    const responseData: IPost = postData?.data.body.data;
     return (
       <div>
         <main className={classes.study_detail_page_main}>

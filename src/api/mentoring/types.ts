@@ -1,12 +1,17 @@
+import { IPageableResponse, IResponseOfPage } from '@api/post/types';
+
 export interface IGetMentoringListResponse {
   body: {
     data: {
-      content: IMentoring[];
+      content: IMentoringPost[];
     };
   };
 }
 
-export interface IMentoring {
+export type MentoringResponseData = IResponseOfPage<IMentoringPost>;
+export type MentoringPostsType = IPageableResponse<IMentoringPost>;
+
+export interface IMentoringPost {
   mentoringId: number;
   title: string;
   content: string;
@@ -17,8 +22,18 @@ export interface IMentoring {
   profileImageUrl: string;
 }
 
+export interface IMentoringPostsType {
+  content: IMentoringPost[];
+  totalElements: number;
+}
+
 export interface IMentoringListRequestOptions {
   page?: number;
   size?: number;
   sort?: string[];
+}
+
+export interface IMentoringSearchListRequestOptions
+  extends IMentoringListRequestOptions {
+  keyword?: string;
 }

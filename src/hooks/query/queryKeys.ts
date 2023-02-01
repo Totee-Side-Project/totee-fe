@@ -1,20 +1,31 @@
-import { IMentoringListRequestOptions } from '@api/mentoring/types';
-import {
+import type {
+  IMentoringListRequestOptions,
+  IMentoringSearchListRequestOptions,
+} from '@api/mentoring/types';
+import type {
   IPostSliderOptions,
   IPostsInfiniteScrollOptions,
-  IPostsPaginationoptions,
+  IPostsPaginationOptions,
 } from '@api/post/types';
 
 export const queryKeys = {
   user: ['user'],
   post: (postId: number) => ['post', postId],
+  postsSlider: (options: IPostSliderOptions) => ['postsSlider', options],
   postsInfiniteScroll: (options: IPostsInfiniteScrollOptions) => [
     'postsInfiniteScroll',
     options,
   ],
-  postsSlider: (options: IPostSliderOptions) => ['postsSlider', options],
-  postSearchTitle: (options: IPostsPaginationoptions) => [
+  mentoringInfiniteScroll: (options: IPostsInfiniteScrollOptions) => [
+    'mentoringInfiniteScroll',
+    options,
+  ],
+  postSearchTitle: (options: IPostsPaginationOptions) => [
     'postSearch',
+    options,
+  ],
+  mentoringSearchList: (options: IMentoringSearchListRequestOptions) => [
+    'mentoringSearch',
     options,
   ],
   applicant: (postId: number) => ['applicant', postId],
@@ -32,6 +43,4 @@ export const queryKeys = {
   studyMembers: (postId: number) => ['studyMembers', postId],
   myMentoringPosts: ['myMentoringPosts'],
   mentoringMembers: (mentoringId?: number) => ['mentoringMembers', mentoringId],
-  // 구현 전
-  // team: (postId: number) => ['team', postId],
 };

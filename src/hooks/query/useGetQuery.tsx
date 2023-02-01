@@ -1,18 +1,26 @@
-import { AlarmAPI } from '@api/alarm';
-import { ApplicationAPI } from '@api/application';
-import { CategoryAPI } from '@api/category';
-import { LikeAPI } from '@api/like';
-import { MentoringAPI } from '@api/mentoring';
-import { IMentoringListRequestOptions } from '@api/mentoring/types';
-import { PostAPI } from '@api/post';
-import { IStudyPostsType } from '@api/post/types';
-import { TeamAPI } from '@api/team';
-import { IMemberType } from '@api/team/types';
-import { UserAPI } from '@api/user';
-import { UserState } from '@store/user';
 import { useQuery } from 'react-query';
 import { useRecoilState } from 'recoil';
-import { queryKeys } from './queryKeys';
+
+import { AlarmAPI } from '@api/alarm';
+import { ApplicationAPI } from '@api/application';
+import { LikeAPI } from '@api/like';
+import { MentoringAPI } from '@api/mentoring';
+import type {
+  IMentoringListRequestOptions,
+  IMentoringSearchListRequestOptions,
+} from '@api/mentoring/types';
+import { PostAPI } from '@api/post';
+import type { IMemberType } from '@api/team/types';
+import { UserAPI } from '@api/user';
+import { queryKeys } from '@hooks/query/queryKeys';
+import { UserState } from '@store/user';
+import { TeamAPI } from '@api/team';
+import {
+  IPostsPaginationOptions,
+  StudyPostsResponseData,
+  StudyPostsType,
+} from '@api/post/types';
+import { CategoryAPI } from '@api/category';
 
 export const useGetUserAPI = () => {
   const [user, setUser] = useRecoilState(UserState);
@@ -38,32 +46,6 @@ export interface UseGetSearchPostListProps {
   page?: number;
   size: number;
   sortOption: string;
-}
-
-export function useGetSearchPostList({
-  keyword,
-  page = 0,
-  size,
-  sortOption,
-}: UseGetSearchPostListProps) {
-  return useQuery(
-    queryKeys.postSearchTitle({
-      keyword,
-      pageNum: page,
-      sortOption,
-    }),
-    () =>
-      PostAPI.getPostList({
-        keyword,
-        size,
-        page,
-        sortOption,
-      }).then((response) => response.data.body.data),
-    {
-      refetchOnWindowFocus: false,
-      enabled: !!keyword,
-    },
-  );
 }
 
 export function useGetCategoryList() {
@@ -108,19 +90,61 @@ export function useGetMentoringList(options: IMentoringListRequestOptions) {
   );
 }
 
+export function useGetSearchPostList({
+  keyword,
+  size,
+  page,
+  sort,
+}: IPostsPaginationOptions) {
+  return useQuery(
+    queryKeys.postSearchTitle({
+      keyword,
+      size,
+      page: page,
+      sort,
+    }),
+    () =>
+      PostAPI.getPostList({
+        keyword,
+        size,
+        page,
+        sort,
+      }).then((response) => response.data.body.data),
+    {
+      // 자동으로 가져오는 옵션
+      enabled: !!keyword,
+    },
+  );
+}
+
+export function useGetSearchMentoringList(
+  options: IMentoringSearchListRequestOptions,
+) {
+  return useQuery(
+    queryKeys.mentoringSearchList(options),
+    () =>
+      MentoringAPI.searchMentoringList(options).then(
+        (response) => response.data.body.data,
+      ),
+    {
+      enabled: !!options.keyword,
+    },
+  );
+}
+
 export function useGetMyStudyPost() {
-  return useQuery<IStudyPostsType>(queryKeys.myStudyPost, PostAPI.myStudyPost);
+  return useQuery<StudyPostsType>(queryKeys.myStudyPost, PostAPI.myStudyPost);
 }
 
 export function useGetParticipatingStudyPost() {
-  return useQuery<IStudyPostsType>(
+  return useQuery<StudyPostsType>(
     queryKeys.participatingStudyPost,
     PostAPI.participatingStudyPost,
   );
 }
 
 export function useGetPostLikeList() {
-  return useQuery<IStudyPostsType>(queryKeys.postLikeList, LikeAPI.LikeList);
+  return useQuery<StudyPostsType>(queryKeys.postLikeList, LikeAPI.LikeList);
 }
 
 export function useGetStudyMembers(postId: number) {

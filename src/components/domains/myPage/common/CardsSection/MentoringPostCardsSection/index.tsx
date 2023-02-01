@@ -1,8 +1,8 @@
 import { useState } from 'react';
+import profileCircle from '@assets/svg/profile-circle.svg';
+import { IMentoringPostsType } from '@api/mentoring/types';
 import Pagination from '../../Pagination';
 import classes from './index.module.scss';
-import profileCircle from '../../../../../../assets/svg/profile-circle.svg';
-import { IMentoringPostsType } from '@api/post/types';
 
 interface IMentoringPostCardsSectionProps {
   mentoringPosts?: IMentoringPostsType;

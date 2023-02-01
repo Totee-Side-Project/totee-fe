@@ -59,20 +59,16 @@ export const MentoSection = ({ type = 'recommend' }: Props) => {
         <SectionSlider>
           <Mentorcard
             key={`mentor-card-1`}
-            // isOpen={isOpen}
             onClick={() => setIsOpen((pre) => !pre)}
           />
           <Mentorcard
             key={`mentor-card-2`}
-            // isOpen={isOpen}
             onClick={() => setIsOpen((pre) => !pre)}
           />
           <Mentorcard
             key={`mentor-card-3`}
-            // isOpen={isOpen}
             onClick={() => setIsOpen((pre) => !pre)}
           />
-          {/* <Mentorcard key={`mentor-card-4`} /> */}
         </SectionSlider>
       </div>
       {isOpen && <MentorPostViewModal isOpen={isOpen} setIsOpen={setIsOpen} />}

@@ -1,41 +1,39 @@
 import { useEffect } from 'react';
 import { useInfiniteQuery } from 'react-query';
-import { AxiosResponse } from 'axios';
-import { useIntersectionObserver } from './useIntersectionObserver';
-import { GetPostListParams, IResponseOfPage } from '@api/post/types';
+import type { AxiosResponse } from 'axios';
 
-// import GetPostListParams from
+import type {
+  IPostsInfiniteScrollOptions,
+  IPostsPaginationOptions,
+  StudyPostsResponseData,
+} from '@api/post/types';
+import type { MentoringResponseData } from '@api/mentoring/types';
+import { useIntersectionObserver } from './useIntersectionObserver';
+
 export type FetchPageFuntionType = (
-  option: GetPostListParams,
-) => Promise<AxiosResponse<IResponseOfPage>>;
+  options: IPostsInfiniteScrollOptions,
+) => Promise<AxiosResponse<MentoringResponseData | StudyPostsResponseData>>;
+
+export type FetchPageQueryKey = ReturnType<GetFetchPageQueryKeyFuntion>;
+export type GetFetchPageQueryKeyFuntion = (
+  options: IPostsInfiniteScrollOptions,
+) => (string | IPostsInfiniteScrollOptions)[];
 
 interface Props {
   getPage: FetchPageFuntionType;
-  queryKey: unknown[];
-  size: number; // 몇개씩 불러올 것인지
-  sortOption: string;
-  keyword?: string;
+  queryKey: FetchPageQueryKey;
+  params: IPostsPaginationOptions;
 }
 
-export const useInfiniteTotalPosts = ({
-  getPage,
-  keyword = '',
-  queryKey,
-  size,
-  sortOption,
-}: Props) => {
+export const useInfiniteTotalPosts = ({ getPage, queryKey, params }: Props) => {
   const getPageInfo = async ({ pageParam = 0 }) => {
     const postData = await getPage({
+      ...params,
       page: pageParam,
-      keyword,
-      size,
-      sortOption,
     }).then((response) => response.data.body.data);
 
-    const nextPageParam = !postData.last ? pageParam + 1 : undefined;
     return {
       postData,
-      nextPageParam,
       isLast: postData.last,
     };
   };
@@ -43,13 +41,14 @@ export const useInfiniteTotalPosts = ({
   const postsQuery = useInfiniteQuery({
     queryKey,
     queryFn: getPageInfo,
-    getNextPageParam: (lastPage, pages) => lastPage.nextPageParam,
+    getNextPageParam: (lastPage, pages) => {
+      const nextPageParam = !lastPage.postData.last
+        ? pages.length + 1
+        : undefined;
+      return nextPageParam;
+    },
     refetchOnWindowFocus: false,
   });
-
-  // useEffect(() => {
-  //   postsQuery.refetch();
-  // }, [sortOption]);
 
   const TriggerComponent = () => {
     const { ref, observer } = useIntersectionObserver(

@@ -1,2 +1,9 @@
-export type sortOptionNameType = 'recent' | 'commentNum' | 'likeNum' | 'view';
-export type ISortOptions = Record<sortOptionNameType, string>;
+export type PostsSortOptionNameType =
+  | 'recent'
+  | 'commentNum'
+  | 'likeNum'
+  | 'view';
+export type MentoringSortOptionsType = 'recent' | 'likeNum';
+
+export type IPostsSortOptions = Record<PostsSortOptionNameType, string>;
+export type IMentoringSortOptions = Record<MentoringSortOptionsType, string>;

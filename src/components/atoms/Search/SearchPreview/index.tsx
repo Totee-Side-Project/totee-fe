@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 
-import { linkToUrl } from '@components/common/main/Search/Search';
-import classes from './searchPreview.module.scss';
+import { linkToUrl } from '@components/atoms/Search';
+import classes from './index.module.scss';
 
 interface Props {
   previewResult: string[];

@@ -13,7 +13,7 @@ export const HeaderDropDown = ({ isOpen, close }: HeaderDropDownProps) => {
   const navigate = useNavigate();
   const handleLogount = useLogout();
   const options: [string, () => void][] =
-    user.roleType === 'adming'
+    user.roleType === 'admin'
       ? [
           ['관리자 페이지', () => {}],
           ['로그아웃', () => handleLogount()],

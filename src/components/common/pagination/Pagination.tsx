@@ -42,7 +42,7 @@ export const Pagination = ({
 
   const pageNumbers = Array(limitPageNum).fill(null);
   const prevDisabled = slideNum <= 1;
-  const nextDisabled = currentPage - 1 + limitPageNum >= totalPageNum;
+  const nextDisabled = slideNum * limitPageNum >= totalPageNum;
   const isSelected = (btnNumber: number) => currentPage + 1 === btnNumber;
 
   return (

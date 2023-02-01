@@ -1,60 +1,52 @@
-import { SearchSection } from '@components/common';
-// import { PostsFooter } from '@components/domains/posts/PostsFooter';
-import { PostsHeader } from '@components/domains/posts/PostsHeader';
-import { PostsInfiniteSection } from '@components/domains/posts/PostsSection/PostsInfiniteSection';
-import { PostsAll } from '@components/domains/posts/PostsAll/PostsAll';
-import {
-  Route,
-  Routes,
-  //  useParams
-} from 'react-router-dom';
-import './PostsPage.scss';
+import { Route, Routes } from 'react-router-dom';
+
+import { PostsAll } from '@components/domains/posts/PostsCategory/PostsAll';
+import { PostsMentoring } from '@components/domains/posts/PostsCategory/PostsMentoring';
+import { PostsStudy } from '@components/domains/posts/PostsCategory/PostsStudy';
+import type {
+  IMentoringSortOptions,
+  IPostsSortOptions,
+} from 'types/sort.types';
 
 export const POSTS_CATEGORY_PATHS = {
   BASE: 'posts/',
   ALL: 'all',
   STUDY: 'study',
-  MENTO: 'mento',
-};
+  MENTORING: 'mentoring',
+  TOTAL_STUDY: 'posts/study',
+  TOTAL_MENTORING: 'posts/mentoring',
+} as const;
 
-export const POSTS_URL_PARAMS = {
-  KEYWORD: 'kw',
-  SORT: 'sort',
-};
+export const POSTS_CATEGORY_NAMES = {
+  STUDY: '스터디',
+  MENTORING: '멘토링',
+  MENTO: '멘토',
+} as const;
+
+export const postsSortOptions: IPostsSortOptions = {
+  recent: '최신순',
+  commentNum: '댓글순',
+  view: '조회순',
+  likeNum: '좋아요순',
+} as const;
+
+export const mentoringSortOptions: IMentoringSortOptions = {
+  recent: '최신순',
+  likeNum: '좋아요순',
+} as const;
+
+type ValueOf<T> = T[keyof T];
+export type PostsCategoryNames = ValueOf<typeof POSTS_CATEGORY_NAMES>;
 
 const PostsPage = () => {
   return (
     <Routes>
       <Route path={POSTS_CATEGORY_PATHS.ALL} element={<PostsAll />} />
+      <Route path={POSTS_CATEGORY_PATHS.STUDY} element={<PostsStudy />} />
       <Route
-        path={POSTS_CATEGORY_PATHS.STUDY}
-        element={
-          <div>
-            <SearchSection />
-            <main>
-              <PostsHeader />
-              <PostsInfiniteSection />
-            </main>
-          </div>
-        }
+        path={POSTS_CATEGORY_PATHS.MENTORING}
+        element={<PostsMentoring />}
       />
-
-      {/* 
-      // TODO: 멘토링 카드 전체보기(무한스크롤) 구현해주어야 함
-      // 스터디에서 apiCall, CardComponent 만 다르게 props로 넘겨서 쓸 수 있을 것 같음
-
-      <Route
-        path={POSTS_CATEGORY_PATHS.MENTO}
-        element={
-          <div>
-            <SearchSection />
-            <main>   
-              <PostsHeader />
-              <PostsInfiniteSection />
-            </main>
-          </div>
-        }
-      /> */}
     </Routes>
   );
 };

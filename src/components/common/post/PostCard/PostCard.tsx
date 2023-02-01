@@ -1,5 +1,6 @@
 import Skeleton from 'react-loading-skeleton';
 import { useLocation, useNavigate } from 'react-router-dom';
+
 import {
   OverLimitIcons,
   UnOverLimitIcons,
@@ -10,13 +11,13 @@ import HeartIcon from '@assets/svg/common/heart.svg';
 import EyeIcon from '@assets/svg/common/eye.svg';
 import MessageIcon from '@assets/svg/common/message-square.svg';
 import classes from './PostCard.module.scss';
-import { IResponsePostDetail } from '@api/post/types';
+import { IPost } from '@api/post/types';
 
 interface PostCardProps {
-  post: IResponsePostDetail;
+  post: IPost;
 }
 interface OptionalProps {
-  post?: IResponsePostDetail;
+  post?: IPost;
   styles?: {
     width: string;
     height: string;
