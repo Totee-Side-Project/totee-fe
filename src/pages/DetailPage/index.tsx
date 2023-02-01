@@ -16,9 +16,9 @@ import JoinerCheck from '@components/common/join/JoinerCheck/JoinerCheck';
 import { useGetPostByPostId } from '@hooks/query/useGetQuery';
 import { useCustomNavigate } from '@hooks/useCustomNavigate';
 import LeftArrowHasBorderIcon from '@assets/svg/common/left_arrow_has_border.svg';
-import { IResponsePostDetail } from 'types/api.types';
 
 import classes from './DetailPage.module.scss';
+import { IResponsePostDetail } from '@api/post/types';
 
 interface IchildrenReactNode {
   children: ReactNode;

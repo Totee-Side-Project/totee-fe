@@ -1,12 +1,13 @@
 import { ReactNode } from 'react';
 
+import { SearchResultGuideText } from '@components/atoms';
+import { PostCard } from '@components/common/post/PostCard/PostCard';
+import type { CategoryTypes } from '@components/domains/posts/PostsContainer';
 import { useInfiniteTotalPosts } from '@hooks/query/useInfiniteWithDraw';
 import { useGetPostsParams } from '@hooks/useGetPostsParams';
-import { PostCard } from '@components/common/post/PostCard/PostCard';
-import { SearchResultGuideText } from '@components/atoms';
-import { MentoringAPI, PostAPI } from '@api/api';
-import { queryKeys } from '@hooks/query';
-import { CategoryTypes } from '@components/domains/posts/PostsContainer';
+import { queryKeys } from '@hooks/query/queryKeys';
+import { PostAPI } from '@api/post';
+import { MentoringAPI } from '@api/mentoring';
 import classes from './postsSection.module.scss';
 
 export const INFINITE_LOADING_PAGE_SIZE = 10;
@@ -19,7 +20,7 @@ interface IProps {
 
 export const fetchFunctions = {
   study: PostAPI.getPostList,
-  mentoring: MentoringAPI.searchMentoringList,
+  mentoring: MentoringAPI.getMentoringList,
 };
 
 export const fetchQueryKeys = {

@@ -1,9 +1,9 @@
+import { IUserType } from '@api/user/types';
 import { useUpdateUser } from '@hooks/query/useMutateQuery';
 import { useValidateNickName } from '@hooks/query/useMutateQuery';
 import React, { useEffect, useState } from 'react';
-import { UserType } from 'types/user.types';
 
-export const useUserProfile = (user: UserType) => {
+export const useUserProfile = (user: IUserType) => {
   const [isEditProfile, setIsEditProfile] = useState(false);
   const [nickName, setNickName] = useState(user.nickname);
   const [introduction, setIntroduction] = useState(user.intro);

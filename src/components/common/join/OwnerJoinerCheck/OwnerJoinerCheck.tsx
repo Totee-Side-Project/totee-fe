@@ -1,37 +1,37 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-
-import { IApplicantDetail } from 'types/api.types';
 import { SkillIcon } from '@components/atoms/SkillIcon/SkillIcon';
-import { useGetApplicant, useGetPostByPostId } from '@hooks/query/useGetQuery';
+import { useGetApplicant } from '@hooks/query/useGetQuery';
 import { STUDY_MAX_LIMIT } from 'constants/studyLimit';
 
 import { ViewModal } from '../Modal/ViewModal';
 import './ownerJoinerCheck.scss';
+import { IMemberType } from '@api/team/types';
 
 const VIEW_LIMIT_APPLICANT = 4;
 
 function OwnerJoinerCheck() {
   const { id } = useParams();
   const [isOpenApplyStatusModal, setIsOpenApplyStatusModal] = useState(false);
-  const [pickApplicant, setPickApplicant] = useState<IApplicantDetail>({
-    nickname: '',
+  const [pickApplicant, setPickApplicant] = useState<IMemberType>({
+    applicationDate: '',
     email: '',
     message: '',
-    applicationDate: '',
+    nickname: '',
+    position: '',
     profileImg: '',
   });
   const [isFull, setIsFull] = useState(false);
   const { data: applicantData, status: applicantDataStatus } = useGetApplicant(
     Number(id),
   );
-  const onClickApplicantBox = (applicant: IApplicantDetail) => {
+  const onClickApplicantBox = (applicant: IMemberType) => {
     setPickApplicant((pre) => ({ ...pre, ...applicant }));
     setIsOpenApplyStatusModal(true);
   };
 
   if (applicantDataStatus === 'success') {
-    const applicant = applicantData?.data.body.data;
+    const applicants = applicantData;
 
     return (
       <>
@@ -39,11 +39,11 @@ function OwnerJoinerCheck() {
           <div className={`StatusM_Box ${isFull && 'StatusM_Full'}`}>
             <div className="StatusM_Title">스터디 참여자 수</div>
             <div className="StatusM_Count">
-              {applicant.length}명 / {STUDY_MAX_LIMIT}명
+              {applicants.length}명 / {STUDY_MAX_LIMIT}명
             </div>
             <div className="StatusM_Title_Line" />
             <div className={`StatusM_Contents ${isFull && 'StatusM_Full'}`}>
-              {applicant.map((applicant) => (
+              {applicants.map((applicant) => (
                 <div
                   className="StatusM_NameBox"
                   key={applicant.nickname}
@@ -57,7 +57,7 @@ function OwnerJoinerCheck() {
                 </div>
               ))}
             </div>
-            {applicant.length > VIEW_LIMIT_APPLICANT && (
+            {applicants.length > VIEW_LIMIT_APPLICANT && (
               <button
                 className="StatusM_Btn"
                 onClick={() => setIsFull((pre) => !pre)}

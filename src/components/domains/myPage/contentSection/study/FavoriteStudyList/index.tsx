@@ -1,5 +1,15 @@
+import CardsSection from '@components/domains/myPage/common/CardsSection';
+import { useGetPostLikeList } from '@hooks/query/useGetQuery';
+
 const FavoriteStudyList = () => {
-  return <>스터디/관심 목록</>;
+  const { data: posts } = useGetPostLikeList();
+
+  return (
+    <CardsSection
+      postSectionTitle="내가 관심목록에 추가한 스터디"
+      studyPosts={posts}
+    />
+  );
 };
 
 export default FavoriteStudyList;

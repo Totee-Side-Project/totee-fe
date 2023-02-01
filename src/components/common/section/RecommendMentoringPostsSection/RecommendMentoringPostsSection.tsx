@@ -1,14 +1,15 @@
 import { HTMLAttributes, useState } from 'react';
 import Slider from 'react-slick';
+
 import { SectionTitle } from '@components/atoms';
 import RecommendMentorCard from '@components/common/card/RecommendMentoringCard/RecommendMentoringCard';
 import NEXT_ARROW_ICON from '@assets/png/nextarrow.png';
 import PREVIOUS_ARROW_ICON from '@assets/png/prevarrow.png';
 import classes from './RecommendMentoringPostsSection.module.scss';
 import { useGetMentoringList } from '@hooks/query/useGetQuery';
-import { IMentoring } from 'types/api.types';
 import MentoringPostDetailModal from '@components/common/mentoring/MentoringPostDetailModal';
 import { POSTS_CATEGORY_PATHS } from 'pages/PostsPage';
+import { IMentoringPost } from '@api/mentoring/types';
 
 const SECTION_TEXTS = {
   subtitle: 'Level Up Mentoring',
@@ -52,7 +53,7 @@ function SliderNavigateIcon({
 
 function RecommendMentoringPostsSection() {
   const [currentModalMentoringPost, setCurrentModalMentoringPost] =
-    useState<IMentoring | null>(null);
+    useState<IMentoringPost | null>(null);
 
   const { data, isLoading, isError } = useGetMentoringList({
     page: 0,
@@ -81,7 +82,7 @@ function RecommendMentoringPostsSection() {
     setCurrentModalMentoringPost(null);
   };
 
-  const getRecommendMentorCardHandler = (mentoring: IMentoring) => {
+  const getRecommendMentorCardHandler = (mentoring: IMentoringPost) => {
     return () => {
       setCurrentModalMentoringPost(mentoring);
     };

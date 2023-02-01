@@ -1,18 +1,18 @@
 import { useEffect } from 'react';
 import { useInfiniteQuery } from 'react-query';
-import { AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 
-import {
+import type {
+  IGetPostListParams,
   IPostsInfiniteScrollOptions,
   MentoringResponseData,
-  PostsResponseData,
-} from 'types/api.types';
-import { IGetPostListParams } from '@api/api.types';
+  StudyPostsResponseData,
+} from '@api/post/types';
 import { useIntersectionObserver } from './useIntersectionObserver';
 
 export type FetchPageFuntionType = (
   options: IGetPostListParams,
-) => Promise<AxiosResponse<MentoringResponseData | PostsResponseData>>;
+) => Promise<AxiosResponse<MentoringResponseData | StudyPostsResponseData>>;
 
 export type FetchPageQueryKey = ReturnType<GetFetchPageQueryKeyFuntion>;
 export type GetFetchPageQueryKeyFuntion = (

@@ -1,9 +1,8 @@
-import { useEffect } from 'react';
 import classes from './alarmIcon.module.scss';
 import CloseIcon from '@assets/svg/xicon.svg';
 // import DownIcon from '@assets/dropdown_down.svg';
 import AlarmItem from './AlarmItem';
-import { AlarmType } from 'types/api.types';
+import { AlarmType } from '@api/alarm/types';
 
 interface Props {
   alarms: AlarmType[];

@@ -9,12 +9,9 @@ import { createMarkup } from '@utils/createMarkup';
 import { handleErrorType } from '@utils/handleErrorType';
 import { handleTime } from '@utils/handleTime';
 import { CommentSubmitArea } from './CommentSubmitArea';
-import type {
-  IPostCommentDto,
-  IReplyDto,
-  IResponsePostDetail,
-} from 'types/api.types';
 import classes from './comments.module.scss';
+import { IPostCommentDto, IReplyDto } from '@api/comment/types';
+import { IResponsePostDetail } from '@api/post/types';
 
 export const Comments = ({
   postId,

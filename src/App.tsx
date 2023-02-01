@@ -29,6 +29,7 @@ import {
 } from '@store/index';
 import studyBanner from '@assets/png/banner/study_banner2.png';
 import './App.css';
+import { useGetLocalStroageItem } from '@hooks/useLocalStorage';
 
 export const routePaths = {
   main: '/',
@@ -62,10 +63,8 @@ function App() {
   const { pathname } = useLocation();
   useScrollToTop();
 
-  // localStorage에서 loginData를 get한다.
-  let loginLocalStorage: any = localStorage.getItem('loginData');
-  // javascript 객체로 변경해줘야한다.
-  loginLocalStorage = JSON.parse(loginLocalStorage);
+  const loginLocalStorage = useGetLocalStroageItem('loginData');
+
   useEffect(() => {
     if (data && data.status === 200) {
       setLogin(loginLocalStorage);

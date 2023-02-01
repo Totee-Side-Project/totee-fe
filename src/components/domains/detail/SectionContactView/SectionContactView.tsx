@@ -1,4 +1,4 @@
-import { IResponsePostDetail } from 'types/api.types';
+import { IResponsePostDetail } from '@api/post/types';
 import classes from './sectionContactView.module.scss';
 
 export const SectionContactView = ({

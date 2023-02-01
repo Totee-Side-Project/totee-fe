@@ -3,9 +3,8 @@ import { useRecoilValue } from 'recoil';
 import { useUpdatePostStatus } from '@hooks/query/useMutateQuery';
 import { UserState } from '@store/user';
 import { checkingDetailPeriod } from '@utils/handleSelectValue';
-
 import classes from './sectionCategory.module.scss';
-import { IResponsePostDetail } from 'types/api.types';
+import { IResponsePostDetail } from '@api/post/types';
 
 type SectionHeaderProps = Pick<
   IResponsePostDetail,

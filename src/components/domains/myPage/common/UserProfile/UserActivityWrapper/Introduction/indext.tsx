@@ -1,9 +1,9 @@
-import { UserType } from 'types/user.types';
+import { IUserType } from '@api/user/types';
 import React from 'react';
 import classes from '../index.module.scss';
 
 interface IIntroductionProps {
-  user: UserType;
+  user: IUserType;
   isEditProfile: boolean;
   introduction: string;
   setIntroduction: React.Dispatch<React.SetStateAction<string>>;

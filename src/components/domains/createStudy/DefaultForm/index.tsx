@@ -1,14 +1,12 @@
 /* eslint-disable no-unused-vars */
 import type { ChangeEvent, MouseEvent } from 'react';
 import { useEffect, useState } from 'react';
-
-import { PostRequestDto } from 'types/api.types';
 import paragraphLine from '@assets/png/paragraph_line.png';
-
 import { data } from '../data';
 import { DefaultFormElement } from '../FormElements';
 // import { DefaultFormElement } from '../FormElements';
 import classes from '../createStudy.module.scss';
+import { PostRequestDto } from '@api/post/types';
 
 interface DefaultFormProps {
   form: PostRequestDto;

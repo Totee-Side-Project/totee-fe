@@ -1,7 +1,8 @@
 declare module 'react-quill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClientProvider } from 'react-query';
+import { queryClient } from '@hooks/query/queryClient';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { BrowserRouter } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
@@ -12,17 +13,6 @@ import globalStyle from '@styles/globalStyle';
 import { theme } from '@styles/theme';
 import App from './App';
 import './index.css';
-
-// default cacheTime은 5분
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-      // cacheTime: 1000 * 5,
-      refetchOnWindowFocus: false,
-    },
-  },
-});
 
 ReactDOM.render(
   <React.StrictMode>

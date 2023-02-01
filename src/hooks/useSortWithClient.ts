@@ -1,9 +1,9 @@
-import { IResponsePostDetail } from 'types/api.types';
-import { PostsSortOptionNameType } from 'types/sort.types';
+import type { PostsSortOptionNameType } from 'types/sort.types';
+import type { IPost } from '@api/post/types';
 
 export const useSortWithClient = () => {
   const chunkData = <T>(data: T[] = [], parts: number): T[][] => {
-    let chunkedData = [];
+    const chunkedData = [];
     const maxIndex = Math.ceil(data.length / parts);
 
     for (let i = 0; i < maxIndex; i++) {
@@ -18,10 +18,10 @@ export const useSortWithClient = () => {
   };
 
   const sortingData = (
-    data: IResponsePostDetail[],
+    data: IPost[],
     selectedFilter: PostsSortOptionNameType,
-  ): IResponsePostDetail[] => {
-    let newData = [...data];
+  ): IPost[] => {
+    const newData = [...data];
     switch (selectedFilter) {
       case 'recent':
         newData.sort(

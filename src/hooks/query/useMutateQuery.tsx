@@ -1,21 +1,19 @@
 import { useMutation, useQueryClient } from 'react-query';
 
-import {
-  AlarmAPI,
-  ApplicationAPI,
-  CommentAPI,
-  LikeAPI,
-  PostAPI,
-  ReplyAPI,
-  TeamAPI,
-  UserAPI,
-} from '@api/api';
-import { IPostTeamRequestFormData, IResponsePostDetail } from 'types/api.types';
-import { queryKeys } from '.';
-import { IRequestReply } from 'types/api.types';
+import { queryKeys } from './queryKeys';
 import Swal from 'sweetalert2';
-import axios, { Axios, AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError } from 'axios';
 import _ from 'lodash';
+import { UserAPI } from '@api/user';
+import { CommentAPI } from '@api/comment';
+import { ReplyAPI } from '@api/reply';
+import { PostAPI } from '@api/post';
+import { LikeAPI } from '@api/like';
+import { AlarmAPI } from '@api/alarm';
+import { ApplicationAPI } from '@api/application';
+import { TeamAPI } from '@api/team';
+import { IRequestReply } from '@api/reply/types';
+import { IPostTeamRequestFormData } from '@api/post/types';
 
 export const useAddUserInfo = () => {
   const queryClient = useQueryClient();
@@ -144,9 +142,7 @@ export const useUpdateApplicant = (postId: number) => {
 
 export const useDeleteApplicant = (postId: string | undefined) => {
   const queryClient = useQueryClient();
-  return useMutation(() => ApplicationAPI.deleteApplicant(postId), {
-    onSuccess: () => {},
-  });
+  return useMutation(() => ApplicationAPI.deleteApplicant(postId));
 };
 
 export const usePostTeam = (postId: number) => {
@@ -155,14 +151,52 @@ export const usePostTeam = (postId: number) => {
     (formData: IPostTeamRequestFormData) => TeamAPI.postTeam(postId, formData),
     {
       onSuccess: () => {
+        Swal.fire({
+          title: '성공',
+          text: '성공적으로 처리되었습니다.',
+          icon: 'success',
+          confirmButtonText: '확인',
+          timer: 3000,
+        });
         queryClient.invalidateQueries(queryKeys.applicant(postId));
+        queryClient.invalidateQueries(queryKeys.studyMembers(postId));
+      },
+      onError: () => {
+        Swal.fire({
+          title: '실패',
+          text: '실패하였습니다.',
+          icon: 'error',
+          confirmButtonText: '확인',
+          timer: 3000,
+        });
       },
     },
   );
 };
-export const useResignateTeam = (postId: number) => {
+
+export const useResignateTeam = (postId: number, nickname: string) => {
   const queryClient = useQueryClient();
-  return useMutation(() => TeamAPI.resignateTeam(postId));
+  return useMutation(() => TeamAPI.resignateTeam(postId, nickname), {
+    onSuccess: () => {
+      Swal.fire({
+        title: '성공',
+        text: '멤버를 추방하였습니다.',
+        icon: 'success',
+        confirmButtonText: '확인',
+        timer: 3000,
+      });
+      queryClient.invalidateQueries(queryKeys.studyMembers(postId));
+    },
+    onError: () => {
+      Swal.fire({
+        title: '실패',
+        text: '멤버를 추방하는데 실패하였습니다.',
+        icon: 'error',
+        confirmButtonText: '확인',
+        timer: 3000,
+      });
+    },
+  });
 };
 
 export const useValidateNickName = () => {
@@ -170,7 +204,13 @@ export const useValidateNickName = () => {
     (userNickName: string) => UserAPI.validateNickname(userNickName),
     {
       onError: () => {
-        alert('이미 존재하는 닉네임입니다.');
+        Swal.fire({
+          title: '실패',
+          text: '이미 존재하는 닉네임입니다.',
+          icon: 'error',
+          confirmButtonText: '확인',
+          timer: 3000,
+        });
       },
     },
   );

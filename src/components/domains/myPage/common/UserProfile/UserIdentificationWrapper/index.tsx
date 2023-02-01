@@ -2,12 +2,12 @@ import ToteeBadgeIcon from '../../../../../../assets/svg/totee-badge.svg';
 import ProfileEditButton from './ProfileEditButton';
 import Position from './Position';
 import NickName from './NickName';
-import { UserType } from 'types/user.types';
 import React from 'react';
 import classes from './index.module.scss';
+import { IUserType } from '@api/user/types';
 
 interface IUserIdentificationWrapperProps {
-  user: UserType;
+  user: IUserType;
   nickName: string;
   setNickName: React.Dispatch<React.SetStateAction<string>>;
   setPosition: React.Dispatch<React.SetStateAction<string>>;

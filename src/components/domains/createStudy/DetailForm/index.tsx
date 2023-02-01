@@ -1,17 +1,17 @@
 import { ChangeEvent } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { PostRequestDto } from 'types/api.types';
 import { Line } from '@components/atoms/Line/Line';
 import { Editor } from '@components/common';
 import { Input } from '@components/atoms';
+import type { IPostRequestDto } from '@api/post/types';
 
 import { SubmitButton } from '../Button';
 import { Idata } from '../data';
 import classes from '../createStudy.module.scss';
 
 interface DetailFormProps {
-  form: PostRequestDto;
+  form: IPostRequestDto;
   data: Idata;
   onChangeByInput: (e: ChangeEvent<HTMLInputElement>, key: any) => void;
   onChangeByEditor: (content: any) => void;
@@ -25,6 +25,7 @@ export const DetailForm = ({
   const { id } = useParams();
   const navigate = useNavigate();
   const navigateRootOnClick = () => navigate('/');
+
   return (
     <section className={classes.detail_editor_container}>
       <div className={classes.title_line} />

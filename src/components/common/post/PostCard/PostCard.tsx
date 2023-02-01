@@ -1,35 +1,36 @@
 import Skeleton from 'react-loading-skeleton';
-import { useNavigate } from 'react-router-dom';
-
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   OverLimitIcons,
   UnOverLimitIcons,
 } from '@components/atoms/SkillIcon/SkillIcons';
 import { Icon } from '@components/atoms';
-import type { IResponsePostDetail } from 'types/api.types';
 import { createMarkup } from '@utils/createMarkup';
 import HeartIcon from '@assets/svg/common/heart.svg';
 import EyeIcon from '@assets/svg/common/eye.svg';
 import MessageIcon from '@assets/svg/common/message-square.svg';
-
 import classes from './PostCard.module.scss';
+import { IResponsePostDetail } from '@api/post/types';
 
 interface PostCardProps {
   post: IResponsePostDetail;
 }
 interface OptionalProps {
   post?: IResponsePostDetail;
+  styles?: {
+    width: string;
+    height: string;
+  };
+  setCurrentPostId?: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export const PostCard = ({ post }: OptionalProps) => {
+export const PostCard = ({ post, styles, setCurrentPostId }: OptionalProps) => {
   const navigate = useNavigate();
-  const clickHandlerURLParameter = () => {
-    post && navigate(`/detail/${post.postId}`);
-  };
+  const { pathname } = useLocation();
 
   if (!post) {
     return (
-      <div className={classes.post_card_container}>
+      <div className={classes.post_card_container} style={styles}>
         <PostCardHeaderSkeleton />
         <PostCardCenterSkeleton />
         <div className={classes.post_info_line} />
@@ -38,10 +39,19 @@ export const PostCard = ({ post }: OptionalProps) => {
     );
   }
 
+  const clickHandler = () => {
+    if (pathname === '/mypage') {
+      setCurrentPostId && setCurrentPostId(post.postId);
+      return;
+    }
+    navigate(`/detail/${post.postId}`);
+  };
+
   return (
     <div
       className={classes.post_card_container}
-      onClick={clickHandlerURLParameter}
+      onClick={clickHandler}
+      style={styles}
     >
       <PostCardHeader post={post} />
       <PostCardCenter post={post} />

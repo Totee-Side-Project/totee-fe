@@ -1,8 +1,7 @@
-import { IResponsePostDetail } from 'types/api.types';
 import { Comments } from './Comments';
 import { CommentSubmitArea } from './CommentSubmitArea';
-
 import classes from './commentSection.module.scss';
+import { IResponsePostDetail } from '@api/post/types';
 
 export const SectionComments = ({
   commentDTOList,

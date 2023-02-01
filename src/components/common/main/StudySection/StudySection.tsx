@@ -1,16 +1,16 @@
 import 'react-loading-skeleton/dist/skeleton.css';
 
-import { PostAPI } from '@api/api';
 import { SectionTitle } from '@components/atoms';
 import { Carousel } from '@components/common';
 import { PostCard } from '@components/common/post/PostCard/PostCard';
 import { PostsFilter } from '@components/domains/posts/PostsFilter';
 import { SortButton } from '@components/atoms/Button/SortButton/SortButton';
-import { queryKeys } from '@hooks/query';
 import { useSortWithClient } from '@hooks/useSortWithClient';
 import { useInfiniteTotalPosts } from '@hooks/query/useInfiniteWithDraw';
 import { useGetPostsParams } from '@hooks/useGetPostsParams';
-import { IResponsePostDetail } from 'types/api.types';
+import { queryKeys } from '@hooks/query/queryKeys';
+import { PostAPI } from '@api/post';
+import type { IPost } from '@api/post/types';
 import { POSTS_CATEGORY_PATHS } from 'pages/PostsPage';
 import classes from './studySection.module.scss';
 import './studySection.scss';
@@ -29,10 +29,10 @@ export function StudySection() {
   const { chunkData } = useSortWithClient();
 
   const pages = query.data?.pages.reduce(
-    (acc, cur) => cur.postData.content as IResponsePostDetail[],
-    [] as IResponsePostDetail[],
+    (acc, cur) => cur.postData.content as IPost[],
+    [] as IPost[],
   );
-  const renderPages = chunkData<IResponsePostDetail>(pages || [], 4);
+  const renderPages = chunkData<IPost>(pages || [], 4);
 
   return (
     <>
