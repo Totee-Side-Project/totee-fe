@@ -18,6 +18,7 @@ import { TeamAPI } from '@api/team';
 import {
   IPostsPaginationOptions,
   StudyPostsResponseData,
+  StudyPostsType,
 } from '@api/post/types';
 import { CategoryAPI } from '@api/category';
 
@@ -132,24 +133,18 @@ export function useGetSearchMentoringList(
 }
 
 export function useGetMyStudyPost() {
-  return useQuery<StudyPostsResponseData>(
-    queryKeys.myStudyPost,
-    PostAPI.myStudyPost,
-  );
+  return useQuery<StudyPostsType>(queryKeys.myStudyPost, PostAPI.myStudyPost);
 }
 
 export function useGetParticipatingStudyPost() {
-  return useQuery<StudyPostsResponseData>(
+  return useQuery<StudyPostsType>(
     queryKeys.participatingStudyPost,
     PostAPI.participatingStudyPost,
   );
 }
 
 export function useGetPostLikeList() {
-  return useQuery<StudyPostsResponseData>(
-    queryKeys.postLikeList,
-    LikeAPI.LikeList,
-  );
+  return useQuery<StudyPostsType>(queryKeys.postLikeList, LikeAPI.LikeList);
 }
 
 export function useGetStudyMembers(postId: number) {

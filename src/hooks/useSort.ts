@@ -1,7 +1,7 @@
-import { IResponsePostDetail } from '@api/post/types';
+import { IPost } from '@api/post/types';
 import { useState } from 'react';
 
-type useSortPropsType = IResponsePostDetail[];
+type useSortPropsType = IPost[];
 
 export const useSort = (posts: useSortPropsType = []) => {
   const [sortedDatas, setSortedDatas] = useState<any[]>(posts);
@@ -42,7 +42,7 @@ export const useSort = (posts: useSortPropsType = []) => {
   };
 
   type sortOptionNameType = 'recent' | 'commentNum' | 'likeNum' | 'view';
-  type ISortFunctions = Record<sortOptionNameType, () => IResponsePostDetail[]>;
+  type ISortFunctions = Record<sortOptionNameType, () => IPost[]>;
   type ISetSortFunctions = Record<sortOptionNameType, () => void>;
 
   const sortFunctions: ISortFunctions = {

@@ -3,10 +3,10 @@ import HeartIcon from '@assets/svg/common/heart.svg';
 import EyeIcon from '@assets/svg/common/eye.svg';
 import MessageIcon from '@assets/svg/common/message-square.svg';
 import classes from './CommentCountView.module.scss';
-import { IResponsePostDetail } from '@api/post/types';
+import { IPost } from '@api/post/types';
 
 export const CommentCountView = (
-  props: Pick<IResponsePostDetail, 'likeNum' | 'commentNum' | 'view'>,
+  props: Pick<IPost, 'likeNum' | 'commentNum' | 'view'>,
 ) => {
   const footerItems = {
     like: [HeartIcon, props.likeNum],

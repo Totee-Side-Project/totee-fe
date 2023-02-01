@@ -3,15 +3,15 @@ import { useInfiniteQuery } from 'react-query';
 import type { AxiosResponse } from 'axios';
 
 import type {
-  IGetPostListParams,
   IPostsInfiniteScrollOptions,
-  MentoringResponseData,
+  IPostsPaginationOptions,
   StudyPostsResponseData,
 } from '@api/post/types';
+import type { MentoringResponseData } from '@api/mentoring/types';
 import { useIntersectionObserver } from './useIntersectionObserver';
 
 export type FetchPageFuntionType = (
-  options: IGetPostListParams,
+  options: IPostsInfiniteScrollOptions,
 ) => Promise<AxiosResponse<MentoringResponseData | StudyPostsResponseData>>;
 
 export type FetchPageQueryKey = ReturnType<GetFetchPageQueryKeyFuntion>;
@@ -22,7 +22,7 @@ export type GetFetchPageQueryKeyFuntion = (
 interface Props {
   getPage: FetchPageFuntionType;
   queryKey: FetchPageQueryKey;
-  params: Omit<IGetPostListParams, 'page'>;
+  params: IPostsPaginationOptions;
 }
 
 export const useInfiniteTotalPosts = ({ getPage, queryKey, params }: Props) => {

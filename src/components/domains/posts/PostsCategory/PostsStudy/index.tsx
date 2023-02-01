@@ -1,3 +1,4 @@
+import { IPost } from '@api/post/types';
 import { SearchSection } from '@components/atoms';
 import { PostCard } from '@components/common/post/PostCard/PostCard';
 import { PostsContainer } from '@components/domains/posts/PostsContainer';
@@ -10,7 +11,6 @@ import {
 import { useInfiniteTotalPosts } from '@hooks/query/useInfiniteWithDraw';
 import { useGetPostsParams } from '@hooks/useGetPostsParams';
 import { postsSortOptions } from 'pages/PostsPage';
-import type { IResponsePostDetail } from 'types/api.types';
 
 export const STUDY = 'study';
 
@@ -24,7 +24,7 @@ export const PostsStudy = () => {
 
   const datas = query.data?.pages
     .map((page) => page.postData.content)
-    .flat() as IResponsePostDetail[];
+    .flat() as IPost[];
 
   return (
     <>

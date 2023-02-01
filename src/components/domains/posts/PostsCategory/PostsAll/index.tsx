@@ -12,9 +12,9 @@ import {
 } from '@hooks/query/useGetQuery';
 import { useGetPostsParams } from '@hooks/useGetPostsParams';
 import { POSTS_CATEGORY_NAMES } from 'pages/PostsPage';
-import { IMentoring } from 'types/api.types';
 import { IMentoringSortOptions, IPostsSortOptions } from 'types/sort.types';
 import { SEARCH_PAGE_SIZE } from '@hooks/useSearch';
+import { IMentoringPost } from '@api/mentoring/types';
 
 const postsSortOptions: IPostsSortOptions = {
   recent: '최신순',
@@ -42,13 +42,13 @@ export const PostsAll = () => {
 
   // TODO: Hook으로 분리
   const [currentModalMentoringPost, setCurrentModalMentoringPost] =
-    useState<IMentoring | null>(null);
+    useState<IMentoringPost | null>(null);
 
   const handleCloseClick = () => {
     setCurrentModalMentoringPost(null);
   };
 
-  const getRecommendMentorCardHandler = (mentoring: IMentoring) => {
+  const getRecommendMentorCardHandler = (mentoring: IMentoringPost) => {
     return () => {
       setCurrentModalMentoringPost(mentoring);
     };

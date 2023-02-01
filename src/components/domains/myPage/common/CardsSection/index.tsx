@@ -1,14 +1,15 @@
-import { IMentoringPostsType, IStudyPostsType } from '@api/post/types';
-import { IMemberType } from '@api/team/types';
-import classes from './index.module.scss';
+import type { IMemberType } from '@api/team/types';
+import { StudyPostsType } from '@api/post/types';
+import { MentoringPostsType } from '@api/mentoring/types';
 import MemberCardsSection from './MemberCardsSection';
 import MentoringPostCardsSection from './MentoringPostCardsSection';
 import StudyPostCardsSection from './StudyPostCardsSection';
+import classes from './index.module.scss';
 
 interface ICardsSectionProps {
   postSectionTitle: string;
-  studyPosts?: IStudyPostsType;
-  mentoringPosts?: IMentoringPostsType;
+  studyPosts?: StudyPostsType;
+  mentoringPosts?: MentoringPostsType;
   memberSectionTitle?: string;
   members?: IMemberType[];
   setCurrentPostId?: React.Dispatch<React.SetStateAction<number>>;

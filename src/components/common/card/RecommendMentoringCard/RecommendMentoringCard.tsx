@@ -1,10 +1,10 @@
-import { IMentoring } from '@api/mentoring/types';
+import { IMentoringPost } from '@api/mentoring/types';
 import MentoringPostCard from '@components/common/card/MentoringPostCard/MentoringPostCard';
 import { MouseEventHandler } from 'react';
 import classes from './RecommendMentoringCard.module.scss';
 
 interface RecommendMentoringCardProps {
-  mentoring: IMentoring;
+  mentoring: IMentoringPost;
   onClick?: MouseEventHandler;
 }
 

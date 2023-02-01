@@ -5,7 +5,7 @@ import type {
 import type {
   IPostSliderOptions,
   IPostsInfiniteScrollOptions,
-  IPostsPaginationoptions,
+  IPostsPaginationOptions,
 } from '@api/post/types';
 
 export const queryKeys = {
@@ -20,7 +20,7 @@ export const queryKeys = {
     'mentoringInfiniteScroll',
     options,
   ],
-  postSearchTitle: (options: IPostsPaginationoptions) => [
+  postSearchTitle: (options: IPostsPaginationOptions) => [
     'postSearch',
     options,
   ],

@@ -1,15 +1,14 @@
-/* eslint-disable no-unused-vars */
 import type { ChangeEvent, MouseEvent } from 'react';
 import { useEffect, useState } from 'react';
+
 import paragraphLine from '@assets/png/paragraph_line.png';
+import { IPostRequestDto } from '@api/post/types';
 import { data } from '../data';
 import { DefaultFormElement } from '../FormElements';
-// import { DefaultFormElement } from '../FormElements';
 import classes from '../createStudy.module.scss';
-import { PostRequestDto } from '@api/post/types';
 
 interface DefaultFormProps {
-  form: PostRequestDto;
+  form: IPostRequestDto;
   onChangeByInput: (e: ChangeEvent<HTMLInputElement>, key: any) => void;
   onChangeBySelect: (e: MouseEvent<HTMLElement>, key: any) => void;
   onChangeByChildrenState: (data: (undefined | string)[]) => void;

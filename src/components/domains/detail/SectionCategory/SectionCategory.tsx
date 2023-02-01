@@ -4,10 +4,10 @@ import { useUpdatePostStatus } from '@hooks/query/useMutateQuery';
 import { UserState } from '@store/user';
 import { checkingDetailPeriod } from '@utils/handleSelectValue';
 import classes from './sectionCategory.module.scss';
-import { IResponsePostDetail } from '@api/post/types';
+import { IPost } from '@api/post/types';
 
 type SectionHeaderProps = Pick<
-  IResponsePostDetail,
+  IPost,
   | 'title'
   | 'onlineOrOffline'
   | 'recruitNum'

@@ -12,7 +12,7 @@ import {
 import MentoringPostDetailModal from '@components/common/mentoring/MentoringPostDetailModal';
 import { useInfiniteTotalPosts } from '@hooks/query/useInfiniteWithDraw';
 import { useGetPostsParams } from '@hooks/useGetPostsParams';
-import type { IMentoring } from 'types/api.types';
+import type { IMentoringPost } from '@api/mentoring/types';
 import { mentoringSortOptions } from 'pages/PostsPage';
 
 export const MENTORING = 'mentoring';
@@ -27,16 +27,16 @@ export const PostsMentoring = () => {
 
   const datas = query?.data?.pages
     .map((page) => page.postData.content)
-    .flat() as IMentoring[];
+    .flat() as IMentoringPost[];
 
   const [currentModalMentoringPost, setCurrentModalMentoringPost] =
-    useState<IMentoring | null>(null);
+    useState<IMentoringPost | null>(null);
 
   const handleCloseClick = () => {
     setCurrentModalMentoringPost(null);
   };
 
-  const getRecommendMentorCardHandler = (mentoring: IMentoring) => {
+  const getRecommendMentorCardHandler = (mentoring: IMentoringPost) => {
     return () => {
       setCurrentModalMentoringPost(mentoring);
     };
