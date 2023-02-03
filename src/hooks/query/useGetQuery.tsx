@@ -166,3 +166,11 @@ export function useGetMentoringMembers(mentoringId: number) {
     { enabled: !!mentoringId },
   );
 }
+
+export function useGetMentoringApplicants(mentoringId: number) {
+  return useQuery(
+    queryKeys.mentoringApplicants(mentoringId),
+    () => MentoringAPI.getMentoringApplicants(mentoringId),
+    { enabled: !!mentoringId },
+  );
+}

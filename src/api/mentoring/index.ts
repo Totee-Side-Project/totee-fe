@@ -32,4 +32,8 @@ export const MentoringAPI = {
       params: { kw: keyword, page, size, sort: sort?.toString() },
     });
   },
+  getMentoringApplicants: (mentoringId: number) =>
+    api
+      .get(`/api/v2/applicant/${mentoringId}`)
+      .then((res) => res.data.body.data),
 };

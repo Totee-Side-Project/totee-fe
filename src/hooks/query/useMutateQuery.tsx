@@ -215,3 +215,35 @@ export const useValidateNickName = () => {
     },
   );
 };
+
+export const useAcceptMentoringApplicants = (mentoringId: number) => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    (formData: IPostTeamRequestFormData) =>
+      TeamAPI.acceptMentoringApplicants(mentoringId, formData),
+    {
+      onSuccess: () => {
+        Swal.fire({
+          title: '성공',
+          text: '성공적으로 처리되었습니다.',
+          icon: 'success',
+          confirmButtonText: '확인',
+          timer: 3000,
+        });
+        queryClient.invalidateQueries(
+          queryKeys.mentoringApplicants(mentoringId),
+        );
+        queryClient.invalidateQueries(queryKeys.mentoringMembers(mentoringId));
+      },
+      onError: () => {
+        Swal.fire({
+          title: '실패',
+          text: '실패하였습니다.',
+          icon: 'error',
+          confirmButtonText: '확인',
+          timer: 3000,
+        });
+      },
+    },
+  );
+};

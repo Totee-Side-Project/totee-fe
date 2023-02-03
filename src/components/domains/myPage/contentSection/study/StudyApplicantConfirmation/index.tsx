@@ -1,12 +1,11 @@
 import DetailedMemberModal from '@components/domains/myPage/common/DetailedMemberModal';
-
 import { useGetApplicant, useGetMyStudyPost } from '@hooks/query/useGetQuery';
 import { usePostTeam } from '@hooks/query/useMutateQuery';
 import { useMemberModal } from '@hooks/useMemberModal';
 import { useGetUserActivity } from '@hooks/useGetUserActivity';
-import { useEffect } from 'react';
 import classes from '../../../common/DetailedMemberModal/index.module.scss';
 import CardsSection from '@components/domains/myPage/common/CardsSection';
+import { useAcceptApplicants } from '@hooks/useAcceptApplicants';
 
 const StudyApplicantConfirmation = () => {
   const { posts, members, currentPostId, setCurrentPostId } =
@@ -15,21 +14,11 @@ const StudyApplicantConfirmation = () => {
   const { isOpenedModal, setIsOpenedModal, currentMember, onClickMemberCard } =
     useMemberModal();
 
-  const {
-    mutate: acceptStudyApplicant,
-    isSuccess: isSuccessStudyApplicantAcceptance,
-  } = usePostTeam(currentPostId);
-
-  const onClickAcceptButton = (isAccept: boolean) => {
-    acceptStudyApplicant({
-      accept: isAccept,
-      nickname: currentMember ? currentMember.nickname : '',
-    });
-  };
-
-  useEffect(() => {
-    setIsOpenedModal(false);
-  }, [isSuccessStudyApplicantAcceptance]);
+  const { onClickAcceptButton } = useAcceptApplicants(
+    usePostTeam(currentPostId),
+    setIsOpenedModal,
+    currentMember ? currentMember.nickname : '',
+  );
 
   return (
     <>
