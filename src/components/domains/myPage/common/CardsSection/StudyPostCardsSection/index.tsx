@@ -5,11 +5,13 @@ import Pagination from '../../Pagination';
 import classes from './index.module.scss';
 
 interface IStudyPostCardsSectionProps {
+  postSectionTitle?: string;
   studyPosts?: StudyPostsType;
   setCurrentPostId?: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const StudyPostCardsSection = ({
+  postSectionTitle,
   studyPosts,
   setCurrentPostId,
 }: IStudyPostCardsSectionProps) => {
@@ -26,6 +28,7 @@ const StudyPostCardsSection = ({
           .slice((currentPage - 1) * 4, (currentPage - 1) * 4 + 4)
           .map((post) => (
             <PostCard
+              postSectionTitle={postSectionTitle}
               post={post}
               styles={{ width: '230px', height: '250px' }}
               key={post.postId}

@@ -30,6 +30,7 @@ const CardsSection = ({
       <p className={classes.title}>{postSectionTitle}</p>
       {studyPosts && (
         <StudyPostCardsSection
+          postSectionTitle={postSectionTitle}
           studyPosts={studyPosts}
           setCurrentPostId={setCurrentPostId}
         />
