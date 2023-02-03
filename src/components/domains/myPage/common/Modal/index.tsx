@@ -3,6 +3,7 @@ import classes from './index.module.scss';
 interface IModalProps {
   isOpenedModal: boolean;
   setIsOpenedModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalPage?: React.Dispatch<React.SetStateAction<number>>;
   title: string;
   subTitle: string;
   children: any;
@@ -11,6 +12,7 @@ interface IModalProps {
 const Modal = ({
   isOpenedModal,
   setIsOpenedModal,
+  setModalPage,
   title,
   subTitle,
   children,
@@ -24,7 +26,10 @@ const Modal = ({
       <div className={classes.detailedMemberModal}>
         <button
           className={classes.closeButton}
-          onClick={() => setIsOpenedModal(false)}
+          onClick={() => {
+            setIsOpenedModal(false);
+            setModalPage && setModalPage(0);
+          }}
         >
           X
         </button>

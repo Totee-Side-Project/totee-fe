@@ -20,7 +20,7 @@ const DetailedMentoringMemberModal = ({
   setIsOpenedModal,
   children,
 }: IDetailedMentoringMemberModalProps) => {
-  const [page, setPage] = useState(0);
+  const [modalPage, setModalPage] = useState(0);
 
   if (!member) {
     return <></>;
@@ -30,6 +30,7 @@ const DetailedMentoringMemberModal = ({
     <Modal
       isOpenedModal={isOpenedModal}
       setIsOpenedModal={setIsOpenedModal}
+      setModalPage={setModalPage}
       title={title}
       subTitle={subTitle}
     >
@@ -42,7 +43,7 @@ const DetailedMentoringMemberModal = ({
       <p className={classes.nickname}>{member.nickname}</p>
       <p className={classes.email}>{member.email}</p>
       <hr />
-      {page === 0 && (
+      {modalPage === 0 && (
         <>
           <p className={classes.hopeDateTimeTitle}>강습 희망 요일</p>
           <p className={`${classes.hopeDateTimeBorder} ${classes.date}`}>
@@ -58,12 +59,15 @@ const DetailedMentoringMemberModal = ({
               {member.endTime}
             </p>
           </div>
-          <button className={classes.nextButton} onClick={() => setPage(1)}>
+          <button
+            className={classes.nextButton}
+            onClick={() => setModalPage(1)}
+          >
             다음 페이지
           </button>
         </>
       )}
-      {page === 1 && (
+      {modalPage === 1 && (
         <>
           <div className={classes.commentTitle}>기타 자기소개 코멘트</div>
           <div className={classes.comment}>
