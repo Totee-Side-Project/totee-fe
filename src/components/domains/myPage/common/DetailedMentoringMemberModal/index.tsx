@@ -26,9 +26,6 @@ const DetailedMentoringMemberModal = ({
     return <></>;
   }
 
-  console.log(member);
-  console.log(isOpenedModal);
-
   return (
     <Modal
       isOpenedModal={isOpenedModal}
@@ -38,8 +35,8 @@ const DetailedMentoringMemberModal = ({
     >
       <ProfileImage
         profileImgSrc={member.profileImg}
-        width={'95px'}
-        height={'95px'}
+        width={'105px'}
+        height={'105px'}
         margin={'20px 0 0 0'}
       />
       <p className={classes.nickname}>{member.nickname}</p>

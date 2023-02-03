@@ -27,8 +27,8 @@ const OpenedMentoringAdminsitration = () => {
         onClickMemberCard={onClickMemberCard}
       />
       <DetailedMentoringMemberModal
-        title="멘티"
-        subTitle="멘티 정보입니다."
+        title="멘토링"
+        subTitle="멘티의 정보입니다."
         member={currentMember}
         isOpenedModal={isOpenedModal}
         setIsOpenedModal={setIsOpenedModal}
