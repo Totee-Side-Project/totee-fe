@@ -1,5 +1,5 @@
 import DetailedStudyMemberModal from '@components/domains/myPage/common/DetailedStudyMemberModal';
-import { useGetApplicant, useGetMyStudyPost } from '@hooks/query/useGetQuery';
+import { useGetApplicant, useGetMyStudyPosts } from '@hooks/query/useGetQuery';
 import { usePostTeam } from '@hooks/query/useMutateQuery';
 import { useMemberModal } from '@hooks/useMemberModal';
 import { useGetUserActivity } from '@hooks/useGetUserActivity';
@@ -8,7 +8,7 @@ import ApplicantAcceptanceButton from '@components/domains/myPage/common/Applica
 
 const StudyApplicantConfirmation = () => {
   const { posts, members, currentPostId, setCurrentPostId } =
-    useGetUserActivity(useGetMyStudyPost, useGetApplicant);
+    useGetUserActivity(useGetMyStudyPosts, useGetApplicant);
 
   const { isOpenedModal, setIsOpenedModal, currentMember, onClickMemberCard } =
     useMemberModal();

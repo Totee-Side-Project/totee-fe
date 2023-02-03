@@ -174,7 +174,7 @@ export const usePostTeam = (postId: number) => {
   );
 };
 
-export const useResignateTeam = (postId: number, nickname: string) => {
+export const useResignateStudyMember = (postId: number, nickname: string) => {
   const queryClient = useQueryClient();
   return useMutation(() => TeamAPI.resignateTeam(postId, nickname), {
     onSuccess: () => {

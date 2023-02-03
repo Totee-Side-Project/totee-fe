@@ -1,8 +1,8 @@
 import CardsSection from '@components/domains/myPage/common/CardsSection';
-import { useGetPostLikeList } from '@hooks/query/useGetQuery';
+import { useGetLikedStudyPosts } from '@hooks/query/useGetQuery';
 
 const FavoriteStudyList = () => {
-  const { data: posts } = useGetPostLikeList();
+  const { data: posts } = useGetLikedStudyPosts();
 
   return (
     <CardsSection

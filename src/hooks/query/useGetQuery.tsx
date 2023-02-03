@@ -132,19 +132,37 @@ export function useGetSearchMentoringList(
   );
 }
 
-export function useGetMyStudyPost() {
-  return useQuery<StudyPostsType>(queryKeys.myStudyPost, PostAPI.myStudyPost);
-}
-
-export function useGetParticipatingStudyPost() {
+export function useGetLikedStudyPosts() {
   return useQuery<StudyPostsType>(
-    queryKeys.participatingStudyPost,
-    PostAPI.participatingStudyPost,
+    queryKeys.likedStudyPosts,
+    LikeAPI.studyPosts,
   );
 }
 
-export function useGetPostLikeList() {
-  return useQuery<StudyPostsType>(queryKeys.postLikeList, LikeAPI.LikeList);
+export function useGetLikedMentoringPosts() {
+  return useQuery(queryKeys.likedMentoringPosts, LikeAPI.mentoringPosts);
+}
+
+export function useGetMyStudyPosts() {
+  return useQuery<StudyPostsType>(queryKeys.myStudyPost, PostAPI.myStudyPost);
+}
+
+export function useGetMyMentoringPosts() {
+  return useQuery(queryKeys.myMentoringPosts, MentoringAPI.getMyMentoringPosts);
+}
+
+export function useGetParticipatingStudyPosts() {
+  return useQuery<StudyPostsType>(
+    queryKeys.participatingStudyPosts,
+    PostAPI.participatingStudyPosts,
+  );
+}
+
+export function useGetParticipatingMentoringPosts() {
+  return useQuery(
+    queryKeys.participatingMentoringPosts,
+    PostAPI.participatingMentoringPosts,
+  );
 }
 
 export function useGetStudyMembers(postId: number) {
@@ -155,14 +173,10 @@ export function useGetStudyMembers(postId: number) {
   );
 }
 
-export function useGetMyMentoringPosts() {
-  return useQuery(queryKeys.myMentoringPosts, MentoringAPI.getMyMentoringPosts);
-}
-
 export function useGetMentoringMembers(mentoringId: number) {
   return useQuery(
     queryKeys.mentoringMembers(mentoringId),
-    () => TeamAPI.getMentoringTeam(mentoringId),
+    () => TeamAPI.getMentoringMembers(mentoringId),
     { enabled: !!mentoringId },
   );
 }
