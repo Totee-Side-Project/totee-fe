@@ -1,0 +1,99 @@
+.nickname {
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 23px;
+  color: #484848;
+  margin-top: 18px;
+}
+
+.email {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #767676;
+}
+
+hr {
+  width: 80%;
+  margin: 24px auto;
+  color: #D8D8D8;
+}
+
+.hopeDateTimeTitle {
+  font-family: 'Roboto';
+  font-size: 16px;
+  line-height: 20px;
+  color: #427F2F;
+}
+
+.hopeDateTimeBorder {
+  border: 1px solid #7BA364;
+  border-radius: 12px;
+  color: #427F2F;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 8px 0;
+}
+
+.date {
+  width: 70%;
+  margin: 8px auto 35px;
+}
+
+.time {
+  width: 70%;
+  margin: 10px auto 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  .startTime {
+    width: 35%;
+  }
+  .wave {
+    color: #427F2F;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .endTime {
+    width: 35%;
+  }
+}
+
+.nextButton {
+  border-radius: 10px;
+  background: #568A35;
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 16px;
+  margin-top: 35px;
+  width: 40%;
+  height: 50px;
+}
+
+.commentTitle {
+  color: #427F2F;
+  font-weight: 400;
+  font-size: 18px;
+  font-family: 'Roboto';
+}
+
+.comment {
+  border: 1px solid #427F2F;
+  border-radius: 12px;
+  width: 85%;
+  margin: 10px auto 0;
+  height: 125px;
+  overflow: auto;
+  color: #767676;
+  font-size: 16px;
+  font-family: 'Roboto';
+  text-align: start;
+  padding: 25px;
+}
+
+
+

@@ -37,7 +37,7 @@ const MentoringApplicantConfirmation = () => {
           currentPostId={currentPostId}
           setIsOpenedModal={setIsOpenedModal}
           currentMember={currentMember}
-          acceptApplicants={useAcceptMentoringApplicants}
+          useAccept={useAcceptMentoringApplicants}
         />
       </DetailedMentoringMemberModal>
     </>

@@ -5,17 +5,18 @@ interface IApplicantAcceptanceButtonProps {
   currentPostId: number;
   setIsOpenedModal: React.Dispatch<React.SetStateAction<boolean>>;
   currentMember?: any;
-  acceptApplicants: any;
+  useAccept: any;
 }
 
 const ApplicantAcceptanceButton = ({
   currentPostId,
   setIsOpenedModal,
   currentMember,
-  acceptApplicants,
+  useAccept,
 }: IApplicantAcceptanceButtonProps) => {
   const { onClickAcceptButton } = useAcceptApplicant(
-    acceptApplicants(currentPostId),
+    useAccept,
+    currentPostId,
     setIsOpenedModal,
     currentMember ? currentMember.nickname : '',
   );

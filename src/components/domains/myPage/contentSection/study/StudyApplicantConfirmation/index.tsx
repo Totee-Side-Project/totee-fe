@@ -34,7 +34,7 @@ const StudyApplicantConfirmation = () => {
           currentPostId={currentPostId}
           setIsOpenedModal={setIsOpenedModal}
           currentMember={currentMember}
-          acceptApplicants={usePostTeam}
+          useAccept={usePostTeam}
         />
       </DetailedStudyMemberModal>
     </>

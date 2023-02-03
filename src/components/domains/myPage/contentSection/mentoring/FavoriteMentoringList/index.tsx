@@ -1,5 +1,15 @@
+import CardsSection from '@components/domains/myPage/common/CardsSection';
+import { useGetLikedMentoringPosts } from '@hooks/query/useGetQuery';
+
 const FavoriteMentoringList = () => {
-  return <>멘토링/관심 목록</>;
+  const { data: posts } = useGetLikedMentoringPosts();
+
+  return (
+    <CardsSection
+      postSectionTitle="내가 관심목록에 추가한 멘토링"
+      mentoringPosts={posts}
+    />
+  );
 };
 
 export default FavoriteMentoringList;

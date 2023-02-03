@@ -1,14 +1,17 @@
 export const useAcceptApplicant = (
-  applicantAcceptance,
+  useAccept,
+  currentPostId: number,
   setIsOpenedModal: React.Dispatch<React.SetStateAction<boolean>>,
   nickname: string,
 ) => {
-  if (applicantAcceptance.isSuccess) {
+  const { mutate, isSuccess } = useAccept(currentPostId);
+
+  if (isSuccess) {
     setIsOpenedModal(false);
   }
 
   const onClickAcceptButton = (isAccept: boolean) => {
-    applicantAcceptance.mutate({
+    mutate({
       accept: isAccept,
       nickname: nickname,
     });
