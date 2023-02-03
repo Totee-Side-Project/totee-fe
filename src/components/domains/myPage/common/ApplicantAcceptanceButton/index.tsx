@@ -1,4 +1,4 @@
-import { useAcceptApplicants } from '@hooks/useAcceptApplicants';
+import { useAcceptApplicant } from '@hooks/useAcceptApplicant';
 import classes from './index.module.scss';
 
 interface IApplicantAcceptanceButtonProps {
@@ -14,7 +14,7 @@ const ApplicantAcceptanceButton = ({
   currentMember,
   acceptApplicants,
 }: IApplicantAcceptanceButtonProps) => {
-  const { onClickAcceptButton } = useAcceptApplicants(
+  const { onClickAcceptButton } = useAcceptApplicant(
     acceptApplicants(currentPostId),
     setIsOpenedModal,
     currentMember ? currentMember.nickname : '',
