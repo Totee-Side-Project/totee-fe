@@ -5,7 +5,7 @@ import { IMentoringPost } from '@api/mentoring/types';
 
 interface MentoringPostDetailModalProps {
   onCloseClick(): void;
-  onApplyClick(): void;
+  onApplyClick?(): void;
   mentoring: IMentoringPost;
 }
 

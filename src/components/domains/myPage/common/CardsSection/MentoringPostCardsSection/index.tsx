@@ -1,23 +1,35 @@
 import { useState } from 'react';
 import profileCircle from '@assets/svg/profile-circle.svg';
-import { IMentoringPostsType } from '@api/mentoring/types';
+import { IMentoringPost, IMentoringPostsType } from '@api/mentoring/types';
 import Pagination from '../../Pagination';
 import classes from './index.module.scss';
 
 interface IMentoringPostCardsSectionProps {
+  postSectionTitle?: string;
   mentoringPosts?: IMentoringPostsType;
   setCurrentPostId?: React.Dispatch<React.SetStateAction<number>>;
+  onClickFavoriteMentoringPostCard?: (post: IMentoringPost) => void;
 }
 
 const MentoringPostCardsSection = ({
+  postSectionTitle,
   mentoringPosts,
   setCurrentPostId,
+  onClickFavoriteMentoringPostCard,
 }: IMentoringPostCardsSectionProps) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   if (!mentoringPosts || mentoringPosts?.content.length === 0) {
     return <></>;
   }
+
+  const onClickMentoringPostCard = (post: IMentoringPost) => {
+    if (postSectionTitle === '내가 관심목록에 추가한 멘토링') {
+      onClickFavoriteMentoringPostCard &&
+        onClickFavoriteMentoringPostCard(post);
+    }
+    setCurrentPostId && setCurrentPostId(post.mentoringId);
+  };
 
   return (
     <>
@@ -28,9 +40,7 @@ const MentoringPostCardsSection = ({
             <div
               className={classes.mentoringPostCard}
               key={post.mentoringId}
-              onClick={() =>
-                setCurrentPostId && setCurrentPostId(post.mentoringId)
-              }
+              onClick={() => onClickMentoringPostCard(post)}
             >
               <p className={classes.title}>{post.title}</p>
               <p className={classes.field}>

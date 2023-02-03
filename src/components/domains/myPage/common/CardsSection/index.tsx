@@ -1,6 +1,6 @@
 import type { IMemberType } from '@api/team/types';
 import { StudyPostsType } from '@api/post/types';
-import { MentoringPostsType } from '@api/mentoring/types';
+import { IMentoringPost, MentoringPostsType } from '@api/mentoring/types';
 import MemberCardsSection from './MemberCardsSection';
 import MentoringPostCardsSection from './MentoringPostCardsSection';
 import StudyPostCardsSection from './StudyPostCardsSection';
@@ -14,6 +14,7 @@ interface ICardsSectionProps {
   members?: IMemberType[];
   setCurrentPostId?: React.Dispatch<React.SetStateAction<number>>;
   onClickMemberCard?: (member: IMemberType) => void;
+  onClickFavoriteMentoringPostCard?: (post: IMentoringPost) => void;
 }
 
 const CardsSection = ({
@@ -24,6 +25,7 @@ const CardsSection = ({
   members,
   setCurrentPostId,
   onClickMemberCard,
+  onClickFavoriteMentoringPostCard,
 }: ICardsSectionProps) => {
   return (
     <>
@@ -37,8 +39,10 @@ const CardsSection = ({
       )}
       {mentoringPosts && (
         <MentoringPostCardsSection
+          postSectionTitle={postSectionTitle}
           mentoringPosts={mentoringPosts}
           setCurrentPostId={setCurrentPostId}
+          onClickFavoriteMentoringPostCard={onClickFavoriteMentoringPostCard}
         />
       )}
       <div className={classes.horizontal} />
