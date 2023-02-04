@@ -7,12 +7,14 @@ interface MentoringPostDetailModalProps {
   onCloseClick(): void;
   onApplyClick(): void;
   mentoring: IMentoringPost;
+  isAuthorizedUser: boolean;
 }
 
 function MentoringPostDetailModal({
   mentoring,
   onCloseClick,
   onApplyClick,
+  isAuthorizedUser,
 }: MentoringPostDetailModalProps) {
   const { title, content, cost, career, profileImageUrl, nickname, field } =
     mentoring;
@@ -59,7 +61,9 @@ function MentoringPostDetailModal({
         </div>
 
         <div className={classes.bottom_fixed}>
-          <button onClick={onApplyClick}>신청하기</button>
+          <button disabled={!isAuthorizedUser} onClick={onApplyClick}>
+            {isAuthorizedUser ? '신청하기' : '로그인 후 신청할 수 있습니다'}
+          </button>
         </div>
       </div>
     </div>

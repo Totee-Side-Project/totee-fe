@@ -8,17 +8,14 @@ import PREVIOUS_ARROW_ICON from '@assets/png/prevarrow.png';
 import classes from './RecommendMentoringPostsSection.module.scss';
 import { useGetMentoringList } from '@hooks/query/useGetQuery';
 import MentoringPostDetailModal from '@components/common/mentoring/MentoringPostDetailModal';
-<<<<<<< HEAD
 import { POSTS_CATEGORY_PATHS } from 'pages/PostsPage';
 import { IMentoringPost } from '@api/mentoring/types';
-=======
 import ApplyMentoringModal, {
   ApplyMentoringPayloads,
 } from '@components/common/mentoring/ApplyMentoringModal';
 import { useApplyMentoring } from '@hooks/query/useMutateQuery';
 import { useRecoilState } from 'recoil';
 import { UserState } from '@store/user';
->>>>>>> de13f66 (add: mentoring api fetching logic)
 
 const SECTION_TEXTS = {
   subtitle: 'Level Up Mentoring',
@@ -61,16 +58,13 @@ function SliderNavigateIcon({
 }
 
 function RecommendMentoringPostsSection() {
+  const [loginData] = useRecoilState(loginState);
   const [currentModalMentoringPost, setCurrentModalMentoringPost] =
-<<<<<<< HEAD
     useState<IMentoringPost | null>(null);
-=======
-    useState<IMentoring | null>(null);
   const [isMentoringPostDetailModalOpen, setIsMentoringPostDetailModalOpen] =
     useState(false);
   const [isApplyMentoringModalOpen, setIsApplyMentoringModalOpen] =
     useState(false);
->>>>>>> de13f66 (add: mentoring api fetching logic)
 
   const { data, isLoading, isError } = useGetMentoringList({
     page: 0,
@@ -135,6 +129,7 @@ function RecommendMentoringPostsSection() {
       ) : null}
       {isMentoringPostDetailModalOpen && currentModalMentoringPost !== null ? (
         <MentoringPostDetailModal
+          isAuthorizedUser={loginData.state}
           mentoring={currentModalMentoringPost}
           onCloseClick={handleCloseClick}
           onApplyClick={() => {
