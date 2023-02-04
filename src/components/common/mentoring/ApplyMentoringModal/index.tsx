@@ -1,4 +1,4 @@
-import { ChangeEvent, MouseEventHandler, useState } from 'react';
+import { ChangeEvent, MouseEventHandler, useMemo, useState } from 'react';
 import { ReactComponent as XIcon } from '@assets/svg/xicon.svg';
 import classes from './index.module.scss';
 import DropDown from '@components/common/dropdown';
@@ -61,6 +61,21 @@ function ApplyMentoringModal({
   const [preferredDays, setPreferredDays] = useState<Set<typeof DAYS[number]>>(
     new Set(),
   );
+
+  const isCurrentStepFormValid = useMemo(() => {
+    const isFirstStepFormValid =
+      preferredStartAt !== null &&
+      preferredStartAt !== null &&
+      preferredDays.size !== 0;
+
+    const isSecondStepFormValid = contact !== '';
+
+    if (step === 'PREFERRED_TIME') {
+      return isFirstStepFormValid;
+    }
+
+    return isFirstStepFormValid && isSecondStepFormValid;
+  }, [step, preferredDays, preferredStartAt, preferredEndAt, contact]);
 
   const onOverlayClick: MouseEventHandler = (e) => {
     if (e.target === e.currentTarget) {
@@ -145,7 +160,12 @@ function ApplyMentoringModal({
                 />
               ))}
             </div>
-            <button onClick={handleNextStepClick}>다음으로</button>
+            <button
+              onClick={handleNextStepClick}
+              disabled={!isCurrentStepFormValid}
+            >
+              다음으로
+            </button>
           </div>
         ) : step === 'SELF_INTRO' ? (
           <div className={classes.self_intro_container}>
@@ -173,7 +193,9 @@ function ApplyMentoringModal({
               >
                 이전으로
               </button>
-              <button onClick={handleSubmit}>제출하기</button>
+              <button onClick={handleSubmit} disabled={!isCurrentStepFormValid}>
+                제출하기
+              </button>
             </div>
           </div>
         ) : null}
