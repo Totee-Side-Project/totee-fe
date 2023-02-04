@@ -14,7 +14,8 @@ import { ApplicationAPI } from '@api/application';
 import { TeamAPI } from '@api/team';
 import { IRequestReply } from '@api/reply/types';
 import { IPostTeamRequestFormData } from '@api/post/types';
-import MentoringAPI, { ApplyMentoringRequestDto } from '@api/mentoringApi';
+import { MentoringAPI } from '@api/mentoring';
+import { IApplyMentoringRequestDto } from '@api/mentoring/types';
 
 export const useAddUserInfo = () => {
   const queryClient = useQueryClient();
@@ -219,7 +220,8 @@ export const useValidateNickName = () => {
 
 export const useApplyMentoring = () => {
   return useMutation(
-    (payload: ApplyMentoringRequestDto) => MentoringAPI.applyMentoring(payload),
+    (payload: IApplyMentoringRequestDto) =>
+      MentoringAPI.applyMentoring(payload),
     {},
   );
 };
