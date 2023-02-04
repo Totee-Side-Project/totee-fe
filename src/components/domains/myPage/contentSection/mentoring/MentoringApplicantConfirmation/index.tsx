@@ -9,6 +9,7 @@ import {
 import { useAcceptMentoringApplicants } from '@hooks/query/useMutateQuery';
 import { useGetUserActivity } from '@hooks/useGetUserActivity';
 import { useMemberModal } from '@hooks/useMemberModal';
+import { useEffect } from 'react';
 
 const MentoringApplicantConfirmation = () => {
   const { posts, members, currentPostId, setCurrentPostId } =
@@ -16,6 +17,21 @@ const MentoringApplicantConfirmation = () => {
 
   const { isOpenedModal, setIsOpenedModal, currentMember, onClickMemberCard } =
     useMemberModal<IMentoringMemberType>();
+
+  const { mutate, isSuccess } = useAcceptMentoringApplicants(currentPostId);
+
+  const onClickAcceptButton = (isAccept: boolean) => {
+    mutate({
+      accept: isAccept,
+      nickname: currentMember ? currentMember.nickname : '',
+    });
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      setIsOpenedModal(false);
+    }
+  }, [isSuccess]);
 
   return (
     <>
@@ -34,12 +50,7 @@ const MentoringApplicantConfirmation = () => {
         isOpenedModal={isOpenedModal}
         setIsOpenedModal={setIsOpenedModal}
       >
-        <ApplicantAcceptanceButton
-          currentPostId={currentPostId}
-          setIsOpenedModal={setIsOpenedModal}
-          currentMember={currentMember}
-          useAccept={useAcceptMentoringApplicants}
-        />
+        <ApplicantAcceptanceButton onClickAcceptButton={onClickAcceptButton} />
       </DetailedMentoringMemberModal>
     </>
   );

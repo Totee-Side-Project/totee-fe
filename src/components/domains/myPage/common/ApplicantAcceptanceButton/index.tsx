@@ -1,27 +1,12 @@
-import { IMentoringMemberType, IStudyMemberType } from '@api/team/types';
-import { useAcceptApplicant } from '@hooks/useAcceptApplicant';
 import classes from './index.module.scss';
 
 interface IApplicantAcceptanceButtonProps {
-  currentPostId: number;
-  setIsOpenedModal: React.Dispatch<React.SetStateAction<boolean>>;
-  currentMember?: IMentoringMemberType | IStudyMemberType;
-  useAccept: any;
+  onClickAcceptButton: (isAccept: boolean) => void;
 }
 
 const ApplicantAcceptanceButton = ({
-  currentPostId,
-  setIsOpenedModal,
-  currentMember,
-  useAccept,
+  onClickAcceptButton,
 }: IApplicantAcceptanceButtonProps) => {
-  const { onClickAcceptButton } = useAcceptApplicant(
-    useAccept,
-    currentPostId,
-    setIsOpenedModal,
-    currentMember ? currentMember.nickname : '',
-  );
-
   return (
     <div className={classes.applicantConfirmationButton}>
       <button

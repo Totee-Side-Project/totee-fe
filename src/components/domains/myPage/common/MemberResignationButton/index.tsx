@@ -1,31 +1,19 @@
 import { IStudyMemberType } from '@api/team/types';
 import { queryKeys } from '@hooks/query/queryKeys';
-import { useResignateMember } from '@hooks/useResignateMember';
 import { useQuery } from 'react-query';
 import classes from './index.module.scss';
 
 interface IMemberResignationButtonProps {
-  currentPostId: number;
+  onClickResignateButton: any;
   currentMember?: IStudyMemberType;
-  setIsOpenedModal: React.Dispatch<React.SetStateAction<boolean>>;
-  useResignate: any;
 }
 
 const MemberResignationButton = ({
+  onClickResignateButton,
   currentMember,
-  currentPostId,
-  setIsOpenedModal,
-  useResignate,
 }: IMemberResignationButtonProps) => {
   const { data }: any = useQuery(queryKeys.user);
   const user = data?.data.body.data;
-
-  const { onClickResignateButton } = useResignateMember(
-    useResignate,
-    currentPostId,
-    setIsOpenedModal,
-    currentMember ? currentMember.nickname : '',
-  );
 
   return (
     <>

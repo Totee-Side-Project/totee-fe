@@ -9,6 +9,7 @@ import { useMemberModal } from '@hooks/useMemberModal';
 import { useGetUserActivity } from '@hooks/useGetUserActivity';
 import MemberResignationButton from '@components/domains/myPage/common/MemberResignationButton';
 import { IStudyMemberType } from '@api/team/types';
+import { useEffect } from 'react';
 
 const OpenedStudyAdministration = () => {
   const { posts, members, currentPostId, setCurrentPostId } =
@@ -16,6 +17,17 @@ const OpenedStudyAdministration = () => {
 
   const { isOpenedModal, setIsOpenedModal, currentMember, onClickMemberCard } =
     useMemberModal<IStudyMemberType>();
+
+  const { mutate: onClickResignateButton, isSuccess } = useResignateStudyMember(
+    currentPostId,
+    currentMember ? currentMember.nickname : '',
+  );
+
+  useEffect(() => {
+    if (isSuccess) {
+      setIsOpenedModal(false);
+    }
+  }, [isSuccess]);
 
   return (
     <>
@@ -35,10 +47,8 @@ const OpenedStudyAdministration = () => {
         setIsOpenedModal={setIsOpenedModal}
       >
         <MemberResignationButton
-          currentPostId={currentPostId}
+          onClickResignateButton={onClickResignateButton}
           currentMember={currentMember}
-          setIsOpenedModal={setIsOpenedModal}
-          useResignate={useResignateStudyMember}
         />
       </DetailedStudyMemberModal>
     </>

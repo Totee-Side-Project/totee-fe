@@ -6,6 +6,7 @@ import { useGetUserActivity } from '@hooks/useGetUserActivity';
 import CardsSection from '@components/domains/myPage/common/CardsSection';
 import ApplicantAcceptanceButton from '@components/domains/myPage/common/ApplicantAcceptanceButton';
 import { IStudyMemberType } from '@api/team/types';
+import { useEffect } from 'react';
 
 const StudyApplicantConfirmation = () => {
   const { posts, members, currentPostId, setCurrentPostId } =
@@ -13,6 +14,21 @@ const StudyApplicantConfirmation = () => {
 
   const { isOpenedModal, setIsOpenedModal, currentMember, onClickMemberCard } =
     useMemberModal<IStudyMemberType>();
+
+  const { mutate, isSuccess } = usePostTeam(currentPostId);
+
+  const onClickAcceptButton = (isAccept: boolean) => {
+    mutate({
+      accept: isAccept,
+      nickname: currentMember ? currentMember.nickname : '',
+    });
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      setIsOpenedModal(false);
+    }
+  }, [isSuccess]);
 
   return (
     <>
@@ -31,12 +47,7 @@ const StudyApplicantConfirmation = () => {
         isOpenedModal={isOpenedModal}
         setIsOpenedModal={setIsOpenedModal}
       >
-        <ApplicantAcceptanceButton
-          currentPostId={currentPostId}
-          setIsOpenedModal={setIsOpenedModal}
-          currentMember={currentMember}
-          useAccept={usePostTeam}
-        />
+        <ApplicantAcceptanceButton onClickAcceptButton={onClickAcceptButton} />
       </DetailedStudyMemberModal>
     </>
   );
