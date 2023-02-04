@@ -1,27 +1,9 @@
 import { useMutation, useQueryClient } from 'react-query';
 
-<<<<<<< HEAD
 import { queryKeys } from './queryKeys';
-=======
-import {
-  AlarmAPI,
-  ApplicationAPI,
-  CommentAPI,
-  LikeAPI,
-  PostAPI,
-  ReplyAPI,
-  TeamAPI,
-  UserAPI,
-} from '@api/api';
-import MentoringAPI from '@api/mentoringApi';
-import { IPostTeamRequestFormData, IResponsePostDetail } from 'types/api.types';
-import { queryKeys } from '.';
-import { IRequestReply } from 'types/api.types';
->>>>>>> de13f66 (add: mentoring api fetching logic)
 import Swal from 'sweetalert2';
 import axios, { AxiosError } from 'axios';
 import _ from 'lodash';
-<<<<<<< HEAD
 import { UserAPI } from '@api/user';
 import { CommentAPI } from '@api/comment';
 import { ReplyAPI } from '@api/reply';
@@ -32,9 +14,7 @@ import { ApplicationAPI } from '@api/application';
 import { TeamAPI } from '@api/team';
 import { IRequestReply } from '@api/reply/types';
 import { IPostTeamRequestFormData } from '@api/post/types';
-=======
-import { ApplyMentoringRequestDto } from '@api/mentoringApi';
->>>>>>> de13f66 (add: mentoring api fetching logic)
+import MentoringAPI, { ApplyMentoringRequestDto } from '@api/mentoringApi';
 
 export const useAddUserInfo = () => {
   const queryClient = useQueryClient();
