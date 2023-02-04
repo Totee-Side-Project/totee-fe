@@ -10,7 +10,7 @@ interface IDropDown {
   defValue?: string;
   onChange?: (value: string) => void;
   errorMsg?: string;
-  placeholder: string;
+  placeholder?: string;
 }
 
 const DropDown = (props: IDropDown) => {
