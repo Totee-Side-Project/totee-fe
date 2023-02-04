@@ -2,11 +2,12 @@ import classes from './index.module.scss';
 import Modal from '../Modal';
 import ProfileImage from '../ProfileImage';
 import { useState } from 'react';
+import { IMentoringMemberType } from '@api/team/types';
 
 interface IDetailedMentoringMemberModalProps {
   title: string;
   subTitle: string;
-  member?: any;
+  member?: IMentoringMemberType;
   isOpenedModal: boolean;
   setIsOpenedModal: React.Dispatch<React.SetStateAction<boolean>>;
   children?: any;

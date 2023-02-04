@@ -8,13 +8,14 @@ import { useResignateStudyMember } from '@hooks/query/useMutateQuery';
 import { useMemberModal } from '@hooks/useMemberModal';
 import { useGetUserActivity } from '@hooks/useGetUserActivity';
 import MemberResignationButton from '@components/domains/myPage/common/MemberResignationButton';
+import { IStudyMemberType } from '@api/team/types';
 
 const OpenedStudyAdministration = () => {
   const { posts, members, currentPostId, setCurrentPostId } =
     useGetUserActivity(useGetMyStudyPosts, useGetStudyMembers);
 
   const { isOpenedModal, setIsOpenedModal, currentMember, onClickMemberCard } =
-    useMemberModal();
+    useMemberModal<IStudyMemberType>();
 
   return (
     <>
@@ -24,7 +25,7 @@ const OpenedStudyAdministration = () => {
         memberSectionTitle="현재 스터디 멤버"
         members={members}
         setCurrentPostId={setCurrentPostId}
-        onClickMemberCard={onClickMemberCard}
+        onClickStudyMemberCard={onClickMemberCard}
       />
       <DetailedStudyMemberModal
         title="스터디 멤버"

@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import profileCircle from '@assets/svg/profile-circle.svg';
-import { IMentoringPost, IMentoringPostsType } from '@api/mentoring/types';
+import { IMentoringPost, MentoringPostsType } from '@api/mentoring/types';
 import Pagination from '../../Pagination';
 import classes from './index.module.scss';
 
 interface IMentoringPostCardsSectionProps {
   postSectionTitle?: string;
-  mentoringPosts?: IMentoringPostsType;
+  mentoringPosts?: MentoringPostsType;
   setCurrentPostId?: React.Dispatch<React.SetStateAction<number>>;
   onClickFavoriteMentoringPostCard?: (post: IMentoringPost) => void;
 }

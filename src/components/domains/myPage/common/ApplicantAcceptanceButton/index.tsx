@@ -1,10 +1,11 @@
+import { IMentoringMemberType, IStudyMemberType } from '@api/team/types';
 import { useAcceptApplicant } from '@hooks/useAcceptApplicant';
 import classes from './index.module.scss';
 
 interface IApplicantAcceptanceButtonProps {
   currentPostId: number;
   setIsOpenedModal: React.Dispatch<React.SetStateAction<boolean>>;
-  currentMember?: any;
+  currentMember?: IMentoringMemberType | IStudyMemberType;
   useAccept: any;
 }
 

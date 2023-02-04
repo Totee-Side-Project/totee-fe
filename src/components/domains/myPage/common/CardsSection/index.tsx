@@ -1,4 +1,4 @@
-import type { IMemberType } from '@api/team/types';
+import type { IMentoringMemberType, IStudyMemberType } from '@api/team/types';
 import { StudyPostsType } from '@api/post/types';
 import { IMentoringPost, MentoringPostsType } from '@api/mentoring/types';
 import MemberCardsSection from './MemberCardsSection';
@@ -11,9 +11,10 @@ interface ICardsSectionProps {
   studyPosts?: StudyPostsType;
   mentoringPosts?: MentoringPostsType;
   memberSectionTitle?: string;
-  members?: IMemberType[];
+  members?: IStudyMemberType[] | IMentoringMemberType[];
   setCurrentPostId?: React.Dispatch<React.SetStateAction<number>>;
-  onClickMemberCard?: (member: IMemberType) => void;
+  onClickStudyMemberCard?: (member: IStudyMemberType) => void;
+  onClickMentoringMemberCard?: (member: IMentoringMemberType) => void;
   onClickFavoriteMentoringPostCard?: (post: IMentoringPost) => void;
 }
 
@@ -24,7 +25,8 @@ const CardsSection = ({
   memberSectionTitle,
   members,
   setCurrentPostId,
-  onClickMemberCard,
+  onClickStudyMemberCard,
+  onClickMentoringMemberCard,
   onClickFavoriteMentoringPostCard,
 }: ICardsSectionProps) => {
   return (
@@ -49,7 +51,8 @@ const CardsSection = ({
       <p className={classes.title}>{memberSectionTitle}</p>
       <MemberCardsSection
         members={members}
-        onClickMemberCard={onClickMemberCard}
+        onClickStudyMemberCard={onClickStudyMemberCard}
+        onClickMentoringMemberCard={onClickMentoringMemberCard}
       />
     </>
   );

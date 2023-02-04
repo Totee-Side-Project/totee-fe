@@ -5,13 +5,14 @@ import { useMemberModal } from '@hooks/useMemberModal';
 import { useGetUserActivity } from '@hooks/useGetUserActivity';
 import CardsSection from '@components/domains/myPage/common/CardsSection';
 import ApplicantAcceptanceButton from '@components/domains/myPage/common/ApplicantAcceptanceButton';
+import { IStudyMemberType } from '@api/team/types';
 
 const StudyApplicantConfirmation = () => {
   const { posts, members, currentPostId, setCurrentPostId } =
     useGetUserActivity(useGetMyStudyPosts, useGetApplicant);
 
   const { isOpenedModal, setIsOpenedModal, currentMember, onClickMemberCard } =
-    useMemberModal();
+    useMemberModal<IStudyMemberType>();
 
   return (
     <>
@@ -21,7 +22,7 @@ const StudyApplicantConfirmation = () => {
         memberSectionTitle="스터디 지원자 목록"
         members={members}
         setCurrentPostId={setCurrentPostId}
-        onClickMemberCard={onClickMemberCard}
+        onClickStudyMemberCard={onClickMemberCard}
       />
       <DetailedStudyMemberModal
         title="지원자 승인 요청 수락"

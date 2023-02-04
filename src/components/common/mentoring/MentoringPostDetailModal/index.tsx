@@ -6,7 +6,7 @@ import { IMentoringPost } from '@api/mentoring/types';
 interface MentoringPostDetailModalProps {
   onCloseClick(): void;
   onApplyClick?(): void;
-  mentoring: IMentoringPost;
+  mentoring?: IMentoringPost;
 }
 
 function MentoringPostDetailModal({
@@ -14,6 +14,10 @@ function MentoringPostDetailModal({
   onCloseClick,
   onApplyClick,
 }: MentoringPostDetailModalProps) {
+  if (!mentoring) {
+    return <></>;
+  }
+
   const { title, content, cost, career, profileImageUrl, nickname, field } =
     mentoring;
 

@@ -22,11 +22,6 @@ export interface IMentoringPost {
   profileImageUrl: string;
 }
 
-export interface IMentoringPostsType {
-  content: IMentoringPost[];
-  totalElements: number;
-}
-
 export interface IMentoringListRequestOptions {
   page?: number;
   size?: number;

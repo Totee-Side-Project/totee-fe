@@ -8,9 +8,10 @@ import { MentoringAPI } from '@api/mentoring';
 import type {
   IMentoringListRequestOptions,
   IMentoringSearchListRequestOptions,
+  MentoringPostsType,
 } from '@api/mentoring/types';
 import { PostAPI } from '@api/post';
-import type { IMemberType } from '@api/team/types';
+import type { IMentoringMemberType, IStudyMemberType } from '@api/team/types';
 import { UserAPI } from '@api/user';
 import { queryKeys } from '@hooks/query/queryKeys';
 import { UserState } from '@store/user';
@@ -77,7 +78,7 @@ export function useGetAlarm() {
 }
 
 export function useGetApplicant(postId: number) {
-  return useQuery<IMemberType[]>(
+  return useQuery<IStudyMemberType[]>(
     queryKeys.applicant(postId),
     () => ApplicationAPI.getApplicant(postId),
     { enabled: !!postId },
@@ -140,7 +141,10 @@ export function useGetLikedStudyPosts() {
 }
 
 export function useGetLikedMentoringPosts() {
-  return useQuery(queryKeys.likedMentoringPosts, LikeAPI.mentoringPosts);
+  return useQuery<MentoringPostsType>(
+    queryKeys.likedMentoringPosts,
+    LikeAPI.mentoringPosts,
+  );
 }
 
 export function useGetMyStudyPosts() {
@@ -148,7 +152,10 @@ export function useGetMyStudyPosts() {
 }
 
 export function useGetMyMentoringPosts() {
-  return useQuery(queryKeys.myMentoringPosts, MentoringAPI.getMyMentoringPosts);
+  return useQuery<MentoringPostsType>(
+    queryKeys.myMentoringPosts,
+    MentoringAPI.getMyMentoringPosts,
+  );
 }
 
 export function useGetParticipatingStudyPosts() {
@@ -159,14 +166,14 @@ export function useGetParticipatingStudyPosts() {
 }
 
 export function useGetParticipatingMentoringPosts() {
-  return useQuery(
+  return useQuery<MentoringPostsType>(
     queryKeys.participatingMentoringPosts,
     PostAPI.participatingMentoringPosts,
   );
 }
 
 export function useGetStudyMembers(postId: number) {
-  return useQuery<IMemberType[]>(
+  return useQuery<IStudyMemberType[]>(
     queryKeys.studyMembers(postId),
     () => TeamAPI.getTeam(postId),
     { enabled: !!postId },
@@ -174,7 +181,7 @@ export function useGetStudyMembers(postId: number) {
 }
 
 export function useGetMentoringMembers(mentoringId: number) {
-  return useQuery(
+  return useQuery<IMentoringMemberType[]>(
     queryKeys.mentoringMembers(mentoringId),
     () => TeamAPI.getMentoringMembers(mentoringId),
     { enabled: !!mentoringId },
@@ -182,7 +189,7 @@ export function useGetMentoringMembers(mentoringId: number) {
 }
 
 export function useGetMentoringApplicants(mentoringId: number) {
-  return useQuery(
+  return useQuery<IMentoringMemberType[]>(
     queryKeys.mentoringApplicants(mentoringId),
     () => MentoringAPI.getMentoringApplicants(mentoringId),
     { enabled: !!mentoringId },

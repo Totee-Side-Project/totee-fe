@@ -6,6 +6,7 @@ import {
 } from '@hooks/query/useGetQuery';
 import { useMemberModal } from '@hooks/useMemberModal';
 import { useGetUserActivity } from '@hooks/useGetUserActivity';
+import { IStudyMemberType } from '@api/team/types';
 
 const ParticipatingStudy = () => {
   const { posts, members, setCurrentPostId } = useGetUserActivity(
@@ -14,7 +15,7 @@ const ParticipatingStudy = () => {
   );
 
   const { isOpenedModal, setIsOpenedModal, currentMember, onClickMemberCard } =
-    useMemberModal();
+    useMemberModal<IStudyMemberType>();
 
   return (
     <>
@@ -24,7 +25,7 @@ const ParticipatingStudy = () => {
         memberSectionTitle="현재 스터디 멤버"
         members={members}
         setCurrentPostId={setCurrentPostId}
-        onClickMemberCard={onClickMemberCard}
+        onClickStudyMemberCard={onClickMemberCard}
       />
       <DetailedStudyMemberModal
         title="스터디 멤버"

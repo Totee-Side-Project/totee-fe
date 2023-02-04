@@ -1,3 +1,4 @@
+import { IStudyMemberType } from '@api/team/types';
 import { queryKeys } from '@hooks/query/queryKeys';
 import { useResignateMember } from '@hooks/useResignateMember';
 import { useQuery } from 'react-query';
@@ -5,7 +6,7 @@ import classes from './index.module.scss';
 
 interface IMemberResignationButtonProps {
   currentPostId: number;
-  currentMember?: any;
+  currentMember?: IStudyMemberType;
   setIsOpenedModal: React.Dispatch<React.SetStateAction<boolean>>;
   useResignate: any;
 }

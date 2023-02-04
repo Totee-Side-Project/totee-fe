@@ -6,14 +6,14 @@ import { STUDY_MAX_LIMIT } from 'constants/studyLimit';
 
 import { ViewModal } from '../Modal/ViewModal';
 import './ownerJoinerCheck.scss';
-import { IMemberType } from '@api/team/types';
+import { IStudyMemberType } from '@api/team/types';
 
 const VIEW_LIMIT_APPLICANT = 4;
 
 function OwnerJoinerCheck() {
   const { id } = useParams();
   const [isOpenApplyStatusModal, setIsOpenApplyStatusModal] = useState(false);
-  const [pickApplicant, setPickApplicant] = useState<IMemberType>({
+  const [pickApplicant, setPickApplicant] = useState<IStudyMemberType>({
     applicationDate: '',
     email: '',
     message: '',
@@ -25,7 +25,7 @@ function OwnerJoinerCheck() {
   const { data: applicantData, status: applicantDataStatus } = useGetApplicant(
     Number(id),
   );
-  const onClickApplicantBox = (applicant: IMemberType) => {
+  const onClickApplicantBox = (applicant: IStudyMemberType) => {
     setPickApplicant((pre) => ({ ...pre, ...applicant }));
     setIsOpenApplyStatusModal(true);
   };

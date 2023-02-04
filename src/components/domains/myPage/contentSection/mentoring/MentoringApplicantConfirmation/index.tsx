@@ -1,3 +1,4 @@
+import { IMentoringMemberType } from '@api/team/types';
 import ApplicantAcceptanceButton from '@components/domains/myPage/common/ApplicantAcceptanceButton';
 import CardsSection from '@components/domains/myPage/common/CardsSection';
 import DetailedMentoringMemberModal from '@components/domains/myPage/common/DetailedMentoringMemberModal';
@@ -14,7 +15,7 @@ const MentoringApplicantConfirmation = () => {
     useGetUserActivity(useGetMyMentoringPosts, useGetMentoringApplicants);
 
   const { isOpenedModal, setIsOpenedModal, currentMember, onClickMemberCard } =
-    useMemberModal();
+    useMemberModal<IMentoringMemberType>();
 
   return (
     <>
@@ -24,7 +25,7 @@ const MentoringApplicantConfirmation = () => {
         memberSectionTitle="멘토링 지원자 목록"
         members={members}
         setCurrentPostId={setCurrentPostId}
-        onClickMemberCard={onClickMemberCard}
+        onClickMentoringMemberCard={onClickMemberCard}
       />
       <DetailedMentoringMemberModal
         title="지원자 승인 요청 수락"

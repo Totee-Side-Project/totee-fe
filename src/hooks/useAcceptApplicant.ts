@@ -1,5 +1,5 @@
 export const useAcceptApplicant = (
-  useAccept,
+  useAccept: any,
   currentPostId: number,
   setIsOpenedModal: React.Dispatch<React.SetStateAction<boolean>>,
   nickname: string,

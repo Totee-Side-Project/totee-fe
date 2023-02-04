@@ -1,3 +1,4 @@
+import { IMentoringMemberType } from '@api/team/types';
 import CardsSection from '@components/domains/myPage/common/CardsSection';
 import DetailedMentoringMemberModal from '@components/domains/myPage/common/DetailedMentoringMemberModal';
 import {
@@ -14,7 +15,7 @@ const OpenedMentoringAdminsitration = () => {
   );
 
   const { isOpenedModal, setIsOpenedModal, currentMember, onClickMemberCard } =
-    useMemberModal();
+    useMemberModal<IMentoringMemberType>();
 
   return (
     <>
@@ -24,7 +25,7 @@ const OpenedMentoringAdminsitration = () => {
         memberSectionTitle="나의 멘티 목록"
         members={members}
         setCurrentPostId={setCurrentPostId}
-        onClickMemberCard={onClickMemberCard}
+        onClickMentoringMemberCard={onClickMemberCard}
       />
       <DetailedMentoringMemberModal
         title="멘토링"

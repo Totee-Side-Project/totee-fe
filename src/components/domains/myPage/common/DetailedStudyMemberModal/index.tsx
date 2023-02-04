@@ -1,4 +1,4 @@
-import { IMemberType } from '@api/team/types';
+import { IStudyMemberType } from '@api/team/types';
 import Modal from '../Modal';
 import ProfileImage from '../ProfileImage';
 import classes from './index.module.scss';
@@ -6,7 +6,7 @@ import classes from './index.module.scss';
 interface IDetailedStudyMemberModalProps {
   title: string;
   subTitle: string;
-  member?: IMemberType;
+  member?: IStudyMemberType;
   isOpenedModal: boolean;
   setIsOpenedModal: React.Dispatch<React.SetStateAction<boolean>>;
   children?: any;
