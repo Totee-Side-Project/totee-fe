@@ -15,12 +15,10 @@ import { UserAPI } from '@api/user';
 import { queryKeys } from '@hooks/query/queryKeys';
 import { UserState } from '@store/user';
 import { TeamAPI } from '@api/team';
-import {
-  IPostsPaginationOptions,
-  StudyPostsResponseData,
-  StudyPostsType,
-} from '@api/post/types';
+import { MentorAPI } from '@api/mentor';
+import { IPostsPaginationOptions, StudyPostsType } from '@api/post/types';
 import { CategoryAPI } from '@api/category';
+import { IMentoListRequestOptions } from '@api/mentor/types';
 
 export const useGetUserAPI = () => {
   const [user, setUser] = useRecoilState(UserState);
@@ -164,5 +162,13 @@ export function useGetMentoringMembers(mentoringId: number) {
     queryKeys.mentoringMembers(mentoringId),
     () => TeamAPI.getMentoringTeam(mentoringId),
     { enabled: !!mentoringId },
+  );
+}
+
+export function useGetMentoList(options: IMentoListRequestOptions) {
+  return useQuery(queryKeys.mentoList, () =>
+    MentorAPI.getMentorList(options).then(
+      (response) => response.data.body.data,
+    ),
   );
 }

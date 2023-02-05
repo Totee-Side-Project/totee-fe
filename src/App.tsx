@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 
 import {
+  AdminPage,
   CreateStudyPage,
   EditStudyPage,
   MainPage,
@@ -41,6 +42,7 @@ export const routePaths = {
   edit: '/editstudy/',
   editId: '/editstudy/:id',
   mypage: '/mypage',
+  admin: '/admin',
 };
 
 export const isNotLoginRoutes = [
@@ -54,6 +56,7 @@ export const isLoginRoutes = [
   { path: routePaths.createStudy, element: <CreateStudyPage /> },
   { path: routePaths.mypage, element: <MyPage /> },
   { path: routePaths.editId, element: <EditStudyPage /> },
+  { path: routePaths.admin, element: <AdminPage /> },
 ];
 
 function App() {

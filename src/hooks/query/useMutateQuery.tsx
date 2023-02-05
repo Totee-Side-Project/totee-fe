@@ -16,6 +16,8 @@ import { IRequestReply } from '@api/reply/types';
 import { IPostTeamRequestFormData } from '@api/post/types';
 import { MentoringAPI } from '@api/mentoring';
 import { IApplyMentoringRequestDto } from '@api/mentoring/types';
+import { AdminMentorRequestForm } from '@api/admin/types';
+import { adminAPI } from '@api/admin';
 
 export const useAddUserInfo = () => {
   const queryClient = useQueryClient();
@@ -224,4 +226,8 @@ export const useApplyMentoring = () => {
       MentoringAPI.applyMentoring(payload),
     {},
   );
+};
+
+export const useAcceptApplyMento = () => {
+  return useMutation((form: AdminMentorRequestForm) => adminAPI.mentor(form));
 };

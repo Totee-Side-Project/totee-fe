@@ -6,6 +6,7 @@ import MyPage from './MyPage';
 import NotMatchPage from './NotMatchPage';
 import EditStudyPage from './EditStudyPage';
 import PostsPage from './PostsPage';
+import AdminPage from './AdminPage';
 
 export {
   MainPage,
@@ -16,4 +17,5 @@ export {
   MyPage,
   NotMatchPage,
   EditStudyPage,
+  AdminPage,
 };
