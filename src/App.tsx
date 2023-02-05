@@ -108,7 +108,9 @@ function App() {
         {pathname !== routePaths.mypage && (
           <Route path="*" element={<Banner />} />
         )}
+        <Route path={routePaths.admin} element={null} />
       </Routes>
+
       <Routes>
         {isNotLoginRoutes.map(({ path, element }) => (
           <Route key={path} path={path} element={element} />

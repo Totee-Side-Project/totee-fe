@@ -11,8 +11,15 @@
 
 .tableContainer {
   flex-basis: 1250px;
-  height: 850px;
-  padding: 30px;
+  height: 500px;
+  margin-top: 40px;
+  padding: 30px 40px;
   border: 1px solid #cccccc;
-  margin-top: 140px;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.pageTitle {
+  font-size: 20px;
+  margin-bottom: 30px;
 }

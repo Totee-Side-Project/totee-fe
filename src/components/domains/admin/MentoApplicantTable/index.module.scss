@@ -1,0 +1,23 @@
+.table {
+  width: 100%;
+}
+.thead {
+}
+.tbody {
+  .tr {
+    text-align: center;
+    :hover {
+      cursor: pointer;
+    }
+  }
+}
+.th {
+  border-bottom: 2px solid #d8d8d8;
+  padding-bottom: 15px;
+  font-size: 16px;
+}
+.td {
+  border-bottom: 1px solid #d8d8d8;
+  font-size: 14px;
+  padding: 10px;
+}
