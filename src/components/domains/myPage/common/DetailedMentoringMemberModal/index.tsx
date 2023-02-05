@@ -48,7 +48,7 @@ const DetailedMentoringMemberModal = ({
         <>
           <p className={classes.hopeDateTimeTitle}>강습 희망 요일</p>
           <p className={`${classes.hopeDateTimeBorder} ${classes.date}`}>
-            월 화 수 목 금 토
+            {member.week}
           </p>
           <p className={classes.hopeDateTimeTitle}>강습 희망 시간대</p>
           <div className={classes.time}>

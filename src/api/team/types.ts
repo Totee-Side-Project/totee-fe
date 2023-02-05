@@ -17,4 +17,5 @@ export interface IMentoringMemberType {
   position: string;
   profileImg: string;
   startTime: string;
+  week: string;
 }
