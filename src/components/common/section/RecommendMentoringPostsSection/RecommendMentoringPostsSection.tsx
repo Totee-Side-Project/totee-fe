@@ -10,6 +10,13 @@ import { useGetMentoringList } from '@hooks/query/useGetQuery';
 import MentoringPostDetailModal from '@components/common/mentoring/MentoringPostDetailModal';
 import { POSTS_CATEGORY_PATHS } from 'pages/PostsPage';
 import { IMentoringPost } from '@api/mentoring/types';
+import ApplyMentoringModal, {
+  ApplyMentoringPayloads,
+} from '@components/common/mentoring/ApplyMentoringModal';
+import { useApplyMentoring } from '@hooks/query/useMutateQuery';
+import { useRecoilState } from 'recoil';
+import { UserState } from '@store/user';
+import { loginState } from '@store/login';
 
 const SECTION_TEXTS = {
   subtitle: 'Level Up Mentoring',
@@ -52,13 +59,20 @@ function SliderNavigateIcon({
 }
 
 function RecommendMentoringPostsSection() {
+  const [loginData] = useRecoilState(loginState);
   const [currentModalMentoringPost, setCurrentModalMentoringPost] =
     useState<IMentoringPost | null>(null);
+  const [isMentoringPostDetailModalOpen, setIsMentoringPostDetailModalOpen] =
+    useState(false);
+  const [isApplyMentoringModalOpen, setIsApplyMentoringModalOpen] =
+    useState(false);
 
   const { data, isLoading, isError } = useGetMentoringList({
     page: 0,
     size: 20,
   });
+  const [user] = useRecoilState(UserState);
+  const { mutate } = useApplyMentoring();
 
   if (isLoading) {
     // TODO: 로딩 UI
@@ -80,21 +94,49 @@ function RecommendMentoringPostsSection() {
 
   const handleCloseClick = () => {
     setCurrentModalMentoringPost(null);
+    setIsApplyMentoringModalOpen(false);
   };
 
   const getRecommendMentorCardHandler = (mentoring: IMentoringPost) => {
     return () => {
       setCurrentModalMentoringPost(mentoring);
+      setIsMentoringPostDetailModalOpen(true);
     };
+  };
+
+  const handleApplyMentoringClick = (payload: ApplyMentoringPayloads) => {
+    if (currentModalMentoringPost !== null) {
+      mutate({
+        ...payload,
+        mentoringId: currentModalMentoringPost.mentoringId,
+      });
+    }
+
+    handleCloseClick();
   };
 
   return (
     <>
-      {currentModalMentoringPost !== null ? (
+      {isApplyMentoringModalOpen ? (
+        <ApplyMentoringModal
+          onCloseClick={handleCloseClick}
+          onApplyClick={handleApplyMentoringClick}
+          profile={{
+            nickname: user.nickname,
+            email: user.email,
+            profileImage: user.profileImageUrl,
+          }}
+        />
+      ) : null}
+      {isMentoringPostDetailModalOpen && currentModalMentoringPost !== null ? (
         <MentoringPostDetailModal
+          isAuthorizedUser={loginData.state}
           mentoring={currentModalMentoringPost}
           onCloseClick={handleCloseClick}
-          onApplyClick={() => {}}
+          onApplyClick={() => {
+            setIsMentoringPostDetailModalOpen(false);
+            setIsApplyMentoringModalOpen(true);
+          }}
         />
       ) : null}
       <section className={classes.recommend_container}>

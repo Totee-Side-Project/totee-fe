@@ -15,6 +15,8 @@ import { POSTS_CATEGORY_NAMES } from 'pages/PostsPage';
 import { IMentoringSortOptions, IPostsSortOptions } from 'types/sort.types';
 import { SEARCH_PAGE_SIZE } from '@hooks/useSearch';
 import { IMentoringPost } from '@api/mentoring/types';
+import { useRecoilState } from 'recoil';
+import { loginState } from '@store/login';
 
 const postsSortOptions: IPostsSortOptions = {
   recent: '최신순',
@@ -29,6 +31,7 @@ const mentoringSortOptions: IMentoringSortOptions = {
 } as const;
 
 export const PostsAll = () => {
+  const [loginData] = useRecoilState(loginState);
   const { allCategoryParams } = useGetPostsParams({
     size: SEARCH_PAGE_SIZE,
   });
@@ -60,6 +63,7 @@ export const PostsAll = () => {
         <MentoringPostDetailModal
           mentoring={currentModalMentoringPost}
           onCloseClick={handleCloseClick}
+          isAuthorizedUser={loginData.state}
           onApplyClick={() => {}}
         />
       ) : null}

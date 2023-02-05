@@ -24,6 +24,7 @@
 
   .dropBox {
     width: 101%;
+    max-height: 200px;
     position: absolute;
     left: -1px;
     top: 40px;
@@ -32,7 +33,7 @@
     flex-direction: column;
     z-index: 999;
     border-radius: 10px;
-    overflow: hidden;
+    overflow: auto;
     background-color: #ffffff;
 
     p {

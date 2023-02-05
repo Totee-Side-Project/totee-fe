@@ -15,10 +15,11 @@ export const Circle = ({
   selected = false,
   backgroundColor,
   options = { outCircle: true },
+  ...props
 }: Props) => {
   if (!options.outCircle) {
     return (
-      <div className={classes.non_outer_circle}>
+      <div className={classes.non_outer_circle} {...props}>
         <div
           className={
             selected
@@ -31,7 +32,7 @@ export const Circle = ({
     );
   }
   return (
-    <div className={classes.outer_circle}>
+    <div className={classes.outer_circle} {...props}>
       <div
         className={
           selected
