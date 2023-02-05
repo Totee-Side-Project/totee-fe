@@ -1,6 +1,7 @@
 import { api } from '@api/instance';
 import { AxiosResponse } from 'axios';
 import {
+  IApplyMentoringRequestDto,
   IMentoringListRequestOptions,
   IMentoringSearchListRequestOptions,
   MentoringResponseData,
@@ -36,4 +37,6 @@ export const MentoringAPI = {
     api
       .get(`/api/v2/applicant/${mentoringId}`)
       .then((res) => res.data.body.data),
+  applyMentoring: ({ mentoringId, ...requestDto }: IApplyMentoringRequestDto) =>
+    api.post(`/api/v2/applicant/${mentoringId}`, requestDto),
 };

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { ChangeEvent, MouseEvent } from 'react';
 
-import { Checkbox, Input, Label, Select } from '@components/atoms';
+import { RadioButton, Input, Label, Select } from '@components/atoms';
 import { SkillSelector } from '@components/common';
 import VerticalLine from '@assets/svg/recentLine.svg';
 import DownArrow from '@assets/svg/recentIcon.svg';
@@ -132,7 +132,7 @@ export const DefaultFormElement = ({
   if (type === 'checkbox')
     return (
       <div className={classes.form_checkbox_wrap}>
-        <Checkbox
+        <RadioButton
           top={<Label text={title} />}
           isChecked={value as string}
           options={data.checkboxOptions}

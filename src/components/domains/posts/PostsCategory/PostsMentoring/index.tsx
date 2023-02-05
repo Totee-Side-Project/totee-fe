@@ -14,10 +14,13 @@ import { useInfiniteTotalPosts } from '@hooks/query/useInfiniteWithDraw';
 import { useGetPostsParams } from '@hooks/useGetPostsParams';
 import type { IMentoringPost } from '@api/mentoring/types';
 import { mentoringSortOptions } from 'pages/PostsPage';
+import { useRecoilState } from 'recoil';
+import { loginState } from '@store/login';
 
 export const MENTORING = 'mentoring';
 
 export const PostsMentoring = () => {
+  const [loginData] = useRecoilState(loginState);
   const { params } = useGetPostsParams({ size: INFINITE_PAGE_SIZE });
   const { query } = useInfiniteTotalPosts({
     getPage: fetchFunctions[MENTORING],
@@ -49,6 +52,7 @@ export const PostsMentoring = () => {
           mentoring={currentModalMentoringPost}
           onCloseClick={handleCloseClick}
           onApplyClick={() => {}}
+          isAuthorizedUser={loginData.state}
         />
       ) : null}
       <SearchSection />

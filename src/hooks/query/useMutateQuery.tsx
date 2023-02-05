@@ -14,6 +14,8 @@ import { ApplicationAPI } from '@api/application';
 import { TeamAPI } from '@api/team';
 import { IRequestReply } from '@api/reply/types';
 import { IPostTeamRequestFormData } from '@api/post/types';
+import { MentoringAPI } from '@api/mentoring';
+import { IApplyMentoringRequestDto } from '@api/mentoring/types';
 
 export const useAddUserInfo = () => {
   const queryClient = useQueryClient();
@@ -245,5 +247,13 @@ export const useAcceptMentoringApplicants = (mentoringId: number) => {
         });
       },
     },
+  );
+};
+
+export const useApplyMentoring = () => {
+  return useMutation(
+    (payload: IApplyMentoringRequestDto) =>
+      MentoringAPI.applyMentoring(payload),
+    {},
   );
 };

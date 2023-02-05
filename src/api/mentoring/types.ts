@@ -32,3 +32,12 @@ export interface IMentoringSearchListRequestOptions
   extends IMentoringListRequestOptions {
   keyword?: string;
 }
+
+export interface IApplyMentoringRequestDto {
+  mentoringId: number;
+  comment: string;
+  contact: string;
+  endTime: string;
+  startTime: string;
+  week: string;
+}
