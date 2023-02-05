@@ -10,7 +10,7 @@ interface IDetailedMentoringMemberModalProps {
   member?: IMentoringMemberType;
   isOpenedModal: boolean;
   setIsOpenedModal: React.Dispatch<React.SetStateAction<boolean>>;
-  children?: any;
+  children?: React.ReactNode;
 }
 
 const DetailedMentoringMemberModal = ({

@@ -9,7 +9,7 @@ interface IDetailedStudyMemberModalProps {
   member?: IStudyMemberType;
   isOpenedModal: boolean;
   setIsOpenedModal: React.Dispatch<React.SetStateAction<boolean>>;
-  children?: any;
+  children?: React.ReactNode;
 }
 
 const DetailedStudyMemberModal = ({

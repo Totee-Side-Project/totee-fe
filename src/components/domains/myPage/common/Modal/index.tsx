@@ -6,7 +6,7 @@ interface IModalProps {
   setModalPage?: React.Dispatch<React.SetStateAction<number>>;
   title: string;
   subTitle: string;
-  children: any;
+  children: React.ReactNode;
 }
 
 const Modal = ({
