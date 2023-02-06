@@ -1,33 +1,35 @@
-import { useState } from 'react';
-
-import { Modal } from '@components/atoms';
 import { useAcceptAndRejectApplyMento } from '@hooks/useAcceptApplyMento';
 import { IMento } from '@api/mentor/types';
+import { Modal } from '@components/atoms';
 
 import classes from './index.module.scss';
 
 interface IMentoApplyAcceptModalProps {
   mento: IMento;
+  onResetClick: () => void;
 }
 
 export const MentoApplyAcceptModal = ({
   mento,
+  onResetClick,
 }: IMentoApplyAcceptModalProps) => {
-  const [isOpen, setIsOpen] = useState(true);
   const { acceptApplyMento, rejectApplyMento } = useAcceptAndRejectApplyMento(
     mento.nickname,
+    onResetClick,
   );
+
   return (
     <Modal
-      isOpen={isOpen}
-      setIsOpen={setIsOpen}
+      isOpen={mento !== undefined}
+      closeModal={onResetClick}
       className={classes.modalContent}
     >
       <div className={classes.mentoApplyAcceptModal}>
         <div className={classes.mentoProfile}>
           <img
             className={classes.profileImage}
-            src={mento.portfolioUrl}
+            // FIXME: 멘토 프로필 이미지로 변경해야함
+            // src={mento.portfolioUrl}
             alt="멘토 프로필 이미지"
           />
           <h3 className={classes.nickName}>{mento.nickname}</h3>

@@ -2,9 +2,9 @@ import type { AriaRole, ReactNode } from 'react';
 
 interface ITableProps {
   columns: string[];
-  datas: object[] | undefined;
-  bodyChildren: ReactNode;
-  onClick?: () => void;
+  datas?: object[] | undefined;
+  bodyChildren?: ReactNode;
+  onClickWithObjectPayload?: (payload: any) => void;
   roleTr?: AriaRole;
   classNames?: {
     table?: string;
@@ -23,7 +23,7 @@ export const Table = ({
   columns,
   datas,
   bodyChildren,
-  onClick,
+  onClickWithObjectPayload,
   roleTr,
   classNames,
 }: ITableProps) => {
@@ -44,7 +44,9 @@ export const Table = ({
               <tr
                 key={index}
                 className={classNames?.tr}
-                onClick={onClick}
+                onClick={() =>
+                  onClickWithObjectPayload && onClickWithObjectPayload(data)
+                }
                 role={roleTr}
               >
                 {Object.values(data).map((value) => (
