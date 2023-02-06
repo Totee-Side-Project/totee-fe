@@ -7,7 +7,7 @@ import { ReactComponent as XIcon } from '@assets/svg/xicon.svg';
 
 interface IModalPropsType {
   isOpen: boolean;
-  setIsOpen: (e: boolean) => void;
+  closeModal?: () => void;
   isCloseBtn?: boolean;
   children: React.ReactNode;
   className?: string;
@@ -15,7 +15,7 @@ interface IModalPropsType {
 
 export function Modal({
   isOpen,
-  setIsOpen,
+  closeModal,
   isCloseBtn = true,
   children,
   className,
@@ -26,7 +26,7 @@ export function Modal({
     <section className={classNames(classes.modal, isOpen ? classes.open : '')}>
       <div className={contentClassName}>
         {isCloseBtn && (
-          <div className={classes.closeBtn} onClick={() => setIsOpen(!isOpen)}>
+          <div className={classes.closeBtn} onClick={closeModal}>
             <XIcon></XIcon>
           </div>
         )}

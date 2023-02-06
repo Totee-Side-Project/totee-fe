@@ -9,10 +9,10 @@ import useProfileImage from '@hooks/useProfileImage';
 
 interface IOnboardModalProps {
   isOpen: boolean;
-  setIsOpen: (e: boolean) => void;
+  closeModal: () => void;
 }
-export function OnboardModal({ isOpen, setIsOpen }: IOnboardModalProps) {
-  let navigate = useNavigate();
+export function OnboardModal({ isOpen, closeModal }: IOnboardModalProps) {
+  const navigate = useNavigate();
 
   const [isShowAlert, setIsShowAlert] = useState(false);
   const [values, setValues] = useState({
@@ -28,7 +28,7 @@ export function OnboardModal({ isOpen, setIsOpen }: IOnboardModalProps) {
   });
 
   const onClickConfimButton = async () => {
-    let formData = new FormData();
+    const formData = new FormData();
     for (const [key, value] of Object.entries(values)) {
       formData.append(key, value);
     }
@@ -36,7 +36,7 @@ export function OnboardModal({ isOpen, setIsOpen }: IOnboardModalProps) {
     const result = await addUserMutation.mutateAsync(formData);
     if (result.status === 200) {
       setTimeout(() => {
-        setIsOpen(false);
+        closeModal();
         setIsShowAlert(false);
         navigate('/');
       }, 3000);
@@ -69,7 +69,6 @@ export function OnboardModal({ isOpen, setIsOpen }: IOnboardModalProps) {
             setStep={setStep}
             values={values}
             setValues={setValues}
-            setIsOpenModal={setIsOpen}
             onClickConfimButton={onClickConfimButton}
           ></CheckPositionModal>
         );
@@ -80,7 +79,7 @@ export function OnboardModal({ isOpen, setIsOpen }: IOnboardModalProps) {
 
   return (
     <>
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen} isCloseBtn={false}>
+      <Modal isOpen={isOpen} closeModal={closeModal} isCloseBtn={false}>
         <section className={classes.onboardModal}>{handleStep(step)}</section>
       </Modal>
       {isShowAlert && <Alert text="토티에 오신것을 환영합니다" />}

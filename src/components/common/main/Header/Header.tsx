@@ -14,24 +14,18 @@ import { routePaths } from 'App';
 import './header.scss';
 
 export const Header = () => {
-  //? state
   const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
   const [isOpenOnboardModal, setIsOpenOnboardModal] = useState(false);
   const [isShowAlarm, setIsShowAlarm] = useState(false);
   const [showApplyModal, setShowApplyModal] = useState<boolean>(false);
 
+  const closeLoginModal = () => setIsOpenLoginModal(false);
+  const closeOnboardModal = () => setIsOpenOnboardModal(false);
+
   //로그인 state 관리
   const [login, setLogin] = useRecoilState(loginState);
   const [user, setUser] = useRecoilState(UserState);
-  let navigate = useNavigate();
-
-  // const handleStudyClick = () => {
-  //   if (login.state) {
-  //     navigate('/setupstudy');
-  //   } else {
-  //     setIsOpenLoginModal(true);
-  //   }
-  // };
+  const navigate = useNavigate();
 
   useEffect(() => {
     // 가입되지 않은 유저일 경우 온보딩 모달 띄우기
@@ -136,11 +130,11 @@ export const Header = () => {
       )}
       <SignInModal
         isOpen={isOpenLoginModal}
-        setIsOpen={setIsOpenLoginModal}
+        closeModal={closeLoginModal}
       ></SignInModal>
       <OnboardModal
         isOpen={isOpenOnboardModal}
-        setIsOpen={setIsOpenOnboardModal}
+        closeModal={closeOnboardModal}
       ></OnboardModal>
     </>
   );

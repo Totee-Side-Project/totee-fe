@@ -1,11 +1,8 @@
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 import { useUpdateApplicant } from '@hooks/query/useMutateQuery';
 
-export const useApplyStudyCase = (
-  postId: string,
-  setIsOpen: Dispatch<SetStateAction<boolean>>,
-) => {
+export const useApplyStudyCase = (postId: string, closeModal: () => void) => {
   const [formData, setFormData] = useState('');
   const { mutateAsync: addApplicantMutateAsync } = useUpdateApplicant(
     Number(postId),
@@ -18,11 +15,11 @@ export const useApplyStudyCase = (
     addApplicantMutateAsync(formData, {
       onSuccess: () => {
         resetFormData();
-        setIsOpen((pre) => !pre);
+        closeModal();
       },
       onError: () => {
         resetFormData();
-        setIsOpen((pre) => !pre);
+        closeModal();
       },
     });
   };

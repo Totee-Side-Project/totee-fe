@@ -8,16 +8,16 @@ import { GOOGLE_AUTH_URL, KAKAO_AUTH_URL } from '@api/auth';
 
 interface ISignInModalProps {
   isOpen: boolean;
-  setIsOpen: (e: boolean) => void;
+  closeModal: () => void;
 }
 
-export function SignInModal({ isOpen, setIsOpen }: ISignInModalProps) {
+export function SignInModal({ isOpen, closeModal }: ISignInModalProps) {
   const googleLoginRef = useRef(null as any);
   const kakaoLoginRef = useRef(null as any);
 
   return (
     <>
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+      <Modal isOpen={isOpen} closeModal={closeModal}>
         <section className={classes.onboardModal}>
           <h1>
             <span>토티</span> 에 오신 것을 환영합니다.

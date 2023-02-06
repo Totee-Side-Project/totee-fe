@@ -30,6 +30,8 @@ function OwnerJoinerCheck() {
     setIsOpenApplyStatusModal(true);
   };
 
+  const closeApplyStatusModal = () => setIsOpenApplyStatusModal(false);
+
   if (applicantDataStatus === 'success') {
     const applicants = applicantData;
 
@@ -69,7 +71,7 @@ function OwnerJoinerCheck() {
         </div>
         <ViewModal
           isOpen={isOpenApplyStatusModal}
-          setIsOpen={setIsOpenApplyStatusModal}
+          closeModal={closeApplyStatusModal}
           applicant={pickApplicant}
         ></ViewModal>
       </>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 
 import { Button } from '@components/atoms';
@@ -11,7 +11,6 @@ export default function CheckPositionModal({
   setStep,
   values,
   setValues,
-  setIsOpenModal,
   onClickConfimButton,
 }: IModalPropsType) {
   const [selectedPosition, setSelectedPosition] = useState('');

@@ -15,12 +15,13 @@ import {
 import './joinerCheck.scss';
 
 function JoinerCheck() {
-  const [isOpenJoinModal, setIsOpenJoinModal] = useState(false);
   const [isSignInModal, setIsSignInModal] = useState(false);
+  const [isOpenJoinModal, setIsOpenJoinModal] = useState(false);
   const userState = useRecoilValue(UserState);
   const { id } = useParams();
 
-  // if (!id) return <div>올바른 접속이 아닙니다.</div>;
+  const closeSignInModal = () => setIsSignInModal(false);
+  const closeJoinModal = () => setIsOpenJoinModal(false);
 
   const { data: postData, status: postDataStatus } = useGetPostByPostId(
     Number(id),
@@ -91,11 +92,11 @@ function JoinerCheck() {
         {userState.nickname === postData?.data.body.data.nickname && (
           <OwnerJoinerCheck />
         )}
-        <SignInModal isOpen={isSignInModal} setIsOpen={setIsSignInModal} />
+        <SignInModal isOpen={isSignInModal} closeModal={closeSignInModal} />
 
         <JoinModal
           isOpen={isOpenJoinModal}
-          setIsOpen={setIsOpenJoinModal}
+          closeModal={closeJoinModal}
           postId={id as string}
         />
       </>

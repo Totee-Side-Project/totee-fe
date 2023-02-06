@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { Button, Modal } from '@components/atoms';
@@ -8,17 +7,17 @@ import './joinModal.scss';
 
 interface IJoinModalProps {
   isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  closeModal: () => void;
   postId: string;
 }
 
-export function JoinModal({ isOpen, setIsOpen, postId }: IJoinModalProps) {
+export function JoinModal({ isOpen, closeModal, postId }: IJoinModalProps) {
   const useProfile = useRecoilValue(UserState);
   const { formData, onChangeByTextarea, addApplicationOnClick } =
-    useApplyStudyCase(postId, setIsOpen);
+    useApplyStudyCase(postId, closeModal);
 
   return (
-    <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+    <Modal isOpen={isOpen} closeModal={closeModal}>
       <div className="ApplyModalWrapper">
         <div className="ApplyTitle">지원 하기</div>
         <div className="SubTitle">지원하실 포지션과 소개를 적어주세요.</div>

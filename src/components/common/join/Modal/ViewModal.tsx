@@ -8,11 +8,11 @@ import { IApplicantDetail } from '@api/application/types';
 
 interface IViewModalProps {
   isOpen: boolean;
-  setIsOpen: (e: boolean) => void;
+  closeModal: () => void;
   applicant: IApplicantDetail;
 }
 
-export function ViewModal({ isOpen, setIsOpen, applicant }: IViewModalProps) {
+export function ViewModal({ isOpen, closeModal, applicant }: IViewModalProps) {
   const { id } = useParams();
   const postTeamMutation = usePostTeam(Number(id));
   const approveTeamOnClick = useCallback(() => {
@@ -69,7 +69,7 @@ export function ViewModal({ isOpen, setIsOpen, applicant }: IViewModalProps) {
   );
 
   return (
-    <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+    <Modal isOpen={isOpen} closeModal={closeModal}>
       <div className="ApplyModalWrapper">
         <div className="ApplyTitle">지원자 보기</div>
         <div className="SubTitle">지원자의 승인여부를 결정해주세요.</div>
