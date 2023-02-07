@@ -2,7 +2,6 @@
   width: 320px;
   min-height: 100vh;
   border-right: 0.5px solid #cccccc;
-  // padding-top: 24px;
 
   .mainMenu {
     position: relative;
@@ -35,7 +34,14 @@
       padding: 6px 0 6px 36px;
       line-height: 17px;
 
+      &:hover {
+        cursor: pointer;
+        background-color: #e0e0e0;
+        transition: 0.2s;
+      }
+
       & > a {
+        display: inline-block;
         height: 100%;
         width: 100%;
         font-size: 12px;

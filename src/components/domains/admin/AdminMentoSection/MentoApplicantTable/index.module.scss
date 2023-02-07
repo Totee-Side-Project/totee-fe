@@ -6,18 +6,23 @@
 .tbody {
   .tr {
     text-align: center;
-    :hover {
+
+    &:hover {
       cursor: pointer;
+      background-color: #d8d8d8;
+      transition: 0.2s;
     }
   }
 }
 .th {
+  text-align: left;
   border-bottom: 2px solid #d8d8d8;
-  padding-bottom: 15px;
+  padding: 0 0 15px 5px;
   font-size: 16px;
 }
 .td {
+  text-align: left;
   border-bottom: 1px solid #d8d8d8;
   font-size: 14px;
-  padding: 10px;
+  padding: 10px 5px;
 }

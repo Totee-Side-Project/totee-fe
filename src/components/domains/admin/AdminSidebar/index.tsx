@@ -31,7 +31,7 @@ export const AdminSidebar = () => {
                 }
                 key={to}
               >
-                <Link to={to} reloadDocument={false}>
+                <Link to={`${to}?page=1`} reloadDocument={false}>
                   {title}
                 </Link>
               </li>
