@@ -166,7 +166,7 @@ export function useGetMentoringMembers(mentoringId: number) {
 }
 
 export function useGetMentoList(options: IMentoListRequestOptions) {
-  return useQuery(queryKeys.mentoList, () =>
+  return useQuery(queryKeys.mentoList(options), () =>
     MentorAPI.getMentorList(options).then(
       (response) => response.data.body.data,
     ),
