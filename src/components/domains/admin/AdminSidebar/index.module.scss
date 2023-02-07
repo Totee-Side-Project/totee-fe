@@ -1,0 +1,70 @@
+.sidebar {
+  width: 320px;
+  min-height: 100vh;
+  border-right: 0.5px solid #cccccc;
+  // padding-top: 24px;
+
+  .mainMenu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 66px;
+    padding: 26px 0 12px 27px;
+    gap: 12px;
+    background-color: #f5f5f5;
+
+    .mainMenuIcon {
+      width: 18.5px;
+      height: 16.5px;
+    }
+    .mainMenuTitle {
+      color: #222222;
+      font-family: 'Noto Sans';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 18px;
+    }
+  }
+
+  .menuList {
+    border-top: 0.5px solid #cccccc;
+    border-bottom: 0.5px solid #cccccc;
+
+    .menuItem {
+      height: 29px;
+      padding: 6px 0 6px 36px;
+      line-height: 17px;
+
+      & > a {
+        height: 100%;
+        width: 100%;
+        font-size: 12px;
+      }
+    }
+  }
+
+  .subMenu {
+    background-color: #ffffff;
+    color: #4f4f4f;
+    height: 33px;
+    width: 100%;
+    position: relative;
+    cursor: pointer;
+    &:hover {
+      background-color: #e0e0e0;
+    }
+    .subMenuTitle {
+      position: absolute;
+      left: 90px;
+      top: 6px;
+      font-family: 'Noto Sans';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+    }
+  }
+}
+
+.focused {
+  background-color: #e7e7e7;
+}

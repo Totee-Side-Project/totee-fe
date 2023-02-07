@@ -1,8 +1,10 @@
 export interface IMentoListRequestOptions {
-  kind?: 'all' | 'n' | 'y';
-  page?: number;
-  size?: number;
+  kind: MentoListRequestKindOption;
+  page: number;
+  size: number;
 }
+
+export type MentoListRequestKindOption = 'all' | 'approved' | 'pending';
 
 export interface IApplyMentor {
   field: string;

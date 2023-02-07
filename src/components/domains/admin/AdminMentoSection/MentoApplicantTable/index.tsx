@@ -1,24 +1,19 @@
-import { IMento } from '@api/mentor/types';
+import { IMento, IMentoListRequestOptions } from '@api/mentor/types';
 import { Table } from '@components/atoms/Table';
 import { useGetMentoList } from '@hooks/query/useGetQuery';
 import classes from './index.module.scss';
 
 const MENTO_APPLICANT_TABLE_COLUMNS = ['닉네임', '분야', '실무 경력', '이메일'];
-const MENTO_APPLICANTS_PAGE = 0;
-const MENTO_APPLICANTS_SIZE = 8;
 
 interface IMentoApplicantTableProps {
   onSelectClick: (mento: IMento) => void;
+  getMentoListParams: IMentoListRequestOptions;
 }
 export const MentoApplicantTable = ({
   onSelectClick,
+  getMentoListParams,
 }: IMentoApplicantTableProps) => {
-  const { data } = useGetMentoList({
-    kind: 'all',
-    page: MENTO_APPLICANTS_PAGE,
-    size: MENTO_APPLICANTS_SIZE,
-  });
-
+  const { data } = useGetMentoList(getMentoListParams);
   const mentoContents = data?.content;
 
   const mentos = mentoContents?.map((mento) => ({

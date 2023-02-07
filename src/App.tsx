@@ -42,7 +42,7 @@ export const routePaths = {
   edit: '/editstudy/',
   editId: '/editstudy/:id',
   mypage: '/mypage',
-  admin: '/admin',
+  admin: '/admin/*',
 };
 
 export const isNotLoginRoutes = [
