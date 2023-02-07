@@ -38,9 +38,15 @@ export const queryKeys = {
     options,
   ],
   myStudyPost: ['myStudyPost'],
-  participatingStudyPost: ['participatingStudyPost'],
-  postLikeList: ['postLikeList'],
+  participatingStudyPosts: ['participatingStudyPosts'],
+  participatingMentoringPosts: ['participatingMentoringPosts'],
+  likedStudyPosts: ['likedStudyPosts'],
+  likedMentoringPosts: ['likedMentoringPosts'],
   studyMembers: (postId: number) => ['studyMembers', postId],
   myMentoringPosts: ['myMentoringPosts'],
-  mentoringMembers: (mentoringId?: number) => ['mentoringMembers', mentoringId],
+  mentoringMembers: (mentoringId: number) => ['mentoringMembers', mentoringId],
+  mentoringApplicants: (mentoringId: number) => [
+    'mentoringApplicants',
+    mentoringId,
+  ],
 };

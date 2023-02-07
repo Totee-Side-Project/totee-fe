@@ -1,20 +1,21 @@
-import DetailedMemberModal from '@components/domains/myPage/common/DetailedMemberModal';
+import DetailedStudyMemberModal from '@components/domains/myPage/common/DetailedStudyMemberModal';
 import CardsSection from '@components/domains/myPage/common/CardsSection';
 import {
-  useGetParticipatingStudyPost,
+  useGetParticipatingStudyPosts,
   useGetStudyMembers,
 } from '@hooks/query/useGetQuery';
 import { useMemberModal } from '@hooks/useMemberModal';
 import { useGetUserActivity } from '@hooks/useGetUserActivity';
+import { IStudyMemberType } from '@api/team/types';
 
 const ParticipatingStudy = () => {
   const { posts, members, setCurrentPostId } = useGetUserActivity(
-    useGetParticipatingStudyPost,
+    useGetParticipatingStudyPosts,
     useGetStudyMembers,
   );
 
   const { isOpenedModal, setIsOpenedModal, currentMember, onClickMemberCard } =
-    useMemberModal();
+    useMemberModal<IStudyMemberType>();
 
   return (
     <>
@@ -24,9 +25,9 @@ const ParticipatingStudy = () => {
         memberSectionTitle="현재 스터디 멤버"
         members={members}
         setCurrentPostId={setCurrentPostId}
-        onClickMemberCard={onClickMemberCard}
+        onClickStudyMemberCard={onClickMemberCard}
       />
-      <DetailedMemberModal
+      <DetailedStudyMemberModal
         title="스터디 멤버"
         subTitle="스터디 멤버와 자기 소개입니다."
         member={currentMember}

@@ -1,35 +1,34 @@
-import DetailedMemberModal from '@components/domains/myPage/common/DetailedMemberModal';
-
-import { useGetApplicant, useGetMyStudyPost } from '@hooks/query/useGetQuery';
+import DetailedStudyMemberModal from '@components/domains/myPage/common/DetailedStudyMemberModal';
+import { useGetApplicant, useGetMyStudyPosts } from '@hooks/query/useGetQuery';
 import { usePostTeam } from '@hooks/query/useMutateQuery';
 import { useMemberModal } from '@hooks/useMemberModal';
 import { useGetUserActivity } from '@hooks/useGetUserActivity';
-import { useEffect } from 'react';
-import classes from '../../../common/DetailedMemberModal/index.module.scss';
 import CardsSection from '@components/domains/myPage/common/CardsSection';
+import ApplicantAcceptanceButton from '@components/domains/myPage/common/ApplicantAcceptanceButton';
+import { IStudyMemberType } from '@api/team/types';
+import { useEffect } from 'react';
 
 const StudyApplicantConfirmation = () => {
   const { posts, members, currentPostId, setCurrentPostId } =
-    useGetUserActivity(useGetMyStudyPost, useGetApplicant);
+    useGetUserActivity(useGetMyStudyPosts, useGetApplicant);
 
   const { isOpenedModal, setIsOpenedModal, currentMember, onClickMemberCard } =
-    useMemberModal();
+    useMemberModal<IStudyMemberType>();
 
-  const {
-    mutate: acceptStudyApplicant,
-    isSuccess: isSuccessStudyApplicantAcceptance,
-  } = usePostTeam(currentPostId);
+  const { mutate, isSuccess } = usePostTeam(currentPostId);
 
   const onClickAcceptButton = (isAccept: boolean) => {
-    acceptStudyApplicant({
+    mutate({
       accept: isAccept,
       nickname: currentMember ? currentMember.nickname : '',
     });
   };
 
   useEffect(() => {
-    setIsOpenedModal(false);
-  }, [isSuccessStudyApplicantAcceptance]);
+    if (isSuccess) {
+      setIsOpenedModal(false);
+    }
+  }, [isSuccess]);
 
   return (
     <>
@@ -39,30 +38,17 @@ const StudyApplicantConfirmation = () => {
         memberSectionTitle="스터디 지원자 목록"
         members={members}
         setCurrentPostId={setCurrentPostId}
-        onClickMemberCard={onClickMemberCard}
+        onClickStudyMemberCard={onClickMemberCard}
       />
-      <DetailedMemberModal
+      <DetailedStudyMemberModal
         title="지원자 승인 요청 수락"
         subTitle="지원자의 승인여부를 결정해주세요."
         member={currentMember}
         isOpenedModal={isOpenedModal}
         setIsOpenedModal={setIsOpenedModal}
       >
-        <div className={classes.applicantConfirmationButton}>
-          <button
-            className={classes.rejectButton}
-            onClick={() => onClickAcceptButton(false)}
-          >
-            승인 거부
-          </button>
-          <button
-            className={classes.acceptButton}
-            onClick={() => onClickAcceptButton(true)}
-          >
-            승인 허용
-          </button>
-        </div>
-      </DetailedMemberModal>
+        <ApplicantAcceptanceButton onClickAcceptButton={onClickAcceptButton} />
+      </DetailedStudyMemberModal>
     </>
   );
 };
