@@ -15,9 +15,9 @@ export const AdminSidebar = () => {
   const { data: approvedMentoData } = approvedMentoQuery;
 
   const countes = {
-    pending: pendingMentoData?.totalElements,
-    approved: approvedMentoData?.totalElements,
-  } as { [key: string]: number | undefined };
+    pending: pendingMentoData?.totalElements || 0,
+    approved: approvedMentoData?.totalElements || 0,
+  } as { [key: string]: number };
 
   return (
     <aside className={classes.sidebar}>
