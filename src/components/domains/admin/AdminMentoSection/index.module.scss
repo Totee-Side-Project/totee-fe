@@ -1,4 +1,9 @@
 .contentSection {
-  width: 100%;
+  max-width: 1400px;
+  min-width: 1000px;
   padding: 0 50px;
+}
+
+.paginationWrap {
+  margin-top: 50px;
 }

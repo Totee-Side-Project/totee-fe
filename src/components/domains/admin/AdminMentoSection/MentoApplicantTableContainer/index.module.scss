@@ -1,9 +1,10 @@
 .tableContainer {
-  flex-basis: 1250px;
-  height: 500px;
+  max-width: 1250px;
+  flex-basis: 800px;
+  height: 550px;
   margin-top: 40px;
   padding: 30px 40px;
-  border: 1px solid #cccccc;
+  // border: 1px solid #cccccc;
   border-radius: 10px;
   background: #ffffff;
 }
