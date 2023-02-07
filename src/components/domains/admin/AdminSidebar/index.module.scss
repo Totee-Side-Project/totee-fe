@@ -31,16 +31,14 @@
 
     .menuItem {
       height: 29px;
-      padding: 6px 0 6px 36px;
       line-height: 17px;
-
       &:hover {
         cursor: pointer;
         background-color: #e0e0e0;
         transition: 0.2s;
       }
-
       & > a {
+        padding: 6px 0 6px 36px;
         display: inline-block;
         height: 100%;
         width: 100%;
