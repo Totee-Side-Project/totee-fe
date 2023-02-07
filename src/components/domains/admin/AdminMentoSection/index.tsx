@@ -1,54 +1,36 @@
-import { useEffect, useState } from 'react';
-import { Route, Routes, useSearchParams } from 'react-router-dom';
+import { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 import { IMento } from '@api/mentor/types';
 import { MentoApplicantTable } from '@components/domains/admin/AdminMentoSection/MentoApplicantTable';
 import { MentoApplicantTableContainer } from '@components/domains/admin/AdminMentoSection/MentoApplicantTableContainer';
 import { MentoApplicantTitle } from '@components/domains/admin/AdminMentoSection/MentoApplicantTitle';
 import { MentoApplyAcceptModal } from '@components/domains/admin/MentoApplyAcceptModal';
-import {
-  ADMIN_MENTO_MENUS,
-  MENTO_APPLICANTS_KINDS,
-  MENTO_APPLICANTS_SIZE,
-} from 'constants/adminPage';
-import classes from './index.module.scss';
 import { Pagination } from '@components/common/pagination/Pagination';
-import { useGetMentoList } from '@hooks/query/useGetQuery';
+
 import { AdminGuideMessage } from '@components/domains/admin/AdminGuideMessage';
+import { useFetchMentoList } from '@hooks/useGetMentoList';
+import { useMentoPagination } from '@hooks/useMentoPagination';
+import { ADMIN_MENTO_MENUS, MENTO_APPLICANTS_KINDS } from 'constants/adminPage';
+import classes from './index.module.scss';
 
 export const AdminMentoSection = () => {
   const [isSelectedMento, setIsSelectedMento] = useState<IMento>();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const pageParam = Number(searchParams.get('page')) || 1;
+  const { currentPage, setCurrentPage, slideNum, setSlideNum } =
+    useMentoPagination();
 
-  const [currentPage, setCurrentPage] = useState(pageParam - 1);
-  const [slideNum, setSlideNum] = useState(1);
-
-  const { data: pendingMentoList, isLoading: pendingMentoListIsLoading } =
-    useGetMentoList({
-      kind: MENTO_APPLICANTS_KINDS.pending,
-      size: MENTO_APPLICANTS_SIZE,
-      page: currentPage,
-    });
-  const { data: approvedMentoList, isLoading: approvedMentoListIsLoading } =
-    useGetMentoList({
-      kind: MENTO_APPLICANTS_KINDS.approved,
-      size: MENTO_APPLICANTS_SIZE,
-      page: currentPage,
-    });
-
-  useEffect(() => {
-    setSearchParams({
-      page: (currentPage + 1).toString(),
-    });
-  }, [currentPage]);
+  const { pendingMentoQuery, approvedMentoQuery } = useFetchMentoList();
+  const { data: pendingMentoData, isLoading: pendingMentoIsLoading } =
+    pendingMentoQuery;
+  const { data: approvedMentoData, isLoading: approvedMentoIsLoading } =
+    approvedMentoQuery;
 
   const handleSelectedMentoOnClick = (mento: IMento) => {
     setIsSelectedMento({ ...mento });
   };
   const clearIsSelectedMento = () => setIsSelectedMento(undefined);
 
-  if (pendingMentoListIsLoading || approvedMentoListIsLoading) {
+  if (pendingMentoIsLoading || approvedMentoIsLoading) {
     return (
       <section className={classes.contentSection}>
         <MentoApplicantTableContainer>
@@ -68,25 +50,22 @@ export const AdminMentoSection = () => {
           element={
             <MentoApplicantTableContainer>
               <MentoApplicantTitle title={ADMIN_MENTO_MENUS.pending.title} />
-              {pendingMentoList && pendingMentoList.content.length ? (
+              {pendingMentoData?.content.length ? (
                 <>
                   <MentoApplicantTable
                     onSelectClick={handleSelectedMentoOnClick}
-                    getMentoListParams={{
-                      kind: MENTO_APPLICANTS_KINDS.pending,
-                      size: MENTO_APPLICANTS_SIZE,
-                      page: currentPage,
-                    }}
-                    data={pendingMentoList}
+                    data={pendingMentoData}
                   />
-                  <Pagination
-                    currentPage={currentPage}
-                    totalPageNum={pendingMentoList.totalPages}
-                    limitPageNum={4}
-                    setCurrentPage={setCurrentPage}
-                    slideNum={slideNum}
-                    setSlideNum={setSlideNum}
-                  />
+                  <div className={classes.paginationWrap}>
+                    <Pagination
+                      currentPage={currentPage}
+                      totalPageNum={pendingMentoData.totalPages}
+                      limitPageNum={4}
+                      setCurrentPage={setCurrentPage}
+                      slideNum={slideNum}
+                      setSlideNum={setSlideNum}
+                    />
+                  </div>
                 </>
               ) : (
                 <AdminGuideMessage guideMessage="수락 대기중인 유저가 없어요." />
@@ -99,25 +78,22 @@ export const AdminMentoSection = () => {
           element={
             <MentoApplicantTableContainer>
               <MentoApplicantTitle title={ADMIN_MENTO_MENUS.approved.title} />
-              {approvedMentoList && approvedMentoList.content.length ? (
+              {approvedMentoData?.content.length ? (
                 <>
                   <MentoApplicantTable
                     onSelectClick={handleSelectedMentoOnClick}
-                    getMentoListParams={{
-                      kind: MENTO_APPLICANTS_KINDS.approved,
-                      size: MENTO_APPLICANTS_SIZE,
-                      page: currentPage,
-                    }}
-                    data={approvedMentoList}
+                    data={approvedMentoData}
                   />
-                  <Pagination
-                    currentPage={currentPage}
-                    totalPageNum={approvedMentoList.totalPages}
-                    limitPageNum={4}
-                    setCurrentPage={setCurrentPage}
-                    slideNum={slideNum}
-                    setSlideNum={setSlideNum}
-                  />
+                  <div className={classes.paginationWrap}>
+                    <Pagination
+                      currentPage={currentPage}
+                      totalPageNum={approvedMentoData.totalPages}
+                      limitPageNum={4}
+                      setCurrentPage={setCurrentPage}
+                      slideNum={slideNum}
+                      setSlideNum={setSlideNum}
+                    />
+                  </div>
                 </>
               ) : (
                 <AdminGuideMessage guideMessage="승인된 멘토가 존재하지 않아요." />

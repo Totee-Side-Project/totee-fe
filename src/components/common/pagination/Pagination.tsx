@@ -15,7 +15,7 @@ interface PaginationProps {
   currentPage: number;
   totalPageNum: number;
   limitPageNum: number;
-  setCurrentPage: Dispatch<SetStateAction<number>>;
+  setCurrentPage: Dispatch<SetStateAction<number>> | ((page: number) => void);
   slideNum: number;
   setSlideNum: Dispatch<SetStateAction<number>>;
 }

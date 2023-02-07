@@ -9,7 +9,6 @@ const MENTO_APPLICANT_TABLE_COLUMNS = ['닉네임', '분야', '실무 경력', '
 interface IMentoApplicantTableProps {
   data: IPageableResponse<IMento>;
   onSelectClick: (mento: IMento) => void;
-  getMentoListParams: IMentoListRequestOptions;
 }
 export const MentoApplicantTable = ({
   data,
