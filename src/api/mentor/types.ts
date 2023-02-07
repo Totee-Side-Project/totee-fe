@@ -21,6 +21,7 @@ export interface IMento {
   career: string;
   contact: string;
   portfolioUrl: string;
+  profileImageUrl: string;
   comment: string;
-  approval: string;
+  approval: boolean;
 }

@@ -28,8 +28,7 @@ export const MentoApplyAcceptModal = ({
         <div className={classes.mentoProfile}>
           <img
             className={classes.profileImage}
-            // FIXME: 멘토 프로필 이미지로 변경해야함
-            // src={mento.portfolioUrl}
+            src={mento.profileImageUrl}
             alt="멘토 프로필 이미지"
           />
           <h3 className={classes.nickName}>{mento.nickname}</h3>
@@ -62,6 +61,7 @@ export const MentoApplyAcceptModal = ({
           </div>
           <p className={classes.comment}>{mento.comment}</p>
         </div>
+        {/* {!mento.approval && ( */}
         <div className={classes.buttonWrap}>
           <button
             type="submit"
@@ -78,6 +78,7 @@ export const MentoApplyAcceptModal = ({
             허용
           </button>
         </div>
+        {/* )} */}
       </div>
     </Modal>
   );
