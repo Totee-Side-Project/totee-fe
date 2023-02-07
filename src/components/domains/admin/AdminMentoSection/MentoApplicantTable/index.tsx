@@ -1,19 +1,20 @@
 import { IMento, IMentoListRequestOptions } from '@api/mentor/types';
+import { IPageableResponse } from '@api/post/types';
 import { Table } from '@components/atoms/Table';
-import { useGetMentoList } from '@hooks/query/useGetQuery';
+
 import classes from './index.module.scss';
 
 const MENTO_APPLICANT_TABLE_COLUMNS = ['닉네임', '분야', '실무 경력', '이메일'];
 
 interface IMentoApplicantTableProps {
+  data: IPageableResponse<IMento>;
   onSelectClick: (mento: IMento) => void;
   getMentoListParams: IMentoListRequestOptions;
 }
 export const MentoApplicantTable = ({
+  data,
   onSelectClick,
-  getMentoListParams,
 }: IMentoApplicantTableProps) => {
-  const { data } = useGetMentoList(getMentoListParams);
   const mentoContents = data?.content;
 
   const mentos = mentoContents?.map((mento) => ({

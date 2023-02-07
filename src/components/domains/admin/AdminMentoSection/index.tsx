@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Route, Routes, useSearchParams } from 'react-router-dom';
 
 import { IMento } from '@api/mentor/types';
@@ -9,21 +9,57 @@ import { MentoApplyAcceptModal } from '@components/domains/admin/MentoApplyAccep
 import {
   ADMIN_MENTO_MENUS,
   MENTO_APPLICANTS_KINDS,
-  MENTO_APPLICANTS_PAGE,
   MENTO_APPLICANTS_SIZE,
 } from 'constants/adminPage';
 import classes from './index.module.scss';
+import { Pagination } from '@components/common/pagination/Pagination';
+import { useGetMentoList } from '@hooks/query/useGetQuery';
+import { AdminGuideMessage } from '@components/domains/admin/AdminGuideMessage';
 
 export const AdminMentoSection = () => {
   const [isSelectedMento, setIsSelectedMento] = useState<IMento>();
   const [searchParams, setSearchParams] = useSearchParams();
   const pageParam = Number(searchParams.get('page')) || 1;
 
+  const [currentPage, setCurrentPage] = useState(pageParam - 1);
+  const [slideNum, setSlideNum] = useState(1);
+
+  const { data: pendingMentoList, isLoading: pendingMentoListIsLoading } =
+    useGetMentoList({
+      kind: MENTO_APPLICANTS_KINDS.pending,
+      size: MENTO_APPLICANTS_SIZE,
+      page: currentPage,
+    });
+  const { data: approvedMentoList, isLoading: approvedMentoListIsLoading } =
+    useGetMentoList({
+      kind: MENTO_APPLICANTS_KINDS.approved,
+      size: MENTO_APPLICANTS_SIZE,
+      page: currentPage,
+    });
+
+  useEffect(() => {
+    setSearchParams({
+      page: (currentPage + 1).toString(),
+    });
+  }, [currentPage]);
+
   const handleSelectedMentoOnClick = (mento: IMento) => {
     setIsSelectedMento({ ...mento });
   };
   const clearIsSelectedMento = () => setIsSelectedMento(undefined);
 
+  if (pendingMentoListIsLoading || approvedMentoListIsLoading) {
+    return (
+      <section className={classes.contentSection}>
+        <MentoApplicantTableContainer>
+          {
+            // TODO: loading 처리를 좀더 우아하게 해야한다.
+          }
+          <div>loading</div>
+        </MentoApplicantTableContainer>
+      </section>
+    );
+  }
   return (
     <section className={classes.contentSection}>
       <Routes>
@@ -32,14 +68,29 @@ export const AdminMentoSection = () => {
           element={
             <MentoApplicantTableContainer>
               <MentoApplicantTitle title={ADMIN_MENTO_MENUS.pending.title} />
-              <MentoApplicantTable
-                onSelectClick={handleSelectedMentoOnClick}
-                getMentoListParams={{
-                  kind: MENTO_APPLICANTS_KINDS.pending,
-                  size: MENTO_APPLICANTS_SIZE,
-                  page: pageParam - 1,
-                }}
-              />
+              {pendingMentoList && pendingMentoList.content.length ? (
+                <>
+                  <MentoApplicantTable
+                    onSelectClick={handleSelectedMentoOnClick}
+                    getMentoListParams={{
+                      kind: MENTO_APPLICANTS_KINDS.pending,
+                      size: MENTO_APPLICANTS_SIZE,
+                      page: currentPage,
+                    }}
+                    data={pendingMentoList}
+                  />
+                  <Pagination
+                    currentPage={currentPage}
+                    totalPageNum={pendingMentoList.totalPages}
+                    limitPageNum={4}
+                    setCurrentPage={setCurrentPage}
+                    slideNum={slideNum}
+                    setSlideNum={setSlideNum}
+                  />
+                </>
+              ) : (
+                <AdminGuideMessage guideMessage="수락 대기중인 유저가 없어요." />
+              )}
             </MentoApplicantTableContainer>
           }
         />
@@ -48,14 +99,29 @@ export const AdminMentoSection = () => {
           element={
             <MentoApplicantTableContainer>
               <MentoApplicantTitle title={ADMIN_MENTO_MENUS.approved.title} />
-              <MentoApplicantTable
-                onSelectClick={handleSelectedMentoOnClick}
-                getMentoListParams={{
-                  kind: MENTO_APPLICANTS_KINDS.approved,
-                  size: MENTO_APPLICANTS_SIZE,
-                  page: pageParam - 1,
-                }}
-              />
+              {approvedMentoList && approvedMentoList.content.length ? (
+                <>
+                  <MentoApplicantTable
+                    onSelectClick={handleSelectedMentoOnClick}
+                    getMentoListParams={{
+                      kind: MENTO_APPLICANTS_KINDS.approved,
+                      size: MENTO_APPLICANTS_SIZE,
+                      page: currentPage,
+                    }}
+                    data={approvedMentoList}
+                  />
+                  <Pagination
+                    currentPage={currentPage}
+                    totalPageNum={approvedMentoList.totalPages}
+                    limitPageNum={4}
+                    setCurrentPage={setCurrentPage}
+                    slideNum={slideNum}
+                    setSlideNum={setSlideNum}
+                  />
+                </>
+              ) : (
+                <AdminGuideMessage guideMessage="승인된 멘토가 존재하지 않아요." />
+              )}
             </MentoApplicantTableContainer>
           }
         />
