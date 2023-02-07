@@ -61,24 +61,24 @@ export const MentoApplyAcceptModal = ({
           </div>
           <p className={classes.comment}>{mento.comment}</p>
         </div>
-        {/* {!mento.approval && ( */}
-        <div className={classes.buttonWrap}>
-          <button
-            type="submit"
-            className={classes.rejectButton}
-            onClick={rejectApplyMento}
-          >
-            거부
-          </button>
-          <button
-            type="submit"
-            className={classes.acceptButton}
-            onClick={acceptApplyMento}
-          >
-            허용
-          </button>
-        </div>
-        {/* )} */}
+        {!mento.approval && (
+          <div className={classes.buttonWrap}>
+            <button
+              type="submit"
+              className={classes.rejectButton}
+              onClick={rejectApplyMento}
+            >
+              거부
+            </button>
+            <button
+              type="submit"
+              className={classes.acceptButton}
+              onClick={acceptApplyMento}
+            >
+              허용
+            </button>
+          </div>
+        )}
       </div>
     </Modal>
   );
