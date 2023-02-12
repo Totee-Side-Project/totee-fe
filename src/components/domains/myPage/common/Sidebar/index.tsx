@@ -39,6 +39,16 @@ const SideBar = ({ focusedMenu, setFocusedMenu }: ISideBarProps) => {
                     : '',
               }}
             >
+              <span
+                className={classes.subMenuShape}
+                style={{
+                  backgroundColor:
+                    mainMenu.title === focusedMenu.mainMenuTitle &&
+                    subMenu.title === focusedMenu.subMenuTitle
+                      ? '#568A35'
+                      : '#A0AEC0',
+                }}
+              />
               <span className={classes.subMenuTitle}>{subMenu.title}</span>
             </div>
           ))}
