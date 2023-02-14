@@ -48,7 +48,7 @@ export const MentoApplyAcceptModal = ({
           </div>
           <div className={classes.mentoCarrerProfleBottom}>
             <div className={classes.portfolioWrap}>
-              <div className={classes.label}>포트폴리오주소</div>
+              <div className={classes.label}>포트폴리오 주소</div>
               <a
                 className={classes.portfolio}
                 href={mento.portfolioUrl}
