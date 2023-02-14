@@ -1,0 +1,25 @@
+.nickname {
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 34px;
+  color: #484848;
+  margin-top: 14px;
+}
+
+.email {
+  font-family: 'Roboto';
+  font-size: 16px;
+  line-height: 20px;
+  color: #767676;
+}
+
+.message {
+  background: #F4F4F4;
+  border-radius: 12px;
+  width: 90%;
+  margin: 21px auto;
+  padding: 30px 20px;
+  word-wrap: break-word;
+  height: 150px;
+  overflow: auto;
+}

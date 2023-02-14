@@ -17,6 +17,7 @@ interface PostCardProps {
   post: IPost;
 }
 interface OptionalProps {
+  postSectionTitle?: string;
   post?: IPost;
   styles?: {
     width: string;
@@ -25,7 +26,12 @@ interface OptionalProps {
   setCurrentPostId?: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export const PostCard = ({ post, styles, setCurrentPostId }: OptionalProps) => {
+export const PostCard = ({
+  postSectionTitle,
+  post,
+  styles,
+  setCurrentPostId,
+}: OptionalProps) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
@@ -41,11 +47,16 @@ export const PostCard = ({ post, styles, setCurrentPostId }: OptionalProps) => {
   }
 
   const clickHandler = () => {
-    if (pathname === '/mypage') {
-      setCurrentPostId && setCurrentPostId(post.postId);
+    if (
+      postSectionTitle === '내가 관심목록에 추가한 스터디' ||
+      pathname !== '/mypage'
+    ) {
+      navigate(`/detail/${post.postId}`);
       return;
     }
-    navigate(`/detail/${post.postId}`);
+    if (pathname === '/mypage') {
+      setCurrentPostId && setCurrentPostId(post.postId);
+    }
   };
 
   return (

@@ -2,16 +2,18 @@ import { useState } from 'react';
 import Pagination from '../../Pagination';
 import classes from './index.module.scss';
 import profileCircle from '../../../../../../assets/svg/profile-circle.svg';
-import { IMemberType } from '@api/team/types';
+import { IMentoringMemberType, IStudyMemberType } from '@api/team/types';
 
 interface IMemberCardsSectionProps {
-  members?: IMemberType[];
-  onClickMemberCard?: any;
+  members?: IStudyMemberType[] | IMentoringMemberType[];
+  onClickStudyMemberCard?: any;
+  onClickMentoringMemberCard?: any;
 }
 
 const MemberCardsSection = ({
   members,
-  onClickMemberCard,
+  onClickStudyMemberCard,
+  onClickMentoringMemberCard,
 }: IMemberCardsSectionProps) => {
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -28,7 +30,11 @@ const MemberCardsSection = ({
             <div
               className={classes.memberCard}
               key={member.email}
-              onClick={() => onClickMemberCard(member)}
+              onClick={() => {
+                onClickStudyMemberCard && onClickStudyMemberCard(member);
+                onClickMentoringMemberCard &&
+                  onClickMentoringMemberCard(member);
+              }}
             >
               <img
                 className={classes.profileImg}

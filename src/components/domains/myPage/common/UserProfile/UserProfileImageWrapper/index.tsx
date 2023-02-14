@@ -1,8 +1,8 @@
-import profileCircle from '../../../../../../assets/svg/profile-circle.svg';
 import profileSquare from '../../../../../../assets/svg/profile-square.svg';
 import React, { useState } from 'react';
 import classes from './index.module.scss';
 import { IUserType } from '@api/user/types';
+import ProfileImage from '../../ProfileImage';
 
 interface IUserProfileImageWrapperProps {
   user: IUserType;
@@ -45,10 +45,10 @@ const UserProfileImageWrapper = ({
           />
         </>
       ) : (
-        <img
-          className={classes.profileImage}
-          src={user.profileImageUrl ? user.profileImageUrl : profileCircle}
-          alt={user.profileImageUrl ? '사용자 프로필 사진' : '기본 프로필 사진'}
+        <ProfileImage
+          profileImgSrc={user.profileImageUrl}
+          width={'131px'}
+          height={'131px'}
         />
       )}
     </div>
