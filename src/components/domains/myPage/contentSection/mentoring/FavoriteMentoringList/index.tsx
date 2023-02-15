@@ -1,13 +1,9 @@
 import { IMentoringPost } from '@api/mentoring/types';
-import MentoringPostDetailModal from '@components/common/mentoring/MentoringPostDetailModal';
 import CardsSection from '@components/domains/myPage/common/CardsSection';
 import { useGetLikedMentoringPosts } from '@hooks/query/useGetQuery';
-import { loginState } from '@store/login';
 import { useState } from 'react';
-import { useRecoilState } from 'recoil';
 
 const FavoriteMentoringList = () => {
-  const [loginData] = useRecoilState(loginState);
   const { data: posts } = useGetLikedMentoringPosts();
 
   const [currentPost, setCurrentPost] = useState<IMentoringPost>();
@@ -28,13 +24,6 @@ const FavoriteMentoringList = () => {
         mentoringPosts={posts}
         onClickFavoriteMentoringPostCard={onClickFavoriteMentoringPostCard}
       />
-      {isOpenedMentoringPostDetailModal && (
-        <MentoringPostDetailModal
-          mentoring={currentPost}
-          onCloseClick={() => setIsOpenedMentoringPostDetailModal(false)}
-          isAuthorizedUser={loginData.state}
-        />
-      )}
     </>
   );
 };
