@@ -4,4 +4,11 @@
   min-height: 250px;
   border-radius: 10px;
   display: flex;
+  flex-flow: row wrap;
+}
+
+@media screen and (max-width: 991px) {
+  .userProfile {
+    min-height: 150px;
+  }  
 }

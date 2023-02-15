@@ -1,15 +1,19 @@
+.memberCardsSection {
+  position: relative;
+}
+
 .memberCards {
   display: flex;
+  justify-content: space-around;
   flex-flow: row wrap;
 }
 
 .memberCard {
-  width: 190px;
-  height: 230px;
+  width: 17%;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
   text-align: center;
-  margin: 15px 29px;
+  padding: 15px 0;
   cursor: pointer;
 
   .profileImg {
@@ -22,7 +26,6 @@
 
   .nickname {
     font-family: 'Noto Sans KR';
-    font-style: normal;
     font-weight: 500;
     font-size: 16px;
     line-height: 25px;
@@ -31,23 +34,23 @@
 
   .emailPosition{
     font-family: 'Noto Sans KR';
-    font-style: normal;
     font-weight: 350;
     font-size: 14px;
     line-height: 20px;
     color: #686868;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   hr {
     color: #E9E9E9;
-    width: 160px;
+    width: 80%;
     margin: 15px auto;
   }
 
   .detailButton {
     color: #1B1C1D;
     font-family: 'Noto Sans KR';
-    font-style: normal;
     font-weight: 300;
     font-size: 15px;
     margin: 0 auto;
@@ -55,5 +58,34 @@
     border: 1px solid gray;
     border-radius: 20px;
     padding: 4px 7px
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .memberCard {
+    width: 30%;
+    .profileImg {
+      width: 55px;
+      height: 55px;
+    }
+    .nickname {
+      font-size: 14px;
+    }
+    .emailPosition{
+      font-size: 12px;
+    }
+    hr {
+      margin: 10px auto;
+    }
+    .detailButton {
+      font-size: 14px;
+      padding: 4px 7px
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .memberCard {
+    width: 45%;
   }
 }

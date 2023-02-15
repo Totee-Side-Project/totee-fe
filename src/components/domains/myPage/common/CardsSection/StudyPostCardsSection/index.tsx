@@ -8,12 +8,14 @@ interface IStudyPostCardsSectionProps {
   postSectionTitle?: string;
   studyPosts?: StudyPostsType;
   setCurrentPostId?: React.Dispatch<React.SetStateAction<number>>;
+  cardUnit: number;
 }
 
 const StudyPostCardsSection = ({
   postSectionTitle,
   studyPosts,
   setCurrentPostId,
+  cardUnit,
 }: IStudyPostCardsSectionProps) => {
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -22,10 +24,13 @@ const StudyPostCardsSection = ({
   }
 
   return (
-    <>
+    <div className={classes.studyPostCardsSection}>
       <div className={classes.postCard}>
         {studyPosts.content
-          .slice((currentPage - 1) * 4, (currentPage - 1) * 4 + 4)
+          .slice(
+            (currentPage - 1) * cardUnit,
+            (currentPage - 1) * cardUnit + cardUnit,
+          )
           .map((post) => (
             <PostCard
               postSectionTitle={postSectionTitle}
@@ -41,7 +46,7 @@ const StudyPostCardsSection = ({
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       />
-    </>
+    </div>
   );
 };
 

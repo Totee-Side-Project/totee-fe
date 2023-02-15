@@ -1,5 +1,6 @@
 .contentSection {
-  width: 100%;
+  width: 85%;
+  margin: 0 auto;
   padding: 0 50px;
 
   .focusedMenuSection {
@@ -8,5 +9,23 @@
     margin: 20px 0 100px 0;
     padding: 51px;
     min-height: 1000px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .contentSection {
+    width: 80%;
+    padding: 0 30px;
+    .focusedMenuSection {
+      padding: 20px;
+      min-height: 1000px;
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .contentSection {
+    width: 95%;
+    padding: 0 5px;
   }
 }

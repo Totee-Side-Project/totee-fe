@@ -95,5 +95,11 @@ hr {
   padding: 25px;
 }
 
-
-
+@media screen and (max-width: 425px){
+  .commentTitle {
+    font-size: 14px;
+  }
+  .comment {
+    font-size: 14px;
+  }
+}

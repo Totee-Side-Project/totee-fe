@@ -1,4 +1,10 @@
-.postCard {
-  display: flex;
-  justify-content: space-around;
+.studyPostCardsSection {
+  position: relative;
+
+  .postCard {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
 }
+

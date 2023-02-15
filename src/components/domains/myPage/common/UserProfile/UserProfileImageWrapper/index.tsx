@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import classes from './index.module.scss';
 import { IUserType } from '@api/user/types';
 import ProfileImage from '../../ProfileImage';
+import { useMobileView } from '@hooks/useMobileView';
 
 interface IUserProfileImageWrapperProps {
   user: IUserType;
@@ -18,6 +19,7 @@ const UserProfileImageWrapper = ({
   setImageFile,
 }: IUserProfileImageWrapperProps) => {
   const [imageUrl, setImageUrl] = useState(user.profileImageUrl);
+  const isCurrentMobileWidth = useMobileView(991);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const imageFile: Blob | MediaSource | undefined = e.target.files?.[0];
@@ -32,7 +34,11 @@ const UserProfileImageWrapper = ({
     <div className={classes.userProfileImageWrapper}>
       {isEditProfile ? (
         <>
-          <img className={classes.profileImage} src={imageUrl} />
+          <ProfileImage
+            profileImgSrc={imageUrl}
+            width={isCurrentMobileWidth ? '70px' : '131px'}
+            height={isCurrentMobileWidth ? '70px' : '131px'}
+          />
           <label className={classes.profileImageEditLabel} htmlFor="file">
             <img src={profileSquare} />
           </label>
@@ -47,8 +53,8 @@ const UserProfileImageWrapper = ({
       ) : (
         <ProfileImage
           profileImgSrc={user.profileImageUrl}
-          width={'131px'}
-          height={'131px'}
+          width={isCurrentMobileWidth ? '70px' : '131px'}
+          height={isCurrentMobileWidth ? '70px' : '131px'}
         />
       )}
     </div>
