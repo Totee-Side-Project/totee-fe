@@ -1,20 +1,49 @@
+@mixin mobile {
+  @media (max-width: 425px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-height: 426px) and (max-width: 991px) {
+    @content;
+  }
+}
+
 .sidebar {
-  width: 320px;
+  min-width: 320px;
   min-height: 100vh;
   border-right: 0.5px solid #cccccc;
+
+  @include tablet() {
+    min-width: 150px;
+  }
+
+  @include mobile() {
+  }
 
   .mainMenu {
     position: relative;
     display: flex;
     align-items: center;
     height: 66px;
-    padding: 26px 0 12px 54px;
+    padding: 26px 0 12px 10%;
     gap: 12px;
     background-color: #f5f5f5;
+
+    @include tablet() {
+      height: 50px;
+      gap: 7px;
+    }
 
     .mainMenuIcon {
       width: 18.5px;
       height: 16.5px;
+
+      @include tablet() {
+        width: 12px;
+        height: 10.5px;
+      }
     }
     .mainMenuTitle {
       color: #222222;
@@ -22,6 +51,14 @@
       font-style: normal;
       font-weight: 400;
       font-size: 18px;
+
+      @include tablet() {
+        font-size: 14px;
+      }
+
+      @include mobile() {
+        font-size: 18px;
+      }
     }
   }
 
@@ -31,18 +68,31 @@
 
     .menuItem {
       height: 43px;
+
       &:hover {
         cursor: pointer;
         background-color: #e0e0e0;
         transition: 0.2s;
       }
+
+      @include tablet() {
+        height: 27px;
+      }
       & > a {
         display: flex;
         align-items: center;
-        padding: 6px 0 6px 72px;
+        padding: 6px 0 6px 15%;
         height: 100%;
         width: 100%;
         font-size: 16px;
+
+        @include tablet() {
+          font-size: 12px;
+        }
+
+        @include mobile() {
+          font-size: 16px;
+        }
       }
     }
   }

@@ -1,10 +1,28 @@
+@mixin mobile {
+  @media (max-width: 425px) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media (min-height: 426px) and (max-width: 991px) {
+    @content;
+  }
+}
+
 .tableContainer {
   max-width: 1250px;
   flex-basis: 800px;
   height: 550px;
   margin-top: 40px;
   padding: 30px 40px;
-  // border: 1px solid #cccccc;
   border-radius: 10px;
   background: #ffffff;
+
+  @include tablet() {
+    padding: 20px 30px;
+  }
+
+  @include mobile() {
+    padding: 15px 20px;
+  }
 }
