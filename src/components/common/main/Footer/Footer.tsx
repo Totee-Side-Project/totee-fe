@@ -31,22 +31,17 @@ export const Footer = () => {
             <h2>FRONTEND</h2>
             <p
               onClick={() =>
-                window.open('https://github.com/LucaRune', '_blank')
+                window.open('https://github.com/ahn0min', '_blank')
               }
             >
-              Rulu
+              ahn0min
             </p>
             <p
               onClick={() =>
-                window.open('https://github.com/aeong98', '_blank')
+                window.open('https://github.com/geunu97', '_blank')
               }
             >
-              aeong98
-            </p>
-            <p
-              onClick={() => window.open('https://github.com/ctaaag', '_blank')}
-            >
-              ctaaag
+              geunu97
             </p>
           </div>
           <div className="footerName">
@@ -63,12 +58,21 @@ export const Footer = () => {
             <h2>DESIGNER</h2>
             <p
               onClick={() =>
+                window.open(
+                  'https://zippy-aftershave-adb.notion.site/Chaehyun-Jang-e73cb8eba1744e09a0c748bb3a28a708',
+                  '_blank',
+                )
+              }
+            >
+              Chaehyun
+            </p>
+            <p
+              onClick={() =>
                 window.open('https://github.com/haezoo25', '_blank')
               }
             >
               Hazel
             </p>
-            <p>Yoon</p>
           </div>
           <div className="footerName">
             <h2>Contacts us</h2>
