@@ -26,7 +26,16 @@ const SideBar = ({ focusedMenu, setFocusedMenu }: ISideBarProps) => {
     setCurrentMainMenu(mainMenuTitle);
   };
 
-  const renderSubMenus = (mainMenu, subMenus) => {
+  const renderSubMenus = (
+    mainMenu: {
+      title: string;
+      iconSrc: string;
+    },
+    subMenus: {
+      title: string;
+      component: JSX.Element;
+    }[],
+  ) => {
     return (
       <div className={classes.subMenuContainer}>
         {subMenus.map((subMenu) => (
