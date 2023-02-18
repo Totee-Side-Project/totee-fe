@@ -1,6 +1,5 @@
 .userIdentificationWrapper {
   margin-left: 45px;
-  min-width: 13%; 
 
   .titleWrapper {
     display: flex;
@@ -21,7 +20,6 @@
     .nickName {
       color: #333333;
       font-family: 'Noto Sans';
-      font-style: normal;
       font-weight: 700;
       font-size: 24px;
       line-height: 33px;
@@ -39,8 +37,6 @@
   .identification {
     color: #767676;
     font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
     font-size: 16px;
     line-height: 20px;
     margin-top: 2px;
@@ -49,7 +45,6 @@
   .profileEditButton {
     button {
       font-family: 'Noto Sans KR';
-      font-style: normal;
       font-weight: 500;
       font-size: 14px;
       border-radius: 20px;
@@ -75,6 +70,42 @@
       color: #898989;
       background-color: #FFFFFF;
       border: 1px solid #898989;
+    }
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .userIdentificationWrapper {
+    margin-left: 25px;
+    .titleWrapper {
+      margin-top: 20px;
+      .nickNameInput {
+        font-size: 14px;
+        width: 90px;
+      }
+      .nickName {
+        font-size: 18px;
+      }
+    }
+    .identification {
+      font-size: 12px;
+    }
+    .profileEditButton {
+      button {
+        font-size: 12px;
+        width: 80px;
+        height: 25px;
+        margin-top: 10px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .userIdentificationWrapper {
+    margin-left: 35px;
+    .titleWrapper {
+      margin-top: 15px;
     }
   }
 }

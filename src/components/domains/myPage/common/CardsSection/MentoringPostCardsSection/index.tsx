@@ -9,6 +9,7 @@ interface IMentoringPostCardsSectionProps {
   mentoringPosts?: MentoringPostsType;
   setCurrentPostId?: React.Dispatch<React.SetStateAction<number>>;
   onClickFavoriteMentoringPostCard?: (post: IMentoringPost) => void;
+  cardUnit: number;
 }
 
 const MentoringPostCardsSection = ({
@@ -16,6 +17,7 @@ const MentoringPostCardsSection = ({
   mentoringPosts,
   setCurrentPostId,
   onClickFavoriteMentoringPostCard,
+  cardUnit,
 }: IMentoringPostCardsSectionProps) => {
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -32,10 +34,13 @@ const MentoringPostCardsSection = ({
   };
 
   return (
-    <>
+    <div className={classes.mentoringPostCardsSection}>
       <div className={classes.mentoringPostCards}>
         {mentoringPosts.content
-          .slice((currentPage - 1) * 4, (currentPage - 1) * 4 + 4)
+          .slice(
+            (currentPage - 1) * cardUnit,
+            (currentPage - 1) * cardUnit + cardUnit,
+          )
           .map((post) => (
             <div
               className={classes.mentoringPostCard}
@@ -75,7 +80,7 @@ const MentoringPostCardsSection = ({
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       />
-    </>
+    </div>
   );
 };
 

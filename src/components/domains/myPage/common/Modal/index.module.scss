@@ -48,3 +48,32 @@
     margin-top: 10px;
   }
 }
+
+@media screen and (max-width:991px){
+  .detailedMemberModal {
+    width: 50%;
+    .closeButton {
+      width: 40px;
+      height: 40px;
+    }
+    .title {
+      font-size: 25px;
+    }
+    .subTitle {
+      font-size: 20px;
+      margin-top: 5px;
+    }
+  }
+}
+
+@media screen and (max-width:425px){
+  .detailedMemberModal {
+    width: 90%;
+    .title {
+      font-size: 20px;
+    }
+    .subTitle {
+      font-size: 17px;
+    }
+  }
+}

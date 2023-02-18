@@ -1,5 +1,7 @@
+import { useMobileView } from '@hooks/useMobileView';
 import { useEffect, useState } from 'react';
 import classes from './index.module.scss';
+import MobilePagination from './MobilePagination';
 
 interface IPaginationProps {
   postsLength: number;
@@ -14,6 +16,7 @@ const Pagination = ({
 }: IPaginationProps) => {
   const [slideNum, setSlideNum] = useState(1);
   const [pages, setPages] = useState<number[]>([]);
+  const isCurrentDesktopWidth = useMobileView(1440);
 
   useEffect(() => {
     setPages(
@@ -26,6 +29,16 @@ const Pagination = ({
 
   if (postsLength === 0) {
     return <></>;
+  }
+
+  if (isCurrentDesktopWidth) {
+    return (
+      <MobilePagination
+        postsLength={postsLength}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
+    );
   }
 
   return (

@@ -3,12 +3,10 @@
   padding: 20px 50px 20px 50px; 
   border-left: 1px solid #D1D1D1;
   min-height: 175px;
-  width: 60%;
+  width: 50%;
 
   .introduction {
     font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
     margin-bottom: 32px;
     .introductionTitle {
       color: #333333;
@@ -29,25 +27,22 @@
     .introductionLength {
       color: #929292;
       font-family: 'Noto Sans KR';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 14px;
       width: 99%;
       text-align: end;
       margin-top: 6px;
     }
     .introductionText {
+      width: 100%;
       color: #767676;
       font-family: 'Roboto';
       margin-top: 7px;
+      word-wrap: break-word;
     }
   }
   
   .progress {
     display: flex;
     justify-content: space-between;
-    font-style: normal;
-    font-weight: 400;
     margin-bottom: 6px;
     width: 250px;
     .progressTitle {
@@ -59,6 +54,57 @@
       color: #767676;
       font-family: 'Roboto';
       font-size: 16px;
+    }
+  }
+}
+
+@media screen and (max-width:991px){
+  .userActivityWrapper {
+    margin: 20px 0 20px 30px;
+    padding: 5px 30px; 
+    min-height: 120px;
+    width: 60%;
+    .introduction {
+      font-size: 14px;
+      .introductionTextarea {
+        height: 80px;
+        font-size: 12px;
+        &::placeholder {
+          font-size: 12px;
+        }
+      }
+      .introductionLength {
+        font-size: 12px;
+      }
+      .introductionText {
+        font-size: 12px;
+        width: 90%;
+      }
+    }
+    .progress {
+      width: 200px;
+      .progressTitle {
+        font-size: 12px;
+      }
+      .progressCount {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width:425px){
+  .userActivityWrapper {
+    border: none;
+    border-top: 1px solid #D1D1D1;
+    width: 90%;
+    margin: 20px auto;
+    .introduction {
+      margin-top: 20px;
+      font-size: 14px;
+      .introductionText {
+        width: 100%;
+      }
     }
   }
 }

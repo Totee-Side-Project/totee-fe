@@ -1,3 +1,7 @@
+.mentoringPostCardsSection {
+  position: relative;
+}
+
 .mentoringPostCards {
   display: flex;
   justify-content: space-around;
@@ -8,7 +12,7 @@
   background: #FFFFFF;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
-  width: 230px; 
+  width: 20%; 
   height: 250px;
   cursor: pointer;
   &:hover {
@@ -85,5 +89,39 @@
       margin-left: 13px;
       margin-bottom: 3px;
     }
+  }
+}
+
+@media screen and (max-width:991px){
+  .mentoringPostCard {
+    width: 30%; 
+    .title {
+      font-size: 14px;
+    }
+    .field {
+      font-size: 12px;
+      margin-top: 12px;
+    }
+    .career {
+      font-size: 12px;
+    }
+    .content {
+      font-size: 12px;
+    }
+    .bottomSection {
+      .profileImageUrl {
+        width: 25px;
+        height: 25px;
+      }
+      .nickname {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width:991px){
+  .mentoringPostCard {
+    width: 45%; 
   }
 }

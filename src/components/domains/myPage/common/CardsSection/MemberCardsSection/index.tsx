@@ -8,12 +8,14 @@ interface IMemberCardsSectionProps {
   members?: IStudyMemberType[] | IMentoringMemberType[];
   onClickStudyMemberCard?: any;
   onClickMentoringMemberCard?: any;
+  cardUnit: number;
 }
 
 const MemberCardsSection = ({
   members,
   onClickStudyMemberCard,
   onClickMentoringMemberCard,
+  cardUnit,
 }: IMemberCardsSectionProps) => {
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -22,10 +24,13 @@ const MemberCardsSection = ({
   }
 
   return (
-    <>
+    <div className={classes.memberCardsSection}>
       <div className={classes.memberCards}>
         {members
-          .slice((currentPage - 1) * 4, (currentPage - 1) * 4 + 4)
+          .slice(
+            (currentPage - 1) * cardUnit,
+            (currentPage - 1) * cardUnit + cardUnit,
+          )
           .map((member) => (
             <div
               className={classes.memberCard}
@@ -56,7 +61,7 @@ const MemberCardsSection = ({
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       />
-    </>
+    </div>
   );
 };
 

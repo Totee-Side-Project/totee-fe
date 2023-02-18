@@ -1,12 +1,6 @@
 .userProfileImageWrapper {
-  margin: 52px 0 66px 85px;
+  margin: 52px 0 66px 10%;
   position: relative;
-
-  .profileImage {
-    width: 131px;
-    height: 131px;
-    border-radius: 50%;
-  }
 
   .profileImageEditLabel {
     position: absolute;
@@ -32,4 +26,26 @@
     overflow: hidden;
     border: 0;
   }
+}
+
+@media screen and (max-width: 991px) {
+  .userProfileImageWrapper {
+    margin: 30px 0 0 3%;
+    .profileImageEditLabel {
+      top: 50px;
+      right: 0;
+      width: 30px;
+      height: 30px;
+      img {
+        top: 5px;
+        left: 5px;
+      }
+    }
+  }  
+}
+
+@media screen and (max-width: 425px) {
+  .userProfileImageWrapper {
+    margin: 20px 0 0 15%;
+  }  
 }
